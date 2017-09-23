@@ -4,7 +4,7 @@ import { RemoteServiceProvider} from './../../providers/remote-service/remote-se
 import {TabsPage} from '../tabs/tabs';
 
 /**
- * Generated class for the GroupsPage page. 
+ * Generated class for the GroupsPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -22,6 +22,11 @@ export class GroupsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GroupsPage');
+  }
+
+  back()
+  {
+    this.navCtrl.push(TabsPage);
   }
 
 }

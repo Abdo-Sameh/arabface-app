@@ -8,7 +8,11 @@ import { SignupPage } from '../pages/signup/signup';
 import { FriendsPage } from '../pages/friends/friends';
 import { NewsPage } from '../pages/news/news';
 import { PagesPage } from '../pages/pages/pages';
+import { GroupsPage } from '../pages/groups/groups';
+import { EventsPage } from '../pages/events/events';
+import { VideosPage } from '../pages/videos/videos';
 import { PhotosPage } from '../pages/photos/photos';
+import { ForumsPage } from '../pages/forums/forums';
 import { SettingsPage } from '../pages/settings/settings';
 import { MenuPage } from '../pages/menu/menu';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -37,11 +41,12 @@ import  {OnlinePage} from '../pages/online/online'
     MenuPage,
     SettingsPage,
     PagesPage,
+    GroupsPage,
+    EventsPage,
     PhotosPage,
-    OnlinePage
-    
-
-
+    OnlinePage,
+    VideosPage,
+    ForumsPage,
   ],
   imports: [
 BrowserModule , IonicModule.forRoot(MyApp), HttpModule
@@ -62,10 +67,12 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule
     MenuPage,
     SettingsPage,
     PagesPage,
+    GroupsPage,
+    EventsPage,
     PhotosPage,
-    OnlinePage
-
-
+    OnlinePage,
+    VideosPage,
+    ForumsPage,
   ],
   providers: [
     StatusBar,

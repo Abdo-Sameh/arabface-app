@@ -10,6 +10,10 @@ import { SettingsPage } from '../pages/settings/settings';
 import { PhotosPage } from '../pages/photos/photos';
 import { PagesPage } from '../pages/pages/pages';
 import { ProfilePage } from '../pages/profile/profile';
+import { GroupsPage } from '../pages/groups/groups';
+import { EventsPage } from '../pages/events/events';
+import { VideosPage } from '../pages/videos/videos';
+import { ForumsPage } from '../pages/forums/forums';
 //import { TabsPage } from '../pages/tabs/tabs';
 
 import xml2js from 'xml2js';
@@ -27,37 +31,41 @@ export class MyApp {
   //  userName = localStorage.getItem('userName').replace(/['"]+/g, '');
   //  userAvatar = localStorage.getItem('userAvatar').slice(8,-1);
   //  userCover = localStorage.getItem('userCover');
-   
-   
+
+
     pages: Array<{title: string, component: any}>;
-  
+
     constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen , public http :Http) {
       this.deviceLanguage = this.platform.lang();
       //this.loadXML('ar')
       this.initializeApp();
-    
-     // this.userAvatar ="http://"+this.userAvatar;   
+
+     // this.userAvatar ="http://"+this.userAvatar;
       // used for an example of ngFor and navigation
       this.pages = [
-        { title: 'profile', component: ProfilePage },
-        { title: 'online friends', component:  OnlinePage},
-        { title: 'photos', component: PhotosPage },
-        { title: 'pages', component: PagesPage },
-        { title: 'settings', component: SettingsPage },
-        
-        
+        { title: 'Profile', component: ProfilePage },
+        { title: 'Online friends', component:  OnlinePage},
+        { title: 'Videos', component: VideosPage },
+        { title: 'Photos', component: PhotosPage },
+        { title: 'Pages', component: PagesPage },
+        { title: 'Forums', component: ForumsPage },
+        { title: 'Groups', component: GroupsPage },
+        { title: 'Events', component: EventsPage },
+        { title: 'Settings', component: SettingsPage },
+
+
       ];
      // console.log(this.userName);
-      //console.log(this.userCover)   
+      //console.log(this.userCover)
   }
-  
+
   ionViewDidLoad() {
 
-    
-  }    
+
+  }
   initializeApp() {
     this.platform.ready().then(() => {
-      
+
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
@@ -73,21 +81,21 @@ export class MyApp {
      this.http.get('/assets/lang/'+lang+'.xml')
      .map(res => res.text())
      .subscribe((data)=>
-     { 
+     {
         this.parseXML(data)
         .then((data)=>
         {
             this.xmlLang= localStorage.setItem('lang', JSON.stringify(data) )
         });
-        
+
      });
-     
+
   }
   public  parseXML(data)
   {
      return new Promise(resolve =>
      {
-      let 
+      let
       arr    = [],
       obj,
       parser = new xml2js.Parser(
@@ -98,17 +106,17 @@ export class MyApp {
       });
 
   parser.parseString(data, function (err, result)
-  { 
+  {
       obj = result.resources.string;
      for(let i=0; i < obj.length ; i++)
-     {  
+     {
          var key = obj[i].$.name;
          var value =obj[i]._;
          key = key.replace(/_{1,}/g,' ').replace(/(\s{1,}|\b)(\w)/g, function(m, space, letter)
          {
            return  letter.toUpperCase();
          })
-         
+
          let ob = {}
 
          ob[key]=value
@@ -128,10 +136,10 @@ export class MyApp {
     localStorage.setItem('userData', "" );
     localStorage.setItem('userDataID', "" );
     localStorage.setItem('lang', "" );
-    
-    
-    this.nav.push(LoginPage);  
-    
+
+
+    this.nav.push(LoginPage);
+
   }
 
 

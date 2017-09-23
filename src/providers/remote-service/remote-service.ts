@@ -22,10 +22,10 @@ export class RemoteServiceProvider {
  public xmlLang :any;
   constructor(public http: Http, public platform :Platform) {
     console.log('Hello RemoteServiceProvider Provider');
-    
+
 
   }
-  
+
   ///////// Login function Start ////////
   /* Function for handling user login in by   */
   loginPostData(sentData,type)
@@ -37,7 +37,7 @@ export class RemoteServiceProvider {
       let urlSearchParams = new URLSearchParams();
       urlSearchParams.append('username', sentData.username);
       urlSearchParams.append('password', sentData.password);
-      let body = urlSearchParams.toString()      
+      let body = urlSearchParams.toString()
       this.http.post(apiURL+type, body, {headers: headers}).
       subscribe(res =>{
         resolve(res.json());
@@ -62,8 +62,8 @@ export class RemoteServiceProvider {
       urlSearchParams.append('username', sentData.firstname+sentData.lastname);
       urlSearchParams.append('email_address', sentData.email_address);
       urlSearchParams.append('password', sentData.password);
-      
-      let body = urlSearchParams.toString()      
+
+      let body = urlSearchParams.toString()
       this.http.post(apiURL+type, body, {headers: headers}).
       subscribe(res =>{
         resolve(res.json());
@@ -77,11 +77,11 @@ export class RemoteServiceProvider {
 
   getPhotos()
    {
-          
+
           return  this.http.get("http://nilemm.com/arabface/api/89129812/page/browse")
           .do((res : Response ) => console.log(res.json()))
           .map((res : Response ) => res.json());
-   
+
    }
 
 
@@ -89,7 +89,7 @@ export class RemoteServiceProvider {
     ///////// Friends function Start ////////
    friendsListApiCall(id)
    {
-    
+
     return  this.http.get('http://nilemm.com/arabface/api/89129812/profile/friends?userid='+id)
     //.do((res : Response ) => console.log(res.json()))
     .map((res : Response ) => res.json());
@@ -100,19 +100,19 @@ export class RemoteServiceProvider {
     ///////// Friends Request function Start ////////
     friendsRequestListApiCall(id)
     {
-     
+
      return  this.http.get('http://nilemm.com/arabface/api/89129812/friend/requests?userid='+id)
      //.do((res : Response ) => console.log(res.json()))
      .map((res : Response ) => res.json());
     }
     ///////// Friends Request function End ////////
- 
+
 
 
     ///////// Friends Request function Start ////////
     friendsSuggestionListApiCall(id)
     {
-     
+
      return  this.http.get('http://nilemm.com/arabface/api/89129812/friend/suggestions?userid='+id)
      //.do((res : Response ) => console.log(res.json()))
      .map((res : Response ) => res.json());
@@ -131,7 +131,7 @@ export class RemoteServiceProvider {
 
    }
    ////////// Feeds function End             ///////////
-   
+
    //////////  profile Api function start   ///////////
 
    profileDetailsApiCall(id)
@@ -140,7 +140,7 @@ export class RemoteServiceProvider {
      return  this.http.get(url)
      //.do((res : Response ) => console.log(res.json()))
      .map((res : Response ) => res.json());
- 
+
    }
 
     //////////  profile api  function End ///////////////
@@ -158,7 +158,7 @@ export class RemoteServiceProvider {
      return  this.http.get(url)
      //.do((res : Response ) => console.log(res.json()))
      .map((res : Response ) => res.json());
-  
+
     }
 
     //////////  messages api  function End ///////////////
@@ -166,11 +166,11 @@ export class RemoteServiceProvider {
 
 
    ////////// likes Api call function start  ////////////
-  
-  
+
+
    likeFeedApiCall(UserID,FeedID):any
   {
-    
+
       let headers = new Headers();
       headers.append('Content-Type', 'application/x-www-form-urlencoded');
       let urlSearchParams = new URLSearchParams();
@@ -178,13 +178,13 @@ export class RemoteServiceProvider {
       urlSearchParams.append('type', "feed");
       urlSearchParams.append('type_id',FeedID );
 
-      
-      let body = urlSearchParams.toString()      
+
+      let body = urlSearchParams.toString()
      return this.http.post("http://nilemm.com/arabface/api/89129812/like/item", body, {headers: headers})
       //do((res : Response ) => console.log(res.json()))
      .map((res : Response ) => res.json());
- 
-   
+
+
 
   }
 
@@ -205,7 +205,7 @@ export class RemoteServiceProvider {
 
   ///////////  Send Messages between users start  ////////////
 
-  
+
    ChatMessagesSend(cID,userID,msg):any
    {
     return this.http.get("http://nilemm.com/arabface/api/89129812/chat/send/message?text="+msg+"&cid="+cID+"&userid="+userID).
@@ -237,7 +237,7 @@ export class RemoteServiceProvider {
     headers.append('Content-Type', 'multipart/form-data');
     let urlSearchParams = new URLSearchParams();
     urlSearchParams.append('path', path.path);
-    let body = urlSearchParams.toString()  
+    let body = urlSearchParams.toString()
      return this.http.get("http://nilemm.com/arabface/api/89129812/profile/change/avatar?userid="+userID).
      do((res : Response ) => console.log(res.json()))
     .map((res : Response ) => res.json());
@@ -250,9 +250,9 @@ export class RemoteServiceProvider {
   //////////// post in feed ///////////////////////
   feedPosting(userID,post)
   {
-    
+
     console.log(userID,post)
-    let url = "http://nilemm.com/arabface/api/89129812/feed/add?type=feed&entity_type=user&text="+post+"&entity_id="+userID ; 
+    let url = "http://nilemm.com/arabface/api/89129812/feed/add?type=feed&entity_type=user&text="+post+"&entity_id="+userID ;
 console.log(url)
    return this.http.post("http://nilemm.com/arabface/api/89129812/feed/add?type=feed&entity_type=user&entity_id=25",{'text':post})
   .map((res : Response ) => res.json());
@@ -264,9 +264,9 @@ console.log(url)
   //////////// post in feed ///////////////////////
   profilePost(userID,post)
   {
-    
+
     console.log(userID,post)
-    let url = "http://nilemm.com/arabface/api/89129812/feed/add?type=feed&entity_type=user&text="+post+"&entity_id="+userID ; 
+    let url = "http://nilemm.com/arabface/api/89129812/feed/add?type=feed&entity_type=user&text="+post+"&entity_id="+userID ;
 console.log(url)
    return this.http.get("http://nilemm.com/arabface/api/89129812/feed/add?type=feed&entity_type=user&text=ppppp&entity_id=25")
   .map((res : Response ) => res.json());
@@ -314,15 +314,15 @@ console.log(url)
   //           "cache-control": "no-cache",
   //         }
   //       }
-        
+
   //       $.ajax(settings).done(function (response) {
   //         console.log(response);
   //           resolve(response)
-          
+
   //       });
   //     })
   // }
-   
+
 
 
   /////////////////////////////////////////////////////
@@ -344,9 +344,9 @@ console.log(url)
      //do((res : Response ) => console.log(res.json()))
        .map((res : Response ) => res.json());
    }
-    
- 
- 
+
+
+
    /////////////////////////////////////////////////////
      //////////////////// load comments ////////////////////
 
@@ -356,9 +356,9 @@ console.log(url)
        //do((res : Response ) => console.log(res.json()))
          .map((res : Response ) => res.json());
      }
-      
-   
-   
+
+
+
      /////////////////////////////////////////////////////
        //////////////////// load comments ////////////////////
 
@@ -368,9 +368,9 @@ console.log(url)
          //do((res : Response ) => console.log(res.json()))
            .map((res : Response ) => res.json());
        }
-        
-     
-     
+
+
+
        /////////////////////////////////////////////////////
         onlineFriends(userid)
         {
@@ -379,6 +379,46 @@ console.log(url)
           .map((res : Response ) => res.json());
 
         }
+        /////////////// get  pages /////////////////////////
+        getPages(type, term, categoryId, userId){
+          return this.http.get("http://nilemm.com/arabface/api/89129812/page/browse?type=" + type + "&term=" + term + "&category_id=" + categoryId + "&userid=" + userId)
+          .map((res : Response ) => res.json());
+        }
 
-       
+        /////////////// create  page /////////////////////////
+        createPage(title, description, category, userId){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('userid', userId );
+          urlSearchParams.append('title', title);
+          urlSearchParams.append('description', description );
+          urlSearchParams.append('category', category );
+          let body = urlSearchParams.toString()
+
+         return this.http.post("http://nilemm.com/arabface/api/89129812/page/create", body, {headers: headers})
+          //do((res : Response ) => console.log(res.json()))
+         .map((res : Response ) => res.json());
+        }
+
+        likePage(userId, pageId, type):any{
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('userid', userId );
+          urlSearchParams.append('type', "page");
+          urlSearchParams.append('type_id',pageId );
+          let body = urlSearchParams.toString()
+          if(type == "like")
+         return this.http.post("http://nilemm.com/arabface/api/89129812/like/item", body, {headers: headers})
+          //do((res : Response ) => console.log(res.json()))
+         .map((res : Response ) => res.json());
+         else
+         return this.http.post("http://nilemm.com/arabface/api/89129812/dislike/item", body, {headers: headers})
+          //do((res : Response ) => console.log(res.json()))
+         .map((res : Response ) => res.json());
+        }
+
+
+
 }

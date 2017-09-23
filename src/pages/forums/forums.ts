@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
 import {TabsPage} from '../tabs/tabs';
+
 /**
- * Generated class for the EventsPage page.
+ * Generated class for the ForumsPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,21 +12,19 @@ import {TabsPage} from '../tabs/tabs';
 
 @IonicPage()
 @Component({
-  selector: 'page-events',
-  templateUrl: 'events.html',
+  selector: 'page-forums',
+  templateUrl: 'forums.html',
 })
-export class EventsPage {
+export class ForumsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad EventsPage');
+    console.log('ionViewDidLoad ForumsPage');
   }
-
   back()
   {
     this.navCtrl.push(TabsPage);
   }
-
 }
