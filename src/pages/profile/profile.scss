@@ -1,0 +1,19 @@
+page-profile {
+ .container
+ {
+     width: 100% !important;
+ }
+ .header_title{
+    padding: 7px 0 5px !important
+ }
+ .profile-editors
+ {
+    position: absolute !important;
+    top: 73px !important;
+    right: 10px !important;
+ }
+ .feed-footer .comment-list {
+    border-top: 0px solid #ddd !important; 
+    margin-top: 7px !important;
+}
+}
