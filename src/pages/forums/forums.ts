@@ -10,7 +10,6 @@ import {TabsPage} from '../tabs/tabs';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-forums',
   templateUrl: 'forums.html',

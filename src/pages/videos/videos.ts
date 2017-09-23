@@ -9,7 +9,6 @@ import {TabsPage} from '../tabs/tabs';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-videos',
   templateUrl: 'videos.html',

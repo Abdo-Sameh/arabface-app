@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController} from 'ionic-angular';
+import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
+import {TabsPage} from '../tabs/tabs';
+import {GroupsPage} from '../groups/groups';
+
 
 /**
  * Generated class for the GroupPage page.
@@ -8,7 +12,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-group',
   templateUrl: 'group.html',
@@ -20,6 +23,10 @@ export class GroupPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GroupPage');
+  }
+  back()
+  {
+    this.navCtrl.push(GroupsPage);
   }
 
 }

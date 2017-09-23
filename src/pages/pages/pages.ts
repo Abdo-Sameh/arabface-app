@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
 import {TabsPage} from '../tabs/tabs';
+import {Page} from '../page/page';
 
 /**
  * Generated class for the PagesPage page.
@@ -40,12 +41,15 @@ export class PagesPage {
       content: "Loading",
     });
     loading.present()
-    var element = document.getElementById("active2");
+    var element = document.getElementById("active");
     if(element != null){
-      if(document.getElementById("active2").innerHTML == "My Pages"){
-        type = "mine";
-      }
+      if($( "#active1" ).hasClass( "active" )){
+        type = "all";
+      }else
+      type = "mine";
     }
+    console.log(type);
+    console.log(term);
 
     this.remoteService.getPages(type, term, categoryId, Id).subscribe(res =>{
         loading.dismiss();
@@ -65,6 +69,10 @@ export class PagesPage {
         this.categories = res.categories;
         console.log(res);
       });
+  }
+
+  pagePage(){
+    this.navCtrl.push(Page);
   }
 
 

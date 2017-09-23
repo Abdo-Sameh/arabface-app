@@ -419,6 +419,25 @@ console.log(url)
          .map((res : Response ) => res.json());
         }
 
+        getGroups(type, term, filter, userId){
+            return this.http.get("http://nilemm.com/arabface/api/89129812/group/browse?type=" + type + "&term=" + term + "&filter=" + filter + "&userid=" + userId)
+            .map((res : Response ) => res.json());
+
+        }
+        joinGroup(group_id, status, userid):any{
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('userid', userid );
+          urlSearchParams.append('status', status);
+          urlSearchParams.append('group_id', group_id );
+          let body = urlSearchParams.toString()
+
+         return this.http.post("http://nilemm.com/arabface/api/89129812/group/join", body, {headers: headers})
+          //do((res : Response ) => console.log(res.json()))
+         .map((res : Response ) => res.json());
+        }
+
 
 
 }
