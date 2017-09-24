@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController, ToastController
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
 import {TabsPage} from '../tabs/tabs';
 import {Page} from '../page/page';
+import {CreatePagePage}  from '../create-page/create-page'
 
 /**
  * Generated class for the PagesPage page.
@@ -80,6 +81,7 @@ export class PagesPage {
     }
   }
 
+
   createPage(title, description, category, userId){
     this.remoteService.createPage(title, description, category, userId).subscribe(res =>{
 
@@ -89,6 +91,7 @@ export class PagesPage {
       });
   }
 
+
   pagePage(page){
     //console.log(page);
     this.navCtrl.push(Page, {
@@ -96,6 +99,9 @@ export class PagesPage {
     });
   }
 
+  newPage(){
+    this.navCtrl.push(CreatePagePage);
+  }
 
   back()
   {
