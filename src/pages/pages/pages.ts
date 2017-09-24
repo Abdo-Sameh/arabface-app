@@ -39,38 +39,25 @@ export class PagesPage {
 
   }
 
-
   getPages(type, term, categoryId, Id){
     let loading = this.loadingCtrl.create({
       content: "Loading",
     });
     loading.present()
-
-      //console.log($("#active1"));
       $('#active1, #active2').click(function(){
-
-        if($('#active1').attr('class') == undefined || ($('#active1').attr('class') == '' && $('#active2').attr('class') == 'active')  )
-        {
+        if(this.id == 'active1'){
           type = "all";
-        }else {
+        }else{
           type = "mine";
         }
       });
       this.type = type;
       this.category = categoryId;
 
-
-    // console.log(this.type);
-    // console.log(this.search);
-    // console.log(this.category );
-
-    // console.log(type);
-    // console.log(term);
-    // console.log(categoryId);
-
     this.remoteService.getPages(type, term, categoryId, Id).subscribe(res =>{
         loading.dismiss();
         console.log(type);
+        console.log(term);
         console.log(categoryId);
         this.pages = res.pages ;
         this.categories = res.categories;
@@ -81,10 +68,21 @@ export class PagesPage {
 
   likePage(userId, pageId, type){
     this.remoteService.likePage(userId, pageId, type).subscribe(res =>{});
+    var like = "#like"+pageId;
+    var dislike = "#dislike"+pageId;
+
+    if(type == "like"){
+      $(like).html("<i class=\"fa fa-thumbs-o-up\"></i> Liked");
+
+    }else{
+      $(dislike).html("<i class=\"fa fa-thumbs-o-up\"></i> Like");
+
+    }
   }
+
   createPage(title, description, category, userId){
     this.remoteService.createPage(title, description, category, userId).subscribe(res =>{
-        // loading.dismiss();
+
         this.pages = res.pages ;
         this.categories = res.categories;
         console.log(res);
