@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import {  NavController, NavParams } from 'ionic-angular';
-
+import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
+import {TabsPage} from '../tabs/tabs';
 /**
  * Generated class for the ContactUsPage page.
  *
@@ -19,6 +20,10 @@ export class ContactUsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ContactUsPage');
+  }
+  back()
+  {
+    this.navCtrl.push(TabsPage);
   }
 
 }
