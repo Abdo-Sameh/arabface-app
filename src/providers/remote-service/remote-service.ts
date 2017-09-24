@@ -438,6 +438,23 @@ console.log(url)
          .map((res : Response ) => res.json());
         }
 
+        getEvents(type, categoryId, term, userId){
+          if(type == ""){
+            return this.http.get("http://nilemm.com/arabface/api/89129812/event/browse?userid=" + userId + "&term=" + term + "&category_id=" + categoryId)
+            .map((res : Response ) => res.json());
+          }else{
+
+          }
+          return this.http.get("http://nilemm.com/arabface/api/89129812/event/browse?userid=" + userId + "&term=" + term + "&category_id=" + categoryId + "&type=" + type)
+          .map((res : Response ) => res.json());
+        }
+
+
+        getVideos(categoryId, term, type, filter, userId){
+          return this.http.get("http://nilemm.com/arabface/api/89129812/videos/browse?userid=" + userId + "&term=" + term + "&category_id=" + categoryId + "&type=" + type + "&filter=" + filter)
+          .map((res : Response ) => res.json());
+        }
+
 
 
 }

@@ -14,12 +14,43 @@ import {TabsPage} from '../tabs/tabs';
   templateUrl: 'videos.html',
 })
 export class VideosPage {
+  videos
+  categories
+  userId :any;
+  search
+  category
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
+    this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
+    this.getVideos("browse", "", "", "", this.userId);
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VideosPage');
+  }
+
+  getVideos(type, categoryId, term, filter, userId){
+    let loading = this.loadingCtrl.create({
+      content: "Loading",
+    });
+    loading.present()
+    // var element = document.getElementById("active");
+    // if(element != null){
+    //   if($( "#active1" ).hasClass( "active" )){
+    //     type = "all";
+    //   }else
+    //   type = "mine";
+    // }
+    // console.log(type);
+    // console.log(term);
+
+    this.remoteService.getVideos(categoryId, term, type, filter, userId).subscribe(res =>{
+        loading.dismiss();
+        this.videos = res.videos ;
+        this.categories = res.categories;
+        console.log(res);
+      });
   }
 
   back()
