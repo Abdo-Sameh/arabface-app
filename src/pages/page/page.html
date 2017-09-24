@@ -12,7 +12,7 @@
 					<a (click)="back()"><i class="fa fa-arrow-left"></i></a>
 				</div>
 				<div class="page_title text-center">
-					<h3>Page Name</h3>
+					<h3>{{ page.title }}</h3>
 				</div>
 				<div class="menu_btn text-right">
 					<a href="#"><i class="fa fa-bars" style="color:#fff;font-size:18px"></i></a>
@@ -26,7 +26,7 @@
 			<div class="user_cover friend_profile">
 				<div class="friend_profile_box">
 					<div class="img-upload">
-						<img src="assets/images/avatar.png" alt="">
+						<img src="{{ page.logo }}" alt="">
 					</div>
 				</div>
 				<div class="profile-editors">
@@ -43,7 +43,7 @@
 					<a href="#">35,619 people like this</a>
 				</div>
 				<div class="panel panel-theme">
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit culpa mollitia veniam officiis ex impedit totam, hic nam voluptas temporibus nihil libero ipsam ab distinctio quae nulla quo, aliquam incidunt!</p>
+					<p>{{ page.description }}</p>
 				</div>
 				<div class="panel panel-theme">
 					<div class="share-post">

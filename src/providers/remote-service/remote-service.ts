@@ -438,6 +438,12 @@ console.log(url)
          .map((res : Response ) => res.json());
         }
 
+        groupFeeding(id){
+          return this.http.get("http://nilemm.com/arabface/api/89129812/feeds?type=group&type_id="  + id)
+          .map((res : Response ) => res.json());
+        }
+
+
         getEvents(type, categoryId, term, userId){
           if(type == ""){
             return this.http.get("http://nilemm.com/arabface/api/89129812/event/browse?userid=" + userId + "&term=" + term + "&category_id=" + categoryId)

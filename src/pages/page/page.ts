@@ -16,8 +16,13 @@ import {PagesPage} from '../pages/pages';
   templateUrl: 'page.html',
 })
 export class Page {
+  id
+  page
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
+
+    this.page = navParams.get("page");
+    console.log(this.page);
   }
 
   ionViewDidLoad() {

@@ -58,8 +58,10 @@ export class GroupsPage {
 
   }
 
-  groupPage(){
-    this.navCtrl.push(GroupPage);
+  groupPage(group){
+    this.navCtrl.push(GroupPage,{
+      group: group,
+    });
   }
 
 
