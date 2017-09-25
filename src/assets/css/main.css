@@ -857,33 +857,33 @@ Start Menu
     padding: 50px 5%;
     margin-top: -11px;
 }
-.user_cover ul {
+.user_cover>ul {
 	overflow: hidden;
 }
-.user_cover ul li {
+.user_cover>ul>li {
 	float: left;
 }
-.user_cover ul li:nth-child(1) {
+.user_cover>ul>li:nth-child(1) {
 	width: 35%;
 }
-.user_cover ul li:nth-child(2) {
+.user_cover>ul>li:nth-child(2) {
 	width: 55%;
 }
-.user_cover ul li:nth-child(3) {
+.user_cover>ul>li:nth-child(3) {
 	width: 10%;
 }
-.user_cover ul li img {
+.user_cover>ul>li img {
 	width: 80px;
 	height: 80px;
 	border-radius: 50%;
 	border: 3px solid #FFF;
 }
-.user_cover ul li h3 {
+.user_cover>ul li h3 {
 	margin: 25px 5px 0 25px;
 	color: #FFF;
 	font-weight: 700;
 }
-.user_cover ul li i {
+.user_cover>ul li i {
 	margin-top: 25px;
 	color: #FFF;
 	display: block;

@@ -11,9 +11,9 @@
     <div class="container">
       <div class="share-post">
         <img src={{userAvatar}} alt="">
-        <form method="post"><textarea placeholder="what's in your mind?" [(ngModel)]="post.text" [ngModelOptions]="{ standalone :true}"></textarea>  
+        <form method="post"><textarea placeholder="what's in your mind?" [(ngModel)]="post.text" [ngModelOptions]="{ standalone :true}"></textarea>
           <div class="clearfix"></div>
-          <button (click)="postFeed()" class="btn btn-theme btn-sm pull-right" >post</button>
+          <button (click)="postFeed()" class="btn btn-theme btn-sm pull-right" >Post</button>
           <div class="clearfix"></div>
         </form>
       </div>
@@ -30,7 +30,7 @@
                       <ul class="dropdown-menu">
                         <li><a href="#">Item-1</a></li>
                         <li><a href="#">Item-2</a></li>
-                        <li><a href="#">Item-3</a></li> 
+                        <li><a href="#">Item-3</a></li>
                       </ul>
                     </span>
                   </div>
@@ -41,7 +41,7 @@
                     <ul class="dropdown-menu dropdown-menu-right">
                       <li><a href="#">Item-1</a></li>
                       <li><a href="#">Item-2</a></li>
-                      <li><a href="#">Item-3</a></li> 
+                      <li><a href="#">Item-3</a></li>
                     </ul>
                   </div>
                 </div>
@@ -96,14 +96,14 @@
                       </div> -->
                     </div>
                   </div>
-               
+
                   <div class="comment write-comment">
                     <div class="pull-left">
                       <img class="feed-img" src={{userAvatar}} alt="">
                     </div>
                     <form>
                       <div class="input-group">
-                        <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">  
+                        <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
                         <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
                       </div>
                     </form>
@@ -125,7 +125,7 @@
                         <ul class="dropdown-menu">
                           <li><a href="#">Item-1</a></li>
                           <li><a href="#">Item-2</a></li>
-                          <li><a href="#">Item-3</a></li> 
+                          <li><a href="#">Item-3</a></li>
                         </ul>
                       </span>
                     </div>
@@ -136,7 +136,7 @@
                       <ul class="dropdown-menu dropdown-menu-right">
                         <li><a href="#">Item-1</a></li>
                         <li><a href="#">Item-2</a></li>
-                        <li><a href="#">Item-3</a></li> 
+                        <li><a href="#">Item-3</a></li>
                       </ul>
                     </div>
                   </div>
@@ -191,14 +191,14 @@
                         </div> -->
                       </div>
                     </div>
-                 
+
                     <div class="comment write-comment">
                       <div class="pull-left">
                         <img class="feed-img" src={{userAvatar}} alt="">
                       </div>
                       <form>
                         <div class="input-group">
-                          <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">  
+                          <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
                           <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
                         </div>
                       </form>
@@ -219,7 +219,7 @@
                           <ul class="dropdown-menu">
                             <li><a href="#">Item-1</a></li>
                             <li><a href="#">Item-2</a></li>
-                            <li><a href="#">Item-3</a></li> 
+                            <li><a href="#">Item-3</a></li>
                           </ul>
                         </span>
                       </div>
@@ -230,7 +230,7 @@
                         <ul class="dropdown-menu dropdown-menu-right">
                           <li><a href="#">Item-1</a></li>
                           <li><a href="#">Item-2</a></li>
-                          <li><a href="#">Item-3</a></li> 
+                          <li><a href="#">Item-3</a></li>
                         </ul>
                       </div>
                     </div>
@@ -285,14 +285,14 @@
                           </div> -->
                         </div>
                       </div>
-                   
+
                       <div class="comment write-comment">
                         <div class="pull-left">
                           <img class="feed-img" src={{userAvatar}} alt="">
                         </div>
                         <form>
                           <div class="input-group">
-                            <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">  
+                            <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
                             <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
                           </div>
                         </form>
@@ -300,7 +300,7 @@
                     </div>
                   </div>
                 </div>
-        
+
       <div class="feed-box"  *ngSwitchCase="feed.shared == true"  >
           <div class="feed-header">
             <div class="pull-left">
@@ -308,7 +308,7 @@
               <div class="feed-title">
              <!-- <div style="  display: inline-block;
               ;white-space:
-              
+
               ">  <a>{{feed.name}}</a> <pre>  shared </pre> <a>{{feed.shared_name}}</a> 's <pre> post</pre> </div> -->
                 <a ><h3 (click)="GoToProfile(feed.entity_id)" style="color:#5c0632;cursor:pointer">{{feed.name}}</h3> <small> shared </small> <h3>{{feed.shared_name}}  </h3>'s post </a><br>
                  <span>{{feed.time}} </span>
@@ -317,7 +317,7 @@
                   <ul class="dropdown-menu">
                     <li><a href="#">Item-1</a></li>
                     <li><a href="#">Item-2</a></li>
-                    <li><a href="#">Item-3</a></li> 
+                    <li><a href="#">Item-3</a></li>
                   </ul>
                 </span>
               </div>
@@ -328,7 +328,7 @@
                 <ul class="dropdown-menu dropdown-menu-right">
                   <li><a href="#">Item-1</a></li>
                   <li><a href="#">Item-2</a></li>
-                  <li><a href="#">Item-3</a></li> 
+                  <li><a href="#">Item-3</a></li>
                 </ul>
               </div>
             </div>
@@ -383,14 +383,14 @@
                   </div> -->
                 </div>
               </div>
-           
+
               <div class="comment write-comment">
                 <div class="pull-left">
                   <img class="feed-img" src={{userAvatar}} alt="">
                 </div>
                 <form>
                   <div class="input-group">
-                    <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">  
+                    <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
                     <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
                   </div>
                 </form>
@@ -412,7 +412,7 @@
                     <ul class="dropdown-menu">
                       <li><a href="#">Item-1</a></li>
                       <li><a href="#">Item-2</a></li>
-                      <li><a href="#">Item-3</a></li> 
+                      <li><a href="#">Item-3</a></li>
                     </ul>
                   </span>
                 </div>
@@ -423,7 +423,7 @@
                   <ul class="dropdown-menu dropdown-menu-right">
                     <li><a href="#">Item-1</a></li>
                     <li><a href="#">Item-2</a></li>
-                    <li><a href="#">Item-3</a></li> 
+                    <li><a href="#">Item-3</a></li>
                   </ul>
                 </div>
               </div>
@@ -477,14 +477,14 @@
                       </div> -->
                     </div>
                   </div>
-               
+
                   <div class="comment write-comment">
                     <div class="pull-left">
                       <img class="feed-img" src={{userAvatar}} alt="">
                     </div>
                     <form>
                       <div class="input-group">
-                        <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">  
+                        <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
                         <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
                       </div>
                     </form>
@@ -492,7 +492,7 @@
                 </div>
             </div>
           </div>
-  
+
 
 
       <div class="feed-box"  *ngSwitchCase="feed.type_id =='upload-video'">
@@ -507,7 +507,7 @@
                   <ul class="dropdown-menu">
                     <li><a href="#">Item-1</a></li>
                     <li><a href="#">Item-2</a></li>
-                    <li><a href="#">Item-3</a></li> 
+                    <li><a href="#">Item-3</a></li>
                   </ul>
                 </span>
               </div>
@@ -518,7 +518,7 @@
                 <ul class="dropdown-menu dropdown-menu-right">
                   <li><a href="#">Item-1</a></li>
                   <li><a href="#">Item-2</a></li>
-                  <li><a href="#">Item-3</a></li> 
+                  <li><a href="#">Item-3</a></li>
                 </ul>
               </div>
             </div>
@@ -572,14 +572,14 @@
                     </div>
                   </div>
                 </div>
-             
+
                 <div class="comment write-comment">
                   <div class="pull-left">
                     <img class="feed-img" src={{userAvatar}} alt="">
                   </div>
                   <form>
                     <div class="input-group">
-                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">  
+                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
                       <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
                     </div>
                   </form>
@@ -600,7 +600,7 @@
                     <ul class="dropdown-menu">
                       <li><a href="#">Item-1</a></li>
                       <li><a href="#">Item-2</a></li>
-                      <li><a href="#">Item-3</a></li> 
+                      <li><a href="#">Item-3</a></li>
                     </ul>
                   </span>
                 </div>
@@ -611,7 +611,7 @@
                   <ul class="dropdown-menu dropdown-menu-right">
                     <li><a href="#">Item-1</a></li>
                     <li><a href="#">Item-2</a></li>
-                    <li><a href="#">Item-3</a></li> 
+                    <li><a href="#">Item-3</a></li>
                   </ul>
                 </div>
               </div>
@@ -640,7 +640,7 @@
                   <i class="fa fa-commenting"></i> {{feed.comments}}
                 </div>
                 <div class="pull-left ml-15">
-                  <i class="fa fa-share"></i> 
+                  <i class="fa fa-share"></i>
                 </div>
               </div>
               <div class="clearfix"></div>
@@ -665,14 +665,14 @@
                       </div> -->
                     </div>
                   </div>
-               
+
                   <div class="comment write-comment">
                     <div class="pull-left">
                       <img class="feed-img" src={{userAvatar}} alt="">
                     </div>
                     <form>
                       <div class="input-group">
-                        <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">  
+                        <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
                         <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
                       </div>
                     </form>

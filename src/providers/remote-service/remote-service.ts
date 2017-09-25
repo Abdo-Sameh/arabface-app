@@ -416,6 +416,21 @@ console.log(url)
          .map((res : Response ) => res.json());
         }
 
+        editPage(title, description, category, pageId){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('page_id', pageId );
+          urlSearchParams.append('title', title);
+          urlSearchParams.append('description', description );
+          urlSearchParams.append('category', category );
+          let body = urlSearchParams.toString()
+
+         return this.http.post("http://nilemm.com/arabface/api/89129812/page/edit", body, {headers: headers})
+          //do((res : Response ) => console.log(res.json()))
+         .map((res : Response ) => res.json());
+        }
+
         likePage(userId, pageId, type):any{
           let headers = new Headers();
           headers.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -433,6 +448,20 @@ console.log(url)
           //do((res : Response ) => console.log(res.json()))
          .map((res : Response ) => res.json());
         }
+
+        deletePage(pageId, userId){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('page_id', pageId );
+          urlSearchParams.append('userid', userId );
+          let body = urlSearchParams.toString()
+         return this.http.post("http://nilemm.com/arabface/api/89129812/page/delete", body, {headers: headers})
+          //do((res : Response ) => console.log(res.json()))
+         .map((res : Response ) => res.json());
+        }
+
+
 
         getGroups(type, term, filter, userId){
             return this.http.get("http://nilemm.com/arabface/api/89129812/group/browse?type=" + type + "&term=" + term + "&filter=" + filter + "&userid=" + userId)
@@ -469,6 +498,17 @@ console.log(url)
           let body = urlSearchParams.toString()
 
          return this.http.post("http://nilemm.com/arabface/api/89129812/group/edit", body, {headers: headers})
+          //do((res : Response ) => console.log(res.json()))
+         .map((res : Response ) => res.json());
+        }
+
+        deleteGroup(groupId){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('group_id', groupId );
+          let body = urlSearchParams.toString()
+         return this.http.post("http://nilemm.com/arabface/api/89129812/group/delete", body, {headers: headers})
           //do((res : Response ) => console.log(res.json()))
          .map((res : Response ) => res.json());
         }
