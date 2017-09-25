@@ -19,10 +19,16 @@ export class VideosPage {
   userId :any;
   search
   category
+  type
+  filter
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
-    this.getVideos("browse", "", "", "", this.userId);
+    this.type = "browse";
+    this.filter = "all";
+    this.category = "all";
+    this.search = "";
+    this.getVideos(this.category, this.search,this.type, this.filter, this.userId);
 
   }
 
@@ -30,7 +36,7 @@ export class VideosPage {
     console.log('ionViewDidLoad VideosPage');
   }
 
-  getVideos(type, categoryId, term, filter, userId){
+  getVideos(categoryId, term, type, filter, userId){
     let loading = this.loadingCtrl.create({
       content: "Loading",
     });
@@ -47,6 +53,13 @@ export class VideosPage {
 
     this.remoteService.getVideos(categoryId, term, type, filter, userId).subscribe(res =>{
         loading.dismiss();
+        console.log(this.type);
+        console.log(this.category);
+        console.log(this.filter);
+        console.log("----------------");
+        console.log(type);
+        console.log(categoryId);
+        console.log(filter);
         this.videos = res.videos ;
         this.categories = res.categories;
         console.log(res);
