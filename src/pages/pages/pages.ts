@@ -81,17 +81,6 @@ export class PagesPage {
     }
   }
 
-
-  createPage(title, description, category, userId){
-    this.remoteService.createPage(title, description, category, userId).subscribe(res =>{
-
-        this.pages = res.pages ;
-        this.categories = res.categories;
-        console.log(res);
-      });
-  }
-
-
   pagePage(page){
     //console.log(page);
     this.navCtrl.push(Page, {

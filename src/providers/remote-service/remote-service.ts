@@ -385,6 +385,11 @@ console.log(url)
           .map((res : Response ) => res.json());
         }
 
+        getPagesCategories(){
+          return this.http.get("http://nilemm.com/arabface/api/89129812/page/get/categories")
+          .map((res : Response ) => res.json());
+        }
+
         /////////////// create  page /////////////////////////
         createPage(title, description, category, userId){
           let headers = new Headers();
