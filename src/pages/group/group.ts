@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController} from 'ionic-angular';
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
-import {TabsPage} from '../tabs/tabs';
 import {GroupsPage} from '../groups/groups';
+import {EditGroupPage} from '../edit-group/edit-group';
 
 
 /**
@@ -38,6 +38,12 @@ export class GroupPage {
         loading.dismiss();
         this.posts = res;
       });
+  }
+
+  editGroup(){
+    this.navCtrl.push(EditGroupPage,{
+      group: this.group,
+    });
   }
 
   back()

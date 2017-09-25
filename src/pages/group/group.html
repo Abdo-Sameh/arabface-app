@@ -32,8 +32,9 @@
 					</div>
 				</div>
 				<div class="profile-editors">
-					<a  href="#" *ngIf="group.is_admin == false && group.is_member == false" class="btn btn-theme btn-sm"><i class="ion-android-add fz-11"></i> Join Group</a>
-          <a  href="#" *ngIf="group.is_admin == false && group.is_member == true" class="btn btn-theme btn-sm"><i class="ion-android-add fz-11"></i> Leave Group</a>
+					<a  href="#" *ngIf="group.is_admin == false && group.is_member == false" class="btn btn-theme btn-sm"><i class="fa fa-plus fz-11"></i> Join Group</a>
+          <a  href="#" *ngIf="group.is_admin == false && group.is_member == true" class="btn btn-theme btn-sm"><i class="fz-11"></i> Leave Group</a>
+          <a (click)="editGroup()" href="#" *ngIf="group.is_admin == true" class="btn btn-theme btn-sm"><i class="fa fa-pencil-square-o fz-11"></i> Edit Group</a>
 				</div>
 			</div>
 			<div class="container pt-70">

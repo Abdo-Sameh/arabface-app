@@ -251,11 +251,21 @@ export class RemoteServiceProvider {
   feedPosting(userID,post)
   {
 
-    console.log(userID,post)
-    let url = "http://nilemm.com/arabface/api/89129812/feed/add?type=feed&entity_type=user&text="+post+"&entity_id="+userID ;
-console.log(url)
-   return this.http.post("http://nilemm.com/arabface/api/89129812/feed/add?type=feed&entity_type=user&entity_id=25",{'text':post})
-  .map((res : Response ) => res.json());
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    let urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('userid', userID );
+    urlSearchParams.append('entity_id', userID );
+    urlSearchParams.append('text', post);
+    urlSearchParams.append('type', "feed" );
+    urlSearchParams.append('entity_type', "user" );
+    let body = urlSearchParams.toString()
+
+   return this.http.post("http://nilemm.com/arabface/api/89129812/feed/add", body, {headers: headers})
+    //do((res : Response ) => console.log(res.json()))
+   .map((res : Response ) => res.json());
+
+
   }
 
   ////////////////////////////////////////////////
@@ -442,6 +452,23 @@ console.log(url)
           let body = urlSearchParams.toString()
 
          return this.http.post("http://nilemm.com/arabface/api/89129812/group/create", body, {headers: headers})
+          //do((res : Response ) => console.log(res.json()))
+         .map((res : Response ) => res.json());
+        }
+        editGroup(title, description, privacy, groupId, canPost, canAddMember){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('group_id', groupId );
+          urlSearchParams.append('title', title);
+          urlSearchParams.append('description', description );
+          urlSearchParams.append('name', title );
+          urlSearchParams.append('privacy', privacy );
+          urlSearchParams.append('who_can_post', canPost );
+          urlSearchParams.append('who_can_add_member', canAddMember );
+          let body = urlSearchParams.toString()
+
+         return this.http.post("http://nilemm.com/arabface/api/89129812/group/edit", body, {headers: headers})
           //do((res : Response ) => console.log(res.json()))
          .map((res : Response ) => res.json());
         }

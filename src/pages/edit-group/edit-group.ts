@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController} from 'ionic-angular';
+import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
+import {GroupPage} from '../group/group';
 
 /**
  * Generated class for the EditGroupPage page.
@@ -8,18 +10,45 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-edit-group',
   templateUrl: 'edit-group.html',
 })
 export class EditGroupPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  group
+  canPost
+  canAddMember
+  privacy
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
+    this.group = navParams.get("group");
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditGroupPage');
+  }
+
+  editGroup(title, description, privacy, groupId, canPost, canAddMember){
+    console.log(this.group);
+    this.remoteService.editGroup(title, description, privacy, groupId, canPost, canAddMember).subscribe(res =>{
+      let toast = this.toastCtrl.create({
+        message: 'Group updated successfully',
+        duration: 3000,
+        position: 'top'
+      });
+
+      toast.present();
+      });
+      this.navCtrl.push(GroupPage, {
+        group: this.group
+      });
+  }
+
+  back() {
+    this.navCtrl.push(GroupPage, {
+      group: this.group
+    });
   }
 
 }

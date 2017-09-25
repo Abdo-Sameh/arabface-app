@@ -41,6 +41,8 @@ import {PostPage}  from '../pages/post/post'
 import {TrendingPage}  from '../pages/trending/trending'
 import {CreatePagePage}  from '../pages/create-page/create-page'
 import {CreateGroupPage}  from '../pages/create-group/create-group'
+import {EditGroupPage}  from '../pages/edit-group/edit-group'
+import {EditPagePage}  from '../pages/edit-page/edit-page'
 
 @NgModule({
   declarations: [
@@ -79,7 +81,9 @@ import {CreateGroupPage}  from '../pages/create-group/create-group'
     PostPage,
     TrendingPage,
     CreatePagePage,
-    CreateGroupPage
+    CreateGroupPage,
+    EditGroupPage,
+    EditPagePage
   ],
   imports: [
 BrowserModule , IonicModule.forRoot(MyApp), HttpModule
@@ -121,7 +125,9 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule
     PostPage,
     TrendingPage,
     CreatePagePage,
-    CreateGroupPage
+    CreateGroupPage,
+    EditGroupPage,
+    EditPagePage
   ],
   providers: [
     StatusBar,
