@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController, ToastController
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
 import {TabsPage} from '../tabs/tabs';
 import {GroupPage} from '../group/group';
+import {CreateGroupPage} from '../create-group/create-group';
 
 /**
  * Generated class for the GroupsPage page.
@@ -35,12 +36,7 @@ export class GroupsPage {
       content: "Loading",
     });
     loading.present()
-    // var element = document.getElementById("active2");
-    // if(element != null){
-    //   if(document.getElementById("active2").innerHTML == "My Pages"){
-    //     type = "mine";
-    //   }
-    // }
+
     console.log(this.search);
     console.log(type);
     console.log(filter);
@@ -55,7 +51,10 @@ export class GroupsPage {
     this.remoteService.joinGroup(group_id, status, userId).subscribe(res =>{
       console.log(res);
     });
+  }
 
+  newGroup(){
+    this.navCtrl.push(CreateGroupPage);
   }
 
   groupPage(group){
@@ -63,8 +62,6 @@ export class GroupsPage {
       group: group,
     });
   }
-
-
 
   back()
   {

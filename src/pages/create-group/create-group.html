@@ -29,25 +29,21 @@
 				<form>
 		       	    <div class="form-group mt-20">
 				        <label for="g_name">Title:</label>
-				        <input type="text" class="form-control" id="g_name">
-				    </div>
-				    <div class="form-group">
-				        <label for="g_url">URL:</label>
-				        <input type="url" class="form-control" id="g_url">
+				        <input type="text" class="form-control" id="g_name" [(ngModel)]="title" [ngModelOptions]="{ standalone :true}">
 				    </div>
 				    <div class="form-group">
 				        <label for="g_desc">Description:</label>
-				        <textarea rows="7" class="form-control" id="g_desc"></textarea>
+				        <textarea rows="7" class="form-control" id="g_desc" [(ngModel)]="description" [ngModelOptions]="{ standalone :true}"></textarea>
 				    </div>
 				    <div class="form-group">
 				        <label for="g_priv">Privacy:</label>
-				        <select class="form-control" id="g_priv">
-							<option>Public</option>
-							<option>Private</option>
+				        <select class="form-control" id="g_priv" [(ngModel)]="privacy" [ngModelOptions]="{ standalone :true}">
+    							<option value="1">Public</option>
+    							<option value="2">Private</option>
 				        </select>
 				    </div>
 				    <div class="form-group mt-30 mb-30">
-		            	<button type="submit" class="btn btn-theme">Create</button>
+		            	<button (click)="createGroup(this.title, this.description, this.privacy, this.userId)" type="submit" class="btn btn-theme">Create</button>
 	            	</div>
 				</form>
 			</div>

@@ -429,6 +429,23 @@ console.log(url)
             .map((res : Response ) => res.json());
 
         }
+
+        createGroup(title, description, name, privacy, userId){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('userid', userId );
+          urlSearchParams.append('title', title);
+          urlSearchParams.append('description', description );
+          urlSearchParams.append('name', name );
+          urlSearchParams.append('privacy', privacy );
+          let body = urlSearchParams.toString()
+
+         return this.http.post("http://nilemm.com/arabface/api/89129812/group/create", body, {headers: headers})
+          //do((res : Response ) => console.log(res.json()))
+         .map((res : Response ) => res.json());
+        }
+
         joinGroup(group_id, status, userid):any{
           let headers = new Headers();
           headers.append('Content-Type', 'application/x-www-form-urlencoded');

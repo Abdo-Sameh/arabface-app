@@ -23,7 +23,7 @@
 </ion-header>
 
 
-<ion-content  style="margin-top:50px">
+<ion-content >
   <section class="bg_grey full_vh">
 			<div class="panel panel-theme">
 				<ul class="nav nav-tabs flex-space-around">
@@ -94,12 +94,13 @@
 							</div>
 						</div>
 					</div>
+
 				</div>
 			</div>
-			<div class="add-btn">
-				<a href="#" data-toggle="modal" data-target="#add_modal"><i class="ion-android-add"></i></a>
+      <div class="add-btn">
+				<a (click)="newGroup()" href="#"><i class="fa fa-plus"></i></a>
 			</div>
-			<div id="add_modal" class="modal fade">
+			<!-- <div id="add_modal" class="modal fade">
 			    <div class="modal-dialog">
 				    <div class="modal-content">
 				        <div class="modal-header">
@@ -135,7 +136,7 @@
 				        </form>
 				    </div>
 			    </div>
-			</div>
+			</div> -->
 		</section>
 
 

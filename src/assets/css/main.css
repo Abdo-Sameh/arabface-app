@@ -3,7 +3,7 @@ Start Global
 =============================*/
 
 /*----Start Reset Css----*/
-/* http://meyerweb.com/eric/tools/css/reset/ 
+/* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
 */
@@ -17,8 +17,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
@@ -27,10 +27,10 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-	
+
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
@@ -93,7 +93,7 @@ body {
 	max-width: 768px;
 	margin: 0 auto;
 	min-height: 100vh;
-	padding-bottom: 73px;  
+	padding-bottom: 73px;
 }
 .container {
 	width: 100%;
@@ -113,7 +113,7 @@ body {
 }
 .btn-theme {
 	background: #5c0632;
-	color: #fff !important; 
+	color: #fff !important;
 }
 .flex {
 	display: flex;
@@ -478,7 +478,7 @@ Start News
 }
 .write-comment form input,
 .write-comment form button {
-	height: 50px;	
+	height: 50px;
     line-height: 50px;
 }
 .write-comment form button i {
@@ -689,7 +689,7 @@ Start Friend Profile
     margin-left: -80px;
     border: 3px solid #fff;
     border-radius: 3px;
-} 
+}
 .friend_profile_box img {
 	width: 100%;
 	height: 100%;
@@ -708,9 +708,9 @@ Start Friend Profile
 .profile-tabs>li {
 	text-align: center;
 }
-.profile-tabs>li.active>a, .profile-tabs>li.active>a:focus, 
-.profile-tabs>li.active>a:hover, .profile-tabs>li>a:hover, 
-.profile-tabs>li>a:focus {  
+.profile-tabs>li.active>a, .profile-tabs>li.active>a:focus,
+.profile-tabs>li.active>a:hover, .profile-tabs>li>a:hover,
+.profile-tabs>li>a:focus {
 	color: #5c0632;
 	border: none;
 	background: none;
@@ -731,7 +731,7 @@ Start Friend Profile
 	top: -3px;
 	left: -2px;
 }
-.profile-tabs>li>a .ion-chatboxes, 
+.profile-tabs>li>a .ion-chatboxes,
 .profile-tabs>li>a .ion-more {
     line-height: 0;
     font-size: 20px;
@@ -781,12 +781,12 @@ Start Profile
 	position: absolute;
 	bottom: 10px;
 	right: 10px;
-} 
+}
 @media (max-width: 460px) {
 	.profile-editors {
 		top: 30px;
 		bottom: auto;
-	} 
+	}
 }
 .profile-editors .fa-picture-o {
 	margin-right: 2px;
@@ -797,7 +797,7 @@ Start Profile
 .profile .profile-tabs>li>a {
 	font-size: 13px;
 }
-.photos {	
+.photos {
 	margin: 10px 0;
 }
 /*====================================
@@ -917,3 +917,23 @@ Start Menu
 /*====================================
 //End Menu
 ====================================*/
+.add-btn {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	background: #5c0632;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	border-radius: 50%;
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+}
+.add-btn a {
+	display: block;
+	color: #fff;
+	font-size: 12px;
+}
+.scroll-content {
+	padding-top: 70px;
+}
