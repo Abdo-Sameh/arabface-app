@@ -20,10 +20,13 @@ export class EventsPage {
   userId :any;
   search
   category
+  type
 
   constructor(public navCtrl: NavController, public navParams: NavParams , public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.userId=localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
-    this.getEvents("", "", "", this.userId);
+    this.type = "upcoming"
+    this.category = "all"
+    this.getEvents(this.type, this.category, "", this.userId);
   }
 
 
@@ -44,13 +47,28 @@ export class EventsPage {
     // }
     // console.log(type);
     // console.log(term);
+    $('#selectType').on('change', function () {
+        categoryId = "all";
 
-    this.remoteService.getEvents(type, term, categoryId, userId).subscribe(res =>{
+        $('#selectCat').val("all");
+        console.log("hello from selectType")
+    });
+    this.type = type;
+    this.category = categoryId;
+
+
+    this.remoteService.getEvents(type, categoryId, term , userId).subscribe(res =>{
         loading.dismiss();
+        console.log(type);
+        console.log(this.category);
+        console.log(term);
         this.events = res.events ;
         this.categories = res.categories;
         console.log(res);
       });
+
+      this.search = "";
+
   }
 
   back()
