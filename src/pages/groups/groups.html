@@ -27,22 +27,22 @@
   <section class="bg_grey full_vh">
 			<div class="panel panel-theme">
 				<ul class="nav nav-tabs flex-space-around">
-					<li class="active"><a (click)="getGroups('','','',userId)" data-toggle="tab" href="#tab-content-1"> Groups</a></li>
-					<li><a (click)="getGroups('member','','',userId)" data-toggle="tab" href="#tab-content-2"> Member</a></li>
-          <li><a (click)="getGroups('yours','','',userId)" data-toggle="tab" href="#tab-content-3"> My Groups</a></li>
+					<li id="active1" class="active"><a (click)="getGroups('recommend','', this.filter, userId)" data-toggle="tab" href="#tab-content-1"> Groups</a></li>
+					<li id="active2"><a (click)="getGroups('member', '', this.filter, userId)" data-toggle="tab" href="#tab-content-2"> Member</a></li>
+          <li id="active3"><a (click)="getGroups('yours','',this.filter, userId)" data-toggle="tab" href="#tab-content-3"> My Groups</a></li>
 				</ul>
 			</div>
 			<div class="container">
 				<form class="search-form search-filter mt-10 mb-30">
 					<div class="input-group">
 						<input type="text" class="form-control" [(ngModel)]="search" [ngModelOptions]="{ standalone :true}" placeholder="Search here ...">
-						<select class="form-control" (ngModelChange)="getGroups('', search ,'', userId)"  [(ngModel)]="filter" [ngModelOptions]="{ standalone :true}">
+						<select class="form-control" [(ngModel)]="filter" [ngModelOptions]="{ standalone :true}" (ngModelChange)="getGroups(this.type, this.search ,this.filter, userId)">
 							<option value="all">All</option>
 							<option value="top">Top</option>
 							<option value="featured">Featured</option>
 						</select>
 						<div class="input-group-btn">
-							<button (click)="getGroups('','this.search','',userId)" type="submit" class="btn btn-default">
+							<button (click)="getGroups(this.type, this.search, this.filter, userId)" type="submit" class="btn btn-default">
 								<i class="fa fa-search"></i>
 							</button>
 						</div>

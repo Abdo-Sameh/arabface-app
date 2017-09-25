@@ -23,11 +23,7 @@ export class PagesPage {
   search
   category
   type
-  page = {
-    'title' : "",
-    'desc' : "",
-    'category' : "",
-  }
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.userId=localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.category = 'all';
