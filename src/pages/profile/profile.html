@@ -1,0 +1,536 @@
+<!--
+  Generated template for the ProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <header class="header_title"  >
+        <div class="container">
+            <div class="back_btn">
+              <a href="#" (click)="back()"><i class="fa fa-arrow-left"></i></a>
+            </div>
+            <div class="page_title text_center">
+              <h3>Profile</h3>
+            </div>
+            <div class="menu_btn">
+                <a href="#"><i class="fa fa-bars" style="color:#fff;font-size:18px"></i></a>
+              </div>
+          </div>
+      </header>   
+</ion-header>
+
+
+<ion-content >
+  
+  
+      <section class="white_bg">
+         
+        <div class="user_cover friend_profile"  >
+          <div class="friend_profile_box">
+            <div class="img-upload">
+              <img src="{{userData['avatar']}}" alt="Arabface" title="Arabface">
+              <div class="file-input file-input-profile">
+               <form enctype="multipart/form-data" method="POST">
+                <label for="profile-upload"><i class="fa fa-camera"></i></label>
+                <input id="profile-upload" type="file"  [(ngModel)]="picture.path" [ngModelOptions]="{standalone: true}"   (change)="changeProfilePicture($event)">
+               </form>
+              </div>
+            </div>	
+            <h3>{{userData['name']}}</h3>
+          </div>
+          <div class="profile-editors">
+            <div class="file-input file-input-cover">
+              <label class="btn btn-theme btn-sm mr-5" for="cover-upload"><i class="fa fa-picture-o"></i> change cover</label>
+              <input id="cover-upload" type="file">
+            </div>
+            <a href="#" class="btn btn-theme btn-sm"><i class="fa fa-pencil-square-o"></i> edit profile</a>
+          </div>
+        </div>
+        <div class="container">
+            <ul class="nav nav-tabs profile-tabs flex-h-center">
+              <li class="active"><a data-toggle="tab" href="#timeline"><i class="fa fa-sliders"></i> Timeline</a></li>
+              <li><a href="#"><span>230</span> Following</a></li>
+              <li><a href="#"><span>429</span> Followers</a></li>
+              <li><a data-toggle="tab"   href="#photos"><span>115</span> Photos</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="timeline" class="tab-pane fade in active">
+                    <div class="timeline">
+                        <div class="feed-box post" *ngFor="let post of posts" >
+             
+<div *ngIf="post.tag_users != ''  ">
+    <div class="feed-header">
+        <img class="feed-img" src="{{post.avatar}}" >
+        <div class="feed-title">
+        <h3 >{{post.name}} <span> changed  profile picture </span></h3>
+        <div class="pull-right mt-10 mb-10">
+        <div class="dropdown">
+        <a href="#" class="btn btn-default btn-sm" data-toggle="dropdown"><i class="fa fa-globe"></i> <span class="caret"></span></a>
+        <ul class="dropdown-menu dropdown-menu-right">
+        <li><a href="#">Item-1</a></li>
+        <li><a href="#">Item-2</a></li>
+        <li><a href="#">Item-3</a></li> 
+        </ul>
+        </div>
+        </div>
+        <div class="clearfix"></div>
+        </div>
+        </div>
+        <div class="feed-body">
+            <p class="mt-10">{{post.full_message}}</p>
+          </div>
+   
+    <div class="feed-footer">
+        <div class="pull-left">
+          <div class="pull-left mr-15 " (click)= "likeFeed(30,post.id)" (click)="setColor('like2')" >
+            <a  id="like2"  style="cursor:pointer"><i class="fa fa-thumbs-o-up" ></i> Like</a>
+          </div>
+          <div class="pull-left mr-15">
+            <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+          </div>
+          <div class="pull-left mr-15">
+            <a href="#"><i class="fa fa-share"></i> Share</a>
+          </div>
+        </div>
+        <div class="pull-right">
+          <div class="pull-left ml-15">
+            <i class="fa fa-thumbs-o-up"></i> {{post.like_count}}
+          </div>
+          <div class="pull-left ml-15">
+            <i class="fa fa-commenting"></i> {{post.comments}}
+          </div>
+          <div class="pull-left ml-15">
+            <i class="fa fa-share"></i> 
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="comment-list">
+            <div class="comment">
+                <div class="pull-left" *ngFor="let comments of post.answers[0]">
+                    <img class="feed-img" src={{comments.avatar}} alt="">
+                  <div class="feed-title">
+                    <h3>
+                      {{comments.name}}
+                    </h3>
+                    <p>{{comments.text}}</p>
+                    <span class="mr-10">Like</span>
+                    <span class="mr-10">Reply</span>
+                    <span class="mr-10">-</span>
+                    <span>{{comments.time}}</span>
+                  </div>
+              </div>
+              <div class="pull-right">
+                <!-- <div class="pull-left ml-15">
+                  <i class="fa fa-thumbs-o-up"></i> 3
+                </div> -->
+              </div>
+            </div>
+         
+            <div class="comment write-comment">
+              <div class="pull-left">
+                <img class="feed-img" src={{userAvatar}} alt="">
+              </div>
+              <form>
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="write a comment ...">  
+                  <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
+                </div>
+              </form>
+            </div>
+          </div>
+      </div>
+  </div>
+
+<!--   seperating  -->
+
+<div *ngIf="post.type_id == 'change-avatar'">
+
+<div class="feed-header">
+<img class="feed-img" src="{{post.avatar}}" >
+<div class="feed-title">
+<h3 >{{post.name}} <span> changed  profile picture </span></h3>
+<div class="pull-right mt-10 mb-10">
+<div class="dropdown">
+<a href="#" class="btn btn-default btn-sm" data-toggle="dropdown"><i class="fa fa-globe"></i> <span class="caret"></span></a>
+<ul class="dropdown-menu dropdown-menu-right">
+<li><a href="#">Item-1</a></li>
+<li><a href="#">Item-2</a></li>
+<li><a href="#">Item-3</a></li> 
+</ul>
+</div>
+</div>
+<div class="clearfix"></div>
+</div>
+</div>
+<div class="feed-body">
+<img src="{{post.avatar}}" style="width:100px;height:120px;padding:30x;margin:10px">
+</div>
+<div class="feed-footer">
+<div class="pull-left">
+<div class="pull-left mr-15 " (click)= "likeFeed(30,post.id)" (click)="setColor('like2')" >
+<a  id="like2"  style="cursor:pointer"><i class="fa fa-thumbs-o-up" ></i> Like</a>
+</div>
+<div class="pull-left mr-15">
+<a href="#"><i class="fa fa-commenting"></i> Comment</a>
+</div>
+<div class="pull-left mr-15">
+<a href="#"><i class="fa fa-share"></i> Share</a>
+</div>
+</div>
+<div class="pull-right">
+<div class="pull-left ml-15">
+<i class="fa fa-thumbs-o-up"></i> {{post.like_count}}
+</div>
+<div class="pull-left ml-15">
+<i class="fa fa-commenting"></i> {{post.comments}}
+</div>
+<div class="pull-left ml-15">
+<i class="fa fa-share"></i> 
+</div>
+</div>
+<div class="clearfix"></div>
+<div class="comment-list">
+<div class="comment">
+    <div class="pull-left" *ngFor="let comments of post.answers[0]">
+        <img class="feed-img" src={{comments.avatar}} alt="">
+      <div class="feed-title">
+        <h3>
+          {{comments.name}}
+        </h3>
+        <p>{{comments.text}}</p>
+        <span class="mr-10">Like</span>
+        <span class="mr-10">Reply</span>
+        <span class="mr-10">-</span>
+        <span>{{comments.time}}</span>
+      </div>
+  </div>
+  <div class="pull-right">
+    <!-- <div class="pull-left ml-15">
+      <i class="fa fa-thumbs-o-up"></i> 3
+    </div> -->
+  </div>
+</div>
+
+<div class="comment write-comment">
+  <div class="pull-left">
+    <img class="feed-img" src={{userAvatar}} alt="">
+  </div>
+  <form>
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="write a comment ...">  
+      <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
+    </div>
+  </form>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<!--   seperating  -->
+
+
+<!--   seperating  -->
+
+<div *ngIf="post.type_id == 'change-cover'">
+
+<div class="feed-header">
+<img class="feed-img" src="{{post.avatar}}" >
+<div class="feed-title">
+<h3 >{{post.name}} <span> changed  profile picture </span></h3>
+<div class="pull-right mt-10 mb-10">
+<div class="dropdown">
+<a href="#" class="btn btn-default btn-sm" data-toggle="dropdown"><i class="fa fa-globe"></i> <span class="caret"></span></a>
+<ul class="dropdown-menu dropdown-menu-right">
+<li><a href="#">Item-1</a></li>
+<li><a href="#">Item-2</a></li>
+<li><a href="#">Item-3</a></li> 
+</ul>
+</div>
+</div>
+<div class="clearfix"></div>
+</div>
+</div>
+<div class="feed-body">
+<img src="{{post.images}}" style="width:100px;height:120px;padding:30x;margin:10px">
+</div>
+<div class="feed-footer">
+<div class="pull-left">
+<div class="pull-left mr-15 " (click)= "likeFeed(30,post.id)" (click)="setColor('like2')" >
+  <a  id="like2"  style="cursor:pointer"><i class="fa fa-thumbs-o-up" ></i> Like</a>
+</div>
+<div class="pull-left mr-15">
+  <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+</div>
+<div class="pull-left mr-15">
+  <a href="#"><i class="fa fa-share"></i> Share</a>
+</div>
+</div>
+<div class="pull-right">
+<div class="pull-left ml-15">
+  <i class="fa fa-thumbs-o-up"></i> {{post.like_count}}
+</div>
+<div class="pull-left ml-15">
+  <i class="fa fa-commenting"></i> {{post.comments}}
+</div>
+<div class="pull-left ml-15">
+  <i class="fa fa-share"></i> 
+</div>
+</div>
+<div class="clearfix"></div>
+<div class="comment-list">
+  <div class="comment">
+      <div class="pull-left" *ngFor="let comments of post.answers[0]">
+          <img class="feed-img" src={{comments.avatar}} alt="">
+        <div class="feed-title">
+          <h3>
+            {{comments.name}}
+          </h3>
+          <p>{{comments.text}}</p>
+          <span class="mr-10">Like</span>
+          <span class="mr-10">Reply</span>
+          <span class="mr-10">-</span>
+          <span>{{comments.time}}</span>
+        </div>
+    </div>
+    <div class="pull-right">
+      <!-- <div class="pull-left ml-15">
+        <i class="fa fa-thumbs-o-up"></i> 3
+      </div> -->
+    </div>
+  </div>
+
+  <div class="comment write-comment">
+    <div class="pull-left">
+      <img class="feed-img" src={{userAvatar}} alt="">
+    </div>
+    <form>
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="write a comment ...">  
+        <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+</div>
+
+
+  
+<!--   seperating  -->
+<div *ngIf="post.shared == true "  >
+    <div class="feed-header">
+    <img class="feed-img" src={{post.avatar}} alt="">
+    <div class="feed-title">
+    <h3>{{post.name}} shared {{post.shared_name}} 's post</h3>
+    <div class="pull-right mt-10 mb-10">
+    <div class="dropdown">
+    <a href="#" class="btn btn-default btn-sm" data-toggle="dropdown"><i class="fa fa-globe"></i> <span class="caret"></span></a>
+    <ul class="dropdown-menu dropdown-menu-right">
+    <li><a href="#">Item-1</a></li>
+    <li><a href="#">Item-2</a></li>
+    <li><a href="#">Item-3</a></li> 
+    </ul>
+    </div>
+    </div>
+    <div class="clearfix"></div>
+    </div>
+    </div><br>
+    <div class="feed-body" style="margin:7px"><br>
+    <div class="feed-header">
+    <img class="feed-img" src="{{post.shared_avatar}}" style="width:30px !important ;height:30px;" >
+    <div class="feed-title">
+      <h3>{{post.shared_name}} </h3>
+      <div class="clearfix"></div>
+    </div>
+    </div>
+    
+    <br><br><br>
+    
+    <div >        
+    {{post.full_message}}
+    </div>
+    </div><br>
+    <div class="feed-footer">
+    <div class="pull-left">
+    <div class="pull-left mr-15 " (click)= "likeFeed(30,post.id)" (click)="setColor('like2')" >
+    <a  id="like2"  style="cursor:pointer"><i class="fa fa-thumbs-o-up" ></i> Like</a>
+    </div>
+    <div class="pull-left mr-15">
+    <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+    </div>
+    <div class="pull-left mr-15">
+    <a href="#"><i class="fa fa-share"></i> Share</a>
+    </div>
+    </div>
+    <div class="pull-right">
+    <div class="pull-left ml-15">
+    <i class="fa fa-thumbs-o-up"></i> {{post.like_count}}
+    </div>
+    <div class="pull-left ml-15">
+    <i class="fa fa-commenting"></i> {{post.comments}}
+    </div>
+    <div class="pull-left ml-15">
+    <i class="fa fa-share"></i> 
+    </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="comment-list">
+    <div class="comment">
+      <div class="pull-left" *ngFor="let comments of post.answers[0]">
+          <img class="feed-img" src={{comments.avatar}} alt="">
+        <div class="feed-title">
+          <h3>
+            {{comments.name}}
+          </h3>
+          <p>{{comments.text}}</p>
+          <span class="mr-10">Like</span>
+          <span class="mr-10">Reply</span>
+          <span class="mr-10">-</span>
+          <span>{{comments.time}}</span>
+        </div>
+    </div>
+    <div class="pull-right">
+      <!-- <div class="pull-left ml-15">
+        <i class="fa fa-thumbs-o-up"></i> 3
+      </div> -->
+    </div>
+    </div>
+    
+    <div class="comment write-comment">
+    <div class="pull-left">
+      <img class="feed-img" src={{userAvatar}} alt="">
+    </div>
+    <form>
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="write a comment ...">  
+        <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
+      </div>
+    </form>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+
+<!--   seperating  -->
+
+
+  
+<!--   seperating  -->
+<div *ngIf="post.shared == false && post.type_id == '' && post.poll_type == '0'">
+    <div class="feed-header">
+    <img class="feed-img" src={{post.avatar}} alt="">
+    <div class="feed-title">
+    <h3>{{post.name}}</h3>
+    <div class="pull-right mt-10 mb-10">
+    <div class="dropdown">
+    <a href="#" class="btn btn-default btn-sm" data-toggle="dropdown"><i class="fa fa-globe"></i> <span class="caret"></span></a>
+    <ul class="dropdown-menu dropdown-menu-right">
+    <li><a href="#">Item-1</a></li>
+    <li><a href="#">Item-2</a></li>
+    <li><a href="#">Item-3</a></li> 
+    </ul>
+    </div>
+    </div>
+    <div class="clearfix"></div>
+    </div>
+    </div><br>
+    <div class="feed-body" style="margin:7px"><br>
+  
+    <br><br>
+    
+    <div >        
+    {{post.full_message}}
+    </div>
+    </div><br>
+    <div class="feed-footer">
+    <div class="pull-left">
+    <div class="pull-left mr-15 " (click)= "likeFeed(30,post.id)" (click)="setColor('like2')" >
+    <a  id="like2"  style="cursor:pointer"><i class="fa fa-thumbs-o-up" ></i> Like</a>
+    </div>
+    <div class="pull-left mr-15">
+    <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+    </div>
+    <div class="pull-left mr-15">
+    <a href="#"><i class="fa fa-share"></i> Share</a>
+    </div>
+    </div>
+    <div class="pull-right">
+    <div class="pull-left ml-15">
+    <i class="fa fa-thumbs-o-up"></i> {{post.like_count}}
+    </div>
+    <div class="pull-left ml-15">
+    <i class="fa fa-commenting"></i> {{post.comments}}
+    </div>
+    <div class="pull-left ml-15">
+    <i class="fa fa-share"></i> 
+    </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="comment-list">
+    <div class="comment">
+      <div class="pull-left" *ngFor="let comments of post.answers[0]">
+          <img class="feed-img" src={{comments.avatar}} alt="">
+        <div class="feed-title">
+          <h3>
+            {{comments.name}}
+          </h3>
+          <p>{{comments.text}}</p>
+          <span class="mr-10">Like</span>
+          <span class="mr-10">Reply</span>
+          <span class="mr-10">-</span>
+          <span>{{comments.time}}</span>
+        </div>
+    </div>
+    <div class="pull-right">
+      <!-- <div class="pull-left ml-15">
+        <i class="fa fa-thumbs-o-up"></i> 3
+      </div> -->
+    </div>
+    </div>
+    
+    <div class="comment write-comment">
+    <div class="pull-left">
+      <img class="feed-img" src={{userAvatar}} alt="">
+    </div>
+    <form>
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="write a comment ...">  
+        <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
+      </div>
+    </form>
+    </div>
+    </div>
+    </div>
+    </div>
+
+                        </div>
+                      </div>
+                </div>
+               <div id="photos"  class="tab-pane fade">
+                  
+<div class="photos">
+                    <a *ngFor="let photo of photos" href="#"><img  src={{photo.path}} alt=""></a>
+                  </div>
+                </div>
+            </div>
+            
+          </div>
+      </section>
+  
+      
+  
+</ion-content>
+
+
+
+
+
+
+
+
