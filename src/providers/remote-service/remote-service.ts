@@ -189,6 +189,25 @@ export class RemoteServiceProvider {
   }
 
   ///////////// likes Api call function End  ////////////////////
+  likeCommentApiCall(UserID,commentId):any
+  {
+
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/x-www-form-urlencoded');
+      let urlSearchParams = new URLSearchParams();
+      urlSearchParams.append('userid', UserID );
+      urlSearchParams.append('type', "comment");
+      urlSearchParams.append('type_id',commentId );
+
+
+      let body = urlSearchParams.toString()
+     return this.http.post("http://nilemm.com/arabface/api/89129812/like/item", body, {headers: headers})
+      //do((res : Response ) => console.log(res.json()))
+     .map((res : Response ) => res.json());
+
+
+
+  }
 
   ///////////// chat messages Api call function start  ////////////////////
 
@@ -201,6 +220,16 @@ export class RemoteServiceProvider {
 
 
    ///////////// chat messages Api call function end  ////////////////////
+
+  sharePost(feedID,userID):any
+  {
+    console.log(feedID +userID)
+    return this.http.get("http://nilemm.com/arabface/api/89129812/feed/action?action=share&feed_id="+feedID+"&userid="+userID)
+   .map((res : Response ) => res.json());
+  }
+
+
+ ///////////// chat messages Api call function end  ////////////////////
 
 
   ///////////  Send Messages between users start  ////////////
@@ -248,6 +277,7 @@ export class RemoteServiceProvider {
 
 
   //////////// post in feed ///////////////////////
+
   feedPosting(userID,post)
   {
 
@@ -264,9 +294,27 @@ export class RemoteServiceProvider {
    return this.http.post("http://nilemm.com/arabface/api/89129812/feed/add", body, {headers: headers})
     //do((res : Response ) => console.log(res.json()))
    .map((res : Response ) => res.json());
-
-
   }
+
+  ////////////////////////////////////////////////
+  commentOnFeeds(postOwner,postID,whoCommented,comment)
+  {
+    return this.http.get("http://nilemm.com/arabface/api/89129812/comment/add?userid="+whoCommented+"&entity_id="+postOwner+"&entity_type=user&text="+comment+"&type=feed&type_id="+postID)
+    //do((res : Response ) => console.log(res.json()))
+      .map((res : Response ) => res.json());
+  }
+
+    //////////// post in feed ///////////////////////
+    ReplyOnComment(postOwner,commentID,whoCommented,reply)
+    {
+      return this.http.get("http://nilemm.com/arabface/api/89129812/comment/add?userid="+whoCommented+"&entity_id="+postOwner+"&entity_type=user&text="+reply+"&type=comment&type_id="+commentID)
+      //do((res : Response ) => console.log(res.json()))
+        .map((res : Response ) => res.json());
+    }
+  
+    ////////////////////////////////////////////////
+
+  
 
   ////////////////////////////////////////////////
 
@@ -303,6 +351,14 @@ console.log(url)
       .map((res : Response ) => res.json());
   }
 
+  loadReplies(commentID)
+  {
+    return this.http.get("http://nilemm.com/arabface/api/89129812/comment/load?type=comment&limit=10&type_id="+commentID)
+    //do((res : Response ) => console.log(res.json()))
+      .map((res : Response ) => res.json());
+  }
+
+
 
   loadProfileComments(feedid)
   {
@@ -336,6 +392,7 @@ console.log(url)
 
 
   /////////////////////////////////////////////////////
+
 
   feedsComment(postOwner,postID,whoCommented,comment)
   {
@@ -395,6 +452,7 @@ console.log(url)
           .map((res : Response ) => res.json());
         }
 
+
         getPagesCategories(){
           return this.http.get("http://nilemm.com/arabface/api/89129812/page/get/categories")
           .map((res : Response ) => res.json());
@@ -415,6 +473,7 @@ console.log(url)
           //do((res : Response ) => console.log(res.json()))
          .map((res : Response ) => res.json());
         }
+
 
         editPage(title, description, category, pageId){
           let headers = new Headers();
@@ -449,6 +508,7 @@ console.log(url)
          .map((res : Response ) => res.json());
         }
 
+
         deletePage(pageId, userId){
           let headers = new Headers();
           headers.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -468,6 +528,7 @@ console.log(url)
             .map((res : Response ) => res.json());
 
         }
+
 
         createGroup(title, description, name, privacy, userId){
           let headers = new Headers();
@@ -527,6 +588,7 @@ console.log(url)
          .map((res : Response ) => res.json());
         }
 
+
         groupFeeding(id){
           return this.http.get("http://nilemm.com/arabface/api/89129812/feeds?type=group&type_id="  + id)
           .map((res : Response ) => res.json());
@@ -549,7 +611,5 @@ console.log(url)
           return this.http.get("http://nilemm.com/arabface/api/89129812/videos/browse?userid=" + userId + "&term=" + term + "&category_id=" + categoryId + "&type=" + type + "&filter=" + filter)
           .map((res : Response ) => res.json());
         }
-
-
 
 }

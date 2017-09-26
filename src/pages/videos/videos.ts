@@ -14,6 +14,7 @@ import {TabsPage} from '../tabs/tabs';
   templateUrl: 'videos.html',
 })
 export class VideosPage {
+
   videos
   categories
   userId :any;
@@ -35,6 +36,7 @@ export class VideosPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad VideosPage');
   }
+
 
   getVideos(categoryId, term, type, filter, userId){
     let loading = this.loadingCtrl.create({

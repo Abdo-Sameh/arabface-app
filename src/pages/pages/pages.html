@@ -18,6 +18,7 @@
 				</div>
 			</div>
 		</header>
+
 </ion-header>
 
 
@@ -25,6 +26,7 @@
   <section class="bg_grey ">
 			<div class="panel panel-theme"style="margin-top:20px">
 				<ul class="nav nav-tabs flex-space-around">
+
 
 					<li id="active1" (click)="getPages('all', this.search, this.category, userId)" class="active"><a   data-toggle="tab" href="#tab-content-1">Pages</a></li>
 					<li id="active2"><a (click)="getPages('mine', this.search, this.category, userId)"data-toggle="tab"  href="#tab-content-2">My Pages</a></li>
@@ -48,6 +50,7 @@
 				<div class="tab-content">
 					<div id="tab-content-1" class="tab-pane fade in active">
 						<div class="row thumbnails">
+
 							<div class="col-xs-6" *ngFor="let page of pages; let i = index">
 							    <div class="thumbnail">
 							    	<a (click)="pagePage(page)" href="#"><img src="{{ page.logo }}" alt=""></a>
@@ -79,6 +82,7 @@
 				</div>
 			</div>
 			<div class="add-btn">
+
 				<a (click)="newPage()" href="#" data-toggle="modal" data-target="#add_modal"><i class="fa fa-plus"></i></a>
 			</div>
 			<!-- <div id="add_modal" class="modal fade">
@@ -114,6 +118,7 @@
 				        </form>
 				    </div>
 			    </div>
+
 			</div> -->
 		</section>
 

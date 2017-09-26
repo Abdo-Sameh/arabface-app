@@ -468,10 +468,7 @@ Start News
     border-top: 1px solid #ddd;
 	margin-top: 15px;
 }
-.feed-footer .comment {
-	overflow: hidden;
-	margin: 20px 0;
-}
+
 .write-comment .feed-img {
 	width: 30px;
 	height: 30px;
@@ -934,6 +931,4 @@ Start Menu
 	color: #fff;
 	font-size: 12px;
 }
-.scroll-content {
-	padding-top: 70px;
-}
+

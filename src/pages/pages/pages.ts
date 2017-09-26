@@ -41,6 +41,7 @@ export class PagesPage {
       content: "Loading",
     });
     loading.present()
+
       $('#active1, #active2').click(function(){
         if(this.id == 'active1'){
           type = "all";
@@ -65,6 +66,7 @@ export class PagesPage {
 
   likePage(userId, pageId, type){
     this.remoteService.likePage(userId, pageId, type).subscribe(res =>{});
+
     var like = "#like"+pageId;
     var dislike = "#dislike"+pageId;
 

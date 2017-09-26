@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController} from 'ionic-angular';
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
+
 import {GroupsPage} from '../groups/groups';
 import {EditGroupPage} from '../edit-group/edit-group';
 
@@ -17,6 +18,7 @@ import {EditGroupPage} from '../edit-group/edit-group';
   templateUrl: 'group.html',
 })
 export class GroupPage {
+
   group
   posts
   userId :any;
@@ -29,6 +31,7 @@ export class GroupPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad GroupPage');
   }
+
   groupFeeding(id){
     let loading = this.loadingCtrl.create({
       content: "Loading",

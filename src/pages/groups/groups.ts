@@ -21,11 +21,13 @@ export class GroupsPage {
   userId :any;
   search
   filter
+
   type
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.filter = 'all';
     this.search = '';
+
     this.type = "recommend";
     this.getGroups(this.type, "", this.filter, this.userId);
   }
@@ -33,11 +35,13 @@ export class GroupsPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad GroupsPage');
   }
+
   getGroups(type, term, filter, userId){
     let loading = this.loadingCtrl.create({
       content: "Loading",
     });
     loading.present()
+
     $('#active1, #active2, #active3').click(function(){
       $('select').val("all");
       filter = "all";
@@ -60,6 +64,7 @@ export class GroupsPage {
         this.groups = res;
         console.log(res);
       });
+
       this.search="";
 
   }
@@ -68,6 +73,7 @@ export class GroupsPage {
     this.remoteService.joinGroup(group_id, status, userId).subscribe(res =>{
       console.log(res);
     });
+
   }
 
   newGroup(){
@@ -79,7 +85,6 @@ export class GroupsPage {
       group: group,
     });
   }
-
   back()
   {
     this.navCtrl.push(TabsPage);

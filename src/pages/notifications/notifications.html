@@ -19,6 +19,11 @@
             <img src={{notify.avatar}} alt="">
           </div>
           <div [ngSwitch]="true">
+          <div class="user-info" *ngSwitchCase="notify.type == 'feed.like.comment'" >
+            <h5>{{notify.name}} <span>Liked your comment</span></h5>
+            <p>{{notify.time}}</p>
+          </div>	
+
           <div class="user-info" *ngSwitchCase="notify.type == 'profile.view'" >
             <h5>{{notify.name}} <span>viewed your profile</span></h5>
             <p>{{notify.time}}</p>
@@ -31,14 +36,24 @@
             <h5>{{notify.name}} <span>tagged you in post</span></h5>
             <p>{{notify.time}}</p>
           </div>
-          <div class="user-info" *ngSwitchCase="notify.type == 'relationship.follow'" >
-              <h5>{{notify.name}} <span>started following you</span></h5>
+          <div class="user-info" *ngSwitchCase="notify.type == 'group.post'" >
+              <h5>{{notify.name}} <span>posted in group</span></h5>
+
               <p>{{notify.time}}</p>
            </div>
            <div class="user-info" *ngSwitchCase="notify.type == 'event.invite'" >
               <h5>{{notify.name}} <span>invited you to  event {{notify.name}}</span></h5>
               <p>{{notify.time}}</p>
            </div>
+           <div class="user-info" *ngSwitchCase="notify.type == 'relationship.follow'" >
+              <h5>{{notify.name}} <span>started following you   </span></h5>
+              <p>{{notify.time}}</p>
+           </div>
+           <div class="user-info" *ngSwitchCase="notify.type == 'event.invite'" >
+            <h5>{{notify.name}} <span>invited you to  event {{notify.name}}</span></h5>
+            <p>{{notify.time}}</p>
+         </div>
+
            <div class="user-info" *ngSwitchCase="notify.type == 'group.add.member'" >
               <h5>{{notify.name}} <span>added you to  group {{notify.title}}</span></h5>
               <p>{{notify.time}}</p>

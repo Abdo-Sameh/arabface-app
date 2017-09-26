@@ -22,10 +22,13 @@ export class NewsPage {
     likes;
     likeNumbers;
     userData;
+    show=true
     feedComments
+    havePosted =false
     post ={ 'text' : ""}
     comment={
-    'comment' : ''
+    'comment' : '',
+    'reply' :''
     }
     feed = { 'feedid' :""}
     public userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
@@ -52,6 +55,46 @@ export class NewsPage {
   }
 
 
+getFeedsList(id)
+{
+  let loading = this.loadingCtrl.create({
+    content: "Loading",
+    
+  });        
+  loading.present()
+      this.remoteService.feedsListApiCall(id).subscribe(res =>{
+        if(this.havePosted == true)
+          {
+
+            res=this.feeds
+          }
+        for(let i =0 ; i < res.length;i++)
+        {
+          let newFeedID=res[i].id
+          let newFeed =res[i].answers
+          this.remoteService.loadComments(newFeedID).subscribe(res2 =>{newFeed.unshift(res2) 
+            for(let g=0 ;g <newFeed[0].length;g++)
+              {
+                this.remoteService.loadReplies(newFeed[0][g].id).subscribe(res3 => { 
+                  
+                  newFeed[0][g]['repliesContent']=res3
+                  
+                });
+                
+              }
+            });
+
+        }
+        this.feeds=res
+        loading.dismiss();
+        console.log(this.feeds)
+      });
+      
+}
+
+
+///////////////////// post feed //////////////
+ 
 likeFeed(userid =this.userId,feedid)
 {
 //   "use strict";
@@ -74,36 +117,76 @@ likeFeed(userid =this.userId,feedid)
 
   
 }
-
-getFeedsList(id)
+likeComment(userid =this.userId,commentID)
 {
-  let loading = this.loadingCtrl.create({
-    content: "Loading",
+//   "use strict";
+//   $(".feed-box").on("click", function() {
+//     console.info($(this).index())
+// });
+  this.remoteService.likeCommentApiCall(this.userId,commentID).subscribe(res =>{
+    this.likes = res; 
+    for(let i =0 ; i<this.feeds.length ;i++)
+      {
+          if(this.feeds[i].id == commentID)
+          {
+            this.feeds[i].like_count=this.likes.likes;
+            break
+          }
+      }
     
+  
+  })
+
+  
+}
+likeReply(userid =this.userId,replyID)
+{
+//   "use strict";
+//   $(".feed-box").on("click", function() {
+//     console.info($(this).index())
+// });
+  this.remoteService.likeCommentApiCall(this.userId,replyID).subscribe(res =>{
+    this.likes = res; 
+    for(let i =0 ; i<this.feeds.length ;i++)
+      {
+          if(this.feeds[i].id == replyID)
+          {
+            this.feeds[i].like_count=this.likes.likes;
+            break
+          }
+      }
+    
+  
+  })
+
+  
+}
+postFeed(userID=this.userId,postText=this.post.text)
+{
+  console.log(this.feeds)
+  
+  let loading = this.loadingCtrl.create({
+    content: "Posting",
   });        
   loading.present()
-      this.remoteService.feedsListApiCall(id).subscribe(res =>{
-        for(let i =0 ; i < res.length;i++)
-        {
-          let newFeedID=res[i].id
-          let newFeed =res[i].answers
-          this.remoteService.loadComments(newFeedID).subscribe(res2 =>{newFeed.push(res2) });
-        }
-        this.feeds=res
-        loading.dismiss();
-        console.log(this.feeds)
-        
-      });
-      
-}
+  this.remoteService.feedPosting(userID,postText).subscribe( res => { 
+    this.feeds.unshift(res.feed)
+    console.log(this.feeds)
+    this.post.text= ""
+    //this.getFeedsList(this.userId);
+    loading.dismiss();
+  });
 
+}
 commentOnFeed(postOwner,postID,whoCommented=this.userId,comment=this.comment.comment)
 {
   let loading = this.loadingCtrl.create({
     content: "commenting",
   });        
+  console.log(this.feeds)
+  
   loading.present()
-  this.remoteService.feedsComment(postOwner,postID,whoCommented,comment).subscribe(res => {
+  this.remoteService.commentOnFeeds(postOwner,postID,whoCommented,comment).subscribe(res => {
     
  
     res.postid = postID
@@ -114,14 +197,65 @@ commentOnFeed(postOwner,postID,whoCommented=this.userId,comment=this.comment.com
                 this.feeds[x].answers[0].push(res)
               }
       }
+      this.remoteService.loadComments(postID).subscribe(res2 =>{ });
+      
       this.comment.comment = ''
       loading.dismiss()
     console.log(res)
   })
 
 }
+replyOnComment(postOwner,commentID,whoCommented=this.userId,comment=this.comment.reply)
+{
+  let loading = this.loadingCtrl.create({
+    content: "replying",
+  });        
+  console.log(this.feeds)
+  
+  loading.present()
+  this.remoteService.ReplyOnComment(postOwner,commentID,whoCommented,comment).subscribe(res => {    
+    
+    
+    res.postid = commentID
+    for( let x in this.feeds)
+      {
+        if(this.feeds[x].id == res.postid)
+          {
+                this.feeds[x].answers[1].push(res)
+              }
+      }
+      this.remoteService.loadReplies(commentID).subscribe(res2 =>{ });
+      
+      this.comment.reply = ''
+      loading.dismiss()
+    console.log(res)
+  })
+  
+}
+
+sharePost(feedid,userID=this.userId)
+{
+  this.remoteService.sharePost(feedid,userID).subscribe(res => {    
+    
+      console.log(res)
+  })
+}
 
 
+
+
+/////////////////////////////////////////
+GoToProfile(id)
+{
+  let loading = this.loadingCtrl.create({
+    content: "Loading",
+  });        
+  loading.present()
+
+    this.remoteService.profileDetailsApiCall(id).subscribe(res =>{loading.dismiss();this.userData = res ; res.id=id;      this.navCtrl.push(ProfilePage,{"userData" : res})
+  });
+  
+}
 
 count=1;
 
@@ -138,31 +272,12 @@ setColor(btn)
     }
 
 }
-
-
-///////////////////// post feed //////////////
- 
-postFeed(userID=this.userId,postText=this.post.text)
-{
-  this.remoteService.feedPosting(userID,postText).subscribe( res => { console.log(res)});
-
-}
-
-
-/////////////////////////////////////////
-GoToProfile(id)
-{
-  let loading = this.loadingCtrl.create({
-    content: "Loading",
-  });        
-  loading.present()
-
-    this.remoteService.profileDetailsApiCall(id).subscribe(res =>{loading.dismiss();this.userData = res ; res.id=id;      this.navCtrl.push(ProfilePage,{"userData" : res})
-  });
-  
-}
-
-
+reply()
+  {
+    console.log(this.show)
+    this.show = false;
+    console.log(this.show)
+  }
  //////////////////////////////////////////////
  back()
  {

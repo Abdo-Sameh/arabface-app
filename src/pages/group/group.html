@@ -12,6 +12,7 @@
 					<a (click)="back()"><i class="fa fa-arrow-left"></i></a>
 				</div>
 				<div class="page_title text-center">
+
 					<h3>{{ group.title }}</h3>
 				</div>
 				<div class="menu_btn text-right">
@@ -28,6 +29,7 @@
 			<div class="user_cover friend_profile">
 				<div class="friend_profile_box">
 					<div class="img-upload">
+
 						<img src="{{ group.logo }}" alt="">
 					</div>
 				</div>
@@ -45,6 +47,7 @@
 					<a href="#">35,619 people like this</a>
 				</div>
 				<div class="panel panel-theme">
+
 					<p>{{ group.description }}</p>
 				</div>
 				<div class="panel panel-theme">
@@ -54,6 +57,7 @@
 					</div>
 				</div>
 				<div class="panel panel-theme">
+
 					<div class="feed-box" *ngFor="let post of posts">
 						<div class="feed-header">
 							<div class="pull-left">
@@ -84,6 +88,7 @@
 							<div class="clearfix"></div>
 						</div>
 						<div class="feed-body">
+
 							<h3><a href="#">{{ post.full_message }}</a></h3>
 							<a href="#"><img src="assets/images/post.jpg" alt=""></a>
 							<p class="mt-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>

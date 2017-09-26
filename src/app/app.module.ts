@@ -123,6 +123,7 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule
     GiftsPage,
     FriendProfilePage,
     PostPage,
+
     TrendingPage,
     CreatePagePage,
     CreateGroupPage,

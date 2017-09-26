@@ -15,6 +15,7 @@ import {TabsPage} from '../tabs/tabs';
 })
 export class EventsPage {
 
+
   events
   categories
   userId :any;
@@ -70,7 +71,6 @@ export class EventsPage {
       this.search = "";
 
   }
-
   back()
   {
     this.navCtrl.push(TabsPage);

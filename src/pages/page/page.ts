@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController, ToastController
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
 import {TabsPage} from '../tabs/tabs';
 import {PagesPage} from '../pages/pages';
+
 import {EditPagePage} from '../edit-page/edit-page';
 
 
@@ -18,6 +19,7 @@ import {EditPagePage} from '../edit-page/edit-page';
   templateUrl: 'page.html',
 })
 export class Page {
+
   id
   page
 
@@ -30,6 +32,7 @@ export class Page {
   ionViewDidLoad() {
     console.log('ionViewDidLoad Page');
   }
+
   editPage(){
     this.navCtrl.push(EditPagePage,{
       page: this.page
