@@ -3,7 +3,6 @@ Start Global
 =============================*/
 
 /*----Start Reset Css----*/
-
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
@@ -18,15 +17,14 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-
 	font: inherit;
 	vertical-align: baseline;
 
@@ -73,7 +71,6 @@ table {
 }
 * {
 	box-sizing: border-box;
-
 	box-sizing: -webkit-border-box;
 }
 a, a:hover, a:focus, a:active {
@@ -86,7 +83,6 @@ body {
     font-family: 'lato', sans-serif;
     font-size: 14px;
     line-height: 1.7;
-
     color: #535353;
     background: #5c0632;
     margin: 0;
@@ -97,12 +93,6 @@ body {
 	max-width: 768px;
 	margin: 0 auto;
 	min-height: 100vh;
-}
-
-.container {
-	width: 94%;
-	margin: 0 auto;
-	padding: 0;
 	padding-bottom: 73px;
 }
 .container {
@@ -118,40 +108,16 @@ body {
 .bg_white {
 	background: #FFF;
 }
-
 .bg_theme {
 	background: #5c0632;
 }
 .btn-theme {
 	background: #5c0632;
-	color: #fff !important; 
-}
-.panel-theme {
-	padding: 10px 15px;
-    border-bottom: 1px solid transparent;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-}
-.add-btn {
-	position: fixed;
-	bottom: 100px;
-	right: 20px;
-	background: #5c0632;
-	width: 40px;
-	height: 40px;
-	line-height: 40px;
-	text-align: center;
-	border-radius: 50%;
-	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
-}
-.add-btn a {
-	display: block;
-	color: #fff;
-	font-size: 17px;
+	color: #fff !important;
 }
 .flex {
 	display: flex;
-	color: #fff !important;
+	display: -webkit-flex;
 }
 .flex-h-center {
 	display: flex;
@@ -161,16 +127,10 @@ body {
 	display: flex;
 	align-items: center;
 }
-.flex-space-around {
-	display: flex;
-	justify-content: space-around;
-}
-
 .flex-space-between {
 	display: flex;
 	justify-content: space-between;
 }
-
 .flex img {
 	margin: auto;
 }
@@ -178,164 +138,6 @@ body {
     right: 0;
     left: auto;
 }
-.form-group>label {
-	margin-bottom: 5px;
-}
-.modal-title {
-	font-weight: 600;
-}
-.list-group-theme .list-group-item {																																													
-	padding: 20px 25px;
-	border-radius: 0;
-}
-.list-group-sm .list-group-item {
-	padding: 10px 25px;
-}
-.list-group-theme .list-group-item h4 {
-	font-weight: 600;
-    color: #5c0632;
-}
-.checkbox, .radio { 
-	position: relative;
-	padding-left: 20px;
-	margin: 5px 0; 
-}
-.checkbox-inline, .radio-inline {
-	display: inline-block;
-	vertical-align: bottom;
-}
-.checkbox label, .radio label { 
-	display: inline-block;
-    position: relative;
-    padding-left: 5px; 
-}
-.checkbox-list label, .radio-list label {
-	display: block;
-	position: static;
-}
-.checkbox-list, .checkbox-list label, .radio-list, .radio-list label {
-	padding-left: 0;
-}
-.checkbox input[type="checkbox"], .radio input[type="radio"] {
-    opacity: 0; 
-}
-.checkbox label:before, .checkbox label:after,
-.radio label:before, .radio label:after {
-	content: "";
-	display: inline-block;
-	position: absolute;
-	width: 17px;
-	height: 17px;
-	top: 3px;
-}
-.checkbox label:before, .radio label:before {
-    left: -20px;
-	background-color: #FFF;
-	border: 1px solid #CCC;
-	border-radius: 3px;
-}
-.checkbox-list label:before, .radio-list label:before {
-	left: auto;
-    right: 0;
-} 
-.radio label:before, .radio label:after {
-	border-radius: 50%;
-}
-.checkbox label:after {
-    left: -16px;
-	font-size: 11px;
-	color: #FFF; 
-}
-.checkbox-list label:after {
-	left: auto;
-    right: -4px;
-}
-.radio label:after {
-	top: 6px;
-	left: -17px;
-	width: 11px;
-	height: 11px;
-	background-color: #5c0632;
-	-webkit-transform: scale(0);
-	transform: scale(0)
-}
-.radio-list label:after {
-	left: auto;
-	right: 3px;
-}
-.checkbox input[type="checkbox"]:checked + label:before {
-	background-color: #5c0632;
-	border-color: #5c0632;
-}
-.checkbox input[type="checkbox"]:checked + label:after {
-	font-family: "Ionicons";
-	content: "\f121";
-	color: #FFF;
-}
-.radio input[type="radio"]:checked + label:after {
-	-webkit-transform: scale(1);
-	transform: scale(1);
-}
-.nav-tabs {
-	padding-top: 10px;
-	padding-bottom: 10px;
-	border-top: 1px solid #ddd;
-}
-.nav-tabs>li {
-	text-align: center;
-}
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, 
-.nav-tabs>li.active>a:hover, .nav-tabs>li>a:hover, 
-.nav-tabs>li>a:focus {  
-	color: #5c0632;
-	border: none;
-	background: none;
-}
-.nav-tabs>li>a {
-	border: none;
-	color: #777;
-}
-.nav-tabs>li>a>i, 
-.nav-tabs>li>a>span {
-	display: block;
-}
-.nav-tabs>li i {
-	font-size: 18px;
-}
-.nav-tabs>li>a i.fa-check {
-	font-size: 12px;
-	position: relative;
-	top: -3px;
-	left: -2px;
-}
-.nav-tabs>li>a>i.ion-chatboxes, 
-.nav-tabs>li>a>i.ion-more {
-    line-height: 0;
-    font-size: 20px;
-}
-.pt-70 { padding-top: 70px !important; }
-.pb-25 { padding-bottom: 25px !important; }
-.mt-5 { margin-top: 5px !important; }
-.mt-10 { margin-top: 10px !important; }
-.mt-15 { margin-top: 15px !important; }
-.mt-20 { margin-top: 20px !important; }
-.mt-30 { margin-top: 30px !important; }
-.mb-5 { margin-bottom: 5px !important; }
-.mb-10 { margin-bottom: 10px !important; }
-.mb-15 { margin-bottom: 15px !important; }
-.mb-20 { margin-bottom: 20px !important; }
-.mb-30 { margin-bottom: 30px !important; }
-.ml-5 { margin-left: 5px !important; }
-.ml-10 { margin-left: 10px !important; }
-.ml-15 { margin-left: 15px !important; }
-.ml-20 { margin-left: 20px !important; }
-.ml-30 { margin-left: 30px !important; }
-.mr-5 { margin-right: 5px !important; }
-.mr-10 { margin-right: 10px !important; }
-.mr-15 { margin-right: 15px !important; }
-.mr-20 { margin-right: 20px !important; }
-.mr-30 { margin-right: 30px !important; }
-.fz-11 { font-size: 11px !important; }
 .pt-70 {
 	padding-top: 70px;
 }
@@ -394,7 +196,6 @@ body {
 /*=========================
 Start Login & crt_account
 ===========================*/
-
 .login_logo {
 	text-align: center;
 	margin-bottom: 40px;
@@ -415,12 +216,11 @@ Start Login & crt_account
 	border-radius: 3px;
 	border: 1px solid #AAA;
 	background: #5c0632;
-	margin-bottom: 15px;
 }
 .form_input input[type=submit] {
 	background: #ffd800;
 	border-color: #ffd800;
-	text-transform: uppercase;
+	text-transform: lowercase;
 	color: #000;
 	cursor: pointer;
 }
@@ -479,7 +279,6 @@ Start Login & crt_account
     display: block;
     border: 4px solid #EEE;
     border-radius: 50%;
-    margin: 0 auto 40px;
     margin: 40px auto;
     font-size: 100px;
     text-align: center;
@@ -496,22 +295,6 @@ Start Main Navigation
 ===========================*/
 .top-nav .active {
 	position: relative;
-}
-.top-nav .active i {
-	color: #FFF;
-}
-.top-nav .active:after {
-	content: "";
-	border: 10px solid transparent;
-	border-bottom-color: #FFF;
-	position: absolute;
-	bottom: -6px;
-	left: 50%;
-	margin-left: -10px;
-}
-.top-nav a i {
-	color: #CACACA;
-    font-size: 32px;
 }
 .top-nav .active:after {
 	content: "";
@@ -533,7 +316,6 @@ Start Main Navigation
     width: 100%;
     max-width: 768px;
 	overflow: hidden;
-	text-align: center;
     z-index: 10;
 }
 .navigation ul {
@@ -548,12 +330,10 @@ Start Main Navigation
 	float: left;
 }
 .navigation ul li a {
-	background: #8f064e;
 	display: block;
 	color: #EEE;
 }
 .navigation ul li a i {
-
 	display: block;
 	background: #8f064e;
 	font-size: 30px;
@@ -572,18 +352,7 @@ Start Main Navigation
 Start Header Title
 ===========================*/
 .header_title {
-
-	position: fixed;
-    top: 0;
-    width: 100%;
-    max-width: 768px;
-	overflow: hidden;
-    z-index: 10;
-	background: #5c0632;
-	min-height: 70px;
-    padding-top: 10px;
-	font-size: 32px;
-    color: #EEE; padding: 10px 0 5px;
+    padding: 10px 0 5px;
 	background: #5c0632;
 	position: fixed;
     top: 0;
@@ -618,85 +387,10 @@ Start Header Title
 	color: #EEE;
 	font-size: 26px;
 }
-.header_title .back_btn,
-.header_title .page_title,
-.header_title .menu_btn {
-	float: left;
-	width: 15%;
-}
-.header_title .page_title {
-	width: 70%;
-    font-size: 24px;
-    margin-top: 5px;
-}
 /*=========================
 //End Header Title
 ===========================*/
 
-/*====================================
-Start Menu
-====================================*/
-.menu {
-	padding: 60px 0 80px;
-}
-.user_cover {
-	background: url(../images/menu_bg.jpg) no-repeat;
-	background-size: cover;
-    padding: 60px 5%;
-    position: relative;
-    min-height: 200px;
-}
-.menu .user_cover img {
-	float: left;
-	width: 80px;
-	height: 80px;
-	border-radius: 50%;
-	border: 3px solid #FFF;
-	margin-right: 20px;
-}
-.menu .user_cover h3 {
-	float: left;
-	color: #FFF;
-	font-size: 20px;
-	text-transform: uppercase;
-	margin-top: 20px;
-}
-.menu .user_cover i {
-	color: #FFF;
-    font-size: 19px;
-    display: block;
-    margin-top: 25px;
-}
-.menu .menu_items li {
-	border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding: 5px 0;
-}
-.menu .menu_items li a {
-	display: block;
-	color: #EEE;
-}
-.menu .menu_items li a i {
-	font-size: 22px;
-	margin: 0 10px;
-    vertical-align: sub;
-}
-.menu .menu_items li a i {
-    font-size: 22px;
-    width: 17px;
-    text-align: center;
-    display: inline-block;
-    vertical-align: sub;
-}
-.menu .logout .btn {
-    margin-top: 40px;
-    background: #ffd800;
-    color: #000 !important;
-    text-transform: uppercase;
-}
-/*====================================
-//End Menu
-====================================*/
-   
 /*=========================
 Start News
 ===========================*/
@@ -705,7 +399,6 @@ Start News
     border-bottom: 1px solid #ddd;
     padding-top: 15px;
     padding-bottom: 10px;
-
 }
 .share-post img {
 	width: 50px;
@@ -718,7 +411,6 @@ Start News
 	border: none;
 	resize: none;
 }
-
 .feed-box {
 	margin-top: 30px;
 }
@@ -731,7 +423,6 @@ Start News
 	float: left;
 	margin-right: 10px;
 }
-
 .feed-title {
 	float: left;
 	width: calc(100% - 60px);
@@ -739,7 +430,6 @@ Start News
 .feed-title h3 {
 	font-size: 14px;
 	font-weight: 600;
-
 	text-transform: lowercase;
 	margin: 5px 0 -2px;
 }
@@ -760,7 +450,6 @@ Start News
     padding-top: 15px;
     color: #777;
 }
-
 .feed-footer a {
 	color: #777;
 }
@@ -775,46 +464,18 @@ Start News
 .feed-footer .feed-title p {
 	font-size: 12px;
 }
-.feed-footer .comment-action {
-    color: #777;
-    font-size: 12px;
-    overflow: hidden;
-}
-@media(max-width: 360px) {
-	.feed-footer .feed-action {
-		font-size: 11px;
-	}
-	.feed-footer .feed-action .mr-15 {
-		margin-right: 10px !important;
-	}
-	.feed-footer .feed-action .ml-15 {
-		margin-left: 10px !important;
-	}
-}
 .feed-footer .comment-list {
     border-top: 1px solid #ddd;
 	margin-top: 15px;
 }
-.feed-footer .comment {
-    margin: 20px 0;
-    overflow: hidden;
-}
-.feed-footer .comment .comment {
-	margin-left: 50px;
-}
-.feed-footer .comment .comment:last-child {
-	margin-bottom: 0;
-	overflow: hidden;
-	margin: 20px 0;
-}
+
 .write-comment .feed-img {
 	width: 30px;
 	height: 30px;
 }
 .write-comment form input,
 .write-comment form button {
-	height: 50px;	
-	
+	height: 50px;
     line-height: 50px;
 }
 .write-comment form button i {
@@ -845,7 +506,6 @@ Start News
 ===========================*/
 
 /*=========================
-
 Start Friends Requests
 ===========================*/
 .friends_requests_info {
@@ -926,7 +586,6 @@ Start Chat
 	margin-right: 25px;
 	margin-left: 0;
 }
-
 .chat .right_side .text_box p {
     background: #5c0632;
 }
@@ -937,7 +596,6 @@ Start Chat
 	border-right-color: transparent;
 
 }
-
 .chat .right_side .text_box i {
     float: right;
 	margin-right: 0;
@@ -954,7 +612,6 @@ Start Chat
 	padding: 20px 0;
 	z-index: 10;
 }
-
 .message-box form button i {
 	color: #5c0632;
 }
@@ -962,30 +619,10 @@ Start Chat
 //End Chat
 ===========================*/
 
-/*=========================
-Start Friends Requests
-===========================*/
-.nav_requests {
-	border-bottom: 1px solid #ddd;
-	padding-bottom: 10px;
-    margin: 10px 0 20px;
-	overflow: hidden;
-}
-@media(max-width: 380px) {
-	.friends_requests .user-item>.pull-right {
-		float: left !important;
-		margin-top: 20px;
-	}
-}
-/*=========================
-//End Friends Requests
-===========================*/
-
 /*====================================
 Start Friend List
 ====================================*/
 .user-item {
-
 	overflow: hidden;
 	border-bottom: 1px solid #ddd;
 	padding-bottom: 4px;
@@ -1023,7 +660,6 @@ Start Friend List
 .user-info h3 {
     font-size: 14px;
     font-weight: 600;
-
     text-transform: lowercase;
     margin-top: 5px;
 }
@@ -1037,7 +673,6 @@ Start Friend List
 /*====================================
 Start Friend Profile
 ====================================*/
-
 .friend_profile {
 	position: relative;
     min-height: 200px;
@@ -1051,7 +686,6 @@ Start Friend Profile
     margin-left: -80px;
     border: 3px solid #fff;
     border-radius: 3px;
-
 }
 .friend_profile_box img {
 	width: 100%;
@@ -1060,7 +694,6 @@ Start Friend Profile
 .friend_profile_box h3 {
 	font-size: 20px;
 	text-align: center;
-
 	text-transform: lowercase;
 }
 .profile-tabs {
@@ -1124,14 +757,12 @@ Start Profile
 .img-upload {
 	position: relative;
 }
-
 .file-input-profile {
 	position: absolute;
     bottom: 6px;
     left: 0px;
 }
 .file-input-profile i {
-
     background: rgba(0, 0, 0, 0.4);
     width: 30px;
     height: 30px;
@@ -1191,7 +822,6 @@ Start Timeline
     width: 2px;
     background: rgba(0,0,0,0.1);
 }
-
 .timeline .post {
 	position: relative;
 	padding-bottom: 5px;
@@ -1207,100 +837,7 @@ Start Timeline
     border-radius: 50%;
 }
 /*====================================
-//End Profile
-====================================*/
-
-/*====================================
-//Start Pages
-====================================*/
-.pages {
-	background: #EEE;
-}
-.pages .nav-tabs {
-    margin-top: 69px;
-    border: none;
-}
-.pages .nav-tabs>li {
-	width: 50%;
-}
-.pages .nav-tabs>li.active>a, 
-.pages .nav-tabs>li.active>a:focus, 
-.pages .nav-tabs>li.active>a:hover, 
-.pages .nav-tabs>li>a:hover, 
-.pages .nav-tabs>li>a:focus {
-    background: #5c0632;
-    color: #fff;
-    border-radius: 5px;
-}
-.pages .nav-tabs>li>a:hover, 
-.pages .nav-tabs>li>a:focus {
-    background: #9E9E9E;
-    color: #5c0632;
-}
-.search-filter:not(.search-full) input.form-control {
-	width: 60%;
-}
-.search-filter select.form-control {
-	width: 40%;
-}
-.select-third select.form-control {
-	width: 33.333%;
-}
-.select-half select.form-control {
-	width: 50%;
-}
-@media(min-width: 601px) {
-	.thumbnails .thumbnail img {
-	    width: 100%;
-	    height: 200px;
-	    object-fit: cover;
-	}
-}
-@media(max-width: 600px) {
-	.thumbnails>div {
-		float: none;
-		width: 100%;
-	}
-}
-.thumbnails .thumbnail h3 {
-    font-weight: 600;
-    text-transform: uppercase;
-    margin-top: 5px;
-}
-.thumbnails .thumbnail p {
-    font-size: 13px;
-    margin: 5px 0 15px;
-}
-.thumbnails .thumbnail .caption .text-muted {
-    display: block;
-    margin-top: -3px;
-    font-size: 12px;
-}
-.pages .share-post {
-	border: none; 
-    padding-top: 10px;
-    padding-bottom: 0; 
-    margin-top: 0; 
-}
-.forum-details h3 {
-	position: relative;
-	margin-bottom: 5px;
-	font-weight: 600;
-}
-.forum-details h3 span {
-	position: absolute;
-	top: 4px;
-	left: 0;
-	margin-left: 90px;
-	line-height: 16px;
-	font-weight: 300;
-}
-.forum-details img {
-	width: 45px;
-	margin-top: 5px;
-}
-/*====================================
-//End Pages
+//End Timeline
 ====================================*/
 
 /*====================================
@@ -1394,6 +931,4 @@ Start Menu
 	color: #fff;
 	font-size: 12px;
 }
-.scroll-content {
-	padding-top: 70px;
-}
+
