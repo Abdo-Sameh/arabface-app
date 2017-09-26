@@ -1,4 +1,4 @@
-/*============================
+*============================
 Start Global
 =============================*/
 
@@ -25,17 +25,13 @@ time, mark, audio, video {
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	font: inherit;
+	line-height: inherit;
 	vertical-align: baseline;
-
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
-}
-body {
-	line-height: 1;
 }
 ol, ul {
 	list-style: none;
@@ -66,14 +62,15 @@ table {
     font-style: normal;
 }
 /*//End Font*/
+
 :focus {
 	outline: none !important;
 }
 * {
 	box-sizing: border-box;
-	box-sizing: -webkit-border-box;
 }
-a, a:hover, a:focus, a:active {
+a, a:hover, a:focus {
+	color: inherit;
 	text-decoration: none;
 }
 img {
@@ -83,10 +80,8 @@ body {
     font-family: 'lato', sans-serif;
     font-size: 14px;
     line-height: 1.7;
-    color: #535353;
     background: #5c0632;
-    margin: 0;
-    padding:0;
+    color: #535353;
 }
 .page {
 	width: 100%;
@@ -96,11 +91,9 @@ body {
 	padding-bottom: 73px;
 }
 .container {
-	width: 100%;
-	margin:0 auto;
-}
-.text_center {
-	text-align: center;
+	width: 94%;
+	margin: 0 auto;
+	padding: 0;
 }
 .full_vh {
 	min-height: calc(100vh - 73px);
@@ -108,12 +101,21 @@ body {
 .bg_white {
 	background: #FFF;
 }
+.bg_grey {
+	background: #EEE;
+}
 .bg_theme {
 	background: #5c0632;
 }
 .btn-theme {
 	background: #5c0632;
 	color: #fff !important;
+}
+.panel-theme {
+	padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
 }
 .flex {
 	display: flex;
@@ -352,40 +354,28 @@ Start Main Navigation
 Start Header Title
 ===========================*/
 .header_title {
-    padding: 10px 0 5px;
-	background: #5c0632;
 	position: fixed;
     top: 0;
     width: 100%;
+    max-width: 768px;
 	overflow: hidden;
     z-index: 10;
+	background: #5c0632;
+	min-height: 70px;
+    padding-top: 10px;
+	font-size: 32px;
+    color: #EEE;
 }
-.header_title .back_btn {
-	float: left;
-	width: 33.3333%;
-}
-.header_title .back_btn a {
-	text-align: left;
-	color: #EEE;
-	font-size: 26px;
-}
-.header_title .page_title {
-	float: left;
-	width: 33.3333%;
-}
-.header_title .page_title h3 {
-	color: #EEE;
-	font-size: 26px;
-}
+.header_title .back_btn,
+.header_title .page_title,
 .header_title .menu_btn {
 	float: left;
-	width: 33.3333%;
+	width: 15%;
 }
-.header_title .menu_btn a {
-	display: block;
-	text-align: right;
-	color: #EEE;
-	font-size: 26px;
+.header_title .page_title {
+	width: 70%;
+    font-size: 24px;
+    margin-top: 5px;
 }
 /*=========================
 //End Header Title
@@ -847,12 +837,11 @@ Start Menu
 	padding: 60px 0 80px;
 }
 .user_cover {
-	background-image: url(../images/menu_bg.jpg);
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
+	background: url(../images/menu_bg.jpg) no-repeat;
 	background-size: cover;
-    padding: 50px 5%;
-    margin-top: -11px;
+    padding: 60px 5%;
+    position: relative;
+    min-height: 200px;
 }
 .user_cover>ul {
 	overflow: hidden;
@@ -931,4 +920,60 @@ Start Menu
 	color: #fff;
 	font-size: 12px;
 }
-
+.header_title a i {
+	color: #fff;
+font-size: 17px;
+position: relative;
+top: -4px;
+}
+.profile .friend_profile_box {
+	bottom: -40px;
+	left: 40px;
+	margin-left: 0;
+}
+.img-upload {
+	position: relative;
+}
+.file-input-cover {
+	display: inline-block;
+}
+.file-input-profile {
+	position: absolute;
+    bottom: 6px;
+    left: 0px;
+}
+.file-input-profile i {
+    background: rgba(0,0,0,0.4);
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    color: #fff;
+    cursor: pointer;
+}
+.file-input input {
+	display: none;
+}
+.profile .profile-editors {
+	position: absolute !important;
+	bottom: 10px !important;
+	right: 10px !important;
+	    top: auto !important;
+}
+@media (max-width: 460px) {
+	.profile-editors {
+		top: 10px !important;
+		bottom: auto !important;
+	}
+}
+.profile .nav-tabs {
+	margin: 100px 0 30px !important;;
+}
+.profile .nav-tabs>li>a {
+	font-size: 13px !important;;
+}
+.thumbnails .thumbnail h3 {
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-top: 5px;
+}
