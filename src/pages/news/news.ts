@@ -169,7 +169,7 @@ postFeed(userID=this.userId,postText=this.post.text)
     content: "Posting",
   });        
   loading.present()
-  this.remoteService.feedPost(userID,postText).subscribe( res => { 
+  this.remoteService.feedPosting(userID,postText).subscribe( res => { 
     this.feeds.unshift(res.feed)
     console.log(this.feeds)
     this.post.text= ""
