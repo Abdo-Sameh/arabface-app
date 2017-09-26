@@ -12,7 +12,8 @@
 					<a (click)="back()"><i class="fa fa-arrow-left"></i></a>
 				</div>
 				<div class="page_title text-center">
-					<h3>Group Name</h3>
+
+					<h3>{{ group.title }}</h3>
 				</div>
 				<div class="menu_btn text-right">
 					<a href="#"><i class="fa fa-bars" style="color:#fff;font-size:18px"></i></a>
@@ -28,11 +29,14 @@
 			<div class="user_cover friend_profile">
 				<div class="friend_profile_box">
 					<div class="img-upload">
-						<img src="assets/images/avatar.png" alt="">
+
+						<img src="{{ group.logo }}" alt="">
 					</div>
 				</div>
 				<div class="profile-editors">
-					<a href="#" class="btn btn-theme btn-sm"><i class="ion-android-add fz-11"></i> Join Group</a>
+					<a  href="#" *ngIf="group.is_admin == false && group.is_member == false" class="btn btn-theme btn-sm"><i class="fa fa-plus fz-11"></i> Join Group</a>
+          <a  href="#" *ngIf="group.is_admin == false && group.is_member == true" class="btn btn-theme btn-sm"><i class="fz-11"></i> Leave Group</a>
+          <a (click)="editGroup()" href="#" *ngIf="group.is_admin == true" class="btn btn-theme btn-sm"><i class="fa fa-pencil-square-o fz-11"></i> Edit Group</a>
 				</div>
 			</div>
 			<div class="container pt-70">
@@ -43,7 +47,8 @@
 					<a href="#">35,619 people like this</a>
 				</div>
 				<div class="panel panel-theme">
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit culpa mollitia veniam officiis ex impedit totam, hic nam voluptas temporibus nihil libero ipsam ab distinctio quae nulla quo, aliquam incidunt!</p>
+
+					<p>{{ group.description }}</p>
 				</div>
 				<div class="panel panel-theme">
 					<div class="share-post">
@@ -52,13 +57,14 @@
 					</div>
 				</div>
 				<div class="panel panel-theme">
-					<div class="feed-box">
+
+					<div class="feed-box" *ngFor="let post of posts">
 						<div class="feed-header">
 							<div class="pull-left">
-								<a href="#"><img class="feed-img" src="assets/images/avatar.png" alt=""></a>
+								<a href="#"><img class="feed-img" src="{{ post.avatar }}" alt=""></a>
 								<div class="feed-title">
-									<h3><a href="#">Username</a></h3>
-									<span>23 minutes ago .</span>
+									<h3><a href="#">{{ post.name }}</a></h3>
+									<span>{{ post.time }}</span>
 									<span class="dropdown ml-5">
 										<a href="#" data-toggle="dropdown"><i class="fa fa-globe"></i></a>
 										<ul class="dropdown-menu">
@@ -82,7 +88,8 @@
 							<div class="clearfix"></div>
 						</div>
 						<div class="feed-body">
-							<h3><a href="#">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</a></h3>
+
+							<h3><a href="#">{{ post.full_message }}</a></h3>
 							<a href="#"><img src="assets/images/post.jpg" alt=""></a>
 							<p class="mt-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
 						</div>

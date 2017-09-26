@@ -14,6 +14,9 @@ import { GroupsPage } from '../pages/groups/groups';
 import { EventsPage } from '../pages/events/events';
 import { VideosPage } from '../pages/videos/videos';
 import { ForumsPage } from '../pages/forums/forums';
+import { TrendingPage } from '../pages/trending/trending';
+import { ContactUsPage } from "../pages/contact-us/contact-us";
+import { GiftsPage } from "../pages/gifts/gifts";
 //import { TabsPage } from '../pages/tabs/tabs';
 
 import xml2js from 'xml2js';
@@ -51,6 +54,9 @@ export class MyApp {
         { title: 'Forums', component: ForumsPage },
         { title: 'Groups', component: GroupsPage },
         { title: 'Events', component: EventsPage },
+        { title: 'Discover', component: TrendingPage },
+        { title: 'Contact Us', component: ContactUsPage },
+        { title: 'Gift Shop', component: GiftsPage },
         { title: 'Settings', component: SettingsPage },
 
 

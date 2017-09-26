@@ -12,7 +12,8 @@
 					<a (click)="back()"><i class="fa fa-arrow-left"></i></a>
 				</div>
 				<div class="page_title text-center">
-					<h3>Page Name</h3>
+
+					<h3>{{ page.title }}</h3>
 				</div>
 				<div class="menu_btn text-right">
 					<a href="#"><i class="fa fa-bars" style="color:#fff;font-size:18px"></i></a>
@@ -26,13 +27,22 @@
 			<div class="user_cover friend_profile">
 				<div class="friend_profile_box">
 					<div class="img-upload">
-						<img src="assets/images/avatar.png" alt="">
+
+						<img src="{{ page.logo }}" alt="">
 					</div>
 				</div>
 				<div class="profile-editors">
-					<a href="#" class="btn btn-theme btn-sm"><i class="fa fa-thumbs-o-up"></i>&nbsp; Like</a>
-					<a href="#" class="btn btn-theme btn-sm"><i class="fa fa-share"></i>&nbsp; Share</a>
-					<a href="#" class="btn btn-theme btn-sm"><i class="fa fa-bookmark"></i>&nbsp; Save</a>
+
+<a href="#" class="btn btn-theme btn-sm"><i class="fa fa-thumbs-o-up"></i>&nbsp; Like</a>
+
+          <div class="dropdown" style="display:inline-block">
+								<a href="#" class="btn btn-theme btn-sm" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
+							<ul class="dropdown-menu dropdown-menu-right">
+                <li><a (click)="editPage()" href="#" style="color: #5c0632;" *ngIf="page.is_admin == true"><i class="fa fa-edit"></i>&nbsp; Edit</a></li>
+								<li><a href="#" style="color: #5c0632;"><i class="fa fa-share"></i>&nbsp; Share</a></li>
+								<li><a href="#" style="color: #5c0632;"><i class="fa fa-bookmark"></i>&nbsp; Save</a></li>
+							</ul>
+						</div>
 				</div>
 			</div>
 			<div class="container pt-70">
@@ -42,8 +52,9 @@
 				<div class="panel panel-theme">
 					<a href="#">35,619 people like this</a>
 				</div>
-				<div class="panel panel-theme">
+				<div class="panel panel-theme"><<<<<<< HEAD
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit culpa mollitia veniam officiis ex impedit totam, hic nam voluptas temporibus nihil libero ipsam ab distinctio quae nulla quo, aliquam incidunt!</p>
+					<p>{{ page.description }}</p>
 				</div>
 				<div class="panel panel-theme">
 					<div class="share-post">

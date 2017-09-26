@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController, ToastController
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
 import {TabsPage} from '../tabs/tabs';
 import {Page} from '../page/page';
+import {CreatePagePage}  from '../create-page/create-page'
 
 /**
  * Generated class for the PagesPage page.
@@ -21,60 +22,73 @@ export class PagesPage {
   userId :any;
   search
   category
-  page = {
-    'title' : "",
-    'desc' : "",
-    'category' : "",
-  }
+  type
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.userId=localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.category = 'all';
-    this.getPages("all", "", "", this.userId);
+    this.type = "all";
+    this.getPages(this.type, "", this.category, this.userId);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PagesPage');
+
   }
 
-  getPages(type="all", term=this.search, categoryId=this.category, Id){
+  getPages(type, term, categoryId, Id){
     let loading = this.loadingCtrl.create({
       content: "Loading",
     });
     loading.present()
-    var element = document.getElementById("active");
-    if(element != null){
-      if($( "#active1" ).hasClass( "active" )){
-        type = "all";
-      }else
-      type = "mine";
-    }
-    console.log(type);
-    console.log(term);
+
+      $('#active1, #active2').click(function(){
+        if(this.id == 'active1'){
+          type = "all";
+        }else{
+          type = "mine";
+        }
+      });
+      this.type = type;
+      this.category = categoryId;
 
     this.remoteService.getPages(type, term, categoryId, Id).subscribe(res =>{
         loading.dismiss();
+        console.log(type);
+        console.log(term);
+        console.log(categoryId);
         this.pages = res.pages ;
         this.categories = res.categories;
         console.log(res);
       });
+      this.search="";
   }
 
   likePage(userId, pageId, type){
     this.remoteService.likePage(userId, pageId, type).subscribe(res =>{});
-  }
-  createPage(title, description, category, userId){
-    this.remoteService.createPage(title, description, category, userId).subscribe(res =>{
-        // loading.dismiss();
-        this.pages = res.pages ;
-        this.categories = res.categories;
-        console.log(res);
-      });
+
+    var like = "#like"+pageId;
+    var dislike = "#dislike"+pageId;
+
+    if(type == "like"){
+      $(like).html("<i class=\"fa fa-thumbs-o-up\"></i> Liked");
+
+    }else{
+      $(dislike).html("<i class=\"fa fa-thumbs-o-up\"></i> Like");
+
+    }
   }
 
-  pagePage(){
-    this.navCtrl.push(Page);
+  pagePage(page){
+    //console.log(page);
+    this.navCtrl.push(Page, {
+      page: page,
+    });
   }
 
+  newPage(){
+    this.navCtrl.push(CreatePagePage);
+  }
 
   back()
   {

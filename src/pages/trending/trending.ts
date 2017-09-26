@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
+import {TabsPage} from '../tabs/tabs';
 /**
  * Generated class for the TrendingPage page.
  *
@@ -19,6 +21,11 @@ export class TrendingPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TrendingPage');
+  }
+
+  back()
+  {
+    this.navCtrl.push(TabsPage);
   }
 
 }

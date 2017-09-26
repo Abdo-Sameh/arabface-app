@@ -39,6 +39,10 @@ import {GiftsPage}  from '../pages/gifts/gifts'
 import {FriendProfilePage}  from '../pages/friend-profile/friend-profile'
 import {PostPage}  from '../pages/post/post'
 import {TrendingPage}  from '../pages/trending/trending'
+import {CreatePagePage}  from '../pages/create-page/create-page'
+import {CreateGroupPage}  from '../pages/create-group/create-group'
+import {EditGroupPage}  from '../pages/edit-group/edit-group'
+import {EditPagePage}  from '../pages/edit-page/edit-page'
 
 @NgModule({
   declarations: [
@@ -75,7 +79,11 @@ import {TrendingPage}  from '../pages/trending/trending'
     GiftsPage,
     FriendProfilePage,
     PostPage,
-    TrendingPage
+    TrendingPage,
+    CreatePagePage,
+    CreateGroupPage,
+    EditGroupPage,
+    EditPagePage
   ],
   imports: [
 BrowserModule , IonicModule.forRoot(MyApp), HttpModule
@@ -115,7 +123,12 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule
     GiftsPage,
     FriendProfilePage,
     PostPage,
-    TrendingPage
+
+    TrendingPage,
+    CreatePagePage,
+    CreateGroupPage,
+    EditGroupPage,
+    EditPagePage
   ],
   providers: [
     StatusBar,

@@ -4,6 +4,9 @@ import { RemoteServiceProvider} from './../../providers/remote-service/remote-se
 import {TabsPage} from '../tabs/tabs';
 import {PagesPage} from '../pages/pages';
 
+import {EditPagePage} from '../edit-page/edit-page';
+
+
 /**
  * Generated class for the Page page.
  *
@@ -17,11 +20,23 @@ import {PagesPage} from '../pages/pages';
 })
 export class Page {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  id
+  page
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
+
+    this.page = navParams.get("page");
+    console.log(this.page);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Page');
+  }
+
+  editPage(){
+    this.navCtrl.push(EditPagePage,{
+      page: this.page
+    });
   }
 
   back()

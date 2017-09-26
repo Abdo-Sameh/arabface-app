@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController, ToastController
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
 import {TabsPage} from '../tabs/tabs';
 import {GroupPage} from '../group/group';
+import {CreateGroupPage} from '../create-group/create-group';
 
 /**
  * Generated class for the GroupsPage page.
@@ -20,35 +21,52 @@ export class GroupsPage {
   userId :any;
   search
   filter
+
+  type
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.filter = 'all';
     this.search = '';
-    this.getGroups("", "", "all", this.userId);
+
+    this.type = "recommend";
+    this.getGroups(this.type, "", this.filter, this.userId);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GroupsPage');
   }
-  getGroups(type, term=this.search, filter=this.filter, userId){
+
+  getGroups(type, term, filter, userId){
     let loading = this.loadingCtrl.create({
       content: "Loading",
     });
     loading.present()
-    // var element = document.getElementById("active2");
-    // if(element != null){
-    //   if(document.getElementById("active2").innerHTML == "My Pages"){
-    //     type = "mine";
-    //   }
-    // }
-    console.log(this.search);
-    console.log(type);
-    console.log(filter);
+
+    $('#active1, #active2, #active3').click(function(){
+      $('select').val("all");
+      filter = "all";
+      if(this.id == 'active1'){
+        type = "recommend";
+      }else if(this.id == 'active2'){
+        type = "member";
+      }else{
+        type = "yours";
+      }
+    });
+    this.type = type;
+    this.filter = filter;
+
+    // console.log(this.search);
+    // console.log(type);
+    // console.log(filter);
     this.remoteService.getGroups(type, term, filter, userId).subscribe(res =>{
         loading.dismiss();
         this.groups = res;
         console.log(res);
       });
+
+      this.search="";
+
   }
 
   joinGroup(group_id, status, userId){
@@ -58,12 +76,15 @@ export class GroupsPage {
 
   }
 
-  groupPage(){
-    this.navCtrl.push(GroupPage);
+  newGroup(){
+    this.navCtrl.push(CreateGroupPage);
   }
 
-
-
+  groupPage(group){
+    this.navCtrl.push(GroupPage,{
+      group: group,
+    });
+  }
   back()
   {
     this.navCtrl.push(TabsPage);
