@@ -35,13 +35,13 @@
 					<div class="user-item"   >
 						<div class="pull-left">
 							<div class="user-img">
-								<img (click)="GoToProfile(friend.userid)" src={{friend.avatar}} alt="">
+								<img (click)="GoToProfile(friend.userid, Id)" src={{friend.avatar}} alt="">
 							</div>
 							<div class="user-info pull-left">
-                <a (click)="GoToProfile(friend.userid)" style="cursor:pointer">{{friend.name}}
+                <a (click)="GoToProfile(friend.userid, Id)" style="cursor:pointer">{{friend.name}}
                 </a>
 							</div>
-						</div>	
+						</div>
 						<div class="pull-right">
 							<a href="#" (click)="confirmFriendrequest(friend.id)" class="btn btn-default btn-sm mr-10">Confirm</a>
 							<a href="#" (click)="DeleteFriendrequest(friend.id)" class="btn btn-default btn-sm">Cancel</a>
@@ -61,11 +61,11 @@
               </div> -->
             </div>
             <div class="user-item"   >
-      
+
                   <h6>There is no friend request</h6>
-            
+
             </div> <!-- //user-item -->
-            
+
           </div>
 
     <!-- <div class="users-list">
@@ -80,10 +80,10 @@
         <div class="user-info">
           <a (click)="GoToProfile(friend.userid)" style="cursor:pointer">{{friend.name}}</a>
           <p></p>
-        </div>					
+        </div>
 
-      </div> 
-        
+      </div>
+
     </div> -->
 
     <div class="users-list">
@@ -93,14 +93,14 @@
           <br><br>
       <div class="user-item" *ngFor="let friend of FriendsSuggestion" >
         <div class="user-img active">
-          <img (click)="GoToProfile(friend.userid)" src="{{friend.avatar}}" alt="Arabface" title="Arabface">
+          <img (click)="GoToProfile(friend.userid, Id)" src="{{friend.avatar}}" alt="Arabface" title="Arabface">
         </div>
         <div class="user-info">
-          <a (click)="GoToProfile(friend.userid)" style="cursor:pointer;color:#333">{{friend.name}}</a>
+          <a (click)="GoToProfile(friend.userid, Id)" style="cursor:pointer;color:#333">{{friend.name}}</a>
           <p><a  (click)="addfriend(friend.userid)"  class="btn btn-default btn-sm mr-10 Addfriend">add friend </a></p>
-        </div>					
+        </div>
       </div> <!-- //user-item -->
-        
+
     </div>
   </div>
 </section>

@@ -23,9 +23,12 @@ export class ProfilePage {
     likeNumbers;
     posts
     picture = {'path': ''}
+    friendslist
+    followers
+    following
   constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider) {
     let data = navParams.get('userData');
-   
+
     if(data)
       {
           this.userID= data.id;
@@ -34,34 +37,63 @@ export class ProfilePage {
 
     if(this.userID == null)
       {
-        this.getProfileData(this.userId);
+        // console.log("----------------------------");
+        // console.log(this.userId);
+        this.getProfileData(this.userId, this.userId);
         this.getPhotsFromProvider(this.userId)
         this.getProfilePosts(this.userId)
-        
-        
+        this.getFriendsList(this.userId, this.userId, "");
+        this.getFollowers(this.userId);
+        this.getFollowing(this.userId);
       }
       else
       {
-        this.getProfileData(this.userID);
+        this.getProfileData(this.userID, this.userId);
         this.getPhotsFromProvider(this.userID)
         this.getProfilePosts(this.userID)
-        
-        
+        this.getFriendsList(this.userId, this.userID, "");
+        this.getFollowers(this.userID);
+        this.getFollowing(this.userID);
       }
+
+      console.log(this.photos);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
   }
-  
-  getProfileData(id)
+  getFollowers(userId){
+    let loading = this.loadingCtrl.create({
+      content: "Loading",
+    });
+    loading.present()
+    this.remoteService.followers(userId).subscribe(res =>{loading.dismiss();this.followers = res ;console.log(res)});
+  }
+  getFollowing(userId){
+    let loading = this.loadingCtrl.create({
+      content: "Loading",
+    });
+    loading.present()
+    this.remoteService.following(userId).subscribe(res =>{loading.dismiss();this.following = res ;console.log(res)});
+  }
+
+  getProfileData(id, theUserId)
   {
     let loading = this.loadingCtrl.create({
       content: "Loading",
-    });        
+    });
     loading.present()
-    this.remoteService.profileDetailsApiCall(id).subscribe(res =>{loading.dismiss();this.userData = res ;console.log(res)});
-    
+    this.remoteService.profileDetailsApiCall(id, theUserId).subscribe(res =>{loading.dismiss();this.userData = res ;console.log(res)});
+
+  }
+  getFriendsList(Id, id, term="")
+  {
+
+  let loading = this.loadingCtrl.create({
+    content: "Loading",
+  });
+  loading.present()
+    this.remoteService.friendsListApiCall(Id, id, term).subscribe(res =>{loading.dismiss();this.friendslist=res ;console.log(res)});
   }
   goToPhotos()
   {
@@ -77,23 +109,23 @@ export class ProfilePage {
     {
       let loading = this.loadingCtrl.create({
         content: "Loading",
-      });        
+      });
       loading.present()
       this.remoteService.profilePosts(userid).subscribe((res) => {           loading.dismiss();
-        
+
         for(let i =0 ; i < res.length;i++)
           {
             let newFeedID=res[i].id
             let newFeed =res[i].answers
-      
+
             this.remoteService.loadProfileComments(newFeedID).subscribe(res2 =>{newFeed.push(res2); })
           }
           this.posts=res
           console.log(this.posts)
-      
-      
+
+
       })
-      
+
     }
     likeFeed(userid =this.userId,feedid)
     {
@@ -102,7 +134,7 @@ export class ProfilePage {
     //     console.info($(this).index())
     // });
       this.remoteService.likeFeedApiCall(this.userId,feedid).subscribe(res =>{
-        this.likes = res; 
+        this.likes = res;
         for(let i =0 ; i<this.posts.length ;i++)
           {
               if(this.posts[i].id == feedid)
@@ -111,18 +143,18 @@ export class ProfilePage {
                 break
               }
           }
-        
-      
+
+
       })
-    
-      
+
+
     }
-    
+
 
   // changeProfilePicture()
   // {
   //   var files = event.srcElement.files;
-    
+
   //     console.log(this.picture.path)
   // }
 
@@ -135,7 +167,7 @@ setColor(btn)
     var property = document.getElementById(btn);
     if (this.count == 0){
         property.style.color = "gray"
-        this.count=1;        
+        this.count=1;
     }
     else{
         property.style.color = "blue"
