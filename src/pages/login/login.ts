@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams ,ToastController,MenuController ,LoadingController } from 'ionic-angular';
-import { SignupPage } from '../signup/signup';
-import { TabsPage} from '../tabs/tabs';
-import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
-import {MyApp} from '../../app/app.component'
-import xml2js from 'xml2js';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
+//import { FirebaseProvider } from './../../providers/firebase/firebase2';
+import { SignupPage } from './../signup/signup';
+import { TabsPage } from './../tabs/tabs';
 
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+import {FormControl , FormGroup , Validators } from '@angular/forms'
+let firebase ; 
+// import stylefile from '../assets/main.css' ; 
 /**
  * Generated class for the LoginPage page.
  *
@@ -18,125 +18,46 @@ import 'rxjs/add/operator/map';
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
+  styleUrls : ['./assets/main.css']
 })
 export class LoginPage {
-  responseData : any ;
-  loggedIn ;
-  xmlLang;
-  userData = {
-    'username':'' , 'password':''
-  };
-  lang :MyApp;
-  
-  constructor(public navCtrl: NavController,public http:Http ,public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl :ToastController,public menu: MenuController,public remoteService : RemoteServiceProvider) {
-    this.loggedIn= localStorage.getItem('loggedIn');
-    // if( localStorage.getItem('lang') !=undefined)
-    //   {  this.xmlLang = JSON.parse(localStorage.getItem('lang'))
-    //   }
-  
-    // if(this.loggedIn == "null"  )
-    //   {
+email ; 
+password ; 
+  constructor(public database : RemoteServiceProvider,public navCtrl: NavController, public navParams: NavParams) {
+  firebase = this.database ; 
+}
 
-    //   }else{
-    //     this.navCtrl.push(TabsPage);
-    //   }
-    this.menu = menu;
-    console.log(this.xmlLang)
-  }
-    
-    ionViewDidLoad() {
+  userForm = new FormGroup ({
+     
+      username : new FormControl (null , [Validators.required , Validators.email]) , 
+      
+      password : new FormControl (null , [Validators.required]) , 
+     
+
+  });
+
+  ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+  }
+  login () {
+     // console.log(this.userForm.value)
     
-    this.menu.enable(false);
-    
+     
+    firebase.login(this.userForm.value)
   }
+  validateEmail(email) {
+    console.log(email)
+    if(email == ""){return true ; }
+  if(email==null){return true ; }
+     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    console.log(re.test(email))
+    return re.test(email);
+}
+creat () {
+  this.navCtrl.push(SignupPage) ; 
+}
+out() {
 
-    ///////// Login function start  //////////////////////
-
-  authLoginUser()
-  {     
-      if(this.userData.username && this.userData.password)
-        {         
-          let loading = this.loadingCtrl.create({
-            content: "Login",
-          });        
-          loading.present()
-          
-          
-          this.remoteService.loginPostData(this.userData,"login").then((result) =>
-
-            {
-              loading.dismiss()
-              
-             this.responseData = result;
-             console.log(this.responseData);
-             if(this.responseData.status !="0")
-             {
-          console.log( localStorage.setItem('userData', JSON.stringify(this.responseData) ));
-          console.log(   localStorage.setItem('userName', JSON.stringify(this.responseData.name) ));
-          console.log(    localStorage.setItem('userDataID',JSON.stringify(this.responseData.id) ));
-          console.log(    localStorage.setItem('userAvatar', JSON.stringify(this.responseData.avatar)) );
-          console.log(  localStorage.setItem('userCover', JSON.stringify(this.responseData.cover) ));
-          console.log(    localStorage.setItem('loggedIn', "true" ));
-              this.navCtrl.push(TabsPage);
-              return true;
-              
-              }   
-             else
-             {
-              this.Toast("Please give valid username and password");
-              return false;
-              
-             }
-            
-        
-        
-             }, (err) => {
-               //Connection failed message
-             });
-        }
-        else
-        {
-            this.Toast("Give username and password");
-        }
-
-
-  }
-
-    ///////// Toast function End  //////////////////////
-
-
-    ///////// signup function start  //////////////////////
-
- public signup()
-  {
-      this.navCtrl.push(SignupPage);
-
-  }
-
-    ///////// signup function start  //////////////////////
-
-    ///////// Toast function Start  //////////////////////
- public Toast(msg) {
-    let toast = this.toastCtrl.create({
-      message: msg,
-      duration: 2000
-    });
-    toast.present();
-  }
-    ///////// Toast function End  //////////////////////
-
-
-    public loading(msg) {
-      let toast = this.loadingCtrl.create({
-        content: msg,
-      });
-      toast.present();
-    }
-
-
-
-  
-  
-
+  firebase.signout () ; 
+}
 }

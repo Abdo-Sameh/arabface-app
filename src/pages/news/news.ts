@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams ,LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams ,LoadingController ,AlertController} from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import {TabsPage} from '../tabs/tabs';
 import {ProfilePage} from '../profile/profile';
@@ -36,7 +36,7 @@ export class NewsPage {
     userAvatar = localStorage.getItem('userAvatar').slice(8,-1);
     public ionicNamedColor: string = 'primary';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams ,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams ,public alert:AlertController,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
     this.getFeedsList(this.userId);
     this.userAvatar ="http://"+this.userAvatar;
 
@@ -118,21 +118,22 @@ likeFeed(userid =this.userId,feedid)
 
 
 }
-likeComment(userid =this.userId,commentID)
+likeComment(userid =this.userId,commentID,postIndex,commentIndex)
 {
+
 //   "use strict";
 //   $(".feed-box").on("click", function() {
 //     console.info($(this).index())
 // });
   this.remoteService.likeCommentApiCall(this.userId,commentID).subscribe(res =>{
     this.likes = res;
-    for(let i =0 ; i<this.feeds.length ;i++)
+    for(let i =0 ; i<this.feeds[postIndex].answers[0].length ;i++)
       {
-          if(this.feeds[i].id == commentID)
-          {
-            this.feeds[i].like_count=this.likes.likes;
-            break
-          }
+        if(this.feeds[postIndex].answers[0][commentIndex].id == commentID)
+        {
+          this.feeds[postIndex].answers[0][commentIndex].like_count=this.likes.likes;
+          break
+        }
       }
 
 
@@ -140,7 +141,7 @@ likeComment(userid =this.userId,commentID)
 
 
 }
-likeReply(userid =this.userId,replyID)
+likeReply(userid =this.userId,replyID,postIndex,commentIndex,replyIndex)
 {
 //   "use strict";
 //   $(".feed-box").on("click", function() {
@@ -148,11 +149,11 @@ likeReply(userid =this.userId,replyID)
 // });
   this.remoteService.likeCommentApiCall(this.userId,replyID).subscribe(res =>{
     this.likes = res;
-    for(let i =0 ; i<this.feeds.length ;i++)
+    for(let i =0 ; i<this.feeds[postIndex].answers[0][commentIndex].repliesContent.length ;i++)
       {
-          if(this.feeds[i].id == replyID)
+          if(this.feeds[postIndex].answers[0][commentIndex].repliesContent[i].id == replyID)
           {
-            this.feeds[i].like_count=this.likes.likes;
+            this.feeds[postIndex].answers[0][commentIndex].repliesContent[i].like_count=this.likes.likes;
             break
           }
       }
@@ -206,40 +207,56 @@ commentOnFeed(postOwner,postID,whoCommented=this.userId,comment=this.comment.com
   })
 
 }
-replyOnComment(postOwner,commentID,whoCommented=this.userId,comment=this.comment.reply)
+replyOnComment(postindex,commentindex,postOwner,commentID,whoCommented=this.userId,comment=this.comment.reply)
 {
   let loading = this.loadingCtrl.create({
     content: "replying",
   });
-  console.log(this.feeds)
 
   loading.present()
   this.remoteService.ReplyOnComment(postOwner,commentID,whoCommented,comment).subscribe(res => {
 
-
+    console.log(this.feeds[postindex].answers[0][commentindex].repliesContent)
     res.postid = commentID
-    for( let x in this.feeds)
-      {
-        if(this.feeds[x].id == res.postid)
+    for(let i =0 ; i< this.feeds[postindex].answers[0][commentindex].repliesContent.length ;i++)
           {
-                this.feeds[x].answers[1].push(res)
-              }
+        if(this.feeds[postindex].answers[0][commentindex][i].id == res.postid)
+          {
+                this.feeds[postindex].answers[0][commentindex][i].repliesContent.push(res)
+          }
       }
       this.remoteService.loadReplies(commentID).subscribe(res2 =>{ });
 
       this.comment.reply = ''
       loading.dismiss()
-    console.log(res)
   })
 
 }
 
 sharePost(feedid,userID=this.userId)
 {
-  this.remoteService.sharePost(feedid,userID).subscribe(res => {
+  let alert = this.alert.create({
+    title: 'share',
+    message: 'Do you want to share this post on your timeline ?',
+    buttons: [
+      {
+        text: 'Ok',
+        handler: () => {
+          this.remoteService.sharePost(feedid,userID).subscribe(res => {
 
-      console.log(res)
-  })
+          })
+        }
+      },
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        handler: () => {
+        }
+      }
+    ]
+  });
+  alert.present();
+
 }
 
 
@@ -274,26 +291,24 @@ GoToProfile(id,userId)
 
 }
 
-count=1;
+// count=1;
 
-setColor(btn)
-{
-    var property = document.getElementById(btn);
-    if (this.count == 0){
-        property.style.color = "gray"
-        this.count=1;
-    }
-    else{
-        property.style.color = "blue"
-        this.count=0;
-    }
+// setColor(btn)
+// {
+//     var property = document.getElementById(btn);
+//     if (this.count == 0){
+//         property.style.color = "gray"
+//         this.count=1;
+//     }
+//     else{
+//         property.style.color = "blue"
+//         this.count=0;
+//     }
 
-}
+// }
 reply()
   {
-    console.log(this.show)
     this.show = false;
-    console.log(this.show)
   }
  //////////////////////////////////////////////
  back()

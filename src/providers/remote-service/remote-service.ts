@@ -5,7 +5,24 @@ import xml2js from 'xml2js';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import * as $ from "jquery";
+import {AlertController,LoadingController} from 'ionic-angular'
+import 'rxjs/add/operator/map';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import * as $ from 'jquery'
+declare var firebase ; 
+let alert1,downloadURL,avatar,name ; let signupres ; let signupresult ; 
+let userID = '25'   ; let cids ; let result = [] ; let friends ; let result5 = []; let msgs ; let chatid = [] ; let insideget ; 
+let friends2 ;let addchat ;  let getremote  ; let remoteid ; let result34 ; let apichat ; let firebasemsgs ; let apimsgs ; 
+let config = {
+     apiKey: "AIzaSyBvXvFFmIM--9WbD07aemNah3ONCY22Ml4",
+    authDomain: "aracall-3cda0.firebaseapp.com",
+    databaseURL: "https://aracall-3cda0.firebaseio.com",
+    projectId: "aracall-3cda0",
+    storageBucket: "aracall-3cda0.appspot.com",
+    messagingSenderId: "712599379890"
+  };
+  let user ; 
 /*
   Generated class for the RemoteServiceProvider provider.
 
@@ -19,12 +36,330 @@ let apiURL = 'http://nilemm.com/arabface/api/89129812/';
 export class RemoteServiceProvider {
  public Id :number;
  deviceLanguage
+ response ; 
+ 
  public xmlLang :any;
-  constructor(public http: Http, public platform :Platform) {
-    console.log('Hello RemoteServiceProvider Provider');
+  constructor(public loadingctr : LoadingController,public alertctrl:AlertController,public http: Http, public platform :Platform) {
 
-
+    this.init() ;
+    //getremote = this.remoteid 
+    firebase.initializeApp(config)
+    alert1 = this.alertctrl ; 
   }
+  login = (data) => {
+    let loader = this.loadingctr.create({
+     
+     showBackdrop : false 
+   });
+   loader.present();
+   const url = 'http://nilemm.com/arabface/api/89129812/login?' + 'username=' + data.username + '&password=' + data.password;
+    
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+   this.http.post(url,headers).subscribe(data3 => {
+     this.response = data3.text() ; 
+    
+     this.response = JSON.parse(this.response) ; 
+
+   
+     if(this.response.status == 1) {
+      localStorage.setItem('userid' , this.response.id) 
+      
+     avatar = this.response.avatar ; 
+     name = this.response.name ; 
+     userID = this.response.id ; 
+       firebase.auth().signInWithEmailAndPassword(data.username, data.password).then(() => {
+         
+         loader.dismiss();
+ 
+       }).catch(function(error) {
+ // Handle Errors here.
+ var errorCode = error.code;
+
+
+
+   if(errorCode == "auth/user-not-found"){
+    
+   
+var storageRef = firebase.storage().ref();
+
+// Create a reference to 'mountains.jpg'
+
+
+
+var getFileBlob = function(url, cb) {
+       var xhr = new XMLHttpRequest();
+       xhr.open("GET", url);
+       xhr.responseType = "blob";
+       xhr.addEventListener('load', function() {
+           cb(xhr.response);
+       });
+       xhr.send();
+   };
+
+   var blobToFile = function(blob, name) {
+       blob.lastModifiedDate = new Date();
+       blob.name = name;
+       return blob;
+   };
+
+   var getFileObject = function(filePathOrUrl, cb) {
+       getFileBlob(filePathOrUrl, function(blob) {
+           cb(blobToFile(blob, 'test.jpg'));
+       });
+   };
+
+   getFileObject(avatar, function(fileObject) {
+       var uploadTask = storageRef.child('images/test.jpg').put(fileObject);
+
+       uploadTask.on('state_changed', function(snapshot) {
+           
+       }, function(error) {
+           
+       }, function() {
+           downloadURL = uploadTask.snapshot.downloadURL;
+         
+           
+   firebase.auth().createUserWithEmailAndPassword(data.username, data.password).then (() => {
+loader.dismiss();
+      var user = firebase.auth().currentUser;
+      user.updateProfile({
+        
+ displayName: name,
+ photoURL:downloadURL , 
+}).then(function() {
+
+}).catch(function(error) {
+ // An error happened.
+});
+   }).catch(function(error) {
+ // Handle Errors here.
+ var errorCode = error.code;
+ var errorMessage = error.message;
+ let alert = alert1.create({
+     title: 'Error',
+     subTitle: errorMessage,
+     buttons: ['OK']
+   });
+   alert.present();
+});
+
+
+
+
+       });
+   });
+
+
+firebase.database().ref(userID + '/chats').set({ 0: "undefined" }) ; 
+firebase.database().ref(userID + '/incoming').set({ 0: "undefined" }) ; 
+
+ }
+
+});
+     }else {
+       loader.dismiss();
+        let alert = alert1.create({
+     title: 'Error',
+     subTitle: 'User Not Found',
+     buttons: ['OK']
+   });
+   alert.present();
+     }
+   })
+   
+
+ }
+
+
+ set_userid (id) {
+  userID = id.toString() ; 
+  console.log('userid is set to' + userID)
+}
+
+ creat1 (email,password,name,data) {
+let loader = this.loadingctr.create({
+     
+     showBackdrop : false 
+   });
+   loader.present();
+  let body = new URLSearchParams();
+body.append('firstname', data.firstname);
+body.append('lastname', data.lastname);
+body.append('username', name);
+body.append('email_address', data.email_address);
+body.append('password', password);
+let body1 = body.toString () ; 
+
+
+
+ let url = 'http://nilemm.com/arabface/api/89129812/signup?' + 'firstname=' + data.firstname + '&lastname=' + data.lastname + '&username=' + name + '&email_address=' + data.email_address + '&password='+password ;
+let url2 = 'http://nilemm.com/arabface/api/89129812/signup' ; 
+
+let headers = new Headers();
+     headers.append('Content-Type', 'application/x-www-form-urlencoded');
+this.http.post (url2,body1,{headers: headers}).subscribe(data => {
+
+let data1 = data.text() ; 
+data = JSON.parse(data1) ; 
+signupresult = data ; 
+localStorage.setItem('userid' , signupresult.userid)
+
+if (data.status == 1) {
+
+done () ; 
+
+}
+});
+function done () {
+
+firebase.auth().createUserWithEmailAndPassword(data.email_address, password).then (() => {
+loader.dismiss()
+      user = firebase.auth().currentUser;
+      user.updateProfile({
+ displayName: data.username
+}).then(function() {
+ 
+ 
+
+
+}).catch(function(error) {
+ // An error happened.
+});
+   }).catch(function(error) {
+ // Handle Errors here.
+ var errorCode = error.code;
+ var errorMessage = error.message;
+ let alert = alert1.create({
+     title: 'Error',
+     subTitle: errorMessage,
+     buttons: ['OK']
+   });
+   alert.present();
+});
+
+
+}
+   
+ }
+
+ _handleReaderLoaded(readerEvt) {
+    var binaryString = readerEvt.target.result;
+           
+           
+   }
+   public creat2 (email,password,name,photo,firstname,lastname) {
+      let url = 'http://nilemm.com/arabface/api/89129812/signup?' + 'firstname=' + firstname + 'lastname=' + lastname + 'username=' + name + 'email_address=' + email + 'password='+password ;
+var headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+this.http.post (url,headers).subscribe(data => {
+
+ signupres = data ;
+ userID = signupres.id;
+});
+var storageRef = firebase.storage().ref();
+
+// Create a reference to 'mountains.jpg'
+
+
+
+var getFileBlob = function(url, cb) {
+       var xhr = new XMLHttpRequest();
+       xhr.open("GET", url);
+       xhr.responseType = "blob";
+       xhr.addEventListener('load', function() {
+           cb(xhr.response);
+       });
+       xhr.send();
+   };
+
+   var blobToFile = function(blob, name) {
+       blob.lastModifiedDate = new Date();
+       blob.name = name;
+       return blob;
+   };
+
+   var getFileObject = function(filePathOrUrl, cb) {
+       getFileBlob(filePathOrUrl, function(blob) {
+           cb(blobToFile(blob, 'test.jpg'));
+       });
+   };
+
+   getFileObject(photo, function(fileObject) {
+       var uploadTask = storageRef.child('images/test.jpg').put(fileObject);
+
+       uploadTask.on('state_changed', function(snapshot) {
+      
+       }, function(error) {
+           
+       }, function() {
+           var downloadURL = uploadTask.snapshot.downloadURL;
+          
+           // handle image here
+       });
+   });
+
+   
+   firebase.auth().createUserWithEmailAndPassword(email, password).then (() => {
+
+      user = firebase.auth().currentUser;
+      user.updateProfile({
+ displayName: name,
+ photoURL:photo , 
+}).then(function() {
+ 
+firebase.database().ref(userID + '/chats').set({ 0: "undefined" }) ; 
+firebase.database().ref(userID + '/incoming').set({ 0: "undefined" }) ; 
+
+
+}).catch(function(error) {
+ // An error happened.
+});
+   }).catch(function(error) {
+ // Handle Errors here.
+ var errorCode = error.code;
+ var errorMessage = error.message;
+ let alert = alert1.create({
+     title: 'Error',
+     subTitle: errorMessage,
+     buttons: ['OK']
+   });
+   alert.present();
+});
+
+ }
+user = new Observable(observer => {
+firebase.auth().onAuthStateChanged(function(user) {
+  
+ if (user) {
+
+   // User is signed in.
+   var displayName = user.displayName;
+ 
+   var email = user.email;
+   var emailVerified = user.emailVerified;
+   var photoURL = user.photoURL;
+   var isAnonymous = user.isAnonymous;
+   var uid = user.uid;
+   var providerData = user.providerData;
+ 
+   observer.next("logged")
+   observer.next({name:displayName})
+ } else {
+
+  observer.next("not here")
+ }
+});
+
+}) ;
+ 
+ init() {
+
+
+
+ }
+
+
 
   ///////// Login function Start ////////
   /* Function for handling user login in by   */
