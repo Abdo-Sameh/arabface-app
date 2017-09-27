@@ -6,12 +6,12 @@ import { PhotoLibrary } from '@ionic-native/photo-library';
 import {FormControl , FormGroup , Validators } from '@angular/forms'
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ImagePicker } from '@ionic-native/image-picker';
-let self ; 
+let self ;
 let firebase,photos ;
-let photourl = [] ;  
+let photourl = [] ;
 import { Events } from 'ionic-angular';
-declare var navigator ; 
-declare var camera ; 
+declare var navigator ;
+declare var camera ;
 /**
  * Generated class for the CreataccountPage page.
  *
@@ -25,62 +25,62 @@ declare var camera ;
   styleUrls : ['./assets/main.css','./assets/ionicons.min.css']
 })
 export class SignupPage {
-name ; mail ; password; confirm ; 
-pimg = true ; profileimg ; picon = false ; 
+name ; mail ; password; confirm ;
+pimg = true ; profileimg ; picon = false ;
   constructor(public imagePicker: ImagePicker,public loadingCtrl: LoadingController , public events: Events , public ds: DomSanitizer,public photoLibrary: PhotoLibrary,public database:RemoteServiceProvider,public navCtrl: NavController, public navParams: NavParams) {
    events.subscribe('choosed', (photo) => {
-   console.log(photo.changingThisBreaksApplicationSecurity) ; 
-   this.profileimg = photo ; 
-   this.picon = true ; 
-   this.pimg = false ; 
+   console.log(photo.changingThisBreaksApplicationSecurity) ;
+   this.profileimg = photo ;
+   this.picon = true ;
+   this.pimg = false ;
   });
-  firebase = this.database ; 
-  self = this.ds ; 
-  photos = this.photoLibrary ; 
+  firebase = this.database ;
+  self = this.ds ;
+  photos = this.photoLibrary ;
 }
 
   userForm = new FormGroup ({
-      
+
       firstname : new FormControl (null , Validators.required),
       lastname : new FormControl (null , Validators.required),
        username : new FormControl (null , Validators.required) ,
-      email_address : new FormControl (null , [Validators.required , Validators.email]) , 
-     
-      password : new FormControl (null , [Validators.required]) , 
-      confirm : new FormControl (null , [Validators.required ]) 
+      email_address : new FormControl (null , [Validators.required , Validators.email]) ,
+
+      password : new FormControl (null , [Validators.required]) ,
+      confirm : new FormControl (null , [Validators.required ])
 
   });
 checkpassword (password) {
- 
+
 if (password == null && this.userForm.value.confirm == null) {
-  return false ; 
+  return false ;
 }
 if (password == "" && this.userForm.value.confirm == "") {
-  return false ; 
+  return false ;
 }
   if (password == this.userForm.value.password) {
-    
+
     return true ;
-  
+
   }else {
-   
-    return false ; 
+
+    return false ;
   }
 }
 checkpassword2 (password) {
 
 if (password == null || this.userForm.value.confirm == null) {
-  return true ; 
+  return true ;
 }
 else if (password == "" || this.userForm.value.confirm == "") {
-  return true ; 
+  return true ;
 }
 else if (password == this.userForm.value.password) {
     return true ;
-  
+
   }else  {
 
-    return false ; 
+    return false ;
   }
 }
 validateEmail(email) {
@@ -98,19 +98,19 @@ console.log("entered")
 if(this.profileimg) {
   console.log("there is a photo")
   console.log(this.profileimg.changingThisBreaksApplicationSecurity)
-  firebase.creat2(this.userForm.value.email,this.userForm.value.password,this.userForm.value.username,this.profileimg,this.userForm.value.firstname,this.userForm.value.lastname) ; 
- 
+  firebase.creat2(this.userForm.value.email,this.userForm.value.password,this.userForm.value.username,this.profileimg,this.userForm.value.firstname,this.userForm.value.lastname) ;
+
 }else {
-  firebase.creat1(this.userForm.value.email,this.userForm.value.password,this.userForm.value.username,this.userForm.value) ; 
- 
+  firebase.creat1(this.userForm.value.email,this.userForm.value.password,this.userForm.value.username,this.userForm.value) ;
+
 }
    }
   select_photo () {
     this.imagePicker.getPictures({maximumImagesCount : 1}).then((results) => {
   for (var i = 0; i < results.length; i++) {
       console.log('Image URI: ' + results[i]);
-      this.profileimg = results[i] ; 
-       this.picon = true ; 
+      this.profileimg = results[i] ;
+       this.picon = true ;
    this.pimg = false ;
   }
 }, (err) => { });
@@ -119,7 +119,7 @@ if(this.profileimg) {
 //   console.log(img);
 //   }, (error)=>{
 
-// console.log(error) ; 
+// console.log(error) ;
 // });
 //      })
 
@@ -132,13 +132,13 @@ if(this.profileimg) {
 //     photos.requestAuthorization().then(() => {
 //   this.photoLibrary.getLibrary().subscribe({
 //     next: library => {
-//       var i = 1 ; 
+//       var i = 1 ;
 //       library.forEach(function(libraryItem) {
 //              let url: SafeUrl = self.bypassSecurityTrustUrl(libraryItem.thumbnailURL);
 //         photourl.push(<string>url);
 //         // Cross-platform access to photo
 //         // Cross-platform access to thumbnail
-       
+
 //            // array of ids of appropriate AlbumItem, only of includeAlbumsData was used
 //       });
 //       console.log(library[0].photoURL)

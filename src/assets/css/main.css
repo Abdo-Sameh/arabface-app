@@ -1,9 +1,9 @@
-/*============================
+*============================
 Start Global
 =============================*/
 
 /*----Start Reset Css----*/
-/* http://meyerweb.com/eric/tools/css/reset/ 
+/* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
 */
@@ -17,8 +17,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
@@ -29,7 +29,7 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
@@ -88,7 +88,7 @@ body {
 	max-width: 768px;
 	margin: 0 auto;
 	min-height: 100vh;
-	padding-bottom: 73px;  
+	padding-bottom: 73px;
 }
 .container {
 	width: 94%;
@@ -109,7 +109,7 @@ body {
 }
 .btn-theme {
 	background: #5c0632;
-	color: #fff !important; 
+	color: #fff !important;
 }
 .panel-theme {
 	padding: 10px 15px;
@@ -134,6 +134,12 @@ body {
 	display: block;
 	color: #fff;
 	font-size: 17px;
+}
+.panel-theme {
+	padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
 }
 .flex {
 	display: flex;
@@ -164,7 +170,7 @@ body {
 .modal-title {
 	font-weight: 600;
 }
-.list-group-theme .list-group-item {																																													
+.list-group-theme .list-group-item {
 	padding: 20px 25px;
 	border-radius: 0;
 }
@@ -175,19 +181,19 @@ body {
 	font-weight: 600;
     color: #5c0632;
 }
-.checkbox, .radio { 
+.checkbox, .radio {
 	position: relative;
 	padding-left: 20px;
-	margin: 5px 0; 
+	margin: 5px 0;
 }
 .checkbox-inline, .radio-inline {
 	display: inline-block;
 	vertical-align: bottom;
 }
-.checkbox label, .radio label { 
+.checkbox label, .radio label {
 	display: inline-block;
     position: relative;
-    padding-left: 5px; 
+    padding-left: 5px;
 }
 .checkbox-list label, .radio-list label {
 	display: block;
@@ -197,7 +203,7 @@ body {
 	padding-left: 0;
 }
 .checkbox input[type="checkbox"], .radio input[type="radio"] {
-    opacity: 0; 
+    opacity: 0;
 }
 .checkbox label:before, .checkbox label:after,
 .radio label:before, .radio label:after {
@@ -217,14 +223,14 @@ body {
 .checkbox-list label:before, .radio-list label:before {
 	left: auto;
     right: 0;
-} 
+}
 .radio label:before, .radio label:after {
 	border-radius: 50%;
 }
 .checkbox label:after {
     left: -16px;
 	font-size: 11px;
-	color: #FFF; 
+	color: #FFF;
 }
 .checkbox-list label:after {
 	left: auto;
@@ -264,9 +270,9 @@ body {
 .nav-tabs>li {
 	text-align: center;
 }
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, 
-.nav-tabs>li.active>a:hover, .nav-tabs>li>a:hover, 
-.nav-tabs>li>a:focus {  
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus,
+.nav-tabs>li.active>a:hover, .nav-tabs>li>a:hover,
+.nav-tabs>li>a:focus {
 	color: #5c0632;
 	border: none;
 	background: none;
@@ -275,7 +281,7 @@ body {
 	border: none;
 	color: #777;
 }
-.nav-tabs>li>a>i, 
+.nav-tabs>li>a>i,
 .nav-tabs>li>a:not(.dropdown)>span {
 	display: block;
 }
@@ -288,13 +294,13 @@ body {
 	top: -3px;
 	left: -2px;
 }
-.nav-tabs>li>a>i.ion-chatboxes, 
+.nav-tabs>li>a>i.ion-chatboxes,
 .nav-tabs>li>a>i.ion-more {
     line-height: 0;
     font-size: 20px;
 }
 .nav-tabs .dropdown-menu {
-	width: 100%;	
+	width: 100%;
 }
 .nav-tabs form select {
     border: none;
@@ -312,11 +318,11 @@ body {
     cursor: pointer;
 	border: 1px solid #fff;
 }
-.ui-datepicker .ui-datepicker-prev-hover { 
-	left: 2px; 
+.ui-datepicker .ui-datepicker-prev-hover {
+	left: 2px;
 }
-.ui-datepicker .ui-datepicker-next-hover { 
-	right: 2px; 
+.ui-datepicker .ui-datepicker-next-hover {
+	right: 2px;
 }
 .ui-datepicker .ui-datepicker-title select {
 	color: #333;
@@ -690,7 +696,7 @@ Start News
 }
 .write-comment form input,
 .write-comment form button {
-	height: 50px;	
+	height: 50px;
     line-height: 50px;
 }
 .write-comment form button i {
@@ -906,7 +912,7 @@ Start Friend Profile
     margin-left: -80px;
     border: 3px solid #fff;
     border-radius: 3px;
-} 
+}
 .friend_profile_box img {
 	width: 100%;
 	height: 100%;
@@ -967,12 +973,12 @@ Start Profile
 	position: absolute;
 	bottom: 10px;
 	right: 10px;
-} 
+}
 @media (max-width: 460px) {
 	.profile-editors {
 		top: 10px;
 		bottom: auto;
-	} 
+	}
 }
 .profile .nav-tabs {
 	margin: 100px 0 30px;
@@ -1018,6 +1024,12 @@ Start Profile
 .pages {
 	background: #EEE;
 }
+.user_cover {
+	background: url(../images/menu_bg.jpg) no-repeat;
+	background-size: cover;
+    padding: 60px 5%;
+    position: relative;
+    min-height: 200px;
 .pages .nav-tabs {
     margin-top: 69px;
     border: none;
@@ -1025,16 +1037,16 @@ Start Profile
 .pages .nav-tabs>li {
 	width: 50%;
 }
-.pages .nav-tabs>li.active>a, 
-.pages .nav-tabs>li.active>a:focus, 
-.pages .nav-tabs>li.active>a:hover, 
-.pages .nav-tabs>li>a:hover, 
+.pages .nav-tabs>li.active>a,
+.pages .nav-tabs>li.active>a:focus,
+.pages .nav-tabs>li.active>a:hover,
+.pages .nav-tabs>li>a:hover,
 .pages .nav-tabs>li>a:focus {
     background: #5c0632;
     color: #fff;
     border-radius: 5px;
 }
-.pages .nav-tabs>li>a:hover, 
+.pages .nav-tabs>li>a:hover,
 .pages .nav-tabs>li>a:focus {
     background: #9E9E9E;
     color: #5c0632;
@@ -1079,10 +1091,10 @@ Start Profile
     font-size: 12px;
 }
 .pages .share-post {
-	border: none; 
+	border: none;
     padding-top: 10px;
-    padding-bottom: 0; 
-    margin-top: 0; 
+    padding-bottom: 0;
+    margin-top: 0;
 }
 .forum-details h3 {
 	position: relative;
@@ -1100,6 +1112,63 @@ Start Profile
 .forum-details img {
 	width: 45px;
 	margin-top: 5px;
+}
+.header_title a i {
+	color: #fff;
+font-size: 17px;
+position: relative;
+top: -4px;
+}
+.profile .friend_profile_box {
+	bottom: -40px;
+	left: 40px;
+	margin-left: 0;
+}
+.img-upload {
+	position: relative;
+}
+.file-input-cover {
+	display: inline-block;
+}
+.file-input-profile {
+	position: absolute;
+    bottom: 6px;
+    left: 0px;
+}
+.file-input-profile i {
+    background: rgba(0,0,0,0.4);
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    color: #fff;
+    cursor: pointer;
+}
+.file-input input {
+	display: none;
+}
+.profile .profile-editors {
+	position: absolute !important;
+	bottom: 10px !important;
+	right: 10px !important;
+	    top: auto !important;
+}
+@media (max-width: 460px) {
+	.profile-editors {
+		top: 10px !important;
+		bottom: auto !important;
+	}
+}
+.profile .nav-tabs {
+	margin: 100px 0 30px !important;;
+}
+.profile .nav-tabs>li>a {
+	font-size: 13px !important;;
+}
+.thumbnails .thumbnail h3 {
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-top: 5px;
 }
 /*====================================
 //End Pages

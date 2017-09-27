@@ -23,25 +23,25 @@ export class FriendsPage {
   userData;
   friendID
   constructor(public navCtrl: NavController, public navParams: NavParams ,public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
-    this.Id=localStorage.getItem('userDataID').replace(/[^0-9]/g, "");  
+    this.Id=localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.getFriendsRequestList(this.Id)
     this.getFriendsList(this.Id);
     this.getFriendsSuggestionList(this.Id);
-   
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FriendsPage');
   }
 
-  getFriendsList(Id)
+  getFriendsList(Id, term="")
   {
 
   let loading = this.loadingCtrl.create({
     content: "Loading",
-  });        
+  });
   loading.present()
-    this.remoteService.friendsListApiCall(Id).subscribe(res =>{loading.dismiss();this.friendslist=res ;console.log(res)});
+    this.remoteService.friendsListApiCall(Id, Id, term).subscribe(res =>{loading.dismiss();this.friendslist=res ;console.log(res)});
   }
 
   getFriendsRequestList(Id)
@@ -54,15 +54,15 @@ export class FriendsPage {
     this.remoteService.friendsSuggestionListApiCall(Id).subscribe(res =>{this.FriendsSuggestion=res ;console.log(res)});
   }
 
-  GoToProfile(id)
+  GoToProfile(id,Id)
   {
-      this.remoteService.profileDetailsApiCall(id).subscribe(res =>{this.userData = res ; res.id=id;      this.navCtrl.push(ProfilePage,{"userData" : res})
+      this.remoteService.profileDetailsApiCall(id, Id).subscribe(res =>{this.userData = res ; res.id=id;      this.navCtrl.push(ProfilePage,{"userData" : res})
     });
-    
+
   }
   addfriend(friendId,userid=this.Id)
   {
-    
+
     this.remoteService.addFriend(userid,friendId).subscribe(res => {
       let toast = this.toastCtrl.create({
         message: "friend request sent",
@@ -74,25 +74,25 @@ export class FriendsPage {
 
   confirmFriendrequest(friendId,userid=this.Id)
   {
- 
+
     this.remoteService.ConfirmFriendRequest(userid,friendId).subscribe(res => {
       let toast = this.toastCtrl.create({
         message: "added",
         duration: 2000
       });
       toast.present();
-    })    
+    })
   }
   DeleteFriendrequest(friendId,userid=this.Id)
   {
- 
+
     this.remoteService.deleteFriendRequest(userid,friendId).subscribe(res => {
       let toast = this.toastCtrl.create({
         message: "removed",
         duration: 2000
       });
       toast.present();
-    })    
+    })
   }
   back()
   {

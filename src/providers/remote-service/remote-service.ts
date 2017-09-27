@@ -422,15 +422,27 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 
     ///////// Friends function Start ////////
-   friendsListApiCall(id)
+   friendsListApiCall(the_userid, id, term)
    {
 
-    return  this.http.get('http://nilemm.com/arabface/api/89129812/profile/friends?userid='+id)
+    return  this.http.get('http://nilemm.com/arabface/api/89129812/profile/friends?userid='+id + "&the_userid=" + the_userid + "&term=" + term)
     //.do((res : Response ) => console.log(res.json()))
     .map((res : Response ) => res.json());
    }
    ///////// Friends function End ////////
 
+   followers(userid)
+   {
+    return  this.http.get('http://nilemm.com/arabface/api/89129812/profile/getfollowers?userid='+userid)
+    //.do((res : Response ) => console.log(res.json()))
+    .map((res : Response ) => res.json());
+   }
+   following(userid)
+   {
+    return  this.http.get('http://nilemm.com/arabface/api/89129812/profile/getfollowing?userid='+userid)
+    //.do((res : Response ) => console.log(res.json()))
+    .map((res : Response ) => res.json());
+   }
 
     ///////// Friends Request function Start ////////
     friendsRequestListApiCall(id)
@@ -469,9 +481,9 @@ firebase.auth().onAuthStateChanged(function(user) {
 
    //////////  profile Api function start   ///////////
 
-   profileDetailsApiCall(id)
+   profileDetailsApiCall(theUserId, id)
    {
-     let url = "http://nilemm.com/arabface/api/89129812/profile/details?userid="+id;
+     let url = "http://nilemm.com/arabface/api/89129812/profile/details?userid="+id + "&the_userid=" + theUserId;
      return  this.http.get(url)
      //.do((res : Response ) => console.log(res.json()))
      .map((res : Response ) => res.json());
@@ -595,15 +607,16 @@ firebase.auth().onAuthStateChanged(function(user) {
 
    ///////////// user profile page changing Api call function start  ////////////////////
 
-   changeProfilePicture(userID : number , path) :any
+   changeProfilePicture(userid , avatar) 
    {
     let headers = new Headers();
     headers.append('Content-Type', 'multipart/form-data');
     let urlSearchParams = new URLSearchParams();
-    urlSearchParams.append('path', path.path);
+    urlSearchParams.append('avatar', avatar);
+    urlSearchParams.append('userid', userid);
     let body = urlSearchParams.toString()
-     return this.http.get("http://nilemm.com/arabface/api/89129812/profile/change/avatar?userid="+userID).
-     do((res : Response ) => console.log(res.json()))
+     return this.http.post("http://nilemm.com/arabface/api/89129812/profile/change/avatar", body, {headers: headers})
+    //  do((res : Response ) => console.log(res.json()))
     .map((res : Response ) => res.json());
    }
 
@@ -646,10 +659,10 @@ firebase.auth().onAuthStateChanged(function(user) {
       //do((res : Response ) => console.log(res.json()))
         .map((res : Response ) => res.json());
     }
-  
+
     ////////////////////////////////////////////////
 
-  
+
 
   ////////////////////////////////////////////////
 
