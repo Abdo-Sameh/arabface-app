@@ -272,15 +272,16 @@ export class RemoteServiceProvider {
 
    ///////////// user profile page changing Api call function start  ////////////////////
 
-   changeProfilePicture(userID : number , path) :any
+   changeProfilePicture(userid , avatar) 
    {
     let headers = new Headers();
     headers.append('Content-Type', 'multipart/form-data');
     let urlSearchParams = new URLSearchParams();
-    urlSearchParams.append('path', path.path);
+    urlSearchParams.append('avatar', avatar);
+    urlSearchParams.append('userid', userid);
     let body = urlSearchParams.toString()
-     return this.http.get("http://nilemm.com/arabface/api/89129812/profile/change/avatar?userid="+userID).
-     do((res : Response ) => console.log(res.json()))
+     return this.http.post("http://nilemm.com/arabface/api/89129812/profile/change/avatar", body, {headers: headers})
+    //  do((res : Response ) => console.log(res.json()))
     .map((res : Response ) => res.json());
    }
 

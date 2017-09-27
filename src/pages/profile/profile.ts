@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams ,LoadingController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController, Platform, ToastController ,LoadingController} from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
+import { File } from '@ionic-native/file';
+import { Transfer, TransferObject } from '@ionic-native/transfer';
+import { FilePath } from '@ionic-native/file-path';
+import { Camera } from '@ionic-native/camera';
 import {TabsPage} from '../tabs/tabs';
 import { PhotosPage} from '../photos/photos'
+import {FriendProfilePage} from '../friend-profile/friend-profile'
 /**
  * Generated class for the ProfilePage page.
  *
@@ -20,61 +25,84 @@ export class ProfilePage {
     userID
     photos
     likes;
+    temp ;
     likeNumbers;
     posts
     picture = {'path': ''}
     friendslist
     followers
     following
-  constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider) {
+    likedPages
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider, private camera: Camera, private transfer: Transfer, public toastCtrl: ToastController, private file: File, private filePath: FilePath, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
     let data = navParams.get('userData');
-
-    if(data)
-      {
-          this.userID= data.id;
-          console.log(data)
-      }
-
-    if(this.userID == null)
-      {
-        // console.log("----------------------------");
-        // console.log(this.userId);
+    //
+    // if(data)
+    //   {
+    //       this.userID= data.id;
+    //       console.log(data)
+    //   }
+    //   console.log(this.userID , this.userId);
+    // if(this.userID == null  || this.userID == this.userId)
+    //   {
+    //     console.log("----------------------------");
+    //     // console.log(this.userId);
         this.getProfileData(this.userId, this.userId);
-        this.getPhotsFromProvider(this.userId)
+    //     //this.getPhotsFromProvider(this.userId)
         this.getProfilePosts(this.userId)
-        this.getFriendsList(this.userId, this.userId, "");
-        this.getFollowers(this.userId);
-        this.getFollowing(this.userId);
-      }
-      else
-      {
-        this.getProfileData(this.userID, this.userId);
-        this.getPhotsFromProvider(this.userID)
-        this.getProfilePosts(this.userID)
-        this.getFriendsList(this.userId, this.userID, "");
-        this.getFollowers(this.userID);
-        this.getFollowing(this.userID);
-      }
+    //
+    //   }
+    //   else
+    //   {
+    //     this.getProfileData(this.userID, this.userId);
+    //   //  this.getPhotsFromProvider(this.userID)
+    //     this.getProfilePosts(this.userID)
+    //
+    //   }
 
-      console.log(this.photos);
+      // console.log(this.photos);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
   }
-  getFollowers(userId){
+  getLikes(userId){
     let loading = this.loadingCtrl.create({
       content: "Loading",
     });
     loading.present()
-    this.remoteService.followers(userId).subscribe(res =>{loading.dismiss();this.followers = res ;console.log(res)});
+    this.remoteService.getPages("likes", "", "all", userId).subscribe(res =>{loading.dismiss();this.likedPages = res.pages ;console.log(res)});
   }
   getFollowing(userId){
+    if(this.userID == null){
+      userId = this.userId;
+    }else{
+      userId = this.userID;
+    }
     let loading = this.loadingCtrl.create({
       content: "Loading",
     });
     loading.present()
-    this.remoteService.following(userId).subscribe(res =>{loading.dismiss();this.following = res ;console.log(res)});
+    this.remoteService.following(userId).subscribe(res =>{this.following = res ;console.log(res)});
+    this.remoteService.followers(userId).subscribe(res =>{this.followers = res ;console.log(res)});
+    loading.dismiss();
+  }
+  isFriend(id) {
+  //  return true;
+    this.remoteService.profileDetailsApiCall(70, this.userId).subscribe(res =>{
+
+      console.log(res);
+      return false;
+  }
+
+  );
+  }
+  myProfile(){
+    if(this.userID == null || this.userId == this.userID){
+      return true;
+    }else{
+      return false;
+    }
   }
 
   getProfileData(id, theUserId)
@@ -86,14 +114,39 @@ export class ProfilePage {
     this.remoteService.profileDetailsApiCall(id, theUserId).subscribe(res =>{loading.dismiss();this.userData = res ;console.log(res)});
 
   }
+  GoToProfile(id,userId)
+  {
+    let loading = this.loadingCtrl.create({
+      content: "Loading",
+    });
+    loading.present()
+
+      this.remoteService.profileDetailsApiCall(id,userId).subscribe(res => {
+          loading.dismiss();this.userData = res ;
+          res.id=id;
+          if(id == userId){
+            this.navCtrl.push(ProfilePage,{
+              "userData" : res
+            })
+          }else{
+            this.navCtrl.push(FriendProfilePage,{
+              "userData" : res
+            })
+          }
+
+    });
+
+  }
   getFriendsList(Id, id, term="")
   {
-
-  let loading = this.loadingCtrl.create({
-    content: "Loading",
-  });
-  loading.present()
-    this.remoteService.friendsListApiCall(Id, id, term).subscribe(res =>{loading.dismiss();this.friendslist=res ;console.log(res)});
+    if(this.userID == null){
+      Id = id;
+    }
+    let loading = this.loadingCtrl.create({
+      content: "Loading",
+    });
+    loading.present()
+      this.remoteService.friendsListApiCall(Id, id, term).subscribe(res =>{loading.dismiss();this.friendslist=res ;console.log(res)});
   }
   goToPhotos()
   {
@@ -102,7 +155,15 @@ export class ProfilePage {
 
   getPhotsFromProvider (userid)
   {
-      this.remoteService.userPhotosAlbumOnProfile(userid).subscribe((res) => { this.photos = res})
+    if(this.userID == null){
+      userid = this.userId;
+    }else{
+      userid = this.userID;
+    }
+    let loading = this.loadingCtrl.create({
+      content: "Loading",
+    });
+      this.remoteService.userPhotosAlbumOnProfile(userid).subscribe((res) => { loading.dismiss();this.photos = res})
   }
 
   getProfilePosts(userid)
@@ -149,14 +210,12 @@ export class ProfilePage {
 
 
     }
+    changeProfilePicture(userid , avatar){
+      console.log(avatar);
+      this.remoteService.changeProfilePicture(this.userId, avatar).subscribe(res =>{console.log("success")});
+    }
 
 
-  // changeProfilePicture()
-  // {
-  //   var files = event.srcElement.files;
-
-  //     console.log(this.picture.path)
-  // }
 
 
 

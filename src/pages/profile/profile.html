@@ -32,29 +32,30 @@
         <img src="{{userData['avatar']}}" alt="Arabface" title="Arabface">
         <div class="file-input file-input-profile">
           <label for="profile-upload">
-            <i class="fa fa-camera"></i>
+            <i *ngIf="myProfile()" class="fa fa-camera"></i>
           </label>
-          <input id="profile-upload" type="file" [(ngModel)]="picture.path" [ngModelOptions]="{standalone: true}"   (change)="changeProfilePicture($event)">
+          <input id="profile-upload" type="file" [(ngModel)]="picture.path" [ngModelOptions]="{standalone: true}"   (click)="changeProfilePicture(this.userId, this.picture.path)">
         </div>
       </form>
       <h3>{{userData['name']}}</h3>
     </div>
     <div class="profile-editors">
       <form class="file-input file-input-cover">
-        <label class="btn btn-theme btn-sm mr-5" for="cover-upload">
+        <label *ngIf="myProfile()" class="btn btn-theme btn-sm mr-5" for="cover-upload">
           <i class="fa fa-picture-o"></i>&nbsp; change cover
         </label>
         <input id="cover-upload" type="file">
       </form>
-      <a href="#" class="btn btn-theme btn-sm"><i class="fa fa-pencil-square-o"></i> edit profile</a>
+      <a href="#" *ngIf="myProfile()" class="btn btn-theme btn-sm"><i class="fa fa-pencil-square-o"></i> edit profile</a>
+      <!-- <a href="#" *ngIf="myProfile()" class="btn btn-theme btn-sm"><i class="fa fa-pencil-square-o"></i> edit profile</a> -->
     </div>
   </div>
   <div class="container">
     <ul class="nav nav-tabs panel panel-theme flex-h-center">
       <li class="active"><a data-toggle="tab" href="#tab-content-1"><i class="ion-ios-settings-strong"></i> Timeline</a></li>
-      <li><a data-toggle="tab" href="#tab-content-2"><i class="ion-person"></i> About</a></li>
-      <li><a data-toggle="tab" href="#tab-content-3"><span style="margin:3px 0 4px;">115</span> Photos</a></li>
-      <li><a data-toggle="tab" href="#tab-content-4"><i class="ion-person-stalker"></i> Friends</a></li>
+      <li><a (click)="getLikes(this.userId); getFollowing(this.userID)" data-toggle="tab" href="#tab-content-2"><i class="ion-person"></i> About</a></li>
+      <li><a (click)="getPhotsFromProvider(this.userID)" data-toggle="tab" href="#tab-content-3"><span style="margin:3px 0 4px;"></span> Photos</a></li>
+      <li><a (click)="getFriendsList(this.userID, this.userId, '')" data-toggle="tab" href="#tab-content-4"><i class="ion-person-stalker"></i> Friends</a></li>
     </ul>
     <div class="tab-content">
       <div id="tab-content-1" class="tab-pane fade in active timeline">
@@ -343,38 +344,15 @@
         <div class="btn btn-theme btn-block">Likes</div>
         <div class="panel panel-theme">
           <div class="row thumbnails">
-            <div class="col-xs-6">
+            <div class="col-xs-6" *ngFor="let page of likedPages">
                 <div class="thumbnail">
-                  <a href="#"><img src="assets/images/post.jpg" alt=""></a>
+                  <a href="#"><img src="{{ page.logo }}" alt=""></a>
                   <div class="caption">
-                      <h3><a href="#">Title Goes Here</a></h3>
+                      <h3><a href="#">{{page.title}}</a></h3>
                   </div>
                 </div>
             </div>
-            <div class="col-xs-6">
-                <div class="thumbnail">
-                  <a href="#"><img src="assets/images/friends.jpg" alt=""></a>
-                  <div class="caption">
-                      <h3><a href="#">Title Goes Here</a></h3>
-                  </div>
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <div class="thumbnail">
-                  <a href="#"><img src="assets/images/post.jpg" alt=""></a>
-                  <div class="caption">
-                      <h3><a href="#">Title Goes Here</a></h3>
-                  </div>
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <div class="thumbnail">
-                  <a href="#"><img src="assets/images/friends.jpg" alt=""></a>
-                  <div class="caption">
-                      <h3><a href="#">Title Goes Here</a></h3>
-                  </div>
-                </div>
-            </div>
+
           </div>
           <a href="#" class="btn btn-default btn-block">See More</a>
         </div>
@@ -414,28 +392,30 @@
       </div>
       <div id="tab-content-4" class="tab-pane fade mb-30">
         <div class="users-list panel panel-theme">
-          <form class="search-form user-item pb-25">
+          <!-- <form class="search-form user-item pb-25">
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search here ...">
+              <input (click)="getFriendsList()" type="text" class="form-control" placeholder="Search here ...">
               <div class="input-group-btn">
                 <button type="submit" class="btn btn-default">
                   <i class="fa fa-search"></i>
                 </button>
               </div>
             </div>
-          </form>
-          <div class="user-item" *ngFor="let friend of friendslist">
+          </form> -->
+          <div class="user-item" *ngFor="let friend of friendslist;">
             <div class="pull-left">
               <div class="user-img">
-                <a href="#"><img src="{{friend.avatar}}" alt=""></a>
+                <a (click)="GoToProfile(friend.id, userId)" href="#"><img src="{{friend.avatar}}" alt=""></a>
               </div>
               <div class="user-info pull-left">
-                <h3 class="mt-15"><a href="#">{{friend.name}}</a></h3>
+                <h3 (click)="GoToProfile(friend.id, userId)" class="mt-15"><a href="#">{{friend.name}}</a></h3>
                 <!-- <p>3 mutual friends</p> -->
               </div>
             </div>
             <div class="pull-right">
-              <a href="#" class="btn btn-default btn-sm"><i class="fa fa-user-plus"></i> Add Friend</a>
+              <a href="#" class="btn btn-default btn-sm"><i  class="fa fa-user-plus"></i> Add Friend</a>
+              <!-- <a href="#" *ngIf="isFriend(friend.id)" class="btn btn-default btn-sm"><i class="ion-ios-minus-outline"></i> Remove Friend</a> -->
+
             </div>
             <div class="clearfix"></div>
           </div> <!-- //user-item -->
@@ -445,7 +425,5 @@
     </div>
   </div>
 </section>
-
-
 
 </ion-content>

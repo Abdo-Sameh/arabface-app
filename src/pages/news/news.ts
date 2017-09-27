@@ -4,6 +4,7 @@ import { RemoteServiceProvider } from './../../providers/remote-service/remote-s
 import {TabsPage} from '../tabs/tabs';
 import {ProfilePage} from '../profile/profile';
 import {MyApp} from '../../app/app.component';
+import {FriendProfilePage} from '../friend-profile/friend-profile';
 //import $ from "jquery";
 
 /**
@@ -252,7 +253,23 @@ GoToProfile(id,userId)
   });
   loading.present()
 
-    this.remoteService.profileDetailsApiCall(id,userId).subscribe(res =>{loading.dismiss();this.userData = res ; res.id=id;      this.navCtrl.push(ProfilePage,{"userData" : res})
+    this.remoteService.profileDetailsApiCall(id,userId).subscribe(res => {
+        loading.dismiss();this.userData = res ;
+        res.id=id;
+        console.log("---------------------")
+        console.log(id, userId);
+        console.log("---------------------")
+
+        if(id == userId){
+          this.navCtrl.push(ProfilePage,{
+            "userData" : res
+          })
+        }else{
+          this.navCtrl.push(FriendProfilePage,{
+            "userData" : res
+          })
+        }
+
   });
 
 }
