@@ -18,7 +18,7 @@ let firebase ;
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
-  styleUrls : ['./assets/main.css']
+  styleUrls : ['../../assets/main.css']
 })
 export class LoginPage {
 email ; 

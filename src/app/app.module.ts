@@ -44,10 +44,12 @@ import {CreateGroupPage}  from '../pages/create-group/create-group'
 import {EditGroupPage}  from '../pages/edit-group/edit-group'
 import {EditPagePage}  from '../pages/edit-page/edit-page'
 
-import { File } from '@ionic-native/file';
-import { Transfer } from '@ionic-native/transfer';
-import { FilePath } from '@ionic-native/file-path';
-import { Camera } from '@ionic-native/camera';
+import {PhotoselectionPage}  from '../pages/photoselection/photoselection'
+
+// import { File } from '@ionic-native/file';
+// import { Transfer } from '@ionic-native/transfer';
+// import { FilePath } from '@ionic-native/file-path';
+// import { Camera } from '@ionic-native/camera';
 
 @NgModule({
   declarations: [
@@ -88,7 +90,8 @@ import { Camera } from '@ionic-native/camera';
     CreatePagePage,
     CreateGroupPage,
     EditGroupPage,
-    EditPagePage
+    EditPagePage,
+    PhotoselectionPage
   ],
   imports: [
 BrowserModule , IonicModule.forRoot(MyApp), HttpModule
@@ -133,15 +136,16 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule
     CreatePagePage,
     CreateGroupPage,
     EditGroupPage,
-    EditPagePage
+    EditPagePage,
+    PhotoselectionPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    File,
-    Transfer,
-    Camera,
-    FilePath,
+    // File,
+    // Transfer,
+    // Camera,
+    // FilePath,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RemoteServiceProvider
   ]

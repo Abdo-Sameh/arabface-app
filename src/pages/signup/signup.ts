@@ -22,7 +22,7 @@ declare var camera ;
 @Component({
   selector: 'page-signup',
   templateUrl: 'signup.html',
-  styleUrls : ['./assets/main.css','./assets/ionicons.min.css']
+  styleUrls : ['../../assets/main.css','../../assets/ionicons.min.css']
 })
 export class SignupPage {
 name ; mail ; password; confirm ;

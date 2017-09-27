@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController, Platform, ToastController ,LoadingController} from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
-import { File } from '@ionic-native/file';
-import { Transfer, TransferObject } from '@ionic-native/transfer';
-import { FilePath } from '@ionic-native/file-path';
-import { Camera } from '@ionic-native/camera';
+//import { File } from '@ionic-native/file';
+//import { Transfer, TransferObject } from '@ionic-native/transfer';
+//import { FilePath } from '@ionic-native/file-path';
+//import { Camera } from '@ionic-native/camera';
 import {TabsPage} from '../tabs/tabs';
 import { PhotosPage} from '../photos/photos'
 import {FriendProfilePage} from '../friend-profile/friend-profile'
@@ -34,7 +34,7 @@ export class ProfilePage {
     following
     likedPages
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider, private camera: Camera, private transfer: Transfer, public toastCtrl: ToastController, private file: File, private filePath: FilePath, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider,  public toastCtrl: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
     let data = navParams.get('userData');
     //
     // if(data)
