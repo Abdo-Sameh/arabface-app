@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { Http } from '@angular/http';
+import { RemoteServiceProvider} from '../providers/remote-service/remote-service';
+
 import 'rxjs/add/operator/map';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -9,6 +11,8 @@ import { OnlinePage } from '../pages/online/online';
 import { SettingsPage } from '../pages/settings/settings';
 import { PhotosPage } from '../pages/photos/photos';
 import { PagesPage } from '../pages/pages/pages';
+import { TabsPage } from '../pages/tabs/tabs';
+
 import { ProfilePage } from '../pages/profile/profile';
 import { GroupsPage } from '../pages/groups/groups';
 import { EventsPage } from '../pages/events/events';
@@ -20,7 +24,8 @@ import { GiftsPage } from "../pages/gifts/gifts";
 //import { TabsPage } from '../pages/tabs/tabs';
 
 import xml2js from 'xml2js';
-
+let firebaseauth
+let firebase,candidate ; 
 
 @Component({
   templateUrl: 'app.html'
@@ -37,9 +42,11 @@ export class MyApp {
 
 
     pages: Array<{title: string, component: any}>;
+    
 
-    constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen , public http :Http) {
+    constructor(public database:RemoteServiceProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen , public http :Http) {
       this.deviceLanguage = this.platform.lang();
+      firebase = this.database ; 
       //this.loadXML('ar')
       this.initializeApp();
 
@@ -133,20 +140,73 @@ export class MyApp {
      });
   }
 
+  ngOnInit () {
+    
+      firebase.user.subscribe (snapshot => {
+        console.log(snapshot)
+    
+        if(snapshot == "logged") {
+          if(localStorage.getItem('userid') == undefined) {
+            this.nav.setRoot(LoginPage)
+            
+          }else {
+            this.database.set_userid(localStorage.getItem('userid'));
+            firebase.set_active("true");
+          }
+          
+          
+         
+    this.nav.setRoot (TabsPage);
+        }else if(snapshot == "not here") {
+    
+          this.nav.setRoot(TabsPage);
+    
+      //     when deploying uncomment the next and comment above
+    //when in development comment next line and uncommnt above tel snapshot == logged 
+         
+          // this.nav.setRoot(LoginPage);
+        }
+      })
+    
+    //   this.database.remotelisten('video').subscribe (data => {
+    // candidate = data ; 
+    // console.log(candidate)
+    // if(candidate != "undefined" && candidate != undefined) {
+    // //   var candidate = $.map(candidate, function(value, index) {
+    // //     return [value];
+    // // });
+    // console.log(candidate.ice)
+    //   if(candidate.ice == undefined){
+    // this.nav.setRoot(VideohandlerPage , {candidate : candidate.message , type : 'remote' , id: candidate.sender });
+    //     }
+    // } 
+      
+    //   })
+    
+    
+    }
+    
+ signout () {
+  
+  firebaseauth.auth().signOut().then(function() {
+   console.log("success")
+  }).catch(function(error) {
+   
+  });
+   }
+  // logout()
+  // {
+  //   localStorage.setItem('loggedIn', null );
+  //   localStorage.setItem('userName', "" );
+  //   localStorage.setItem('userAvatar', "" );
+  //   localStorage.setItem('userData', "" );
+  //   localStorage.setItem('userDataID', "" );
+  //   localStorage.setItem('lang', "" );
 
-  logout()
-  {
-    localStorage.setItem('loggedIn', null );
-    localStorage.setItem('userName', "" );
-    localStorage.setItem('userAvatar', "" );
-    localStorage.setItem('userData', "" );
-    localStorage.setItem('userDataID', "" );
-    localStorage.setItem('lang', "" );
 
+  //   this.nav.push(LoginPage);
 
-    this.nav.push(LoginPage);
-
-  }
+  // }
 
 
 
