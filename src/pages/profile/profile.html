@@ -31,10 +31,21 @@
       <form class="img-upload">
         <img src="{{userData['avatar']}}" alt="Arabface" title="Arabface">
         <div class="file-input file-input-profile">
+          <ion-item>
+          <p>{{imageURI}}</p>
+          <button ion-button color="secondary" (click)="getImage()">Get Image</button>
+        </ion-item>
+        <ion-item>
+          <h4>Image Preview</h4>
+          <img src="{{imageFileName}}" *ngIf="imageFileName" alt="Ionic File" width="300" />
+        </ion-item>
+        <ion-item>
+          <button ion-button (click)="uploadFile()">Upload</button>
+        </ion-item>
           <label for="profile-upload">
             <i *ngIf="myProfile()" class="fa fa-camera"></i>
           </label>
-          <input id="profile-upload" type="file" [(ngModel)]="picture.path" [ngModelOptions]="{standalone: true}"   (click)="changeProfilePicture(this.userId, this.picture.path)">
+          <input id="profile-upload" type="file" [(ngModel)]="picture.path" [ngModelOptions]="{standalone: true}"   (click)="upload()">
         </div>
       </form>
       <h3>{{userData['name']}}</h3>
@@ -52,13 +63,13 @@
   </div>
   <div class="container">
     <ul class="nav nav-tabs panel panel-theme flex-h-center">
-      <li class="active"><a data-toggle="tab" href="#tab-content-1"><i class="ion-ios-settings-strong"></i> Timeline</a></li>
-      <li><a (click)="getLikes(this.userId); getFollowing(this.userID)" data-toggle="tab" href="#tab-content-2"><i class="ion-person"></i> About</a></li>
-      <li><a (click)="getPhotsFromProvider(this.userID)" data-toggle="tab" href="#tab-content-3"><span style="margin:3px 0 4px;"></span> Photos</a></li>
-      <li><a (click)="getFriendsList(this.userID, this.userId, '')" data-toggle="tab" href="#tab-content-4"><i class="ion-person-stalker"></i> Friends</a></li>
+      <li class="active"><a data-toggle="tab" href="#tab-content-1{{this.userId}}"><i class="ion-ios-settings-strong"></i> Timeline</a></li>
+      <li><a (click)="getFollowingAndLikes(this.userID)" data-toggle="tab" href="#tab-content-2{{this.userId}}"><i class="ion-person"></i> About</a></li>
+      <li><a (click)="getPhotsFromProvider(this.userID)" data-toggle="tab" href="#tab-content-3{{this.userId}}"><span style="margin:3px 0 4px;"></span> Photos</a></li>
+      <li><a (click)="getFriendsList(this.userID, this.userId, '')" data-toggle="tab" href="#tab-content-4{{this.userId}}"><i class="ion-person-stalker"></i> Friends</a></li>
     </ul>
     <div class="tab-content">
-      <div id="tab-content-1" class="tab-pane fade in active timeline">
+      <div id="tab-content-1{{this.userId}}" class="tab-pane fade timeline active in">
         <div class="feed-box panel panel-theme mt-30" *ngFor="let post of posts">
           <!-- <div *ngIf="post.tag_users != ''  "> -->
           <div class="feed-header">
@@ -328,7 +339,7 @@
           </div>
         </div>
       </div>
-      <div id="tab-content-2" class="tab-pane fade mb-30">
+      <div id="tab-content-2{{this.userId}}" class="tab-pane fade mb-30">
         <div class="panel panel-theme">
           <ul class="profile-info" *ngFor="let info of userData.profile_info">
             <li><i>{{ info.name }} :</i> {{ info.value }}</li>
@@ -387,10 +398,10 @@
           <a href="#" class="btn btn-default btn-block">See More</a>
         </div>
       </div>
-      <div id="tab-content-3" class="tab-pane fade photos mb-30">
+      <div id="tab-content-3{{this.userId}}" class="tab-pane fade photos mb-30">
         <a *ngFor="let photo of photos" href="#"><img src="{{ photo.path }}" alt=""></a>
       </div>
-      <div id="tab-content-4" class="tab-pane fade mb-30">
+      <div id="tab-content-4{{this.userId}}" class="tab-pane fade mb-30">
         <div class="users-list panel panel-theme">
           <!-- <form class="search-form user-item pb-25">
             <div class="input-group">

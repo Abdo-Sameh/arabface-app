@@ -2,10 +2,10 @@ import { PhotoselectionPage } from './../photoselection/photoselection';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { Component } from '@angular/core';
 import { NavController, NavParams , LoadingController} from 'ionic-angular';
-import { PhotoLibrary } from '@ionic-native/photo-library';
+// import { PhotoLibrary } from '@ionic-native/photo-library';
 import {FormControl , FormGroup , Validators } from '@angular/forms'
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { ImagePicker } from '@ionic-native/image-picker';
+// import { ImagePicker } from '@ionic-native/image-picker';
 let self ;
 let firebase,photos ;
 let photourl = [] ;
@@ -27,7 +27,7 @@ declare var camera ;
 export class SignupPage {
 name ; mail ; password; confirm ;
 pimg = true ; profileimg ; picon = false ;
-  constructor(public imagePicker: ImagePicker,public loadingCtrl: LoadingController , public events: Events , public ds: DomSanitizer,public photoLibrary: PhotoLibrary,public database:RemoteServiceProvider,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public loadingCtrl: LoadingController , public events: Events , public ds: DomSanitizer,public database:RemoteServiceProvider,public navCtrl: NavController, public navParams: NavParams) {
    events.subscribe('choosed', (photo) => {
    console.log(photo.changingThisBreaksApplicationSecurity) ;
    this.profileimg = photo ;
@@ -36,7 +36,7 @@ pimg = true ; profileimg ; picon = false ;
   });
   firebase = this.database ;
   self = this.ds ;
-  photos = this.photoLibrary ;
+  // photos = this.photoLibrary ;
 }
 
   userForm = new FormGroup ({
@@ -106,14 +106,14 @@ if(this.profileimg) {
 }
    }
   select_photo () {
-    this.imagePicker.getPictures({maximumImagesCount : 1}).then((results) => {
-  for (var i = 0; i < results.length; i++) {
-      console.log('Image URI: ' + results[i]);
-      this.profileimg = results[i] ;
-       this.picon = true ;
-   this.pimg = false ;
-  }
-}, (err) => { });
+//     this.imagePicker.getPictures({maximumImagesCount : 1}).then((results) => {
+//   for (var i = 0; i < results.length; i++) {
+//       console.log('Image URI: ' + results[i]);
+//       this.profileimg = results[i] ;
+//        this.picon = true ;
+//    this.pimg = false ;
+//   }
+// }, (err) => { });
 //      photos.requestAuthorization().then(() => {
 // navigator.camera.getPicture(function (img) {
 //   console.log(img);
