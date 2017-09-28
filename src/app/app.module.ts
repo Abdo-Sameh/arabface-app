@@ -46,6 +46,9 @@ import {EditPagePage}  from '../pages/edit-page/edit-page'
 
 import {PhotoselectionPage}  from '../pages/photoselection/photoselection'
 
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+
 // import { File } from '@ionic-native/file';
 // import { Transfer } from '@ionic-native/transfer';
 // import { FilePath } from '@ionic-native/file-path';
@@ -142,6 +145,7 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule
   providers: [
     StatusBar,
     SplashScreen,
+    Transfer,Camera,
     // File,
     // Transfer,
     // Camera,

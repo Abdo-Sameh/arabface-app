@@ -29,7 +29,7 @@ export class FriendProfilePage {
   friendslist
   followers
   following
-  likedPages
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider) {
     let data = navParams.get('userData');
@@ -39,13 +39,6 @@ export class FriendProfilePage {
       console.log(this.userID , this.userId);
       this.getProfileData(this.userID, this.userId);
       this.getProfilePosts(this.userID)
-  }
-  getLikes(userId){
-    let loading = this.loadingCtrl.create({
-      content: "Loading",
-    });
-    loading.present()
-    this.remoteService.getPages("likes", "", "all", userId).subscribe(res =>{loading.dismiss();this.likedPages = res.pages ;console.log(res)});
   }
   getFollowing(userId){
     if(this.userID == null){

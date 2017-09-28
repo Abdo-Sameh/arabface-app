@@ -6,8 +6,8 @@ import { TabsPage } from './../tabs/tabs';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {FormControl , FormGroup , Validators } from '@angular/forms'
-let firebase ; 
-// import stylefile from '../assets/main.css' ; 
+let firebase ;
+// import stylefile from '../assets/main.css' ;
 /**
  * Generated class for the LoginPage page.
  *
@@ -21,18 +21,18 @@ let firebase ;
   styleUrls : ['../../assets/main.css']
 })
 export class LoginPage {
-email ; 
-password ; 
+email ;
+password ;
   constructor(public database : RemoteServiceProvider,public navCtrl: NavController, public navParams: NavParams) {
-  firebase = this.database ; 
+  firebase = this.database ;
 }
 
   userForm = new FormGroup ({
-     
-      username : new FormControl (null , [Validators.required , Validators.email]) , 
-      
-      password : new FormControl (null , [Validators.required]) , 
-     
+
+      username : new FormControl (null , [Validators.required , Validators.email]) ,
+
+      password : new FormControl (null , [Validators.required]) ,
+
 
   });
 
@@ -41,8 +41,8 @@ password ;
   }
   login () {
      // console.log(this.userForm.value)
-    
-     
+
+
     firebase.login(this.userForm.value)
     this.navCtrl.push(TabsPage)
   }
@@ -55,10 +55,10 @@ password ;
     return re.test(email);
 }
 creat () {
-  this.navCtrl.push(SignupPage) ; 
+  this.navCtrl.push(SignupPage) ;
 }
 out() {
 
-  firebase.signout () ; 
+  firebase.signout () ;
 }
 }
