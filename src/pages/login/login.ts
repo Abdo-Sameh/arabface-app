@@ -44,6 +44,7 @@ password ;
     
      
     firebase.login(this.userForm.value)
+    this.navCtrl.push(TabsPage)
   }
   validateEmail(email) {
     console.log(email)

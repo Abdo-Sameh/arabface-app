@@ -95,35 +95,22 @@ getFeedsList(id)
 
 ///////////////////// post feed //////////////
  
-likeFeed(userid =this.userId,feedid)
+likeFeed(userid =this.userId,feedid,postIndex)
 {
-//   "use strict";
-//   $(".feed-box").on("click", function() {
-//     console.info($(this).index())
-// });
+
   this.remoteService.likeFeedApiCall(this.userId,feedid).subscribe(res =>{
-    this.likes = res; 
-    for(let i =0 ; i<this.feeds.length ;i++)
-      {
-          if(this.feeds[i].id == feedid)
-          {
-            this.feeds[i].like_count=this.likes.likes;
-            break
-          }
-      }
-    
   
+            this.feeds[postIndex].like_count=res.likes;
+            this.feeds[postIndex].has_like=res.has_like;
   })
 
   
 }
+
 likeComment(userid =this.userId,commentID,postIndex,commentIndex)
 {
 
-//   "use strict";
-//   $(".feed-box").on("click", function() {
-//     console.info($(this).index())
-// });
+
   this.remoteService.likeCommentApiCall(this.userId,commentID).subscribe(res =>{
     this.likes = res; 
     for(let i =0 ; i<this.feeds[postIndex].answers[0].length ;i++)
@@ -131,6 +118,8 @@ likeComment(userid =this.userId,commentID,postIndex,commentIndex)
         if(this.feeds[postIndex].answers[0][commentIndex].id == commentID)
         {
           this.feeds[postIndex].answers[0][commentIndex].like_count=this.likes.likes;
+          this.feeds[postIndex].answers[0][commentIndex].has_like=this.likes.has_like;
+          
           break
         }      
       }
@@ -142,17 +131,15 @@ likeComment(userid =this.userId,commentID,postIndex,commentIndex)
 }
 likeReply(userid =this.userId,replyID,postIndex,commentIndex,replyIndex)
 {
-//   "use strict";
-//   $(".feed-box").on("click", function() {
-//     console.info($(this).index())
-// });
+
   this.remoteService.likeCommentApiCall(this.userId,replyID).subscribe(res =>{
-    this.likes = res; 
     for(let i =0 ; i<this.feeds[postIndex].answers[0][commentIndex].repliesContent.length ;i++)
       {
           if(this.feeds[postIndex].answers[0][commentIndex].repliesContent[i].id == replyID)
           {
-            this.feeds[postIndex].answers[0][commentIndex].repliesContent[i].like_count=this.likes.likes;
+            this.feeds[postIndex].answers[0][commentIndex].repliesContent[i].like_count=res.likes;
+            this.feeds[postIndex].answers[0][commentIndex].repliesContent[i].has_like=res.has_like;
+            
             break
           }
       }
@@ -172,7 +159,6 @@ postFeed(userID=this.userId,postText=this.post.text)
   loading.present()
   this.remoteService.feedPosting(userID,postText).subscribe( res => { 
     this.feeds.unshift(res.feed)
-    console.log(this.feeds)
     this.post.text= ""
     //this.getFeedsList(this.userId);
     loading.dismiss();
@@ -184,7 +170,6 @@ commentOnFeed(postOwner,postID,whoCommented=this.userId,comment=this.comment.com
   let loading = this.loadingCtrl.create({
     content: "commenting",
   });        
-  console.log(this.feeds)
   
   loading.present()
   this.remoteService.commentOnFeeds(postOwner,postID,whoCommented,comment).subscribe(res => {
@@ -202,58 +187,29 @@ commentOnFeed(postOwner,postID,whoCommented=this.userId,comment=this.comment.com
       
       this.comment.comment = ''
       loading.dismiss()
-    console.log(res)
   })
 
 }
 replyOnComment(postindex,commentindex,postOwner,commentID,whoCommented=this.userId,comment=this.comment.reply)
 {
-  // let loading = this.loadingCtrl.create({
-  //   content: "replying",
-  // });        
+  let loading = this.loadingCtrl.create({
+    content: "replying",
+  });        
   
-  // loading.present()
-  // this.remoteService.ReplyOnComment(postOwner,commentID,whoCommented,comment).subscribe(res => {    
+  loading.present()
+  this.remoteService.ReplyOnComment(postOwner,commentID,whoCommented,comment).subscribe(res => {    
     
     
-  //   res.postid = commentID
-  //   for( let x in this.feeds)
-  //     {
-  //       if(this.feeds[postindex].answers[0][commentindex].id == res.postid)
-  //         {
-  //               this.feeds[x].answers[0][0].repliesContent.push(res)
-  //         }
-  //     }
-  //     this.remoteService.loadReplies(commentID).subscribe(res2 =>{ });
+    res.postid = commentID
+
+                this.feeds[postindex].answers[0][commentindex].repliesContent.push(res)
+     
+      this.remoteService.loadReplies(commentID).subscribe(res2 =>{ });
       
-  //     this.comment.reply = ''
-  //     loading.dismiss()
-  //   console.log(res)
-  // })
-  {
-    let loading = this.loadingCtrl.create({
-      content: "replying",
-    });
-  
-    loading.present()
-    this.remoteService.ReplyOnComment(postOwner,commentID,whoCommented,comment).subscribe(res => {
-  
-      console.log(this.feeds[postindex].answers[0][commentindex].repliesContent)
-      res.postid = commentID
-      for(let i =0 ; i< this.feeds[postindex].answers[0][commentindex].length ;i++)
-            {
-          if(this.feeds[postindex].answers[0][commentindex][i].id == res.postid)
-            {
-                  this.feeds[postindex].answers[0][commentindex][i].repliesContent.push(res)
-            }
-        }
-        this.remoteService.loadReplies(commentID).subscribe(res2 =>{ });
-  
-        this.comment.reply = ''
-        loading.dismiss()
-    })
-  
-  }
+      this.comment.reply = ''
+      loading.dismiss()
+  })
+
 }
 
 sharePost(feedid,userID=this.userId)
@@ -315,7 +271,7 @@ GoToProfile(id)
 // }
 reply()
   {
-    this.show = false;
+    this.show = !this.show;
   }
  //////////////////////////////////////////////
  back()

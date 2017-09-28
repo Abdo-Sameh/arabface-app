@@ -159,7 +159,7 @@ export class MyApp {
     this.nav.setRoot (TabsPage);
         }else if(snapshot == "not here") {
     
-          this.nav.setRoot(LoginPage);
+          this.nav.setRoot(TabsPage);
     
       //     when deploying uncomment the next and comment above
     //when in development comment next line and uncommnt above tel snapshot == logged 
