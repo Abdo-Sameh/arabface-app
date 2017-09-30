@@ -48,6 +48,16 @@ export class GroupPage {
       group: this.group,
     });
   }
+  saveGroup(eventId){
+    this.remoteService.saveItem('page', eventId, this.userId).subscribe(res=>{
+
+    });
+  }
+  unsaveGroup(eventId){
+    this.remoteService.unsaveItem('page', eventId, this.userId).subscribe(res=>{
+
+    });
+  }
 
   back()
   {

@@ -794,6 +794,32 @@ console.log(url)
           .map((res : Response ) => res.json());
 
         }
+
+        saveItem(type, typeId, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('type', type );
+          urlSearchParams.append('type_id', typeId);
+          urlSearchParams.append('userid', userid );
+          let body = urlSearchParams.toString()
+
+         return this.http.post("http://nilemm.com/arabface/api/89129812/save/item", body, {headers: headers})
+         .map((res : Response ) => res.json());
+        }
+        unsaveItem(type, typeId, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('type', type );
+          urlSearchParams.append('type_id', typeId);
+          urlSearchParams.append('userid', userid );
+          let body = urlSearchParams.toString()
+
+         return this.http.post("http://nilemm.com/arabface/api/89129812/unsave/item", body, {headers: headers})
+         .map((res : Response ) => res.json());
+        }
+
         /////////////// get  pages /////////////////////////
         getPages(type, term, categoryId, userId){
           return this.http.get("http://nilemm.com/arabface/api/89129812/page/browse?type=" + type + "&term=" + term + "&category_id=" + categoryId + "&userid=" + userId)

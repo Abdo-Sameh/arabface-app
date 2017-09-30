@@ -31,6 +31,16 @@ export class EventPage {
       'event' : this.event
     });
   }
+  saveEvent(eventId){
+    this.remoteService.saveItem('event', eventId, this.userId).subscribe(res=>{
+
+    });
+  }
+  unsaveItem(eventId){
+    this.remoteService.unsaveItem('event', eventId, this.userId).subscribe(res=>{
+
+    });
+  }
   back(){
     this.navCtrl.push(EventsPage);
   }
