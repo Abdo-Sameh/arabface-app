@@ -1,0 +1,323 @@
+<!--
+  Generated template for the SavedPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <header class="header_title">
+			<div class="container">
+				<div class="back_btn">
+					<a href="#"><i class="ion-arrow-left-c"></i></a>
+				</div>
+				<div class="page_title text-center">
+					<h3>Saved</h3>
+				</div>
+				<div class="menu_btn text-right">
+					<a href="#"><i class="ion-android-menu"></i></a>
+				</div>
+			</div>
+		</header>
+
+</ion-header>
+
+
+<ion-content padding>
+  <section class="bg_grey full_vh">
+			<div class="panel panel-theme">
+				<ul class="nav nav-tabs flex-space-around">
+					<li class="active">
+						<a class="p-0" data-toggle="tab" href="#">
+							<form>
+								<select>
+									<option value="posts">Posts</option>
+                  <option value="events">Events</option>
+									<option value="pages">Pages</option>
+									<option value="groups">Groups</option>
+								</select>
+							</form>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="container">
+				<form class="search-form mt-10 mb-30">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Search here ...">
+						<div class="input-group-btn">
+							<button type="submit" class="btn btn-default">
+								<i class="fa fa-search"></i>
+							</button>
+						</div>
+					</div>
+				</form>
+				<div class="feed-box panel panel-theme mt-30">
+					<div class="feed-header">
+						<div class="pull-left">
+							<a href="#"><img class="feed-img" src="images/avatar.png" alt=""></a>
+							<div class="feed-title">
+								<h3><a href="#">Username</a></h3>
+								<span>23 minutes ago .</span>
+								<span class="dropdown ml-5">
+									<a href="#" data-toggle="dropdown"><i class="fa fa-globe"></i></a>
+									<ul class="dropdown-menu">
+										<li><a href="#">Item-1</a></li>
+										<li><a href="#">Item-2</a></li>
+										<li><a href="#">Item-3</a></li>
+									</ul>
+								</span>
+							</div>
+						</div>
+						<div class="pull-right">
+							<div class="dropdown">
+								<a href="#" class="btn btn-default btn-sm" data-toggle="dropdown"><span class="caret"></span></a>
+								<ul class="dropdown-menu dropdown-menu-right">
+									<li><a href="#">Item-1</a></li>
+									<li><a href="#">Item-2</a></li>
+									<li><a href="#">Item-3</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="feed-body">
+						<h3>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. <a href="#">See More ...</a></h3>
+						<a href="#"><img src="images/post.jpg" alt=""></a>
+					</div>
+					<div class="feed-footer">
+						<div class="feed-action">
+							<div class="pull-left">
+								<div class="pull-left mr-15">
+									<a href="#"><i class="fa fa-thumbs-o-up"></i> Like</a>
+								</div>
+								<div class="pull-left mr-15">
+									<a href="#"><i class="fa fa-commenting"></i> Comment</a>
+								</div>
+								<div class="pull-left mr-15">
+									<a href="#"><i class="fa fa-share"></i> Share</a>
+								</div>
+							</div>
+							<div class="pull-right">
+								<div class="pull-right ml-15">
+									<a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+								</div>
+								<div class="pull-right ml-15">
+									<a href="#"><i class="fa fa-commenting"></i></a> 5
+								</div>
+								<div class="pull-right ml-15">
+									<a href="#"><i class="fa fa-share"></i></a> 10
+								</div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+						<!-- <div class="comment-list">
+							<div class="comment">
+								<a href="#"><img class="feed-img" src="images/avatar.png" alt=""></a>
+								<div class="feed-title">
+									<h3><a href="#">Username</a></h3>
+									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+									<div class="comment-action">
+										<div class="pull-left">
+											<a href="#" class="mr-10">Like</a>
+											<a href="#" class="mr-10">Reply</a>
+											<span class="mr-10">-</span>
+											<span>30 minute ago.</span>
+										</div>
+										<div class="pull-right">
+											<a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+										</div>
+									</div>
+									<div class="comment">
+										<a href="#"><img class="feed-img" src="images/avatar.png" alt=""></a>
+										<div class="feed-title">
+											<h3><a href="#">Username</a></h3>
+											<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+											<div class="comment-action">
+												<div class="pull-left">
+													<a href="#" class="mr-10">Like</a>
+													<a href="#" class="mr-10">Reply</a>
+													<span class="mr-10">-</span>
+													<span>30 minute ago.</span>
+												</div>
+												<div class="pull-right">
+													<a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+												</div>
+												<div class="clearfix"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="comment">
+								<a href="#"><img class="feed-img" src="images/avatar.png" alt=""></a>
+								<div class="feed-title">
+									<h3><a href="#">Username</a></h3>
+									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+									<div class="comment-action">
+										<div class="pull-left">
+											<a href="#" class="mr-10">Like</a>
+											<a href="#" class="mr-10">Reply</a>
+											<span class="mr-10">-</span>
+											<span>30 minute ago.</span>
+										</div>
+										<div class="pull-right">
+											<a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="comment write-comment">
+								<div class="pull-left">
+									<img class="feed-img" src="images/avatar.png" alt="">
+								</div>
+								<form>
+									<div class="input-group">
+										<input type="text" class="form-control" placeholder="write a comment ...">
+										<div class="input-group-btn">
+											<button type="submit" class="btn btn-default">
+												<i class="fa fa-paper-plane"></i>
+											</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div> -->
+					</div>
+				</div>
+				<div class="feed-box panel panel-theme mt-30">
+					<div class="feed-header">
+						<div class="pull-left">
+							<a href="#"><img class="feed-img" src="images/avatar.png" alt=""></a>
+							<div class="feed-title">
+								<h3><a href="#">Username</a></h3>
+								<span>23 minutes ago .</span>
+								<span class="dropdown ml-5">
+									<a href="#" data-toggle="dropdown"><i class="fa fa-globe"></i></a>
+									<ul class="dropdown-menu">
+										<li><a href="#">Item-1</a></li>
+										<li><a href="#">Item-2</a></li>
+										<li><a href="#">Item-3</a></li>
+									</ul>
+								</span>
+							</div>
+						</div>
+						<div class="pull-right">
+							<div class="dropdown">
+								<a href="#" class="btn btn-default btn-sm" data-toggle="dropdown"><span class="caret"></span></a>
+								<ul class="dropdown-menu dropdown-menu-right">
+									<li><a href="#">Item-1</a></li>
+									<li><a href="#">Item-2</a></li>
+									<li><a href="#">Item-3</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="feed-body">
+						<h3>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. <a href="#">See More ...</a></h3>
+						<a href="#"><img src="images/friends.jpg" alt=""></a>
+					</div>
+					<div class="feed-footer">
+						<div class="feed-action">
+							<div class="pull-left">
+								<div class="pull-left mr-15">
+									<a href="#"><i class="fa fa-thumbs-o-up"></i> Like</a>
+								</div>
+								<div class="pull-left mr-15">
+									<a href="#"><i class="fa fa-commenting"></i> Comment</a>
+								</div>
+								<div class="pull-left mr-15">
+									<a href="#"><i class="fa fa-share"></i> Share</a>
+								</div>
+							</div>
+							<div class="pull-right">
+								<div class="pull-right ml-15">
+									<a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+								</div>
+								<div class="pull-right ml-15">
+									<a href="#"><i class="fa fa-commenting"></i></a> 5
+								</div>
+								<div class="pull-right ml-15">
+									<a href="#"><i class="fa fa-share"></i></a> 10
+								</div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+						<!-- <div class="comment-list">
+							<div class="comment">
+								<a href="#"><img class="feed-img" src="images/avatar.png" alt=""></a>
+								<div class="feed-title">
+									<h3><a href="#">Username</a></h3>
+									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+									<div class="comment-action">
+										<div class="pull-left">
+											<a href="#" class="mr-10">Like</a>
+											<a href="#" class="mr-10">Reply</a>
+											<span class="mr-10">-</span>
+											<span>30 minute ago.</span>
+										</div>
+										<div class="pull-right">
+											<a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+										</div>
+									</div>
+									<div class="comment">
+										<a href="#"><img class="feed-img" src="images/avatar.png" alt=""></a>
+										<div class="feed-title">
+											<h3><a href="#">Username</a></h3>
+											<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+											<div class="comment-action">
+												<div class="pull-left">
+													<a href="#" class="mr-10">Like</a>
+													<a href="#" class="mr-10">Reply</a>
+													<span class="mr-10">-</span>
+													<span>30 minute ago.</span>
+												</div>
+												<div class="pull-right">
+													<a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+												</div>
+												<div class="clearfix"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="comment">
+								<a href="#"><img class="feed-img" src="images/avatar.png" alt=""></a>
+								<div class="feed-title">
+									<h3><a href="#">Username</a></h3>
+									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+									<div class="comment-action">
+										<div class="pull-left">
+											<a href="#" class="mr-10">Like</a>
+											<a href="#" class="mr-10">Reply</a>
+											<span class="mr-10">-</span>
+											<span>30 minute ago.</span>
+										</div>
+										<div class="pull-right">
+											<a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="comment write-comment">
+								<div class="pull-left">
+									<img class="feed-img" src="images/avatar.png" alt="">
+								</div>
+								<form>
+									<div class="input-group">
+										<input type="text" class="form-control" placeholder="write a comment ...">
+										<div class="input-group-btn">
+											<button type="submit" class="btn btn-default">
+												<i class="fa fa-paper-plane"></i>
+											</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div> -->
+					</div>
+				</div>
+			</div>
+		</section>
+</ion-content>

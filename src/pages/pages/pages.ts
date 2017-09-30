@@ -64,19 +64,26 @@ export class PagesPage {
       this.search="";
   }
 
-  likePage(userId, pageId, type){
-    this.remoteService.likePage(userId, pageId, type).subscribe(res =>{});
+  likePage(userId, pageId, type, index){
+    this.remoteService.likePage(userId, pageId, type).subscribe(res =>{
+      if(type == "like"){
+        this.pages[index].has_like = true;
+      }else{
+        this.pages[index].has_like = false;
+      }
 
-    var like = "#like"+pageId;
-    var dislike = "#dislike"+pageId;
+    });
 
-    if(type == "like"){
-      $(like).html("<i class=\"fa fa-thumbs-o-up\"></i> Liked");
-
-    }else{
-      $(dislike).html("<i class=\"fa fa-thumbs-o-up\"></i> Like");
-
-    }
+    // var like = "#like"+pageId;
+    // var dislike = "#dislike"+pageId;
+    //
+    // if(type == "like"){
+    //   $(like).html("<i class=\"fa fa-thumbs-o-up\"></i> Liked");
+    //
+    // }else{
+    //   $(dislike).html("<i class=\"fa fa-thumbs-o-up\"></i> Like");
+    //
+    // }
   }
 
   pagePage(page){

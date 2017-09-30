@@ -12,6 +12,7 @@ import { SettingsPage } from '../pages/settings/settings';
 import { PhotosPage } from '../pages/photos/photos';
 import { PagesPage } from '../pages/pages/pages';
 import { TabsPage } from '../pages/tabs/tabs';
+import { SavedPage } from '../pages/saved/saved';
 
 import { ProfilePage } from '../pages/profile/profile';
 import { GroupsPage } from '../pages/groups/groups';
@@ -25,7 +26,7 @@ import { GiftsPage } from "../pages/gifts/gifts";
 
 import xml2js from 'xml2js';
 let firebaseauth
-let firebase,candidate ; 
+let firebase,candidate ;
 
 @Component({
   templateUrl: 'app.html'
@@ -42,11 +43,11 @@ export class MyApp {
 
 
     pages: Array<{title: string, component: any}>;
-    
+
 
     constructor(public database:RemoteServiceProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen , public http :Http) {
       this.deviceLanguage = this.platform.lang();
-      firebase = this.database ; 
+      firebase = this.database ;
       //this.loadXML('ar')
       this.initializeApp();
 
@@ -64,9 +65,8 @@ export class MyApp {
         { title: 'Discover', component: TrendingPage },
         { title: 'Contact Us', component: ContactUsPage },
         { title: 'Gift Shop', component: GiftsPage },
+        { title: 'Saved', component: SavedPage },
         { title: 'Settings', component: SettingsPage },
-
-
       ];
      // console.log(this.userName);
       //console.log(this.userCover)
@@ -141,35 +141,35 @@ export class MyApp {
   }
 
   ngOnInit () {
-    
+
       firebase.user.subscribe (snapshot => {
         console.log(snapshot)
-    
+
         if(snapshot == "logged") {
           if(localStorage.getItem('userid') == undefined) {
             this.nav.setRoot(LoginPage)
-            
+
           }else {
             this.database.set_userid(localStorage.getItem('userid'));
             firebase.set_active("true");
           }
-          
-          
-         
-    this.nav.setRoot (TabsPage);
+
+
+
+    this.nav.setRoot(TabsPage);
         }else if(snapshot == "not here") {
-    
-          this.nav.setRoot(LoginPage);
-    
+
+          this.nav.push(TabsPage);
+
       //     when deploying uncomment the next and comment above
-    //when in development comment next line and uncommnt above tel snapshot == logged 
-         
+    //when in development comment next line and uncommnt above tel snapshot == logged
+
           // this.nav.setRoot(LoginPage);
         }
       })
-    
+
     //   this.database.remotelisten('video').subscribe (data => {
-    // candidate = data ; 
+    // candidate = data ;
     // console.log(candidate)
     // if(candidate != "undefined" && candidate != undefined) {
     // //   var candidate = $.map(candidate, function(value, index) {
@@ -179,19 +179,19 @@ export class MyApp {
     //   if(candidate.ice == undefined){
     // this.nav.setRoot(VideohandlerPage , {candidate : candidate.message , type : 'remote' , id: candidate.sender });
     //     }
-    // } 
-      
+    // }
+
     //   })
-    
-    
+
+
     }
-    
+
  signout () {
-  
+
   firebaseauth.auth().signOut().then(function() {
    console.log("success")
   }).catch(function(error) {
-   
+
   });
    }
   // logout()

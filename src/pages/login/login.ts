@@ -41,8 +41,6 @@ password ;
   }
   login () {
      // console.log(this.userForm.value)
-
-
     firebase.login(this.userForm.value)
     this.navCtrl.push(TabsPage)
   }
