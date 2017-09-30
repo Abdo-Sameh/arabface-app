@@ -38,13 +38,13 @@ export class Page {
       page: this.page
     });
   }
-  savePage(eventId){
-    this.remoteService.saveItem('page', eventId, this.userId).subscribe(res=>{
+  savePage(pageId){
+    this.remoteService.saveItem('page', pageId, this.userId).subscribe(res=>{
 
     });
   }
-  unsavePage(eventId){
-    this.remoteService.unsaveItem('page', eventId, this.userId).subscribe(res=>{
+  unsavePage(pageId){
+    this.remoteService.unsaveItem('page', pageId, this.userId).subscribe(res=>{
 
     });
   }

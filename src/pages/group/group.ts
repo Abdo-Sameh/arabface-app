@@ -48,13 +48,13 @@ export class GroupPage {
       group: this.group,
     });
   }
-  saveGroup(eventId){
-    this.remoteService.saveItem('page', eventId, this.userId).subscribe(res=>{
+  saveGroup(groupId){
+    this.remoteService.saveItem('group', groupId, this.userId).subscribe(res=>{
 
     });
   }
-  unsaveGroup(eventId){
-    this.remoteService.unsaveItem('page', eventId, this.userId).subscribe(res=>{
+  unsaveGroup(groupId){
+    this.remoteService.unsaveItem('group', groupId, this.userId).subscribe(res=>{
 
     });
   }

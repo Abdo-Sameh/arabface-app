@@ -36,7 +36,7 @@ export class EventPage {
 
     });
   }
-  unsaveItem(eventId){
+  unsaveEvent(eventId){
     this.remoteService.unsaveItem('event', eventId, this.userId).subscribe(res=>{
 
     });

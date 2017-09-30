@@ -479,6 +479,14 @@ firebase.auth().onAuthStateChanged(function(user) {
    }
    ////////// Feeds function End             ///////////
 
+   savedFeeds(id){
+     let url = "http://nilemm.com/arabface/api/89129812/feeds?type=saved&userid="+id;
+     console.log(url);
+     return  this.http.get(url)
+     //do((res : Response ) => console.log(res.json()))
+     .map((res : Response ) => res.json());
+   }
+
    //////////  profile Api function start   ///////////
 
    profileDetailsApiCall(theUserId, id)
