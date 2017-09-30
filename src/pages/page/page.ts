@@ -48,7 +48,15 @@ export class Page {
 
     });
   }
-
+  isSaved(pageId){
+    this.remoteService.isSaved('page', pageId, this.userId).subscribe(res=>{
+      if(res.status == 1){
+        return true;
+      }else{
+        return false;
+      }
+    });
+  }
   back()
   {
     this.navCtrl.push(PagesPage);

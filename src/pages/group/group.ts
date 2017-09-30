@@ -58,7 +58,15 @@ export class GroupPage {
 
     });
   }
-
+  isSaved(groupId){
+    this.remoteService.isSaved('group', groupId, this.userId).subscribe(res=>{
+      if(res.status == 1){
+        return true;
+      }else{
+        return false;
+      }
+    });
+  }
   back()
   {
     this.navCtrl.push(GroupsPage);

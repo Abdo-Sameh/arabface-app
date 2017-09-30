@@ -827,6 +827,18 @@ console.log(url)
          return this.http.post("http://nilemm.com/arabface/api/89129812/unsave/item", body, {headers: headers})
          .map((res : Response ) => res.json());
         }
+        isSaved(type, typeId, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('type', type );
+          urlSearchParams.append('type_id', typeId);
+          urlSearchParams.append('userid', userid );
+          let body = urlSearchParams.toString()
+
+         return this.http.post("http://nilemm.com/arabface/api/89129812/saved/item", body, {headers: headers})
+         .map((res : Response ) => res.json());
+        }
 
         /////////////// get  pages /////////////////////////
         getPages(type, term, categoryId, userId){

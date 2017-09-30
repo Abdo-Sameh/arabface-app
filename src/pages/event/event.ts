@@ -41,6 +41,15 @@ export class EventPage {
 
     });
   }
+  isSaved(eventId){
+    this.remoteService.isSaved('event', eventId, this.userId).subscribe(res=>{
+      if(res.status == 1){
+        return true;
+      }else{
+        return false;
+      }
+    });
+  }
   back(){
     this.navCtrl.push(EventsPage);
   }
