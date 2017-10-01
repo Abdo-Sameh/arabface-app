@@ -17,6 +17,8 @@ import { SettingsGeneralPage } from '../pages/settings-general/settings-general'
 import { SettingsNotificationsPage } from '../pages/settings-notifications/settings-notifications';
 import { SettingsPasswordPage } from '../pages/settings-password/settings-password';
 import { SettingsPrivacyPage } from '../pages/settings-privacy/settings-privacy';
+import { SettingsBlockingPage } from '../pages/settings-blocking/settings-blocking';
+import { SettingsDeletePage } from '../pages/settings-delete/settings-delete';
 import { PhotosPage } from '../pages/photos/photos';
 import { ForumsPage } from '../pages/forums/forums';
 import { SettingsPage } from '../pages/settings/settings';
@@ -81,10 +83,8 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
     ForumsPage,
     GroupPage,
     Page,
-    SettingsGeneralPage,
-    SettingsNotificationsPage,
-    SettingsPasswordPage,
-    SettingsPrivacyPage,
+    SettingsGeneralPage, SettingsNotificationsPage, SettingsPasswordPage,
+    SettingsPrivacyPage, SettingsBlockingPage, SettingsDeletePage,
     ContactUsPage,
     FriendRequestsPage,
     FriendListPage,
@@ -127,10 +127,8 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule
     ForumsPage,
     GroupPage,
     Page,
-    SettingsGeneralPage,
-    SettingsNotificationsPage,
-    SettingsPasswordPage,
-    SettingsPrivacyPage,
+    SettingsGeneralPage, SettingsNotificationsPage, SettingsPasswordPage,
+    SettingsPrivacyPage, SettingsBlockingPage, SettingsDeletePage,
     ContactUsPage,
     FriendRequestsPage,
     FriendListPage,

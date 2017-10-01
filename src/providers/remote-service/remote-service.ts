@@ -1083,4 +1083,27 @@ console.log(url)
           .map((res : Response ) => res.json());
         }
 
+
+         ///////////Settings///////////////
+        getSettingsNotifications(userid){
+          return this.http.get("http://nilemm.com/arabface/api/89129812/settings/get/notifications?userid=" + userid)
+          .map((res : Response ) => res.json());
+        }
+
+        setSettingsNotifications(following_you, site_mention_you, site_tag_you, site_comment,site_reply_comment, site_like,site_share_item, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('notify-following-you', following_you );
+          urlSearchParams.append('notify-site-mention-you', site_mention_you );
+          urlSearchParams.append('notify-site-tag-you', site_tag_you );
+          urlSearchParams.append('notify-site-comment', site_comment );
+          urlSearchParams.append('notify-site-reply-comment', site_reply_comment );
+          urlSearchParams.append('notify-site-like', site_like );
+          urlSearchParams.append('notify-site-share-item', site_share_item );
+          urlSearchParams.append('userid', userid);
+          let body = urlSearchParams.toString()
+          return this.http.post("http://nilemm.com/arabface/api/89129812/settings/notifications", body, {headers: headers})
+          .map((res : Response ) => res.json());
+        }
 }

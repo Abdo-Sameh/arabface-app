@@ -5,19 +5,18 @@ import {TabsPage} from '../tabs/tabs';
 import { SettingsPage } from '../settings/settings';
 
 
-
 /**
- * Generated class for the SettingsGeneralPage page.
+ * Generated class for the SettingsBlockingPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
 @Component({
-  selector: 'page-settings-general',
-  templateUrl: 'settings-general.html',
+  selector: 'page-settings-blocking',
+  templateUrl: 'settings-blocking.html',
 })
-export class SettingsGeneralPage {
+export class SettingsBlockingPage {
 
   userId
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
@@ -25,12 +24,7 @@ export class SettingsGeneralPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SettingsGeneralPage');
-  }
-
-  back()
-  {
-    this.navCtrl.push(SettingsPage);
+    console.log('ionViewDidLoad SettingsBlockingPage');
   }
 
 }
