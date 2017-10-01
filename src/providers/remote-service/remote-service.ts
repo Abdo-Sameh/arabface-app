@@ -10,10 +10,10 @@ import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import * as $ from 'jquery'
-declare var firebase ; 
-let alert1,downloadURL,avatar,name ; let signupres ; let signupresult ; 
-let userID = '25'   ; let cids ; let result = [] ; let friends ; let result5 = []; let msgs ; let chatid = [] ; let insideget ; 
-let friends2 ;let addchat ;  let getremote  ; let remoteid ; let result34 ; let apichat ; let firebasemsgs ; let apimsgs ; 
+declare var firebase ;
+let alert1,downloadURL,avatar,name ; let signupres ; let signupresult ;
+let userID = '25'   ; let cids ; let result = [] ; let friends ; let result5 = []; let msgs ; let chatid = [] ; let insideget ;
+let friends2 ;let addchat ;  let getremote  ; let remoteid ; let result34 ; let apichat ; let firebasemsgs ; let apimsgs ;
 let config = {
      apiKey: "AIzaSyBvXvFFmIM--9WbD07aemNah3ONCY22Ml4",
     authDomain: "aracall-3cda0.firebaseapp.com",
@@ -22,7 +22,7 @@ let config = {
     storageBucket: "aracall-3cda0.appspot.com",
     messagingSenderId: "712599379890"
   };
-  let user ; 
+  let user ;
 /*
   Generated class for the RemoteServiceProvider provider.
 
@@ -36,42 +36,42 @@ let apiURL = 'http://nilemm.com/arabface/api/89129812/';
 export class RemoteServiceProvider {
  public Id :number;
  deviceLanguage
- response ; 
- 
+ response ;
+
  public xmlLang :any;
   constructor(public loadingctr : LoadingController,public alertctrl:AlertController,public http: Http, public platform :Platform) {
 
     this.init() ;
-    //getremote = this.remoteid 
+    //getremote = this.remoteid
     firebase.initializeApp(config)
-    alert1 = this.alertctrl ; 
+    alert1 = this.alertctrl ;
   }
   login = (data) => {
     let loader = this.loadingctr.create({
-     
-     showBackdrop : false 
+
+     showBackdrop : false
    });
    loader.present();
    const url = 'http://nilemm.com/arabface/api/89129812/login?' + 'username=' + data.username + '&password=' + data.password;
-    
+
     var headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
    this.http.post(url,headers).subscribe(data3 => {
-     this.response = data3.text() ; 
-    
-     this.response = JSON.parse(this.response) ; 
+     this.response = data3.text() ;
 
-   
+     this.response = JSON.parse(this.response) ;
+
+
      if(this.response.status == 1) {
-      localStorage.setItem('userid' , this.response.id) 
-      
-     avatar = this.response.avatar ; 
-     name = this.response.name ; 
-     userID = this.response.id ; 
+      localStorage.setItem('userid' , this.response.id)
+
+     avatar = this.response.avatar ;
+     name = this.response.name ;
+     userID = this.response.id ;
        firebase.auth().signInWithEmailAndPassword(data.username, data.password).then(() => {
-         
+
          loader.dismiss();
- 
+
        }).catch(function(error) {
  // Handle Errors here.
  var errorCode = error.code;
@@ -79,8 +79,8 @@ export class RemoteServiceProvider {
 
 
    if(errorCode == "auth/user-not-found"){
-    
-   
+
+
 var storageRef = firebase.storage().ref();
 
 // Create a reference to 'mountains.jpg'
@@ -113,20 +113,20 @@ var getFileBlob = function(url, cb) {
        var uploadTask = storageRef.child('images/test.jpg').put(fileObject);
 
        uploadTask.on('state_changed', function(snapshot) {
-           
+
        }, function(error) {
-           
+
        }, function() {
            downloadURL = uploadTask.snapshot.downloadURL;
-         
-           
+
+
    firebase.auth().createUserWithEmailAndPassword(data.username, data.password).then (() => {
 loader.dismiss();
       var user = firebase.auth().currentUser;
       user.updateProfile({
-        
+
  displayName: name,
- photoURL:downloadURL , 
+ photoURL:downloadURL ,
 }).then(function() {
 
 }).catch(function(error) {
@@ -151,8 +151,8 @@ loader.dismiss();
    });
 
 
-firebase.database().ref(userID + '/chats').set({ 0: "undefined" }) ; 
-firebase.database().ref(userID + '/incoming').set({ 0: "undefined" }) ; 
+firebase.database().ref(userID + '/chats').set({ 0: "undefined" }) ;
+firebase.database().ref(userID + '/incoming').set({ 0: "undefined" }) ;
 
  }
 
@@ -167,20 +167,20 @@ firebase.database().ref(userID + '/incoming').set({ 0: "undefined" }) ;
    alert.present();
      }
    })
-   
+
 
  }
 
 
  set_userid (id) {
-  userID = id.toString() ; 
+  userID = id.toString() ;
   console.log('userid is set to' + userID)
 }
 
  creat1 (email,password,name,data) {
 let loader = this.loadingctr.create({
-     
-     showBackdrop : false 
+
+     showBackdrop : false
    });
    loader.present();
   let body = new URLSearchParams();
@@ -189,25 +189,25 @@ body.append('lastname', data.lastname);
 body.append('username', name);
 body.append('email_address', data.email_address);
 body.append('password', password);
-let body1 = body.toString () ; 
+let body1 = body.toString () ;
 
 
 
  let url = 'http://nilemm.com/arabface/api/89129812/signup?' + 'firstname=' + data.firstname + '&lastname=' + data.lastname + '&username=' + name + '&email_address=' + data.email_address + '&password='+password ;
-let url2 = 'http://nilemm.com/arabface/api/89129812/signup' ; 
+let url2 = 'http://nilemm.com/arabface/api/89129812/signup' ;
 
 let headers = new Headers();
      headers.append('Content-Type', 'application/x-www-form-urlencoded');
 this.http.post (url2,body1,{headers: headers}).subscribe(data => {
 
-let data1 = data.text() ; 
-data = JSON.parse(data1) ; 
-signupresult = data ; 
+let data1 = data.text() ;
+data = JSON.parse(data1) ;
+signupresult = data ;
 localStorage.setItem('userid' , signupresult.userid)
 
 if (data.status == 1) {
 
-done () ; 
+done () ;
 
 }
 });
@@ -219,8 +219,8 @@ loader.dismiss()
       user.updateProfile({
  displayName: data.username
 }).then(function() {
- 
- 
+
+
 
 
 }).catch(function(error) {
@@ -240,13 +240,13 @@ loader.dismiss()
 
 
 }
-   
+
  }
 
  _handleReaderLoaded(readerEvt) {
     var binaryString = readerEvt.target.result;
-           
-           
+
+
    }
    public creat2 (email,password,name,photo,firstname,lastname) {
       let url = 'http://nilemm.com/arabface/api/89129812/signup?' + 'firstname=' + firstname + 'lastname=' + lastname + 'username=' + name + 'email_address=' + email + 'password='+password ;
@@ -289,27 +289,27 @@ var getFileBlob = function(url, cb) {
        var uploadTask = storageRef.child('images/test.jpg').put(fileObject);
 
        uploadTask.on('state_changed', function(snapshot) {
-      
+
        }, function(error) {
-           
+
        }, function() {
            var downloadURL = uploadTask.snapshot.downloadURL;
-          
+
            // handle image here
        });
    });
 
-   
+
    firebase.auth().createUserWithEmailAndPassword(email, password).then (() => {
 
       user = firebase.auth().currentUser;
       user.updateProfile({
  displayName: name,
- photoURL:photo , 
+ photoURL:photo ,
 }).then(function() {
- 
-firebase.database().ref(userID + '/chats').set({ 0: "undefined" }) ; 
-firebase.database().ref(userID + '/incoming').set({ 0: "undefined" }) ; 
+
+firebase.database().ref(userID + '/chats').set({ 0: "undefined" }) ;
+firebase.database().ref(userID + '/incoming').set({ 0: "undefined" }) ;
 
 
 }).catch(function(error) {
@@ -330,19 +330,19 @@ firebase.database().ref(userID + '/incoming').set({ 0: "undefined" }) ;
  }
 user = new Observable(observer => {
 firebase.auth().onAuthStateChanged(function(user) {
-  
+
  if (user) {
 
    // User is signed in.
    var displayName = user.displayName;
- 
+
    var email = user.email;
    var emailVerified = user.emailVerified;
    var photoURL = user.photoURL;
    var isAnonymous = user.isAnonymous;
    var uid = user.uid;
    var providerData = user.providerData;
- 
+
    observer.next("logged")
    observer.next({name:displayName})
  } else {
@@ -352,7 +352,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 });
 
 }) ;
- 
+
  init() {
 
 
@@ -478,6 +478,14 @@ firebase.auth().onAuthStateChanged(function(user) {
 
    }
    ////////// Feeds function End             ///////////
+
+   savedFeeds(id){
+     let url = "http://nilemm.com/arabface/api/89129812/feeds?type=saved&userid="+id;
+     console.log(url);
+     return  this.http.get(url)
+     //do((res : Response ) => console.log(res.json()))
+     .map((res : Response ) => res.json());
+   }
 
    //////////  profile Api function start   ///////////
 
@@ -607,7 +615,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
    ///////////// user profile page changing Api call function start  ////////////////////
 
-   changeProfilePicture(userid , avatar) 
+   changeProfilePicture(userid , avatar)
    {
     let headers = new Headers();
     headers.append('Content-Type', 'multipart/form-data');
@@ -794,6 +802,44 @@ console.log(url)
           .map((res : Response ) => res.json());
 
         }
+
+        saveItem(type, typeId, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('type', type );
+          urlSearchParams.append('type_id', typeId);
+          urlSearchParams.append('userid', userid );
+          let body = urlSearchParams.toString()
+
+         return this.http.post("http://nilemm.com/arabface/api/89129812/save/item", body, {headers: headers})
+         .map((res : Response ) => res.json());
+        }
+        unsaveItem(type, typeId, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('type', type );
+          urlSearchParams.append('type_id', typeId);
+          urlSearchParams.append('userid', userid );
+          let body = urlSearchParams.toString()
+
+         return this.http.post("http://nilemm.com/arabface/api/89129812/unsave/item", body, {headers: headers})
+         .map((res : Response ) => res.json());
+        }
+        isSaved(type, typeId, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('type', type );
+          urlSearchParams.append('type_id', typeId);
+          urlSearchParams.append('userid', userid );
+          let body = urlSearchParams.toString()
+
+         return this.http.post("http://nilemm.com/arabface/api/89129812/saved/item", body, {headers: headers})
+         .map((res : Response ) => res.json());
+        }
+
         /////////////// get  pages /////////////////////////
         getPages(type, term, categoryId, userId){
           return this.http.get("http://nilemm.com/arabface/api/89129812/page/browse?type=" + type + "&term=" + term + "&category_id=" + categoryId + "&userid=" + userId)
@@ -952,6 +998,83 @@ console.log(url)
           }
           return this.http.get("http://nilemm.com/arabface/api/89129812/event/browse?userid=" + userId + "&term=" + term + "&category_id=" + categoryId + "&type=" + type)
           .map((res : Response ) => res.json());
+        }
+        getEventCategories(){
+          return this.http.get("http://nilemm.com/arabface/api/89129812/event/get/categories")
+          .map((res : Response ) => res.json());
+        }
+
+        createEvent(title,description,category_id,location,address,start_day,start_month,start_year,start_hour,start_minute,start_time_type,privacy,end_day,end_month,end_year,end_hour,end_minute,end_time_type,userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('title', title );
+          urlSearchParams.append('description', description);
+          urlSearchParams.append('category_id', category_id );
+          urlSearchParams.append('location', location );
+          urlSearchParams.append('address', address);
+          urlSearchParams.append('start_day', start_day );
+          urlSearchParams.append('start_month', start_month );
+          urlSearchParams.append('start_year', start_year);
+          urlSearchParams.append('start_hour', start_hour );
+          urlSearchParams.append('start_minute', start_minute );
+          urlSearchParams.append('start_time_type', start_time_type);
+          urlSearchParams.append('privacy', privacy );
+          urlSearchParams.append('end_day', end_day );
+          urlSearchParams.append('end_month', end_month );
+          urlSearchParams.append('end_year', end_year);
+          urlSearchParams.append('end_hour', end_hour );
+          urlSearchParams.append('end_minute', end_minute );
+          urlSearchParams.append('end_time_type', end_time_type);
+          urlSearchParams.append('userid', userid);
+          let body = urlSearchParams.toString()
+
+         return this.http.post("http://nilemm.com/arabface/api/89129812/event/create", body, {headers: headers})
+          //do((res : Response ) => console.log(res.json()))
+         .map((res : Response ) => res.json());
+        }
+        editEvent(title,description,category_id,location,address,start_day,start_month,start_year,start_hour,start_minute,start_time_type,privacy,end_day,end_month,end_year,end_hour,end_minute,end_time_type,userid, eventId){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('title', title );
+          urlSearchParams.append('description', description);
+          urlSearchParams.append('category_id', category_id );
+          urlSearchParams.append('location', location );
+          urlSearchParams.append('address', address);
+          urlSearchParams.append('start_day', start_day );
+          urlSearchParams.append('start_month', start_month );
+          urlSearchParams.append('start_year', start_year);
+          urlSearchParams.append('start_hour', start_hour );
+          urlSearchParams.append('start_minute', start_minute );
+          urlSearchParams.append('start_time_type', start_time_type);
+          urlSearchParams.append('privacy', privacy );
+          urlSearchParams.append('end_day', end_day );
+          urlSearchParams.append('end_month', end_month );
+          urlSearchParams.append('end_year', end_year);
+          urlSearchParams.append('end_hour', end_hour );
+          urlSearchParams.append('end_minute', end_minute );
+          urlSearchParams.append('end_time_type', end_time_type);
+          urlSearchParams.append('userid', userid);
+          urlSearchParams.append('event_id', eventId);
+          let body = urlSearchParams.toString()
+
+         return this.http.post("http://nilemm.com/arabface/api/89129812/event/edit", body, {headers: headers})
+          //do((res : Response ) => console.log(res.json()))
+         .map((res : Response ) => res.json());
+        }
+
+        deleteEvent(event_id, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('event_id', event_id );
+          urlSearchParams.append('userid', userid );
+          let body = urlSearchParams.toString()
+          return this.http.post("http://nilemm.com/arabface/api/89129812/event/delete", body, {headers: headers})
+           //do((res : Response ) => console.log(res.json()))
+          .map((res : Response ) => res.json());
+
         }
 
 

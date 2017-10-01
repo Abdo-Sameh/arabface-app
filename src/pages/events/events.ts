@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController} from 'ionic-angular';
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
-import {TabsPage} from '../tabs/tabs';
+import { TabsPage } from '../tabs/tabs';
+import { CreateEventPage } from '../create-event/create-event';
+import { EventPage } from '../event/event';
+
 /**
  * Generated class for the EventsPage page.
  *
@@ -39,15 +42,7 @@ export class EventsPage {
       content: "Loading",
     });
     loading.present()
-    // var element = document.getElementById("active");
-    // if(element != null){
-    //   if($( "#active1" ).hasClass( "active" )){
-    //     type = "all";
-    //   }else
-    //   type = "mine";
-    // }
-    // console.log(type);
-    // console.log(term);
+
     $('#selectType').on('change', function () {
         categoryId = "all";
 
@@ -70,6 +65,14 @@ export class EventsPage {
 
       this.search = "";
 
+  }
+  createEventPage(){
+    this.navCtrl.push(CreateEventPage);
+  }
+  goToEventPage(event){
+    this.navCtrl.push(EventPage,{
+      'event': event
+    });
   }
   back()
   {

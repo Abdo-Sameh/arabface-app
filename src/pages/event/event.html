@@ -1,5 +1,5 @@
 <!--
-  Generated template for the GroupPage page.
+  Generated template for the EventPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,38 +7,45 @@
 <ion-header>
 
   <header class="header_title">
-			<div class="container">
-				<div class="back_btn">
-					<a (click)="back()"><i class="fa fa-arrow-left"></i></a>
-				</div>
-				<div class="page_title text-center">
+      <div class="container">
+        <div class="back_btn">
+          <a (click)="back()"><i class="fa fa-arrow-left"></i></a>
+        </div>
+        <div class="page_title text-center">
 
-					<h3>{{ group.title }}</h3>
-				</div>
-				<div class="menu_btn text-right">
-					<a href="#"><i class="fa fa-bars" style="color:#fff;font-size:18px"></i></a>
-				</div>
-			</div>
-		</header>
+          <h3>{{ event.title }}</h3>
+        </div>
+        <div class="menu_btn text-right">
+          <a href="#"><i class="fa fa-bars" style="color:#fff;font-size:18px"></i></a>
+        </div>
+      </div>
+    </header>
 
 </ion-header>
 
 
-<ion-content >
-  <section class="bg_grey full_vh pt-70">
+<ion-content padding>
+  <section class="bg_grey full_vh" style="margin-top: 50px;">
 			<div class="user_cover friend_profile">
 				<div class="friend_profile_box">
 					<div class="img-upload">
 
-						<img src="{{ group.logo }}" alt="">
+						<img src="{{ event.logo }}" alt="">
 					</div>
 				</div>
 				<div class="profile-editors">
-					<a  href="#" *ngIf="group.is_admin == false && group.is_member == false" class="btn btn-theme btn-sm"><i class="fa fa-plus fz-11"></i> Join Group</a>
-          <a  href="#" *ngIf="group.is_admin == false && group.is_member == true" class="btn btn-theme btn-sm"><i class="fz-11"></i> Leave Group</a>
-          <a (click)="editGroup()" href="#" *ngIf="group.is_admin == true" class="btn btn-theme btn-sm"><i class="fa fa-pencil-square-o fz-11"></i> Edit Group</a>
-          <a (click)="saveGroup(group.id)" href="#" *ngIf="saved == false" class="btn btn-theme btn-sm"><i class="fa fa-bookmark fz-11"></i> Save Group</a>
-          <a (click)="unsaveGroup(group.id)" href="#" *ngIf="saved == true" class="btn btn-theme btn-sm"><i class="fa fa-bookmark fz-11"></i> Unsave Group</a>
+
+<a href="#" class="btn btn-theme btn-sm"><i class="fa fa-thumbs-o-up"></i>&nbsp; Like</a>
+
+          <div class="dropdown" style="display:inline-block">
+								<a href="#" class="btn btn-theme btn-sm" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
+							<ul class="dropdown-menu dropdown-menu-right">
+                <li><a (click)="editEventPage()" href="#" style="color: #5c0632;" ><i class="fa fa-edit"></i>&nbsp; Edit</a></li>
+								<li><a href="#" style="color: #5c0632;"><i class="fa fa-share"></i>&nbsp; Share</a></li>
+								<li><a (click)="saveEvent(event.id)" href="#" *ngIf="saved == false" style="color: #5c0632;"><i class="fa fa-bookmark"></i>&nbsp; Save</a></li>
+                <li><a (click)="unsaveEvent(event.id)" href="#" *ngIf="saved == true" style="color: #5c0632;"><i class="fa fa-bookmark"></i>&nbsp; Unsave</a></li>
+							</ul>
+						</div>
 				</div>
 			</div>
 			<div class="container pt-70">
@@ -49,8 +56,8 @@
 					<a href="#">35,619 people like this</a>
 				</div>
 				<div class="panel panel-theme">
-
-					<p>{{ group.description }}</p>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit culpa mollitia veniam officiis ex impedit totam, hic nam voluptas temporibus nihil libero ipsam ab distinctio quae nulla quo, aliquam incidunt!</p>
+					<p>{{ event.description }}</p>
 				</div>
 				<div class="panel panel-theme">
 					<div class="share-post">
@@ -59,14 +66,13 @@
 					</div>
 				</div>
 				<div class="panel panel-theme">
-
-					<div class="feed-box" *ngFor="let post of posts">
+					<div class="feed-box">
 						<div class="feed-header">
 							<div class="pull-left">
-								<a href="#"><img class="feed-img" src="{{ post.avatar }}" alt=""></a>
+								<a href="#"><img class="feed-img" src="assets/images/avatar.png" alt=""></a>
 								<div class="feed-title">
-									<h3><a href="#">{{ post.name }}</a></h3>
-									<span>{{ post.time }}</span>
+									<h3><a href="#">Username</a></h3>
+									<span>23 minutes ago .</span>
 									<span class="dropdown ml-5">
 										<a href="#" data-toggle="dropdown"><i class="fa fa-globe"></i></a>
 										<ul class="dropdown-menu">
@@ -90,8 +96,7 @@
 							<div class="clearfix"></div>
 						</div>
 						<div class="feed-body">
-
-							<h3><a href="#">{{ post.full_message }}</a></h3>
+							<h3><a href="#">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</a></h3>
 							<a href="#"><img src="assets/images/post.jpg" alt=""></a>
 							<p class="mt-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
 						</div>

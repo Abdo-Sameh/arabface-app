@@ -30,8 +30,8 @@ import { HttpModule } from '@angular/http';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { RemoteServiceProvider } from '../providers/remote-service/remote-service';
-import  {OnlinePage} from '../pages/online/online'
-import  {ContactUsPage} from '../pages/contact-us/contact-us'
+import {OnlinePage} from '../pages/online/online'
+import {ContactUsPage} from '../pages/contact-us/contact-us'
 import {FindFriendsPage}  from '../pages/find-friends/find-friends'
 import {FriendListPage}  from '../pages/friend-list/friend-list'
 import {FriendRequestsPage}  from '../pages/friend-requests/friend-requests'
@@ -43,11 +43,14 @@ import {CreatePagePage}  from '../pages/create-page/create-page'
 import {CreateGroupPage}  from '../pages/create-group/create-group'
 import {EditGroupPage}  from '../pages/edit-group/edit-group'
 import {EditPagePage}  from '../pages/edit-page/edit-page'
-
+import {CreateEventPage}  from '../pages/create-event/create-event'
+import {EditEventPage}  from '../pages/edit-event/edit-event'
+import {EventPage}  from '../pages/event/event'
 import {PhotoselectionPage}  from '../pages/photoselection/photoselection'
+import { SavedPage } from '../pages/saved/saved';
 
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 
 // import { File } from '@ionic-native/file';
 // import { Transfer } from '@ionic-native/transfer';
@@ -94,7 +97,8 @@ import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/trans
     CreateGroupPage,
     EditGroupPage,
     EditPagePage,
-    PhotoselectionPage
+    SavedPage,
+    PhotoselectionPage, CreateEventPage, EditEventPage, EventPage
   ],
   imports: [
 BrowserModule , IonicModule.forRoot(MyApp), HttpModule
@@ -140,12 +144,14 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule
     CreateGroupPage,
     EditGroupPage,
     EditPagePage,
-    PhotoselectionPage
+    SavedPage,
+    PhotoselectionPage, CreateEventPage, EditEventPage, EventPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    Transfer,Camera,
+    FileTransfer,Camera,
+    FileTransferObject,
     // File,
     // Transfer,
     // Camera,

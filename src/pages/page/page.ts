@@ -22,10 +22,12 @@ export class Page {
 
   id
   page
-
+  userId
+  saved
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
-
+    this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.page = navParams.get("page");
+    this.isSaved(this.page.id)
     console.log(this.page);
   }
 
@@ -38,7 +40,28 @@ export class Page {
       page: this.page
     });
   }
-
+  savePage(pageId){
+    this.remoteService.saveItem('page', pageId, this.userId).subscribe(res=>{
+      this.saved = true;
+        // console.log(res);
+    });
+  }
+  unsavePage(pageId){
+    this.remoteService.unsaveItem('page', pageId, this.userId).subscribe(res=>{
+      this.saved  = false;
+      // console.log(res);
+    });
+  }
+  isSaved(pageId){
+    this.remoteService.isSaved('page', pageId, this.userId).subscribe(res=>{
+      // console.log(res);
+      if(res.status == 1){
+        this.saved = true;
+      }else{
+        this.saved = false;
+      }
+    });
+  }
   back()
   {
     this.navCtrl.push(PagesPage);
