@@ -42,8 +42,8 @@
 							<ul class="dropdown-menu dropdown-menu-right">
                 <li><a (click)="editEventPage()" href="#" style="color: #5c0632;" ><i class="fa fa-edit"></i>&nbsp; Edit</a></li>
 								<li><a href="#" style="color: #5c0632;"><i class="fa fa-share"></i>&nbsp; Share</a></li>
-								<li><a (click)="saveEvent(event.id)" href="#" *ngIf="!isSaved(event.id)" style="color: #5c0632;"><i class="fa fa-bookmark"></i>&nbsp; Save</a></li>
-                <li><a (click)="unsaveEvent(event.id)" href="#" *ngIf="isSaved(event.id)" style="color: #5c0632;"><i class="fa fa-bookmark"></i>&nbsp; Unsave</a></li>
+								<li><a (click)="saveEvent(event.id)" href="#" *ngIf="saved == false" style="color: #5c0632;"><i class="fa fa-bookmark"></i>&nbsp; Save</a></li>
+                <li><a (click)="unsaveEvent(event.id)" href="#" *ngIf="saved == true" style="color: #5c0632;"><i class="fa fa-bookmark"></i>&nbsp; Unsave</a></li>
 							</ul>
 						</div>
 				</div>

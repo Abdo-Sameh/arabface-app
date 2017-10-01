@@ -18,9 +18,11 @@ import { EventsPage } from '../events/events';
 export class EventPage {
   userId
   event
+  saved
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.event = navParams.get("event");
+    this.isSaved(this.event.id);
   }
 
   ionViewDidLoad() {
@@ -33,20 +35,20 @@ export class EventPage {
   }
   saveEvent(eventId){
     this.remoteService.saveItem('event', eventId, this.userId).subscribe(res=>{
-
+      this.saved = true;
     });
   }
   unsaveEvent(eventId){
     this.remoteService.unsaveItem('event', eventId, this.userId).subscribe(res=>{
-
+      this.saved = false;
     });
   }
   isSaved(eventId){
     this.remoteService.isSaved('event', eventId, this.userId).subscribe(res=>{
       if(res.status == 1){
-        return true;
+        this.saved = true;
       }else{
-        return false;
+        this.saved = false;
       }
     });
   }

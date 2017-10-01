@@ -37,8 +37,8 @@
 					<a  href="#" *ngIf="group.is_admin == false && group.is_member == false" class="btn btn-theme btn-sm"><i class="fa fa-plus fz-11"></i> Join Group</a>
           <a  href="#" *ngIf="group.is_admin == false && group.is_member == true" class="btn btn-theme btn-sm"><i class="fz-11"></i> Leave Group</a>
           <a (click)="editGroup()" href="#" *ngIf="group.is_admin == true" class="btn btn-theme btn-sm"><i class="fa fa-pencil-square-o fz-11"></i> Edit Group</a>
-          <a (click)="saveGroup(group.id)" href="#" *ngIf="!isSaved(group.id)" class="btn btn-theme btn-sm"><i class="fa fa-bookmark fz-11"></i> Save Group</a>
-          <a (click)="unsaveGroup(group.id)" href="#" *ngIf="isSaved(group.id)" class="btn btn-theme btn-sm"><i class="fa fa-bookmark fz-11"></i> Unsave Group</a>
+          <a (click)="saveGroup(group.id)" href="#" *ngIf="saved == false" class="btn btn-theme btn-sm"><i class="fa fa-bookmark fz-11"></i> Save Group</a>
+          <a (click)="unsaveGroup(group.id)" href="#" *ngIf="saved == true" class="btn btn-theme btn-sm"><i class="fa fa-bookmark fz-11"></i> Unsave Group</a>
 				</div>
 			</div>
 			<div class="container pt-70">
