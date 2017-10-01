@@ -27,10 +27,7 @@ export class SettingsNotificationsPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad SettingsNotificationsPage');
   }
-  enteredSettings(){
 
-  }
-//following_you, site_mention_you, site_tag_you, site_comment,site_reply_comment, site_like,site_share_item
   saveSettings(){
     if(this.settings["notify-following-you"] == true){
       this.settings["notify-following-you"] == "1"

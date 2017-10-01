@@ -26,5 +26,8 @@ export class SettingsDeletePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad SettingsDeletePage');
   }
+  back(){
+    this.navCtrl.pop();
+  }
 
 }

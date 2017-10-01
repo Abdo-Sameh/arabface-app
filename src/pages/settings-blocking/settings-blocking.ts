@@ -26,5 +26,8 @@ export class SettingsBlockingPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad SettingsBlockingPage');
   }
+  back(){
+    this.navCtrl.pop();
+  }
 
 }

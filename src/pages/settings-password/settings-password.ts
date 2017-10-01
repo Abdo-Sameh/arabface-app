@@ -24,9 +24,8 @@ export class SettingsPasswordPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad SettingsPasswordPage');
   }
-  back()
-  {
-    this.navCtrl.push(SettingsPage);
+  back(){
+    this.navCtrl.pop();
   }
 
 }

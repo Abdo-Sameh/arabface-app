@@ -25,9 +25,8 @@ export class SettingsPrivacyPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad SettingsPrivacyPage');
   }
-  back()
-  {
-    this.navCtrl.push(SettingsPage);
+  back(){
+    this.navCtrl.pop();
   }
 
 }

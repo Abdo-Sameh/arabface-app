@@ -28,9 +28,8 @@ export class SettingsGeneralPage {
     console.log('ionViewDidLoad SettingsGeneralPage');
   }
 
-  back()
-  {
-    this.navCtrl.push(SettingsPage);
+  back(){
+    this.navCtrl.pop();
   }
 
 }
