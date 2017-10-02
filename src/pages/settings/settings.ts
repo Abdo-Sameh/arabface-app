@@ -39,7 +39,6 @@ export class SettingsPage {
     });
     loading.present()
       this.remoteService.getSettingsNotifications(this.userId).subscribe(res =>{
-        console.log(res["notify-site-mention-you"]);
         this.settings = res;
         loading.dismiss();
         this.navCtrl.push(SettingsNotificationsPage,{
@@ -51,7 +50,17 @@ export class SettingsPage {
     this.navCtrl.push(SettingsPasswordPage);
   }
   privacyPage(){
-    this.navCtrl.push(SettingsPrivacyPage);
+    let loading = this.loadingCtrl.create({
+      content: "Loading",
+    });
+    loading.present()
+      this.remoteService.getSettingsNotifications(this.userId).subscribe(res =>{
+        this.settings = res;
+        loading.dismiss();
+        this.navCtrl.push(SettingsPrivacyPage,{
+          'settings' : this.settings
+        });
+      });
   }
   blockingPage(){
     this.navCtrl.push(SettingsBlockingPage);

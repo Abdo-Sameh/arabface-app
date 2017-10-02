@@ -1179,9 +1179,3 @@ top: -4px;
     margin-top: 30px;
     display: block;
 }
-.toggle-md.toggle-checked .toggle-icon {
-    background-color: #f3a6cd !important;
-}
-.toggle-md.toggle-checked .toggle-inner {
-    background-color: #5c0632 !important;
-}

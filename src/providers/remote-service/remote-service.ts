@@ -329,27 +329,27 @@ firebase.database().ref(userID + '/incoming').set({ 0: "undefined" }) ;
 
  }
 user = new Observable(observer => {
-firebase.auth().onAuthStateChanged(function(user) {
-
- if (user) {
-
-   // User is signed in.
-   var displayName = user.displayName;
-
-   var email = user.email;
-   var emailVerified = user.emailVerified;
-   var photoURL = user.photoURL;
-   var isAnonymous = user.isAnonymous;
-   var uid = user.uid;
-   var providerData = user.providerData;
-
-   observer.next("logged")
-   observer.next({name:displayName})
- } else {
-
-  observer.next("not here")
- }
-});
+// firebase.auth().onAuthStateChanged(function(user) {
+//
+//  if (user) {
+//
+//    // User is signed in.
+//    var displayName = user.displayName;
+//
+//    var email = user.email;
+//    var emailVerified = user.emailVerified;
+//    var photoURL = user.photoURL;
+//    var isAnonymous = user.isAnonymous;
+//    var uid = user.uid;
+//    var providerData = user.providerData;
+//
+//    observer.next("logged")
+//    observer.next({name:displayName})
+//  } else {
+//
+//   observer.next("not here")
+//  }
+// });
 
 }) ;
 
@@ -1104,6 +1104,47 @@ console.log(url)
           urlSearchParams.append('userid', userid);
           let body = urlSearchParams.toString()
           return this.http.post("http://nilemm.com/arabface/api/89129812/settings/notifications", body, {headers: headers})
+          .map((res : Response ) => res.json());
+        }
+        changePassword(current_password, new_password, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('current_password', current_password );
+          urlSearchParams.append('new_password', new_password );
+          urlSearchParams.append('userid', userid );
+          let body = urlSearchParams.toString()
+          return this.http.post("http://nilemm.com/arabface/api/89129812/settings/password", body, {headers: headers})
+          .map((res : Response ) => res.json());
+        }
+        settingsPrivacy(wcvp, wcpp, wcsb, wcsm, wcsv, en, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('who-can-view-profile', wcvp );
+          urlSearchParams.append('who-can-post-profile', wcpp );
+          urlSearchParams.append('who-can-see-birth', wcsb );
+          urlSearchParams.append('who-can-send-message', wcsm )
+          urlSearchParams.append('who-can-see-visitors', wcsv );
+          urlSearchParams.append('email-notification', en )
+          urlSearchParams.append('userid', userid );
+          let body = urlSearchParams.toString()
+          return this.http.post("http://nilemm.com/arabface/api/89129812/settings/privacy", body, {headers: headers})
+          .map((res : Response ) => res.json());
+        }
+
+
+        contactUs(name, email, subject, message, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('name', name );
+          urlSearchParams.append('email', email );
+          urlSearchParams.append('subject', subject);
+          urlSearchParams.append('message', message );
+          urlSearchParams.append('userid', userid );
+          let body = urlSearchParams.toString()
+          return this.http.post("http://nilemm.com/arabface/api/89129812/contact", body, {headers: headers})
           .map((res : Response ) => res.json());
         }
 }

@@ -15,14 +15,29 @@ import {TabsPage} from '../tabs/tabs';
   templateUrl: 'contact-us.html',
 })
 export class ContactUsPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  userId
+  name
+  email
+  subject
+  message
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
+    this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ContactUsPage');
   }
+  contactUs(name, email, subject, message){
+    this.remoteService.contactUs(name, email, subject, message, this.userId).subscribe(res=>{
+      let toast = this.toastCtrl.create({
+        message: 'Thanks for contacting us',
+        duration: 3000,
+      });
+      toast.present();
+    })
+    this.navCtrl.push(TabsPage);
 
+  }
   back()
   {
     this.navCtrl.push(TabsPage);
