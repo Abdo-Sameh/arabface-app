@@ -1147,4 +1147,17 @@ console.log(url)
           return this.http.post("http://nilemm.com/arabface/api/89129812/contact", body, {headers: headers})
           .map((res : Response ) => res.json());
         }
+
+        getHashtag(type, hashtag, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('type', type );
+          urlSearchParams.append('hashtag', hashtag );
+          urlSearchParams.append('userid', userid);
+          let body = urlSearchParams.toString()
+          return this.http.post("http://nilemm.com/arabface/api/89129812/hashtag/get", body, {headers: headers})
+          .map((res : Response ) => res.json());
+
+        }
 }
