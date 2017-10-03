@@ -62,10 +62,10 @@ export class MyApp {
         { title: 'Forums', component: ForumsPage },
         { title: 'Groups', component: GroupsPage },
         { title: 'Events', component: EventsPage },
-        { title: 'Discover', component: TrendingPage },
         { title: 'Contact Us', component: ContactUsPage },
         { title: 'Gift Shop', component: GiftsPage },
         { title: 'Saved', component: SavedPage },
+        { title: 'Discover', component: TrendingPage },
         { title: 'Settings', component: SettingsPage },
       ];
      // console.log(this.userName);

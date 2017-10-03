@@ -50,7 +50,9 @@ import {EditEventPage}  from '../pages/edit-event/edit-event'
 import {EventPage}  from '../pages/event/event'
 import {PhotoselectionPage}  from '../pages/photoselection/photoselection'
 import { SavedPage } from '../pages/saved/saved';
-
+import { VideoPage } from '../pages/video/video';
+import { AddVideoPage } from '../pages/add-video/add-video';
+import { EditVideoPage } from '../pages/edit-video/edit-video';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 
@@ -79,7 +81,7 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
     EventsPage,
     PhotosPage,
     OnlinePage,
-    VideosPage,
+    VideosPage, AddVideoPage, VideoPage, EditVideoPage,
     ForumsPage,
     GroupPage,
     Page,
@@ -123,7 +125,7 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule
     EventsPage,
     PhotosPage,
     OnlinePage,
-    VideosPage,
+    VideosPage, AddVideoPage, VideoPage, EditVideoPage,
     ForumsPage,
     GroupPage,
     Page,

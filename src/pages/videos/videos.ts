@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController} from 'ionic-angular';
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
-import {TabsPage} from '../tabs/tabs';
+import { TabsPage } from '../tabs/tabs';
+import { VideoPage } from '../video/video';
+
 /**
  * Generated class for the VideosPage page.
  *
@@ -43,15 +45,6 @@ export class VideosPage {
       content: "Loading",
     });
     loading.present()
-    // var element = document.getElementById("active");
-    // if(element != null){
-    //   if($( "#active1" ).hasClass( "active" )){
-    //     type = "all";
-    //   }else
-    //   type = "mine";
-    // }
-    // console.log(type);
-    // console.log(term);
 
     this.remoteService.getVideos(categoryId, term, type, filter, userId).subscribe(res =>{
         loading.dismiss();
@@ -67,9 +60,12 @@ export class VideosPage {
         console.log(res);
       });
   }
-
-  back()
-  {
+  videoPage(video){
+    this.navCtrl.push(VideoPage, {
+      'video' : video
+    })
+  }
+  back() {
     this.navCtrl.push(TabsPage);
   }
 

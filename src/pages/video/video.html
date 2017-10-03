@@ -1,0 +1,184 @@
+<!--
+  Generated template for the VideoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <header class="header_title">
+			<div class="container">
+				<div class="back_btn">
+					<a (click)="back()"><i class="fa fa-arrow-left"></i></a>
+				</div>
+				<div class="page_title text-center">
+					<h3>Video</h3>
+				</div>
+				<div class="menu_btn text-right">
+					<a href="#"><i class="fa fa-bars" style="color:#fff;font-size:18px"></i></a>
+				</div>
+			</div>
+		</header>
+
+</ion-header>
+
+
+<ion-content padding>
+  <section class="bg_grey full_vh pt-70">
+			<div class="container">
+				<div class="feed-box post panel panel-theme mt-30">
+          <div class="feed-header">
+						<div class="pull-left">
+							<a href="#"><img class="feed-img" src="images/avatar.png" alt=""></a>
+							<div class="feed-title">
+								<h3><a href="#">Username</a></h3>
+								<span>23 minutes ago .</span>
+								<span class="dropdown ml-5">
+									<a href="#" data-toggle="dropdown"><i class="fa fa-globe"></i></a>
+									<ul class="dropdown-menu">
+										<li><a href="#">Item-1</a></li>
+										<li><a href="#">Item-2</a></li>
+										<li><a href="#">Item-3</a></li>
+									</ul>
+								</span>
+							</div>
+						</div>
+						<div class="pull-right">
+							<div class="dropdown">
+								<a href="#" class="btn btn-default btn-sm" data-toggle="dropdown"><span class="caret"></span></a>
+								<ul class="dropdown-menu dropdown-menu-right">
+									<li><a (click)="editVideoPage()" href="#">Edit</a></li>
+									<li><a href="#">Delete</a></li>
+									<li><a href="#">Save</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="feed-body">
+						<h3>{{ video.title }}</h3>
+						<a href="#"><img src="assets/images/friends.jpg" alt=""></a>
+					</div>
+					<div class="feed-footer">
+						<div class="action-result flex-space-between">
+							<div class="pull-left">
+								<a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+							</div>
+							<div class="pull-right">
+								<a href="#"><i class="fa fa-commenting"></i></a> 5
+								<a href="#"><i class="fa fa-share ml-10"></i></a> 10
+							</div>
+						</div>
+						<div class="feed-action flex-space-around">
+							<a href="#"><i class="fa fa-thumbs-o-up"></i> Like</a>
+							<a href="#"><i class="fa fa-commenting"></i> Comment</a>
+							<a href="#"><i class="fa fa-share"></i> Share</a>
+						</div>
+						<div class="comment-list">
+							<div class="comment">
+								<a href="#"><img class="feed-img" src="assets/images/avatar.png" alt=""></a>
+								<div class="feed-title">
+									<h3><a href="#">Username</a></h3>
+									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+									<div class="comment-action">
+										<div class="pull-left">
+											<a href="#" class="mr-10">Like</a>
+											<a href="#" class="mr-10">Reply</a>
+											<span class="mr-10">-</span>
+											<span>30 minute ago.</span>
+										</div>
+										<div class="pull-right">
+											<a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+										</div>
+									</div>
+									<div class="comment">
+										<a href="#"><img class="feed-img" src="assets/images/avatar.png" alt=""></a>
+										<div class="feed-title">
+											<h3><a href="#">Username</a></h3>
+											<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+											<div class="comment-action">
+												<div class="pull-left">
+													<a href="#" class="mr-10">Like</a>
+													<a href="#" class="mr-10">Reply</a>
+													<span class="mr-10">-</span>
+													<span>30 minute ago.</span>
+												</div>
+												<div class="pull-right">
+													<a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+												</div>
+												<div class="clearfix"></div>
+											</div>
+											<div class="comment write-comment">
+												<div class="pull-left">
+													<img class="feed-img" src="assets/images/avatar.png" alt="">
+												</div>
+												<form>
+													<div class="input-group">
+														<input type="text" class="form-control" placeholder="add to your post ...">
+														<div class="input-group-btn">
+															<button type="submit" class="btn btn-default">
+																<i class="fa fa-paper-plane"></i>
+															</button>
+														</div>
+													</div>
+												</form>
+												<ul class="feed-editors">
+													<li><a href="#"><i class="fa fa-user-plus"></i></a></li>
+													<li><a href="#"><i class="fa fa-camera"></i></a></li>
+													<li><a href="#"><i class="fa fa-video-camera"></i></a></li>
+													<li><a href="#"><i class="fa fa-map-marker"></i></a></li>
+													<li><a href="#"><i class="fa fa-link"></i></a></li>
+													<li><a href="#"><i class="fa fa-smile-o"></i></a></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="comment">
+								<a href="#"><img class="feed-img" src="assets/images/avatar.png" alt=""></a>
+								<div class="feed-title">
+									<h3><a href="#">Username</a></h3>
+									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+									<div class="comment-action">
+										<div class="pull-left">
+											<a href="#" class="mr-10">Like</a>
+											<a href="#" class="mr-10">Reply</a>
+											<span class="mr-10">-</span>
+											<span>30 minute ago.</span>
+										</div>
+										<div class="pull-right">
+											<a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="comment write-comment">
+								<div class="pull-left">
+									<img class="feed-img" src="assets/images/avatar.png" alt="">
+								</div>
+								<form>
+									<div class="input-group">
+										<input type="text" class="form-control" placeholder="add to your post ...">
+										<div class="input-group-btn">
+											<button type="submit" class="btn btn-default">
+												<i class="fa fa-paper-plane"></i>
+											</button>
+										</div>
+									</div>
+								</form>
+								<ul class="feed-editors">
+									<li><a href="#"><i class="fa fa-user-plus"></i></a></li>
+									<li><a href="#"><i class="fa fa-camera"></i></a></li>
+									<li><a href="#"><i class="fa fa-video-camera"></i></a></li>
+									<li><a href="#"><i class="fa fa-map-marker"></i></a></li>
+									<li><a href="#"><i class="fa fa-link"></i></a></li>
+									<li><a href="#"><i class="fa fa-smile-o"></i></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+</ion-content>

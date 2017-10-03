@@ -19,19 +19,19 @@ export class TrendingPage {
   hashtags
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
+    this.getHashtag()
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TrendingPage');
   }
-  getHashtag(type, hashtag){
-    this.remoteService.getHashtag(type, hashtag, this.userId).subscribe(res => {
-      console.log(res);
+  getHashtag() {
+    this.remoteService.getHashtag(this.userId).subscribe(res => {
+    this.hashtags = res.hashtags;
     });
   }
 
-  back()
-  {
+  back() {
     this.navCtrl.push(TabsPage);
   }
 
