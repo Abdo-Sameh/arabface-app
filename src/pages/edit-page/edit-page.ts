@@ -19,6 +19,11 @@ export class EditPagePage {
   page
   categories
   userId:any
+  userName
+  userAvatar
+  searchQuery
+  users
+  roles
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.userId=localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.page = this.navParams.get("page");
@@ -27,6 +32,12 @@ export class EditPagePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditPagePage');
+  }
+  getProfileData() {
+    this.remoteService.profileDetailsApiCall(this.page.owner, this.userId).subscribe(res => {
+      this.userName = res.name;
+      this.userAvatar = res.avatar;
+    });
   }
 
   editPage(title, description, category, page_id){
@@ -47,6 +58,62 @@ export class EditPagePage {
       this.categories = res;
     });
   }
+  searchUsers(term){
+    if(term != ""){
+        this.remoteService.searchUsers(term).subscribe(res =>{
+          this.users = res;
+        });
+      }
+    }
+    addRole(first_name, last_name, avatar, id){
+    var role = {
+        'first_name' : first_name,
+        'last_name' : last_name,
+        'page_role' : '1',
+        'avatar' : avatar,
+        'role_user_id' : id
+      }
+      this.roles.push(role);
+      this.users = [];
+      this.searchQuery = "";
+    }
+
+    saveRoles(pageId, roles){
+      var temp = [];
+      for (let role of roles){
+        temp[role.role_user_id] = role.page_role;
+      }
+      console.log(temp);
+      // for (var key in temp) {
+      //   console.log(key);
+      // }
+      // temp.forEach((key: any) => {
+      //      console.log(temp[key]);
+      //  });
+      this.remoteService.savePageRoles(pageId, temp, this.userId).subscribe(res => {
+        console.log(res);
+        let toast = this.toastCtrl.create({
+          message: 'Roles saved successfully',
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present();
+      });
+    }
+
+    getPageRoles(id){
+      this.remoteService.getPageRoles(id, this.userId).subscribe(res => {
+        this.roles = res;
+        this.getProfileData();
+        console.log(res);
+      });
+    }
+    removePageRole(user, page_id, index){
+        this.remoteService.removePageRole(user, page_id, this.userId).subscribe(res => {
+          this.roles.splice(index, 1);
+        });
+      }
+
 
   deletePage(pageId, userId){
     console.log(pageId, );

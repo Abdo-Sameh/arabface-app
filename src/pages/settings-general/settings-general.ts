@@ -36,6 +36,7 @@ export class SettingsGeneralPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.getUserData();
+    console.log(this.user);
   }
 
   ionViewDidLoad() {
@@ -54,6 +55,18 @@ export class SettingsGeneralPage {
      this.remoteService.getUserData('birth_day', this.userId).subscribe(res => {this.user.birth_day = res});
      this.remoteService.getUserData('birth_month', this.userId).subscribe(res => {this.user.birth_month = res});
      this.remoteService.getUserData('birth_year', this.userId).subscribe(res => {this.user.birth_year = res});
+  }
+  saveSettings(first, last, email, username, gender, country, city, state, bio){
+    console.log(first, last, email, username, gender, country, city, state, bio);
+    this.remoteService.settingsGeneral(first, last, email, username, gender, country, city, state, bio, this.userId).subscribe(res => {
+      let toast = this.toastCtrl.create({
+        message: 'Settings saved successfully',
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+      this.navCtrl.pop();
+      });
   }
 
   back(){

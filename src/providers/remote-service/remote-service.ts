@@ -701,6 +701,12 @@ console.log(url)
 
   //////////////////////////////////////////////
 
+
+  searchUsers(term){
+    return this.http.get("http://192.168.1.252/arabface/api/14789632/search/users?term=" + term)
+      .map((res : Response ) => res.json());
+  }
+
   //////////////////// load comments ////////////////////
 
   loadComments(feedid)
@@ -918,6 +924,30 @@ console.log(url)
          .map((res : Response ) => res.json());
         }
 
+        getPageRoles(id, userid){
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/page/get/roles?userid=" + userid + "&id=" + id)
+          .map((res : Response ) => res.json());
+        }
+        savePageRoles(pageId, roles, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          for (var key in roles) {
+            urlSearchParams.append('roles[' + key + ']', roles[key] );
+          }
+          // urlSearchParams.append('roles', roles );
+          urlSearchParams.append('page_id', pageId );
+          urlSearchParams.append('userid', userid );
+          let body = urlSearchParams.toString();
+          console.log(urlSearchParams);
+         return this.http.post("http://192.168.1.252/arabface/api/14789632/page/save/roles", body, {headers: headers})
+         .map((res : Response ) => res.json());
+        }
+
+        removePageRole(user, page_id, userid){
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/page/remove/role?userid=" + userid + "&user=" + user + "&page_id=" + page_id)
+          .map((res : Response ) => res.json());
+        }
 
 
         getGroups(type, term, filter, userId){
@@ -1075,6 +1105,17 @@ console.log(url)
           .map((res : Response ) => res.json());
 
         }
+        rsvp(event_id, rsvp, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('event_id', event_id );
+          urlSearchParams.append('rsvp', rsvp );
+          urlSearchParams.append('userid', userid );
+          let body = urlSearchParams.toString()
+          return this.http.post("http://192.168.1.252/arabface/api/14789632/event/rsvp", body, {headers: headers})
+          .map((res : Response ) => res.json());
+        }
         ////////////////////////////////////////////////////
 
         /////////////////// Videos ////////////////////////
@@ -1175,6 +1216,25 @@ console.log(url)
           urlSearchParams.append('userid', userid );
           let body = urlSearchParams.toString()
           return this.http.post("http://192.168.1.252/arabface/api/14789632/settings/privacy", body, {headers: headers})
+          .map((res : Response ) => res.json());
+        }
+        settingsGeneral(first, last, email, username, gender, country, city, state, bio, userid){
+
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('first_name', first );
+          urlSearchParams.append('last_name', last );
+          urlSearchParams.append('email_address', email);
+          urlSearchParams.append('username', username );
+          urlSearchParams.append('gender', gender );
+          urlSearchParams.append('state', state );
+          urlSearchParams.append('country', country );
+          urlSearchParams.append('city', city);
+          urlSearchParams.append('bio', bio );
+          urlSearchParams.append('userid', userid );
+          let body = urlSearchParams.toString()
+          return this.http.post("http://192.168.1.252/arabface/api/14789632/settings/general", body, {headers: headers})
           .map((res : Response ) => res.json());
         }
 
