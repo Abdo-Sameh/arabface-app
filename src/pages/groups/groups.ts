@@ -69,9 +69,13 @@ export class GroupsPage {
 
   }
 
-  joinGroup(group_id, status, userId){
+  joinGroup(group_id, status, userId, index){
     this.remoteService.joinGroup(group_id, status, userId).subscribe(res =>{
-      console.log(res);
+      if(status == '0'){
+        this.groups[index].is_member = true;
+      }else{
+        this.groups[index].is_member = false;
+      }
     });
 
   }

@@ -51,14 +51,14 @@
 					<div id="tab-content-1" class="tab-pane fade in active">
 						<div class="row thumbnails">
 
-							<div class="col-xs-6" *ngFor="let page of pages; let i = index">
+							<div class="col-xs-6" *ngFor="let page of pages; let i = index; ">
 							    <div class="thumbnail">
 							    	<a (click)="pagePage(page)" href="#"><img src="{{ page.logo }}" alt=""></a>
 								    <div class="caption">
 								        <h3><a (click)="pagePage()" href="#">{{ page.title }}</a></h3>
 								        <p>{{ page.description }}</p>
-								        <a id="like{{page.id}}" (click)="likePage(userId, page.id, 'like')" href="#" *ngIf="page.has_like == false" class="btn btn-default btn-sm"><i class="fa fa-thumbs-o-up"></i> Like</a>
-                        <a id="dislike{{page.id}}" (click)="likePage(userId, page.id, 'dislike')" href="#" *ngIf="page.has_like == true" class="btn btn-default btn-sm"><i class="fa fa-thumbs-o-up"></i> Liked</a>
+								        <a *ngIf="page.has_like == false" (click)="likePage(userId, page.id, 'like', i)" href="#"  class="btn btn-default btn-sm"><i class="fa fa-thumbs-o-up"></i> Like</a>
+                        <a *ngIf="page.has_like == true" style="color: #488aff" (click)="likePage(userId, page.id, 'dislike', i)" href="#"  class="btn btn-default btn-sm"><i class="fa fa-thumbs-o-up"></i> Liked</a>
                     </div>
 							    </div>
 							</div>
@@ -66,14 +66,14 @@
 					</div>
 					<div id="tab-content-2" class="tab-pane fade">
 						<div class="row thumbnails">
-							<div class="col-xs-6" *ngFor="let page of pages">
+							<div class="col-xs-6" *ngFor="let page of pages; let i = index;">
 							    <div class="thumbnail">
 							    	<a (click)="pagePage()" href="#"><img src="{{ page.logo }}" alt=""></a>
 								    <div class="caption">
 								        <h3><a (click)="pagePage()" href="#">{{ page.title }}</a></h3>
 								        <p>{{ page.description }}</p>
-								        <a (click)="likePage(userId, page.id, 'like')" href="#" *ngIf="page.has_like == false" class="btn btn-default btn-sm"><i class="fa fa-thumbs-o-up"></i> Like</a>
-                        <a (click)="likePage(userId, page.id, 'dislike')" href="#" *ngIf="page.has_like == true" class="btn btn-default btn-sm"><i class="fa fa-thumbs-o-up"></i> Like</a>
+                        <a *ngIf="page.has_like == false" (click)="likePage(userId, page.id, 'like', i)" href="#"  class="btn btn-default btn-sm"><i class="fa fa-thumbs-o-up"></i> Like</a>
+                        <a *ngIf="page.has_like == true" style="color: #488aff" (click)="likePage(userId, page.id, 'dislike', i)" href="#"  class="btn btn-default btn-sm"><i class="fa fa-thumbs-o-up"></i> Liked</a>
                     </div>
 							    </div>
 							</div>

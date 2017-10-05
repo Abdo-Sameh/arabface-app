@@ -8,6 +8,10 @@ import { RemoteServiceProvider } from './../../providers/remote-service/remote-s
 import {TabsPage} from '../tabs/tabs';
 import { PhotosPage} from '../photos/photos'
 import {FriendProfilePage} from '../friend-profile/friend-profile'
+
+// import { Camera, CameraOptions } from '@ionic-native/camera';
+// import { FileTransfer, FileUploadOptions, FileTransferObject  } from '@ionic-native/file-transfer';
+
 /**
  * Generated class for the ProfilePage page.
  *
@@ -34,8 +38,10 @@ export class ProfilePage {
     followers
     following
     likedPages
+    imageURI:any;
+    imageFileName:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider,  public toastCtrl: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
+  constructor( public navCtrl: NavController, public navParams: NavParams,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider,  public toastCtrl: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
     let data = navParams.get('userData');
     console.log()
     //
@@ -68,14 +74,8 @@ export class ProfilePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
   }
-  getLikes(userId){
-    let loading = this.loadingCtrl.create({
-      content: "Loading",
-    });
-    loading.present()
-    this.remoteService.getPages("likes", "", "all", userId).subscribe(res =>{loading.dismiss();this.likedPages = res.pages ;console.log(res)});
-  }
-  getFollowing(userId){
+
+  getFollowingAndLikes(userId){
     if(this.userID == null){
       userId = this.userId;
     }else{
@@ -87,6 +87,7 @@ export class ProfilePage {
     loading.present()
     this.remoteService.following(userId).subscribe(res =>{this.following = res ;console.log(res)});
     this.remoteService.followers(userId).subscribe(res =>{this.followers = res ;console.log(res)});
+    this.remoteService.getPages("likes", "", "all", userId).subscribe(res =>{this.likedPages = res.pages ;console.log(res)});
     loading.dismiss();
   }
   isFriend(id) {
@@ -109,11 +110,7 @@ export class ProfilePage {
 
   getProfileData(id, theUserId)
   {
-    let loading = this.loadingCtrl.create({
-      content: "Loading",
-    });
-    loading.present()
-    this.remoteService.profileDetailsApiCall(id, theUserId).subscribe(res =>{loading.dismiss();this.userData = res ;console.log(res)});
+    this.remoteService.profileDetailsApiCall(id, theUserId).subscribe(res =>{this.userData = res ;console.log(res)});
 
   }
   GoToProfile(id,userId)
@@ -125,7 +122,10 @@ export class ProfilePage {
 
       this.remoteService.profileDetailsApiCall(id,userId).subscribe(res => {
           loading.dismiss();this.userData = res ;
+          console.log("---------------------------");
           res.id=id;
+          console.log(res);
+          console.log("----------------------------");
           if(id == userId){
             this.navCtrl.push(ProfilePage,{
               "userData" : res
@@ -237,9 +237,113 @@ setColor(btn)
 
 }
 
+// getImage() {
+//     const options: CameraOptions = {
+//       quality: 100,
+//       destinationType: this.camera.DestinationType.FILE_URI,
+//       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+//     }
+
+//     this.camera.getPicture(options).then((imageData) => {
+//       this.imageURI = imageData;
+//     }, (err) => {
+//       console.log(err);
+//       this.presentToast(err);
+//     });
+// }
+
+// uploadFile() {
+// let loader = this.loadingCtrl.create({
+//   content: "Uploading..."
+// });
+// loader.present();
+// const fileTransfer: FileTransferObject = this.transfer.create();
+
+// let headers = new Headers();
+// headers.append('Content-Type', 'multipart/form-data');
+
+// let options: FileUploadOptions = {
+//   fileKey: 'avatar',
+//   fileName: this.imageURI,
+//   chunkedMode: false,
+//   mimeType: "multipart/form-data",
+//   headers: headers,
+//   params: {
+//     'userid': this.userId,
+//     'avatar': this.imageURI
+//   }
+// }
+
+// fileTransfer.upload(this.imageURI, 'http://nilemm.com/arabface/api/89129812/profile/change/avatar', options)
+//   .then((data) => {
+//   console.log(data+" Uploaded Successfully");
+//   this.imageFileName = "http://192.168.0.7:8080/static/images/ionicfile.jpg"
+//   loader.dismiss();
+//   this.presentToast("Image uploaded successfully");
+// }, (err) => {
+//   console.log(err);
+//   loader.dismiss();
+//   this.presentToast(err);
+// });
+// }
+
+presentToast(msg) {
+  let toast = this.toastCtrl.create({
+    message: msg,
+    duration: 3000,
+    position: 'bottom'
+  });
+
+  toast.onDidDismiss(() => {
+    console.log('Dismissed toast');
+  });
+
+  toast.present();
+}
+// upload()
+//     {
+//
+//        let options = {
+//
+//            quality: 100
+//             };
+//
+//
+//       this.camera.getPicture(options).then((imageData) => {
+//        // imageData is either a base64 encoded string or a file URI
+//        // If it's base64:
+//
+//      const fileTransfer: TransferObject = this.transfer.create();
+//      let headers = new Headers();
+//      headers.append('Content-Type', 'multipart/form-data');
+//      let urlSearchParams = new URLSearchParams();
+//     //  urlSearchParams.append('avatar', avatar);
+//     //  urlSearchParams.append('userid', userid);
+//       let options1: FileUploadOptions = {
+//          fileKey: 'avatar',
+//          fileName: 'name.jpg',
+//          headers: headers
+//       }
+//
+//   fileTransfer.upload(imageData, 'http://nilemm.com/arabface/api/89129812/profile/change/avatar?userid=66', options1)
+//    .then((data) => {
+//      // success
+//      alert("success");
+//    }, (err) => {
+//      // error
+//      alert("error"+JSON.stringify(err));
+//    });
+//
+//
+//     });
+//
+//
+// }
+
   back()
   {
     this.navCtrl.push(TabsPage);
+    // this.navCtrl.pop()
   }
 
 }

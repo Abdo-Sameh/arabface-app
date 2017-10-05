@@ -17,6 +17,8 @@ import { SettingsGeneralPage } from '../pages/settings-general/settings-general'
 import { SettingsNotificationsPage } from '../pages/settings-notifications/settings-notifications';
 import { SettingsPasswordPage } from '../pages/settings-password/settings-password';
 import { SettingsPrivacyPage } from '../pages/settings-privacy/settings-privacy';
+import { SettingsBlockingPage } from '../pages/settings-blocking/settings-blocking';
+import { SettingsDeletePage } from '../pages/settings-delete/settings-delete';
 import { PhotosPage } from '../pages/photos/photos';
 import { ForumsPage } from '../pages/forums/forums';
 import { SettingsPage } from '../pages/settings/settings';
@@ -30,8 +32,8 @@ import { HttpModule } from '@angular/http';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { RemoteServiceProvider } from '../providers/remote-service/remote-service';
-import  {OnlinePage} from '../pages/online/online'
-import  {ContactUsPage} from '../pages/contact-us/contact-us'
+import {OnlinePage} from '../pages/online/online'
+import {ContactUsPage} from '../pages/contact-us/contact-us'
 import {FindFriendsPage}  from '../pages/find-friends/find-friends'
 import {FriendListPage}  from '../pages/friend-list/friend-list'
 import {FriendRequestsPage}  from '../pages/friend-requests/friend-requests'
@@ -45,8 +47,16 @@ import {EditGroupPage}  from '../pages/edit-group/edit-group'
 import {PostFeatursPage}  from '../pages/post-featurs/post-featurs'
 
 import {EditPagePage}  from '../pages/edit-page/edit-page'
-
+import {CreateEventPage}  from '../pages/create-event/create-event'
+import {EditEventPage}  from '../pages/edit-event/edit-event'
+import {EventPage}  from '../pages/event/event'
 import {PhotoselectionPage}  from '../pages/photoselection/photoselection'
+import { SavedPage } from '../pages/saved/saved';
+import { VideoPage } from '../pages/video/video';
+import { AddVideoPage } from '../pages/add-video/add-video';
+import { EditVideoPage } from '../pages/edit-video/edit-video';
+// import { Camera, CameraOptions } from '@ionic-native/camera';
+// import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 
 // import { File } from '@ionic-native/file';
 // import { Transfer } from '@ionic-native/transfer';
@@ -73,14 +83,12 @@ import {PhotoselectionPage}  from '../pages/photoselection/photoselection'
     EventsPage,
     PhotosPage,
     OnlinePage,
-    VideosPage,
+    VideosPage, AddVideoPage, VideoPage, EditVideoPage,
     ForumsPage,
     GroupPage,
     Page,
-    SettingsGeneralPage,
-    SettingsNotificationsPage,
-    SettingsPasswordPage,
-    SettingsPrivacyPage,
+    SettingsGeneralPage, SettingsNotificationsPage, SettingsPasswordPage,
+    SettingsPrivacyPage, SettingsBlockingPage, SettingsDeletePage,
     ContactUsPage,
     FriendRequestsPage,
     FriendListPage,
@@ -94,7 +102,10 @@ import {PhotoselectionPage}  from '../pages/photoselection/photoselection'
     EditGroupPage,
     EditPagePage,
     PhotoselectionPage,
-    PostFeatursPage
+    PostFeatursPage,
+
+    SavedPage,
+    PhotoselectionPage, CreateEventPage, EditEventPage, EventPage
   ],
   imports: [
 BrowserModule , IonicModule.forRoot(MyApp), HttpModule
@@ -119,14 +130,12 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule
     EventsPage,
     PhotosPage,
     OnlinePage,
-    VideosPage,
+    VideosPage, AddVideoPage, VideoPage, EditVideoPage,
     ForumsPage,
     GroupPage,
     Page,
-    SettingsGeneralPage,
-    SettingsNotificationsPage,
-    SettingsPasswordPage,
-    SettingsPrivacyPage,
+    SettingsGeneralPage, SettingsNotificationsPage, SettingsPasswordPage,
+    SettingsPrivacyPage, SettingsBlockingPage, SettingsDeletePage,
     ContactUsPage,
     FriendRequestsPage,
     FriendListPage,
@@ -140,11 +149,14 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule
     CreateGroupPage,
     EditGroupPage,
     EditPagePage,
-    PhotoselectionPage
+    SavedPage,
+    PhotoselectionPage, CreateEventPage, EditEventPage, EventPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    // FileTransfer,Camera,
+    // FileTransferObject,
     // File,
     // Transfer,
     // Camera,

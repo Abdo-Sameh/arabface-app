@@ -37,11 +37,8 @@ export class FriendsPage {
   getFriendsList(Id, term="")
   {
 
-  let loading = this.loadingCtrl.create({
-    content: "Loading",
-  });
-  loading.present()
-    this.remoteService.friendsListApiCall(Id, Id, term).subscribe(res =>{loading.dismiss();this.friendslist=res ;console.log(res)});
+ 
+    this.remoteService.friendsListApiCall(Id, Id, term).subscribe(res =>{this.friendslist=res ;console.log(res)});
   }
 
   getFriendsRequestList(Id)
@@ -50,8 +47,11 @@ export class FriendsPage {
   }
 
   getFriendsSuggestionList(Id)
-  {
-    this.remoteService.friendsSuggestionListApiCall(Id).subscribe(res =>{this.FriendsSuggestion=res ;console.log(res)});
+  { let loading = this.loadingCtrl.create({
+    content: "Loading",
+  });
+  loading.present()
+    this.remoteService.friendsSuggestionListApiCall(Id).subscribe(res =>{ loading.dismiss();this.FriendsSuggestion=res ;console.log(res)});
   }
 
   GoToProfile(id,Id)
