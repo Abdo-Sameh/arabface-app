@@ -15,7 +15,7 @@ let alert1,downloadURL,avatar,name ; let signupres ; let signupresult ;
 let userID = '25'   ; let cids ; let result = [] ; let friends ; let result5 = []; let msgs ; let chatid = [] ; let insideget ;
 let friends2 ;let addchat ;  let getremote  ; let remoteid ; let result34 ; let apichat ; let firebasemsgs ; let apimsgs ;
 let config = {
-     apiKey: "AIzaSyBvXvFFmIM--9WbD07aemNah3ONCY22Ml4",
+    apiKey: "AIzaSyBvXvFFmIM--9WbD07aemNah3ONCY22Ml4",
     authDomain: "aracall-3cda0.firebaseapp.com",
     databaseURL: "https://aracall-3cda0.firebaseio.com",
     projectId: "aracall-3cda0",
@@ -36,7 +36,10 @@ let apiURL = 'http://192.168.1.252/arabface/api/14789632/';
 export class RemoteServiceProvider {
  public Id :number;
  deviceLanguage
- response ;
+ response ; 
+ serverURL ="http://192.168.1.252"
+ KEY = '14789632'
+
 
  public xmlLang :any;
   constructor(public loadingctr : LoadingController,public alertctrl:AlertController,public http: Http, public platform :Platform) {
@@ -52,7 +55,8 @@ export class RemoteServiceProvider {
      showBackdrop : false
    });
    loader.present();
-   const url = 'http://192.168.1.252/arabface/api/14789632/login?' + 'username=' + data.username + '&password=' + data.password;
+   const url = this.serverURL+'/arabface/api/'+this.KEY+'/login?' + 'username=' + data.username + '&password=' + data.password;
+    console.log(url)
 
     var headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -73,6 +77,8 @@ export class RemoteServiceProvider {
          loader.dismiss();
 
        }).catch(function(error) {
+        loader.dismiss();
+        
  // Handle Errors here.
  var errorCode = error.code;
 
@@ -193,8 +199,9 @@ let body1 = body.toString () ;
 
 
 
- let url = 'http://192.168.1.252/arabface/api/14789632/signup?' + 'firstname=' + data.firstname + '&lastname=' + data.lastname + '&username=' + name + '&email_address=' + data.email_address + '&password='+password ;
-let url2 = 'http://192.168.1.252/arabface/api/14789632/signup' ;
+let url = this.serverURL+'/arabface/api/'+this.KEY+'/signup?' + 'firstname=' + data.firstname + '&lastname=' + data.lastname + '&username=' + name + '&email_address=' + data.email_address + '&password='+password ;
+let url2 = this.serverURL+'/arabface/api/'+this.KEY+'/signup' ; 
+
 
 let headers = new Headers();
      headers.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -249,7 +256,8 @@ loader.dismiss()
 
    }
    public creat2 (email,password,name,photo,firstname,lastname) {
-      let url = 'http://192.168.1.252/arabface/api/14789632/signup?' + 'firstname=' + firstname + 'lastname=' + lastname + 'username=' + name + 'email_address=' + email + 'password='+password ;
+      let url = this.serverURL+'/arabface/api/'+this.KEY+'/signup?' + 'firstname=' + firstname + 'lastname=' + lastname + 'username=' + name + 'email_address=' + email + 'password='+password ;
+
 var headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
 this.http.post (url,headers).subscribe(data => {
@@ -413,7 +421,8 @@ user = new Observable(observer => {
   getPhotos()
    {
 
-          return  this.http.get("http://192.168.1.252/arabface/api/14789632/page/browse")
+          return  this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/page/browse')
+
           .do((res : Response ) => console.log(res.json()))
           .map((res : Response ) => res.json());
 
@@ -425,7 +434,8 @@ user = new Observable(observer => {
    friendsListApiCall(the_userid, id, term)
    {
 
-    return  this.http.get('http://192.168.1.252/arabface/api/14789632/profile/friends?userid='+id + "&the_userid=" + the_userid + "&term=" + term)
+    return  this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/friends?userid='+id + "&the_userid=" + the_userid + "&term=" + term)
+
     //.do((res : Response ) => console.log(res.json()))
     .map((res : Response ) => res.json());
    }
@@ -433,13 +443,15 @@ user = new Observable(observer => {
 
    followers(userid)
    {
-    return  this.http.get('http://192.168.1.252/arabface/api/14789632/profile/getfollowers?userid='+userid)
+    return  this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/profile/getfollowers?userid='+userid)
+
     //.do((res : Response ) => console.log(res.json()))
     .map((res : Response ) => res.json());
    }
    following(userid)
    {
-    return  this.http.get('http://192.168.1.252/arabface/api/14789632/profile/getfollowing?userid='+userid)
+    return  this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/profile/getfollowing?userid='+userid)
+
     //.do((res : Response ) => console.log(res.json()))
     .map((res : Response ) => res.json());
    }
@@ -448,7 +460,8 @@ user = new Observable(observer => {
     friendsRequestListApiCall(id)
     {
 
-     return  this.http.get('http://192.168.1.252/arabface/api/14789632/friend/requests?userid='+id)
+     return  this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/friend/requests?userid='+id)
+
      //.do((res : Response ) => console.log(res.json()))
      .map((res : Response ) => res.json());
     }
@@ -460,7 +473,8 @@ user = new Observable(observer => {
     friendsSuggestionListApiCall(id)
     {
 
-     return  this.http.get('http://192.168.1.252/arabface/api/14789632/friend/suggestions?userid='+id)
+     return  this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/friend/suggestions?limit=10&userid='+id)
+
      //.do((res : Response ) => console.log(res.json()))
      .map((res : Response ) => res.json());
     }
@@ -470,10 +484,9 @@ user = new Observable(observer => {
 
    feedsListApiCall(id)
    {
-    let url = "http://192.168.1.252/arabface/api/14789632/feeds?userid="+id;
-    console.log(url);
+    let url = this.serverURL+'/arabface/api/'+this.KEY+'/feeds?userid='+id;
+
     return  this.http.get(url)
-    //do((res : Response ) => console.log(res.json()))
     .map((res : Response ) => res.json());
 
    }
@@ -491,7 +504,8 @@ user = new Observable(observer => {
 
    profileDetailsApiCall(theUserId, id)
    {
-     let url = "http://192.168.1.252/arabface/api/14789632/profile/details?userid="+id + "&the_userid=" + theUserId;
+     let url = this.serverURL+'/arabface/api/'+this.KEY+'/profile/details?userid='+id + '&the_userid=' + theUserId;
+
      return  this.http.get(url)
      //.do((res : Response ) => console.log(res.json()))
      .map((res : Response ) => res.json());
@@ -501,7 +515,8 @@ user = new Observable(observer => {
     //////////  profile api  function End ///////////////
     profilePosts(id)
    {
-    return  this.http.get("http://192.168.1.252/arabface/api/14789632/feeds?type=timeline&limit=1200&type_id="+id)
+    return  this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/feeds?type=timeline&limit=1200&type_id='+id)
+
     .map((res : Response ) => res.json());
    }
 
@@ -509,7 +524,8 @@ user = new Observable(observer => {
 
     messagesApiCall(id)
     {
-      let url = "http://192.168.1.252/arabface/api/14789632/chat/conversations?userid="+id;
+      let url = this.serverURL+'/arabface/api/'+this.KEY+'/chat/conversations?userid='+id;
+
      return  this.http.get(url)
      //.do((res : Response ) => console.log(res.json()))
      .map((res : Response ) => res.json());
@@ -535,7 +551,8 @@ user = new Observable(observer => {
 
 
       let body = urlSearchParams.toString()
-     return this.http.post("http://192.168.1.252/arabface/api/14789632/like/item", body, {headers: headers})
+     return this.http.post(this.serverURL+'/arabface/api/'+this.KEY+'/like/item', body, {headers: headers})
+
       //do((res : Response ) => console.log(res.json()))
      .map((res : Response ) => res.json());
 
@@ -556,7 +573,8 @@ user = new Observable(observer => {
 
 
       let body = urlSearchParams.toString()
-     return this.http.post("http://192.168.1.252/arabface/api/14789632/like/item", body, {headers: headers})
+     return this.http.post(this.serverURL+'/arabface/api/'+this.KEY+'/like/item', body, {headers: headers})
+
       //do((res : Response ) => console.log(res.json()))
      .map((res : Response ) => res.json());
 
@@ -568,7 +586,8 @@ user = new Observable(observer => {
 
     usersCoversation(cID,userID):any
     {
-      return this.http.get("http://192.168.1.252/arabface/api/14789632/chat/get/messages?cid="+cID+"&userid="+userID).
+      return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/chat/get/messages?cid='+cID+"&userid="+userID).
+
       do((res : Response ) => console.log(res.json()))
      .map((res : Response ) => res.json());
     }
@@ -579,7 +598,8 @@ user = new Observable(observer => {
   sharePost(feedID,userID):any
   {
     console.log(feedID +userID)
-    return this.http.get("http://192.168.1.252/arabface/api/14789632/feed/action?action=share&feed_id="+feedID+"&userid="+userID)
+    return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/feed/action?action=share&feed_id='+feedID+"&userid="+userID)
+
    .map((res : Response ) => res.json());
   }
 
@@ -592,7 +612,8 @@ user = new Observable(observer => {
 
    ChatMessagesSend(cID,userID,msg):any
    {
-    return this.http.get("http://192.168.1.252/arabface/api/14789632/chat/send/message?text="+msg+"&cid="+cID+"&userid="+userID).
+    return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/chat/send/message?text='+msg+"&cid="+cID+"&userid="+userID).
+
     do((res : Response ) => console.log(res.json()))
    .map((res : Response ) => res.json());
    }
@@ -603,7 +624,8 @@ user = new Observable(observer => {
 
    userPhotosAlbumOnProfile(userID : number) :any
    {
-     return this.http.get("http://192.168.1.252/arabface/api/14789632/profile/photos?the_userid="+userID).
+     return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/profile/photos?the_userid='+userID).
+
      do((res : Response ) => console.log(res.json()))
     .map((res : Response ) => res.json());
    }
@@ -623,7 +645,8 @@ user = new Observable(observer => {
     urlSearchParams.append('avatar', avatar);
     urlSearchParams.append('userid', userid);
     let body = urlSearchParams.toString()
-     return this.http.post("http://192.168.1.252/arabface/api/14789632/profile/change/avatar", body, {headers: headers})
+     return this.http.post(this.serverURL+'/arabface/api/'+this.KEY+'/profile/change/avatar', body, {headers: headers})
+
     //  do((res : Response ) => console.log(res.json()))
     .map((res : Response ) => res.json());
    }
@@ -634,7 +657,7 @@ user = new Observable(observer => {
 
   //////////// post in feed ///////////////////////
 
-  feedPosting(userID,post)
+  feedPosting(userID,post,background='default')
   {
 
     let headers = new Headers();
@@ -644,18 +667,57 @@ user = new Observable(observer => {
     urlSearchParams.append('entity_id', userID );
     urlSearchParams.append('text', post);
     urlSearchParams.append('type', "feed" );
+    urlSearchParams.append('background', background );
     urlSearchParams.append('entity_type', "user" );
     let body = urlSearchParams.toString()
 
-   return this.http.post("http://192.168.1.252/arabface/api/14789632/feed/add", body, {headers: headers})
+   return this.http.post(this.serverURL+'/arabface/api/'+this.KEY+'/feed/add', body, {headers: headers})
+
     //do((res : Response ) => console.log(res.json()))
    .map((res : Response ) => res.json());
   }
+  locationPosting(userID,location)
+  {
 
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    let urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('userid', userID );
+    urlSearchParams.append('entity_id', userID );
+    urlSearchParams.append('type', "feed" );
+    urlSearchParams.append('entity_type', "user" );
+    urlSearchParams.append('feeling_type', "listening-to" );
+    urlSearchParams.append('location', location );
+    
+    let body = urlSearchParams.toString()
+
+   return this.http.post(this.serverURL+'/arabface/api/'+this.KEY+'/feed/add', body, {headers: headers})
+    //do((res : Response ) => console.log(res.json()))
+   .map((res : Response ) => res.json());
+  }
+  backgroundPosting(userID,location)
+  {
+
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    let urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('userid', userID );
+    urlSearchParams.append('entity_id', userID );
+    urlSearchParams.append('type', "feed" );
+    urlSearchParams.append('entity_type', "user" );
+    urlSearchParams.append('background', "listening-to" );
+    
+    let body = urlSearchParams.toString()
+
+   return this.http.post(this.serverURL+'/arabface/api/'+this.KEY+'/feed/add', body, {headers: headers})
+    //do((res : Response ) => console.log(res.json()))
+   .map((res : Response ) => res.json());
+  }
   ////////////////////////////////////////////////
   commentOnFeeds(postOwner,postID,whoCommented,comment)
   {
-    return this.http.get("http://192.168.1.252/arabface/api/14789632/comment/add?userid="+whoCommented+"&entity_id="+postOwner+"&entity_type=user&text="+comment+"&type=feed&type_id="+postID)
+    return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/comment/add?userid='+whoCommented+"&entity_id="+postOwner+"&entity_type=user&text="+comment+"&type=feed&type_id="+postID)
+
     //do((res : Response ) => console.log(res.json()))
       .map((res : Response ) => res.json());
   }
@@ -663,7 +725,8 @@ user = new Observable(observer => {
     //////////// post in feed ///////////////////////
     ReplyOnComment(postOwner,commentID,whoCommented,reply)
     {
-      return this.http.get("http://192.168.1.252/arabface/api/14789632/comment/add?userid="+whoCommented+"&entity_id="+postOwner+"&entity_type=user&text="+reply+"&type=comment&type_id="+commentID)
+      return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/comment/add?userid='+whoCommented+"&entity_id="+postOwner+"&entity_type=user&text="+reply+"&type=comment&type_id="+commentID)
+
       //do((res : Response ) => console.log(res.json()))
         .map((res : Response ) => res.json());
     }
@@ -683,9 +746,10 @@ user = new Observable(observer => {
   {
 
     console.log(userID,post)
-    let url = "http://192.168.1.252/arabface/api/14789632/feed/add?type=feed&entity_type=user&text="+post+"&entity_id="+userID ;
+    let url = this.serverURL+'/arabface/api/'+this.KEY+'/feed/add?type=feed&entity_type=user&text='+post+"&entity_id="+userID ;
 console.log(url)
-   return this.http.get("http://192.168.1.252/arabface/api/14789632/feed/add?type=feed&entity_type=user&text=ppppp&entity_id=25")
+   return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/feed/add?type=feed&entity_type=user&text=ppppp&entity_id=25')
+
   .map((res : Response ) => res.json());
   }
 
@@ -694,7 +758,8 @@ console.log(url)
   ////////////// get notifications /////////////////
   getNotifications(userid)
   {
-    return this.http.get("http://192.168.1.252/arabface/api/14789632/notifications?limit=13&userid="+userid)
+    return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/notifications?limit=13&userid='+userid)
+
     //do((res : Response ) => console.log(res.json()))
       .map((res : Response ) => res.json());
   }
@@ -711,14 +776,16 @@ console.log(url)
 
   loadComments(feedid)
   {
-    return this.http.get("http://192.168.1.252/arabface/api/14789632/comment/load?type=feed&limit=10&type_id="+feedid)
+    return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/comment/load?type=feed&limit=10&type_id='+feedid)
+
     //do((res : Response ) => console.log(res.json()))
       .map((res : Response ) => res.json());
   }
 
   loadReplies(commentID)
   {
-    return this.http.get("http://192.168.1.252/arabface/api/14789632/comment/load?type=comment&limit=10&type_id="+commentID)
+    return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/comment/load?type=comment&limit=10&type_id='+commentID)
+
     //do((res : Response ) => console.log(res.json()))
       .map((res : Response ) => res.json());
   }
@@ -727,7 +794,8 @@ console.log(url)
 
   loadProfileComments(feedid)
   {
-    return this.http.get("http://192.168.1.252/arabface/api/14789632/comment/load?type=feed&limit=5&type_id="+feedid)
+    return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/comment/load?type=feed&limit=5&type_id='+feedid)
+
     //do((res : Response ) => console.log(res.json()))
       .map((res : Response ) => res.json());
   }
@@ -761,7 +829,8 @@ console.log(url)
 
   feedsComment(postOwner,postID,whoCommented,comment)
   {
-    return this.http.get("http://192.168.1.252/arabface/api/14789632/comment/add?userid="+whoCommented+"&entity_id="+postOwner+"&entity_type=user&text="+comment+"&type=feed&type_id="+postID)
+    return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/comment/add?userid='+whoCommented+"&entity_id="+postOwner+"&entity_type=user&text="+comment+"&type=feed&type_id="+postID)
+
     //do((res : Response ) => console.log(res.json()))
       .map((res : Response ) => res.json());
   }
@@ -772,7 +841,8 @@ console.log(url)
 
    addFriend(userid,friendID)
    {
-     return this.http.get("http://192.168.1.252/arabface/api/14789632/friend/add?userid="+userid+"&to_userid="+friendID)
+     return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/friend/add?userid='+userid+"&to_userid="+friendID)
+
      //do((res : Response ) => console.log(res.json()))
        .map((res : Response ) => res.json());
    }
@@ -784,7 +854,8 @@ console.log(url)
 
      ConfirmFriendRequest(userid,friendID)
      {
-       return this.http.get("http://192.168.1.252/arabface/api/14789632/friend/confirm?userid="+userid+"&to_userid="+friendID)
+       return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/friend/confirm?userid='+userid+"&to_userid="+friendID)
+
        //do((res : Response ) => console.log(res.json()))
          .map((res : Response ) => res.json());
      }
@@ -796,7 +867,8 @@ console.log(url)
 
        deleteFriendRequest(userid,friendID)
        {
-         return this.http.get("http://192.168.1.252/arabface/api/14789632/friend/remove?userid="+userid+"&to_userid="+friendID)
+         return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/friend/remove?userid='+userid+"&to_userid="+friendID)
+
          //do((res : Response ) => console.log(res.json()))
            .map((res : Response ) => res.json());
        }
@@ -806,7 +878,7 @@ console.log(url)
        /////////////////////////////////////////////////////
         onlineFriends(userid)
         {
-           return this.http.get("http://192.168.1.252/arabface/api/14789632/friend/online?userid="+userid)
+           return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/friend/online?userid='+userid)
         //do((res : Response ) => console.log(res.json()))
           .map((res : Response ) => res.json());
 
@@ -851,13 +923,13 @@ console.log(url)
 
         /////////////// get  pages /////////////////////////
         getPages(type, term, categoryId, userId){
-          return this.http.get("http://192.168.1.252/arabface/api/14789632/page/browse?type=" + type + "&term=" + term + "&category_id=" + categoryId + "&userid=" + userId)
+          return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/page/browse?type=' + type + "&term=" + term + "&category_id=" + categoryId + "&userid=" + userId)
           .map((res : Response ) => res.json());
         }
 
 
         getPagesCategories(){
-          return this.http.get("http://192.168.1.252/arabface/api/14789632/page/get/categories")
+          return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/page/get/categories')
           .map((res : Response ) => res.json());
         }
 
@@ -872,7 +944,7 @@ console.log(url)
           urlSearchParams.append('category', category );
           let body = urlSearchParams.toString()
 
-         return this.http.post("http://192.168.1.252/arabface/api/14789632/page/create", body, {headers: headers})
+         return this.http.post(this.serverURL+'/arabface/api/'+this.KEY+'/page/create', body, {headers: headers})
           //do((res : Response ) => console.log(res.json()))
          .map((res : Response ) => res.json());
         }
@@ -888,7 +960,7 @@ console.log(url)
           urlSearchParams.append('category', category );
           let body = urlSearchParams.toString()
 
-         return this.http.post("http://192.168.1.252/arabface/api/14789632/page/edit", body, {headers: headers})
+         return this.http.post(this.serverURL+'/arabface/api/'+this.KEY+'/page/edit', body, {headers: headers})
           //do((res : Response ) => console.log(res.json()))
          .map((res : Response ) => res.json());
         }
@@ -902,11 +974,12 @@ console.log(url)
           urlSearchParams.append('type_id',pageId );
           let body = urlSearchParams.toString()
           if(type == "like")
-         return this.http.post("http://192.168.1.252/arabface/api/14789632/like/item", body, {headers: headers})
+         return this.http.post(this.serverURL+'/arabface/api/'+this.KEY+'/like/item', body, {headers: headers})
           //do((res : Response ) => console.log(res.json()))
          .map((res : Response ) => res.json());
          else
-         return this.http.post("http://192.168.1.252/arabface/api/14789632/dislike/item", body, {headers: headers})
+         return this.http.post(this.serverURL+'/arabface/api/'+this.KEY+'/dislike/item', body, {headers: headers})
+
           //do((res : Response ) => console.log(res.json()))
          .map((res : Response ) => res.json());
         }
@@ -919,7 +992,7 @@ console.log(url)
           urlSearchParams.append('page_id', pageId );
           urlSearchParams.append('userid', userId );
           let body = urlSearchParams.toString()
-         return this.http.post("http://192.168.1.252/arabface/api/14789632/page/delete", body, {headers: headers})
+         return this.http.post(this.serverURL+'/arabface/api/'+this.KEY+'/page/delete', body, {headers: headers})
           //do((res : Response ) => console.log(res.json()))
          .map((res : Response ) => res.json());
         }
@@ -951,7 +1024,8 @@ console.log(url)
 
 
         getGroups(type, term, filter, userId){
-            return this.http.get("http://192.168.1.252/arabface/api/14789632/group/browse?type=" + type + "&term=" + term + "&filter=" + filter + "&userid=" + userId)
+            return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/group/browse?type=' + type + "&term=" + term + "&filter=" + filter + "&userid=" + userId)
+
             .map((res : Response ) => res.json());
 
         }
@@ -968,7 +1042,8 @@ console.log(url)
           urlSearchParams.append('privacy', privacy );
           let body = urlSearchParams.toString()
 
-         return this.http.post("http://192.168.1.252/arabface/api/14789632/group/create", body, {headers: headers})
+         return this.http.post(this.serverURL+'/arabface/api/'+this.KEY+'/group/create', body, {headers: headers})
+
           //do((res : Response ) => console.log(res.json()))
          .map((res : Response ) => res.json());
         }
@@ -985,7 +1060,8 @@ console.log(url)
           urlSearchParams.append('who_can_add_member', canAddMember );
           let body = urlSearchParams.toString()
 
-         return this.http.post("http://192.168.1.252/arabface/api/14789632/group/edit", body, {headers: headers})
+         return this.http.post(this.serverURL+'/arabface/api/'+this.KEY+'/group/edit', body, {headers: headers})
+
           //do((res : Response ) => console.log(res.json()))
          .map((res : Response ) => res.json());
         }
@@ -996,7 +1072,7 @@ console.log(url)
           let urlSearchParams = new URLSearchParams();
           urlSearchParams.append('group_id', groupId );
           let body = urlSearchParams.toString()
-         return this.http.post("http://192.168.1.252/arabface/api/14789632/group/delete", body, {headers: headers})
+         return this.http.post(this.serverURL+'/arabface/api/'+this.KEY+'/group/delete', body, {headers: headers})
           //do((res : Response ) => console.log(res.json()))
          .map((res : Response ) => res.json());
         }
@@ -1010,27 +1086,28 @@ console.log(url)
           urlSearchParams.append('group_id', group_id );
           let body = urlSearchParams.toString()
 
-         return this.http.post("http://192.168.1.252/arabface/api/14789632/group/join", body, {headers: headers})
+         return this.http.post(this.serverURL+'/arabface/api/'+this.KEY+'/group/join', body, {headers: headers})
           //do((res : Response ) => console.log(res.json()))
          .map((res : Response ) => res.json());
         }
 
 
         groupFeeding(id){
-          return this.http.get("http://192.168.1.252/arabface/api/14789632/feeds?type=group&type_id="  + id)
+          return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/feeds?type=group&type_id='  + id)
           .map((res : Response ) => res.json());
         }
 
         /////////////////// Events /////////////////////////
 
         getEvents(type, categoryId, term, userId){
-          if(type == "")
-            return this.http.get("http://192.168.1.252/arabface/api/14789632/event/browse?userid=" + userId + "&term=" + term + "&category_id=" + categoryId)
+          if(type == ""){
+            return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/event/browse?userid=' + userId + "&term=" + term + "&category_id=" + categoryId)
             .map((res : Response ) => res.json());
-
+          }
           return this.http.get("http://192.168.1.252/arabface/api/14789632/event/browse?userid=" + userId + "&term=" + term + "&category_id=" + categoryId + "&type=" + type)
           .map((res : Response ) => res.json());
-        }
+        
+      }
         getEventCategories(){
           return this.http.get("http://192.168.1.252/arabface/api/14789632/event/get/categories")
           .map((res : Response ) => res.json());
@@ -1121,7 +1198,7 @@ console.log(url)
         /////////////////// Videos ////////////////////////
 
         getVideos(categoryId, term, type, filter, userId){
-          return this.http.get("http://192.168.1.252/arabface/api/14789632/videos/browse?userid=" + userId + "&term=" + term + "&category_id=" + categoryId + "&type=" + type + "&filter=" + filter)
+          return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/videos/browse?userid=' + userId + "&term=" + term + "&category_id=" + categoryId + "&type=" + type + "&filter=" + filter)
           .map((res : Response ) => res.json());
         }
         getVideoCategories(){

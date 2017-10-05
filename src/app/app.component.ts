@@ -153,36 +153,22 @@ export class MyApp {
             this.database.set_userid(localStorage.getItem('userid'));
             firebase.set_active("true");
           }
+          
+          
+         
+          this.nav.setRoot (TabsPage);
 
-
-
-    this.nav.setRoot(TabsPage);
-        }else if(snapshot == "not here") {
-
-          this.nav.push(TabsPage);
-
+        }else if(snapshot == null) {
+    
+          this.nav.setRoot(TabsPage);
+    
       //     when deploying uncomment the next and comment above
     //when in development comment next line and uncommnt above tel snapshot == logged
 
           // this.nav.setRoot(LoginPage);
         }
       })
-
-    //   this.database.remotelisten('video').subscribe (data => {
-    // candidate = data ;
-    // console.log(candidate)
-    // if(candidate != "undefined" && candidate != undefined) {
-    // //   var candidate = $.map(candidate, function(value, index) {
-    // //     return [value];
-    // // });
-    // console.log(candidate.ice)
-    //   if(candidate.ice == undefined){
-    // this.nav.setRoot(VideohandlerPage , {candidate : candidate.message , type : 'remote' , id: candidate.sender });
-    //     }
-    // }
-
-    //   })
-
+    
 
     }
 

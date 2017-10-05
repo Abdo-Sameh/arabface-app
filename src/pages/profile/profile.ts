@@ -9,8 +9,8 @@ import {TabsPage} from '../tabs/tabs';
 import { PhotosPage} from '../photos/photos'
 import {FriendProfilePage} from '../friend-profile/friend-profile'
 
-import { Camera, CameraOptions } from '@ionic-native/camera';
-import { FileTransfer, FileUploadOptions, FileTransferObject  } from '@ionic-native/file-transfer';
+// import { Camera, CameraOptions } from '@ionic-native/camera';
+// import { FileTransfer, FileUploadOptions, FileTransferObject  } from '@ionic-native/file-transfer';
 
 /**
  * Generated class for the ProfilePage page.
@@ -26,6 +26,7 @@ import { FileTransfer, FileUploadOptions, FileTransferObject  } from '@ionic-nat
 export class ProfilePage {
     userData =[];
     userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
+    
     userID
     photos
     likes;
@@ -40,8 +41,9 @@ export class ProfilePage {
     imageURI:any;
     imageFileName:any;
 
-  constructor(private transfer: FileTransfer,private camera: Camera, public navCtrl: NavController, public navParams: NavParams,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider,  public toastCtrl: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
+  constructor( public navCtrl: NavController, public navParams: NavParams,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider,  public toastCtrl: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
     let data = navParams.get('userData');
+    console.log()
     //
     // if(data)
     //   {
@@ -235,55 +237,55 @@ setColor(btn)
 
 }
 
-getImage() {
-    const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
-    }
+// getImage() {
+//     const options: CameraOptions = {
+//       quality: 100,
+//       destinationType: this.camera.DestinationType.FILE_URI,
+//       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+//     }
 
-    this.camera.getPicture(options).then((imageData) => {
-      this.imageURI = imageData;
-    }, (err) => {
-      console.log(err);
-      this.presentToast(err);
-    });
-}
+//     this.camera.getPicture(options).then((imageData) => {
+//       this.imageURI = imageData;
+//     }, (err) => {
+//       console.log(err);
+//       this.presentToast(err);
+//     });
+// }
 
-uploadFile() {
-let loader = this.loadingCtrl.create({
-  content: "Uploading..."
-});
-loader.present();
-const fileTransfer: FileTransferObject = this.transfer.create();
+// uploadFile() {
+// let loader = this.loadingCtrl.create({
+//   content: "Uploading..."
+// });
+// loader.present();
+// const fileTransfer: FileTransferObject = this.transfer.create();
 
-let headers = new Headers();
-headers.append('Content-Type', 'multipart/form-data');
+// let headers = new Headers();
+// headers.append('Content-Type', 'multipart/form-data');
 
-let options: FileUploadOptions = {
-  fileKey: 'avatar',
-  fileName: this.imageURI,
-  chunkedMode: false,
-  mimeType: "multipart/form-data",
-  headers: headers,
-  params: {
-    'userid': this.userId,
-    'avatar': this.imageURI
-  }
-}
+// let options: FileUploadOptions = {
+//   fileKey: 'avatar',
+//   fileName: this.imageURI,
+//   chunkedMode: false,
+//   mimeType: "multipart/form-data",
+//   headers: headers,
+//   params: {
+//     'userid': this.userId,
+//     'avatar': this.imageURI
+//   }
+// }
 
-fileTransfer.upload(this.imageURI, 'http://nilemm.com/arabface/api/89129812/profile/change/avatar', options)
-  .then((data) => {
-  console.log(data+" Uploaded Successfully");
-  this.imageFileName = "http://192.168.0.7:8080/static/images/ionicfile.jpg"
-  loader.dismiss();
-  this.presentToast("Image uploaded successfully");
-}, (err) => {
-  console.log(err);
-  loader.dismiss();
-  this.presentToast(err);
-});
-}
+// fileTransfer.upload(this.imageURI, 'http://nilemm.com/arabface/api/89129812/profile/change/avatar', options)
+//   .then((data) => {
+//   console.log(data+" Uploaded Successfully");
+//   this.imageFileName = "http://192.168.0.7:8080/static/images/ionicfile.jpg"
+//   loader.dismiss();
+//   this.presentToast("Image uploaded successfully");
+// }, (err) => {
+//   console.log(err);
+//   loader.dismiss();
+//   this.presentToast(err);
+// });
+// }
 
 presentToast(msg) {
   let toast = this.toastCtrl.create({

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams ,LoadingController ,AlertController
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import {TabsPage} from '../tabs/tabs';
 import {ProfilePage} from '../profile/profile';
+import {PostFeatursPage} from '../post-featurs/post-featurs'
 import {FriendProfilePage} from '../friend-profile/friend-profile'
 import {MyApp} from '../../app/app.component';
 //import $ from "jquery";
@@ -13,12 +14,14 @@ import {MyApp} from '../../app/app.component';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
+declare var google;
 
 @Component({
   selector: 'page-news',
   templateUrl: 'news.html',
 })
 export class NewsPage {
+  
     feeds ;
     likes;
     likeNumbers;
@@ -38,9 +41,7 @@ export class NewsPage {
 
   constructor(public navCtrl: NavController,  public navParams: NavParams ,public alert:AlertController,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
     this.getFeedsList(this.userId);
-    this.userAvatar ="http://"+this.userAvatar;
-
-
+    this.userAvatar ="http://"+this.userAvatar;   
   }
 
   ionViewDidLoad() {
@@ -89,6 +90,7 @@ getFeedsList(id)
         this.feeds=res
         loading.dismiss();
         console.log(this.feeds)
+        
       });
 
 }
@@ -295,4 +297,18 @@ reply()
    this.navCtrl.pop();
       //  this.navCtrl.push(TabsPage);
  }
+
+
+
+ effects()
+ {
+   $(this).css('background-color','grey')
+ }
+
+goToPost()
+{
+  this.navCtrl.push(PostFeatursPage)
 }
+}
+
+

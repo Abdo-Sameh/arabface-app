@@ -44,6 +44,8 @@ import {TrendingPage}  from '../pages/trending/trending'
 import {CreatePagePage}  from '../pages/create-page/create-page'
 import {CreateGroupPage}  from '../pages/create-group/create-group'
 import {EditGroupPage}  from '../pages/edit-group/edit-group'
+import {PostFeatursPage}  from '../pages/post-featurs/post-featurs'
+
 import {EditPagePage}  from '../pages/edit-page/edit-page'
 import {CreateEventPage}  from '../pages/create-event/create-event'
 import {EditEventPage}  from '../pages/edit-event/edit-event'
@@ -53,8 +55,8 @@ import { SavedPage } from '../pages/saved/saved';
 import { VideoPage } from '../pages/video/video';
 import { AddVideoPage } from '../pages/add-video/add-video';
 import { EditVideoPage } from '../pages/edit-video/edit-video';
-import { Camera, CameraOptions } from '@ionic-native/camera';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+// import { Camera, CameraOptions } from '@ionic-native/camera';
+// import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 
 // import { File } from '@ionic-native/file';
 // import { Transfer } from '@ionic-native/transfer';
@@ -99,6 +101,9 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
     CreateGroupPage,
     EditGroupPage,
     EditPagePage,
+    PhotoselectionPage,
+    PostFeatursPage,
+
     SavedPage,
     PhotoselectionPage, CreateEventPage, EditEventPage, EventPage
   ],
@@ -138,7 +143,7 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule
     GiftsPage,
     FriendProfilePage,
     PostPage,
-
+    PostFeatursPage,
     TrendingPage,
     CreatePagePage,
     CreateGroupPage,
@@ -150,8 +155,8 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule
   providers: [
     StatusBar,
     SplashScreen,
-    FileTransfer,Camera,
-    FileTransferObject,
+    // FileTransfer,Camera,
+    // FileTransferObject,
     // File,
     // Transfer,
     // Camera,
