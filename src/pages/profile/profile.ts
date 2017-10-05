@@ -22,6 +22,7 @@ import {FriendProfilePage} from '../friend-profile/friend-profile'
 export class ProfilePage {
     userData =[];
     userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
+    
     userID
     photos
     likes;
@@ -36,6 +37,7 @@ export class ProfilePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider,  public toastCtrl: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
     let data = navParams.get('userData');
+    console.log()
     //
     // if(data)
     //   {

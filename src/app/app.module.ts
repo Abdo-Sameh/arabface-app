@@ -42,6 +42,8 @@ import {TrendingPage}  from '../pages/trending/trending'
 import {CreatePagePage}  from '../pages/create-page/create-page'
 import {CreateGroupPage}  from '../pages/create-group/create-group'
 import {EditGroupPage}  from '../pages/edit-group/edit-group'
+import {PostFeatursPage}  from '../pages/post-featurs/post-featurs'
+
 import {EditPagePage}  from '../pages/edit-page/edit-page'
 
 import {PhotoselectionPage}  from '../pages/photoselection/photoselection'
@@ -91,7 +93,8 @@ import {PhotoselectionPage}  from '../pages/photoselection/photoselection'
     CreateGroupPage,
     EditGroupPage,
     EditPagePage,
-    PhotoselectionPage
+    PhotoselectionPage,
+    PostFeatursPage
   ],
   imports: [
 BrowserModule , IonicModule.forRoot(MyApp), HttpModule
@@ -131,7 +134,7 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule
     GiftsPage,
     FriendProfilePage,
     PostPage,
-
+    PostFeatursPage,
     TrendingPage,
     CreatePagePage,
     CreateGroupPage,
