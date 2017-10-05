@@ -19,6 +19,7 @@ export class EventPage {
   userId
   event
   saved
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.event = navParams.get("event");
@@ -50,6 +51,13 @@ export class EventPage {
       }else{
         this.saved = false;
       }
+    });
+  }
+  rsvp(event_id, rsvp){
+    console.log(event_id, rsvp);
+    this.remoteService.rsvp(event_id, rsvp, this.userId).subscribe(res => {
+      this.event.rsvp = rsvp;
+      console.log(res);
     });
   }
   back(){

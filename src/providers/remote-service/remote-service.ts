@@ -30,7 +30,7 @@ let config = {
   for more info on providers and Angular DI.
 */
 
-let apiURL = 'http://nilemm.com/arabface/api/89129812/';
+let apiURL = 'http://192.168.1.252/arabface/api/14789632/';
 
 @Injectable()
 export class RemoteServiceProvider {
@@ -52,7 +52,7 @@ export class RemoteServiceProvider {
      showBackdrop : false
    });
    loader.present();
-   const url = 'http://nilemm.com/arabface/api/89129812/login?' + 'username=' + data.username + '&password=' + data.password;
+   const url = 'http://192.168.1.252/arabface/api/14789632/login?' + 'username=' + data.username + '&password=' + data.password;
 
     var headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -193,8 +193,8 @@ let body1 = body.toString () ;
 
 
 
- let url = 'http://nilemm.com/arabface/api/89129812/signup?' + 'firstname=' + data.firstname + '&lastname=' + data.lastname + '&username=' + name + '&email_address=' + data.email_address + '&password='+password ;
-let url2 = 'http://nilemm.com/arabface/api/89129812/signup' ;
+ let url = 'http://192.168.1.252/arabface/api/14789632/signup?' + 'firstname=' + data.firstname + '&lastname=' + data.lastname + '&username=' + name + '&email_address=' + data.email_address + '&password='+password ;
+let url2 = 'http://192.168.1.252/arabface/api/14789632/signup' ;
 
 let headers = new Headers();
      headers.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -249,7 +249,7 @@ loader.dismiss()
 
    }
    public creat2 (email,password,name,photo,firstname,lastname) {
-      let url = 'http://nilemm.com/arabface/api/89129812/signup?' + 'firstname=' + firstname + 'lastname=' + lastname + 'username=' + name + 'email_address=' + email + 'password='+password ;
+      let url = 'http://192.168.1.252/arabface/api/14789632/signup?' + 'firstname=' + firstname + 'lastname=' + lastname + 'username=' + name + 'email_address=' + email + 'password='+password ;
 var headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
 this.http.post (url,headers).subscribe(data => {
@@ -329,27 +329,27 @@ firebase.database().ref(userID + '/incoming').set({ 0: "undefined" }) ;
 
  }
 user = new Observable(observer => {
-firebase.auth().onAuthStateChanged(function(user) {
-
- if (user) {
-
-   // User is signed in.
-   var displayName = user.displayName;
-
-   var email = user.email;
-   var emailVerified = user.emailVerified;
-   var photoURL = user.photoURL;
-   var isAnonymous = user.isAnonymous;
-   var uid = user.uid;
-   var providerData = user.providerData;
-
-   observer.next("logged")
-   observer.next({name:displayName})
- } else {
-
-  observer.next("not here")
- }
-});
+// firebase.auth().onAuthStateChanged(function(user) {
+//
+//  if (user) {
+//
+//    // User is signed in.
+//    var displayName = user.displayName;
+//
+//    var email = user.email;
+//    var emailVerified = user.emailVerified;
+//    var photoURL = user.photoURL;
+//    var isAnonymous = user.isAnonymous;
+//    var uid = user.uid;
+//    var providerData = user.providerData;
+//
+//    observer.next("logged")
+//    observer.next({name:displayName})
+//  } else {
+//
+//   observer.next("not here")
+//  }
+// });
 
 }) ;
 
@@ -413,7 +413,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   getPhotos()
    {
 
-          return  this.http.get("http://nilemm.com/arabface/api/89129812/page/browse")
+          return  this.http.get("http://192.168.1.252/arabface/api/14789632/page/browse")
           .do((res : Response ) => console.log(res.json()))
           .map((res : Response ) => res.json());
 
@@ -425,7 +425,7 @@ firebase.auth().onAuthStateChanged(function(user) {
    friendsListApiCall(the_userid, id, term)
    {
 
-    return  this.http.get('http://nilemm.com/arabface/api/89129812/profile/friends?userid='+id + "&the_userid=" + the_userid + "&term=" + term)
+    return  this.http.get('http://192.168.1.252/arabface/api/14789632/profile/friends?userid='+id + "&the_userid=" + the_userid + "&term=" + term)
     //.do((res : Response ) => console.log(res.json()))
     .map((res : Response ) => res.json());
    }
@@ -433,13 +433,13 @@ firebase.auth().onAuthStateChanged(function(user) {
 
    followers(userid)
    {
-    return  this.http.get('http://nilemm.com/arabface/api/89129812/profile/getfollowers?userid='+userid)
+    return  this.http.get('http://192.168.1.252/arabface/api/14789632/profile/getfollowers?userid='+userid)
     //.do((res : Response ) => console.log(res.json()))
     .map((res : Response ) => res.json());
    }
    following(userid)
    {
-    return  this.http.get('http://nilemm.com/arabface/api/89129812/profile/getfollowing?userid='+userid)
+    return  this.http.get('http://192.168.1.252/arabface/api/14789632/profile/getfollowing?userid='+userid)
     //.do((res : Response ) => console.log(res.json()))
     .map((res : Response ) => res.json());
    }
@@ -448,7 +448,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     friendsRequestListApiCall(id)
     {
 
-     return  this.http.get('http://nilemm.com/arabface/api/89129812/friend/requests?userid='+id)
+     return  this.http.get('http://192.168.1.252/arabface/api/14789632/friend/requests?userid='+id)
      //.do((res : Response ) => console.log(res.json()))
      .map((res : Response ) => res.json());
     }
@@ -460,7 +460,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     friendsSuggestionListApiCall(id)
     {
 
-     return  this.http.get('http://nilemm.com/arabface/api/89129812/friend/suggestions?userid='+id)
+     return  this.http.get('http://192.168.1.252/arabface/api/14789632/friend/suggestions?userid='+id)
      //.do((res : Response ) => console.log(res.json()))
      .map((res : Response ) => res.json());
     }
@@ -470,7 +470,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
    feedsListApiCall(id)
    {
-    let url = "http://nilemm.com/arabface/api/89129812/feeds?limit=1000&userid="+id;
+    let url = "http://192.168.1.252/arabface/api/14789632/feeds?userid="+id;
     console.log(url);
     return  this.http.get(url)
     //do((res : Response ) => console.log(res.json()))
@@ -480,7 +480,7 @@ firebase.auth().onAuthStateChanged(function(user) {
    ////////// Feeds function End             ///////////
 
    savedFeeds(id){
-     let url = "http://nilemm.com/arabface/api/89129812/feeds?type=saved&userid="+id;
+     let url = "http://192.168.1.252/arabface/api/14789632/feeds?type=saved&userid="+id;
      console.log(url);
      return  this.http.get(url)
      //do((res : Response ) => console.log(res.json()))
@@ -491,7 +491,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
    profileDetailsApiCall(theUserId, id)
    {
-     let url = "http://nilemm.com/arabface/api/89129812/profile/details?userid="+id + "&the_userid=" + theUserId;
+     let url = "http://192.168.1.252/arabface/api/14789632/profile/details?userid="+id + "&the_userid=" + theUserId;
      return  this.http.get(url)
      //.do((res : Response ) => console.log(res.json()))
      .map((res : Response ) => res.json());
@@ -501,7 +501,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     //////////  profile api  function End ///////////////
     profilePosts(id)
    {
-    return  this.http.get("http://nilemm.com/arabface/api/89129812/feeds?type=timeline&limit=1200&type_id="+id)
+    return  this.http.get("http://192.168.1.252/arabface/api/14789632/feeds?type=timeline&limit=1200&type_id="+id)
     .map((res : Response ) => res.json());
    }
 
@@ -509,7 +509,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
     messagesApiCall(id)
     {
-      let url = "http://nilemm.com/arabface/api/89129812/chat/conversations?userid="+id;
+      let url = "http://192.168.1.252/arabface/api/14789632/chat/conversations?userid="+id;
      return  this.http.get(url)
      //.do((res : Response ) => console.log(res.json()))
      .map((res : Response ) => res.json());
@@ -535,7 +535,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 
       let body = urlSearchParams.toString()
-     return this.http.post("http://nilemm.com/arabface/api/89129812/like/item", body, {headers: headers})
+     return this.http.post("http://192.168.1.252/arabface/api/14789632/like/item", body, {headers: headers})
       //do((res : Response ) => console.log(res.json()))
      .map((res : Response ) => res.json());
 
@@ -556,7 +556,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 
       let body = urlSearchParams.toString()
-     return this.http.post("http://nilemm.com/arabface/api/89129812/like/item", body, {headers: headers})
+     return this.http.post("http://192.168.1.252/arabface/api/14789632/like/item", body, {headers: headers})
       //do((res : Response ) => console.log(res.json()))
      .map((res : Response ) => res.json());
 
@@ -568,7 +568,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
     usersCoversation(cID,userID):any
     {
-      return this.http.get("http://nilemm.com/arabface/api/89129812/chat/get/messages?cid="+cID+"&userid="+userID).
+      return this.http.get("http://192.168.1.252/arabface/api/14789632/chat/get/messages?cid="+cID+"&userid="+userID).
       do((res : Response ) => console.log(res.json()))
      .map((res : Response ) => res.json());
     }
@@ -579,7 +579,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   sharePost(feedID,userID):any
   {
     console.log(feedID +userID)
-    return this.http.get("http://nilemm.com/arabface/api/89129812/feed/action?action=share&feed_id="+feedID+"&userid="+userID)
+    return this.http.get("http://192.168.1.252/arabface/api/14789632/feed/action?action=share&feed_id="+feedID+"&userid="+userID)
    .map((res : Response ) => res.json());
   }
 
@@ -592,7 +592,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
    ChatMessagesSend(cID,userID,msg):any
    {
-    return this.http.get("http://nilemm.com/arabface/api/89129812/chat/send/message?text="+msg+"&cid="+cID+"&userid="+userID).
+    return this.http.get("http://192.168.1.252/arabface/api/14789632/chat/send/message?text="+msg+"&cid="+cID+"&userid="+userID).
     do((res : Response ) => console.log(res.json()))
    .map((res : Response ) => res.json());
    }
@@ -603,7 +603,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
    userPhotosAlbumOnProfile(userID : number) :any
    {
-     return this.http.get("http://nilemm.com/arabface/api/89129812/profile/photos?the_userid="+userID).
+     return this.http.get("http://192.168.1.252/arabface/api/14789632/profile/photos?the_userid="+userID).
      do((res : Response ) => console.log(res.json()))
     .map((res : Response ) => res.json());
    }
@@ -623,7 +623,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     urlSearchParams.append('avatar', avatar);
     urlSearchParams.append('userid', userid);
     let body = urlSearchParams.toString()
-     return this.http.post("http://nilemm.com/arabface/api/89129812/profile/change/avatar", body, {headers: headers})
+     return this.http.post("http://192.168.1.252/arabface/api/14789632/profile/change/avatar", body, {headers: headers})
     //  do((res : Response ) => console.log(res.json()))
     .map((res : Response ) => res.json());
    }
@@ -647,7 +647,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     urlSearchParams.append('entity_type', "user" );
     let body = urlSearchParams.toString()
 
-   return this.http.post("http://nilemm.com/arabface/api/89129812/feed/add", body, {headers: headers})
+   return this.http.post("http://192.168.1.252/arabface/api/14789632/feed/add", body, {headers: headers})
     //do((res : Response ) => console.log(res.json()))
    .map((res : Response ) => res.json());
   }
@@ -655,7 +655,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   ////////////////////////////////////////////////
   commentOnFeeds(postOwner,postID,whoCommented,comment)
   {
-    return this.http.get("http://nilemm.com/arabface/api/89129812/comment/add?userid="+whoCommented+"&entity_id="+postOwner+"&entity_type=user&text="+comment+"&type=feed&type_id="+postID)
+    return this.http.get("http://192.168.1.252/arabface/api/14789632/comment/add?userid="+whoCommented+"&entity_id="+postOwner+"&entity_type=user&text="+comment+"&type=feed&type_id="+postID)
     //do((res : Response ) => console.log(res.json()))
       .map((res : Response ) => res.json());
   }
@@ -663,15 +663,18 @@ firebase.auth().onAuthStateChanged(function(user) {
     //////////// post in feed ///////////////////////
     ReplyOnComment(postOwner,commentID,whoCommented,reply)
     {
-      return this.http.get("http://nilemm.com/arabface/api/89129812/comment/add?userid="+whoCommented+"&entity_id="+postOwner+"&entity_type=user&text="+reply+"&type=comment&type_id="+commentID)
+      return this.http.get("http://192.168.1.252/arabface/api/14789632/comment/add?userid="+whoCommented+"&entity_id="+postOwner+"&entity_type=user&text="+reply+"&type=comment&type_id="+commentID)
       //do((res : Response ) => console.log(res.json()))
         .map((res : Response ) => res.json());
     }
 
     ////////////////////////////////////////////////
 
-
-
+    getUserData(attr, userid){
+      return this.http.get("http://192.168.1.252/arabface/api/14789632/get/user/data?userid=" + userid + "&attr=" + attr)
+      //do((res : Response ) => console.log(res.json()))
+        .map((res : Response ) => res.json());
+    }
   ////////////////////////////////////////////////
 
 
@@ -680,9 +683,9 @@ firebase.auth().onAuthStateChanged(function(user) {
   {
 
     console.log(userID,post)
-    let url = "http://nilemm.com/arabface/api/89129812/feed/add?type=feed&entity_type=user&text="+post+"&entity_id="+userID ;
+    let url = "http://192.168.1.252/arabface/api/14789632/feed/add?type=feed&entity_type=user&text="+post+"&entity_id="+userID ;
 console.log(url)
-   return this.http.get("http://nilemm.com/arabface/api/89129812/feed/add?type=feed&entity_type=user&text=ppppp&entity_id=25")
+   return this.http.get("http://192.168.1.252/arabface/api/14789632/feed/add?type=feed&entity_type=user&text=ppppp&entity_id=25")
   .map((res : Response ) => res.json());
   }
 
@@ -691,25 +694,31 @@ console.log(url)
   ////////////// get notifications /////////////////
   getNotifications(userid)
   {
-    return this.http.get("http://nilemm.com/arabface/api/89129812/notifications?limit=13&userid="+userid)
+    return this.http.get("http://192.168.1.252/arabface/api/14789632/notifications?limit=13&userid="+userid)
     //do((res : Response ) => console.log(res.json()))
       .map((res : Response ) => res.json());
   }
 
   //////////////////////////////////////////////
 
+
+  searchUsers(term){
+    return this.http.get("http://192.168.1.252/arabface/api/14789632/search/users?term=" + term)
+      .map((res : Response ) => res.json());
+  }
+
   //////////////////// load comments ////////////////////
 
   loadComments(feedid)
   {
-    return this.http.get("http://nilemm.com/arabface/api/89129812/comment/load?type=feed&limit=10&type_id="+feedid)
+    return this.http.get("http://192.168.1.252/arabface/api/14789632/comment/load?type=feed&limit=10&type_id="+feedid)
     //do((res : Response ) => console.log(res.json()))
       .map((res : Response ) => res.json());
   }
 
   loadReplies(commentID)
   {
-    return this.http.get("http://nilemm.com/arabface/api/89129812/comment/load?type=comment&limit=10&type_id="+commentID)
+    return this.http.get("http://192.168.1.252/arabface/api/14789632/comment/load?type=comment&limit=10&type_id="+commentID)
     //do((res : Response ) => console.log(res.json()))
       .map((res : Response ) => res.json());
   }
@@ -718,7 +727,7 @@ console.log(url)
 
   loadProfileComments(feedid)
   {
-    return this.http.get("http://nilemm.com/arabface/api/89129812/comment/load?type=feed&limit=5&type_id="+feedid)
+    return this.http.get("http://192.168.1.252/arabface/api/14789632/comment/load?type=feed&limit=5&type_id="+feedid)
     //do((res : Response ) => console.log(res.json()))
       .map((res : Response ) => res.json());
   }
@@ -728,7 +737,7 @@ console.log(url)
   //       var settings = {
   //         "async": true,
   //         "crossDomain": true,
-  //         "url": "http://nilemm.com/arabface/api/89129812/feed/add?type=feed&entity_type=user&text="+post+"&entity_id="+userID,
+  //         "url": "http://192.168.1.252/arabface/api/14789632/feed/add?type=feed&entity_type=user&text="+post+"&entity_id="+userID,
   //         "method": "GET",
   //         "headers": {
   //           "x-devtools-emulate-network-conditions-client-id": "964b73d8-9467-4f26-bff0-ddb7029125a0",
@@ -752,7 +761,7 @@ console.log(url)
 
   feedsComment(postOwner,postID,whoCommented,comment)
   {
-    return this.http.get("http://nilemm.com/arabface/api/89129812/comment/add?userid="+whoCommented+"&entity_id="+postOwner+"&entity_type=user&text="+comment+"&type=feed&type_id="+postID)
+    return this.http.get("http://192.168.1.252/arabface/api/14789632/comment/add?userid="+whoCommented+"&entity_id="+postOwner+"&entity_type=user&text="+comment+"&type=feed&type_id="+postID)
     //do((res : Response ) => console.log(res.json()))
       .map((res : Response ) => res.json());
   }
@@ -763,7 +772,7 @@ console.log(url)
 
    addFriend(userid,friendID)
    {
-     return this.http.get("http://nilemm.com/arabface/api/89129812/friend/add?userid="+userid+"&to_userid="+friendID)
+     return this.http.get("http://192.168.1.252/arabface/api/14789632/friend/add?userid="+userid+"&to_userid="+friendID)
      //do((res : Response ) => console.log(res.json()))
        .map((res : Response ) => res.json());
    }
@@ -775,7 +784,7 @@ console.log(url)
 
      ConfirmFriendRequest(userid,friendID)
      {
-       return this.http.get("http://nilemm.com/arabface/api/89129812/friend/confirm?userid="+userid+"&to_userid="+friendID)
+       return this.http.get("http://192.168.1.252/arabface/api/14789632/friend/confirm?userid="+userid+"&to_userid="+friendID)
        //do((res : Response ) => console.log(res.json()))
          .map((res : Response ) => res.json());
      }
@@ -787,7 +796,7 @@ console.log(url)
 
        deleteFriendRequest(userid,friendID)
        {
-         return this.http.get("http://nilemm.com/arabface/api/89129812/friend/remove?userid="+userid+"&to_userid="+friendID)
+         return this.http.get("http://192.168.1.252/arabface/api/14789632/friend/remove?userid="+userid+"&to_userid="+friendID)
          //do((res : Response ) => console.log(res.json()))
            .map((res : Response ) => res.json());
        }
@@ -797,7 +806,7 @@ console.log(url)
        /////////////////////////////////////////////////////
         onlineFriends(userid)
         {
-           return this.http.get("http://nilemm.com/arabface/api/89129812/friend/online?userid="+userid)
+           return this.http.get("http://192.168.1.252/arabface/api/14789632/friend/online?userid="+userid)
         //do((res : Response ) => console.log(res.json()))
           .map((res : Response ) => res.json());
 
@@ -812,7 +821,7 @@ console.log(url)
           urlSearchParams.append('userid', userid );
           let body = urlSearchParams.toString()
 
-         return this.http.post("http://nilemm.com/arabface/api/89129812/save/item", body, {headers: headers})
+         return this.http.post("http://192.168.1.252/arabface/api/14789632/save/item", body, {headers: headers})
          .map((res : Response ) => res.json());
         }
         unsaveItem(type, typeId, userid){
@@ -824,7 +833,7 @@ console.log(url)
           urlSearchParams.append('userid', userid );
           let body = urlSearchParams.toString()
 
-         return this.http.post("http://nilemm.com/arabface/api/89129812/unsave/item", body, {headers: headers})
+         return this.http.post("http://192.168.1.252/arabface/api/14789632/unsave/item", body, {headers: headers})
          .map((res : Response ) => res.json());
         }
         isSaved(type, typeId, userid){
@@ -836,19 +845,19 @@ console.log(url)
           urlSearchParams.append('userid', userid );
           let body = urlSearchParams.toString()
 
-         return this.http.post("http://nilemm.com/arabface/api/89129812/saved/item", body, {headers: headers})
+         return this.http.post("http://192.168.1.252/arabface/api/14789632/saved/item", body, {headers: headers})
          .map((res : Response ) => res.json());
         }
 
         /////////////// get  pages /////////////////////////
         getPages(type, term, categoryId, userId){
-          return this.http.get("http://nilemm.com/arabface/api/89129812/page/browse?type=" + type + "&term=" + term + "&category_id=" + categoryId + "&userid=" + userId)
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/page/browse?type=" + type + "&term=" + term + "&category_id=" + categoryId + "&userid=" + userId)
           .map((res : Response ) => res.json());
         }
 
 
         getPagesCategories(){
-          return this.http.get("http://nilemm.com/arabface/api/89129812/page/get/categories")
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/page/get/categories")
           .map((res : Response ) => res.json());
         }
 
@@ -863,7 +872,7 @@ console.log(url)
           urlSearchParams.append('category', category );
           let body = urlSearchParams.toString()
 
-         return this.http.post("http://nilemm.com/arabface/api/89129812/page/create", body, {headers: headers})
+         return this.http.post("http://192.168.1.252/arabface/api/14789632/page/create", body, {headers: headers})
           //do((res : Response ) => console.log(res.json()))
          .map((res : Response ) => res.json());
         }
@@ -879,7 +888,7 @@ console.log(url)
           urlSearchParams.append('category', category );
           let body = urlSearchParams.toString()
 
-         return this.http.post("http://nilemm.com/arabface/api/89129812/page/edit", body, {headers: headers})
+         return this.http.post("http://192.168.1.252/arabface/api/14789632/page/edit", body, {headers: headers})
           //do((res : Response ) => console.log(res.json()))
          .map((res : Response ) => res.json());
         }
@@ -893,11 +902,11 @@ console.log(url)
           urlSearchParams.append('type_id',pageId );
           let body = urlSearchParams.toString()
           if(type == "like")
-         return this.http.post("http://nilemm.com/arabface/api/89129812/like/item", body, {headers: headers})
+         return this.http.post("http://192.168.1.252/arabface/api/14789632/like/item", body, {headers: headers})
           //do((res : Response ) => console.log(res.json()))
          .map((res : Response ) => res.json());
          else
-         return this.http.post("http://nilemm.com/arabface/api/89129812/dislike/item", body, {headers: headers})
+         return this.http.post("http://192.168.1.252/arabface/api/14789632/dislike/item", body, {headers: headers})
           //do((res : Response ) => console.log(res.json()))
          .map((res : Response ) => res.json());
         }
@@ -910,15 +919,39 @@ console.log(url)
           urlSearchParams.append('page_id', pageId );
           urlSearchParams.append('userid', userId );
           let body = urlSearchParams.toString()
-         return this.http.post("http://nilemm.com/arabface/api/89129812/page/delete", body, {headers: headers})
+         return this.http.post("http://192.168.1.252/arabface/api/14789632/page/delete", body, {headers: headers})
           //do((res : Response ) => console.log(res.json()))
          .map((res : Response ) => res.json());
         }
 
+        getPageRoles(id, userid){
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/page/get/roles?userid=" + userid + "&id=" + id)
+          .map((res : Response ) => res.json());
+        }
+        savePageRoles(pageId, roles, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          for (var key in roles) {
+            urlSearchParams.append('roles[' + key + ']', roles[key] );
+          }
+          // urlSearchParams.append('roles', roles );
+          urlSearchParams.append('page_id', pageId );
+          urlSearchParams.append('userid', userid );
+          let body = urlSearchParams.toString();
+          console.log(urlSearchParams);
+         return this.http.post("http://192.168.1.252/arabface/api/14789632/page/save/roles", body, {headers: headers})
+         .map((res : Response ) => res.json());
+        }
+
+        removePageRole(user, page_id, userid){
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/page/remove/role?userid=" + userid + "&user=" + user + "&page_id=" + page_id)
+          .map((res : Response ) => res.json());
+        }
 
 
         getGroups(type, term, filter, userId){
-            return this.http.get("http://nilemm.com/arabface/api/89129812/group/browse?type=" + type + "&term=" + term + "&filter=" + filter + "&userid=" + userId)
+            return this.http.get("http://192.168.1.252/arabface/api/14789632/group/browse?type=" + type + "&term=" + term + "&filter=" + filter + "&userid=" + userId)
             .map((res : Response ) => res.json());
 
         }
@@ -935,7 +968,7 @@ console.log(url)
           urlSearchParams.append('privacy', privacy );
           let body = urlSearchParams.toString()
 
-         return this.http.post("http://nilemm.com/arabface/api/89129812/group/create", body, {headers: headers})
+         return this.http.post("http://192.168.1.252/arabface/api/14789632/group/create", body, {headers: headers})
           //do((res : Response ) => console.log(res.json()))
          .map((res : Response ) => res.json());
         }
@@ -952,7 +985,7 @@ console.log(url)
           urlSearchParams.append('who_can_add_member', canAddMember );
           let body = urlSearchParams.toString()
 
-         return this.http.post("http://nilemm.com/arabface/api/89129812/group/edit", body, {headers: headers})
+         return this.http.post("http://192.168.1.252/arabface/api/14789632/group/edit", body, {headers: headers})
           //do((res : Response ) => console.log(res.json()))
          .map((res : Response ) => res.json());
         }
@@ -963,7 +996,7 @@ console.log(url)
           let urlSearchParams = new URLSearchParams();
           urlSearchParams.append('group_id', groupId );
           let body = urlSearchParams.toString()
-         return this.http.post("http://nilemm.com/arabface/api/89129812/group/delete", body, {headers: headers})
+         return this.http.post("http://192.168.1.252/arabface/api/14789632/group/delete", body, {headers: headers})
           //do((res : Response ) => console.log(res.json()))
          .map((res : Response ) => res.json());
         }
@@ -977,30 +1010,29 @@ console.log(url)
           urlSearchParams.append('group_id', group_id );
           let body = urlSearchParams.toString()
 
-         return this.http.post("http://nilemm.com/arabface/api/89129812/group/join", body, {headers: headers})
+         return this.http.post("http://192.168.1.252/arabface/api/14789632/group/join", body, {headers: headers})
           //do((res : Response ) => console.log(res.json()))
          .map((res : Response ) => res.json());
         }
 
 
         groupFeeding(id){
-          return this.http.get("http://nilemm.com/arabface/api/89129812/feeds?type=group&type_id="  + id)
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/feeds?type=group&type_id="  + id)
           .map((res : Response ) => res.json());
         }
 
+        /////////////////// Events /////////////////////////
 
         getEvents(type, categoryId, term, userId){
-          if(type == ""){
-            return this.http.get("http://nilemm.com/arabface/api/89129812/event/browse?userid=" + userId + "&term=" + term + "&category_id=" + categoryId)
+          if(type == "")
+            return this.http.get("http://192.168.1.252/arabface/api/14789632/event/browse?userid=" + userId + "&term=" + term + "&category_id=" + categoryId)
             .map((res : Response ) => res.json());
-          }else{
 
-          }
-          return this.http.get("http://nilemm.com/arabface/api/89129812/event/browse?userid=" + userId + "&term=" + term + "&category_id=" + categoryId + "&type=" + type)
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/event/browse?userid=" + userId + "&term=" + term + "&category_id=" + categoryId + "&type=" + type)
           .map((res : Response ) => res.json());
         }
         getEventCategories(){
-          return this.http.get("http://nilemm.com/arabface/api/89129812/event/get/categories")
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/event/get/categories")
           .map((res : Response ) => res.json());
         }
 
@@ -1029,8 +1061,7 @@ console.log(url)
           urlSearchParams.append('userid', userid);
           let body = urlSearchParams.toString()
 
-         return this.http.post("http://nilemm.com/arabface/api/89129812/event/create", body, {headers: headers})
-          //do((res : Response ) => console.log(res.json()))
+         return this.http.post("http://192.168.1.252/arabface/api/14789632/event/create", body, {headers: headers})
          .map((res : Response ) => res.json());
         }
         editEvent(title,description,category_id,location,address,start_day,start_month,start_year,start_hour,start_minute,start_time_type,privacy,end_day,end_month,end_year,end_hour,end_minute,end_time_type,userid, eventId){
@@ -1059,8 +1090,7 @@ console.log(url)
           urlSearchParams.append('event_id', eventId);
           let body = urlSearchParams.toString()
 
-         return this.http.post("http://nilemm.com/arabface/api/89129812/event/edit", body, {headers: headers})
-          //do((res : Response ) => console.log(res.json()))
+         return this.http.post("http://192.168.1.252/arabface/api/14789632/event/edit", body, {headers: headers})
          .map((res : Response ) => res.json());
         }
 
@@ -1071,16 +1101,199 @@ console.log(url)
           urlSearchParams.append('event_id', event_id );
           urlSearchParams.append('userid', userid );
           let body = urlSearchParams.toString()
-          return this.http.post("http://nilemm.com/arabface/api/89129812/event/delete", body, {headers: headers})
-           //do((res : Response ) => console.log(res.json()))
+          return this.http.post("http://192.168.1.252/arabface/api/14789632/event/delete", body, {headers: headers})
           .map((res : Response ) => res.json());
 
         }
+        rsvp(event_id, rsvp, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('event_id', event_id );
+          urlSearchParams.append('rsvp', rsvp );
+          urlSearchParams.append('userid', userid );
+          let body = urlSearchParams.toString()
+          return this.http.post("http://192.168.1.252/arabface/api/14789632/event/rsvp", body, {headers: headers})
+          .map((res : Response ) => res.json());
+        }
+        ////////////////////////////////////////////////////
 
+        /////////////////// Videos ////////////////////////
 
         getVideos(categoryId, term, type, filter, userId){
-          return this.http.get("http://nilemm.com/arabface/api/89129812/videos/browse?userid=" + userId + "&term=" + term + "&category_id=" + categoryId + "&type=" + type + "&filter=" + filter)
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/videos/browse?userid=" + userId + "&term=" + term + "&category_id=" + categoryId + "&type=" + type + "&filter=" + filter)
+          .map((res : Response ) => res.json());
+        }
+        getVideoCategories(){
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/videos/get/categories")
+          .map((res : Response ) => res.json());
+        }
+        addNewVideo(title, description, privacy, link, category, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('title', title);
+          urlSearchParams.append('description', description);
+          urlSearchParams.append('privacy', privacy);
+          urlSearchParams.append('link', link);
+          urlSearchParams.append('category', category);
+          urlSearchParams.append('userid', userid);
+          let body = urlSearchParams.toString()
+          return this.http.post("http://192.168.1.252/arabface/api/14789632/video/create", body, {headers: headers})
+          .map((res : Response ) => res.json());
+        }
+        deleteVideo(video_id, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('video_id', video_id);
+          urlSearchParams.append('userid', userid);
+          let body = urlSearchParams.toString()
+          return this.http.post("http://192.168.1.252/arabface/api/14789632/video/delete", body, {headers: headers})
+          .map((res : Response ) => res.json());
+        }
+        editVideo(title, desc, privacy, category_id, video_id, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('title', title);
+          urlSearchParams.append('desc', desc);
+          urlSearchParams.append('privacy', privacy);
+          urlSearchParams.append('category_id', category_id);
+          urlSearchParams.append('video_id', video_id);
+          urlSearchParams.append('userid', userid);
+          let body = urlSearchParams.toString()
+          return this.http.post("http://192.168.1.252/arabface/api/14789632/video/edit", body, {headers: headers})
           .map((res : Response ) => res.json());
         }
 
+        ///////////////////////////////////////////////////
+
+
+         //////////////////// Settings /////////////////////
+        getSettingsNotifications(userid){
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/settings/get/notifications?userid=" + userid)
+          .map((res : Response ) => res.json());
+        }
+
+        setSettingsNotifications(following_you, site_mention_you, site_tag_you, site_comment,site_reply_comment, site_like,site_share_item, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('notify-following-you', following_you );
+          urlSearchParams.append('notify-site-mention-you', site_mention_you );
+          urlSearchParams.append('notify-site-tag-you', site_tag_you );
+          urlSearchParams.append('notify-site-comment', site_comment );
+          urlSearchParams.append('notify-site-reply-comment', site_reply_comment );
+          urlSearchParams.append('notify-site-like', site_like );
+          urlSearchParams.append('notify-site-share-item', site_share_item );
+          urlSearchParams.append('userid', userid);
+          let body = urlSearchParams.toString()
+          return this.http.post("http://192.168.1.252/arabface/api/14789632/settings/notifications", body, {headers: headers})
+          .map((res : Response ) => res.json());
+        }
+        changePassword(current_password, new_password, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('current_password', current_password );
+          urlSearchParams.append('new_password', new_password );
+          urlSearchParams.append('userid', userid );
+          let body = urlSearchParams.toString()
+          return this.http.post("http://192.168.1.252/arabface/api/14789632/settings/password", body, {headers: headers})
+          .map((res : Response ) => res.json());
+        }
+        settingsPrivacy(wcvp, wcpp, wcsb, wcsm, wcsv, en, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('who-can-view-profile', wcvp );
+          urlSearchParams.append('who-can-post-profile', wcpp );
+          urlSearchParams.append('who-can-see-birth', wcsb );
+          urlSearchParams.append('who-can-send-message', wcsm )
+          urlSearchParams.append('who-can-see-visitors', wcsv );
+          urlSearchParams.append('email-notification', en )
+          urlSearchParams.append('userid', userid );
+          let body = urlSearchParams.toString()
+          return this.http.post("http://192.168.1.252/arabface/api/14789632/settings/privacy", body, {headers: headers})
+          .map((res : Response ) => res.json());
+        }
+        settingsGeneral(first, last, email, username, gender, country, city, state, bio, userid){
+
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('first_name', first );
+          urlSearchParams.append('last_name', last );
+          urlSearchParams.append('email_address', email);
+          urlSearchParams.append('username', username );
+          urlSearchParams.append('gender', gender );
+          urlSearchParams.append('state', state );
+          urlSearchParams.append('country', country );
+          urlSearchParams.append('city', city);
+          urlSearchParams.append('bio', bio );
+          urlSearchParams.append('userid', userid );
+          let body = urlSearchParams.toString()
+          return this.http.post("http://192.168.1.252/arabface/api/14789632/settings/general", body, {headers: headers})
+          .map((res : Response ) => res.json());
+        }
+
+        ////////////////// Contact Us /////////////////////////
+        contactUs(name, email, subject, message, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('name', name );
+          urlSearchParams.append('email', email );
+          urlSearchParams.append('subject', subject);
+          urlSearchParams.append('message', message );
+          urlSearchParams.append('userid', userid );
+          let body = urlSearchParams.toString()
+          return this.http.post("http://192.168.1.252/arabface/api/14789632/contact", body, {headers: headers})
+          .map((res : Response ) => res.json());
+        }
+        /////////////////////////////////////////////////////
+
+        ////////////////// Trending /////////////////////////
+        getHashtag(userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('userid', userid);
+          let body = urlSearchParams.toString()
+          return this.http.post("http://192.168.1.252/arabface/api/14789632/hashtag/get", body, {headers: headers})
+          .map((res : Response ) => res.json());
+        }
+        ////////////////////////////////////////////////////////
+
+        ////////////////// Blocking ///////////////////////////
+        blockUser(id, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('id', id );
+          urlSearchParams.append('userid', userid);
+          let body = urlSearchParams.toString()
+          return this.http.post("http://192.168.1.252/arabface/api/14789632/block/user", body, {headers: headers})
+          .map((res : Response ) => res.json());
+        }
+        unblockUser(id, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('id', id );
+          urlSearchParams.append('userid', userid);
+          let body = urlSearchParams.toString()
+          return this.http.post("http://192.168.1.252/arabface/api/14789632/unblock/user", body, {headers: headers})
+          .map((res : Response ) => res.json());
+        }
+        isBlocked(id, userid){
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/blocked?id=" + id + "&userid=" + userid)
+          .map((res : Response ) => res.json());
+        }
+        getAllBlocked(userid){
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/all/blocked?userid=" + userid)
+          .map((res : Response ) => res.json());
+        }
+        ////////////////////////////////////////////////////
 }

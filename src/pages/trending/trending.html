@@ -16,8 +16,7 @@
 					<h3>Trending</h3>
 				</div>
 				<div class="menu_btn text-right">
-				<a href="#"><i class="ion-android-menu"></i></a>
-					<a href="#"><i class="fa fa-bars" style="color:#fff;font-size:18px"></i></a>
+				    <a href="#"><i class="fa fa-bars" style="color:#fff;font-size:18px"></i></a>
 				</div>
 			</div>
 		</header>
@@ -27,12 +26,12 @@
 
 <ion-content >
   <section class="bg_grey full_vh pt-70">
-			<div class="list-group list-group-theme">
+			<div class="list-group list-group-theme" *ngFor="let hashtag of hashtags">
 			    <a href="#" class="list-group-item">
-				    <h4 class="list-group-item-heading">#Hashtag_1</h4>
-				    <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+				    <h4 class="list-group-item-heading">{{ hashtag.tag}}</h4>
+				    <!-- <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p> -->
 			    </a>
-			    <a href="#" class="list-group-item">
+			    <!-- <a href="#" class="list-group-item">
 				    <h4 class="list-group-item-heading">#Hashtag_2</h4>
 				    <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
 			    </a>
@@ -43,7 +42,7 @@
 			    <a href="#" class="list-group-item">
 				    <h4 class="list-group-item-heading">#Hashtag_4</h4>
 				    <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-			    </a>
+			    </a> -->
 			</div>
 		</section>
 </ion-content>

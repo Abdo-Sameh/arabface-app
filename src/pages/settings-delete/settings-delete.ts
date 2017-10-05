@@ -1,38 +1,33 @@
 import { Component } from '@angular/core';
-
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
-import { TabsPage } from '../tabs/tabs';
+import {TabsPage} from '../tabs/tabs';
+import { SettingsPage } from '../settings/settings';
+
+
 /**
- * Generated class for the TrendingPage page.
+ * Generated class for the SettingsDeletePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
 @Component({
-  selector: 'page-trending',
-  templateUrl: 'trending.html',
+  selector: 'page-settings-delete',
+  templateUrl: 'settings-delete.html',
 })
-export class TrendingPage {
+export class SettingsDeletePage {
+
   userId
-  hashtags
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
-    this.getHashtag()
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TrendingPage');
+    console.log('ionViewDidLoad SettingsDeletePage');
   }
-  getHashtag() {
-    this.remoteService.getHashtag(this.userId).subscribe(res => {
-    this.hashtags = res.hashtags;
-    });
-  }
-
-  back() {
-    this.navCtrl.push(TabsPage);
+  back(){
+    this.navCtrl.pop();
   }
 
 }

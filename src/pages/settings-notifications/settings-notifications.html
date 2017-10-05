@@ -28,70 +28,75 @@
 			<form class="list-group list-group-sm list-group-theme">
 				<legend class="list-group-item bg_grey">
 					<h4>Site Notifications</h4>
+
 				</legend>
+        <p class="help-block">Send me site notifications when </p>
 			    <a href="#" class="list-group-item">
-				    <div class="checkbox checkbox-list">
-                        <input type="checkbox" id="check_1" checked>
-                        <label for="check_1">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</label>
-                    </div>
+				    <div>
+              <ion-toggle [(ngModel)]="settings['notify-following-you']" [ngModelOptions]="{ standalone :true}" class="pull-right"></ion-toggle>
+              <!-- <input type="checkbox" class="check_1" id="check_1" value="1" *ngIf="settings['notify-following-you'] == '1'" checked>
+              <input type="checkbox" class="check_1" id="check_1" value="0" *ngIf="settings['notify-following-you'] == '0'" > -->
+              <label for="check_1" class="pull-left" style="margin-top:12px">Someone followed you</label>
+              <div class="clearfix"></div>
+            </div>
 			    </a>
 			    <a href="#" class="list-group-item">
-				    <div class="checkbox checkbox-list">
-                        <input type="checkbox" id="check_2">
-                        <label for="check_2">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</label>
-                    </div>
+				    <div>
+              <ion-toggle [(ngModel)]="settings['notify-site-mention-you']" [ngModelOptions]="{ standalone :true}" class="pull-right"></ion-toggle>
+              <!-- <input type="checkbox" id="check_2" class="check_2" value="1" *ngIf="settings['notify-site-mention-you'] == '1'" checked>
+              <input type="checkbox" id="check_2" class="check_2" value="0" *ngIf="settings['notify-site-mention-you'] == '0'"> -->
+              <label for="check_2" class="pull-left" style="margin-top:12px">You are Mentioned</label>
+              <div class="clearfix"></div>
+            </div>
 			    </a>
 			    <a href="#" class="list-group-item">
-				    <div class="checkbox checkbox-list">
-                        <input type="checkbox" id="check_3" checked>
-                        <label for="check_3">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</label>
-                    </div>
+				    <div>
+              <ion-toggle [(ngModel)]="settings['notify-site-tag-you']" [ngModelOptions]="{ standalone :true}" class="pull-right"></ion-toggle>
+              <!-- <input type="checkbox" id="check_3" class="check_3" value="1" *ngIf="settings['notify-site-tag-you'] == '1'" checked>
+              <input type="checkbox" id="check_3" class="check_3" value="0" *ngIf="settings['notify-site-tag-you'] == '0'" > -->
+              <label for="check_3" class="pull-left" style="margin-top:12px">You are tagged</label>
+              <div class="clearfix"></div>
+            </div>
 			    </a>
 			    <a href="#" class="list-group-item">
-				    <div class="checkbox checkbox-list">
-                        <input type="checkbox" id="check_4">
-                        <label for="check_4">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</label>
-                    </div>
+				    <div>
+              <ion-toggle [(ngModel)]="settings['notify-site-comment']" [ngModelOptions]="{ standalone :true}" class="pull-right"></ion-toggle>
+              <!-- <input type="checkbox" id="check_4" class="check_4" value="1" *ngIf="settings['notify-site-comment'] == '1'" checked>
+              <input type="checkbox" id="check_4" class="check_4" value="0" *ngIf="settings['notify-site-comment'] == '0'"> -->
+              <label for="check_4" class="pull-left" style="margin-top:12px">Commented on your post</label>
+              <div class="clearfix"></div>
+            </div>
 			    </a>
 			    <a href="#" class="list-group-item">
-				    <div class="checkbox checkbox-list">
-                        <input type="checkbox" id="check_5" checked>
-                        <label for="check_5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</label>
-                    </div>
+				    <div>
+              <ion-toggle [(ngModel)]="settings['notify-site-reply-comment']" [ngModelOptions]="{ standalone :true}" class="pull-right"></ion-toggle>
+              <!-- <input type="checkbox" id="check_5" class="check_5" value="1" *ngIf="settings['notify-site-reply-comment'] == '1'" checked>
+              <input type="checkbox" id="check_5" class="check_5" value="0" *ngIf="settings['notify-site-reply-comment'] == '0'"> -->
+              <label for="check_5" class="pull-left" style="margin-top:12px">Replied your comment</label>
+              <div class="clearfix"></div>
+            </div>
 			    </a>
-			    <legend class="list-group-item bg_grey">
-					<h4>Push Notifications</h4>
-				</legend>
-			    <a href="#" class="list-group-item">
-				    <div class="checkbox checkbox-list">
-                        <input type="checkbox" id="check_6" checked>
-                        <label for="check_6">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</label>
-                    </div>
+          <a href="#" class="list-group-item">
+				    <div>
+              <ion-toggle [(ngModel)]="settings['notify-site-like']" [ngModelOptions]="{ standalone :true}" class="pull-right"></ion-toggle>
+              <!-- <input type="checkbox" id="check_6" class="check_6" value="1" *ngIf="settings['notify-site-like'] == '1'" checked>
+              <input type="checkbox" id="check_6" class="check_6" value="0" *ngIf="settings['notify-site-like'] == '0'"> -->
+              <label for="check_6" class="pull-left" style="margin-top:12px">Like your posts,photos e.t.c</label>
+              <div class="clearfix"></div>
+            </div>
 			    </a>
-			    <a href="#" class="list-group-item">
-				    <div class="checkbox checkbox-list">
-                        <input type="checkbox" id="check_7">
-                        <label for="check_7">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</label>
-                    </div>
+          <a href="#" class="list-group-item">
+				    <div>
+              <ion-toggle [(ngModel)]="settings['notify-site-share-item']" [ngModelOptions]="{ standalone :true}" class="pull-right"></ion-toggle>
+              <!-- <input type="checkbox" id="check_7" class="check_7" value="1" *ngIf="settings['notify-site-share-item'] == '1'" checked>
+              <input type="checkbox" id="check_7" class="check_7" value="0" *ngIf="settings['notify-site-share-item'] == '0'"> -->
+              <label for="check_7" class="pull-left" style="margin-top:12px">Shared your posts</label>
+              <div class="clearfix"></div>
+            </div>
 			    </a>
-			    <a href="#" class="list-group-item">
-				    <div class="checkbox checkbox-list">
-                        <input type="checkbox" id="check_8" checked>
-                        <label for="check_8">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</label>
-                    </div>
-			    </a>
-			    <a href="#" class="list-group-item">
-				    <div class="checkbox checkbox-list">
-                        <input type="checkbox" id="check_9">
-                        <label for="check_9">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</label>
-                    </div>
-			    </a>
-			    <a href="#" class="list-group-item">
-				    <div class="checkbox checkbox-list">
-                        <input type="checkbox" id="check_10" checked>
-                        <label for="check_10">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</label>
-                    </div>
-			    </a>
+          <div class="form-group mt-30 mb-30">
+            <button (click)="saveSettings()" type="submit" class="btn btn-theme">Save</button>
+          </div>
 			</form>
 		</section>
 </ion-content>

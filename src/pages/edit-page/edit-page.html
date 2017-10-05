@@ -24,16 +24,16 @@
 
 
 <ion-content padding>
-  <section class="bg_grey full_vh">
+  <section class="bg_grey full_vh" style="margin-top: 50px">
 			<div class="panel panel-theme">
 				<ul class="nav nav-tabs flex-space-around">
-					<li class="active"><a data-toggle="tab" href="#tab-content-1"> General</a></li>
-					<li><a data-toggle="tab" href="#tab-content-2"> Page Roles</a></li>
+					<li class="active"><a data-toggle="tab" href="#tab-content-11"> General</a></li>
+					<li><a (click)="getPageRoles(page.id)" data-toggle="tab" href="#tab-content-22"> Page Roles</a></li>
 				</ul>
 			</div>
 			<div class="container">
 				<div class="tab-content">
-					<div id="tab-content-1" class="tab-pane fade in active">
+					<div id="tab-content-11" class="tab-pane fade in active">
 						<form class="panel panel-theme">
 				       	    <div class="form-group">
 						        <label for="g_name">Title:</label>
@@ -55,76 +55,75 @@
 			          </div>
 					    </form>
 					</div>
-					<div id="tab-content-2" class="tab-pane fade">
+          <div id="tab-content-22" class="tab-pane fade">
 						<form class="panel panel-theme">
-						    <div class="form-group">
+						    <div class="form-group" id="roles">
 							    <div class="user-item">
-									<div class="user-img">
-										<a href="#"><img src="assets/images/avatar.png" alt=""></a>
+							    	<div class="pull-left">
+										<div class="user-img">
+											<a href="#"><img src="{{userAvatar}}" alt=""></a>
+										</div>
+										<div class="user-info pull-left">
+											<h3 class="mt-15"><a href="#">{{userName}}</a></h3>
+										</div>
 									</div>
-									<div class="user-info">
-										<h3><a href="#">Username</a></h3>
-								        <select>
-    											<option>Admin</option>
-    											<option>Moderator</option>
-    											<option>Editor</option>
-								        </select>
+									<div class="pull-right pt-15">
+										<span class="label label-theme">Admin</span>
 									</div>
 								</div>
+                <div *ngFor="let role of roles let i = index;">
 							 	<div class="user-item">
-									<div class="user-img">
-										<a href="#"><img src="assets/images/avatar.png" alt=""></a>
+							 		<div class="pull-left">
+										<div class="user-img">
+											<a href="#"><img src="{{ role.avatar }}" alt=""></a>
+										</div>
+										<div class="user-info pull-left">
+											<h3><a href="#">{{ role.first_name }} {{ role.last_name }}</a></h3>
+									        <select [(ngModel)]="role.page_role" [ngModelOptions]="{standalone: true}">
+    												<option value="1">Admin</option>
+    												<option value="2">Moderator</option>
+    												<option value="3">Editor</option>
+									        </select>
+										</div>
 									</div>
-									<div class="user-info">
-										<h3><a href="#">Username</a></h3>
-								        <select>
-    											<option>Admin</option>
-    											<option>Moderator</option>
-    											<option>Editor</option>
-								        </select>
+									<div class="pull-right pt-15">
+										<a (click)="removePageRole(role.role_user_id, role.role_page_id, i)" href="#" class="btn btn-danger btn-xs"><i class="fa fa-close"></i></a>
 									</div>
 								</div>
+              </div>
 								<span></span>
 							</div>
 							<label>Add Role:</label>
 				    		<div class="search-form user-item mt-20 pb-25">
 								<div class="input-group">
-									<input type="text" class="form-control" placeholder="Search here ...">
+									<input type="text" primary [(ngModel)]="searchQuery" [ngModelOptions]="{standalone: true}" (keyup)="searchUsers(searchQuery)" show-cancel="true"  class="form-control" placeholder="Search here ...">
 									<div class="input-group-btn">
-										<button type="submit" class="btn btn-default">
+										<!-- <button type="submit" class="btn btn-default">
 											<i class="fa fa-search"></i>
-										</button>
+										</button> -->
 									</div>
 								</div>
 							</div>
-							<div class="user-item">
-									<div class="user-img">
-										<a href="#"><img src="assets/images/avatar.png" alt=""></a>
-									</div>
-									<div class="user-info">
-										<h3><a href="#">Username</a></h3>
-								        <select>
-    											<option>Admin</option>
-    											<option>Moderator</option>
-    											<option>Editor</option>
-								        </select>
-									</div>
-								</div>
-								<div class="user-item">
-									<div class="user-img">
-										<a href="#"><img src="assets/images/avatar.png" alt=""></a>
-									</div>
-									<div class="user-info">
-										<h3><a href="#">Username</a></h3>
-								        <select>
-    											<option>Admin</option>
-    											<option>Moderator</option>
-    											<option>Editor</option>
-								        </select>
-									</div>
-								</div>
+              <div class="user-suggestion-list box" id="page-user-role-suggestion" *ngFor="let user of users; let i = index;">
+  							<div class="user-item">
+  								<div class="user-img">
+  									<a (click)="addRole(user.first_name, user.last_name, user.avatar, user.id)" href="#"><img src="{{ user.avatar }}" alt=""></a>
+  								</div>
+  								<div class="user-info">
+  									<h3 (click)="addRole(user.first_name, user.last_name, user.avatar, user.id)" class="mt-15"><a href="#">{{ user.name }}</a></h3>
+  								</div>
+  							</div>
+  							<!-- <div class="user-item">
+  								<div class="user-img">
+  									<a href="#"><img src="images/avatar.png" alt=""></a>
+  								</div>
+  								<div class="user-info">
+  									<h3 class="mt-15"><a href="#">Username</a></h3>
+  								</div>
+  							</div> -->
+              </div>
 						    <div class="form-group mt-30 mb-30">
-				            	<button type="submit" class="btn btn-theme">Save</button>
+				            	<button (click)="saveRoles(page.id, roles)" type="submit" class="btn btn-theme">Save</button>
 			            	</div>
 						</form>
 					</div>

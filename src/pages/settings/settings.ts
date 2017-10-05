@@ -6,6 +6,8 @@ import { SettingsGeneralPage } from '../settings-general/settings-general';
 import { SettingsNotificationsPage } from '../settings-notifications/settings-notifications';
 import { SettingsPasswordPage } from '../settings-password/settings-password';
 import { SettingsPrivacyPage } from '../settings-privacy/settings-privacy';
+import { SettingsBlockingPage } from '../settings-blocking/settings-blocking';
+import { SettingsDeletePage } from '../settings-delete/settings-delete';
 
 /**
  * Generated class for the SettingsPage page.
@@ -19,8 +21,10 @@ import { SettingsPrivacyPage } from '../settings-privacy/settings-privacy';
   templateUrl: 'settings.html',
 })
 export class SettingsPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  settings
+  userId
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
+    this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
   }
 
   ionViewDidLoad() {
@@ -30,15 +34,40 @@ export class SettingsPage {
     this.navCtrl.push(SettingsGeneralPage);
   }
   notificationsPage(){
-    this.navCtrl.push(SettingsNotificationsPage);
+    let loading = this.loadingCtrl.create({
+      content: "Loading",
+    });
+    loading.present()
+      this.remoteService.getSettingsNotifications(this.userId).subscribe(res =>{
+        this.settings = res;
+        loading.dismiss();
+        this.navCtrl.push(SettingsNotificationsPage,{
+          'settings' : this.settings
+        });
+      });
   }
   passwordPage(){
     this.navCtrl.push(SettingsPasswordPage);
   }
   privacyPage(){
-    this.navCtrl.push(SettingsPrivacyPage);
+    let loading = this.loadingCtrl.create({
+      content: "Loading",
+    });
+    loading.present()
+      this.remoteService.getSettingsNotifications(this.userId).subscribe(res =>{
+        this.settings = res;
+        loading.dismiss();
+        this.navCtrl.push(SettingsPrivacyPage,{
+          'settings' : this.settings
+        });
+      });
   }
-
+  blockingPage(){
+    this.navCtrl.push(SettingsBlockingPage);
+  }
+  deletePage(){
+    this.navCtrl.push(SettingsDeletePage);
+  }
   back()
   {
     this.navCtrl.push(TabsPage);
