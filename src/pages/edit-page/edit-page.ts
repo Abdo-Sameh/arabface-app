@@ -128,9 +128,7 @@ export class EditPagePage {
       this.navCtrl.push(PagesPage);
   }
   back(){
-    this.navCtrl.push(Page,{
-      page: this.page,
-    });
+    this.navCtrl.pop();
   }
 
 }

@@ -23,7 +23,7 @@ export class GroupPage {
   posts
   saved
   members = {
-    
+
   }
   userId :any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
@@ -80,9 +80,8 @@ export class GroupPage {
       }
     });
   }
-  back()
-  {
-    this.navCtrl.push(GroupsPage);
+  back() {
+    this.navCtrl.pop();
   }
 
 }
