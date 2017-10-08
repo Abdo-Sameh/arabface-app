@@ -886,3 +886,8 @@ Start Menu Settings
 /*====================================
  //End Chat Room
 ====================================*/
+.modal-backdrop,.modal-backdrop.in {
+	background-color: transparent !important;
+	opacity: 1 !important;
+	z-index: -1 !important;
+ }

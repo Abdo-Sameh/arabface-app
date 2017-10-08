@@ -21,6 +21,8 @@ export class VideoPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public remoteService :RemoteServiceProvider, public toastCtrl :ToastController) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.video = this.navParams.get('video');
+    // this.video.code = this.video.code.replace(/['"]+/g, '');
+    console.log(this.video.code);
   }
 
   ionViewDidLoad() {
