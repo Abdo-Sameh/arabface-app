@@ -996,6 +996,10 @@ console.log(url)
           //do((res : Response ) => console.log(res.json()))
          .map((res : Response ) => res.json());
         }
+        pageLikes(typeId, userId, likeType){
+          return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/count/likes?type=page&type_id=' + typeId + "&userid=" + userId + "&like_type=" + likeType)
+          .map((res : Response ) => res.json());
+        }
 
         getPageRoles(id, userid){
           return this.http.get("http://192.168.1.252/arabface/api/14789632/page/get/roles?userid=" + userid + "&id=" + id)
@@ -1025,11 +1029,9 @@ console.log(url)
 
         getGroups(type, term, filter, userId){
             return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/group/browse?type=' + type + "&term=" + term + "&filter=" + filter + "&userid=" + userId)
-
             .map((res : Response ) => res.json());
 
         }
-
 
         createGroup(title, description, name, privacy, userId){
           let headers = new Headers();
@@ -1094,6 +1096,11 @@ console.log(url)
 
         groupFeeding(id){
           return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/feeds?type=group&type_id='  + id)
+          .map((res : Response ) => res.json());
+        }
+
+        groupMembers(group_id, userid){
+          return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/group/members?group_id=' + group_id + '&userid=' + userid)
           .map((res : Response ) => res.json());
         }
 
