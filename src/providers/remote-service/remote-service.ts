@@ -36,7 +36,7 @@ let apiURL = 'http://192.168.1.252/arabface/api/14789632/';
 export class RemoteServiceProvider {
  public Id :number;
  deviceLanguage
- response ; 
+ response ;
  serverURL ="http://192.168.1.252"
  KEY = '14789632'
 
@@ -78,7 +78,7 @@ export class RemoteServiceProvider {
 
        }).catch(function(error) {
         loader.dismiss();
-        
+
  // Handle Errors here.
  var errorCode = error.code;
 
@@ -200,7 +200,7 @@ let body1 = body.toString () ;
 
 
 let url = this.serverURL+'/arabface/api/'+this.KEY+'/signup?' + 'firstname=' + data.firstname + '&lastname=' + data.lastname + '&username=' + name + '&email_address=' + data.email_address + '&password='+password ;
-let url2 = this.serverURL+'/arabface/api/'+this.KEY+'/signup' ; 
+let url2 = this.serverURL+'/arabface/api/'+this.KEY+'/signup' ;
 
 
 let headers = new Headers();
@@ -688,7 +688,7 @@ user = new Observable(observer => {
     urlSearchParams.append('entity_type', "user" );
     urlSearchParams.append('feeling_type', "listening-to" );
     urlSearchParams.append('location', location );
-    
+
     let body = urlSearchParams.toString()
 
    return this.http.post(this.serverURL+'/arabface/api/'+this.KEY+'/feed/add', body, {headers: headers})
@@ -706,7 +706,7 @@ user = new Observable(observer => {
     urlSearchParams.append('type', "feed" );
     urlSearchParams.append('entity_type', "user" );
     urlSearchParams.append('background', "listening-to" );
-    
+
     let body = urlSearchParams.toString()
 
    return this.http.post(this.serverURL+'/arabface/api/'+this.KEY+'/feed/add', body, {headers: headers})
@@ -1106,7 +1106,7 @@ console.log(url)
           }
           return this.http.get("http://192.168.1.252/arabface/api/14789632/event/browse?userid=" + userId + "&term=" + term + "&category_id=" + categoryId + "&type=" + type)
           .map((res : Response ) => res.json());
-        
+
       }
         getEventCategories(){
           return this.http.get("http://192.168.1.252/arabface/api/14789632/event/get/categories")
@@ -1284,11 +1284,11 @@ console.log(url)
           let headers = new Headers();
           headers.append('Content-Type', 'application/x-www-form-urlencoded');
           let urlSearchParams = new URLSearchParams();
-          urlSearchParams.append('who-can-view-profile', wcvp );
-          urlSearchParams.append('who-can-post-profile', wcpp );
-          urlSearchParams.append('who-can-see-birth', wcsb );
-          urlSearchParams.append('who-can-send-message', wcsm )
-          urlSearchParams.append('who-can-see-visitors', wcsv );
+          urlSearchParams.append('who_can_view_profile', wcvp );
+          urlSearchParams.append('who_can_post_profile', wcpp );
+          urlSearchParams.append('who_can_see_birth', wcsb );
+          urlSearchParams.append('who_can_send_message', wcsm )
+          urlSearchParams.append('who_can_see_visitors', wcsv );
           urlSearchParams.append('email-notification', en )
           urlSearchParams.append('userid', userid );
           let body = urlSearchParams.toString()
