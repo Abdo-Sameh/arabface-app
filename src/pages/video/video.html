@@ -48,8 +48,8 @@
 								<a href="#" class="btn btn-default btn-sm" data-toggle="dropdown"><span class="caret"></span></a>
 								<ul class="dropdown-menu dropdown-menu-right">
 									<li><a (click)="editVideoPage()" href="#">Edit</a></li>
-									<li><a href="#">Delete</a></li>
-									<li><a href="#">Save</a></li>
+									<li><a (click)="deleteVideo(video.id)"href="#">Delete</a></li>
+									<!-- <li><a href="#">Save</a></li> -->
 								</ul>
 							</div>
 						</div>
@@ -57,7 +57,7 @@
 					</div>
 					<div class="feed-body">
 						<h3>{{ video.title }}</h3>
-            <div ng-bind-html="video.code"></div>
+            <!-- <div ><div ng-bind-html="{{video.code}}"></div></div> -->
 					</div>
 					<div class="feed-footer">
 						<div class="action-result flex-space-between">
