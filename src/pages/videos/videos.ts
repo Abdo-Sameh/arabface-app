@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, LoadingController, ToastController
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
 import { TabsPage } from '../tabs/tabs';
 import { VideoPage } from '../video/video';
+import { AddVideoPage } from '../add-video/add-video';
+
 
 /**
  * Generated class for the VideosPage page.
@@ -64,6 +66,9 @@ export class VideosPage {
     this.navCtrl.push(VideoPage, {
       'video' : video
     })
+  }
+  addNewVideo(){
+    this.navCtrl.push(AddVideoPage);
   }
   back() {
     this.navCtrl.push(TabsPage);
