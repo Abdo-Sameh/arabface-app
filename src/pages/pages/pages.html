@@ -58,7 +58,7 @@
 								        <h3><a (click)="pagePage()" href="#">{{ page.title }}</a></h3>
 								        <p>{{ page.description }}</p>
 								        <a *ngIf="page.has_like == false" (click)="likePage(userId, page.id, 'like', i)" href="#"  class="btn btn-default btn-sm"><i class="fa fa-thumbs-o-up"></i> Like</a>
-                        <a *ngIf="page.has_like == true" style="color: #488aff" (click)="likePage(userId, page.id, 'dislike', i)" href="#"  class="btn btn-default btn-sm"><i class="fa fa-thumbs-o-up"></i> Liked</a>
+                        <a *ngIf="page.has_like == true" style="color: #488aff" (click)="likePage(userId, page.id, 'dislike', i)" href="#"  class="btn btn-default btn-sm"><i class="fa fa-check"></i> Liked</a>
                     </div>
 							    </div>
 							</div>
