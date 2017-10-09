@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController, ToastController
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
 import {TabsPage} from '../tabs/tabs';
 import {PagesPage} from '../pages/pages';
-
+import {InviteFriendPage} from '../invite-friend/invite-friend';
 import {EditPagePage} from '../edit-page/edit-page';
 
 
@@ -81,6 +81,11 @@ export class Page {
       }else{
         this.saved = false;
       }
+    });
+  }
+  inviteFriend(){
+    this.navCtrl.push(InviteFriendPage, {
+      page: this.page
     });
   }
   back()

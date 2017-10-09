@@ -434,9 +434,8 @@ user = new Observable(observer => {
    friendsListApiCall(the_userid, id, term)
    {
 
-    return  this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/friends?userid='+id + "&the_userid=" + the_userid + "&term=" + term)
+    return  this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/profile/friends?userid='+id + "&the_userid=" + the_userid + "&term=" + term)
 
-    //.do((res : Response ) => console.log(res.json()))
     .map((res : Response ) => res.json());
    }
    ///////// Friends function End ////////
@@ -1023,6 +1022,14 @@ console.log(url)
 
         removePageRole(user, page_id, userid){
           return this.http.get("http://192.168.1.252/arabface/api/14789632/page/remove/role?userid=" + userid + "&user=" + user + "&page_id=" + page_id)
+          .map((res : Response ) => res.json());
+        }
+        inviteFriendTolikepage(userid, page_id, invited_id){
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/page/invite/friend?userid=" + userid + "&user=" + user + "&page_id=" + page_id + "&invited_id=" + invited_id)
+          .map((res : Response ) => res.json());
+        }
+        isInvitedPage(page, user, userid){
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/page/invited?userid=" + userid + "&page=" + page + "&user=" + user)
           .map((res : Response ) => res.json());
         }
 
