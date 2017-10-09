@@ -199,6 +199,7 @@
                 </div>
             </div>
           </div>
+          <a (click)="getSavedPages(page + 1)" href="#" class="btn btn-default btn-block">See More</a>
         </div>
 
         <!-- <div class="tab-content"> -->
@@ -216,6 +217,7 @@
 							    </div>
 							</div>
 						</div>
+            <a (click)="getSavedEvents(page + 1)" href="#" class="btn btn-default btn-block">See More</a>
 					</div>
 				<!-- </div> -->
         <div class="tab-pane" *ngIf="type == 'groups'">
@@ -233,6 +235,7 @@
                 </div>
             </div>
           </div>
+          <a (click)="getSavedGroups(page + 1)" href="#" class="btn btn-default btn-block">See More</a>
         </div>
 
 			</div>
