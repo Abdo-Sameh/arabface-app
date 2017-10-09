@@ -28,8 +28,8 @@
 				<ul class="nav nav-tabs flex-space-around">
 
 
-					<li id="active1" (click)="getPages('all', this.search, this.category, userId)" class="active"><a   data-toggle="tab" href="#tab-content-1">Pages</a></li>
-					<li id="active2"><a (click)="getPages('mine', this.search, this.category, userId)"data-toggle="tab"  href="#tab-content-2">My Pages</a></li>
+					<li id="active1" (click)="getPages('all', '', this.category, userId, 1)" class="active"><a   data-toggle="tab" href="#tab-content-1">Pages</a></li>
+					<li id="active2"><a (click)="getPages('mine', '', this.category, userId, 1)"data-toggle="tab"  href="#tab-content-2">My Pages</a></li>
 
         </ul>
 			</div>
@@ -37,11 +37,11 @@
 				<form class="search-form search-filter mt-10 mb-30">
 					<div class="input-group">
 						<input type="text" class="form-control"  [(ngModel)]="search" [ngModelOptions]="{ standalone :true}" placeholder="Search here ...">
-						<select class="form-control"  [(ngModel)]="category" [ngModelOptions]="{ standalone :true}" (ngModelChange)="getPages(this.type, this.search ,this.category, userId)">
+						<select class="form-control"  [(ngModel)]="category" [ngModelOptions]="{ standalone :true}" (ngModelChange)="getPages(this.type, '' ,this.category, userId, 1)">
 							<option *ngFor="let category of categories"  value="{{ category.id }}">{{ category.title }}</option>
 						</select>
 						<div class="input-group-btn">
-							<button (click)="getPages('search',this.search,this.category,userId)" type="submit" class="btn btn-default">
+							<button (click)="getPages('search',this.search,this.category,userId, 1)" type="submit" class="btn btn-default">
 								<i class="fa fa-search"></i>
 							</button>
 						</div>
@@ -63,6 +63,7 @@
 							    </div>
 							</div>
 						</div>
+            <a (click)="getPages(this.type, this.search ,this.category, userId, page+1)" href="#" class="btn btn-default btn-block">See More</a>
 					</div>
 					<div id="tab-content-2" class="tab-pane fade">
 						<div class="row thumbnails">
@@ -78,6 +79,7 @@
 							    </div>
 							</div>
 						</div>
+            <a (click)="getPages(this.type, this.search ,this.category, userId, page+1)" href="#" class="btn btn-default btn-block">See More</a>
 					</div>
 				</div>
 			</div>

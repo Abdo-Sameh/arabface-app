@@ -25,23 +25,24 @@ export class EventsPage {
   search
   category
   type
-
+  page
   constructor(public navCtrl: NavController, public navParams: NavParams , public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.userId=localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.type = "upcoming"
     this.category = "all"
-    this.getEvents(this.type, this.category, "", this.userId);
+    this.page = 1;
+    this.getEvents(this.type, this.category, "", this.userId, 1);
   }
 
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EventsPage');
   }
-  getEvents(type, categoryId, term, userId){
+  getEvents(type, categoryId, term, userId, page){
     let loading = this.loadingCtrl.create({
       content: "Loading",
     });
-    loading.present()
+
 
     $('#selectType').on('change', function () {
         categoryId = "all";
@@ -51,20 +52,29 @@ export class EventsPage {
     });
     this.type = type;
     this.category = categoryId;
-
-
-    this.remoteService.getEvents(type, categoryId, term , userId).subscribe(res =>{
-        loading.dismiss();
-        console.log(type);
-        console.log(this.category);
-        console.log(term);
-        this.events = res.events ;
-        this.categories = res.categories;
-        console.log(res);
+    if(page > 1){
+      this.remoteService.getEvents(type, categoryId, term , userId, page, 2).subscribe(res =>{
+        for(let x of res.events){
+          this.events.push(x);
+        }
       });
+      this.page = page;
+    }
+    else{
+      this.page = page;
+      loading.present()
+      this.remoteService.getEvents(type, categoryId, term , userId, page, 2).subscribe(res =>{
+          loading.dismiss();
+          console.log(type);
+          console.log(this.category);
+          console.log(term);
+          this.events = res.events ;
+          this.categories = res.categories;
+          console.log(res);
+        });
 
-      this.search = "";
-
+        this.search = term;
+      }
   }
   createEventPage(){
     this.navCtrl.push(CreateEventPage);

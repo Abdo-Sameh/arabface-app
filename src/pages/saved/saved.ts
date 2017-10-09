@@ -20,13 +20,18 @@ import { TabsPage } from '../tabs/tabs';
 export class SavedPage {
   userId
   type = "posts"
-  pages
-  groups
-  events
+  pages :any
+  groups :any
+  events :any
   posts
+  page
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.type = "posts"
+    this.page = 1;
+    this.pages = [];
+    this.groups = [];
+    this.events = [];
     this.getSavedPosts();
   }
 
@@ -44,16 +49,19 @@ export class SavedPage {
         console.log(res);
       });
   }
-  getSavedPages(){
+  getSavedPages(page){
     let loading = this.loadingCtrl.create({
       content: "Loading",
     });
     loading.present()
-    this.remoteService.getPages("saved", "", "all", this.userId).subscribe(res =>{
+    this.remoteService.getPages("saved", "", "all", this.userId, page, 4).subscribe(res =>{
         loading.dismiss();
-        this.pages = res.pages ;
+        for(let x of res.pages){
+          this.pages.push(x);
+        }
         console.log(res);
       });
+      this.page = page;
   }
   pagePage(page){
     this.navCtrl.push(Page, {
@@ -71,16 +79,19 @@ export class SavedPage {
     });
   }
 
-  getSavedGroups(){
+  getSavedGroups(page){
     let loading = this.loadingCtrl.create({
       content: "Loading",
     });
     loading.present()
-    this.remoteService.getGroups("saved", "", "all", this.userId).subscribe(res =>{
+    this.remoteService.getGroups("saved", "", "all", this.userId, page, 4).subscribe(res =>{
         loading.dismiss();
-        this.groups = res;
+        for(let x of res){
+          this.groups.push(x);
+        }
         console.log(res);
       });
+      this.page = page;
   }
   groupPage(group){
     this.navCtrl.push(GroupPage, {
@@ -97,16 +108,19 @@ export class SavedPage {
     });
 
   }
-  getSavedEvents(){
+  getSavedEvents(page){
     let loading = this.loadingCtrl.create({
       content: "Loading",
     });
     loading.present()
-    this.remoteService.getEvents("saved", "all", "" , this.userId).subscribe(res =>{
+    this.remoteService.getEvents("saved", "all", "" , this.userId, page, 2).subscribe(res =>{
         loading.dismiss();
-        this.events = res.events ;
+        for(let x of res.events){
+          this.events.push(x);
+        }
         console.log(res);
       });
+      this.page = page;
   }
   goToEventPage(event){
     this.navCtrl.push(EventPage, {
@@ -117,11 +131,11 @@ export class SavedPage {
     if(type == 'posts')
       this.getSavedPosts();
     else if(type == 'groups')
-      this.getSavedGroups();
+      this.getSavedGroups(1);
     else if(type == 'events')
-      this.getSavedEvents();
+      this.getSavedEvents(1);
     else if(type == 'pages')
-      this.getSavedPages();
+      this.getSavedPages(1);
   }
   back(){
     this.navCtrl.push(TabsPage);

@@ -78,5 +78,8 @@ export class CreateEventPage {
       });
       this.navCtrl.push(EventsPage);
   }
+  back(){
+    this.navCtrl.pop();
+  }
 
 }

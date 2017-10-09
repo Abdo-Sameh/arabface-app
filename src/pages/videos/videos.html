@@ -28,8 +28,8 @@
 			<div class="panel panel-theme">
 				<ul class="nav nav-tabs flex-space-around">
 
-					<li (click)="getVideos(this.category, this.search,this.type, this.filter, this.userId)" class="active"><a data-toggle="tab" href="#tab-content-1"> Videos</a></li>
-					<li (click)="getVideos(this.category, this.search,'mine', this.filter, this.userId)" ><a data-toggle="tab" href="#tab-content-2"> My Videos</a></li>
+					<li (click)="getVideos(this.category, '',this.type, this.filter, this.userId, 1)" class="active"><a data-toggle="tab" href="#tab-content-1"> Videos</a></li>
+					<li (click)="getVideos(this.category, '','mine', this.filter, this.userId, 1)" ><a data-toggle="tab" href="#tab-content-2"> My Videos</a></li>
 				</ul>
 			</div>
 			<div class="container">
@@ -40,7 +40,7 @@
 
 								<input type="text" class="form-control" [(ngModel)]="search" [ngModelOptions]="{ standalone :true}" placeholder="Search here ...">
 								<div class="input-group-btn">
-									<button (click)="getVideos(this.category, this.search,this.type, this.filter, this.userId)" type="submit" class="btn btn-default">
+									<button (click)="getVideos(this.category, this.search,this.type, this.filter, this.userId, 1)" type="submit" class="btn btn-default">
 										<i class="fa fa-search"></i>
 									</button>
 								</div>
@@ -49,10 +49,10 @@
 						<form class="search-form search-filter select-half mt-10 mb-30">
 							<div class="input-group flex">
 
-								<select class="form-control" [(ngModel)]="category" [ngModelOptions]="{ standalone :true}" (ngModelChange)="getVideos(this.category, this.search,this.type, this.filter, this.userId)">
+								<select class="form-control" [(ngModel)]="category" [ngModelOptions]="{ standalone :true}" (ngModelChange)="getVideos(this.category, '',this.type, this.filter, this.userId, 1)">
 									<option *ngFor="let category of categories"  value="{{ category.id }}">{{ category.title }}</option>
 								</select>
-								<select class="form-control" [(ngModel)]="filter" [ngModelOptions]="{ standalone :true}" (ngModelChange)="getVideos(this.category, this.search,this.type, this.filter, this.userId)">
+								<select class="form-control" [(ngModel)]="filter" [ngModelOptions]="{ standalone :true}" (ngModelChange)="getVideos(this.category, '',this.type, this.filter, this.userId, 1)">
 									<option value="all">All</option>
 									<option value="top">Top</option>
 									<option value="featured">Featured</option>
@@ -74,6 +74,7 @@
 							    </div>
 							</div>
 						</div>
+            <a (click)="getVideos(this.category, this.search,this.type, this.filter, this.userId, page + 1)" href="#" class="btn btn-default btn-block">See More</a>
 					</div>
 					<div id="tab-content-2" class="tab-pane fade">
 						<div class="row thumbnails">
@@ -89,6 +90,7 @@
 							    </div>
 							</div>
 						</div>
+            <a (click)="getVideos(this.category, this.search,this.type, this.filter, this.userId, page + 1)" href="#" class="btn btn-default btn-block">See More</a>
 					</div>
 				</div>
 			</div>

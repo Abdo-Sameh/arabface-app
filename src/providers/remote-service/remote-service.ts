@@ -922,8 +922,8 @@ console.log(url)
         }
 
         /////////////// get  pages /////////////////////////
-        getPages(type, term, categoryId, userId){
-          return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/page/browse?type=' + type + "&term=" + term + "&category_id=" + categoryId + "&userid=" + userId)
+        getPages(type, term, categoryId, userId, page, limit){
+          return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/page/browse?type=' + type + "&term=" + term + "&category_id=" + categoryId + "&page=" + page + "&limit=" + limit + "&userid=" + userId)
           .map((res : Response ) => res.json());
         }
 
@@ -1027,8 +1027,8 @@ console.log(url)
         }
 
 
-        getGroups(type, term, filter, userId){
-            return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/group/browse?type=' + type + "&term=" + term + "&filter=" + filter + "&userid=" + userId)
+        getGroups(type, term, filter, userId, page, limit){
+            return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/group/browse?type=' + type + "&term=" + term + "&filter=" + filter + "&page=" + page + "&limit=" + limit + "&userid=" + userId)
             .map((res : Response ) => res.json());
 
         }
@@ -1106,12 +1106,12 @@ console.log(url)
 
         /////////////////// Events /////////////////////////
 
-        getEvents(type, categoryId, term, userId){
+        getEvents(type, categoryId, term, userId, page, limit){
           if(type == ""){
-            return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/event/browse?userid=' + userId + "&term=" + term + "&category_id=" + categoryId)
+            return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/event/browse?userid=' + userId + "&term=" + term + "&category_id=" + categoryId + "&page=" + page + "&limit=" + limit)
             .map((res : Response ) => res.json());
           }
-          return this.http.get("http://192.168.1.252/arabface/api/14789632/event/browse?userid=" + userId + "&term=" + term + "&category_id=" + categoryId + "&type=" + type)
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/event/browse?userid=" + userId + "&term=" + term + "&category_id=" + categoryId + "&type=" + type + "&page=" + page + "&limit=" + limit)
           .map((res : Response ) => res.json());
 
       }
@@ -1204,8 +1204,8 @@ console.log(url)
 
         /////////////////// Videos ////////////////////////
 
-        getVideos(categoryId, term, type, filter, userId){
-          return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/videos/browse?userid=' + userId + "&term=" + term + "&category_id=" + categoryId + "&type=" + type + "&filter=" + filter)
+        getVideos(categoryId, term, type, filter, userId, page, limit){
+          return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/videos/browse?userid=' + userId + "&term=" + term + "&category_id=" + categoryId + "&type=" + type + "&filter=" + filter + "&page=" + page + "&limit=" + limit)
           .map((res : Response ) => res.json());
         }
         getVideoCategories(){
