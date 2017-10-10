@@ -15,19 +15,25 @@ import { RemoteServiceProvider} from './../../providers/remote-service/remote-se
   templateUrl: 'photos.html',
 })
 export class PhotosPage {
-  photos ;
-  userid ;
+  photos
+  userId
 
   constructor(public navCtrl: NavController,public remoteService : RemoteServiceProvider, public navParams: NavParams) {
-    this.userid = localStorage.getItem('userDataID').replace(/[^0-9]/g, "")
-    this.getPhotsFromProvider(this.userid)
+    this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "")
+    // this.getPhotsFromProvider(this.userid)
+    this.getPhotos("all", 10, 0);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PhotosPage');
   }
+  getPhotos(album_id, limit, offset){
+    this.remoteService.getPhotos(this.userId, album_id, limit, offset).subscribe(res => {
+      this.photos = res;
+    });
+  }
 
-  getPhotsFromProvider (userid : number)
+  getPhotsFromProvider (userid)
   {
       this.remoteService.userPhotosAlbumOnProfile(userid).subscribe((res) => { this.photos = res})
   }
