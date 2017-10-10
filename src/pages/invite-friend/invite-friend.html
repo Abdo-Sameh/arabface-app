@@ -46,9 +46,19 @@
 								<h3 class="mt-15"><a href="#">{{friend.name}}</a></h3>
 							</div>
 						</div>
-            <button *ngIf="friend.invited == true" type="submit" class="fa fa-check btn btn-theme pull-right">Invited</button>
-            <button *ngIf="friend.invited == false" (click)="inviteFriendTolikepage(friend.id, i)" type="submit" class="btn btn-theme pull-right">Invite</button>
-					</div> <!-- //user-item -->
+            <div *ngIf="page">
+              <button *ngIf="friend.invited == true" type="submit" class="fa fa-check btn btn-theme pull-right">Invited</button>
+              <button *ngIf="friend.invited == false" (click)="inviteFriendTolikepage(friend.id, i)" type="submit" class="btn btn-theme pull-right">Invite</button>
+            </div>
+            <div *ngIf="event">
+              <button *ngIf="friend.invited == true" type="submit" class="fa fa-check btn btn-theme pull-right">Invited</button>
+              <button *ngIf="friend.invited == false" (click)="inviteFriendToEvent(friend.id, i)" type="submit" class="btn btn-theme pull-right">Invite</button>
+            </div>
+            <div *ngIf="group">
+              <button  type="submit" class="fa fa-check btn btn-theme pull-right">Added</button>
+              <button  type="submit" class="btn btn-theme pull-right">Add</button>
+            </div>
+          </div>
 
 
 				</form>

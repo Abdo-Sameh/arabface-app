@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
-import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
-import {TabsPage} from '../tabs/tabs';
-import {PagesPage} from '../pages/pages';
-import {InviteFriendPage} from '../invite-friend/invite-friend';
-import {EditPagePage} from '../edit-page/edit-page';
+import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
+import { TabsPage } from '../tabs/tabs';
+import { PagesPage } from '../pages/pages';
+import { InviteFriendPage } from '../invite-friend/invite-friend';
+import { EditPagePage } from '../edit-page/edit-page';
 
 
 /**

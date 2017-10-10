@@ -1207,6 +1207,14 @@ console.log(url)
           return this.http.post("http://192.168.1.252/arabface/api/14789632/event/rsvp", body, {headers: headers})
           .map((res : Response ) => res.json());
         }
+        inviteFriendToEvent(event_id, invited_id, userid){
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/event/invite/friend?userid=" + userid + "&event_id=" + event_id + "&invited_id=" + invited_id)
+          .map((res : Response ) => res.json());
+        }
+        isInvitedEvent(event_id, user, userid){
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/event/invited?userid=" + userid + "&event_id=" + event_id + "&user=" + user)
+          .map((res : Response ) => res.json());
+        }
         ////////////////////////////////////////////////////
 
         /////////////////// Videos ////////////////////////
