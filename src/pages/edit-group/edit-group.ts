@@ -58,9 +58,7 @@ export class EditGroupPage {
   }
 
   back() {
-    this.navCtrl.push(GroupPage, {
-      group: this.group
-    });
+    this.navCtrl.pop();
   }
 
 }

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController, ToastController
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
 import { EditEventPage } from '../edit-event/edit-event';
 import { EventsPage } from '../events/events';
+import { InviteFriendPage } from '../invite-friend/invite-friend';
 
 /**
  * Generated class for the EventPage page.
@@ -58,6 +59,11 @@ export class EventPage {
     this.remoteService.rsvp(event_id, rsvp, this.userId).subscribe(res => {
       this.event.rsvp = rsvp;
       console.log(res);
+    });
+  }
+  inviteFriend(){
+    this.navCtrl.push(InviteFriendPage, {
+      event: this.event
     });
   }
   back(){
