@@ -418,15 +418,15 @@ user = new Observable(observer => {
   }
     ///////// Signup function End ////////
 
-  getPhotos()
-   {
-
-          return  this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/page/browse')
-
-          .do((res : Response ) => console.log(res.json()))
-          .map((res : Response ) => res.json());
-
-   }
+  // getPhotos()
+  //  {
+  //
+  //         return  this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/page/browse')
+  //
+  //         .do((res : Response ) => console.log(res.json()))
+  //         .map((res : Response ) => res.json());
+  //
+  //  }
 
 
 
@@ -1402,4 +1402,9 @@ console.log(url)
           .map((res : Response ) => res.json());
         }
         ////////////////////////////////////////////////////
+
+        getPhotos(userid, album_id, limit, offset){
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/photo/album/photos?userid=" + userid + "&album_id=" + album_id + "&limit=" + limit + "&offset=" + offset)
+          .map((res : Response ) => res.json());
+        }
 }
