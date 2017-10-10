@@ -28,16 +28,16 @@
 			<div class="container">
 				<form class="search-form user-item pb-25">
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search here ...">
+						<input type="text" class="form-control" [(ngModel)]="search" [ngModelOptions]="{ standalone :true}" (keyup)="friendsListApiCall(userId, userId, search)" placeholder="Search here ...">
 						<div class="input-group-btn">
-							<button type="submit" class="btn btn-default">
+							<!-- <button type="submit" class="btn btn-default">
 								<i class="fa fa-search"></i>
-							</button>
+							</button> -->
 						</div>
 					</div>
 				</form>
-				<form class="users-list" *ngFor="let friend of friends; let i = index;">
-					<div class="user-item">
+				<form class="users-list">
+					<div class="user-item" *ngFor="let friend of friends; let i = index;">
 						<div class="pull-left">
 							<div class="user-img">
 								<a href="#"><img src="{{friend.avatar}}" alt=""></a>
@@ -46,12 +46,8 @@
 								<h3 class="mt-15"><a href="#">{{friend.name}}</a></h3>
 							</div>
 						</div>
-            <button *ngIf="isInvitedPage(friend.id)" type="submit" class="btn btn-theme pull-right">Invited</button>
-            <button *ngIf="!isInvitedPage(friend.id)"type="submit" class="btn btn-theme pull-right">Invite</button>
-						<!-- <div class="checkbox pull-right pt-15">
-	                        <input type="checkbox" id="check_1">
-	                        <label for="check_1"></label>
-						</div> -->
+            <button *ngIf="friend.invited == true" type="submit" class="fa fa-check btn btn-theme pull-right">Invited</button>
+            <button *ngIf="friend.invited == false" (click)="inviteFriendTolikepage(friend.id, i)" type="submit" class="btn btn-theme pull-right">Invite</button>
 					</div> <!-- //user-item -->
 
 
