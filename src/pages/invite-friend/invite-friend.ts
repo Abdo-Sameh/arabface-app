@@ -19,12 +19,14 @@ export class InviteFriendPage {
   friends
   page
   event
+  group
   search
   invited :boolean
   constructor(public navCtrl: NavController, public navParams: NavParams, public remoteService :RemoteServiceProvider, public toastCtrl :ToastController) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.page = navParams.get("page");
     this.event = navParams.get("event");
+    this.group = navParams.get("group");
     this.friendsListApiCall(this.userId, this.userId, '');
   }
   ionViewDidLoad() {
@@ -59,6 +61,15 @@ export class InviteFriendPage {
               else
                 res[i].invited = false
             });
+          }else if(this.group){
+            console.log('group');
+            this.remoteService.isMember(this.group.id, res[i].id, this.userId).subscribe(res2 => {
+              console.log(res2);
+              if(res2.status == 1)
+                res[i].added = true
+              else
+                res[i].added = false
+            });
           }
       }
       console.log(this.friends);
@@ -86,6 +97,21 @@ export class InviteFriendPage {
       console.log(res);
       if(res.status == 1)
         this.friends[index].invited = true;
+      // else if(res.status == 0 && res.message == "user-already-liked"){
+      //   let toast = this.toastCtrl.create({
+      //     message: 'User already liked',
+      //     duration: 3000,
+      //     position: 'top'
+      //   });
+      //   toast.present();
+      // }
+    });
+  }
+  addMember(id, index){
+    this.remoteService.addMember(this.group.id, id, this.userId).subscribe(res =>{
+      console.log(res);
+      if(res.status == 1)
+        this.friends[index].added = true;
       // else if(res.status == 0 && res.message == "user-already-liked"){
       //   let toast = this.toastCtrl.create({
       //     message: 'User already liked',

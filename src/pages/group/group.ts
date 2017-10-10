@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController} from 'ionic-angular';
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
-
+import { InviteFriendPage } from '../invite-friend/invite-friend';
 import {GroupsPage} from '../groups/groups';
 import {EditGroupPage} from '../edit-group/edit-group';
 
@@ -79,6 +79,11 @@ export class GroupPage {
         this.saved = false;
       }
     });
+  }
+  addMembers(){
+    this.navCtrl.push(InviteFriendPage, {
+      group : this.group
+    })
   }
   back() {
     this.navCtrl.pop();

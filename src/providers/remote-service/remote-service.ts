@@ -1110,7 +1110,14 @@ console.log(url)
           return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/group/members?group_id=' + group_id + '&userid=' + userid)
           .map((res : Response ) => res.json());
         }
-
+        isMember(group_id, id, userid){
+          return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/group/member?group_id=' + group_id + "&id=" + id + '&userid=' + userid)
+          .map((res : Response ) => res.json());
+        }
+        addMember(group_id, id, userid){
+          return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/group/add/member?group_id=' + group_id + "&user_id=" + id + '&userid=' + userid)
+          .map((res : Response ) => res.json());
+        }
         /////////////////// Events /////////////////////////
 
         getEvents(type, categoryId, term, userId, page, limit){

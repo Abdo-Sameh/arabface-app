@@ -55,8 +55,8 @@
               <button *ngIf="friend.invited == false" (click)="inviteFriendToEvent(friend.id, i)" type="submit" class="btn btn-theme pull-right">Invite</button>
             </div>
             <div *ngIf="group">
-              <button  type="submit" class="fa fa-check btn btn-theme pull-right">Added</button>
-              <button  type="submit" class="btn btn-theme pull-right">Add</button>
+              <button *ngIf="friend.added == true" type="submit" class="fa fa-check btn btn-theme pull-right">Added</button>
+              <button *ngIf="friend.added == false" (click)="addMember(friend.id, i)" type="submit" class="btn btn-theme pull-right">Add</button>
             </div>
           </div>
 
