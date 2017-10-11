@@ -1403,8 +1403,45 @@ console.log(url)
         }
         ////////////////////////////////////////////////////
 
-        getPhotos(userid, album_id, limit, offset){
-          return this.http.get("http://192.168.1.252/arabface/api/14789632/photo/album/photos?userid=" + userid + "&album_id=" + album_id + "&limit=" + limit + "&offset=" + offset)
+        getPhotos(userid, album_id, limit, offset, the_userid){
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/photo/album/photos?userid=" + userid + "&album_id=" + album_id + "&limit=" + limit + "&offset=" + offset + "&the_userid=" + the_userid)
+          .map((res : Response ) => res.json());
+        }
+
+        getAlbums(userid, limit, offset, type){
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/photo/albums?userid=" + userid + "&limit=" + limit + "&offset=" + offset + "&type=" + type)
+          .map((res : Response ) => res.json());
+        }
+
+        createAlbum(title, desc, privacy, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('title', title );
+          urlSearchParams.append('desc', desc);
+          urlSearchParams.append('privacy', privacy);
+          urlSearchParams.append('userid', userid);
+          let body = urlSearchParams.toString()
+          return this.http.post("http://192.168.1.252/arabface/api/14789632/photo/album/add", body, {headers: headers})
+          .map((res : Response ) => res.json());
+        }
+
+        editAlbum(title, desc, privacy, album_id, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('title', title );
+          urlSearchParams.append('desc', desc);
+          urlSearchParams.append('privacy', privacy);
+          urlSearchParams.append('album_id', album_id);
+          urlSearchParams.append('userid', userid);
+          let body = urlSearchParams.toString()
+          return this.http.post("http://192.168.1.252/arabface/api/14789632/photo/album/add", body, {headers: headers})
+          .map((res : Response ) => res.json());
+        }
+
+        albumDetails(album_id, userid){
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/photo/album/details?userid=" + userid + "&album_id=" + album_id)
           .map((res : Response ) => res.json());
         }
 }
