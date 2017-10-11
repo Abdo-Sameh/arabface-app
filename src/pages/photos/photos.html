@@ -49,11 +49,11 @@
 										<i class="ion-android-add-circle mr-5"></i>
 										Add New Photo
 									</label>
-                  <label *ngIf="category == 1 || category == 2" for="photo-upload">
+                  <label *ngIf="category == 1 || category == 2" (click)="createAlbum()" for="photo-upload">
 										<i class="ion-android-add-circle mr-5"></i>
 										Create New Album
 									</label>
-									<input id="photo-upload" type="file">
+									<!-- <input id="photo-upload" type="file"> -->
 								</div>
 							</form>
 						</a>

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {TabsPage} from '../tabs/tabs';
+import { TabsPage } from '../tabs/tabs';
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
+import { CreateAlbumPage } from '../create-album/create-album';
 
 /**
  * Generated class for the PhotosPage page.
@@ -77,6 +78,9 @@ export class PhotosPage {
         this.offset += limit;
       });
     }
+  }
+  createAlbum(){
+    this.navCtrl.push(CreateAlbumPage);
   }
 
   back()

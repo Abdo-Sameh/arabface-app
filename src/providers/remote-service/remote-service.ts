@@ -514,7 +514,7 @@ user = new Observable(observer => {
     //////////  profile api  function End ///////////////
     profilePosts(id)
    {
-    return  this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/feeds?type=timeline&limit=1200&type_id='+id)
+    return  this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/feeds?type=timeline&type_id='+id)
 
     .map((res : Response ) => res.json());
    }
