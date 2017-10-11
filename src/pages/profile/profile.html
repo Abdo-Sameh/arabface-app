@@ -70,7 +70,7 @@
     <ul class="nav nav-tabs panel panel-theme flex-h-center">
       <li class="active"><a data-toggle="tab" href="#tab-content-1{{this.userId}}"><i class="fa fa-sliders" style="margin: 5px 0 2px 0;"></i> Timeline</a></li>
       <li><a (click)="getFollowingAndLikes(this.userID)" data-toggle="tab" href="#tab-content-2{{this.userId}}"><i class="fa fa-user" style="margin: 5px 0 2px 0;"></i> About</a></li>
-      <li><a (click)="getPhotsFromProvider(this.userID)" data-toggle="tab" href="#tab-content-3{{this.userId}}"><span style="margin:3px 0 4px;">140</span> Photos</a></li>
+      <li><a (click)="getPhotsFromProvider(this.userID)" data-toggle="tab" href="#tab-content-3{{this.userId}}"><span style="margin:3px 0 4px;">{{photos.length}}</span> Photos</a></li>
       <li><a (click)="getFriendsList(this.userID, this.userId, '')" data-toggle="tab" href="#tab-content-4{{this.userId}}"><i class="fa fa-users" style="margin: 5px 0 2px 0;"></i> Friends</a></li>
     </ul>
     <div class="tab-content">
@@ -337,7 +337,7 @@
         <div class="panel panel-theme">
           <ul class="profile-info">
             <!-- <li><i>{{ info.name }} :</i> {{ info.value }}</li> -->
-            <li><i class="fa fa-circle fa-fw" style="color: green;"></i> {{ profileInfo.online_time }}</li>
+            <li><i class="fa fa-circle fa-fw" style="color: green; font-size: 10px;"></i> {{ profileInfo.online_time }}</li>
             <li><i class="fa fa-map-marker fa-fw"></i> {{ profileInfo.city }}, {{ profileInfo.country  }}</li>
             <li><i class="fa fa-user fa-fw"></i> {{ profileInfo.gender }}</li>
             <li><i class="fa fa-calendar fa-fw"></i> {{ profileInfo.birth }}</li>
@@ -357,7 +357,7 @@
             </div>
 
           </div>
-          <a href="#" class="btn btn-default btn-block">See More</a>
+          <a (click)="getMorePages(userId)" href="#" class="btn btn-default btn-block">See More</a>
         </div>
         <div class="btn btn-theme btn-block">Followers</div>
         <div class="panel panel-theme">

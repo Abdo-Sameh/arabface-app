@@ -2,4 +2,14 @@ page-pages {
     .scroll-content {
         padding-top: 70px !important;
     }
+    .pages .nav-tabs {
+    margin-top: 69px !important;
+    border: none !important;
+  }
+  .panel-theme {
+      padding: 10px 15px;
+      border-bottom: 1px solid transparent;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+    }
 }
