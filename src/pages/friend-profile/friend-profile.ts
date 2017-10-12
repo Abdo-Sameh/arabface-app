@@ -29,11 +29,12 @@ export class FriendProfilePage {
   friendslist
   followers
   following
-
+  myFriendsList
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider) {
     let data = navParams.get('userData');
-
+      this.friendslist = [];
+      this.myFriendsList = [];
       this.userID= data.id;
       console.log(data)
       console.log(this.userID , this.userId);
@@ -113,7 +114,16 @@ export class FriendProfilePage {
       content: "Loading",
     });
     loading.present()
-      this.remoteService.friendsListApiCall(Id, id, term).subscribe(res =>{loading.dismiss();this.friendslist=res ;console.log(res)});
+      this.remoteService.friendsListApiCall(Id, id, term).subscribe(res =>{this.friendslist=res ;console.log(res)});
+      this.remoteService.friendsListApiCall(this.userId, this.userId, term).subscribe(res1 => {
+        loading.dismiss();
+        console.log(res1);
+        for (var i = 0;i < res1.length; i++){
+            this.myFriendsList.push(res1[i].id);
+        }
+        console.log(this.myFriendsList);
+      });
+
   }
   goToPhotos()
   {

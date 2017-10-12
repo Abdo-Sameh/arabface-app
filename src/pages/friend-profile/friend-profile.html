@@ -403,21 +403,22 @@
             </div>
           </form> -->
           <div class="user-item" *ngFor="let friend of friendslist;">
-            <div class="pull-left">
-              <div class="user-img">
-                <a (click)="GoToProfile(friend.id, this.userID)" href="#"><img src="{{friend.avatar}}" alt=""></a>
+            <div *ngIf="friend.id != userId">
+              <div class="pull-left">
+                <div class="user-img">
+                  <a (click)="GoToProfile(friend.id, this.userID)" href="#"><img src="{{friend.avatar}}" alt=""></a>
+                </div>
+                <div class="user-info pull-left">
+                  <h3 (click)="GoToProfile(friend.id, this.userID)" class="mt-15"><a href="#">{{friend.name}}</a></h3>
+                  <!-- <p>3 mutual friends</p> -->
+                </div>
               </div>
-              <div class="user-info pull-left">
-                <h3 (click)="GoToProfile(friend.id, this.userID)" class="mt-15"><a href="#">{{friend.name}}</a></h3>
-                <!-- <p>3 mutual friends</p> -->
+              <div class="pull-right">
+                <a href="#" *ngIf="myFriendsList.indexOf(friend.id) > -1" style="color: #488aff" class="btn btn-default btn-sm"><i  class="fa fa-check"></i> Friends</a>
+                <a href="#" *ngIf="myFriendsList.indexOf(friend.id) == -1" class="btn btn-default btn-sm"><i  class="fa fa-user-plus"></i> Add Friend</a>
               </div>
+              <div class="clearfix"></div>.
             </div>
-            <div class="pull-right">
-              <a href="#" class="btn btn-default btn-sm"><i  class="fa fa-user-plus"></i> Add Friend</a>
-              <!-- <a href="#" *ngIf="isFriend(friend.id)" class="btn btn-default btn-sm"><i class="ion-ios-minus-outline"></i> Remove Friend</a> -->
-
-            </div>
-            <div class="clearfix"></div>
           </div> <!-- //user-item -->
 
         </div>
