@@ -26,6 +26,7 @@ import {FriendProfilePage} from '../friend-profile/friend-profile'
 export class ProfilePage {
     userData = [];
     userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
+
     profileInfo = {
       'online_time' : '',
       "gender" : '',

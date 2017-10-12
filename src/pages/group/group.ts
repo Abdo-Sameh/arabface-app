@@ -80,6 +80,7 @@ export class GroupPage {
       }
     });
   }
+
   addMembers(){
     this.navCtrl.push(InviteFriendPage, {
       group : this.group

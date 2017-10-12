@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams ,LoadingController ,AlertController} from 'ionic-angular';
+import { IonicPage, NavController,PopoverController ,ToastController, NavParams ,LoadingController ,AlertController} from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import {TabsPage} from '../tabs/tabs';
 import {ProfilePage} from '../profile/profile';
 import {PostFeatursPage} from '../post-featurs/post-featurs'
 import {FriendProfilePage} from '../friend-profile/friend-profile'
+import {DisplayPostPage} from '../display-post/display-post'
+
 import {MyApp} from '../../app/app.component';
 //import $ from "jquery";
 
@@ -27,19 +29,21 @@ export class NewsPage {
     likeNumbers;
     userData;
     show=true
+    postToDisplay
     feedComments
     havePosted =false
     post ={ 'text' : ""}
     comment={
     'comment' : '',
-    'reply' :''
+    'reply' :'',
+    'edited':'',
     }
+    hiddenPost
     feed = { 'feedid' :""}
     public userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     userAvatar = localStorage.getItem('userAvatar').slice(8,-1);
-    public ionicNamedColor: string = 'primary';
 
-  constructor(public navCtrl: NavController,  public navParams: NavParams ,public alert:AlertController,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
+  constructor(public navCtrl: NavController,public popOver : PopoverController  ,public toast:ToastController, public navParams: NavParams ,public alert:AlertController,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
     this.getFeedsList(this.userId);
     this.userAvatar ="http://"+this.userAvatar;
   }
@@ -48,28 +52,19 @@ export class NewsPage {
     console.log('ionViewDidLoad NewsPage');
   }
 
-  public toggleNamedColor(): void {
-    if(this.ionicNamedColor === 'primary') {
-      this.ionicNamedColor = 'secondary'
-    } else {
-      this.ionicNamedColor = 'primary'
-    }
-  }
+  
 
 
-getFeedsList(id)
+getFeedsList(id,more=false,GotPosts= 30)
 {
   let loading = this.loadingCtrl.create({
-    content: "Loading",
-
+    content: "",
+    spinner: "bubbles",
+    showBackdrop: true,
   });
   loading.present()
       this.remoteService.feedsListApiCall(id).subscribe(res =>{
-        if(this.havePosted == true)
-          {
-
-            res=this.feeds
-          }
+  
         for(let i =0 ; i < res.length;i++)
         {
           let newFeedID=res[i].id
@@ -88,6 +83,11 @@ getFeedsList(id)
 
         }
         this.feeds=res
+        if(GotPosts > 30)
+        { 
+          console.log()
+          this.feeds.push(res)
+        }
         loading.dismiss();
         console.log(this.feeds)
 
@@ -95,6 +95,11 @@ getFeedsList(id)
 
 }
 
+loadMoreFeeds(feedlength)
+{
+  console.log(feedlength)
+  this.getFeedsList(this.userId,true,feedlength)
+}
 
 ///////////////////// post feed //////////////
 
@@ -152,27 +157,29 @@ likeReply(userid =this.userId,replyID,postIndex,commentIndex,replyIndex)
 
 
 }
-postFeed(userID=this.userId,postText=this.post.text)
-{
-  console.log(this.feeds)
+// postFeed(userID=this.userId,postText=this.post.text)
+// {
+//   console.log(this.feeds)
 
-  let loading = this.loadingCtrl.create({
-    content: "Posting",
-  });
-  loading.present()
-  this.remoteService.feedPosting(userID,postText).subscribe( res => {
-    this.feeds.unshift(res.feed)
-    this.post.text= ""
-    //this.getFeedsList(this.userId);
-    loading.dismiss();
-  });
+//   let loading = this.loadingCtrl.create({
+//     content: "",
+//     spinner: "bubbles",
+    
+//   });
+//   loading.present()
+//   this.remoteService.feedPosting(userID,postText).subscribe( res => {
+//     this.feeds.unshift(res.feed)
+//     this.post.text= ""
+//     //this.getFeedsList(this.userId);
+//     loading.dismiss();
+//   });
 
-}
+// }
 commentOnFeed(postOwner,postID,whoCommented=this.userId,comment=this.comment.comment)
 {
   let loading = this.loadingCtrl.create({
-    content: "commenting",
-  });
+    content: "",
+    spinner: "bubbles",  });
 
   loading.present()
   this.remoteService.commentOnFeeds(postOwner,postID,whoCommented,comment).subscribe(res => {
@@ -196,8 +203,8 @@ commentOnFeed(postOwner,postID,whoCommented=this.userId,comment=this.comment.com
 replyOnComment(postindex,commentindex,postOwner,commentID,whoCommented=this.userId,comment=this.comment.reply)
 {
   let loading = this.loadingCtrl.create({
-    content: "replying",
-  });
+    content: "",
+    spinner: "bubbles",  });
 
   loading.present()
   this.remoteService.ReplyOnComment(postOwner,commentID,whoCommented,comment).subscribe(res => {
@@ -248,8 +255,8 @@ sharePost(feedid,userID=this.userId)
 GoToProfile(id,userId)
 {
   let loading = this.loadingCtrl.create({
-    content: "Loading",
-  });
+    content: "",
+    spinner: "bubbles",  });
   loading.present()
 
     this.remoteService.profileDetailsApiCall(id,userId).subscribe(res => {
@@ -287,10 +294,31 @@ GoToProfile(id,userId)
 //     }
 
 // }
+edit() {
+  $(document).on('click','.comment-edit',function(){
+    $(this).parent().prev().find('.input-group').show();
+    
+  })
+  $(document).on('click','.cancel-edit',function(){
+    $(this).parent().hide();
+    
+  })
+
+}
 reply()
   {
-    this.show = !this.show;
-  }
+    $(document).on('click','.comment-reply',function(){
+      $(this).closest('.comment').find('.reply-input').show();
+      
+    })
+    $(document).on('click','.reply-close',function(){
+      $(this).closest('.reply-input').hide();
+      
+    })
+    
+  
+    
+    }
  //////////////////////////////////////////////
  back()
  {
@@ -299,14 +327,151 @@ reply()
  }
 
 
+   /* feed options 
+    which contain 
+    -i don't like post 
+    -edit post
+    -delete post
+    -view post
+   */
 
+    editPost()
+    {
+      $(document).on('click','.comment-edit',function(){
+        $(this).parent().prev().find('.input-group').show();
+        
+      })
+      $(document).on('click','.cancel-edit',function(){
+        $(this).parent().hide();
+        
+      })
+    }
+    ConfirmEditPost(text,feedid)
+    {
+        this.remoteService.editPost(text,feedid,this.userId).subscribe((data) => {console.log(data)})
+    }
+
+    savePost(feedid)
+  {
+    let toast = this.toast.create({
+      message: 'this post has saved !',
+      duration : 2000
+      
+    });
+    toast.present();
+    this.remoteService.saveItem('feed',feedid,this.userId).subscribe(res => {
+      console.log(res)
+    })      
+  }    
+    donotLikePost(feedid,index,userID=this.userId)
+    {
+      this.remoteService.hidePost(feedid,userID).subscribe(res => {
+        this.hiddenPost = res.status
+        if(res.status == 1 )
+        {
+          this.feeds.splice(index,1)
+          
+          let toast = this.toast.create({
+            message: 'This post will no longer show to you',
+            duration : 2000
+          });
+          toast.present();
+        }
+      })
+    }
+    deletePost(feedid,index,userID=this.userId)
+    {
+      let alert = this.alert.create({
+        title: 'share',
+        message: 'Do you want to delete this post?',
+        
+        buttons: [
+          {
+            text: 'Ok',
+            handler: () => {
+              
+              this.remoteService.removePost(feedid,userID).subscribe(res => {
+                if(res.status == 1 )
+                { 
+                  this.feeds.splice(index,1)
+                  let toast = this.toast.create({
+                    message: 'You deleted this post ',
+                    duration : 2000
+                    
+                    
+                  });
+                  toast.present();
+                }
+              })
+            }
+          },
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+            }
+          }
+        ]
+      });
+      alert.present();
+    }
+    deleteComment(commentId)
+    {
+      let alert = this.alert.create({
+        title: 'share',
+        message: 'Do you want to delete comment?',
+        buttons: [
+          {
+            text: 'Ok',
+            handler: () => {
+              this.remoteService.removeComment(commentId,this.userId).subscribe(res => {
+                if(res.status == 1 )
+                {
+
+                  let toast = this.toast.create({
+                    message: 'You deleted this comment ',
+                    duration : 2000
+                    
+                  });
+                  toast.present();
+                }
+              })       
+            }
+          },
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+            }
+          }
+        ]
+      });
+      alert.present();
+    
+      
+    }
+    turnOffNotifications(feedid,userID=this.userId)
+    { 
+        this.remoteService.unsubscribePost(feedid,userID).subscribe((data) => { console.log(data)})
+    }
+    showPost(feed)
+    {
+      this.postToDisplay=feed
+      console.log(this.postToDisplay)
+      this.navCtrl.push(DisplayPostPage,{'post':this.postToDisplay})
+    }
+   //////////////////////////////////////////
  effects()
  {
    $(this).css('background-color','grey')
  }
 
 goToPost()
-{
+ {
+//   let popover = this.popOver.create(PostFeatursPage, {}, {cssClass: 'contpopover'});
+//   popover.present({
+     
+//   });
   this.navCtrl.push(PostFeatursPage)
 }
 }

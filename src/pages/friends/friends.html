@@ -23,7 +23,7 @@
 <section >
   <div class="container" >
       <div class="users-list friends_requests" *ngIf="FriendsRequest?.length != 0 ">
-        <div *ngFor="let friend of FriendsRequest">
+        <div *ngFor="let friend of FriendsRequest ; let i = index ">
 					<div class="nav_requests">
 						<div class="pull-left" style="color:#5c0632">
 							<h4>Friends Requests</h4>
@@ -38,13 +38,13 @@
 								<img (click)="GoToProfile(friend.userid, Id)" src={{friend.avatar}} alt="">
 							</div>
 							<div class="user-info pull-left">
-                <a (click)="GoToProfile(friend.userid, Id)" style="cursor:pointer">{{friend.name}}
+                <a (click)="GoToProfile(friend.userid, Id)"   style="cursor:pointer">{{friend.name}}
                 </a>
 							</div>
 						</div>
 						<div class="pull-right">
-							<a href="#" (click)="confirmFriendrequest(friend.id)" class="btn btn-default btn-sm mr-10">Confirm</a>
-							<a href="#" (click)="DeleteFriendrequest(friend.id)" class="btn btn-default btn-sm">Cancel</a>
+							<a href="#" (click)="confirmFriendrequest(friend.id,i)" class="btn btn-default btn-sm mr-10">Confirm</a>
+							<a href="#" (click)="DeleteFriendrequest(friend.id,i)" class="btn btn-default btn-sm">Cancel</a>
 						</div>
 						<div class="clearfix"></div>
 					</div> <!-- //user-item -->
@@ -91,13 +91,13 @@
             <h4>Suggestions </h4>
           </div><br>
           <br><br>
-      <div class="user-item" *ngFor="let friend of FriendsSuggestion" >
+      <div class="user-item" *ngFor="let friend of FriendsSuggestion ; let i = index" >
         <div class="user-img active">
           <img (click)="GoToProfile(friend.userid, Id)" src="{{friend.avatar}}" alt="Arabface" title="Arabface">
         </div>
         <div class="user-info">
           <a (click)="GoToProfile(friend.userid, Id)" style="cursor:pointer;color:#333">{{friend.name}}</a>
-          <p><a  (click)="addfriend(friend.userid)"  class="btn btn-default btn-sm mr-10 Addfriend">add friend </a></p>
+          <p><a  (click)="addfriend(friend.userid,i)"  class="btn btn-default btn-sm mr-10 Addfriend">add friend </a></p>
         </div>
       </div> <!-- //user-item -->
 

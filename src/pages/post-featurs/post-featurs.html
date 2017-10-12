@@ -8,17 +8,18 @@
 
 
 <ion-content >
-<section class="bg_grey full_vh ">
+<section class="bg_grey  full_vh">
  <div class="container">         
-   <div class="panel panel-theme mt-20 " >
+   <div class="panel panel-theme privacy mt-20 " >
     <div class="pull-left">
-      <img src={{userAvatar}} class="mr-10" width="30" style="vertical-align:bottom;" alt="" /> 
+        <!-- <img  src={{userAvatar}} alt=""> -->
+        
       <div class="dropdown inline-block ml-10">
         <a href="#"   class="btn btn-default btn-sm" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-globe"></i> <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Public</a></li>
-          <li><a href="#">Friends only</a></li>
-          <li><a href="#">  Only me</a></li>
+        <ul class="privacyDropdown dropdown-menu" (click)="selectPrivacy()">
+          <li><a href="#"><i class="fa fa-globe"></i> Public</a></li>
+          <li><a href="#"><i class="fa fa-group"></i> Friends only</a></li>
+          <li><a href="#"> <i class="fa fa-lock"></i> Only me</a></li>
         </ul>
       </div>
      </div>
@@ -27,11 +28,30 @@
     </div>
     <div class="clearfix"></div>
    </div>
-   <div class="share-post panel panel-theme postBody" style="margin-bottom:0px">
-    <form><textarea class="p-0" rows="6"  [(ngModel)]="post.text" [ngModelOptions]="{ standalone :true}" placeholder="what's in your mind?"></textarea></form>
+   <div class="share-post panel panel-theme postBody" style="margin-bottom:0px;min-height:150px">
+    <form>
+      <textarea class="p-0" rows="6"  [(ngModel)]="post.text" [ngModelOptions]="{ standalone :true}" placeholder="what's in your mind?"></textarea>
+   
+      <div class="feeling-div">
+          <div class="feelingText btn btn-theme"></div>
+          <div> <input type='text'[(ngModel)]="post.feeling" [ngModelOptions]="{ standalone :true}" style="width: 100%;margin-top: 10px;border: 1px solid #ccc;padding: 7px;" placeholder="type what you feel" />  </div>
+        </div>
+      
+        <div class="tag-div" style="display:none">
+          <div class="selectedUsersInTag" ><ul class="chosenElments" style="display:inline"></ul></div>
+            <div> 
+              <input type='text'[(ngModel)]="tagedUsers" [ngModelOptions]="{ standalone :true}" (keyup)="getFriendsListToTag(tagedUsers)" style="width: 100%;margin-top: 10px;border: 1px solid #ccc;padding: 7px;" placeholder="type what you feel" />  
+            </div>
+            <div *ngIf="searchedUsers">
+              <ul (click)="selectUserToTag()" class="tagslist  " style="width:100%" *ngFor="let taged of searchedUsers" >
+                <li style="overflow:hidden"><div style="float:left;"><img  style=" width:25px;height:25px;border-radius:2px;margin:7px"src={{taged.avatar}} /> </div>  <a style="float: left;margin: 10px 0 0 40px;">{{taged.name}} </a>   </li>
+              </ul>
+            </div>
+        </div>
+    </form>
   </div>
   <div class="colors" [hidden]="bgshow" (click)="getColor()">
-      <ul style="display:inline-flex;margin-left:200px" >
+      <ul style="display:inline-flex;margin-left:100px" >
 
         <li  style="width:25px;height:25px;margin:3px;border-radius:50%;"  id="color1" >
 
@@ -61,13 +81,34 @@
     </div>
     
    <div class="feed-editors panel panel-theme flex-space-around m-0" >
-    <a href="#"><i class="fa fa-user-plus"></i></a>
+    <a href="#" (click)="tagUsersDivShow()"><i class="fa fa-user-plus"></i></a>
     <a href="#"><i class="fa fa-camera"></i></a>
     <a href="#"><i class="fa fa-video-camera"></i></a>
     <a  (click)="locationPopUp()"><i class="fa fa-map-marker"></i></a>
-    <a href="#"  (click)="backgroundShow()"><i class="fa fa-link"></i></a>
-    <a href="#"  (click)="feelingsShow()"><i class="fa fa-smile-o"></i></a>
+    <a href="#"  (click)="backgroundShow()"><i class="ion-android-color-palette"></i></a>
+    <a href="#"  class="emotion-btn" (click)="feelingsShow()"><i class="fa fa-smile-o"></i></a>
+    
    </div>
+   <div class="dropdown dropdown-feeling">
+    <ul (click)="selectFeeling()" class="dropdown-menu">
+      <li><a href="#"><img src="assets/images/status/listening-to.png"> Listening to</a></li>
+      <li><a href="#"><img src="assets/images/status/watching.png"> Watching</a></li>
+      <li><a href="#"><img src="assets/images/status/feeling.png"> Feeling</a></li>
+      <li><a href="#"><img src="assets/images/status/thinking-about.png"> Thinking about</a></li>
+      <li><a href="#"><img src="assets/images/status/reading.png"> Reading</a></li>
+      <li><a href="#"><img src="assets/images/status/eating.png"> Eating</a></li>
+      <li><a href="#"><img src="assets/images/status/drinking.png"> Drinking</a></li>
+      <li><a href="#"><img src="assets/images/status/celebrating.png"> Celebrating</a></li>
+      <li><a href="#"><img src="assets/images/status/traveling-to.png"> Traveling to</a></li>
+      <li><a href="#"><img src="assets/images/status/exercising.png"> Exercising</a></li>
+      <li><a href="#"><img src="assets/images/status/meeting.png"> Meeting</a></li>
+      <li><a href="#"><img src="assets/images/status/playing.png"> Playing</a></li>
+      <li><a href="#"><img src="assets/images/status/looking-for.png"> Looking for</a></li>
+    </ul>
+  </div>
+
+  
   </div>
 </section>
 </ion-content>
+  <script src="./post-featurs.js"></script>

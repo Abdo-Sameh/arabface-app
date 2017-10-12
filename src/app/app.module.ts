@@ -45,6 +45,7 @@ import {CreatePagePage}  from '../pages/create-page/create-page'
 import {CreateGroupPage}  from '../pages/create-group/create-group'
 import {EditGroupPage}  from '../pages/edit-group/edit-group'
 import {PostFeatursPage}  from '../pages/post-featurs/post-featurs'
+import {DisplayPostPage} from '../pages/display-post/display-post'
 import { CreateAlbumPage } from '../pages/create-album/create-album';
 import {EditPagePage}  from '../pages/edit-page/edit-page'
 import {CreateEventPage}  from '../pages/create-event/create-event'
@@ -104,6 +105,8 @@ import { InviteFriendPage } from '../pages/invite-friend/invite-friend';
     EditPagePage,
     PhotoselectionPage,
     PostFeatursPage,
+    DisplayPostPage,
+
     InviteFriendPage,
     SavedPage,
     CreateAlbumPage,
@@ -152,6 +155,7 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule
     EditGroupPage,
     EditPagePage,
     SavedPage,
+    DisplayPostPage,
     CreateAlbumPage,
     InviteFriendPage,
     PhotoselectionPage, CreateEventPage, EditEventPage, EventPage

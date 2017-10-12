@@ -70,6 +70,10 @@
               <h5>{{notify.name}} <span>invited you to  page {{notify.title}}</span></h5>
               <p>{{notify.time}}</p>
            </div>			
+           <div (click)="displayPost(notify.feed,notify.type,notify.userid)" class="user-info" *ngSwitchCase="notify.type == 'feed.mention'" >
+              <h5>{{notify.name}} <span>mentioned you in  post {{notify.title}}</span></h5>
+              <p>{{notify.time}}</p>
+           </div>		
            <div (click)="displayPost(notify.feed,notify.type,notify.userid)" class="user-info" *ngSwitchCase="notify.type == 'feed.like'" >
               <h5>{{notify.name}} <span>liked your post</span></h5>
               <p>{{notify.time}}</p>
