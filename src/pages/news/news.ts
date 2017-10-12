@@ -52,7 +52,7 @@ export class NewsPage {
     console.log('ionViewDidLoad NewsPage');
   }
 
-  
+
 
 
 getFeedsList(id,more=false,GotPosts= 30)
@@ -64,7 +64,7 @@ getFeedsList(id,more=false,GotPosts= 30)
   });
   loading.present()
       this.remoteService.feedsListApiCall(id).subscribe(res =>{
-  
+
         for(let i =0 ; i < res.length;i++)
         {
           let newFeedID=res[i].id
@@ -84,7 +84,7 @@ getFeedsList(id,more=false,GotPosts= 30)
         }
         this.feeds=res
         if(GotPosts > 30)
-        { 
+        {
           console.log()
           this.feeds.push(res)
         }
@@ -164,7 +164,7 @@ likeReply(userid =this.userId,replyID,postIndex,commentIndex,replyIndex)
 //   let loading = this.loadingCtrl.create({
 //     content: "",
 //     spinner: "bubbles",
-    
+
 //   });
 //   loading.present()
 //   this.remoteService.feedPosting(userID,postText).subscribe( res => {
@@ -297,11 +297,11 @@ GoToProfile(id,userId)
 edit() {
   $(document).on('click','.comment-edit',function(){
     $(this).parent().prev().find('.input-group').show();
-    
+
   })
   $(document).on('click','.cancel-edit',function(){
     $(this).parent().hide();
-    
+
   })
 
 }
@@ -309,15 +309,15 @@ reply()
   {
     $(document).on('click','.comment-reply',function(){
       $(this).closest('.comment').find('.reply-input').show();
-      
+
     })
     $(document).on('click','.reply-close',function(){
       $(this).closest('.reply-input').hide();
-      
+
     })
-    
-  
-    
+
+
+
     }
  //////////////////////////////////////////////
  back()
@@ -327,9 +327,9 @@ reply()
  }
 
 
-   /* feed options 
-    which contain 
-    -i don't like post 
+   /* feed options
+    which contain
+    -i don't like post
     -edit post
     -delete post
     -view post
@@ -339,11 +339,11 @@ reply()
     {
       $(document).on('click','.comment-edit',function(){
         $(this).parent().prev().find('.input-group').show();
-        
+
       })
       $(document).on('click','.cancel-edit',function(){
         $(this).parent().hide();
-        
+
       })
     }
     ConfirmEditPost(text,feedid)
@@ -356,13 +356,13 @@ reply()
     let toast = this.toast.create({
       message: 'this post has saved !',
       duration : 2000
-      
+
     });
     toast.present();
     this.remoteService.saveItem('feed',feedid,this.userId).subscribe(res => {
       console.log(res)
-    })      
-  }    
+    })
+  }
     donotLikePost(feedid,index,userID=this.userId)
     {
       this.remoteService.hidePost(feedid,userID).subscribe(res => {
@@ -370,7 +370,7 @@ reply()
         if(res.status == 1 )
         {
           this.feeds.splice(index,1)
-          
+
           let toast = this.toast.create({
             message: 'This post will no longer show to you',
             duration : 2000
@@ -384,21 +384,21 @@ reply()
       let alert = this.alert.create({
         title: 'share',
         message: 'Do you want to delete this post?',
-        
+
         buttons: [
           {
             text: 'Ok',
             handler: () => {
-              
+
               this.remoteService.removePost(feedid,userID).subscribe(res => {
                 if(res.status == 1 )
-                { 
+                {
                   this.feeds.splice(index,1)
                   let toast = this.toast.create({
                     message: 'You deleted this post ',
                     duration : 2000
-                    
-                    
+
+
                   });
                   toast.present();
                 }
@@ -431,11 +431,11 @@ reply()
                   let toast = this.toast.create({
                     message: 'You deleted this comment ',
                     duration : 2000
-                    
+
                   });
                   toast.present();
                 }
-              })       
+              })
             }
           },
           {
@@ -447,11 +447,11 @@ reply()
         ]
       });
       alert.present();
-    
-      
+
+
     }
     turnOffNotifications(feedid,userID=this.userId)
-    { 
+    {
         this.remoteService.unsubscribePost(feedid,userID).subscribe((data) => { console.log(data)})
     }
     showPost(feed)
@@ -470,7 +470,7 @@ goToPost()
  {
 //   let popover = this.popOver.create(PostFeatursPage, {}, {cssClass: 'contpopover'});
 //   popover.present({
-     
+
 //   });
   this.navCtrl.push(PostFeatursPage)
 }

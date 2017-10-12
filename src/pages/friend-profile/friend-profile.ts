@@ -30,13 +30,24 @@ export class FriendProfilePage {
   followers
   following
   myFriendsList
-
+  cover
+  profileInfo
   constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider) {
     let data = navParams.get('userData');
       this.friendslist = [];
       this.myFriendsList = [];
+      this.profileInfo = {
+        'online_time' : '',
+        "gender" : '',
+        "birth" : '',
+        "bio" :'',
+        "city" : '',
+        "state" : '',
+        "country" : ''
+      }
       this.userID= data.id;
       console.log(data)
+      // this.cover
       console.log(this.userID , this.userId);
       this.getProfileData(this.userID, this.userId);
       this.getProfilePosts(this.userID)
@@ -56,14 +67,6 @@ export class FriendProfilePage {
     loading.dismiss();
   }
   isFriend(id) {
-  //  return true;
-    this.remoteService.profileDetailsApiCall(70, this.userId).subscribe(res =>{
-
-      console.log(res);
-      return false;
-  }
-
-  );
   }
   myProfile(){
     if(this.userID == null || this.userId == this.userID){
@@ -79,7 +82,30 @@ export class FriendProfilePage {
       content: "Loading",
     });
     loading.present()
-    this.remoteService.profileDetailsApiCall(id, theUserId).subscribe(res =>{loading.dismiss();this.userData = res ;console.log(res)});
+    this.remoteService.profileDetailsApiCall(id, theUserId).subscribe(res =>{
+      loading.dismiss();
+      this.userData = res;
+      console.log(res)
+      for(var i = 0; i < res.profile_info.length; i++){
+        console.log(res.profile_info[i]);
+        if(res.profile_info[i]){
+          if(res.profile_info[i].name == "online_time")
+            this.profileInfo.online_time = res.profile_info[i].value;
+          else if(res.profile_info[i].name == "gender")
+            this.profileInfo.gender = res.profile_info[i].value;
+          else if(res.profile_info[i].name == "birth")
+            this.profileInfo.birth = res.profile_info[i].value;
+          else if(res.profile_info[i].name == "bio")
+            this.profileInfo.bio = res.profile_info[i].value;
+          else if(res.profile_info[i].name == "country")
+            this.profileInfo.country = res.profile_info[i].value;
+          else if(res.profile_info[i].name == "city")
+            this.profileInfo.city = res.profile_info[i].value;
+          else if(res.profile_info[i].name == "state")
+            this.profileInfo.state = res.profile_info[i].value;
+          }
+      }
+    });
 
   }
   GoToProfile(id,userId)
@@ -107,6 +133,7 @@ export class FriendProfilePage {
   }
   getFriendsList(Id, id, term="")
   {
+    this.friendslist = [];
     if(this.userID == null){
       Id = id;
     }
@@ -114,7 +141,20 @@ export class FriendProfilePage {
       content: "Loading",
     });
     loading.present()
-      this.remoteService.friendsListApiCall(Id, id, term).subscribe(res =>{this.friendslist=res ;console.log(res)});
+      this.remoteService.friendsListApiCall(Id, id, term).subscribe(res => {
+        for(let friend of res){
+          this.remoteService.profileDetailsApiCall(friend.id, this.userId).subscribe(res2 => {
+            console.log(res2);
+            friend.friend_status = res2.friend_status;
+            this.friendslist.push(friend);
+          });
+
+
+        }
+        // this.friendslist = res;
+        console.log(this.friendslist);
+      });
+
       this.remoteService.friendsListApiCall(this.userId, this.userId, term).subscribe(res1 => {
         loading.dismiss();
         console.log(res1);
@@ -171,8 +211,8 @@ export class FriendProfilePage {
 
       this.remoteService.addFriend(userid,friendId).subscribe(res => {
         console.log(res)
-        if(res.status == 1)
-        {
+        if(res.status == 1) {
+          this.friendslist[index].friend_status = 1;
         }
 
       })
