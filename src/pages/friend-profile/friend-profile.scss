@@ -18,6 +18,9 @@ page-friend-profile {
      border-top: 0px solid #ddd !important;
      margin-top: 7px !important;
  }
+ .fixed-content,.scroll-content {
+   margin:0 !important
+ }
  .nav-tabs {
 
 
@@ -30,19 +33,16 @@ page-friend-profile {
  	    object-fit: cover;
  	}
  }
- @media(max-width: 600px) {
- 	.thumbnails>div {
- 		float: none;
+ .thumbnails img {
  		width: 100%;
  	}
- }
  .thumbnails .thumbnail h3 {
      font-weight: 600;
      text-transform: uppercase;
      margin-top: 5px;
      font-size: 14px;
  }
- thumbnails .thumbnail img {
+ .thumbnails .thumbnail img {
    width: 100% !important;
  }
  .thumbnails .thumbnail p {
@@ -62,5 +62,9 @@ page-friend-profile {
  }
  #ion-diagnostics-toast {
  	background: none !important
+ }
+ .friend_profile_box {
+     width: 110px;
+     height: 110px;
  }
 }
