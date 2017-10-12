@@ -131,7 +131,7 @@ body {
 	padding-bottom: 73px;
 }
 .container {
-	width: 94%;
+	width: 94% !important;
 	margin: 0 auto;
 	padding: 0;
 }
@@ -542,16 +542,19 @@ Start Header Title
 ===========================*/
 .header_title {
 	position: fixed;
-    top: 0;
+	top: 0;
+	left: 0;
+	right: 0;
     width: 100%;
     max-width: 768px;
+    margin: 0 auto;
 	overflow: hidden;
-    z-index: 10;
 	background: #5c0632;
 	min-height: 70px;
     padding-top: 10px;
 	font-size: 32px;
     color: #EEE;
+    z-index: 10;
 }
 .header_title .back_btn,
 .header_title .page_title,
@@ -576,10 +579,10 @@ Start Menu
 }
 .user_cover {
 	background: url(../images/menu_bg.jpg) no-repeat;
-	background-size: cover;
-    padding: 60px 5%;
-    position: relative;
-    min-height: 200px;
+	    background-size: cover;
+	    padding: 60px 5%;
+	    position: relative;
+	    min-height: 200px;
 }
 .menu .user_cover img {
 	float: left;
@@ -693,27 +696,19 @@ Start News
 .feed-footer .feed-title p {
 	font-size: 12px;
 }
+.feed-footer .action-result {
+    margin: 10px 0;
+}
 .feed-footer .feed-action {
     border-top: 1px solid #ddd;
     padding-top: 15px;
-    margin-top: 20px;
     margin-bottom: 5px;
     overflow: hidden;
 }
 .post .feed-footer .feed-action {
 	border-bottom: 1px solid #ddd;
 	padding-bottom: 15px;
-}
-@media(max-width: 360px) {
-	.feed-footer .feed-action {
-		font-size: 11px;
-	}
-	.feed-footer .feed-action .mr-15 {
-		margin-right: 10px !important;
-	}
-	.feed-footer .feed-action .ml-15 {
-		margin-left: 10px !important;
-	}
+	margin-bottom: 25px;
 }
 .feed-footer .comment {
     margin: 20px 0;
@@ -729,6 +724,14 @@ Start News
     color: #777;
     font-size: 12px;
     overflow: hidden;
+}
+.comment .write-comment {
+	max-width: 400px;
+}
+.comment .write-comment form input,
+.comment .write-comment form button {
+	height: 35px;
+    line-height: 35px;
 }
 .write-comment .feed-img {
 	width: 30px;
@@ -747,16 +750,11 @@ Start News
 	margin-top: 10px;
 	margin-left: 40px;
 }
-.feed-box .feed-title h3 img {
-	width: 15px;
-    position: relative;
-    margin: 0 2px -3px;
-}
 .feed-editors li {
 	float: left;
 	margin-right: 10px;
 }
-.feed-editors li a:hover {
+.feed-editors a:hover {
 	color: #5c0632;
 }
 /*=========================
@@ -943,9 +941,13 @@ Start Friend List
 /*====================================
 Start Friend Profile
 ====================================*/
+.user_cover h3 {
+	font-size: 16px;
+    margin-left: 22px;
+}
 .friend_profile_box {
-    width: 160px;
-    height: 160px;
+		width: 110px;
+		height: 110px;
     position: absolute;
     bottom: -80px;
     left: 50%;
@@ -1069,7 +1071,8 @@ Start Profile
 	background-size: cover;
     padding: 60px 5%;
     position: relative;
-    min-height: 200px;
+	min-height: 200px;
+}
 .pages .nav-tabs {
     margin-top: 69px;
     border: none;
@@ -1110,11 +1113,8 @@ Start Profile
 	    object-fit: cover;
 	}
 }
-@media(max-width: 600px) {
-	.thumbnails>div {
-		float: none;
-		width: 100%;
-	}
+.thumbnails img {
+width: 100%;
 }
 .thumbnails .thumbnail h3 {
     font-weight: 600;
@@ -1129,6 +1129,12 @@ Start Profile
     display: block;
     margin-top: -3px;
     font-size: 12px;
+}
+.thumbnails.videos .caption p i {
+	color: #777;
+	font-size: 16px;
+    position: relative;
+    top: 1px;
 }
 .pages .share-post {
 	border: none;
@@ -1220,3 +1226,40 @@ top: -4px;
     display: block;
 }
 
+.pages {
+	background: #EEE;
+}
+.pages .nav-tabs {
+    margin-top: 69px;
+    border: none;
+}
+.pages .nav-tabs>li {
+	width: 50%;
+}
+.pages .nav-tabs>li.active>a,
+.pages .nav-tabs>li.active>a:focus,
+.pages .nav-tabs>li.active>a:hover,
+.pages .nav-tabs>li>a:hover,
+.pages .nav-tabs>li>a:focus {
+    background: #5c0632;
+    color: #fff;
+    border-radius: 5px;
+}
+.pages .nav-tabs>li>a:hover,
+.pages .nav-tabs>li>a:focus {
+    background: #9E9E9E;
+    color: #5c0632;
+}
+.pages .add-post {
+	border: none;
+    padding-top: 10px;
+    padding-bottom: 0;
+    margin-top: 0;
+}
+.feed-header .feed-title {
+    float: left;
+    width: calc(100% - 60px);
+}
+#ion-diagnostics-toast {
+	background: none !important
+}

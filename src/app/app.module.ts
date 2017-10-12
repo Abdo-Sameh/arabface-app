@@ -46,6 +46,7 @@ import {CreateGroupPage}  from '../pages/create-group/create-group'
 import {EditGroupPage}  from '../pages/edit-group/edit-group'
 import {PostFeatursPage}  from '../pages/post-featurs/post-featurs'
 import {DisplayPostPage} from '../pages/display-post/display-post'
+import { CreateAlbumPage } from '../pages/create-album/create-album';
 import {EditPagePage}  from '../pages/edit-page/edit-page'
 import {CreateEventPage}  from '../pages/create-event/create-event'
 import {EditEventPage}  from '../pages/edit-event/edit-event'
@@ -55,6 +56,7 @@ import { SavedPage } from '../pages/saved/saved';
 import { VideoPage } from '../pages/video/video';
 import { AddVideoPage } from '../pages/add-video/add-video';
 import { EditVideoPage } from '../pages/edit-video/edit-video';
+import { InviteFriendPage } from '../pages/invite-friend/invite-friend';
 // import { Camera, CameraOptions } from '@ionic-native/camera';
 // import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 
@@ -104,7 +106,10 @@ import { EditVideoPage } from '../pages/edit-video/edit-video';
     PhotoselectionPage,
     PostFeatursPage,
     DisplayPostPage,
+
+    InviteFriendPage,
     SavedPage,
+    CreateAlbumPage,
     PhotoselectionPage, CreateEventPage, EditEventPage, EventPage
   ],
   imports: [
@@ -151,6 +156,8 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule
     EditPagePage,
     SavedPage,
     DisplayPostPage,
+    CreateAlbumPage,
+    InviteFriendPage,
     PhotoselectionPage, CreateEventPage, EditEventPage, EventPage
   ],
   providers: [

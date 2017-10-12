@@ -6,27 +6,27 @@
 -->
 <ion-header>
 
-    <header class="header_title"  >
-        <div class="container">
-            <div class="back_btn">
-              <a href="#" (click)="back()"><i class="fa fa-arrow-left"></i></a>
-            </div>
-            <div class="page_title text_center">
-              <h3>Profile</h3>
-            </div>
-            <div class="menu_btn">
-                <a href="#"><i class="fa fa-bars" style="color:#fff;font-size:18px"></i></a>
-              </div>
-          </div>
-      </header>
+    <header class="header_title">
+			<div class="container" style="width: 94% !important;DISPLAY: FLEX; ALIGN-ITEMS: center;">
+				<div class="back_btn">
+					<a (click)="back()" href="#"><i class="fa fa-arrow-left" style="font-size: 19px;line-height: 43px;"></i></a>
+				</div>
+				<div class="page_title text-center">
+					<h3 style="font-size:24px !IMPORTANT">Profile</h3>
+				</div>
+				<div class="menu_btn text-right">
+					<a href="#"><i class="fa fa-bars"  style="font-size: 19px; line-height: 43px;"></i></a>
+				</div>
+			</div>
+		</header>
 </ion-header>
 
 
 <ion-content >
 
 
-  <section class="bg_grey full_vh  profile">
-  <div class="user_cover">
+  <section class="bg_grey full_vh  profile pt-70">
+  <div class="user_cover" style="background: url({{cover}}) !important">
     <div class="friend_profile_box">
       <form class="img-upload">
         <img src="{{userData['avatar']}}" alt="Arabface" title="Arabface">
@@ -45,13 +45,14 @@
           <label for="profile-upload">
             <i *ngIf="myProfile()" class="fa fa-camera"></i>
           </label>
-          <input id="profile-upload" type="file" [(ngModel)]="picture.path" [ngModelOptions]="{standalone: true}">upload
+          <input id="profile-upload" type="file" [(ngModel)]="picture.path" [ngModelOptions]="{standalone: true}">
 
         </div>
-        <button id="profile-upload" type="submit" (click)="changeProfilePicture(this.userId, picture.path)">here</button>
+        <!-- <button id="profile-upload" type="submit" (click)="changeProfilePicture(this.userId, picture.path)">here</button> -->
       </form>
-      <h3>{{userData['name']}}</h3>
+
     </div>
+<h3 style="position: absolute; bottom: -80px;">{{userData['name']}}</h3>
     <div class="profile-editors">
       <form class="file-input file-input-cover">
         <label *ngIf="myProfile()" class="btn btn-theme btn-sm mr-5" for="cover-upload">
@@ -59,16 +60,16 @@
         </label>
         <input id="cover-upload" type="file">
       </form>
-      <a href="#" *ngIf="myProfile()" class="btn btn-theme btn-sm"><i class="fa fa-pencil-square-o"></i> edit profile</a>
+      <!-- <a href="#" *ngIf="myProfile()" class="btn btn-theme btn-sm"><i class="fa fa-pencil-square-o"></i> edit profile</a> -->
       <!-- <a href="#" *ngIf="myProfile()" class="btn btn-theme btn-sm"><i class="fa fa-pencil-square-o"></i> edit profile</a> -->
     </div>
   </div>
   <div class="container">
     <ul class="nav nav-tabs panel panel-theme flex-h-center">
-      <li class="active"><a data-toggle="tab" href="#tab-content-1{{this.userId}}"><i class="ion-ios-settings-strong"></i> Timeline</a></li>
-      <li><a (click)="getFollowingAndLikes(this.userID)" data-toggle="tab" href="#tab-content-2{{this.userId}}"><i class="ion-person"></i> About</a></li>
-      <li><a (click)="getPhotsFromProvider(this.userID)" data-toggle="tab" href="#tab-content-3{{this.userId}}"><span style="margin:3px 0 4px;"></span> Photos</a></li>
-      <li><a (click)="getFriendsList(this.userID, this.userId, '')" data-toggle="tab" href="#tab-content-4{{this.userId}}"><i class="ion-person-stalker"></i> Friends</a></li>
+      <li class="active"><a data-toggle="tab" href="#tab-content-1{{this.userId}}"><i class="fa fa-sliders" style="margin: 5px 0 2px 0;"></i> Timeline</a></li>
+      <li><a (click)="getFollowingAndLikes(this.userID)" data-toggle="tab" href="#tab-content-2{{this.userId}}"><i class="fa fa-user" style="margin: 5px 0 2px 0;"></i> About</a></li>
+      <li><a (click)="getPhotsFromProvider(this.userID)" data-toggle="tab" href="#tab-content-3{{this.userId}}"><span style="margin:3px 0 4px;">{{photos.length}}</span> Photos</a></li>
+      <li><a (click)="getFriendsList(this.userID, this.userId, '')" data-toggle="tab" href="#tab-content-4{{this.userId}}"><i class="fa fa-users" style="margin: 5px 0 2px 0;"></i> Friends</a></li>
     </ul>
     <div class="tab-content">
       <div id="tab-content-1{{this.userId}}" class="tab-pane fade timeline active in">
@@ -107,104 +108,93 @@
             <a href="#"><img src="assets/images/post.jpg" alt=""></a>
           </div>
           <div class="feed-footer">
-            <div class="feed-action">
-              <div class="pull-left">
-                <div class="pull-left mr-15" (click)= "likeFeed(30,post.id)" (click)="setColor('like2')">
-                  <a id="like2"  style="cursor:pointer">< href="#"><i class="fa fa-thumbs-o-up"></i> Like</a>
-                </div>
-                <div class="pull-left mr-15">
-                  <a href="#"><i class="fa fa-commenting"></i> Comment</a>
-                </div>
-                <div class="pull-left mr-15">
-                  <a href="#"><i class="fa fa-share"></i> Share</a>
-                </div>
-              </div>
-              <div class="pull-right">
-                <div class="pull-right ml-15">
-                  <a href="#"><i class="fa fa-thumbs-o-up"></i></a> {{post.like_count}}
-                </div>
-                <div class="pull-right ml-15">
-                  <a href="#"><i class="fa fa-commenting"></i></a> {{post.comments}}
-                </div>
-                <div class="pull-right ml-15">
-                  <a href="#"><i class="fa fa-share"></i></a> 10
-                </div>
-              </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="comment-list">
-              <div class="comment" *ngFor="let comments of post.answers">
-                <a href="#"><img class="feed-img" src="{{comments.avatar}}" alt=""></a>
-                <div class="feed-title">
-                  <h3><a href="#">{{comments.name}}</a></h3>
-                  <p>{{comments.text}}</p>
-                  <div class="comment-action">
-                    <div class="pull-left">
-                      <a href="#" class="mr-10">Like</a>
-                      <a href="#" class="mr-10">Reply</a>
-                      <span class="mr-10">-</span>
-                      <span>{{comments.time}}</span>
-                    </div>
-                    <div class="pull-right">
-                      <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
-                    </div>
-                  </div>
-                  <div class="comment">
-                    <a href="#"><img class="feed-img" src="assets/images/avatar.png" alt=""></a>
-                    <div class="feed-title">
-                      <h3><a href="#">Username</a></h3>
-                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                      <div class="comment-action">
-                        <div class="pull-left">
-                          <a href="#" class="mr-10">Like</a>
-                          <a href="#" class="mr-10">Reply</a>
-                          <span class="mr-10">-</span>
-                          <span>30 minute ago.</span>
-                        </div>
-                        <div class="pull-right">
-                          <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
-                        </div>
-                        <div class="clearfix"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="comment">
-                <a href="#"><img class="feed-img" src="assets/images/avatar.png" alt=""></a>
-                <div class="feed-title">
-                  <h3><a href="#">Username</a></h3>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                  <div class="comment-action">
-                    <div class="pull-left">
-                      <a href="#" class="mr-10">Like</a>
-                      <a href="#" class="mr-10">Reply</a>
-                      <span class="mr-10">-</span>
-                      <span>30 minute ago.</span>
-                    </div>
-                    <div class="pull-right">
-                      <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="comment write-comment">
-                <div class="pull-left">
-                  <img class="feed-img" src="assets/images/avatar.png" alt="">
-                </div>
-                <form>
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="write a comment ...">
-                    <div class="input-group-btn">
-                      <button type="submit" class="btn btn-default">
-                        <i class="fa fa-paper-plane"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
+								<div class="action-result flex-space-between">
+							<div class="pull-left">
+								<a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+							</div>
+							<div class="pull-right">
+								<a href="#"><i class="fa fa-commenting"></i></a> 5
+								<a href="#"><i class="fa fa-share ml-10"></i></a> 10
+							</div>
+						</div>
+						<div class="feed-action flex-space-around">
+							<a href="#"><i class="fa fa-thumbs-o-up"></i> Like</a>
+							<a href="#"><i class="fa fa-commenting"></i> Comment</a>
+							<a href="#"><i class="fa fa-share"></i> Share</a>
+								</div>
+								<!-- <div class="comment-list">
+									<div class="comment">
+										<a href="#"><img class="feed-img" src="images/avatar.png" alt=""></a>
+										<div class="feed-title">
+											<h3><a href="#">Username</a></h3>
+											<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+											<div class="comment-action">
+												<div class="pull-left">
+													<a href="#" class="mr-10">Like</a>
+													<a href="#" class="mr-10">Reply</a>
+													<span class="mr-10">-</span>
+													<span>30 minute ago.</span>
+												</div>
+												<div class="pull-right">
+													<a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+												</div>
+											</div>
+											<div class="comment">
+												<a href="#"><img class="feed-img" src="images/avatar.png" alt=""></a>
+												<div class="feed-title">
+													<h3><a href="#">Username</a></h3>
+													<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+													<div class="comment-action">
+														<div class="pull-left">
+															<a href="#" class="mr-10">Like</a>
+															<a href="#" class="mr-10">Reply</a>
+															<span class="mr-10">-</span>
+															<span>30 minute ago.</span>
+														</div>
+														<div class="pull-right">
+															<a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+														</div>
+														<div class="clearfix"></div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="comment">
+										<a href="#"><img class="feed-img" src="images/avatar.png" alt=""></a>
+										<div class="feed-title">
+											<h3><a href="#">Username</a></h3>
+											<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+											<div class="comment-action">
+												<div class="pull-left">
+													<a href="#" class="mr-10">Like</a>
+													<a href="#" class="mr-10">Reply</a>
+													<span class="mr-10">-</span>
+													<span>30 minute ago.</span>
+												</div>
+												<div class="pull-right">
+													<a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="comment write-comment">
+										<div class="pull-left">
+											<img class="feed-img" src="images/avatar.png" alt="">
+										</div>
+										<form>
+											<div class="input-group">
+												<input type="text" class="form-control" placeholder="write a comment ...">
+												<div class="input-group-btn">
+													<button type="submit" class="btn btn-default">
+														<i class="fa fa-paper-plane"></i>
+													</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div> -->
+							</div>
         <!-- </div> -->
         </div>
         <div class="feed-box panel panel-theme mt-30">
@@ -343,15 +333,13 @@
       </div>
       <div id="tab-content-2{{this.userId}}" class="tab-pane fade mb-30">
         <div class="panel panel-theme">
-          <ul class="profile-info" *ngFor="let info of userData.profile_info">
-            <li><i>{{ info.name }} :</i> {{ info.value }}</li>
-            <!-- <li><i class="fa fa-home fa-fw"></i> Lives in City, Country</li>
-            <li><i class="fa fa-graduation-cap fa-fw"></i> Studies at University</li>
-            <li><i class="fa fa-ellipsis-h fa-fw"></i> Full Information</li> -->
-            <!-- <li><i class="fa fa-user fa-fw"></i> Accountant</li>
-            <li><i class="fa fa-home fa-fw"></i> Lives in City, Country</li>
-            <li><i class="fa fa-graduation-cap fa-fw"></i> Studies at University</li>
-            <li><i class="fa fa-ellipsis-h fa-fw"></i> Full Information</li> -->
+          <ul class="profile-info">
+            <!-- <li><i>{{ info.name }} :</i> {{ info.value }}</li> -->
+            <li><i class="fa fa-circle fa-fw" style="color: green; font-size: 10px;"></i> {{ profileInfo.online_time }}</li>
+            <li><i class="fa fa-map-marker fa-fw"></i> {{ profileInfo.city }}, {{ profileInfo.country  }}</li>
+            <li><i class="fa fa-user fa-fw"></i> {{ profileInfo.gender }}</li>
+            <li><i class="fa fa-calendar fa-fw"></i> {{ profileInfo.birth }}</li>
+            <li><i class="fa fa-info-circle fa-fw"></i> {{ profileInfo.bio }}</li>
           </ul>
         </div>
         <div class="btn btn-theme btn-block">Likes</div>
@@ -367,7 +355,7 @@
             </div>
 
           </div>
-          <a href="#" class="btn btn-default btn-block">See More</a>
+          <a (click)="getMorePages(userId)" href="#" class="btn btn-default btn-block">See More</a>
         </div>
         <div class="btn btn-theme btn-block">Followers</div>
         <div class="panel panel-theme">
@@ -401,7 +389,7 @@
         </div>
       </div>
       <div id="tab-content-3{{this.userId}}" class="tab-pane fade photos mb-30">
-        <a *ngFor="let photo of photos" href="#"><img src="{{ photo.path }}" alt=""></a>
+        <a *ngFor="let photo of photos" href="#"><img src="{{ photo.path }}" style="width:100%" alt=""></a>
       </div>
       <div id="tab-content-4{{this.userId}}" class="tab-pane fade mb-30">
         <div class="users-list panel panel-theme">
@@ -421,15 +409,16 @@
                 <a (click)="GoToProfile(friend.id, userId)" href="#"><img src="{{friend.avatar}}" alt=""></a>
               </div>
               <div class="user-info pull-left">
-                <h3 (click)="GoToProfile(friend.id, userId)" class="mt-15"><a href="#">{{friend.name}}</a></h3>
+                <h3 (click)="GoToProfile(friend.id, userId)"><a href="#">{{friend.name}}</a></h3>
+                <a href="#" class="btn btn-default btn-sm"><i  class="fa fa-user-plus"></i> Add Friend</a>
                 <!-- <p>3 mutual friends</p> -->
               </div>
             </div>
-            <div class="pull-right">
-              <a href="#" class="btn btn-default btn-sm"><i  class="fa fa-user-plus"></i> Add Friend</a>
+            <!-- <div class="pull-right"> -->
+
               <!-- <a href="#" *ngIf="isFriend(friend.id)" class="btn btn-default btn-sm"><i class="ion-ios-minus-outline"></i> Remove Friend</a> -->
 
-            </div>
+            <!-- </div> -->
             <div class="clearfix"></div>
           </div> <!-- //user-item -->
 

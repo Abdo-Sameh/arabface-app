@@ -7,15 +7,15 @@
 <ion-header>
 
     <header class="header_title"  >
-        <div class="container">
+        <div class="container" style="width: 94% !important;DISPLAY: FLEX; ALIGN-ITEMS: center;">
             <div class="back_btn">
-              <a href="#" (click)="back()"><i class="fa fa-arrow-left"></i></a>
+              <a (click)="back()" href="#"><i class="fa fa-arrow-left" style="font-size: 19px;line-height: 43px;"></i></a>
             </div>
             <div class="page_title text_center">
-              <h3>Profile</h3>
+              <h3 style="font-size:24px !IMPORTANT">Profile</h3>
             </div>
             <div class="menu_btn">
-                <a href="#"><i class="fa fa-bars" style="color:#fff;font-size:18px"></i></a>
+                <a href="#"><i class="fa fa-bars"  style="font-size: 19px; line-height: 43px;"></i></a>
               </div>
           </div>
       </header>
@@ -25,7 +25,7 @@
 <ion-content >
 
 
-  <section class="bg_grey full_vh pt-70 profile">
+  <section class="bg_grey full_vh profile pt-14">
   <div class="user_cover">
     <div class="friend_profile_box">
       <form class="img-upload">
@@ -37,7 +37,7 @@
           <input id="profile-upload" type="file" [(ngModel)]="picture.path" [ngModelOptions]="{standalone: true}"   (change)="changeProfilePicture($event)">
         </div>
       </form>
-      <h3>{{userData['name']}}</h3>
+      <h3 style="position: absolute; bottom: -80px;">{{userData['name']}}</h3>
     </div>
     <div class="profile-editors">
       <form class="file-input file-input-cover">
@@ -52,10 +52,10 @@
   </div>
   <div class="container">
     <ul class="nav nav-tabs panel panel-theme flex-h-center">
-      <li class="active"><a data-toggle="tab" href="#tab-content-1{{this.userID}}"><i class="ion-ios-settings-strong"></i> Timeline</a></li>
-      <li><a data-toggle="tab" href="#tab-content-2{{this.userID}}"><i (click)="getFollowing(this.userID)" class="ion-person"></i> About</a></li>
-      <li><a (click)="getPhotsFromProvider(this.userID)" data-toggle="tab" href="#tab-content-3{{this.userID}}"><span style="margin:3px 0 4px;"></span> Photos</a></li>
-      <li><a (click)="getFriendsList(this.userID, this.userId, '')" data-toggle="tab" href="#tab-content-4{{this.userID}}"><i class="ion-person-stalker"></i> Friends</a></li>
+      <li class="active"><a data-toggle="tab" href="#tab-content-1{{this.userID}}"><i class="fa fa-sliders" style="margin: 5px 0 2px 0;"></i> Timeline</a></li>
+      <li><a data-toggle="tab" href="#tab-content-2{{this.userID}}"><i (click)="getFollowing(this.userID)" class="fa fa-user" style="margin: 5px 0 2px 0;"></i> About</a></li>
+      <li><a (click)="getPhotsFromProvider(this.userID)" data-toggle="tab" href="#tab-content-3{{this.userID}}"><span style="margin:3px 0 4px;">120</span> Photos</a></li>
+      <li><a (click)="getFriendsList(this.userID, this.userId, '')" data-toggle="tab" href="#tab-content-4{{this.userID}}"><i class="fa fa-users" style="margin: 5px 0 2px 0;"></i> Friends</a></li>
     </ul>
     <div class="tab-content">
       <div id="tab-content-1{{this.userID}}" class="tab-pane fade timeline active in">

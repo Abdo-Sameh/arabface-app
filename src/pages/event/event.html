@@ -45,7 +45,8 @@
 					<div class="dropdown dropdown-cover">
 						<a href="#" class="btn btn-theme btn-sm" data-toggle="dropdown"><span class="caret"></span></a>
 						<ul class="dropdown-menu dropdown-menu-right">
-							<li><a href="#"><i class="fa fa-bookmark-o fa-fw"></i>&nbsp; Save</a></li>
+							<li><a (click)="saveEvent(event.id)" *ngIf="saved == false" href="#"><i class="fa fa-bookmark-o fa-fw"></i>&nbsp; Save</a></li>
+              <li><a (click)="unsaveEvent(event.id)" *ngIf="saved == true" href="#"><i class="fa fa-bookmark-o fa-fw"></i>&nbsp; Unsave</a></li>
 							<li><a *ngIf="event.is_admin == true" href="#"><i class="fa fa-pencil-square-o fa-fw"></i>&nbsp; Edit</a></li>
 							<li><a *ngIf="event.is_admin == true" href="#"><i class="fa fa-picture-o fa-fw"></i>&nbsp; Change Cover</a></li>
 						</ul>
@@ -54,7 +55,7 @@
 			</div>
 			<div class="container pt-70">
 				<div class="panel panel-theme">
-					<a href="#">Invite Friends</a>
+					<a (click)="inviteFriend()" href="#">Invite Friends</a>
 				</div>
 				<div class="panel panel-theme">
 					<a href="#"><i class="fa fa-calendar fa-fw"></i> {{ event.event_time }}</a>

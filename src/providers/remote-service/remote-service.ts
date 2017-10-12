@@ -418,15 +418,15 @@ user = new Observable(observer => {
   }
     ///////// Signup function End ////////
 
-  getPhotos()
-   {
-
-          return  this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/page/browse')
-
-          .do((res : Response ) => console.log(res.json()))
-          .map((res : Response ) => res.json());
-
-   }
+  // getPhotos()
+  //  {
+  //
+  //         return  this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/page/browse')
+  //
+  //         .do((res : Response ) => console.log(res.json()))
+  //         .map((res : Response ) => res.json());
+  //
+  //  }
 
 
 
@@ -435,6 +435,7 @@ user = new Observable(observer => {
    {
 
     return  this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/profile/friends?userid='+id + "&the_userid=" + the_userid + "&term=" + term)
+
     .map((res : Response ) => res.json());
    }
    ///////// Friends function End ////////
@@ -500,7 +501,7 @@ user = new Observable(observer => {
     //////////  profile api  function End ///////////////
     profilePosts(id)
    {
-    return  this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/feeds?type=timeline&limit=1200&type_id='+id)
+    return  this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/feeds?type=timeline&type_id='+id)
 
     .map((res : Response ) => res.json());
    }
@@ -1061,6 +1062,14 @@ console.log(url)
           return this.http.get("http://192.168.1.252/arabface/api/14789632/page/remove/role?userid=" + userid + "&user=" + user + "&page_id=" + page_id)
           .map((res : Response ) => res.json());
         }
+        inviteFriendTolikepage(userid, page_id, invited_id){
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/page/invite/friend?userid=" + userid + "&user=" + user + "&page_id=" + page_id + "&invited_id=" + invited_id)
+          .map((res : Response ) => res.json());
+        }
+        isInvitedPage(page, user, userid){
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/page/invited?userid=" + userid + "&page=" + page + "&user=" + user)
+          .map((res : Response ) => res.json());
+        }
 
 
         getGroups(type, term, filter, userId, page, limit){
@@ -1140,6 +1149,14 @@ console.log(url)
           .map((res : Response ) => res.json());
         }
 
+        isMember(group_id, id, userid){
+          return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/group/member?group_id=' + group_id + "&id=" + id + '&userid=' + userid)
+          .map((res : Response ) => res.json());
+        }
+        addMember(group_id, id, userid){
+          return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/group/add/member?group_id=' + group_id + "&user_id=" + id + '&userid=' + userid)
+          .map((res : Response ) => res.json());
+        }
         /////////////////// Events /////////////////////////
 
         getEvents(type, categoryId, term, userId, page, limit){
@@ -1234,6 +1251,14 @@ console.log(url)
           urlSearchParams.append('userid', userid );
           let body = urlSearchParams.toString()
           return this.http.post("http://192.168.1.252/arabface/api/14789632/event/rsvp", body, {headers: headers})
+          .map((res : Response ) => res.json());
+        }
+        inviteFriendToEvent(event_id, invited_id, userid){
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/event/invite/friend?userid=" + userid + "&event_id=" + event_id + "&invited_id=" + invited_id)
+          .map((res : Response ) => res.json());
+        }
+        isInvitedEvent(event_id, user, userid){
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/event/invited?userid=" + userid + "&event_id=" + event_id + "&user=" + user)
           .map((res : Response ) => res.json());
         }
         ////////////////////////////////////////////////////
@@ -1416,4 +1441,46 @@ console.log(url)
           .map((res : Response ) => res.json());
         }
         ////////////////////////////////////////////////////
+
+        getPhotos(userid, album_id, limit, offset, the_userid){
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/photo/album/photos?userid=" + userid + "&album_id=" + album_id + "&limit=" + limit + "&offset=" + offset + "&the_userid=" + the_userid)
+          .map((res : Response ) => res.json());
+        }
+
+        getAlbums(userid, limit, offset, type){
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/photo/albums?userid=" + userid + "&limit=" + limit + "&offset=" + offset + "&type=" + type)
+          .map((res : Response ) => res.json());
+        }
+
+        createAlbum(title, desc, privacy, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('title', title );
+          urlSearchParams.append('desc', desc);
+          urlSearchParams.append('privacy', privacy);
+          urlSearchParams.append('userid', userid);
+          let body = urlSearchParams.toString()
+          return this.http.post("http://192.168.1.252/arabface/api/14789632/photo/album/add", body, {headers: headers})
+          .map((res : Response ) => res.json());
+        }
+
+        editAlbum(title, desc, privacy, album_id, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('title', title );
+          urlSearchParams.append('desc', desc);
+          urlSearchParams.append('privacy', privacy);
+          urlSearchParams.append('album_id', album_id);
+          urlSearchParams.append('userid', userid);
+          let body = urlSearchParams.toString()
+          return this.http.post("http://192.168.1.252/arabface/api/14789632/photo/album/add", body, {headers: headers})
+          .map((res : Response ) => res.json());
+        }
+
+        albumDetails(album_id, userid){
+          return this.http.get("http://192.168.1.252/arabface/api/14789632/photo/album/details?userid=" + userid + "&album_id=" + album_id)
+          .map((res : Response ) => res.json());
+        }
 }
