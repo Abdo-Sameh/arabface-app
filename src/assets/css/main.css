@@ -159,7 +159,7 @@ body {
 }
 .add-btn {
 	position: fixed;
-	bottom: 100px;
+	bottom: 30px;
 	right: 20px;
 	z-index: 9999;
 	background: #5c0632;
@@ -565,7 +565,14 @@ Start Header Title
 .header_title .page_title {
 	width: 70%;
     font-size: 24px;
-    margin-top: 5px;
+}
+.header_title .container {
+		width: 94% !important;
+    display: flex;
+    align-items: center;
+}
+.header_title .page_title h3 {
+    font-size: 24px !important;
 }
 /*=========================
 //End Header Title
@@ -1030,7 +1037,7 @@ Start Profile
 }
 .timeline {
 	position: relative;
-	padding-left: 30px;
+	padding-left: 20px;
 }
 .timeline:before, .timeline .feed-box:before {
     content: "";
@@ -1049,7 +1056,7 @@ Start Profile
 }
 .timeline .feed-box:before {
     top: 20px;
-    left: -35px;
+    left: -25px;
     width: 10px;
     height: 10px;
     background: #fff;
@@ -1114,21 +1121,27 @@ Start Profile
 	}
 }
 .thumbnails img {
-width: 100%;
+    width: 100%;
+    height: 120px !important;
 }
 .thumbnails .thumbnail h3 {
     font-weight: 600;
     text-transform: uppercase;
     margin-top: 5px;
+		font-size: 12px;
+		height: 18px;
+		overflow: hidden;
 }
 .thumbnails .thumbnail p {
     font-size: 13px;
     margin: 5px 0 15px;
+		height: 34px;
+		overflow: hidden;
 }
 .thumbnails .thumbnail .caption .text-muted {
     display: block;
     margin-top: -3px;
-    font-size: 12px;
+    font-size: 11px;
 }
 .thumbnails.videos .caption p i {
 	color: #777;
@@ -1262,4 +1275,10 @@ top: -4px;
 }
 #ion-diagnostics-toast {
 	background: none !important
+}
+.modal-backdrop {
+	z-index: -1 !important
+}
+.nav-tabs .photo-upload {
+    padding: 7px 15px;
 }
