@@ -200,7 +200,7 @@ export class FriendProfilePage {
 
   back()
   {
-    this.navCtrl.push(TabsPage);
+    this.navCtrl.pop();
   }
 
   ionViewDidLoad() {

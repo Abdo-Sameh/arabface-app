@@ -1,3 +1,66 @@
 page-friend-profile {
+  .header_title{
+     padding: 7px 0 5px !important
+  }
+  .profile-editors
+  {
+     position: absolute !important;
+     top: 10px !important;
+     right: 10px !important;
+  }
+  @media (max-width: 460px) {
+ .profile-editors {
+     top: 10px !important;
+     bottom: auto;
+ }
+ }
+  .feed-footer .comment-list {
+     border-top: 0px solid #ddd !important;
+     margin-top: 7px !important;
+ }
+ .nav-tabs {
 
+
+     padding-bottom: 10px !important;
+ }
+ @media(min-width: 601px) {
+ 	.thumbnails .thumbnail img {
+ 	    width: 100%;
+ 	    height: 200px;
+ 	    object-fit: cover;
+ 	}
+ }
+ @media(max-width: 600px) {
+ 	.thumbnails>div {
+ 		float: none;
+ 		width: 100%;
+ 	}
+ }
+ .thumbnails .thumbnail h3 {
+     font-weight: 600;
+     text-transform: uppercase;
+     margin-top: 5px;
+     font-size: 14px;
+ }
+ thumbnails .thumbnail img {
+   width: 100% !important;
+ }
+ .thumbnails .thumbnail p {
+     font-size: 13px;
+     margin: 5px 0 15px;
+ }
+ .thumbnails .thumbnail .caption .text-muted {
+     display: block;
+     margin-top: -3px;
+     font-size: 12px;
+ }
+ .thumbnails.videos .caption p i {
+ 	color: #777;
+ 	font-size: 16px;
+     position: relative;
+     top: 1px;
+ }
+ #ion-diagnostics-toast {
+ 	background: none !important
+ }
 }

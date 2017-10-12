@@ -24,9 +24,18 @@ import {FriendProfilePage} from '../friend-profile/friend-profile'
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
-    userData =[];
+    userData = [];
     userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
-
+    profileInfo = {
+      'online_time' : '',
+      "gender" : '',
+      "birth" : '',
+      "bio" :'',
+      "city" : '',
+      "state" : '',
+      "country" : ''
+    }
+    cover
     userID
     photos
     likes;
@@ -40,35 +49,19 @@ export class ProfilePage {
     likedPages
     imageURI:any;
     imageFileName:any;
-
+    offset
+    limit
   constructor( public navCtrl: NavController, public navParams: NavParams,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider,  public toastCtrl: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
     let data = navParams.get('userData');
     console.log()
-    //
-    // if(data)
-    //   {
-    //       this.userID= data.id;
-    //       console.log(data)
-    //   }
-    //   console.log(this.userID , this.userId);
-    // if(this.userID == null  || this.userID == this.userId)
-    //   {
-    //     console.log("----------------------------");
-    //     // console.log(this.userId);
+    this.limit = 4;
+    this.offset = 1;
+    this.photos = [];
+    this.cover =  localStorage.getItem('userCover');
+    console.log(this.cover)
         this.getProfileData(this.userId, this.userId);
-    //     //this.getPhotsFromProvider(this.userId)
         this.getProfilePosts(this.userId)
-    //
-    //   }
-    //   else
-    //   {
-    //     this.getProfileData(this.userID, this.userId);
-    //   //  this.getPhotsFromProvider(this.userID)
-    //     this.getProfilePosts(this.userID)
-    //
-    //   }
-
-      // console.log(this.photos);
+        this.getPhotsFromProvider(this.userID);
   }
 
   ionViewDidLoad() {
@@ -76,6 +69,7 @@ export class ProfilePage {
   }
 
   getFollowingAndLikes(userId){
+    this.offset = 1;
     if(this.userID == null){
       userId = this.userId;
     }else{
@@ -90,15 +84,22 @@ export class ProfilePage {
     this.remoteService.getPages("likes", "", "all", userId, 1, 4).subscribe(res =>{this.likedPages = res.pages ;console.log(res)});
     loading.dismiss();
   }
+  getMorePages(userId){
+    this.offset += 1;
+    this.remoteService.getPages("likes", "", "all", userId, this.offset, this.limit).subscribe(res => {
+      for(let x of res.pages){
+        this.likedPages.push(x);
+      }
+       console.log(res)
+    });
+  }
   isFriend(id) {
   //  return true;
     this.remoteService.profileDetailsApiCall(70, this.userId).subscribe(res =>{
 
       console.log(res);
       return false;
-  }
-
-  );
+    });
   }
   myProfile(){
     if(this.userID == null || this.userId == this.userID){
@@ -110,7 +111,19 @@ export class ProfilePage {
 
   getProfileData(id, theUserId)
   {
-    this.remoteService.profileDetailsApiCall(id, theUserId).subscribe(res =>{this.userData = res ;console.log(res)});
+    this.remoteService.profileDetailsApiCall(id, theUserId).subscribe(res =>{
+      this.userData = res;
+      console.log(res)
+      this.profileInfo.online_time = res.profile_info[0].value;
+      this.profileInfo.gender = res.profile_info[1].value;
+      this.profileInfo.birth = res.profile_info[2].value;
+      this.profileInfo.bio = res.profile_info[3].value;
+      // this.profileInfo.city = res.profile_info[4].value;
+      // this.profileInfo.state = res.profile_info[5].value;
+      this.profileInfo.country = res.profile_info[4].value;
+
+      // console.log(res)
+    });
 
   }
   GoToProfile(id,userId)

@@ -21,7 +21,7 @@ declare var google;
   templateUrl: 'news.html',
 })
 export class NewsPage {
-  
+
     feeds ;
     likes;
     likeNumbers;
@@ -41,7 +41,7 @@ export class NewsPage {
 
   constructor(public navCtrl: NavController,  public navParams: NavParams ,public alert:AlertController,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
     this.getFeedsList(this.userId);
-    this.userAvatar ="http://"+this.userAvatar;   
+    this.userAvatar ="http://"+this.userAvatar;
   }
 
   ionViewDidLoad() {
@@ -90,7 +90,7 @@ getFeedsList(id)
         this.feeds=res
         loading.dismiss();
         console.log(this.feeds)
-        
+
       });
 
 }
@@ -310,5 +310,3 @@ goToPost()
   this.navCtrl.push(PostFeatursPage)
 }
 }
-
-
