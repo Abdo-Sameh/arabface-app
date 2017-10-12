@@ -389,7 +389,12 @@
         </div>
       </div>
       <div id="tab-content-3{{this.userId}}" class="tab-pane fade photos mb-30">
-        <a *ngFor="let photo of photos" href="#"><img src="{{ photo.path }}" style="width:100%" alt=""></a>
+        <div class="row thumbnails">
+          <div class="col-xs-6" *ngFor="let photo of photos">
+            <a class="thumbnail" href="#"><img src="{{ photo.path }}" style="width:100%" alt=""></a>
+          </div>
+        </div>
+
       </div>
       <div id="tab-content-4{{this.userId}}" class="tab-pane fade mb-30">
         <div class="users-list panel panel-theme">

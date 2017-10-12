@@ -165,6 +165,18 @@ export class FriendProfilePage {
       })
 
     }
+
+    addfriend(friendId,index,userid=this.userId)
+    {
+
+      this.remoteService.addFriend(userid,friendId).subscribe(res => {
+        console.log(res)
+        if(res.status == 1)
+        {
+        }
+
+      })
+    }
     likeFeed(userid =this.userId,feedid)
     {
     //   "use strict";

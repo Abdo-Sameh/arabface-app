@@ -37,8 +37,9 @@
           <input id="profile-upload" type="file" [(ngModel)]="picture.path" [ngModelOptions]="{standalone: true}"   (change)="changeProfilePicture($event)">
         </div>
       </form>
-      <h3 style="position: absolute; bottom: -80px;">{{userData['name']}}</h3>
+
     </div>
+    <h3 style="position: absolute; bottom: -80px;">{{userData['name']}}</h3>
     <div class="profile-editors">
       <form class="file-input file-input-cover">
         <label  class="btn btn-theme btn-sm mr-5" for="cover-upload">
