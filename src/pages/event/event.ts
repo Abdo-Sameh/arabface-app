@@ -61,7 +61,7 @@ export class EventPage {
     });
   }
   back(){
-    this.navCtrl.push(EventsPage);
+    this.navCtrl.pop();
   }
 
 }

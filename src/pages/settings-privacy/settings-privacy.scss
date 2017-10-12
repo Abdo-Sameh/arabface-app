@@ -1,7 +1,13 @@
 page-settings-privacy {
   .modal-backdrop,.modal-backdrop.in {
-  background-color: transparent !important;
-  opacity: 1 !important;
-  z-index: -1 !important;
+    background-color: transparent !important;
+    opacity: 1 !important;
+    z-index: -1 !important;
+   }
+   .toggle-md.toggle-checked .toggle-icon {
+       background-color: #f3a6cd !important;
+   }
+   .toggle-md.toggle-checked .toggle-inner {
+       background-color: #5c0632 !important;
    }
 }

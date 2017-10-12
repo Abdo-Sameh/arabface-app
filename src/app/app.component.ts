@@ -33,16 +33,17 @@ let firebase,candidate ;
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-
+checkLogin = localStorage.getItem('loggedIn')
+userName = localStorage.getItem('userName').replace(/[^aA-zZ]/g, "")
+userCover = localStorage.getItem('userCover')
   deviceLanguage
   public xmlLang :any;
-  rootPage: any = LoginPage;
   //  userName = localStorage.getItem('userName').replace(/['"]+/g, '');
   //  userAvatar = localStorage.getItem('userAvatar').slice(8,-1);
   //  userCover = localStorage.getItem('userCover');
 
 
-    pages: Array<{title: string, component: any}>;
+    pages: Array<{title: string, component: any , icon: string}>;
 
 
     constructor(public database:RemoteServiceProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen , public http :Http) {
@@ -50,23 +51,23 @@ export class MyApp {
       firebase = this.database ;
       //this.loadXML('ar')
       this.initializeApp();
-
+   console.log(this.userCover)
      // this.userAvatar ="http://"+this.userAvatar;
       // used for an example of ngFor and navigation
       this.pages = [
-        { title: 'Profile', component: ProfilePage },
-        { title: 'Online friends', component:  OnlinePage},
-        { title: 'Videos', component: VideosPage },
-        { title: 'Photos', component: PhotosPage },
-        { title: 'Pages', component: PagesPage },
-        { title: 'Forums', component: ForumsPage },
-        { title: 'Groups', component: GroupsPage },
-        { title: 'Events', component: EventsPage },
-        { title: 'Contact Us', component: ContactUsPage },
-        { title: 'Gift Shop', component: GiftsPage },
-        { title: 'Saved', component: SavedPage },
-        { title: 'Discover', component: TrendingPage },
-        { title: 'Settings', component: SettingsPage },
+        { title: 'Profile', component: ProfilePage ,icon : 'ion-ios-person'  },
+        { title: 'Online friends', component:  OnlinePage ,icon : 'ion-person-stalker'},
+        { title: 'Videos', component: VideosPage ,icon : 'ion-ios-videocam' },
+        { title: 'Photos', component: PhotosPage ,icon : 'ion-images'},
+        { title: 'Pages', component: PagesPage ,icon : 'ion-ios-browsers'},
+        { title: 'Forums', component: ForumsPage ,icon : 'ion-chatboxes'},
+        { title: 'Groups', component: GroupsPage ,icon : 'ion-ios-people'},
+        { title: 'Events', component: EventsPage ,icon : 'ion-calendar'},
+        { title: 'Contact Us', component: ContactUsPage ,icon : 'ion-ios-telephone'},
+        { title: 'Gift Shop', component: GiftsPage ,icon : 'ion-bag'},
+        { title: 'Saved', component: SavedPage ,icon : 'ion-compass'},
+        { title: 'Discover', component: TrendingPage,icon : 'ion-compass'},
+        { title: 'Settings', component: SettingsPage ,icon : 'ion-ios-gear'},
       ];
      // console.log(this.userName);
       //console.log(this.userCover)
@@ -142,57 +143,63 @@ export class MyApp {
 
   ngOnInit () {
 
-      firebase.user.subscribe (snapshot => {
-        console.log(snapshot)
+    if(this.checkLogin == "1")
+    {
+      this.nav.setRoot(TabsPage)
+      
+    }else{
+      this.nav.setRoot(LoginPage)
+      
+    }
+    //   firebase.user.subscribe (snapshot => {
+    //     console.log(snapshot)
 
-        if(snapshot == "logged") {
-          if(localStorage.getItem('userid') == undefined) {
-            this.nav.setRoot(LoginPage)
+    //     if(snapshot == "logged") {
+    //       if(localStorage.getItem('userid') == undefined) {
+    //         this.nav.setRoot(LoginPage)
 
-          }else {
-            this.database.set_userid(localStorage.getItem('userid'));
-            firebase.set_active("true");
-          }
+    //       }else {
+    //         this.database.set_userid(localStorage.getItem('userid'));
+    //         firebase.set_active("true");
+    //       }
           
           
          
-          this.nav.setRoot (TabsPage);
+    //       this.nav.setRoot (TabsPage);
 
-        }else if(snapshot == null) {
+    //     }else if(snapshot == null) {
     
-          this.nav.setRoot(TabsPage);
+    //       this.nav.setRoot(TabsPage);
     
-      //     when deploying uncomment the next and comment above
-    //when in development comment next line and uncommnt above tel snapshot == logged
+    //   //     when deploying uncomment the next and comment above
+    // //when in development comment next line and uncommnt above tel snapshot == logged
 
-          // this.nav.setRoot(LoginPage);
-        }
-      })
+    //       // this.nav.setRoot(LoginPage);
+    //     }
+    //   })
     
 
     }
 
- signout () {
+  logout()
+  {
+    localStorage.setItem('loggedIn', "0" );
+    localStorage.setItem('userName', "" );
+    localStorage.setItem('userAvatar', "" );
+    localStorage.setItem('userData', "" );
+    localStorage.setItem('userDataID', "" );
+    localStorage.setItem('userCover', "" );
+    console.log(    localStorage.getItem('userCover' ))
 
-  firebaseauth.auth().signOut().then(function() {
-   console.log("success")
-  }).catch(function(error) {
+    this.nav.setRoot(LoginPage);
 
-  });
-   }
-  // logout()
-  // {
-  //   localStorage.setItem('loggedIn', null );
-  //   localStorage.setItem('userName', "" );
-  //   localStorage.setItem('userAvatar', "" );
-  //   localStorage.setItem('userData', "" );
-  //   localStorage.setItem('userDataID', "" );
-  //   localStorage.setItem('lang', "" );
+  }
+  //  signout () {
+  // this.na
+  //  console.log("success")
+ 
+  //  }
 
-
-  //   this.nav.push(LoginPage);
-
-  // }
 
 
 

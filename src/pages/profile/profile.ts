@@ -26,7 +26,7 @@ import {FriendProfilePage} from '../friend-profile/friend-profile'
 export class ProfilePage {
     userData =[];
     userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
-    
+
     userID
     photos
     likes;
@@ -87,7 +87,7 @@ export class ProfilePage {
     loading.present()
     this.remoteService.following(userId).subscribe(res =>{this.following = res ;console.log(res)});
     this.remoteService.followers(userId).subscribe(res =>{this.followers = res ;console.log(res)});
-    this.remoteService.getPages("likes", "", "all", userId).subscribe(res =>{this.likedPages = res.pages ;console.log(res)});
+    this.remoteService.getPages("likes", "", "all", userId, 1, 4).subscribe(res =>{this.likedPages = res.pages ;console.log(res)});
     loading.dismiss();
   }
   isFriend(id) {

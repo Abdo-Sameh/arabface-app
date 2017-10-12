@@ -17,30 +17,30 @@ import {CreateGroupPage} from '../create-group/create-group';
   templateUrl: 'groups.html',
 })
 export class GroupsPage {
-  groups
+  groups :any;
   userId :any;
   search
   filter
-
+  page :number;
   type
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.filter = 'all';
     this.search = '';
-
+    this.page = 1;
     this.type = "recommend";
-    this.getGroups(this.type, "", this.filter, this.userId);
+    this.getGroups(this.type, "", this.filter, this.userId, 1);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GroupsPage');
   }
 
-  getGroups(type, term, filter, userId){
+  getGroups(type, term, filter, userId, page){
     let loading = this.loadingCtrl.create({
       content: "Loading",
     });
-    loading.present()
+
 
     $('#active1, #active2, #active3').click(function(){
       $('select').val("all");
@@ -59,14 +59,26 @@ export class GroupsPage {
     // console.log(this.search);
     // console.log(type);
     // console.log(filter);
-    this.remoteService.getGroups(type, term, filter, userId).subscribe(res =>{
-        loading.dismiss();
-        this.groups = res;
-        console.log(res);
+    if(page > 1){
+      this.remoteService.getGroups(type, term, filter, userId, page, 4).subscribe(res =>{
+        for(let x of res){
+          this.groups.push(x);
+        }
       });
+      this.page = page;
+      console.log(page);
 
-      this.search="";
+    }else{
+      this.page = page;
+      loading.present()
+      this.remoteService.getGroups(type, term, filter, userId, page, 4).subscribe(res =>{
+          loading.dismiss();
+          this.groups = res;
+          console.log(res);
+        });
 
+      this.search = term;
+    }
   }
 
   joinGroup(group_id, status, userId, index){

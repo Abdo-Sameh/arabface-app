@@ -1,0 +1,1613 @@
+<!--
+  Generated template for the DisplayPostPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+
+<ion-content padding>
+    <div  [ngSwitch]="true">
+        
+
+       <!-- ////////////////////////////////// upload photo  post  /////////////////////////////////////////////////////////////////// -->
+
+      <div class="feed-box panel panel-theme mt-20"  *ngSwitchCase="post.type_id == 'upload-album-photos' && post.shared == false"  >
+            <div class="feed-header">
+              <div class="pull-left">
+                <img class="feed-img" src={{post.avatar}} alt="">
+                <div class="feed-title">
+                    <a (click)="GoToProfile(post.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 18px;                      ">{{post.name}} </a>  <span *ngIf="post.tag_users != ''">  with  <span *ngFor="let tag of post.tag_users"><a style="color:#5c0632;  font-size: 18px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
+                    <span>{{post.time}} </span>
+                  <span class="dropdown ml-5">
+                    <a href="#" data-toggle="dropdown"><i class="fa fa-globe"></i></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Item-1</a></li>
+                      <li><a href="#">Item-2</a></li>
+                      <li><a href="#">Item-3</a></li>
+                    </ul>
+                  </span>
+                </div>
+              </div>
+              <div class="pull-right">
+                <div class="dropdown">
+                  <a href="#" data-toggle="dropdown"><span class="caret"></span></a>
+                  <ul class="dropdown-menu dropdown-menu-right" *ngIf="post.can_edit_post == false">
+                    <li><a href="#">i don't like this post</a></li>
+                    <li><a (click)="turnOffNotifications"href="#">Turn off notifications</a></li>
+                    <li><a (click)="savePost()" href="#">save</a></li>
+                  </ul>
+                  <ul class="dropdown-menu dropdown-menu-right" *ngIf="post.can_edit_post == true">
+                      <li><a href="#">i don't like this post</a></li>
+                      <li><a (click)="turnOffNotifications"href="#">Turn off notifications</a></li>
+                      <li><a (click)="savePost()" href="#">save</a></li>
+                      
+                      <li><a (click)="editPost()" href="#">Edit post</a></li>
+                      <li><a (click)="deletePost()" href="#">Delete post</a></li>
+                    </ul>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="feed-body">
+              <img src="{{post.images}}" alt="">
+              <p>{{post.full_message}} </p>
+            </div><br>
+            <div class="feed-footer">
+
+                <div class="action-result flex-space-between">
+                    <div class="pull-left">
+                      <a href="#" (click)="effects()" class="effects"><i class="fa fa-thumbs-o-up"></i></a> {{post.like_count}}
+                    </div>
+                    <div class="pull-right">
+                      <a href="#"><i class="fa fa-commenting"></i></a> {{post.comments}}
+                    </div>
+                  </div>
+                  <div class="feed-action flex-space-around">
+                    <a href="#" *ngIf="post.has_like ==false"  (click)= "likeFeed(30,post.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Like</a>
+                    <a href="#" *ngIf="post.has_like" style="color:#488aff" (click)= "likeFeed(30,post.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>             
+                                <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+                    <a href="#" (click)="sharePost(post.id)"><i class="fa fa-share" ></i> Share</a>
+                  </div>
+
+
+
+
+              <div class="clearfix"></div>
+              <div class="comment-list" >
+                  <div class="comment" *ngFor="let comments of post.answers[0];let commentIndex=index">
+                      <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
+                      <div class="feed-title">
+                        <h3><a href="#">{{comments.name}}</a></h3>
+                        <p>{{comments.text}}</p>
+                        <div class="comment-action">
+                            <div class="pull-left" style="width:100%" >
+                                <div class="feed-title">
+
+
+                                  <span class="mr-10"*ngIf="comments.has_like==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Like</span>
+                                  <span class="mr-10"*ngIf="comments.has_like != false"style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>                                    <span (click)="reply()" class="mr-10"> {{comments.replies}} Reply</span>
+                                  <span class="mr-10">-</span>
+                                  <span>{{comments.time}}</span>
+                                </div>
+                              </div>
+                          <!-- <div class="pull-right">
+                            <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+                          </div> -->
+                        </div>
+                        <div [hidden]="show" class="comment">
+                          <div *ngFor="let replies of comments.repliesContent ;let replyIndex = index">
+                            <a href="#"><img class="feed-img" src={{replies.avatar}} alt=""></a>
+                          <div class="feed-title">
+                            <h3><a href="#">{{replies.name}}</a></h3>
+                            <p>{{replies.text}}</p>
+                            <div class="comment-action">
+                              <div class="pull-left">
+                                <a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Like</a>
+                                <a href="#" class="mr-10" *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                  <span class="mr-10">-</span>
+                                <span>{{replies.time}}</span>
+
+                              </div>
+
+                                <!-- <div class="pull-right">
+                                <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+                              </div> -->
+
+                              <div class="clearfix"></div>
+
+                            </div>
+
+                          </div>
+
+                        </div>
+                        <div  class="comment write-comment">
+                            <div class="pull-left">
+                              <img class="feed-img"  src={{userAvatar}}  alt="">
+                            </div>
+                            <form>
+                              <div class="input-group" style="max-width:400px">
+                                <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="reply ...">
+                                <div class="input-group-btn">
+                                  <button type="submit" style="height:35px" class="btn btn-default" (click)="replyOnComment(comments.entity_id,comments.id)">
+                                    <i class="fa fa-paper-plane"></i>
+                                  </button>
+                                </div>
+                              </div>
+                            </form>
+
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+              <div class="comment write-comment">
+                <div class="pull-left">
+                  <img class="feed-img" src={{userAvatar}} alt="">
+                </div>
+                <form>
+                  <div class="input-group">
+                    <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
+                    <span class="input-group-addon" (click)="commentOnFeed(post.entity_id,post.id)"><i class="fa fa-paper-plane"></i></span>
+                  </div>
+                </form>
+              </div>
+            </div>
+            </div>
+          </div>
+
+<!-- ////////////////////////////////  location post         /////////////////////////////////////////////////////////// -->
+
+          <div class="feed-box panel panel-theme mt-20"  *ngSwitchCase=" post.location != '' " >
+              <div class="feed-header">
+                <div class="pull-left">
+                  <img class="feed-img" src={{post.avatar}} alt="">
+                  <div class="feed-title">
+                      <a (click)="GoToProfile(post.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 18px;                      ">{{post.name}} </a>  <span *ngIf="post.tag_users != ''">  with  <span *ngFor="let tag of post.tag_users"><a style="color:#5c0632;  font-size: 18px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
+                      <span>{{post.time}} -  {{ post.location}} </span>
+                    <span class="dropdown ml-5">
+                      <a href="#" data-toggle="dropdown"><i class="fa fa-globe"></i></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="#">Item-1</a></li>
+                        <li><a href="#">Item-2</a></li>
+                        <li><a href="#">Item-3</a></li>
+                      </ul>
+                    </span>
+                  </div>
+                </div>
+                <div class="pull-right">
+                  <div class="dropdown">
+                          <a href="#" data-toggle="dropdown"><span class="caret"></span></a>
+                          <ul class="dropdown-menu dropdown-menu-right" *ngIf="post.can_edit_post == false">
+                            <li><a href="#">i don't like this post</a></li>
+                            <li><a (click)="turnOffNotifications"href="#">Turn off notifications</a></li>
+                            <li><a (click)="savePost()" href="#">save</a></li>
+                          </ul>
+                          <ul class="dropdown-menu dropdown-menu-right" *ngIf="post.can_edit_post == true">
+                              <li><a href="#">i don't like this post</a></li>
+                              <li><a (click)="turnOffNotifications"href="#">Turn off notifications</a></li>
+                              <li><a (click)="savePost()" href="#">save</a></li>
+                              
+                              <li><a (click)="editPost()" href="#">Edit post</a></li>
+                              <li><a (click)="deletePost()" href="#">Delete post</a></li>
+                            </ul>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="feed-body">
+                <img src="{{post.images}}" alt="">
+                <img style="width: 100%;margin-top: 10px" class="post-location-image" src="https://maps.googleapis.com/maps/api/staticmap?center={{post.location}}&amp;zoom=15&amp;size=700x200&amp;maptype=roadmap&amp;markers=color:red%7CJapan5&amp;sensor=false&amp;scale=1&amp;visual_refresh=true&amp;key=AIzaSyCekO3PhGgE-H9yOO4z-o0q0aOmm4M0JEA">
+                
+              </div><br>
+              <div class="feed-footer">
+                  <div class="action-result flex-space-between">
+                      <div class="pull-left">
+                        <a href="#"  (click)="effects()"  class="effects"><i class="fa fa-thumbs-o-up"></i></a> {{post.like_count}}
+                      </div>
+                      <div class="pull-right">
+                        <a href="#"><i class="fa fa-commenting"></i></a> {{post.comments}}
+                      </div>
+                    </div>
+                    <div class="feed-action flex-space-around">
+                      <a href="#" *ngIf="post.has_like ==false"  (click)= "likeFeed(30,post.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Like</a>
+                      <a href="#" *ngIf="post.has_like" style="color:#488aff"  (click)= "likeFeed(30,post.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>   
+                                               <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+                      <a href="#" (click)="sharePost(post.id)"><i class="fa fa-share" ></i> Share</a>
+                    </div>
+                <div class="clearfix"></div>
+                <div class="comment-list" >
+                    <div class="comment" *ngFor="let comments of post.answers[0];let commentIndex=index">
+                        <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
+                        <div class="feed-title">
+                          <h3><a href="#">{{comments.name}}</a></h3>
+                          <p>{{comments.text}}</p>
+                          <div class="comment-action">
+                              <div class="pull-left" style="width:100%" >
+                                  <div class="feed-title">
+
+
+                                    <span class="mr-10"*ngIf="comments.has_like==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Like</span>
+                                    <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>                                      <span (click)="reply()" class="mr-10"> {{comments.replies}} Reply</span>
+                                    <span class="mr-10">-</span>
+                                    <span>{{comments.time}}</span>
+                                  </div>
+                                </div>
+                            <!-- <div class="pull-right">
+                              <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+                            </div> -->
+                          </div>
+                          <div [hidden]="show" class="comment">
+                            <div *ngFor="let replies of comments.repliesContent ;let replyIndex = index">
+                              <a href="#"><img class="feed-img" src={{replies.avatar}} alt=""></a>
+                            <div class="feed-title">
+                              <h3><a href="#">{{replies.name}}</a></h3>
+                              <p>{{replies.text}}</p>
+                              <div class="comment-action">
+                                <div class="pull-left">
+                                  <a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Like</a>
+                                  <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                    <span class="mr-10">-</span>
+                                  <span>{{replies.time}}</span>
+
+                                </div>
+
+                                  <!-- <div class="pull-right">
+                                  <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+                                </div> -->
+
+                                <div class="clearfix"></div>
+
+                              </div>
+
+                            </div>
+
+                          </div>
+                          <div  class="comment write-comment">
+                              <div class="pull-left">
+                                <img class="feed-img"  src={{userAvatar}}  alt="">
+                              </div>
+                              <form>
+                                <div class="input-group" style="max-width:400px">
+                                  <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="reply ...">
+                                  <div class="input-group-btn">
+                                    <button type="submit" style="height:35px" class="btn btn-default" (click)="replyOnComment(mainI,commentIndex,comments.entity_id,comments.id)">
+                                      <i class="fa fa-paper-plane"></i>
+                                    </button>
+                                  </div>
+                                </div>
+                              </form>
+
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                <div class="comment write-comment">
+                  <div class="pull-left">
+                    <img class="feed-img" src={{userAvatar}} alt="">
+                  </div>
+                  <form>
+                    <div class="input-group">
+                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
+                      <span class="input-group-addon" (click)="commentOnFeed(post.entity_id,post.id)"><i class="fa fa-paper-plane"></i></span>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              </div>
+            </div>
+
+          <!-- ////////////////////////////////// normal post  /////////////////////////////////////////////////////////////////// -->
+
+
+          <div class="feed-box panel panel-theme mt-20"  *ngSwitchCase="post.type_id == '' && post.shared == false && post.poll_type == '0' && post.type != 'group' && post.location == '' &&post.feeling_type=='' "  >
+
+              <div class="feed-header">
+                <div class="pull-left">
+                  <img class="feed-img" src={{post.avatar}} alt="">
+                  <div class="feed-title">
+                    <a (click)="GoToProfile(post.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 18px;                      ">{{post.name}} </a>  <span *ngIf="post.tag_users != ''">  with  <span *ngFor="let tag of post.tag_users"><a style="color:#5c0632;  font-size: 18px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
+                    <span>{{post.time}} </span>
+                    <span class="dropdown ml-5">
+                      <a href="#" data-toggle="dropdown"><i class="fa fa-globe"></i></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="#">Item-1</a></li>
+                        <li><a href="#">Item-2</a></li>
+                        <li><a href="#">Item-3</a></li>
+                      </ul>
+                    </span>
+                  </div>
+                </div>
+                <div class="pull-right">
+                  <div class="dropdown">
+                          <a href="#" data-toggle="dropdown"><span class="caret"></span></a>
+                          <ul class="dropdown-menu dropdown-menu-right" *ngIf="post.can_edit_post == false">
+                            <li><a href="#">i don't like this post</a></li>
+                            <li><a (click)="turnOffNotifications"href="#">Turn off notifications</a></li>
+                            <li><a (click)="savePost()" href="#">save</a></li>
+                          </ul>
+                          <ul class="dropdown-menu dropdown-menu-right" *ngIf="post.can_edit_post == true">
+                              <li><a href="#">i don't like this post</a></li>
+                              <li><a (click)="turnOffNotifications"href="#">Turn off notifications</a></li>
+                              <li><a (click)="savePost()" href="#">save</a></li>
+                              
+                              <li><a (click)="editPost()" href="#">Edit post</a></li>
+                              <li><a (click)="deletePost()" href="#">Delete post</a></li>
+                            </ul>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="feed-body" id="{{post.background}}" style="padding:25px;">
+                <img src="{{post.images}}" alt="">
+                <p>{{post.full_message}}</p>
+              </div><br>
+              <div class="feed-footer">
+                  <div class="action-result flex-space-between">
+                      <div class="pull-left">
+                        <a href="#"  (click)="effects()"  class="effects"><i class="fa fa-thumbs-o-up"></i></a> {{post.like_count}}
+                      </div>
+                      <div class="pull-right">
+                        <a href="#"><i class="fa fa-commenting"></i></a> {{post.comments}}
+                      </div>
+                    </div>
+                    <div class="feed-action flex-space-around">
+                      <a href="#" *ngIf="post.has_like ==false"  (click)= "likeFeed(30,post.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Like</a>
+                      <a href="#" *ngIf="post.has_like" style="color:#488aff"  (click)= "likeFeed(30,post.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>   
+                                               <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+                      <a href="#" (click)="sharePost(post.id)"><i class="fa fa-share" ></i> Share</a>
+                    </div>
+                <div class="clearfix"></div>
+                <div class="comment-list" >
+                    <div class="comment" *ngFor="let comments of post.answers[0];let commentIndex=index">
+                        <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
+                        <div class="feed-title">
+                          <h3><a href="#">{{comments.name}}</a></h3>
+                          <p>{{comments.text}}</p>
+                          <div class="comment-action">
+                              <div class="pull-left" style="width:100%" >
+                                  <div class="feed-title">
+
+
+                                    <span class="mr-10"*ngIf="comments.has_like ==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Like</span>
+                                    <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>                                      <span (click)="reply()" class="mr-10"> {{comments.replies}} Reply</span>
+                                    <span class="mr-10">-</span>
+                                    <span>{{comments.time}}</span>
+                                  </div>
+                                </div>
+                            <!-- <div class="pull-right">
+                              <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+                            </div> -->
+                          </div>
+                          <div [hidden]="show" class="comment">
+                            <div *ngFor="let replies of comments.repliesContent ;let replyIndex = index">
+                              <a href="#"><img class="feed-img" src={{replies.avatar}} alt=""></a>
+                            <div class="feed-title">
+                              <h3><a href="#">{{replies.name}}</a></h3>
+                              <p>{{replies.text}}</p>
+                              <div class="comment-action">
+                                <div class="pull-left">
+                                  <a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Like</a>
+                                  <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                    <span class="mr-10">-</span>
+                                  <span>{{replies.time}}</span>
+
+                                </div>
+
+                                  <!-- <div class="pull-right">
+                                  <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+                                </div> -->
+
+                                <div class="clearfix"></div>
+
+                              </div>
+
+                            </div>
+
+                          </div>
+                          <div  class="comment write-comment">
+                              <div class="pull-left">
+                                <img class="feed-img"  src={{userAvatar}}  alt="">
+                              </div>
+                              <form>
+                                <div class="input-group" style="max-width:400px">
+                                  <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="reply ...">
+                                  <div class="input-group-btn">
+                                    <button type="submit" style="height:35px" class="btn btn-default" (click)="replyOnComment(mainI,commentIndex,comments.entity_id,comments.id)">
+                                      <i class="fa fa-paper-plane"></i>
+                                    </button>
+                                  </div>
+                                </div>
+                              </form>
+
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                <div class="comment write-comment">
+                  <div class="pull-left">
+                    <img class="feed-img" src={{userAvatar}} alt="">
+                  </div>
+                  <form>
+                    <div class="input-group">
+                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
+                      <span class="input-group-addon" (click)="commentOnFeed(post.entity_id,post.id)"><i class="fa fa-paper-plane"></i></span>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              </div>
+            </div>
+
+    <!-- ////////////////////////////////// group post  /////////////////////////////////////////////////////////////////// -->
+
+
+
+            <div class="feed-box panel panel-theme mt-20"  *ngSwitchCase=" post.shared == false && post.type == 'group'"  >
+                <div class="feed-header">
+                  <div class="pull-left">
+                    <img class="feed-img" src={{post.avatar}} alt="">
+                    <div class="feed-title">
+                        <a (click)="GoToProfile(post.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 18px;                      ">{{post.name}} </a>  <span *ngIf="post.tag_users != ''">  with  <span *ngFor="let tag of post.tag_users"><a style="color:#5c0632;  font-size: 18px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
+                        <span>{{post.time}} </span>
+                      <span class="dropdown ml-5">
+                        <a href="#" data-toggle="dropdown"><i class="fa fa-globe"></i></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#">Item-1</a></li>
+                          <li><a href="#">Item-2</a></li>
+                          <li><a href="#">Item-3</a></li>
+                        </ul>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="pull-right">
+                    <div class="dropdown">
+                            <a href="#" data-toggle="dropdown"><span class="caret"></span></a>
+                            <ul class="dropdown-menu dropdown-menu-right" *ngIf="post.can_edit_post == false">
+                              <li><a href="#">i don't like this post</a></li>
+                              <li><a (click)="turnOffNotifications"href="#">Turn off notifications</a></li>
+                              <li><a (click)="savePost()" href="#">save</a></li>
+                            </ul>
+                            <ul class="dropdown-menu dropdown-menu-right" *ngIf="post.can_edit_post == true">
+                                <li><a href="#">i don't like this post</a></li>
+                                <li><a (click)="turnOffNotifications"href="#">Turn off notifications</a></li>
+                                <li><a (click)="savePost()" href="#">save</a></li>
+                                
+                                <li><a (click)="editPost()" href="#">Edit post</a></li>
+                                <li><a (click)="deletePost()" href="#">Delete post</a></li>
+                              </ul>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="feed-body">
+                  <img src="{{post.images}}" alt="">
+                  <p>{{post.full_message}}</p>
+                </div><br>
+                <div class="feed-footer">
+                    <div class="action-result flex-space-between">
+                        <div class="pull-left">
+                          <a href="#"  (click)="effects()" class="effects"><i class="fa fa-thumbs-o-up"></i></a> {{post.like_count}}
+                        </div>
+                        <div class="pull-right">
+                          <a href="#"><i class="fa fa-commenting"></i></a> {{post.comments}}
+                        </div>
+                      </div>
+                      <div class="feed-action flex-space-around">
+                        <a href="#" *ngIf="post.has_like ==false"  (click)= "likeFeed(30,post.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Like</a>
+                        <a href="#" *ngIf="post.has_like" style="color:#488aff" (click)= "likeFeed(30,post.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>               
+                                  <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+                        <a href="#" (click)="sharePost(post.id)"><i class="fa fa-share" ></i> Share</a>
+                      </div>
+                  <div class="clearfix"></div>
+                  <div class="comment-list" >
+                      <div class="comment" *ngFor="let comments of post.answers[0];let commentIndex=index">
+                          <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
+                          <div class="feed-title">
+                            <h3><a href="#">{{comments.name}}</a></h3>
+                            <p>{{comments.text}}</p>
+                            <div class="comment-action">
+                                <div class="pull-left" style="width:100%" >
+                                    <div class="feed-title">
+
+
+                                      <span class="mr-10"*ngIf="comments.has_like==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Like</span>
+                                      <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>                                        <span (click)="reply()" class="mr-10"> {{comments.replies}} Reply</span>
+                                      <span class="mr-10">-</span>
+                                      <span>{{comments.time}}</span>
+                                    </div>
+                                  </div>
+                              <!-- <div class="pull-right">
+                                <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+                              </div> -->
+                            </div>
+                            <div [hidden]="show" class="comment">
+                              <div *ngFor="let replies of comments.repliesContent ;let replyIndex = index">
+                                <a href="#"><img class="feed-img" src={{replies.avatar}} alt=""></a>
+                              <div class="feed-title">
+                                <h3><a href="#">{{replies.name}}</a></h3>
+                                <p>{{replies.text}}</p>
+                                <div class="comment-action">
+                                  <div class="pull-left">
+                                    <a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Like</a>
+                                    <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                      <span class="mr-10">-</span>
+                                    <span>{{replies.time}}</span>
+
+                                  </div>
+
+                                    <!-- <div class="pull-right">
+                                    <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+                                  </div> -->
+
+                                  <div class="clearfix"></div>
+
+                                </div>
+
+                              </div>
+
+                            </div>
+                            <div  class="comment write-comment">
+                                <div class="pull-left">
+                                  <img class="feed-img"  src={{userAvatar}}  alt="">
+                                </div>
+                                <form>
+                                  <div class="input-group" style="max-width:400px">
+                                    <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="reply ...">
+                                    <div class="input-group-btn">
+                                      <button type="submit" style="height:35px" class="btn btn-default" (click)="replyOnComment(mainI,commentIndex,comments.entity_id,comments.id)">
+                                        <i class="fa fa-paper-plane"></i>
+                                      </button>
+                                    </div>
+                                  </div>
+                                </form>
+
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                  <div class="comment write-comment">
+                    <div class="pull-left">
+                      <img class="feed-img" src={{userAvatar}} alt="">
+                    </div>
+                    <form>
+                      <div class="input-group">
+                        <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
+                        <span class="input-group-addon" (click)="commentOnFeed(post.entity_id,post.id)"><i class="fa fa-paper-plane"></i></span>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                </div>
+              </div>
+
+
+          <!-- ////////////////////////////////// poll post  /////////////////////////////////////////////////////////////////// -->
+
+
+            <div class="feed-box panel panel-theme mt-20"  *ngSwitchCase="post.type_id == '' && post.shared == false && poll_type == '1'"  >
+                <div class="feed-header">
+                  <div class="pull-left">
+                    <img class="feed-img" src={{post.avatar}} alt="">
+                    <div class="feed-title">
+                        <a (click)="GoToProfile(post.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 18px;                      ">{{post.name}} </a>  <span *ngIf="post.tag_users != ''">  with  <span *ngFor="let tag of post.tag_users"><a style="color:#5c0632;  font-size: 18px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
+                        <span>{{post.time}} </span>
+                      <span class="dropdown ml-5">
+                        <a href="#" data-toggle="dropdown"><i class="fa fa-globe"></i></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#">Item-1</a></li>
+                          <li><a href="#">Item-2</a></li>
+                          <li><a href="#">Item-3</a></li>
+                        </ul>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="pull-right">
+                    <div class="dropdown">
+                            <a href="#" data-toggle="dropdown"><span class="caret"></span></a>
+                            <ul class="dropdown-menu dropdown-menu-right" *ngIf="post.can_edit_post == false">
+                              <li><a href="#">i don't like this post</a></li>
+                              <li><a (click)="turnOffNotifications"href="#">Turn off notifications</a></li>
+                              <li><a (click)="savePost()" href="#">save</a></li>
+                            </ul>
+                            <ul class="dropdown-menu dropdown-menu-right" *ngIf="post.can_edit_post == true">
+                                <li><a href="#">i don't like this post</a></li>
+                                <li><a (click)="turnOffNotifications"href="#">Turn off notifications</a></li>
+                                <li><a (click)="savePost()" href="#">save</a></li>
+                                
+                                <li><a (click)="editPost()" href="#">Edit post</a></li>
+                                <li><a (click)="deletePost()" href="#">Delete post</a></li>
+                              </ul>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="feed-body">
+                  <img src="{{post.images}}" alt="">
+                  <p>{{post.full_message}}</p>
+                </div><br>
+                <div class="feed-footer">
+                    <div class="action-result flex-space-between">
+                        <div class="pull-left">
+                          <a href="#"  (click)="effects()" class="effects"> <i class="fa fa-thumbs-o-up"></i></a> {{post.like_count}}
+                        </div>
+                        <div class="pull-right">
+                          <a href="#"><i class="fa fa-commenting"></i></a> {{post.comments}}
+                        </div>
+                      </div>
+                      <div class="feed-action flex-space-around">
+                        <a href="#" *ngIf="post.has_like ==false"  (click)= "likeFeed(30,post.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Like</a>
+                        <a href="#" *ngIf="post.has_like" style="color:#488aff" (click)= "likeFeed(30,post.id,mainI)" ><i class="fa fa-thumbs-o-up" ></i> Liked</a>    
+                                          <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+                        <a href="#" (click)="sharePost(post.id)"><i class="fa fa-share" ></i> Share</a>
+                      </div>
+                  <div class="clearfix"></div>
+                  <div class="comment-list" >
+                      <div class="comment" *ngFor="let comments of post.answers[0];let commentIndex=index">
+                          <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
+                          <div class="feed-title">
+                            <h3><a href="#">{{comments.name}}</a></h3>
+                            <p>{{comments.text}}</p>
+                            <div class="comment-action">
+                                <div class="pull-left" style="width:100%" >
+                                    <div class="feed-title">
+
+
+                                      <span class="mr-10" *ngIf="comments.has_like==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Like</span>
+                                      <span class="mr-10" *ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>                                        <span (click)="reply()" class="mr-10"> {{comments.replies}} Reply</span>
+                                      <span class="mr-10">-</span>
+                                      <span>{{comments.time}}</span>
+                                    </div>
+                                  </div>
+                              <!-- <div class="pull-right">
+                                <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+                              </div> -->
+                            </div>
+                            <div [hidden]="show" class="comment">
+                              <div *ngFor="let replies of comments.repliesContent ;let replyIndex = index">
+                                <a href="#"><img class="feed-img" src={{replies.avatar}} alt=""></a>
+                              <div class="feed-title">
+                                <h3><a href="#">{{replies.name}}</a></h3>
+                                <p>{{replies.text}}</p>
+                                <div class="comment-action">
+                                  <div class="pull-left">
+                                    <a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Like</a>
+                                    <a href="#" class="mr-10" *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>
+                                    
+                                    <span class="mr-10">-</span>
+                                    <span>{{replies.time}}</span>
+
+                                  </div>
+
+                                    <!-- <div class="pull-right">
+                                    <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+                                  </div> -->
+
+                                  <div class="clearfix"></div>
+
+                                </div>
+
+                              </div>
+
+                            </div>
+                            <div  class="comment write-comment">
+                                <div class="pull-left">
+                                  <img class="feed-img"  src={{userAvatar}}  alt="">
+                                </div>
+                                <form>
+                                  <div class="input-group" style="max-width:400px">
+                                    <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="reply ...">
+                                    <div class="input-group-btn">
+                                      <button type="submit" style="height:35px" class="btn btn-default" (click)="replyOnComment(mainI,commentIndex,comments.entity_id,comments.id)">
+                                        <i class="fa fa-paper-plane"></i>
+                                      </button>
+                                    </div>
+                                  </div>
+                                </form>
+
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                  <div class="comment write-comment">
+                    <div class="pull-left">
+                      <img class="feed-img" src={{userAvatar}} alt="">
+                    </div>
+                    <form>
+                      <div class="input-group">
+                        <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
+                        <span class="input-group-addon" (click)="commentOnFeed(post.entity_id,post.id)"><i class="fa fa-paper-plane"></i></span>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                </div>
+              </div>
+          <!-- ////////////////////////////////// watching post  /////////////////////////////////////////////////////////////////// -->
+
+
+              <div class="feed-box panel panel-theme mt-20"  *ngSwitchCase="post.feeling_type != '' && post.shared == false && post.type== 'feed'"  >
+                  <div class="feed-header">
+                    <div class="pull-left">
+                      <img class="feed-img" src={{post.avatar}} alt="">
+                      <div class="feed-title">
+                     <!-- <div style="  display: inline-block;
+                      ;white-space:
+
+                      ">  <a>{{post.name}}</a> <pre>  shared </pre> <a>{{post.shared_name}}</a> 's <pre> post</pre> </div> -->
+                      <a (click)="GoToProfile(post.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 18px;                      ">{{post.name}} </a>  <span *ngIf="post.tag_users != ''">  with  <span *ngFor="let tag of post.tag_users"><a style="color:#5c0632;  font-size: 18px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
+                      <span>{{post.time}} </span>
+                        <span class="dropdown ml-5">
+                          <a href="#" data-toggle="dropdown"><i class="fa fa-globe"></i></a>
+                          <ul class="dropdown-menu">
+                            <li><a href="#">Item-1</a></li>
+                            <li><a href="#">Item-2</a></li>
+                            <li><a href="#">Item-3</a></li>
+                          </ul>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="pull-right">
+                      <div class="dropdown">
+                              <a href="#" data-toggle="dropdown"><span class="caret"></span></a>
+                              <ul class="dropdown-menu dropdown-menu-right" *ngIf="post.can_edit_post == false">
+                                <li><a href="#">i don't like this post</a></li>
+                                <li><a (click)="turnOffNotifications"href="#">Turn off notifications</a></li>
+                                <li><a (click)="savePost()" href="#">save</a></li>
+                              </ul>
+                              <ul class="dropdown-menu dropdown-menu-right" *ngIf="post.can_edit_post == true">
+                                  <li><a href="#">i don't like this post</a></li>
+                                  <li><a (click)="turnOffNotifications"href="#">Turn off notifications</a></li>
+                                  <li><a (click)="savePost()" href="#">save</a></li>
+                                  
+                                  <li><a (click)="editPost()" href="#">Edit post</a></li>
+                                  <li><a (click)="deletePost()" href="#">Delete post</a></li>
+                                </ul>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="feed-body well" style="margin-left:20px">
+
+
+                       <mark>{{post.feeling_type}} </mark> |  {{post.feeling_text}}
+                  </div><br>
+                  <div class="feed-footer">
+                      <div class="action-result flex-space-between">
+                          <div class="pull-left">
+                            <a href="#" class="effects"><i class="fa fa-thumbs-o-up"></i></a> {{post.like_count}}
+                          </div>
+                          <div class="pull-right">
+                            <a href="#"><i class="fa fa-commenting"></i></a> {{post.comments}}
+                          </div>
+                        </div>
+                        <div class="feed-action flex-space-around">
+                          <a href="#" *ngIf="post.has_like ==false"  (click)= "likeFeed(30,post.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Like</a>
+                          <a href="#" *ngIf="post.has_like" style="color:#488aff" (click)= "likeFeed(30,post.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>    
+                                            <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+                          <a href="#" (click)="sharePost(post.id)"><i class="fa fa-share" ></i> Share</a>
+                        </div>
+                    <div class="clearfix"></div>
+                    <div class="comment-list" >
+                        <div class="comment" *ngFor="let comments of post.answers[0];let commentIndex=index">
+                            <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
+                            <div class="feed-title">
+                              <h3><a href="#">{{comments.name}}</a></h3>
+                              <p>{{comments.text}}</p>
+                              <div class="comment-action">
+                                  <div class="pull-left" style="width:100%" >
+                                      <div class="feed-title">
+
+
+                                        <span class="mr-10"*ngIf="comments.has_like==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Like</span>
+                                        <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>                                          <span (click)="reply()" class="mr-10"> {{comments.replies}} Reply</span>
+                                        <span class="mr-10">-</span>
+                                        <span>{{comments.time}}</span>
+                                      </div>
+                                    </div>
+                                <!-- <div class="pull-right">
+                                  <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+                                </div> -->
+                              </div>
+                              <div [hidden]="show" class="comment">
+                                <div *ngFor="let replies of comments.repliesContent ;let replyIndex = index">
+                                  <a href="#"><img class="feed-img" src={{replies.avatar}} alt=""></a>
+                                <div class="feed-title">
+                                  <h3><a href="#">{{replies.name}}</a></h3>
+                                  <p>{{replies.text}}</p>
+                                  <div class="comment-action">
+                                    <div class="pull-left">
+                                      <a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Like</a>
+                                      <a href="#" class="mr-10" *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>     
+                                                                         <span class="mr-10">-</span>
+                                      <span>{{replies.time}}</span>
+
+                                    </div>
+
+                                      <!-- <div class="pull-right">
+                                      <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+                                    </div> -->
+
+                                    <div class="clearfix"></div>
+
+                                  </div>
+
+                                </div>
+
+                              </div>
+                              <div  class="comment write-comment">
+                                  <div class="pull-left">
+                                    <img class="feed-img"  src={{userAvatar}}  alt="">
+                                  </div>
+                                  <form>
+                                    <div class="input-group" style="max-width:400px">
+                                      <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="reply ...">
+                                      <div class="input-group-btn">
+                                        <button type="submit" style="height:35px" class="btn btn-default" (click)="replyOnComment(mainI,commentIndex,comments.entity_id,comments.id)">
+                                          <i class="fa fa-paper-plane"></i>
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </form>
+
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+                    <div class="comment write-comment">
+                      <div class="pull-left">
+                        <img class="feed-img" src={{userAvatar}} alt="">
+                      </div>
+                      <form>
+                        <div class="input-group">
+                          <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
+                          <span class="input-group-addon" (click)="commentOnFeed(post.entity_id,post.id)"><i class="fa fa-paper-plane"></i></span>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+
+
+          <!-- ////////////////////////////////// shared watching post  /////////////////////////////////////////////////////////////////// -->
+
+
+              <div class="feed-box panel panel-theme mt-20"  *ngSwitchCase="post.feeling_type != '' && post.shared == true"  >
+                  <div class="feed-header">
+                    <div class="pull-left">
+                      <img class="feed-img" src={{post.avatar}} alt="">
+                      <div class="feed-title">
+                     <!-- <div style="  display: inline-block;
+                      ;white-space:
+
+                      ">  <a>{{post.name}}</a> <pre>  shared </pre> <a>{{post.shared_name}}</a> 's <pre> post</pre> </div> -->
+                      <a (click)="GoToProfile(post.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 18px;                      ">{{post.name}} </a>  <span *ngIf="post.tag_users != ''">  with  <span *ngFor="let tag of post.tag_users"><a style="color:#5c0632;  font-size: 18px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
+                      <span>{{post.time}} </span>
+                        <span class="dropdown ml-5">
+                          <a href="#" data-toggle="dropdown"><i class="fa fa-globe"></i></a>
+                          <ul class="dropdown-menu">
+                            <li><a href="#">Item-1</a></li>
+                            <li><a href="#">Item-2</a></li>
+                            <li><a href="#">Item-3</a></li>
+                          </ul>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="pull-right">
+                      <div class="dropdown">
+                              <a href="#" data-toggle="dropdown"><span class="caret"></span></a>
+                              <ul class="dropdown-menu dropdown-menu-right" *ngIf="post.can_edit_post == false">
+                                <li><a href="#">i don't like this post</a></li>
+                                <li><a (click)="turnOffNotifications"href="#">Turn off notifications</a></li>
+                                <li><a (click)="savePost()" href="#">save</a></li>
+                              </ul>
+                              <ul class="dropdown-menu dropdown-menu-right" *ngIf="post.can_edit_post == true">
+                                  <li><a href="#">i don't like this post</a></li>
+                                  <li><a (click)="turnOffNotifications"href="#">Turn off notifications</a></li>
+                                  <li><a (click)="savePost()" href="#">save</a></li>
+                                  
+                                  <li><a (click)="editPost()" href="#">Edit post</a></li>
+                                  <li><a (click)="deletePost()" href="#">Delete post</a></li>
+                                </ul>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="feed-body" style="margin-left:20px">
+                      <div class="feed-header">
+                          <img class="feed-img" src="{{post.shared_avatar}}" style="width:30px !important ;height:30px;" >
+                          <div class="feed-title">
+                            <a  (click)="GoToProfile(post.entity_id, userId)" style="color:#5c0632;cursor:pointer">{{post.shared_name}} </a>
+                            <div class="clearfix"></div>
+                          </div>
+                          </div>
+
+                          <br><br><br>
+
+                          <div >
+                       <b><mark>{{post.feeling_type}}</mark></b>   {{post.feeling_text}}
+                          </div>
+                  </div><br>
+                  <div class="feed-footer">
+                      <div class="action-result flex-space-between">
+                          <div class="pull-left">
+                            <a href="#" class="effects"><i class="fa fa-thumbs-o-up"></i></a> {{post.like_count}}
+                          </div>
+                          <div class="pull-right">
+                            <a href="#"><i class="fa fa-commenting"></i></a> {{post.comments}}
+                          </div>
+                        </div>
+                        <div class="feed-action flex-space-around">
+                          <a href="#" *ngIf="post.has_like ==false"  (click)= "likeFeed(30,post.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Like</a>
+                          <a href="#" *ngIf="post.has_like"  style="color:#488aff" (click)= "likeFeed(30,post.id,mainI)" ><i class="fa fa-thumbs-o-up" ></i> Liked</a>    
+                                                       <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+                          <a href="#" (click)="sharePost(post.id)"><i class="fa fa-share" ></i> Share</a>
+                        </div>
+                    <div class="clearfix"></div>
+                    <div class="comment-list" >
+                        <div class="comment" *ngFor="let comments of post.answers[0];let commentIndex=index">
+                            <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
+                            <div class="feed-title">
+                              <h3><a href="#">{{comments.name}}</a></h3>
+                              <p>{{comments.text}}</p>
+                              <div class="comment-action">
+                                  <div class="pull-left" style="width:100%" >
+                                      <div class="feed-title">
+
+
+                                        <span class="mr-10"*ngIf="comments.has_like==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Like</span>
+                                        <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>                                          <span (click)="reply()" class="mr-10"> {{comments.replies}} Reply</span>
+                                        <span class="mr-10">-</span>
+                                        <span>{{comments.time}}</span>
+                                      </div>
+                                    </div>
+                                <!-- <div class="pull-right">
+                                  <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+                                </div> -->
+                              </div>
+                              <div [hidden]="show" class="comment">
+                                <div *ngFor="let replies of comments.repliesContent ;let replyIndex = index">
+                                  <a href="#"><img class="feed-img" src={{replies.avatar}} alt=""></a>
+                                <div class="feed-title">
+                                  <h3><a href="#">{{replies.name}}</a></h3>
+                                  <p>{{replies.text}}</p>
+                                  <div class="comment-action">
+                                    <div class="pull-left">
+                                      <a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Like</a>
+                                      <a href="#" class="mr-10" *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                        <span class="mr-10">-</span>
+                                      <span>{{replies.time}}</span>
+
+                                    </div>
+
+                                      <!-- <div class="pull-right">
+                                      <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+                                    </div> -->
+
+                                    <div class="clearfix"></div>
+
+                                  </div>
+
+                                </div>
+
+                              </div>
+                              <div  class="comment write-comment">
+                                  <div class="pull-left">
+                                    <img class="feed-img"  src={{userAvatar}}  alt="">
+                                  </div>
+                                  <form>
+                                    <div class="input-group" style="max-width:400px">
+                                      <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="reply ...">
+                                      <div class="input-group-btn">
+                                        <button type="submit" style="height:35px" class="btn btn-default" (click)="replyOnComment(mainI,commentIndex,comments.entity_id,comments.id)">
+                                          <i class="fa fa-paper-plane"></i>
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </form>
+
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+                    <div class="comment write-comment">
+                      <div class="pull-left">
+                        <img class="feed-img" src={{userAvatar}} alt="">
+                      </div>
+                      <form>
+                        <div class="input-group">
+                          <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
+                          <span class="input-group-addon" (click)="commentOnFeed(post.entity_id,post.id)"><i class="fa fa-paper-plane"></i></span>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+
+
+             <!-- ////////////////////////////////// shared post  /////////////////////////////////////////////////////////////////// -->
+
+
+    <div class="feed-box panel panel-theme mt-20"  *ngSwitchCase="post.shared == true && feeling_type == ''"  >
+        <div class="feed-header">
+          <div class="pull-left">
+            <img class="feed-img" src={{post.avatar}} alt="">
+            <div class="feed-title">
+           <!-- <div style="  display: inline-block;
+            ;white-space:
+
+            ">  <a>{{post.name}}</a> <pre>  shared </pre> <a>{{post.shared_name}}</a> 's <pre> post</pre> </div> -->
+            <a (click)="GoToProfile(post.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 18px;                      ">{{post.name}} </a>  <span *ngIf="post.tag_users != ''">  with  <span *ngFor="let tag of post.tag_users"><a style="color:#5c0632;  font-size: 18px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
+            <span>{{post.time}} </span>
+              <span class="dropdown ml-5">
+                <a href="#" data-toggle="dropdown"><i class="fa fa-globe"></i></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Item-1</a></li>
+                  <li><a href="#">Item-2</a></li>
+                  <li><a href="#">Item-3</a></li>
+                </ul>
+              </span>
+            </div>
+          </div>
+          <div class="pull-right">
+            <div class="dropdown">
+                    <a href="#" data-toggle="dropdown"><span class="caret"></span></a>
+                    <ul class="dropdown-menu dropdown-menu-right" *ngIf="post.can_edit_post == false">
+                      <li><a href="#">i don't like this post</a></li>
+                      <li><a (click)="turnOffNotifications"href="#">Turn off notifications</a></li>
+                      <li><a (click)="savePost()" href="#">save</a></li>
+                    </ul>
+                    <ul class="dropdown-menu dropdown-menu-right" *ngIf="post.can_edit_post == true">
+                        <li><a href="#">i don't like this post</a></li>
+                        <li><a (click)="turnOffNotifications"href="#">Turn off notifications</a></li>
+                        <li><a (click)="savePost()" href="#">save</a></li>
+                        
+                        <li><a (click)="editPost()" href="#">Edit post</a></li>
+                        <li><a (click)="deletePost()" href="#">Delete post</a></li>
+                      </ul>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="feed-body">
+            <div class="feed-header">
+                <img class="feed-img" src="{{post.shared_avatar}}" style="width:30px !important ;height:30px;" >
+                <div class="feed-title">
+                  <h3>{{post.shared_name}} </h3>
+                  <div class="clearfix"></div>
+                </div>
+                </div>
+
+                <br><br><br>
+
+                <div >
+                {{post.full_message}}
+                </div>
+        </div><br>
+        <div class="feed-footer">
+            <div class="action-result flex-space-between">
+                <div class="pull-left">
+                  <a href="#" class="effects"><i class="fa fa-thumbs-o-up"></i></a> {{post.like_count}}
+                </div>
+                <div class="pull-right">
+                  <a href="#"><i class="fa fa-commenting"></i></a> {{post.comments}}
+                </div>
+              </div>
+              <div class="feed-action flex-space-around">
+                <a href="#" *ngIf="post.has_like ==false"  (click)= "likeFeed(30,post.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Like</a>
+                <a href="#" *ngIf="post.has_like" style="color:#488aff"  (click)= "likeFeed(30,post.id,mainI)" ><i class="fa fa-thumbs-o-up"   ></i> Liked</a>    
+                           <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+                <a href="#" (click)="sharePost(post.id)"><i class="fa fa-share" ></i> Share</a>
+              </div>
+          <div class="clearfix"></div>
+          <div class="comment-list" >
+              <div class="comment" *ngFor="let comments of post.answers[0];let commentIndex=index">
+                  <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
+                  <div class="feed-title">
+                    <h3><a href="#">{{comments.name}}</a></h3>
+                    <p>{{comments.text}}</p>
+                    <div class="comment-action">
+                        <div class="pull-left" style="width:100%" >
+                            <div class="feed-title">
+
+
+                              <span class="mr-10"*ngIf="comments.has_like==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Like</span>
+                              <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>                                <span (click)="reply()" class="mr-10"> {{comments.replies}} Reply</span>
+                              <span class="mr-10">-</span>
+                              <span>{{comments.time}}</span>
+                            </div>
+                          </div>
+                      <!-- <div class="pull-right">
+                        <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+                      </div> -->
+                    </div>
+                    <div [hidden]="show" class="comment">
+                      <div *ngFor="let replies of comments.repliesContent ;let replyIndex = index">
+                        <a href="#"><img class="feed-img" src={{replies.avatar}} alt=""></a>
+                      <div class="feed-title">
+                        <h3><a href="#">{{replies.name}}</a></h3>
+                        <p>{{replies.text}}</p>
+                        <div class="comment-action">
+                          <div class="pull-left">
+                            <a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Like</a>
+                            <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>      
+                                                    <span class="mr-10">-</span>
+                            <span>{{replies.time}}</span>
+
+                          </div>
+
+                            <!-- <div class="pull-right">
+                            <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+                          </div> -->
+
+                          <div class="clearfix"></div>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+                    <div  class="comment write-comment">
+                        <div class="pull-left">
+                          <img class="feed-img"  src={{userAvatar}}  alt="">
+                        </div>
+                        <form>
+                          <div class="input-group" style="max-width:400px">
+                            <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="reply ...">
+                            <div class="input-group-btn">
+                              <button type="submit" style="height:35px" class="btn btn-default" (click)="replyOnComment(mainI,commentIndex,comments.entity_id,comments.id)">
+                                <i class="fa fa-paper-plane"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </form>
+
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+          <div class="comment write-comment">
+            <div class="pull-left">
+              <img class="feed-img" src={{userAvatar}} alt="">
+            </div>
+            <form>
+              <div class="input-group">
+                <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
+                <span class="input-group-addon" (click)="commentOnFeed(post.entity_id,post.id)"><i class="fa fa-paper-plane"></i></span>
+              </div>
+            </form>
+          </div>
+        </div>
+        </div>
+      </div>
+
+
+
+ <!-- ////////////////////////////////// change avatar  post  /////////////////////////////////////////////////////////////////// -->
+
+
+      <div class="feed-box panel panel-theme mt-20"  *ngSwitchCase="post.type_id =='change-avatar'">
+          <div class="feed-header">
+            <div class="pull-left">
+              <img class="feed-img" src={{post.avatar}} alt="">
+              <div class="feed-title">
+                  <a (click)="GoToProfile(post.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 18px;                      ">{{post.name}} </a>  <span *ngIf="post.tag_users != ''">  with  <span *ngFor="let tag of post.tag_users"><a style="color:#5c0632;  font-size: 18px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
+                  <span>{{post.time}} </span>
+                <span class="dropdown ml-5">
+                  <a href="#" data-toggle="dropdown"><i class="fa fa-globe"></i></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Item-1</a></li>
+                    <li><a href="#">Item-2</a></li>
+                    <li><a href="#">Item-3</a></li>
+                  </ul>
+                </span>
+              </div>
+            </div>
+            <div class="pull-right">
+              <div class="dropdown">
+                      <a href="#" data-toggle="dropdown"><span class="caret"></span></a>
+                      <ul class="dropdown-menu dropdown-menu-right" *ngIf="post.can_edit_post == false">
+                        <li><a href="#">i don't like this post</a></li>
+                        <li><a (click)="turnOffNotifications"href="#">Turn off notifications</a></li>
+                        <li><a (click)="savePost()" href="#">save</a></li>
+                      </ul>
+                      <ul class="dropdown-menu dropdown-menu-right" *ngIf="post.can_edit_post == true">
+                          <li><a href="#">i don't like this post</a></li>
+                          <li><a (click)="turnOffNotifications"href="#">Turn off notifications</a></li>
+                          <li><a (click)="savePost()" href="#">save</a></li>
+                          
+                          <li><a (click)="editPost()" href="#">Edit post</a></li>
+                          <li><a (click)="deletePost()" href="#">Delete post</a></li>
+                        </ul>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="feed-body">
+            <img src="{{post.images}}" alt="">
+          </div><br>
+          <div class="feed-footer">
+              <div class="action-result flex-space-between">
+                  <div class="pull-left">
+                    <a href="#" class="effects"><i class="fa fa-thumbs-o-up"></i></a> {{post.like_count}}
+                  </div>
+                  <div class="pull-right">
+                    <a href="#"><i class="fa fa-commenting"></i></a> {{post.comments}}
+                  </div>
+                </div>
+                <div class="feed-action flex-space-around">
+                  <a href="#" *ngIf="post.has_like ==false"  (click)= "likeFeed(30,post.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Like</a>
+                  <a href="#" *ngIf="post.has_like" style="color:#488aff"  (click)= "likeFeed(30,post.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>    
+                  <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+                  <a href="#" (click)="sharePost(post.id)"><i class="fa fa-share" ></i> Share</a>
+                </div>
+            <div class="clearfix"></div>
+            <div class="comment-list" >
+                <div class="comment" *ngFor="let comments of post.answers[0];let commentIndex=index">
+                    <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
+                    <div class="feed-title">
+                      <h3><a href="#">{{comments.name}}</a></h3>
+                      <p>{{comments.text}}</p>
+                      <div class="comment-action">
+                          <div class="pull-left" style="width:100%" >
+                              <div class="feed-title">
+
+
+                                <span class="mr-10"*ngIf="comments.has_like==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Like</span>
+                                <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>                                  <span (click)="reply()" class="mr-10"> {{comments.replies}} Reply</span>
+                                <span class="mr-10">-</span>
+                                <span>{{comments.time}}</span>
+                              </div>
+                            </div>
+                        <!-- <div class="pull-right">
+                          <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+                        </div> -->
+                      </div>
+                      <div [hidden]="show" class="comment">
+                        <div *ngFor="let replies of comments.repliesContent ;let replyIndex = index">
+                          <a href="#"><img class="feed-img" src={{replies.avatar}} alt=""></a>
+                        <div class="feed-title">
+                          <h3><a href="#">{{replies.name}}</a></h3>
+                          <p>{{replies.text}}</p>
+                          <div class="comment-action">
+                            <div class="pull-left">
+                              <a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Like</a>
+                              <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                <span class="mr-10">-</span>
+                              <span>{{replies.time}}</span>
+
+                            </div>
+
+                              <!-- <div class="pull-right">
+                              <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+                            </div> -->
+
+                            <div class="clearfix"></div>
+
+                          </div>
+
+                        </div>
+
+                      </div>
+                      <div  class="comment write-comment">
+                          <div class="pull-left">
+                            <img class="feed-img"  src={{userAvatar}}  alt="">
+                          </div>
+                          <form>
+                            <div class="input-group" style="max-width:400px">
+                              <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="reply ...">
+                              <div class="input-group-btn">
+                                <button type="submit" style="height:35px" class="btn btn-default" (click)="replyOnComment(mainI,commentIndex,comments.entity_id,comments.id)">
+                                  <i class="fa fa-paper-plane"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </form>
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+            <div class="comment write-comment">
+              <div class="pull-left">
+                <img class="feed-img" src={{userAvatar}} alt="">
+              </div>
+              <form>
+                <div class="input-group">
+                  <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
+                  <span class="input-group-addon" (click)="commentOnFeed(post.entity_id,post.id)"><i class="fa fa-paper-plane"></i></span>
+                </div>
+              </form>
+            </div>
+          </div>
+          </div>
+        </div>
+
+
+          <!-- ////////////////////////////////// upload video post  /////////////////////////////////////////////////////////////////// -->
+
+    <div class="feed-box panel panel-theme mt-20"  *ngSwitchCase="post.type_id =='upload-video'">
+        <div class="feed-header">
+          <div class="pull-left">
+            <img class="feed-img" src={{post.avatar}} alt="">
+            <div class="feed-title">
+                <a (click)="GoToProfile(post.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 18px;                      ">{{post.name}} </a>  <span *ngIf="post.tag_users != ''">  with  <span *ngFor="let tag of post.tag_users"><a style="color:#5c0632;  font-size: 18px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
+                <span>{{post.time}} .</span>
+              <span class="dropdown ml-5">
+                <a href="#" data-toggle="dropdown"><i class="fa fa-globe"></i></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Item-1</a></li>
+                  <li><a href="#">Item-2</a></li>
+                  <li><a href="#">Item-3</a></li>
+                </ul>
+              </span>
+            </div>
+          </div>
+          <div class="pull-right">
+            <div class="dropdown">
+                    <a href="#" data-toggle="dropdown"><span class="caret"></span></a>
+                    <ul class="dropdown-menu dropdown-menu-right" *ngIf="post.can_edit_post == false">
+                      <li><a href="#">i don't like this post</a></li>
+                      <li><a (click)="turnOffNotifications"href="#">Turn off notifications</a></li>
+                      <li><a (click)="savePost()" href="#">save</a></li>
+                    </ul>
+                    <ul class="dropdown-menu dropdown-menu-right" *ngIf="post.can_edit_post == true">
+                        <li><a href="#">i don't like this post</a></li>
+                        <li><a (click)="turnOffNotifications"href="#">Turn off notifications</a></li>
+                        <li><a (click)="savePost()" href="#">save</a></li>
+                        
+                        <li><a (click)="editPost()" href="#">Edit post</a></li>
+                        <li><a (click)="deletePost()" href="#">Delete post</a></li>
+                      </ul>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="feed-body">
+            {{post.video_embed}}
+        </div><br>
+        <div class="feed-footer">
+            <div class="action-result flex-space-between">
+                <div class="pull-left">
+                  <a href="#" class="effects"><i class="fa fa-thumbs-o-up"></i></a> {{post.like_count}}
+                </div>
+                <div class="pull-right">
+                  <a href="#"><i class="fa fa-commenting"></i></a> {{post.comments}}
+                </div>
+              </div>
+              <div class="feed-action flex-space-around">
+                <a href="#" *ngIf="post.has_like ==false"  (click)= "likeFeed(30,post.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Like</a>
+                <a href="#" *ngIf="post.has_like" style="color:#488aff"  (click)= "likeFeed(30,post.id,mainI)" ><i class="fa fa-thumbs-o-up"   ></i> Liked</a>    
+                                <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+                <a href="#" (click)="sharePost(post.id)"><i class="fa fa-share" ></i> Share</a>
+              </div>
+          <div class="clearfix"></div>
+          <div class="comment-list" >
+              <div class="comment" *ngFor="let comments of post.answers[0];let commentIndex=index">
+                  <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
+                  <div class="feed-title">
+                    <h3><a href="#">{{comments.name}}</a></h3>
+                    <p>{{comments.text}}</p>
+                    <div class="comment-action">
+                        <div class="pull-left" style="width:100%" >
+                            <div class="feed-title">
+
+                              <span class="mr-10"*ngIf="comments.has_like==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Like</span>
+                              <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
+                              <span (click)="reply()" class="mr-10"> {{comments.replies}} Reply</span>
+                              <span class="mr-10">-</span>
+                              <span>{{comments.time}}</span>
+                            </div>
+                          </div>
+                      <!-- <div class="pull-right">
+                        <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+                      </div> -->
+                    </div>
+                    <div [hidden]="show" class="comment">
+                      <div *ngFor="let replies of comments.repliesContent ;let replyIndex = index">
+                        <a href="#"><img class="feed-img" src={{replies.avatar}} alt=""></a>
+                      <div class="feed-title">
+                        <h3><a href="#">{{replies.name}}</a></h3>
+                        <p>{{replies.text}}</p>
+                        <div class="comment-action">
+                          <div class="pull-left">
+                            <a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Like</a>
+                            <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                              <span class="mr-10">-</span>
+                            <span>{{replies.time}}</span>
+
+                          </div>
+
+                            <!-- <div class="pull-right">
+                            <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+                          </div> -->
+
+                          <div class="clearfix"></div>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+                    <div  class="comment write-comment">
+                        <div class="pull-left">
+                          <img class="feed-img"  src={{userAvatar}}  alt="">
+                        </div>
+                        <form>
+                          <div class="input-group" style="max-width:400px">
+                            <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="reply ...">
+                            <div class="input-group-btn">
+                              <button type="submit" style="height:35px" class="btn btn-default" (click)="replyOnComment(mainI,commentIndex,comments.entity_id,comments.id)">
+                                <i class="fa fa-paper-plane"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </form>
+
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+          <div class="comment write-comment">
+            <div class="pull-left">
+              <img class="feed-img" src={{userAvatar}} alt="">
+            </div>
+            <form>
+              <div class="input-group">
+                <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
+                <span class="input-group-addon" (click)="commentOnFeed(post.entity_id,post.id)"><i class="fa fa-paper-plane"></i></span>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        </div>
+      </div>
+
+
+     <!-- ////////////////////////////////// change cover post  /////////////////////////////////////////////////////////////////// -->
+
+      <div class="feed-box panel panel-theme mt-20"  *ngSwitchCase="post.type_id =='change-cover'">
+          <div class="feed-header">
+            <div class="pull-left">
+              <img class="feed-img" src={{post.avatar}} alt="">
+              <div class="feed-title">
+                  <a (click)="GoToProfile(post.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 18px;                      ">{{post.name}} </a>  <span *ngIf="post.tag_users != ''">  with  <span *ngFor="let tag of post.tag_users"><a style="color:#5c0632;  font-size: 18px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
+                  <span>{{post.time}}</span>
+                <span class="dropdown ml-5">
+                  <a href="#" data-toggle="dropdown"><i class="fa fa-globe"></i></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Item-1</a></li>
+                    <li><a href="#">Item-2</a></li>
+                    <li><a href="#">Item-3</a></li>
+                  </ul>
+                </span>
+              </div>
+            </div>
+            <div class="pull-right">
+                  <div class="dropdown">
+                      <a href="#" data-toggle="dropdown"><span class="caret"></span></a>
+                      <ul class="dropdown-menu dropdown-menu-right" *ngIf="post.can_edit_post == false">
+                        <li><a href="#">i don't like this post</a></li>
+                        <li><a (click)="turnOffNotifications"href="#">Turn off notifications</a></li>
+                        <li><a (click)="savePost()" href="#">save</a></li>
+                      </ul>
+                      <ul class="dropdown-menu dropdown-menu-right" *ngIf="post.can_edit_post == true">
+                          <li><a href="#">i don't like this post</a></li>
+                          <li><a (click)="turnOffNotifications"href="#">Turn off notifications</a></li>
+                          <li><a (click)="savePost()" href="#">save</a></li>
+                          
+                          <li><a (click)="editPost()" href="#">Edit post</a></li>
+                          <li><a (click)="deletePost()" href="#">Delete post</a></li>
+                        </ul>
+                    </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="feed-body">
+            <img src="{{post.images}}" alt="">
+          </div><br>
+          <div class="feed-footer">
+              <div class="action-result flex-space-between">
+                  <div class="pull-left">
+                    <a href="#" class="effects"><i class="fa fa-thumbs-o-up"></i></a> {{post.like_count}}
+                  </div>
+                  <div class="pull-right">
+                    <a href="#"><i class="fa fa-commenting"></i></a> {{post.comments}}
+                  </div>
+                </div>
+                <div class="feed-action flex-space-around">
+                  <a href="#" *ngIf="post.has_like ==false"  (click)= "likeFeed(30,post.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Like</a>
+                  <a href="#" *ngIf="post.has_like" style="color:#488aff"  (click)= "likeFeed(30,post.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>  
+
+                    
+                    <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+                  <a href="#" (click)="sharePost(post.id)"><i class="fa fa-share" ></i> Share</a>
+                </div>
+            <div class="clearfix"></div>
+            <div class="comment-list" >
+                <div class="comment" *ngFor="let comments of post.answers[0];let commentIndex=index">
+                    <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
+                    <div class="feed-title">
+                      <h3><a href="#">{{comments.name}}</a></h3>
+                      <p>{{comments.text}}</p>
+                      <div class="comment-action">
+                          <div class="pull-left" style="width:100%" >
+                              <div class="feed-title">
+
+
+                                <span class="mr-10"*ngIf="comments.has_like==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Like</span>
+                                <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>                                  <span (click)="reply()" class="mr-10"> {{comments.replies}} Reply</span>
+                                <span class="mr-10">-</span>
+                                <span>{{comments.time}}</span>
+                              </div>
+                            </div>
+                        <!-- <div class="pull-right">
+                          <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+                        </div> -->
+                      </div>
+                      <div [hidden]="show" class="comment">
+                        <div *ngFor="let replies of comments.repliesContent ;let replyIndex = index">
+                          <a href="#"><img class="feed-img" src={{replies.avatar}} alt=""></a>
+                        <div class="feed-title">
+                          <h3><a href="#">{{replies.name}}</a></h3>
+                          <p>{{replies.text}}</p>
+                          <div class="comment-action">
+                            <div class="pull-left">
+                              <a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Like</a>
+                              <a href="#" class="mr-10" *ngIf="replies.has_like !=false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                <span class="mr-10">-</span>
+                              <span>{{replies.time}}</span>
+
+                            </div>
+
+                              <!-- <div class="pull-right">
+                              <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+                            </div> -->
+
+                            <div class="clearfix"></div>
+
+                          </div>
+
+                        </div>
+
+                      </div>
+                      <div  class="comment write-comment">
+                          <div class="pull-left">
+                            <img class="feed-img"  src={{userAvatar}}  alt="">
+                          </div>
+                          <form>
+                            <div class="input-group" style="max-width:400px">
+                              <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="reply ...">
+                              <div class="input-group-btn">
+                                <button type="submit" style="height:35px" class="btn btn-default" (click)="replyOnComment(mainI,commentIndex,comments.entity_id,comments.id)">
+                                  <i class="fa fa-paper-plane"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </form>
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+            <div class="comment write-comment">
+              <div class="pull-left">
+                <img class="feed-img" src={{userAvatar}} alt="">
+              </div>
+              <form>
+                <div class="input-group">
+                  <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
+                  <span class="input-group-addon" (click)="commentOnFeed(post.entity_id,post.id)"><i class="fa fa-paper-plane"></i></span>
+                </div>
+              </form>
+            </div>
+          </div>
+          </div>
+        </div>
+    </div>
+</ion-content>

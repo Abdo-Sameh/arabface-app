@@ -30,6 +30,8 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController,public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl :ToastController,public menu: MenuController,public remoteService : RemoteServiceProvider) {
     this.loggedIn= localStorage.getItem('loggedIn');
+    console.log(localStorage.getItem('userCover' ))
+    
     // if( localStorage.getItem('lang') !=undefined)
     //   {  this.xmlLang = JSON.parse(localStorage.getItem('lang'))
     //   }
@@ -46,7 +48,7 @@ export class LoginPage {
 
     ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
-
+      console.log(localStorage.getItem('loggedIn'))
     this.menu.enable(false);
 
   }
@@ -77,7 +79,7 @@ export class LoginPage {
           console.log(    localStorage.setItem('userDataID',JSON.stringify(this.responseData.id) ));
           console.log(    localStorage.setItem('userAvatar', JSON.stringify(this.responseData.avatar)) );
           console.log(  localStorage.setItem('userCover', JSON.stringify(this.responseData.cover) ));
-          console.log(    localStorage.setItem('loggedIn', "true" ));
+          console.log(    localStorage.setItem('loggedIn', "1" ));
               this.navCtrl.push(TabsPage);
               return true;
 

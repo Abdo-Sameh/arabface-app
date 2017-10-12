@@ -22,12 +22,17 @@ export class GroupPage {
   group
   posts
   saved
+  members = {
+
+  }
   userId :any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.group = navParams.get("group");
     this.isSaved(this.group.id);
     this.groupFeeding(this.group.id);
+    this.groupMembers(this.group.id, this.userId);
+    console.log(this.members);
   }
 
   ionViewDidLoad() {
@@ -60,6 +65,12 @@ export class GroupPage {
       this.saved = false;
     });
   }
+  groupMembers(group_id, userid){
+    this.remoteService.groupMembers(group_id, userid).subscribe(res => {
+      console.log(res);
+      this.members = res;
+    });
+  }
   isSaved(groupId){
     this.remoteService.isSaved('group', groupId, this.userId).subscribe(res=>{
       if(res.status == 1){
@@ -69,9 +80,8 @@ export class GroupPage {
       }
     });
   }
-  back()
-  {
-    this.navCtrl.push(GroupsPage);
+  back() {
+    this.navCtrl.pop();
   }
 
 }

@@ -33,7 +33,10 @@
 				</div>
 				<div class="profile-editors">
 
-<a href="#" class="btn btn-theme btn-sm"><i class="fa fa-thumbs-o-up"></i>&nbsp; Like</a>
+          <a *ngIf="page.has_like == false" (click)="likePage(userId, page.id, 'like')" href="#" class="btn btn-theme btn-sm"><i class="fa fa-thumbs-o-up"></i>&nbsp; Like</a>
+          <a *ngIf="page.has_like == true" style="color: #488aff" (click)="likePage(userId, page.id, 'dislike')" href="#" class="btn btn-theme btn-sm"><i class="fa fa-check"></i>&nbsp; Liked</a>
+          <!-- <a *ngIf="page.has_like == false" (click)="likePage(userId, page.id, 'like')" href="#"  class="btn btn-default btn-sm"><i class="fa fa-thumbs-o-up"></i> Like</a>
+          <a *ngIf="page.has_like == true" style="color: #488aff" (click)="likePage(userId, page.id, 'dislike')" href="#"  class="btn btn-default btn-sm"><i class="fa fa-thumbs-o-up"></i> Liked</a> -->
 
           <div class="dropdown" style="display:inline-block">
 								<a href="#" class="btn btn-theme btn-sm" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
@@ -51,10 +54,10 @@
 					<a href="#">Suggest to Friends</a>
 				</div>
 				<div class="panel panel-theme">
-					<a href="#">35,619 people like this</a>
+					<a href="#">{{likes}} people like this</a>
 				</div>
 				<div class="panel panel-theme">
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit culpa mollitia veniam officiis ex impedit totam, hic nam voluptas temporibus nihil libero ipsam ab distinctio quae nulla quo, aliquam incidunt!</p>
+					<!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit culpa mollitia veniam officiis ex impedit totam, hic nam voluptas temporibus nihil libero ipsam ab distinctio quae nulla quo, aliquam incidunt!</p> -->
 					<p>{{ page.description }}</p>
 				</div>
 				<div class="panel panel-theme">

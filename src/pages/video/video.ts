@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
 import { VideosPage } from '../videos/videos';
+import { EditVideoPage } from '../edit-video/edit-video';
+
 
 /**
  * Generated class for the VideoPage page.
@@ -21,13 +23,17 @@ export class VideoPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public remoteService :RemoteServiceProvider, public toastCtrl :ToastController) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.video = this.navParams.get('video');
+    // this.video.code = this.video.code.substr(1);
+    // this.video.code = this.video.code.substring(1, this.video.code.length-1);
+    // $('#display').append(this.video.code);
+    console.log(this.video.code);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VideoPage');
   }
   editVideoPage(){
-    this.navCtrl.push(VideosPage, {
+    this.navCtrl.push(EditVideoPage, {
       'video' : this.video
     });
   }

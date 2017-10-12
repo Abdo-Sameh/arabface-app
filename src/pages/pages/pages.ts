@@ -17,18 +17,20 @@ import {CreatePagePage}  from '../create-page/create-page'
   templateUrl: 'pages.html',
 })
 export class PagesPage {
-  pages
+  pages :any
   categories
   userId :any;
   search
   category
   type
+  page :number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.userId=localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.category = 'all';
     this.type = "all";
-    this.getPages(this.type, "", this.category, this.userId);
+    this.page = 1;
+    this.getPages(this.type, "", this.category, this.userId, 1);
   }
 
   ionViewDidLoad() {
@@ -36,11 +38,11 @@ export class PagesPage {
 
   }
 
-  getPages(type, term, categoryId, Id){
+  getPages(type, term, categoryId, Id, page){
     let loading = this.loadingCtrl.create({
       content: "Loading",
     });
-    loading.present()
+
 
       $('#active1, #active2').click(function(){
         if(this.id == 'active1'){
@@ -51,17 +53,31 @@ export class PagesPage {
       });
       this.type = type;
       this.category = categoryId;
+      console.log(page);
+      if(page > 1){
 
-    this.remoteService.getPages(type, term, categoryId, Id).subscribe(res =>{
-        loading.dismiss();
-        console.log(type);
-        console.log(term);
-        console.log(categoryId);
-        this.pages = res.pages ;
-        this.categories = res.categories;
-        console.log(res);
-      });
-      this.search="";
+        this.remoteService.getPages(type, term, categoryId, Id, page, 4).subscribe(res =>{
+
+            for(let x of res.pages){
+              this.pages.push(x);
+            }
+            console.log(res);
+          });
+          this.page = page;
+      }else{
+        this.page = page;
+        loading.present()
+        this.remoteService.getPages(type, term, categoryId, Id, page, 4).subscribe(res =>{
+            loading.dismiss();
+            console.log(type);
+            console.log(term);
+            console.log(categoryId);
+            this.pages = res.pages;
+            this.categories = res.categories;
+            console.log(res);
+          });
+          this.search = term;
+      }
   }
 
   likePage(userId, pageId, type, index){

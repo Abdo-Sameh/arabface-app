@@ -43,3 +43,34 @@ html {
 .header_title .page_title h3  {
     font-size: 16px !important
 }
+
+.input-wrapper{
+    //padding:10px !important;
+    
+}
+.list-md .item-block .item-inner{
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    
+}
+
+.input-wrapper .label {
+    font-weight: 400 !important;
+    margin-left: -200px;
+    font-size: 16px !important;
+    font-family: 'lato', sans-serif !important;
+    
+}
+.input-wrapper .label .icons{
+font-size: 30px !important;
+margin: 20px !important;
+}
+.logout
+{
+    margin-top: 40px !important;
+    background: #ffd800 !important;
+    color: #000  !important;
+    padding: 17px !important;
+    text-transform: uppercase !important;
+    margin: 50px !important;
+    float: right !important
+}
