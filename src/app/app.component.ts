@@ -33,9 +33,8 @@ let firebase,candidate ;
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-checkLogin = localStorage.getItem('loggedIn')
-userName = localStorage.getItem('userName').replace(/[^aA-zZ]/g, "")
-userCover = localStorage.getItem('userCover')
+  checkLogin = localStorage.getItem('loggedIn')
+
   deviceLanguage
   public xmlLang :any;
   //  userName = localStorage.getItem('userName').replace(/['"]+/g, '');
@@ -48,26 +47,26 @@ userCover = localStorage.getItem('userCover')
 
     constructor(public database:RemoteServiceProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen , public http :Http) {
       this.deviceLanguage = this.platform.lang();
+
       firebase = this.database ;
       //this.loadXML('ar')
       this.initializeApp();
-   console.log(this.userCover)
      // this.userAvatar ="http://"+this.userAvatar;
       // used for an example of ngFor and navigation
       this.pages = [
-        { title: 'Profile', component: ProfilePage ,icon : 'ion-ios-person'  },
-        { title: 'Online friends', component:  OnlinePage ,icon : 'ion-person-stalker'},
-        { title: 'Videos', component: VideosPage ,icon : 'ion-ios-videocam' },
-        { title: 'Photos', component: PhotosPage ,icon : 'ion-images'},
-        { title: 'Pages', component: PagesPage ,icon : 'ion-ios-browsers'},
-        { title: 'Forums', component: ForumsPage ,icon : 'ion-chatboxes'},
-        { title: 'Groups', component: GroupsPage ,icon : 'ion-ios-people'},
-        { title: 'Events', component: EventsPage ,icon : 'ion-calendar'},
-        { title: 'Contact Us', component: ContactUsPage ,icon : 'ion-ios-telephone'},
-        { title: 'Gift Shop', component: GiftsPage ,icon : 'ion-bag'},
-        { title: 'Saved', component: SavedPage ,icon : 'ion-compass'},
-        { title: 'Discover', component: TrendingPage,icon : 'ion-compass'},
-        { title: 'Settings', component: SettingsPage ,icon : 'ion-ios-gear'},
+        { title: 'Profile', component: ProfilePage ,icon : 'fa fa-user'  },
+        { title: 'Online friends', component:  OnlinePage ,icon : 'fa fa-circle'},
+        { title: 'Videos', component: VideosPage ,icon : 'fa fa-video-camera' },
+        { title: 'Photos', component: PhotosPage ,icon : 'fa fa-camera'},
+        { title: 'Pages', component: PagesPage ,icon : 'fa fa-file'},
+        { title: 'Forums', component: ForumsPage ,icon : 'fa fa-commenting'},
+        { title: 'Groups', component: GroupsPage ,icon : 'fa fa-users'},
+        { title: 'Events', component: EventsPage ,icon : 'fa fa-calendar'},
+        { title: 'Contact Us', component: ContactUsPage ,icon : 'fa fa-envelope'},
+        { title: 'Gift Shop', component: GiftsPage ,icon : 'fa fa-shopping-bag'},
+        { title: 'Saved', component: SavedPage ,icon : 'fa fa-bookmark'},
+        { title: 'Discover', component: TrendingPage,icon : 'fa fa-hashtag'},
+        { title: 'Settings', component: SettingsPage ,icon : 'fa fa-cog'},
       ];
      // console.log(this.userName);
       //console.log(this.userCover)
@@ -142,13 +141,12 @@ userCover = localStorage.getItem('userCover')
   }
 
   ngOnInit () {
-
-    if(this.checkLogin == "1")
+    console.log('app'+this.checkLogin)
+    if((this.checkLogin == "0") || (!this.checkLogin))
     {
-      this.nav.setRoot(TabsPage)
-      
-    }else{
       this.nav.setRoot(LoginPage)
+    }else{
+      this.nav.setRoot(TabsPage)
       
     }
     //   firebase.user.subscribe (snapshot => {
@@ -189,7 +187,6 @@ userCover = localStorage.getItem('userCover')
     localStorage.setItem('userData', "" );
     localStorage.setItem('userDataID', "" );
     localStorage.setItem('userCover', "" );
-    console.log(    localStorage.getItem('userCover' ))
 
     this.nav.setRoot(LoginPage);
 

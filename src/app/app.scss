@@ -25,6 +25,7 @@ html {
 .item-md {
 
     background-color: #5c0632 !important;
+    padding: 0px !important
     
 }
 .toolbar-background-md{
@@ -53,23 +54,25 @@ html {
     
 }
 
-.input-wrapper .label {
+.menu_items .input-wrapper .label {
     font-weight: 400 !important;
-    margin-left: -200px;
-    font-size: 16px !important;
-    font-family: 'lato', sans-serif !important;
-    
+    text-align: left;
+    font-family: 'lato', sans-serif !important;margin-left: 0!important;
+
+    padding-top: 0;
+    margin-top: 0;
 }
-.input-wrapper .label .icons{
-font-size: 30px !important;
-margin: 20px !important;
+.menu_items .input-wrapper .label .icons {
+    font-size: 23px !important;
+    margin: 20px !important;
+    vertical-align: middle;
 }
 .logout
 {
     margin-top: 40px !important;
     background: #ffd800 !important;
     color: #000  !important;
-    padding: 17px !important;
+  //  padding: 17px !important;
     text-transform: uppercase !important;
     margin: 50px !important;
     float: right !important

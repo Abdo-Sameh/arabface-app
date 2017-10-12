@@ -40,11 +40,21 @@ export class NewsPage {
     }
     hiddenPost
     feed = { 'feedid' :""}
-    public userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
-    userAvatar = localStorage.getItem('userAvatar').slice(8,-1);
+    userId 
+    userAvatar 
 
   constructor(public navCtrl: NavController,public popOver : PopoverController  ,public toast:ToastController, public navParams: NavParams ,public alert:AlertController,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
+    if(localStorage.getItem('userDataID'))
+    {
+     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "")
+    }
+    if(localStorage.getItem('userAvatar'))
+    {
+      this.userAvatar = localStorage.getItem('userAvatar').slice(8,-1);
+    }
+    
     this.getFeedsList(this.userId);
+    
     this.userAvatar ="http://"+this.userAvatar;
   }
 
@@ -355,8 +365,8 @@ reply()
   {
     let toast = this.toast.create({
       message: 'this post has saved !',
-      duration : 2000
-
+      duration : 2000,
+      cssClass: 'alert'
     });
     toast.present();
     this.remoteService.saveItem('feed',feedid,this.userId).subscribe(res => {
@@ -382,7 +392,7 @@ reply()
     deletePost(feedid,index,userID=this.userId)
     {
       let alert = this.alert.create({
-        title: 'share',
+        title: 'Delete',
         message: 'Do you want to delete this post?',
 
         buttons: [
@@ -418,7 +428,7 @@ reply()
     deleteComment(commentId)
     {
       let alert = this.alert.create({
-        title: 'share',
+        title: 'Delete',
         message: 'Do you want to delete comment?',
         buttons: [
           {
