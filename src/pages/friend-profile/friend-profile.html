@@ -26,7 +26,7 @@
 
 
   <section class="bg_grey full_vh profile pt-14">
-  <div class="user_cover">
+  <div class="user_cover" [ngStyle]="{ 'background-image': 'url('  + userData['cover'] + ')'}">
     <div class="friend_profile_box">
       <form class="img-upload">
         <img src="{{userData['avatar']}}" alt="Arabface" title="Arabface">
@@ -37,13 +37,14 @@
           <input id="profile-upload" type="file" [(ngModel)]="picture.path" [ngModelOptions]="{standalone: true}"   (change)="changeProfilePicture($event)">
         </div>
       </form>
-      <h3 style="position: absolute; bottom: -80px;">{{userData['name']}}</h3>
+
     </div>
+    <h3 style="position: absolute; bottom: -80px;">{{userData['name']}}</h3>
     <div class="profile-editors">
       <form class="file-input file-input-cover">
-        <label  class="btn btn-theme btn-sm mr-5" for="cover-upload">
+        <!-- <label  class="btn btn-theme btn-sm mr-5" for="cover-upload">
           <i *ngIf="myProfile()" class="fa fa-picture-o"></i>&nbsp; change cover
-        </label>
+        </label> -->
         <input id="cover-upload" type="file">
       </form>
       <a href="#" *ngIf="myProfile()" class="btn btn-theme btn-sm"><i class="fa fa-pencil-square-o"></i> edit profile</a>
@@ -54,7 +55,7 @@
     <ul class="nav nav-tabs panel panel-theme flex-h-center">
       <li class="active"><a data-toggle="tab" href="#tab-content-1{{this.userID}}"><i class="fa fa-sliders" style="margin: 5px 0 2px 0;"></i> Timeline</a></li>
       <li><a data-toggle="tab" href="#tab-content-2{{this.userID}}"><i (click)="getFollowing(this.userID)" class="fa fa-user" style="margin: 5px 0 2px 0;"></i> About</a></li>
-      <li><a (click)="getPhotsFromProvider(this.userID)" data-toggle="tab" href="#tab-content-3{{this.userID}}"><span style="margin:3px 0 4px;">120</span> Photos</a></li>
+      <li><a (click)="getPhotsFromProvider(this.userID)" data-toggle="tab" href="#tab-content-3{{this.userID}}"><i class="fa fa-photo" style="margin: 5px 0 2px 0;"></i> Photos</a></li>
       <li><a (click)="getFriendsList(this.userID, this.userId, '')" data-toggle="tab" href="#tab-content-4{{this.userID}}"><i class="fa fa-users" style="margin: 5px 0 2px 0;"></i> Friends</a></li>
     </ul>
     <div class="tab-content">
@@ -330,15 +331,13 @@
       </div>
       <div id="tab-content-2{{this.userID}}" class="tab-pane fade mb-30">
         <div class="panel panel-theme">
-          <ul class="profile-info" *ngFor="let info of userData.profile_info">
-            <li><i>{{ info.name }} :</i> {{ info.value }}</li>
-            <!-- <li><i class="fa fa-home fa-fw"></i> Lives in City, Country</li>
-            <li><i class="fa fa-graduation-cap fa-fw"></i> Studies at University</li>
-            <li><i class="fa fa-ellipsis-h fa-fw"></i> Full Information</li> -->
-            <!-- <li><i class="fa fa-user fa-fw"></i> Accountant</li>
-            <li><i class="fa fa-home fa-fw"></i> Lives in City, Country</li>
-            <li><i class="fa fa-graduation-cap fa-fw"></i> Studies at University</li>
-            <li><i class="fa fa-ellipsis-h fa-fw"></i> Full Information</li> -->
+          <ul class="profile-info">
+            <!-- <li><i>{{ info.name }} :</i> {{ info.value }}</li> -->
+            <li><i class="fa fa-circle fa-fw" style="color: green; font-size: 10px;"></i> {{ profileInfo.online_time }}</li>
+            <li><i class="fa fa-map-marker fa-fw"></i> {{ profileInfo.country  }}</li>
+            <li><i class="fa fa-user fa-fw"></i> {{ profileInfo.gender }}</li>
+            <li><i class="fa fa-calendar fa-fw"></i> {{ profileInfo.birth }}</li>
+            <li><i class="fa fa-info-circle fa-fw"></i>Bio: {{ profileInfo.bio }}</li>
           </ul>
         </div>
         <!-- <div class="btn btn-theme btn-block">Likes</div>
@@ -388,7 +387,11 @@
         </div>
       </div>
       <div id="tab-content-3{{this.userID}}" class="tab-pane fade photos mb-30">
-        <a *ngFor="let photo of photos" href="#"><img src="{{ photo.path }}" alt=""></a>
+        <div class="row thumbnails">
+          <div class="col-xs-6" *ngFor="let photo of photos">
+            <a class="thumbnail" href="#"><img src="{{ photo.path }}" style="width:100%" alt=""></a>
+          </div>
+        </div>
       </div>
       <div id="tab-content-4{{this.userID}}" class="tab-pane fade mb-30">
         <div class="users-list panel panel-theme">
@@ -402,24 +405,25 @@
               </div>
             </div>
           </form> -->
-          <div class="user-item" *ngFor="let friend of friendslist;">
-            <div class="pull-left">
-              <div class="user-img">
-                <a (click)="GoToProfile(friend.id, this.userID)" href="#"><img src="{{friend.avatar}}" alt=""></a>
+          <div *ngFor="let friend of friendslist; let i = index;" >
+          <div class="user-item" *ngIf="friend.id != userId">
+              <div class="pull-left">
+                <div class="user-img">
+                  <a (click)="GoToProfile(friend.id, this.userID)" href="#"><img src="{{friend.avatar}}" alt=""></a>
+                </div>
+                <div class="user-info pull-left">
+                  <h3 (click)="GoToProfile(friend.id, this.userID)" class="mt-15"><a href="#">{{friend.name}}</a></h3>
+                  <!-- <p>3 mutual friends</p> -->
+                </div>
               </div>
-              <div class="user-info pull-left">
-                <h3 (click)="GoToProfile(friend.id, this.userID)" class="mt-15"><a href="#">{{friend.name}}</a></h3>
-                <!-- <p>3 mutual friends</p> -->
+              <div class="pull-right">
+                <a href="#" *ngIf="friend.friend_status == 2" style="color: #488aff" class="btn btn-default btn-sm"><i  class="fa fa-check"></i> Friends</a>
+                <a href="#" *ngIf="friend.friend_status == 1" style="color: #488aff" class="btn btn-default btn-sm"><i  class="fa fa-check"></i> Request sent</a>
+                <a (click)="addfriend(friend.id,i)" href="#" *ngIf="friend.friend_status == '0'" class="btn btn-default btn-sm"><i  class="fa fa-user-plus"></i> Add Friend</a>
               </div>
-            </div>
-            <div class="pull-right">
-              <a href="#" class="btn btn-default btn-sm"><i  class="fa fa-user-plus"></i> Add Friend</a>
-              <!-- <a href="#" *ngIf="isFriend(friend.id)" class="btn btn-default btn-sm"><i class="ion-ios-minus-outline"></i> Remove Friend</a> -->
-
-            </div>
-            <div class="clearfix"></div>
+              <div class="clearfix"></div>.
           </div> <!-- //user-item -->
-
+        </div>
         </div>
       </div>
     </div>
