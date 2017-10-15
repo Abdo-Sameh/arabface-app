@@ -73,14 +73,14 @@ getFeedsList(id,more=false,GotPosts= 30)
     showBackdrop: true,
   });
   loading.present()
-      this.remoteService.feedsListApiCall(id).subscribe(res =>{
+      this.remoteService.feedsListApiCall(id,'','feed',10).subscribe(res =>{
 
         for(let i =0 ; i < res.length;i++)
         {
-          let newFeedID=res[i].id
-          let newFeed =res[i].answers
+          let newFeedID = res[i].id
+          let newFeed = res[i].answers
           this.remoteService.loadComments(newFeedID).subscribe(res2 =>{newFeed.unshift(res2)
-            for(let g=0 ;g <newFeed[0].length;g++)
+            for(let g = 0 ;g < newFeed[0].length; g++)
               {
                 this.remoteService.loadReplies(newFeed[0][g].id).subscribe(res3 => {
 
