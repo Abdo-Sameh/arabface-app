@@ -26,11 +26,11 @@
 <ion-content padding>
   <section class="bg_grey full_vh pt-70">
 			<form class="list-group list-group-sm list-group-theme">
-				<legend class="list-group-item bg_grey">
+				<!-- <legend class="list-group-item bg_grey">
 					<h4>Site Notifications</h4>
 
-				</legend>
-        <p class="help-block">Send me site notifications when </p>
+				</legend> -->
+        <p class="help-block">Send me notifications when </p>
 			    <a href="#" class="list-group-item">
 				    <div>
               <ion-toggle [(ngModel)]="settings['notify-following-you']" [ngModelOptions]="{ standalone :true}" class="pull-right"></ion-toggle>
@@ -91,6 +91,13 @@
               <!-- <input type="checkbox" id="check_7" class="check_7" value="1" *ngIf="settings['notify-site-share-item'] == '1'" checked>
               <input type="checkbox" id="check_7" class="check_7" value="0" *ngIf="settings['notify-site-share-item'] == '0'"> -->
               <label for="check_7" class="pull-left" style="margin-top:12px">Shared your posts</label>
+              <div class="clearfix"></div>
+            </div>
+			    </a>
+          <a href="#" class="list-group-item">
+				    <div>
+              <ion-toggle [(ngModel)]="settings['notify-site-store']" [ngModelOptions]="{ standalone :true}" class="pull-right"></ion-toggle>
+              <label for="check_8" class="pull-left" style="margin-top:12px">Enable store notifications</label>
               <div class="clearfix"></div>
             </div>
 			    </a>

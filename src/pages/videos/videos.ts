@@ -44,21 +44,39 @@ export class VideosPage {
 
 
   getVideos(categoryId, term, type, filter, userId, page){
+
+    this.type = type;
+    this.category = categoryId;
+
     let loading = this.loadingCtrl.create({
       content: "Loading",
     });
 
     if(page > 1){
       this.remoteService.getVideos(categoryId, term, type, filter, userId, page, 4).subscribe(res =>{
+        console.log(res.videos.length, type);
+        if(res.videos.length == 0){
+          if(type == "browse")
+            $('#all').hide();
+          else
+            $('#my').hide();
+        }
         for(let x of res.videos){
           this.videos.push(x);
         }
       });
       this.page = page;
     }else {
+
       this.page = page;
       loading.present()
       this.remoteService.getVideos(categoryId, term, type, filter, userId, page, 4).subscribe(res =>{
+        if(res.videos.length > 0){
+          if(type == "browse")
+            $('#all').show();
+          else
+            $('#my').show();
+        }
           loading.dismiss();
           console.log(this.type);
           console.log(this.category);
