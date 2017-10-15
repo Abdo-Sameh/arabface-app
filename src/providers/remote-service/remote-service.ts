@@ -717,7 +717,6 @@ user = new Observable(observer => {
     }
     else{
       alert('else')
-      
       urlSearchParams.append('text', post);
 
     }
