@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams ,LoadingController ,AlertController
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import * as $ from "jquery"
 
-declare var users
+const Tagedusers= []
 @Component({
   selector: 'page-post-featurs',
   templateUrl: 'post-featurs.html',
@@ -18,7 +18,7 @@ export class PostFeatursPage {
   listeningShow=true
    userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
   userAvatar = localStorage.getItem('userAvatar').slice(8,-1);
-  
+  users
   constructor(public navCtrl: NavController,public navParams: NavParams ,public alert:AlertController,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
   
   }
@@ -43,36 +43,61 @@ export class PostFeatursPage {
   postFeed(userID=this.userId,postText=this.post)
   {
     let privacy= $('.privacy').attr('id')
+    let id=$('.postBody').attr('id')
+    
     
     let loading = this.loadingCtrl.create({
       content: "Posting",
     });        
     loading.present()
-    if($('.postBody').attr('id'))
-    {
-      let id=$('.postBody').attr('id')
+  
+      // let id=$('.postBody').attr('id')
       
-      this.remoteService.feedPosting(userID,postText.text,'none','text',privacy,id).subscribe( res => { 
-        // this.feeds.unshift(res.feed)
-         this.post.text= ""
-         //this.getFeedsList(this.userId);
-         loading.dismiss();
-       });
-       this.navCtrl.pop()
-     }
-     else if($('.feeling-div').attr('id')) {
+      // this.remoteService.feedPosting(userID,postText.text,'none','text',privacy,id).subscribe( res => { 
+      //   // this.feeds.unshift(res.feed)
+      //    this.post.text= ""
+      //    //this.getFeedsList(this.userId);
+      //    loading.dismiss();
+      //  });
+      //  this.navCtrl.pop()
+      if($('.feeling-div').attr('id') && this.post.text == "") {
       let selectedFeeling=$('.feeling-div').attr('id')
-        this.remoteService.feedPosting(userID,postText.feeling,selectedFeeling,privacy,'feeling').subscribe( res => { 
+        this.remoteService.feedPosting(userID,postText.feeling,selectedFeeling,'feeling',privacy,id).subscribe( res => { 
           // this.feeds.unshift(res.feed)
            this.post.text= ""
            //this.getFeedsList(this.userId);
            loading.dismiss();
          });
          this.navCtrl.pop()
+       }else if($('.feeling-div').attr('id') && this.post.text != "")
+       {
+        let selectedFeeling=$('.feeling-div').attr('id')
+        
+        this.remoteService.feedPosting(userID,postText,selectedFeeling,'feeling&text',privacy,id).subscribe( res => { 
+          // this.feeds.unshift(res.feed)
+           this.post.text= ""
+           //this.getFeedsList(this.userId);
+           loading.dismiss();
+         });
+         this.navCtrl.pop()
+
+       }else if(Tagedusers.length > 0)
+       {
+        this.remoteService.feedPosting(userID,postText.text,'none','text',privacy,id,Tagedusers).subscribe( res => { 
+          
+          // this.feeds.unshift(res.feed)
+           this.post.text= ""
+           //this.getFeedsList(this.userId);
+           if(res.status == 1)  Tagedusers.splice(0,Tagedusers.length)
+         
+
+           console.log(Tagedusers)
+           loading.dismiss();
+         });
+         this.navCtrl.pop()
        }
-  
        else{
-      this.remoteService.feedPosting(userID,postText.text,'none','text',privacy).subscribe( res => { 
+      this.remoteService.feedPosting(userID,postText.text,'none','text',privacy,id).subscribe( res => { 
         // this.feeds.unshift(res.feed)
          this.post.text= ""
          //this.getFeedsList(this.userId);
@@ -161,11 +186,27 @@ export class PostFeatursPage {
   }
   selectUserToTag()
   {
-    var users
-    $(document).on('click','.tagslist li a',function(e){
-      
-      e.preventDefault();
-     $('.selectedUsersInTag').find("ul[class='chosenElments']").append('<li class="well" style="margin:3px;display:inline">'+$(this).text()+'</li>') 
-    })
+    var users = []
+
+      $(document).one('click','.tagslist li',function(e){
+        e.preventDefault();
+       let userName = $(this).find('a').text()
+       let userID = $(this).find('p').text()
+       let userImage = $(this).find('img').attr('src')
+     users
+    
+      Tagedusers.push(userID)  
+        $('.selectedUsersInTag').find("ul[class='chosenElments']").append('<li class="btn btn-theme btn-xs created-tag" style="margin:3px;">'+userName+'<p hidden>'+userID+'</p> <i class="fa fa-close"></i></li>') 
+       
+      })
+      $(document).on('click','.created-tag>i', function(){
+        let userid = $(this).parent().find('p').text()
+        let index = Tagedusers.findIndex(item => item.id == userid)
+        Tagedusers.splice(index,1)
+        $(this).parent().remove()
+        
+        console.log(index)
+      })
+      console.log(Tagedusers)
   }
 }

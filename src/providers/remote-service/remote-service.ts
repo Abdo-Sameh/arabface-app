@@ -473,9 +473,9 @@ user = new Observable(observer => {
 
    ////////// Feeds function Start ///////////
 
-   feedsListApiCall(id)
+   feedsListApiCall(id,type_id,type,limit)
    {
-    let url = this.serverURL+'/arabface/api/'+this.KEY+'/feeds?limit=20&userid='+id;
+    let url = this.serverURL+'/arabface/api/'+this.KEY+'/feeds?type='+type+'&type_id='+type_id+'&limit='+limit+'&userid='+id;
 
     return  this.http.get(url).map((res : Response ) => res.json());
 
@@ -682,7 +682,7 @@ user = new Observable(observer => {
 
   //////////// post in feed ///////////////////////
 
-  feedPosting(userID,post,feeling='none',postType='text',privacy,background='default')
+  feedPosting(userID,post,feeling='none',postType='text',privacy,background='default',tag :any='no')
   {
 
     let headers = new Headers();
@@ -692,10 +692,31 @@ user = new Observable(observer => {
     urlSearchParams.append('entity_id', userID );
     if(postType=='feeling')
     {
+      alert('feeling')
       urlSearchParams.append('feeling_type', feeling );
       urlSearchParams.append('feeling_text', post );
+    }else if(postType=='feeling&text')
+    {
+      alert('feeling&trext')
+      
+      urlSearchParams.append('feeling_type', feeling );
+      urlSearchParams.append('feeling_text', post.feeling );
+      urlSearchParams.append('text', post.text);
+      
+    }else if(tag != 'no')
+    {
+      console.log(tag)
+      let tags =""
+      for(let x =0 ; x < tag.length;x++)
+      {
+        tags+=tag[x].toString() + ','; 
+      }
+      urlSearchParams.append('tags', tags)
+      urlSearchParams.append('text', post);
+        
     }
     else{
+      alert('else')
       urlSearchParams.append('text', post);
 
     }

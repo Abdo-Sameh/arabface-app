@@ -11,7 +11,7 @@
 <section class="bg_grey  full_vh">
  <div class="container">         
 
-   <div class="share-post panel panel-theme postBody" style="margin-bottom:0px;min-height:150px">
+   <div class="share-post panel panel-theme postBody" style="margin-bottom:0px;min-height:150px" id="default">
     <form>
       <textarea class="p-0" rows="6"  [(ngModel)]="post.text" [ngModelOptions]="{ standalone :true}" placeholder="what's in your mind?"></textarea>
    
@@ -21,20 +21,26 @@
         </div>
       
         <div class="tag-div" style="display:none">
-          <div class="selectedUsersInTag" ><ul class="chosenElments" style="display:inline"></ul></div>
+          <div class="selectedUsersInTag" >
+          <ul class="chosenElments" style="display:inline">
+            
+          
+          </ul>
+        
+        </div>
             <div> 
               <input type='text'[(ngModel)]="tagedUsers" [ngModelOptions]="{ standalone :true}" (keyup)="getFriendsListToTag(tagedUsers)" style="width: 100%;margin-top: 10px;border: 1px solid #ccc;padding: 7px;" placeholder="type what you feel" />  
             </div>
             <div *ngIf="searchedUsers">
               <ul (click)="selectUserToTag()" class="tagslist  " style="width:100%" *ngFor="let taged of searchedUsers" >
-                <li style="overflow:hidden"><div style="float:left;"><img  style=" width:25px;height:25px;border-radius:2px;margin:7px"src={{taged.avatar}} /> </div>  <a style="float: left;margin: 10px 0 0 40px;">{{taged.name}} </a>   </li>
+                <li style="overflow:hidden"><div style="float:left;"><img  style=" width:25px;height:25px;border-radius:2px;margin:7px"src={{taged.avatar}} /> </div>  <a style="float: left;margin: 10px 0 0 40px;" class="userName">{{taged.name}} </a> <p class="userID" hidden>{{taged.id}}</p>  </li>
               </ul>
             </div>
         </div>
     </form>
   </div>
   <div class="colors" [hidden]="bgshow" (click)="getColor()">
-      <ul style="display:inline-flex;margin-left:60px" >
+      <ul style="display: flex;justify-content: center;" >
 
         <li  style="width:25px;height:25px;margin:3px;border-radius:50%;"  id="color1" >
 
@@ -56,6 +62,9 @@
                           
         </li> 
         <li  style="width:25px;height:25px;border-radius:50%;margin:3px"  id="color7">
+          
+        </li>
+        <li  style="width:25px;height:25px;border-radius:50%;margin:3px;border:1px solid grey"  id="default">
           
         </li>
 
