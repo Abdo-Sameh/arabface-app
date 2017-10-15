@@ -34,8 +34,8 @@
 					</div>
 				</div>
 				<div class="profile-editors">
-					<a  href="#" *ngIf="group.is_admin == false && group.is_member == false" class="btn btn-theme btn-sm"><i class="fa fa-plus fz-11"></i> Join Group</a>
-          <a  href="#" *ngIf="group.is_admin == false && group.is_member == true" class="btn btn-theme btn-sm"><i class="fz-11"></i> Leave Group</a>
+					<a (click)="joinGroup(group.id, 0, userId)" href="#" *ngIf="group.is_admin == false && group.is_member == false" class="btn btn-theme btn-sm"><i class="fa fa-plus fz-11"></i> Join Group</a>
+          <a (click)="joinGroup(group.id, 1, userId)"href="#" *ngIf="group.is_admin == false && group.is_member == true" class="btn btn-theme btn-sm"><i class="fz-11"></i> Leave Group</a>
           <a (click)="editGroup()" href="#" *ngIf="group.is_admin == true" class="btn btn-theme btn-sm"><i class="fa fa-pencil-square-o fz-11"></i> Edit Group</a>
           <a (click)="saveGroup(group.id)" href="#" *ngIf="saved == false" class="btn btn-theme btn-sm"><i class="fa fa-bookmark fz-11"></i> Save Group</a>
           <a (click)="unsaveGroup(group.id)" href="#" *ngIf="saved == true" class="btn btn-theme btn-sm"><i class="fa fa-bookmark fz-11"></i> Unsave Group</a>
@@ -43,7 +43,7 @@
 			</div>
 			<div class="container pt-70">
 				<div class="panel panel-theme">
-					<a (click)="addMembers()" href="#">Add Friends</a>
+					<a (click)="addMembers()" href="#">Add Members</a>
 				</div>
 				<div class="panel panel-theme">
 					<a href="#">{{members.length}} Members</a>

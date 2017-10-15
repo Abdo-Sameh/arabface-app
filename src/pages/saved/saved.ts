@@ -50,6 +50,8 @@ export class SavedPage {
       });
   }
   getSavedPages(page){
+    if(page == 1)
+      this.pages = [];
     let loading = this.loadingCtrl.create({
       content: "Loading",
     });
@@ -80,6 +82,8 @@ export class SavedPage {
   }
 
   getSavedGroups(page){
+    if(page == 1)
+      this.groups = [];
     let loading = this.loadingCtrl.create({
       content: "Loading",
     });
@@ -109,6 +113,8 @@ export class SavedPage {
 
   }
   getSavedEvents(page){
+    if(page == 1)
+      this.events = [];
     let loading = this.loadingCtrl.create({
       content: "Loading",
     });
