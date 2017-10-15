@@ -56,9 +56,7 @@ export class GroupsPage {
     this.type = type;
     this.filter = filter;
 
-    // console.log(this.search);
-    // console.log(type);
-    // console.log(filter);
+
     if(page > 1){
       this.remoteService.getGroups(type, term, filter, userId, page, 4).subscribe(res =>{
         for(let x of res){

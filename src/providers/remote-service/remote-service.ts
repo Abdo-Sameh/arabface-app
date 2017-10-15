@@ -605,7 +605,7 @@ user = new Observable(observer => {
    .map((res : Response ) => res.json());
   }
 
-  
+
   removeComment(commentid,userID):any
   {
     console.log(commentid +userID)
@@ -719,10 +719,10 @@ user = new Observable(observer => {
       alert('else')
       
       urlSearchParams.append('text', post);
-      
+
     }
     urlSearchParams.append('privacy', privacy );
-    
+
     urlSearchParams.append('type', "feed" );
     urlSearchParams.append('background', background );
     urlSearchParams.append('entity_type', "user" );
@@ -780,7 +780,7 @@ user = new Observable(observer => {
   }
 
 
-  
+
     //////////// post in feed ///////////////////////
     ReplyOnComment(postOwner,commentID,whoCommented,reply)
     {
@@ -1343,7 +1343,7 @@ console.log(url)
           .map((res : Response ) => res.json());
         }
 
-        setSettingsNotifications(following_you, site_mention_you, site_tag_you, site_comment,site_reply_comment, site_like,site_share_item, userid){
+        setSettingsNotifications(following_you, site_mention_you, site_tag_you, site_comment,site_reply_comment, site_like,site_share_item, site_store, userid){
           let headers = new Headers();
           headers.append('Content-Type', 'application/x-www-form-urlencoded');
           let urlSearchParams = new URLSearchParams();
@@ -1354,6 +1354,7 @@ console.log(url)
           urlSearchParams.append('notify-site-reply-comment', site_reply_comment );
           urlSearchParams.append('notify-site-like', site_like );
           urlSearchParams.append('notify-site-share-item', site_share_item );
+          urlSearchParams.append('notify-site-store', site_store );
           urlSearchParams.append('userid', userid);
           let body = urlSearchParams.toString()
           return this.http.post("http://192.168.1.252/arabface/api/14789632/settings/notifications", body, {headers: headers})

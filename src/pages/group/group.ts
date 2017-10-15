@@ -80,6 +80,16 @@ export class GroupPage {
       }
     });
   }
+  joinGroup(group_id, status){
+    this.remoteService.joinGroup(group_id, status, this.userId).subscribe(res =>{
+      if(status == '0'){
+        this.group.is_member = true;
+      }else{
+        this.group.is_member = false;
+      }
+    });
+
+  }
 
   addMembers(){
     this.navCtrl.push(InviteFriendPage, {

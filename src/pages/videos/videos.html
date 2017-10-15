@@ -28,13 +28,13 @@
 			<div class="panel panel-theme">
 				<ul class="nav nav-tabs flex-space-around">
 
-					<li (click)="getVideos(this.category, '',this.type, this.filter, this.userId, 1)" class="active"><a data-toggle="tab" href="#tab-content-1"> Videos</a></li>
+					<li (click)="getVideos(this.category, '','browse', this.filter, this.userId, 1)" class="active"><a data-toggle="tab" href="#tab-content-1"> Videos</a></li>
 					<li (click)="getVideos(this.category, '','mine', this.filter, this.userId, 1)" ><a data-toggle="tab" href="#tab-content-2"> My Videos</a></li>
 				</ul>
 			</div>
 			<div class="container">
 				<div class="tab-content">
-					<div id="tab-content-1" class="tab-pane fade in active">
+					<div>
 						<form class="search-form search-filter search-full mt-10 mb-30">
 							<div class="input-group">
 
@@ -60,7 +60,7 @@
 							</div>
 						</form>
 						<div class="tab-content">
-					<div id="tab-content-1" class="tab-pane fade in active">
+					<div  id="tab-content-1" class="tab-pane fade in active">
 						<div class="row thumbnails">
 
 							<div class="col-xs-6" *ngFor="let video of videos">
@@ -74,7 +74,7 @@
 							    </div>
 							</div>
 						</div>
-            <a (click)="getVideos(this.category, this.search,this.type, this.filter, this.userId, page + 1)" href="#" class="btn btn-default btn-block">See More</a>
+            <a id="all" (click)="getVideos(this.category, this.search,this.type, this.filter, this.userId, page + 1)" href="#" class="btn btn-default btn-block">See More</a>
 					</div>
 					<div id="tab-content-2" class="tab-pane fade">
 						<div class="row thumbnails">
@@ -90,7 +90,7 @@
 							    </div>
 							</div>
 						</div>
-            <a (click)="getVideos(this.category, this.search,this.type, this.filter, this.userId, page + 1)" href="#" class="btn btn-default btn-block">See More</a>
+            <a id="my" (click)="getVideos(this.category, this.search,this.type, this.filter, this.userId, page + 1)" href="#" class="btn btn-default btn-block">See More</a>
 					</div>
 				</div>
 			</div>
@@ -98,43 +98,7 @@
 
 				<a (click)="addNewVideo()" href="#" data-toggle="modal" data-target="#add_modal"><i class="fa fa-plus"></i></a>
 			</div>
-			<!-- <div id="add_modal" class="modal fade">
-			    <div class="modal-dialog">
-				    <div class="modal-content">
-				        <div class="modal-header">
-				            <button type="button" class="close" data-dismiss="modal">&times;</button>
-				       	    <h4 class="modal-title">Add New Group</h4>
-				        </div>
-				        <form>
-					        <div class="modal-body">
-					       	    <div class="form-group">
-							        <label for="g_name">Title:</label>
-							        <input type="text" class="form-control" id="g_name">
-							    </div>
-							    <div class="form-group">
-							        <label for="g_url">URL:</label>
-							        <input type="url" class="form-control" id="g_url">
-							    </div>
-							    <div class="form-group">
-							        <label for="g_desc">Description:</label>
-							        <textarea rows="7" class="form-control" id="g_desc"></textarea>
-							    </div>
-							    <div class="form-group">
-							        <label for="g_priv">Privacy:</label>
-							        <select class="form-control" id="g_priv">
-										<option>Public</option>
-										<option>Private</option>
-							        </select>
-							    </div>
-					        </div>
-					        <div class="modal-footer">
-					            <button type="button" class="btn btn-default" data-dismiss="modal">CANCEL</button>
-					            <button type="submit" class="btn btn-default" data-dismiss="modal">OK</button>
-					        </div>
-				        </form>
-				    </div>
-			    </div>
-        </div> -->
+
       </div>
     </div>
 		</section>
