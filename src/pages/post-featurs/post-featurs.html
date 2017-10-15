@@ -10,24 +10,7 @@
 <ion-content >
 <section class="bg_grey  full_vh">
  <div class="container">         
-   <div class="panel panel-theme privacy mt-20 " >
-    <div class="pull-left">
-        <!-- <img  src={{userAvatar}} alt=""> -->
-        
-      <div class="dropdown inline-block ml-10">
-        <a href="#"   class="btn btn-default btn-sm" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-globe"></i> <span class="caret"></span></a>
-        <ul class="privacyDropdown dropdown-menu" (click)="selectPrivacy()">
-          <li><a href="#"><i class="fa fa-globe"></i> Public</a></li>
-          <li><a href="#"><i class="fa fa-group"></i> Friends only</a></li>
-          <li><a href="#"> <i class="fa fa-lock"></i> Only me</a></li>
-        </ul>
-      </div>
-     </div>
-     <div class="pull-right">
-      <a href="#" (click)="postFeed()" class="btn btn-theme">Post</a>
-    </div>
-    <div class="clearfix"></div>
-   </div>
+
    <div class="share-post panel panel-theme postBody" style="margin-bottom:0px;min-height:150px">
     <form>
       <textarea class="p-0" rows="6"  [(ngModel)]="post.text" [ngModelOptions]="{ standalone :true}" placeholder="what's in your mind?"></textarea>
@@ -51,7 +34,7 @@
     </form>
   </div>
   <div class="colors" [hidden]="bgshow" (click)="getColor()">
-      <ul style="display:inline-flex;margin-left:100px" >
+      <ul style="display:inline-flex;margin-left:60px" >
 
         <li  style="width:25px;height:25px;margin:3px;border-radius:50%;"  id="color1" >
 
@@ -106,7 +89,24 @@
       <li><a href="#"><img src="assets/images/status/looking-for.png"> Looking for</a></li>
     </ul>
   </div>
-
+  <div class="panel panel-theme privacy mt-20 " >
+    <div class="pull-left">
+        <!-- <img  src={{userAvatar}} alt=""> -->
+        
+      <div class="dropdown inline-block ml-10">
+        <a href="#"   class="btn btn-default btn-sm" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-globe"></i> <span class="caret"></span></a>
+        <ul class="privacyDropdown dropdown-menu" (click)="selectPrivacy()">
+          <li><a href="#"><i class="fa fa-globe"></i> Public</a></li>
+          <li><a href="#"><i class="fa fa-group"></i> Friends only</a></li>
+          <li><a href="#"> <i class="fa fa-lock"></i> Only me</a></li>
+        </ul>
+      </div>
+     </div>
+     <div class="pull-right">
+      <a href="#" (click)="postFeed()" class="btn btn-theme">Post</a>
+    </div>
+    <div class="clearfix"></div>
+   </div>
   
   </div>
 </section>

@@ -26,7 +26,7 @@
 
 
   <section class="bg_grey full_vh  profile pt-70">
-  <div class="user_cover" style="background: url({{cover}}) !important">
+  <div class="user_cover" [ngStyle]="{ 'background-image': 'url('  + cover + ')'}">
     <div class="friend_profile_box">
       <form class="img-upload">
         <img src="{{userData['avatar']}}" alt="Arabface" title="Arabface">
@@ -68,7 +68,7 @@
     <ul class="nav nav-tabs panel panel-theme flex-h-center">
       <li class="active"><a data-toggle="tab" href="#tab-content-1{{this.userId}}"><i class="fa fa-sliders" style="margin: 5px 0 2px 0;"></i> Timeline</a></li>
       <li><a (click)="getFollowingAndLikes(this.userID)" data-toggle="tab" href="#tab-content-2{{this.userId}}"><i class="fa fa-user" style="margin: 5px 0 2px 0;"></i> About</a></li>
-      <li><a (click)="getPhotsFromProvider(this.userID)" data-toggle="tab" href="#tab-content-3{{this.userId}}"><span style="margin:3px 0 4px;">{{photos.length}}</span> Photos</a></li>
+      <li><a (click)="getPhotsFromProvider(this.userID)" data-toggle="tab" href="#tab-content-3{{this.userId}}"><i class="fa fa-photo" style="margin: 5px 0 2px 0;"></i> Photos</a></li>
       <li><a (click)="getFriendsList(this.userID, this.userId, '')" data-toggle="tab" href="#tab-content-4{{this.userId}}"><i class="fa fa-users" style="margin: 5px 0 2px 0;"></i> Friends</a></li>
     </ul>
     <div class="tab-content">
@@ -336,7 +336,7 @@
           <ul class="profile-info">
             <!-- <li><i>{{ info.name }} :</i> {{ info.value }}</li> -->
             <li><i class="fa fa-circle fa-fw" style="color: green; font-size: 10px;"></i> {{ profileInfo.online_time }}</li>
-            <li><i class="fa fa-map-marker fa-fw"></i> {{ profileInfo.city }}, {{ profileInfo.country  }}</li>
+            <li><i class="fa fa-map-marker fa-fw"></i>{{ profileInfo.country  }}</li>
             <li><i class="fa fa-user fa-fw"></i> {{ profileInfo.gender }}</li>
             <li><i class="fa fa-calendar fa-fw"></i> {{ profileInfo.birth }}</li>
             <li><i class="fa fa-info-circle fa-fw"></i> {{ profileInfo.bio }}</li>
@@ -389,7 +389,12 @@
         </div>
       </div>
       <div id="tab-content-3{{this.userId}}" class="tab-pane fade photos mb-30">
-        <a *ngFor="let photo of photos" href="#"><img src="{{ photo.path }}" style="width:100%" alt=""></a>
+        <div class="row thumbnails">
+          <div class="col-xs-6" *ngFor="let photo of photos">
+            <a class="thumbnail" href="#"><img src="{{ photo.path }}" style="width:100%" alt=""></a>
+          </div>
+        </div>
+
       </div>
       <div id="tab-content-4{{this.userId}}" class="tab-pane fade mb-30">
         <div class="users-list panel panel-theme">
@@ -410,7 +415,7 @@
               </div>
               <div class="user-info pull-left">
                 <h3 (click)="GoToProfile(friend.id, userId)"><a href="#">{{friend.name}}</a></h3>
-                <a href="#" class="btn btn-default btn-sm"><i  class="fa fa-user-plus"></i> Add Friend</a>
+                <a href="#" style="color: #488aff" class="btn btn-default btn-sm"><i  class="fa fa-check"></i> Friends</a>
                 <!-- <p>3 mutual friends</p> -->
               </div>
             </div>

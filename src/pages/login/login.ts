@@ -29,8 +29,6 @@ export class LoginPage {
   };
 
   constructor(public navCtrl: NavController,public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl :ToastController,public menu: MenuController,public remoteService : RemoteServiceProvider) {
-    this.loggedIn= localStorage.getItem('loggedIn');
-    console.log(localStorage.getItem('userCover' ))
     
     // if( localStorage.getItem('lang') !=undefined)
     //   {  this.xmlLang = JSON.parse(localStorage.getItem('lang'))
@@ -48,7 +46,6 @@ export class LoginPage {
 
     ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
-      console.log(localStorage.getItem('loggedIn'))
     this.menu.enable(false);
 
   }
@@ -86,7 +83,7 @@ export class LoginPage {
               }
              else
              {
-              this.Toast("Please give valid username and password");
+              this.Toast("Please enter valid username and password");
               return false;
 
              }
@@ -99,7 +96,7 @@ export class LoginPage {
         }
         else
         {
-            this.Toast("Give username and password");
+            this.Toast("Insert username and password");
         }
 
 

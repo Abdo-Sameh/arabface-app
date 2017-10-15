@@ -26,7 +26,7 @@
 
 <ion-content padding>
 
-  <section class="bg_grey full_vh" style="margin-top: 50px;">
+  <section class="bg_grey full_vh pages">
 			<div class="panel panel-theme">
 				<ul class="nav nav-tabs">
 					<li class="active">
@@ -63,8 +63,10 @@
 			<div class="container">
         <div *ngIf="category == 3 || category == 4">
   				<div class="panel panel-theme mb-30">
-  					<div class="photos mt-5 mb-5">
-  						<a href="#" *ngFor="let photo of photos"><img src="{{photo.path}}" alt=""></a>
+  					<div class="photos mt-5 mb-5 row thumbnails">
+                <div class="col-xs-6" *ngFor="let photo of photos">
+  						     <a href="#" class="thumbnail"><img src="{{photo.path}}" alt=""></a>
+                </div>
   					</div>
             <a (click)="getPhotos(category, limit, offset)" href="#" class="btn btn-default btn-block">See More</a>
   				</div>
