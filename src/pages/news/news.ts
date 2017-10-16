@@ -23,7 +23,7 @@ declare var google;
   templateUrl: 'news.html',
 })
 export class NewsPage {
-
+  videoURL
     feeds ;
     likes;
     likeNumbers;
@@ -75,8 +75,20 @@ getFeedsList(id,more=false,GotPosts= 30)
   loading.present()
       this.remoteService.feedsListApiCall(id,'','feed',10).subscribe(res =>{
 
+
+
+
+        //////////////////// looping to get comments and their replis ////////////////////////////////
         for(let i =0 ; i < res.length;i++)
         {
+
+                  ///////////// video url handling ////////////////////////
+                  if(res[i].video_embed != '')
+                  {
+                    this.videoURL = res[i].video_embed.replace(/[^0-9]/g, "")
+                  }
+
+                  /////////////////////////////////////////////////////
           let newFeedID = res[i].id
           let newFeed = res[i].answers
           this.remoteService.loadComments(newFeedID).subscribe(res2 =>{newFeed.unshift(res2)
@@ -460,9 +472,26 @@ reply()
 
 
     }
-    turnOffNotifications(feedid,userID=this.userId)
+    turnNotifications(feedid,index,feedType,userID=this.userId)
     {
-        this.remoteService.unsubscribePost(feedid,userID).subscribe((data) => { console.log(data)})
+      if(feedType == true)
+      {
+        this.remoteService.unsubscribePost(feedid,userID).subscribe((data) => { console.log(data)
+        if(data.status == 1)
+        {
+          this.feeds[index].has_subscribed = !feedType
+        }
+        })
+        
+      }else {
+        this.remoteService.subscribePost(feedid,userID).subscribe((data) => { console.log(data)
+          if(data.status == 1)
+          {
+            this.feeds[index].has_subscribed = !feedType
+          }
+        })
+        
+      }
     }
     showPost(feed)
     {

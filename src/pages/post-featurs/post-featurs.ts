@@ -208,5 +208,10 @@ export class PostFeatursPage {
         console.log(index)
       })
       console.log(Tagedusers)
-  }
+  
+    }
+back()
+{
+  this.navCtrl.pop()
 }
+  }
