@@ -54,6 +54,10 @@ export class EventsPage {
     this.category = categoryId;
     if(page > 1){
       this.remoteService.getEvents(type, categoryId, term , userId, page, 2).subscribe(res =>{
+
+        if(res.events.length == 0){
+            $('#more').hide();
+        }
         for(let x of res.events){
           this.events.push(x);
         }
@@ -64,6 +68,9 @@ export class EventsPage {
       this.page = page;
       loading.present()
       this.remoteService.getEvents(type, categoryId, term , userId, page, 2).subscribe(res =>{
+        if(res.events.length > 0){
+            $('#more').show();
+        }
           loading.dismiss();
           console.log(type);
           console.log(this.category);
