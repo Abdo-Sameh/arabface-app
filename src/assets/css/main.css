@@ -136,7 +136,7 @@ body {
 	padding: 0;
 }
 .full_vh {
-	min-height: calc(100vh - 73px);
+	min-height: calc(120vh - 73px);
 }
 .bg_white {
 	background: #FFF;
@@ -368,7 +368,7 @@ body {
 	color: #333;
 }
 .p-0 { padding: 0 !important; }
-.pt-70 { padding-top: 70px !important; }
+.pt-70 { padding-top: 54px !important; }
 .pb-25 { padding-bottom: 25px !important; }
 .mt-5 { margin-top: 5px !important; }
 .mt-10 { margin-top: 10px !important; }
@@ -542,17 +542,15 @@ Start Header Title
 ===========================*/
 .header_title {
 	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
+    top: 0;
+    left: 0;
+    right: 0;
     width: 100%;
     max-width: 768px;
     margin: 0 auto;
-	overflow: hidden;
-	background: #5c0632;
-	min-height: 70px;
-    padding-top: 10px;
-	font-size: 32px;
+    overflow: hidden;
+    background: #5c0632;
+    font-size: 32px;
     color: #EEE;
     z-index: 10;
 }
@@ -572,7 +570,9 @@ Start Header Title
     align-items: center;
 }
 .header_title .page_title h3 {
-    font-size: 24px !important;
+	/* font-size: 22px !IMPORTANT;
+    font-weight: 400;
+    margin-top: -13px; */
 }
 /*=========================
 //End Header Title
@@ -928,7 +928,7 @@ Start Friend List
 	height: 100%;
 }
 .user-info h3 {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     text-transform: uppercase;
     margin-top: 5px;
@@ -956,9 +956,9 @@ Start Friend Profile
 		width: 110px;
 		height: 110px;
     position: absolute;
-    bottom: -80px;
+    bottom: -30px;
     left: 50%;
-    margin-left: -80px;
+    margin-left: -60px;
     border: 3px solid #fff;
     border-radius: 3px;
 }
@@ -1141,7 +1141,9 @@ Start Profile
 .thumbnails .thumbnail .caption .text-muted {
     display: block;
     margin-top: -3px;
-    font-size: 11px;
+	font-size: 11px;
+	height: 14px;
+    overflow: hidden;
 }
 .thumbnails.videos .caption p i {
 	color: #777;
@@ -1185,6 +1187,7 @@ top: -4px;
 }
 .img-upload {
 	position: relative;
+	height: 100%;
 }
 .file-input-cover {
 	display: inline-block;
@@ -1243,7 +1246,7 @@ top: -4px;
 	background: #EEE;
 }
 .pages .nav-tabs {
-    margin-top: 69px;
+    margin-top: 53px;
     border: none;
 }
 .pages .nav-tabs>li {
@@ -1282,3 +1285,25 @@ top: -4px;
 .nav-tabs .photo-upload {
     padding: 7px 15px;
 }
+
+.poll-options-container .options {
+	border-bottom: solid 1px #F1F1F1;
+	padding: 4px 10px;
+	position: relative;
+  }
+  .poll-options-container .options i {
+	  font-size: 20px;
+	  display: inline-block;
+	  position: relative;
+	  top: 2px;
+  }
+  .poll-options-container .options input[type="text"] {
+  margin-left:3px
+  }
+  .poll-options-container .options input[type=text] {
+	  border: none;
+	  width: 90%;
+	  height: 30px;
+	  outline: none;
+	  font-size: 15px;
+  }

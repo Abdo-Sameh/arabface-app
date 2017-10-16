@@ -604,7 +604,13 @@ user = new Observable(observer => {
 
    .map((res : Response ) => res.json());
   }
+  subscribePost(feedID,userID):any
+  {
+    console.log(feedID +userID)
+    return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/feed/action?action=subscribe&feed_id='+feedID+"&userid="+userID)
 
+   .map((res : Response ) => res.json());
+  }
 
   removeComment(commentid,userID):any
   {

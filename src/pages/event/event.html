@@ -33,7 +33,7 @@
 					</div>
 				</div>
 				<div class="profile-editors">
-          <select [(ngModel)]="event.rsvp" [ngModelOptions]="{ standalone :true}" *ngIf="event.is_admin == false" (ngModelChange)="rsvp(event.id, event.rsvp)">
+          <select class="btn btn-theme btn-sm" [(ngModel)]="event.rsvp" [ngModelOptions]="{ standalone :true}" *ngIf="event.is_admin == false" (ngModelChange)="rsvp(event.id, event.rsvp)">
             <option value="1">going</option>
             <option value="2">maybe</option>
             <option value="0">not going</option>
@@ -42,7 +42,7 @@
           </select>
 					<!-- <a href="#" *ngIf="event.is_admin == true" class="btn btn-theme btn-sm"><i class="fa fa-check"></i>&nbsp; Going</a> -->
 					<a href="#" class="btn btn-theme btn-sm"><i class="fa fa-share"></i>&nbsp; Share</a>
-					<div class="dropdown dropdown-cover">
+					<div class="dropdown dropdown-cover" style="display:inline-block">
 						<a href="#" class="btn btn-theme btn-sm" data-toggle="dropdown"><span class="caret"></span></a>
 						<ul class="dropdown-menu dropdown-menu-right">
 							<li><a (click)="saveEvent(event.id)" *ngIf="saved == false" href="#"><i class="fa fa-bookmark-o fa-fw"></i>&nbsp; Save</a></li>
