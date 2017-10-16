@@ -20,22 +20,31 @@ export class PostFeatursPage {
   userAvatar = localStorage.getItem('userAvatar').slice(8,-1);
   users
   constructor(public navCtrl: NavController,public navParams: NavParams ,public alert:AlertController,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
-  
+
   }
   selectPrivacy()
   {
     $(document).on('click','li',function(){
-      if($(this).text() == 'Public')
+      if($(this).text() == ' Public')
       {
         $('.privacy').attr('id','1')
-      }else if ($(this).text() == 'Friends only')
+        $('#privacy').removeClass('fa fa-group');
+        $('#privacy').removeClass('fa fa-lock');
+        $('#privacy').addClass('fa fa-globe');
+
+      }else if ($(this).text() == ' Friends only')
       {
         $('.privacy').attr('id','2')
-        
+        $('#privacy').removeClass('fa fa-globe');
+        $('#privacy').removeClass('fa fa-lock');
+        $('#privacy').addClass('fa fa-group');
       }
       else{
         $('.privacy').attr('id','3')
-        
+        $('#privacy').removeClass('fa fa-globe');
+        $('#privacy').removeClass('fa fa-group');
+        $('#privacy').addClass('fa fa-lock');
+
       }
 
      })
@@ -44,16 +53,16 @@ export class PostFeatursPage {
   {
     let privacy= $('.privacy').attr('id')
     let id=$('.postBody').attr('id')
-    
-    
+
+
     let loading = this.loadingCtrl.create({
       content: "Posting",
-    });        
+    });
     loading.present()
-  
+
       // let id=$('.postBody').attr('id')
-      
-      // this.remoteService.feedPosting(userID,postText.text,'none','text',privacy,id).subscribe( res => { 
+
+      // this.remoteService.feedPosting(userID,postText.text,'none','text',privacy,id).subscribe( res => {
       //   // this.feeds.unshift(res.feed)
       //    this.post.text= ""
       //    //this.getFeedsList(this.userId);
@@ -62,7 +71,7 @@ export class PostFeatursPage {
       //  this.navCtrl.pop()
       if($('.feeling-div').attr('id') && this.post.text == "") {
       let selectedFeeling=$('.feeling-div').attr('id')
-        this.remoteService.feedPosting(userID,postText.feeling,selectedFeeling,'feeling',privacy,id).subscribe( res => { 
+        this.remoteService.feedPosting(userID,postText.feeling,selectedFeeling,'feeling',privacy,id).subscribe( res => {
           // this.feeds.unshift(res.feed)
            this.post.text= ""
            //this.getFeedsList(this.userId);
@@ -72,8 +81,8 @@ export class PostFeatursPage {
        }else if($('.feeling-div').attr('id') && this.post.text != "")
        {
         let selectedFeeling=$('.feeling-div').attr('id')
-        
-        this.remoteService.feedPosting(userID,postText,selectedFeeling,'feeling&text',privacy,id).subscribe( res => { 
+
+        this.remoteService.feedPosting(userID,postText,selectedFeeling,'feeling&text',privacy,id).subscribe( res => {
           // this.feeds.unshift(res.feed)
            this.post.text= ""
            //this.getFeedsList(this.userId);
@@ -83,13 +92,13 @@ export class PostFeatursPage {
 
        }else if(Tagedusers.length > 0)
        {
-        this.remoteService.feedPosting(userID,postText.text,'none','text',privacy,id,Tagedusers).subscribe( res => { 
-          
+        this.remoteService.feedPosting(userID,postText.text,'none','text',privacy,id,Tagedusers).subscribe( res => {
+
           // this.feeds.unshift(res.feed)
            this.post.text= ""
            //this.getFeedsList(this.userId);
            if(res.status == 1)  Tagedusers.splice(0,Tagedusers.length)
-         
+
 
            console.log(Tagedusers)
            loading.dismiss();
@@ -97,7 +106,7 @@ export class PostFeatursPage {
          this.navCtrl.pop()
        }
        else{
-      this.remoteService.feedPosting(userID,postText.text,'none','text',privacy,id).subscribe( res => { 
+      this.remoteService.feedPosting(userID,postText.text,'none','text',privacy,id).subscribe( res => {
         // this.feeds.unshift(res.feed)
          this.post.text= ""
          //this.getFeedsList(this.userId);
@@ -105,7 +114,7 @@ export class PostFeatursPage {
        });
        this.navCtrl.pop()
     }
-   
+
   }
   locationPopUp()
   {
@@ -127,7 +136,7 @@ export class PostFeatursPage {
                 //   // invalid login
                 //   return false;
                 // }
-                this.remoteService.locationPosting(this.userId,data.location).subscribe(res => 
+                this.remoteService.locationPosting(this.userId,data.location).subscribe(res =>
                 {
                     console.log(res)
 
@@ -152,35 +161,35 @@ export class PostFeatursPage {
     $(document).on('click','li',function(){
       $('.postBody').attr('id',this.id)
       $('.p-0').attr('id',this.id)
-      
-    });  
-    
+
+    });
+
   }
   feelingsShow()
   {
 				$('.dropdown-feeling').toggleClass('open');
   }
   selectFeeling()
-  {   
+  {
     $(document).on('click','.dropdown-menu li a',function(){
     $('.feeling-div').attr('id',$(this).text())
     $(".feeling-div").show()
     $('.feelingText').text($(this).text())
   })
-  
+
   }
 
   tagUsersDivShow()
   {
     $('.tag-div').toggle();
-    
+
   }
 
   getFriendsListToTag(term)
   {
     if(term != ""){
       this.remoteService.friendsListApiCall(this.userId,this.userId,term).subscribe(res =>{
-         this.searchedUsers = res    
+         this.searchedUsers = res
           });
     }
   }
@@ -194,17 +203,17 @@ export class PostFeatursPage {
        let userID = $(this).find('p').text()
        let userImage = $(this).find('img').attr('src')
      users
-    
-      Tagedusers.push(userID)  
-        $('.selectedUsersInTag').find("ul[class='chosenElments']").append('<li class="btn btn-theme btn-xs created-tag" style="margin:3px;">'+userName+'<p hidden>'+userID+'</p> <i class="fa fa-close"></i></li>') 
-       
+
+      Tagedusers.push(userID)
+        $('.selectedUsersInTag').find("ul[class='chosenElments']").append('<li class="btn btn-theme btn-xs created-tag" style="margin:3px;">'+userName+'<p hidden>'+userID+'</p> <i class="fa fa-close"></i></li>')
+
       })
       $(document).on('click','.created-tag>i', function(){
         let userid = $(this).parent().find('p').text()
         let index = Tagedusers.findIndex(item => item.id == userid)
         Tagedusers.splice(index,1)
         $(this).parent().remove()
-        
+
         console.log(index)
       })
       console.log(Tagedusers)

@@ -59,6 +59,12 @@ export class GroupsPage {
 
     if(page > 1){
       this.remoteService.getGroups(type, term, filter, userId, page, 4).subscribe(res =>{
+        if(res.length == 0){
+            $('#all').hide();
+            $('#member').hide();
+            $('#my').hide();
+        }
+
         for(let x of res){
           this.groups.push(x);
         }
@@ -70,6 +76,11 @@ export class GroupsPage {
       this.page = page;
       loading.present()
       this.remoteService.getGroups(type, term, filter, userId, page, 4).subscribe(res =>{
+        if(res.length > 0){
+            $('#all').show();
+            $('#member').show();
+            $('#my').show();
+        }
           loading.dismiss();
           this.groups = res;
           console.log(res);

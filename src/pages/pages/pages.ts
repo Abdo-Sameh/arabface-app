@@ -57,7 +57,12 @@ export class PagesPage {
       if(page > 1){
 
         this.remoteService.getPages(type, term, categoryId, Id, page, 4).subscribe(res =>{
-
+          if(res.pages.length == 0){
+            // if(type == "all" || type == "search")
+              $('#all').hide();
+            // else
+              $('#my').hide();
+          }
             for(let x of res.pages){
               this.pages.push(x);
             }
@@ -68,6 +73,12 @@ export class PagesPage {
         this.page = page;
         loading.present()
         this.remoteService.getPages(type, term, categoryId, Id, page, 4).subscribe(res =>{
+          if(res.pages.length > 0){
+            // if(type == "all" || type == "search")
+              $('#all').show();
+            // else
+              $('#my').show();
+          }
             loading.dismiss();
             console.log(type);
             console.log(term);

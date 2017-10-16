@@ -692,31 +692,27 @@ user = new Observable(observer => {
     urlSearchParams.append('entity_id', userID );
     if(postType=='feeling')
     {
-      alert('feeling')
       urlSearchParams.append('feeling_type', feeling );
       urlSearchParams.append('feeling_text', post );
     }else if(postType=='feeling&text')
     {
-      alert('feeling&trext')
-      
+
       urlSearchParams.append('feeling_type', feeling );
       urlSearchParams.append('feeling_text', post.feeling );
       urlSearchParams.append('text', post.text);
-      
+
     }else if(tag != 'no')
     {
-      console.log(tag)
       let tags =""
       for(let x =0 ; x < tag.length;x++)
       {
-        tags+=tag[x].toString() + ','; 
+        tags+=tag[x].toString() + ',';
       }
       urlSearchParams.append('tags', tags)
       urlSearchParams.append('text', post);
-        
+
     }
     else{
-      alert('else')
       urlSearchParams.append('text', post);
 
     }
