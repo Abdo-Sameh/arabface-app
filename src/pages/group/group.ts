@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController} from 'ionic-angular';
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
 import { InviteFriendPage } from '../invite-friend/invite-friend';
 import {GroupsPage} from '../groups/groups';
@@ -26,7 +26,7 @@ export class GroupPage {
 
   }
   userId :any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
+  constructor(public alert:AlertController, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.group = navParams.get("group");
     this.isSaved(this.group.id);
@@ -81,13 +81,32 @@ export class GroupPage {
     });
   }
   joinGroup(group_id, status){
-    this.remoteService.joinGroup(group_id, status, this.userId).subscribe(res =>{
-      if(status == '0'){
-        this.group.is_member = true;
-      }else{
-        this.group.is_member = false;
-      }
-    });
+    if(status == '0'){
+      this.remoteService.joinGroup(group_id, '0', this.userId).subscribe(res =>{});
+      this.group.is_member = true;
+    }else{
+
+      let alert = this.alert.create({
+        title: 'Leave',
+        message: 'Do you want to leave group?',
+        buttons: [
+          {
+            text: 'Yes',
+            handler: () => {
+              this.remoteService.joinGroup(group_id, '1', this.userId).subscribe(res =>{});
+              this.group.is_member = false;
+            }
+          },
+          {
+            text: 'No',
+            role: 'cancel',
+            handler: () => {
+            }
+          }
+        ]
+      });
+      alert.present();
+    }
 
   }
 

@@ -62,7 +62,9 @@
 						<label for="state">State:</label>
             <input type="text" class="form-control" id="state" [(ngModel)]="user.state" [ngModelOptions]="{ standalone :true}">
 					</div>
-          <select class=" form-control" id="country" [(ngModel)]="user.country" [ngModelOptions]="{ standalone :true}">
+          <div class="form-group">
+						<label for="state">Country:</label>
+            <select class=" form-control" id="country" [(ngModel)]="user.country" [ngModelOptions]="{ standalone :true}">
 
                     <option value="">Select Country</option>
                         <option value="afghanistan">Afghanistan</option>
@@ -312,7 +314,7 @@
                         <option value="zambia">Zambia</option>
                         <option value="zimbabwe">Zimbabwe</option>
                 </select>
-
+              </div>
 					<div class="form-group">
 						<label for="city">City:</label>
             <input type="text" class="form-control" id="city" [(ngModel)]="user.city" [ngModelOptions]="{ standalone :true}">

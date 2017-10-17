@@ -25,7 +25,7 @@
 
 
 <ion-content >
-  <section class="bg_grey full_vh pt-70">
+  <section class="bg_grey full_vh pt-70 pages">
 			<div class="user_cover">
 				<div class="friend_profile_box">
 					<div class="img-upload">
@@ -76,10 +76,10 @@
 				<a href="#">Location</a>
 			  </div>
 			  <div *ngFor="let feed of feeds ; let mainI =index" [ngSwitch]="true">
-				  
-		
+
+
 				 <!-- ////////////////////////////////// upload photo  post  /////////////////////////////////////////////////////////////////// -->
-		
+
 				<div class="feed-box panel panel-theme mt-20"  *ngSwitchCase="feed.type_id == 'upload-album-photos' && feed.shared == false"  >
 					  <div class="feed-header">
 						<div class="pull-left">
@@ -91,7 +91,7 @@
 								  <a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
 								  <a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
 								  <a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
-								  
+
 								  <ul class="dropdown-menu">
 									<!-- <li><a href="#">Item-1</a></li>
 									<li><a href="#">Item-2</a></li>
@@ -126,7 +126,7 @@
 						<p>{{feed.full_message}} </p>
 					  </div><br>
 					  <div class="feed-footer">
-		
+
 						  <div class="action-result flex-space-between">
 							  <div class="pull-left">
 								<a href="#" (click)="effects()" class="effects"><i class="fa fa-thumbs-o-up"></i></a> {{feed.like_count}}
@@ -137,14 +137,14 @@
 							</div>
 							<div class="feed-action flex-space-around">
 							  <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Like</a>
-							  <a href="#" *ngIf="feed.has_like" style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>             
+							  <a href="#" *ngIf="feed.has_like" style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>
 										  <a href="#"><i class="fa fa-commenting"></i> Comment</a>
 							  <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> Share</a>
 							</div>
-		
-		
-		
-		
+
+
+
+
 						<div class="clearfix"></div>
 						<div class="comment-list" >
 							<div class="comment" *ngFor="let comments of feed.answers[0];let commentIndex=index">
@@ -155,23 +155,23 @@
 										<p style="margin-left:0 !important;"  >{{comments.text}}</p>
 										<div class="input-group">
 										<textarea [(ngModel)]="comment.edited" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
-		
-										<a href="#" (click)="ConfirmEditPost(comment.edited,comments.id)" class="btn btn-theme">Save</a> 
-										<a href="#" class="btn btn-danger cancel-edit">Cancel</a> 
+
+										<a href="#" (click)="ConfirmEditPost(comment.edited,comments.id)" class="btn btn-theme">Save</a>
+										<a href="#" class="btn btn-danger cancel-edit">Cancel</a>
 									  </div>
 									</div>
 									<div class="pull-right" *ngIf="comments.can_edit == false">
-										<a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a> 
-										<a href="#" (click)="deleteComment(comments.id,commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a> 
+										<a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a>
+										<a href="#" (click)="deleteComment(comments.id,commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a>
 									</div>
 									<div class="clearfix"></div>
 								  <div class="comment-action">
 									  <div class="pull-left" style="width:100%" >
 										  <div class="feed-title">
-		
-		
+
+
 											<span class="mr-10"*ngIf="comments.has_like ==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Like</span>
-											<span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>      
+											<span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
 												<span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
 											<span class="mr-10">-</span>
 											<span>{{comments.time}}</span>
@@ -184,7 +184,7 @@
 								  <div  class="comment reply-input">
 									  <div class="pull-right">
 										  <a href="#" class="label label-default reply-close" style="margin-bottom: -10px;
-										  display: block;"><i class="fa fa-caret-up reply-close"></i></a> 
+										  display: block;"><i class="fa fa-caret-up reply-close"></i></a>
 									  </div>
 									  <div class="clearfix"></div>
 									<div *ngFor="let replies of comments.repliesContent ;let replyIndex = index">
@@ -197,19 +197,19 @@
 										  <a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Like</a>
 										  <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                    <span class="mr-10">-</span>
 										  <span>{{replies.time}}</span>
-		
+
 										</div>
-		
+
 										  <!-- <div class="pull-right">
 										  <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
 										</div> -->
-		
+
 										<div class="clearfix"></div>
-		
+
 									  </div>
-		
+
 									</div>
-		
+
 								  </div>
 								  <div  class="comment write-comment">
 									  <div class="pull-left">
@@ -225,10 +225,10 @@
 										  </div>
 										</div>
 									  </form>
-		
+
 									</div>
 								  </div>
-		
+
 								</div>
 							  </div>
 						<div class="comment write-comment">
@@ -245,9 +245,9 @@
 					  </div>
 					  </div>
 					</div>
-		
+
 		 <!-- ////////////////////////////////  location post         /////////////////////////////////////////////////////////// -->
-		
+
 					<div class="feed-box panel panel-theme mt-20"  *ngSwitchCase=" feed.location != '' " >
 						<div class="feed-header">
 						  <div class="pull-left">
@@ -259,7 +259,7 @@
 									<a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
 									<a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
 									<a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
-									
+
 									<ul class="dropdown-menu">
 									  <!-- <li><a href="#">Item-1</a></li>
 									  <li><a href="#">Item-2</a></li>
@@ -292,7 +292,7 @@
 						<div class="feed-body">
 						  <img src="{{feed.images}}" alt="">
 						  <img style="width: 100%;margin-top: 10px" class="post-location-image" src="https://maps.googleapis.com/maps/api/staticmap?center={{feed.location}}&amp;zoom=15&amp;size=700x200&amp;maptype=roadmap&amp;markers=color:red%7CJapan5&amp;sensor=false&amp;scale=1&amp;visual_refresh=true&amp;key=AIzaSyCekO3PhGgE-H9yOO4z-o0q0aOmm4M0JEA">
-						  
+
 						</div><br>
 						<div class="feed-footer">
 							<div class="action-result flex-space-between">
@@ -305,7 +305,7 @@
 							  </div>
 							  <div class="feed-action flex-space-around">
 								<a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Like</a>
-								<a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>   
+								<a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>
 														 <a href="#"><i class="fa fa-commenting"></i> Comment</a>
 								<a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> Share</a>
 							  </div>
@@ -319,23 +319,23 @@
 										  <p style="margin-left:0 !important;"  >{{comments.text}}</p>
 										  <div class="input-group">
 										  <textarea [(ngModel)]="comment.edited" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
-		
-										  <a href="#" (click)="ConfirmEditPost(comment.edited,comments.id)" class="btn btn-theme">Save</a> 
-										  <a href="#" class="btn btn-danger cancel-edit">Cancel</a> 
+
+										  <a href="#" (click)="ConfirmEditPost(comment.edited,comments.id)" class="btn btn-theme">Save</a>
+										  <a href="#" class="btn btn-danger cancel-edit">Cancel</a>
 										</div>
 									  </div>
 									  <div class="pull-right" *ngIf="comments.can_edit == false">
-										  <a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a> 
-										  <a href="#" (click)="deleteComment(comments.id,commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a> 
+										  <a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a>
+										  <a href="#" (click)="deleteComment(comments.id,commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a>
 									  </div>
 									  <div class="clearfix"></div>
 									<div class="comment-action">
 										<div class="pull-left" style="width:100%" >
 											<div class="feed-title">
-		
-		
+
+
 											  <span class="mr-10"*ngIf="comments.has_like ==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Like</span>
-											  <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>      
+											  <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
 												  <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
 											  <span class="mr-10">-</span>
 											  <span>{{comments.time}}</span>
@@ -348,7 +348,7 @@
 									<div  class="comment reply-input">
 										<div class="pull-right">
 											<a href="#" class="label label-default reply-close" style="margin-bottom: -10px;
-											display: block;"><i class="fa fa-caret-up reply-close"></i></a> 
+											display: block;"><i class="fa fa-caret-up reply-close"></i></a>
 										</div>
 										<div class="clearfix"></div>
 									  <div *ngFor="let replies of comments.repliesContent ;let replyIndex = index">
@@ -361,19 +361,19 @@
 											<a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Like</a>
 											<a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                    <span class="mr-10">-</span>
 											<span>{{replies.time}}</span>
-		
+
 										  </div>
-		
+
 											<!-- <div class="pull-right">
 											<a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
 										  </div> -->
-		
+
 										  <div class="clearfix"></div>
-		
+
 										</div>
-		
+
 									  </div>
-		
+
 									</div>
 									<div  class="comment write-comment">
 										<div class="pull-left">
@@ -389,10 +389,10 @@
 											</div>
 										  </div>
 										</form>
-		
+
 									  </div>
 									</div>
-		
+
 								  </div>
 								</div>
 						  <div class="comment write-comment">
@@ -409,12 +409,12 @@
 						</div>
 						</div>
 					  </div>
-		  
+
 					<!-- ////////////////////////////////// normal post  /////////////////////////////////////////////////////////////////// -->
-		
+
 					  <div *ngIf="hiddenPost != 1">
 					<div class="feed-box panel panel-theme mt-20"  *ngSwitchCase=" feed.shared == false && feed.poll_type == '0' && feed.type == 'event' && feed.location == '' &&feed.feeling_type=='' "  >
-		
+
 						<div class="feed-header">
 						  <div class="pull-left">
 							<img class="feed-img" src={{feed.avatar}} alt="">
@@ -425,7 +425,7 @@
 								  <a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
 								  <a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
 								  <a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
-								  
+
 								  <ul class="dropdown-menu">
 									<!-- <li><a href="#">Item-1</a></li>
 									<li><a href="#">Item-2</a></li>
@@ -458,14 +458,14 @@
 						<div class="feed-body" id="{{feed.background}}" style="padding:25px;">
 						  <img src="{{feed.images}}" alt="">
 						  <p>{{feed.full_message}}</p>
-		
+
 						  <div class="pull-left comment-edit-input">
-						  
+
 							  <div class="input-group">
 							  <textarea [(ngModel)]="comment.edited" [ngModelOptions]="{ standalone :true}" class="form-control mb-5">{{feed.full_message}}</textarea>
-		
-							  <a href="#" (click)="ConfirmEditPost(comment.edited,comments.id)" class="btn btn-theme">Save</a> 
-							  <a href="#" class="btn btn-danger cancel-edit">Cancel</a> 
+
+							  <a href="#" (click)="ConfirmEditPost(comment.edited,comments.id)" class="btn btn-theme">Save</a>
+							  <a href="#" class="btn btn-danger cancel-edit">Cancel</a>
 							</div>
 						  </div>
 						</div><br>
@@ -480,7 +480,7 @@
 							  </div>
 							  <div class="feed-action flex-space-around">
 								<a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Like</a>
-								<a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>   
+								<a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>
 														 <a href="#"><i class="fa fa-commenting"></i> Comment</a>
 								<a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> Share</a>
 							  </div>
@@ -494,23 +494,23 @@
 										  <p style="margin-left:0 !important;"  >{{comments.text}}</p>
 										  <div class="input-group">
 										  <textarea [(ngModel)]="comment.edited" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
-		
-										  <a href="#" (click)="ConfirmEditPost(comment.edited,comments.id)" class="btn btn-theme">Save</a> 
-										  <a href="#" class="btn btn-danger cancel-edit">Cancel</a> 
+
+										  <a href="#" (click)="ConfirmEditPost(comment.edited,comments.id)" class="btn btn-theme">Save</a>
+										  <a href="#" class="btn btn-danger cancel-edit">Cancel</a>
 										</div>
 									  </div>
 									  <div class="pull-right" *ngIf="comments.can_edit == false">
-										  <a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a> 
-										  <a href="#" (click)="deleteComment(comments.id,commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a> 
+										  <a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a>
+										  <a href="#" (click)="deleteComment(comments.id,commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a>
 									  </div>
 									  <div class="clearfix"></div>
 									<div class="comment-action">
 										<div class="pull-left" style="width:100%" >
 											<div class="feed-title">
-		
-		
+
+
 											  <span class="mr-10"*ngIf="comments.has_like ==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Like</span>
-											  <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>      
+											  <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
 												  <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
 											  <span class="mr-10">-</span>
 											  <span>{{comments.time}}</span>
@@ -523,7 +523,7 @@
 									<div  class="comment reply-input">
 										<div class="pull-right">
 											<a href="#" class="label label-default reply-close" style="margin-bottom: -10px;
-											display: block;"><i class="fa fa-caret-up reply-close"></i></a> 
+											display: block;"><i class="fa fa-caret-up reply-close"></i></a>
 										</div>
 										<div class="clearfix"></div>
 									  <div *ngFor="let replies of comments.repliesContent ;let replyIndex = index">
@@ -536,19 +536,19 @@
 											<a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Like</a>
 											<a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                    <span class="mr-10">-</span>
 											<span>{{replies.time}}</span>
-		
+
 										  </div>
-		
+
 											<!-- <div class="pull-right">
 											<a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
 										  </div> -->
-		
+
 										  <div class="clearfix"></div>
-		
+
 										</div>
-		
+
 									  </div>
-		
+
 									</div>
 									<div  class="comment write-comment">
 										<div class="pull-left">
@@ -564,10 +564,10 @@
 											</div>
 										  </div>
 										</form>
-		
+
 									  </div>
 									</div>
-		
+
 								  </div>
 								</div>
 						  <div class="comment write-comment">
@@ -586,10 +586,10 @@
 					  </div>
 					</div>
 		  <!-- ////////////////////////////////// normal with Feeling post  /////////////////////////////////////////////////////////////////// -->
-		
+
 		  <div *ngIf="hiddenPost != 1">
 			<div class="feed-box panel panel-theme mt-20"  *ngSwitchCase="feed.type_id == '' && feed.shared == false && feed.poll_type == '0' && feed.type != 'group' && feed.location == '' &&feed.feeling_type !='' && feed.full_message != '' "  >
-		
+
 				<div class="feed-header">
 				  <div class="pull-left">
 					<img class="feed-img" src={{feed.avatar}} alt="">
@@ -600,7 +600,7 @@
 						  <a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
 						  <a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
 						  <a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
-						  
+
 						  <ul class="dropdown-menu">
 							<!-- <li><a href="#">Item-1</a></li>
 							<li><a href="#">Item-2</a></li>
@@ -634,15 +634,15 @@
 				  <img src="{{feed.images}}" alt="">
 				  <p>{{feed.full_message}}</p><br>
 				  <mark>{{feed.feeling_type}} </mark> |  {{feed.feeling_text}}
-				  
-		
+
+
 				  <div class="pull-left comment-edit-input">
-				  
+
 					  <div class="input-group">
 					  <textarea [(ngModel)]="comment.edited" [ngModelOptions]="{ standalone :true}" class="form-control mb-5">{{feed.full_message}}</textarea>
-		
-					  <a href="#" (click)="ConfirmEditPost(comment.edited,comments.id)" class="btn btn-theme">Save</a> 
-					  <a href="#" class="btn btn-danger cancel-edit">Cancel</a> 
+
+					  <a href="#" (click)="ConfirmEditPost(comment.edited,comments.id)" class="btn btn-theme">Save</a>
+					  <a href="#" class="btn btn-danger cancel-edit">Cancel</a>
 					</div>
 				  </div>
 				</div><br>
@@ -657,7 +657,7 @@
 					  </div>
 					  <div class="feed-action flex-space-around">
 						<a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Like</a>
-						<a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>   
+						<a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>
 												 <a href="#"><i class="fa fa-commenting"></i> Comment</a>
 						<a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> Share</a>
 					  </div>
@@ -671,23 +671,23 @@
 								  <p style="margin-left:0 !important;"  >{{comments.text}}</p>
 								  <div class="input-group">
 								  <textarea [(ngModel)]="comment.edited" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
-		
-								  <a href="#" (click)="ConfirmEditPost(comment.edited,comments.id)" class="btn btn-theme">Save</a> 
-								  <a href="#" class="btn btn-danger cancel-edit">Cancel</a> 
+
+								  <a href="#" (click)="ConfirmEditPost(comment.edited,comments.id)" class="btn btn-theme">Save</a>
+								  <a href="#" class="btn btn-danger cancel-edit">Cancel</a>
 								</div>
 							  </div>
 							  <div class="pull-right" *ngIf="comments.can_edit == false">
-								  <a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a> 
-								  <a href="#" (click)="deleteComment(comments.id,commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a> 
+								  <a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a>
+								  <a href="#" (click)="deleteComment(comments.id,commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a>
 							  </div>
 							  <div class="clearfix"></div>
 							<div class="comment-action">
 								<div class="pull-left" style="width:100%" >
 									<div class="feed-title">
-		
-		
+
+
 									  <span class="mr-10"*ngIf="comments.has_like ==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Like</span>
-									  <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>      
+									  <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
 										  <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
 									  <span class="mr-10">-</span>
 									  <span>{{comments.time}}</span>
@@ -700,7 +700,7 @@
 							<div  class="comment reply-input">
 								<div class="pull-right">
 									<a href="#" class="label label-default reply-close" style="margin-bottom: -10px;
-									display: block;"><i class="fa fa-caret-up reply-close"></i></a> 
+									display: block;"><i class="fa fa-caret-up reply-close"></i></a>
 								</div>
 								<div class="clearfix"></div>
 							  <div *ngFor="let replies of comments.repliesContent ;let replyIndex = index">
@@ -713,19 +713,19 @@
 									<a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Like</a>
 									<a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                    <span class="mr-10">-</span>
 									<span>{{replies.time}}</span>
-		
+
 								  </div>
-		
+
 									<!-- <div class="pull-right">
 									<a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
 								  </div> -->
-		
+
 								  <div class="clearfix"></div>
-		
+
 								</div>
-		
+
 							  </div>
-		
+
 							</div>
 							<div  class="comment write-comment">
 								<div class="pull-left">
@@ -741,10 +741,10 @@
 									</div>
 								  </div>
 								</form>
-		
+
 							  </div>
 							</div>
-		
+
 						  </div>
 						</div>
 				  <div class="comment write-comment">
@@ -762,11 +762,11 @@
 				</div>
 			  </div>
 			</div>
-		
+
 			  <!-- ////////////////////////////////// group post  /////////////////////////////////////////////////////////////////// -->
-		
-		
-		
+
+
+
 					  <div class="feed-box panel panel-theme mt-20"  *ngSwitchCase=" feed.shared == false && feed.type == 'group'"  >
 						  <div class="feed-header">
 							<div class="pull-left">
@@ -778,7 +778,7 @@
 									  <a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
 									  <a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
 									  <a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
-									  
+
 									  <ul class="dropdown-menu">
 										<!-- <li><a href="#">Item-1</a></li>
 										<li><a href="#">Item-2</a></li>
@@ -823,7 +823,7 @@
 								</div>
 								<div class="feed-action flex-space-around">
 								  <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Like</a>
-								  <a href="#" *ngIf="feed.has_like" style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>               
+								  <a href="#" *ngIf="feed.has_like" style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>
 											<a href="#"><i class="fa fa-commenting"></i> Comment</a>
 								  <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> Share</a>
 								</div>
@@ -837,23 +837,23 @@
 											<p style="margin-left:0 !important;"  >{{comments.text}}</p>
 											<div class="input-group">
 											<textarea [(ngModel)]="comment.edited" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
-		  
-											<a href="#" (click)="ConfirmEditPost(comment.edited,comments.id)" class="btn btn-theme">Save</a> 
-											<a href="#" class="btn btn-danger cancel-edit">Cancel</a> 
+
+											<a href="#" (click)="ConfirmEditPost(comment.edited,comments.id)" class="btn btn-theme">Save</a>
+											<a href="#" class="btn btn-danger cancel-edit">Cancel</a>
 										  </div>
 										</div>
 										<div class="pull-right" *ngIf="comments.can_edit == false">
-											<a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a> 
-											<a href="#" (click)="deleteComment(comments.id,commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a> 
+											<a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a>
+											<a href="#" (click)="deleteComment(comments.id,commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a>
 										</div>
 										<div class="clearfix"></div>
 									  <div class="comment-action">
 										  <div class="pull-left" style="width:100%" >
 											  <div class="feed-title">
-		  
-		  
+
+
 												<span class="mr-10"*ngIf="comments.has_like ==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Like</span>
-												<span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>      
+												<span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
 													<span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
 												<span class="mr-10">-</span>
 												<span>{{comments.time}}</span>
@@ -866,7 +866,7 @@
 									  <div  class="comment reply-input">
 										  <div class="pull-right">
 											  <a href="#" class="label label-default reply-close" style="margin-bottom: -10px;
-											  display: block;"><i class="fa fa-caret-up reply-close"></i></a> 
+											  display: block;"><i class="fa fa-caret-up reply-close"></i></a>
 										  </div>
 										  <div class="clearfix"></div>
 										<div *ngFor="let replies of comments.repliesContent ;let replyIndex = index">
@@ -879,19 +879,19 @@
 											  <a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Like</a>
 											  <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                    <span class="mr-10">-</span>
 											  <span>{{replies.time}}</span>
-		  
+
 											</div>
-		  
+
 											  <!-- <div class="pull-right">
 											  <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
 											</div> -->
-		  
+
 											<div class="clearfix"></div>
-		  
+
 										  </div>
-		  
+
 										</div>
-		  
+
 									  </div>
 									  <div  class="comment write-comment">
 										  <div class="pull-left">
@@ -907,10 +907,10 @@
 											  </div>
 											</div>
 										  </form>
-		  
+
 										</div>
 									  </div>
-		  
+
 									</div>
 								  </div>
 							<div class="comment write-comment">
@@ -927,11 +927,11 @@
 						  </div>
 						  </div>
 						</div>
-		
-		
+
+
 					<!-- ////////////////////////////////// poll post  /////////////////////////////////////////////////////////////////// -->
-		
-		
+
+
 					  <div class="feed-box panel panel-theme mt-20"  *ngSwitchCase="feed.type_id == '' && feed.shared == false && poll_type == '1'"  >
 						  <div class="feed-header">
 							<div class="pull-left">
@@ -943,7 +943,7 @@
 									  <a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
 									  <a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
 									  <a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
-									  
+
 									  <ul class="dropdown-menu">
 										<!-- <li><a href="#">Item-1</a></li>
 										<li><a href="#">Item-2</a></li>
@@ -988,7 +988,7 @@
 								</div>
 								<div class="feed-action flex-space-around">
 								  <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Like</a>
-								  <a href="#" *ngIf="feed.has_like" style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up" ></i> Liked</a>    
+								  <a href="#" *ngIf="feed.has_like" style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up" ></i> Liked</a>
 													<a href="#"><i class="fa fa-commenting"></i> Comment</a>
 								  <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> Share</a>
 								</div>
@@ -1002,23 +1002,23 @@
 											<p style="margin-left:0 !important;"  >{{comments.text}}</p>
 											<div class="input-group">
 											<textarea [(ngModel)]="comment.edited" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
-		  
-											<a href="#" (click)="ConfirmEditPost(comment.edited,comments.id)" class="btn btn-theme">Save</a> 
-											<a href="#" class="btn btn-danger cancel-edit">Cancel</a> 
+
+											<a href="#" (click)="ConfirmEditPost(comment.edited,comments.id)" class="btn btn-theme">Save</a>
+											<a href="#" class="btn btn-danger cancel-edit">Cancel</a>
 										  </div>
 										</div>
 										<div class="pull-right" *ngIf="comments.can_edit == false">
-											<a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a> 
-											<a href="#" (click)="deleteComment(comments.id,commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a> 
+											<a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a>
+											<a href="#" (click)="deleteComment(comments.id,commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a>
 										</div>
 										<div class="clearfix"></div>
 									  <div class="comment-action">
 										  <div class="pull-left" style="width:100%" >
 											  <div class="feed-title">
-		  
-		  
+
+
 												<span class="mr-10"*ngIf="comments.has_like ==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Like</span>
-												<span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>      
+												<span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
 													<span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
 												<span class="mr-10">-</span>
 												<span>{{comments.time}}</span>
@@ -1031,7 +1031,7 @@
 									  <div  class="comment reply-input">
 										  <div class="pull-right">
 											  <a href="#" class="label label-default reply-close" style="margin-bottom: -10px;
-											  display: block;"><i class="fa fa-caret-up reply-close"></i></a> 
+											  display: block;"><i class="fa fa-caret-up reply-close"></i></a>
 										  </div>
 										  <div class="clearfix"></div>
 										<div *ngFor="let replies of comments.repliesContent ;let replyIndex = index">
@@ -1044,19 +1044,19 @@
 											  <a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Like</a>
 											  <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                    <span class="mr-10">-</span>
 											  <span>{{replies.time}}</span>
-		  
+
 											</div>
-		  
+
 											  <!-- <div class="pull-right">
 											  <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
 											</div> -->
-		  
+
 											<div class="clearfix"></div>
-		  
+
 										  </div>
-		  
+
 										</div>
-		  
+
 									  </div>
 									  <div  class="comment write-comment">
 										  <div class="pull-left">
@@ -1072,10 +1072,10 @@
 											  </div>
 											</div>
 										  </form>
-		  
+
 										</div>
 									  </div>
-		  
+
 									</div>
 								  </div>
 							<div class="comment write-comment">
@@ -1093,8 +1093,8 @@
 						  </div>
 						</div>
 					<!-- ////////////////////////////////// feeling post  /////////////////////////////////////////////////////////////////// -->
-		
-		
+
+
 						<div class="feed-box panel panel-theme mt-20"  *ngSwitchCase="feed.feeling_type != '' && feed.shared == false && feed.type== 'feed' && feed.full_message == ''"  >
 							<div class="feed-header">
 							  <div class="pull-left">
@@ -1106,7 +1106,7 @@
 										<a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
 										<a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
 										<a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
-										
+
 										<ul class="dropdown-menu">
 										  <!-- <li><a href="#">Item-1</a></li>
 										  <li><a href="#">Item-2</a></li>
@@ -1137,8 +1137,8 @@
 								  <div class="clearfix"></div>
 								</div>
 							<div class="feed-body well" style="margin-left:20px">
-		
-		
+
+
 								 <mark>{{feed.feeling_type}} </mark> |  {{feed.feeling_text}}
 							</div><br>
 							<div class="feed-footer">
@@ -1152,7 +1152,7 @@
 								  </div>
 								  <div class="feed-action flex-space-around">
 									<a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Like</a>
-									<a href="#" *ngIf="feed.has_like" style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>    
+									<a href="#" *ngIf="feed.has_like" style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>
 													  <a href="#"><i class="fa fa-commenting"></i> Comment</a>
 									<a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> Share</a>
 								  </div>
@@ -1166,23 +1166,23 @@
 											  <p style="margin-left:0 !important;"  >{{comments.text}}</p>
 											  <div class="input-group">
 											  <textarea [(ngModel)]="comment.edited" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
-			
-											  <a href="#" (click)="ConfirmEditPost(comment.edited,comments.id)" class="btn btn-theme">Save</a> 
-											  <a href="#" class="btn btn-danger cancel-edit">Cancel</a> 
+
+											  <a href="#" (click)="ConfirmEditPost(comment.edited,comments.id)" class="btn btn-theme">Save</a>
+											  <a href="#" class="btn btn-danger cancel-edit">Cancel</a>
 											</div>
 										  </div>
 										  <div class="pull-right" *ngIf="comments.can_edit == false">
-											  <a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a> 
-											  <a href="#" (click)="deleteComment(comments.id,commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a> 
+											  <a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a>
+											  <a href="#" (click)="deleteComment(comments.id,commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a>
 										  </div>
 										  <div class="clearfix"></div>
 										<div class="comment-action">
 											<div class="pull-left" style="width:100%" >
 												<div class="feed-title">
-			
-			
+
+
 												  <span class="mr-10"*ngIf="comments.has_like ==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Like</span>
-												  <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>      
+												  <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
 													  <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
 												  <span class="mr-10">-</span>
 												  <span>{{comments.time}}</span>
@@ -1195,7 +1195,7 @@
 										<div  class="comment reply-input">
 											<div class="pull-right">
 												<a href="#" class="label label-default reply-close" style="margin-bottom: -10px;
-												display: block;"><i class="fa fa-caret-up reply-close"></i></a> 
+												display: block;"><i class="fa fa-caret-up reply-close"></i></a>
 											</div>
 											<div class="clearfix"></div>
 										  <div *ngFor="let replies of comments.repliesContent ;let replyIndex = index">
@@ -1208,19 +1208,19 @@
 												<a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Like</a>
 												<a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                    <span class="mr-10">-</span>
 												<span>{{replies.time}}</span>
-			
+
 											  </div>
-			
+
 												<!-- <div class="pull-right">
 												<a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
 											  </div> -->
-			
+
 											  <div class="clearfix"></div>
-			
+
 											</div>
-			
+
 										  </div>
-			
+
 										</div>
 										<div  class="comment write-comment">
 											<div class="pull-left">
@@ -1236,10 +1236,10 @@
 												</div>
 											  </div>
 											</form>
-			
+
 										  </div>
 										</div>
-			
+
 									  </div>
 									</div>
 							  <div class="comment write-comment">
@@ -1256,11 +1256,11 @@
 							</div>
 							</div>
 						  </div>
-		
-		
+
+
 					<!-- ////////////////////////////////// shared watching post  /////////////////////////////////////////////////////////////////// -->
-		
-		
+
+
 						<div class="feed-box panel panel-theme mt-20"  *ngSwitchCase="feed.feeling_type != '' && feed.shared == true"  >
 							<div class="feed-header">
 							  <div class="pull-left">
@@ -1272,7 +1272,7 @@
 										<a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
 										<a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
 										<a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
-										
+
 										<ul class="dropdown-menu">
 										  <!-- <li><a href="#">Item-1</a></li>
 										  <li><a href="#">Item-2</a></li>
@@ -1310,9 +1310,9 @@
 									  <div class="clearfix"></div>
 									</div>
 									</div>
-		
+
 									<br><br><br>
-		
+
 									<div >
 								 <b><mark>{{feed.feeling_type}}</mark></b>   {{feed.feeling_text}}
 									</div>
@@ -1328,7 +1328,7 @@
 								  </div>
 								  <div class="feed-action flex-space-around">
 									<a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Like</a>
-									<a href="#" *ngIf="feed.has_like"  style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up" ></i> Liked</a>    
+									<a href="#" *ngIf="feed.has_like"  style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up" ></i> Liked</a>
 																 <a href="#"><i class="fa fa-commenting"></i> Comment</a>
 									<a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> Share</a>
 								  </div>
@@ -1342,23 +1342,23 @@
 											  <p style="margin-left:0 !important;"  >{{comments.text}}</p>
 											  <div class="input-group">
 											  <textarea [(ngModel)]="comment.edited" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
-			
-											  <a href="#" (click)="ConfirmEditPost(comment.edited,comments.id)" class="btn btn-theme">Save</a> 
-											  <a href="#" class="btn btn-danger cancel-edit">Cancel</a> 
+
+											  <a href="#" (click)="ConfirmEditPost(comment.edited,comments.id)" class="btn btn-theme">Save</a>
+											  <a href="#" class="btn btn-danger cancel-edit">Cancel</a>
 											</div>
 										  </div>
 										  <div class="pull-right" *ngIf="comments.can_edit == false">
-											  <a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a> 
-											  <a href="#" (click)="deleteComment(comments.id,commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a> 
+											  <a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a>
+											  <a href="#" (click)="deleteComment(comments.id,commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a>
 										  </div>
 										  <div class="clearfix"></div>
 										<div class="comment-action">
 											<div class="pull-left" style="width:100%" >
 												<div class="feed-title">
-			
-			
+
+
 												  <span class="mr-10"*ngIf="comments.has_like ==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Like</span>
-												  <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>      
+												  <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
 													  <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
 												  <span class="mr-10">-</span>
 												  <span>{{comments.time}}</span>
@@ -1371,7 +1371,7 @@
 										<div  class="comment reply-input">
 											<div class="pull-right">
 												<a href="#" class="label label-default reply-close" style="margin-bottom: -10px;
-												display: block;"><i class="fa fa-caret-up reply-close"></i></a> 
+												display: block;"><i class="fa fa-caret-up reply-close"></i></a>
 											</div>
 											<div class="clearfix"></div>
 										  <div *ngFor="let replies of comments.repliesContent ;let replyIndex = index">
@@ -1384,19 +1384,19 @@
 												<a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Like</a>
 												<a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                    <span class="mr-10">-</span>
 												<span>{{replies.time}}</span>
-			
+
 											  </div>
-			
+
 												<!-- <div class="pull-right">
 												<a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
 											  </div> -->
-			
+
 											  <div class="clearfix"></div>
-			
+
 											</div>
-			
+
 										  </div>
-			
+
 										</div>
 										<div  class="comment write-comment">
 											<div class="pull-left">
@@ -1412,10 +1412,10 @@
 												</div>
 											  </div>
 											</form>
-			
+
 										  </div>
 										</div>
-			
+
 									  </div>
 									</div>
 							  <div class="comment write-comment">
@@ -1432,11 +1432,11 @@
 							</div>
 							</div>
 						  </div>
-		
-		
+
+
 					   <!-- ////////////////////////////////// shared post  /////////////////////////////////////////////////////////////////// -->
-		
-		
+
+
 			  <div class="feed-box panel panel-theme mt-20"  *ngSwitchCase="feed.shared == true && feeling_type == ''"  >
 				  <div class="feed-header">
 					<div class="pull-left">
@@ -1448,7 +1448,7 @@
 							  <a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
 							  <a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
 							  <a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
-							  
+
 							  <ul class="dropdown-menu">
 								<!-- <li><a href="#">Item-1</a></li>
 								<li><a href="#">Item-2</a></li>
@@ -1486,9 +1486,9 @@
 							<div class="clearfix"></div>
 						  </div>
 						  </div>
-		
+
 						  <br><br><br>
-		
+
 						  <div >
 						  {{feed.full_message}}
 						  </div>
@@ -1504,7 +1504,7 @@
 						</div>
 						<div class="feed-action flex-space-around">
 						  <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Like</a>
-						  <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"   ></i> Liked</a>    
+						  <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"   ></i> Liked</a>
 									 <a href="#"><i class="fa fa-commenting"></i> Comment</a>
 						  <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> Share</a>
 						</div>
@@ -1518,23 +1518,23 @@
 									<p style="margin-left:0 !important;"  >{{comments.text}}</p>
 									<div class="input-group">
 									<textarea [(ngModel)]="comment.edited" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
-		
-									<a href="#" (click)="ConfirmEditPost(comment.edited,comments.id)" class="btn btn-theme">Save</a> 
-									<a href="#" class="btn btn-danger cancel-edit">Cancel</a> 
+
+									<a href="#" (click)="ConfirmEditPost(comment.edited,comments.id)" class="btn btn-theme">Save</a>
+									<a href="#" class="btn btn-danger cancel-edit">Cancel</a>
 								  </div>
 								</div>
 								<div class="pull-right" *ngIf="comments.can_edit == false">
-									<a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a> 
-									<a href="#" (click)="deleteComment(comments.id,commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a> 
+									<a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a>
+									<a href="#" (click)="deleteComment(comments.id,commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a>
 								</div>
 								<div class="clearfix"></div>
 							  <div class="comment-action">
 								  <div class="pull-left" style="width:100%" >
 									  <div class="feed-title">
-		
-		
+
+
 										<span class="mr-10"*ngIf="comments.has_like ==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Like</span>
-										<span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>      
+										<span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
 											<span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
 										<span class="mr-10">-</span>
 										<span>{{comments.time}}</span>
@@ -1547,7 +1547,7 @@
 							  <div  class="comment reply-input">
 								  <div class="pull-right">
 									  <a href="#" class="label label-default reply-close" style="margin-bottom: -10px;
-									  display: block;"><i class="fa fa-caret-up reply-close"></i></a> 
+									  display: block;"><i class="fa fa-caret-up reply-close"></i></a>
 								  </div>
 								  <div class="clearfix"></div>
 								<div *ngFor="let replies of comments.repliesContent ;let replyIndex = index">
@@ -1560,19 +1560,19 @@
 									  <a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Like</a>
 									  <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                    <span class="mr-10">-</span>
 									  <span>{{replies.time}}</span>
-		
+
 									</div>
-		
+
 									  <!-- <div class="pull-right">
 									  <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
 									</div> -->
-		
+
 									<div class="clearfix"></div>
-		
+
 								  </div>
-		
+
 								</div>
-		
+
 							  </div>
 							  <div  class="comment write-comment">
 								  <div class="pull-left">
@@ -1588,10 +1588,10 @@
 									  </div>
 									</div>
 								  </form>
-		
+
 								</div>
 							  </div>
-		
+
 							</div>
 						  </div>
 					<div class="comment write-comment">
@@ -1608,12 +1608,12 @@
 				  </div>
 				  </div>
 				</div>
-		
-		
-		
+
+
+
 		   <!-- ////////////////////////////////// change avatar  post  /////////////////////////////////////////////////////////////////// -->
-		
-		
+
+
 				<div class="feed-box panel panel-theme mt-20"  *ngSwitchCase="feed.type_id =='change-avatar'">
 					<div class="feed-header">
 					  <div class="pull-left">
@@ -1625,7 +1625,7 @@
 								<a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
 								<a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
 								<a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
-								
+
 								<ul class="dropdown-menu">
 								  <!-- <li><a href="#">Item-1</a></li>
 								  <li><a href="#">Item-2</a></li>
@@ -1669,7 +1669,7 @@
 						  </div>
 						  <div class="feed-action flex-space-around">
 							<a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Like</a>
-							<a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>    
+							<a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>
 							<a href="#"><i class="fa fa-commenting"></i> Comment</a>
 							<a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> Share</a>
 						  </div>
@@ -1683,23 +1683,23 @@
 									  <p style="margin-left:0 !important;"  >{{comments.text}}</p>
 									  <div class="input-group">
 									  <textarea [(ngModel)]="comment.edited" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
-		
-									  <a href="#" (click)="ConfirmEditPost(comment.edited,comments.id)" class="btn btn-theme">Save</a> 
-									  <a href="#" class="btn btn-danger cancel-edit">Cancel</a> 
+
+									  <a href="#" (click)="ConfirmEditPost(comment.edited,comments.id)" class="btn btn-theme">Save</a>
+									  <a href="#" class="btn btn-danger cancel-edit">Cancel</a>
 									</div>
 								  </div>
 								  <div class="pull-right" *ngIf="comments.can_edit == false">
-									  <a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a> 
-									  <a href="#" (click)="deleteComment(comments.id,commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a> 
+									  <a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a>
+									  <a href="#" (click)="deleteComment(comments.id,commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a>
 								  </div>
 								  <div class="clearfix"></div>
 								<div class="comment-action">
 									<div class="pull-left" style="width:100%" >
 										<div class="feed-title">
-		
-		
+
+
 										  <span class="mr-10"*ngIf="comments.has_like ==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Like</span>
-										  <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>      
+										  <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
 											  <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
 										  <span class="mr-10">-</span>
 										  <span>{{comments.time}}</span>
@@ -1712,7 +1712,7 @@
 								<div  class="comment reply-input">
 									<div class="pull-right">
 										<a href="#" class="label label-default reply-close" style="margin-bottom: -10px;
-										display: block;"><i class="fa fa-caret-up reply-close"></i></a> 
+										display: block;"><i class="fa fa-caret-up reply-close"></i></a>
 									</div>
 									<div class="clearfix"></div>
 								  <div *ngFor="let replies of comments.repliesContent ;let replyIndex = index">
@@ -1725,19 +1725,19 @@
 										<a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Like</a>
 										<a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                    <span class="mr-10">-</span>
 										<span>{{replies.time}}</span>
-		
+
 									  </div>
-		
+
 										<!-- <div class="pull-right">
 										<a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
 									  </div> -->
-		
+
 									  <div class="clearfix"></div>
-		
+
 									</div>
-		
+
 								  </div>
-		
+
 								</div>
 								<div  class="comment write-comment">
 									<div class="pull-left">
@@ -1753,10 +1753,10 @@
 										</div>
 									  </div>
 									</form>
-		
+
 								  </div>
 								</div>
-		
+
 							  </div>
 							</div>
 					  <div class="comment write-comment">
@@ -1773,10 +1773,10 @@
 					</div>
 					</div>
 				  </div>
-		
-		
+
+
 					<!-- ////////////////////////////////// upload video post  /////////////////////////////////////////////////////////////////// -->
-		
+
 			  <div class="feed-box panel panel-theme mt-20"  *ngSwitchCase="feed.type_id =='upload-video'">
 				  <div class="feed-header">
 					<div class="pull-left">
@@ -1788,7 +1788,7 @@
 							  <a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
 							  <a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
 							  <a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
-							  
+
 							  <ul class="dropdown-menu">
 								<!-- <li><a href="#">Item-1</a></li>
 								<li><a href="#">Item-2</a></li>
@@ -1832,7 +1832,7 @@
 						</div>
 						<div class="feed-action flex-space-around">
 						  <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Like</a>
-						  <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"   ></i> Liked</a>    
+						  <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"   ></i> Liked</a>
 										  <a href="#"><i class="fa fa-commenting"></i> Comment</a>
 						  <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> Share</a>
 						</div>
@@ -1846,23 +1846,23 @@
 									<p style="margin-left:0 !important;"  >{{comments.text}}</p>
 									<div class="input-group">
 									<textarea [(ngModel)]="comment.edited" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
-		
-									<a href="#" (click)="ConfirmEditPost(comment.edited,comments.id)" class="btn btn-theme">Save</a> 
-									<a href="#" class="btn btn-danger cancel-edit">Cancel</a> 
+
+									<a href="#" (click)="ConfirmEditPost(comment.edited,comments.id)" class="btn btn-theme">Save</a>
+									<a href="#" class="btn btn-danger cancel-edit">Cancel</a>
 								  </div>
 								</div>
 								<div class="pull-right" *ngIf="comments.can_edit == false">
-									<a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a> 
-									<a href="#" (click)="deleteComment(comments.id,commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a> 
+									<a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a>
+									<a href="#" (click)="deleteComment(comments.id,commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a>
 								</div>
 								<div class="clearfix"></div>
 							  <div class="comment-action">
 								  <div class="pull-left" style="width:100%" >
 									  <div class="feed-title">
-		
-		
+
+
 										<span class="mr-10"*ngIf="comments.has_like ==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Like</span>
-										<span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>      
+										<span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
 											<span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
 										<span class="mr-10">-</span>
 										<span>{{comments.time}}</span>
@@ -1875,7 +1875,7 @@
 							  <div  class="comment reply-input">
 								  <div class="pull-right">
 									  <a href="#" class="label label-default reply-close" style="margin-bottom: -10px;
-									  display: block;"><i class="fa fa-caret-up reply-close"></i></a> 
+									  display: block;"><i class="fa fa-caret-up reply-close"></i></a>
 								  </div>
 								  <div class="clearfix"></div>
 								<div *ngFor="let replies of comments.repliesContent ;let replyIndex = index">
@@ -1888,19 +1888,19 @@
 									  <a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Like</a>
 									  <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                    <span class="mr-10">-</span>
 									  <span>{{replies.time}}</span>
-		
+
 									</div>
-		
+
 									  <!-- <div class="pull-right">
 									  <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
 									</div> -->
-		
+
 									<div class="clearfix"></div>
-		
+
 								  </div>
-		
+
 								</div>
-		
+
 							  </div>
 							  <div  class="comment write-comment">
 								  <div class="pull-left">
@@ -1916,10 +1916,10 @@
 									  </div>
 									</div>
 								  </form>
-		
+
 								</div>
 							  </div>
-		
+
 							</div>
 						  </div>
 					<div class="comment write-comment">
@@ -1934,13 +1934,13 @@
 					  </form>
 					</div>
 				  </div>
-		
+
 				  </div>
 				</div>
-		
-		
+
+
 			   <!-- ////////////////////////////////// change cover post  /////////////////////////////////////////////////////////////////// -->
-		
+
 				<div class="feed-box panel panel-theme mt-20"  *ngSwitchCase="feed.type_id =='change-cover'">
 					<div class="feed-header">
 					  <div class="pull-left">
@@ -1952,7 +1952,7 @@
 								<a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
 								<a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
 								<a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
-								
+
 								<ul class="dropdown-menu">
 								  <!-- <li><a href="#">Item-1</a></li>
 								  <li><a href="#">Item-2</a></li>
@@ -1996,9 +1996,9 @@
 						  </div>
 						  <div class="feed-action flex-space-around">
 							<a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Like</a>
-							<a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>  
-		
-							  
+							<a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>
+
+
 							  <a href="#"><i class="fa fa-commenting"></i> Comment</a>
 							<a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> Share</a>
 						  </div>
@@ -2012,23 +2012,23 @@
 									  <p style="margin-left:0 !important;"  >{{comments.text}}</p>
 									  <div class="input-group">
 									  <textarea [(ngModel)]="comment.edited" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
-		
-									  <a href="#" (click)="ConfirmEditPost(comment.edited,comments.id)" class="btn btn-theme">Save</a> 
-									  <a href="#" class="btn btn-danger cancel-edit">Cancel</a> 
+
+									  <a href="#" (click)="ConfirmEditPost(comment.edited,comments.id)" class="btn btn-theme">Save</a>
+									  <a href="#" class="btn btn-danger cancel-edit">Cancel</a>
 									</div>
 								  </div>
 								  <div class="pull-right" *ngIf="comments.can_edit == false">
-									  <a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a> 
-									  <a href="#" (click)="deleteComment(comments.id,commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a> 
+									  <a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a>
+									  <a href="#" (click)="deleteComment(comments.id,commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a>
 								  </div>
 								  <div class="clearfix"></div>
 								<div class="comment-action">
 									<div class="pull-left" style="width:100%" >
 										<div class="feed-title">
-		
-		
+
+
 										  <span class="mr-10"*ngIf="comments.has_like ==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Like</span>
-										  <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>      
+										  <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
 											  <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
 										  <span class="mr-10">-</span>
 										  <span>{{comments.time}}</span>
@@ -2041,7 +2041,7 @@
 								<div  class="comment reply-input">
 									<div class="pull-right">
 										<a href="#" class="label label-default reply-close" style="margin-bottom: -10px;
-										display: block;"><i class="fa fa-caret-up reply-close"></i></a> 
+										display: block;"><i class="fa fa-caret-up reply-close"></i></a>
 									</div>
 									<div class="clearfix"></div>
 								  <div *ngFor="let replies of comments.repliesContent ;let replyIndex = index">
@@ -2054,19 +2054,19 @@
 										<a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Like</a>
 										<a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                    <span class="mr-10">-</span>
 										<span>{{replies.time}}</span>
-		
+
 									  </div>
-		
+
 										<!-- <div class="pull-right">
 										<a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
 									  </div> -->
-		
+
 									  <div class="clearfix"></div>
-		
+
 									</div>
-		
+
 								  </div>
-		
+
 								</div>
 								<div  class="comment write-comment">
 									<div class="pull-left">
@@ -2082,10 +2082,10 @@
 										</div>
 									  </div>
 									</form>
-		
+
 								  </div>
 								</div>
-		
+
 							  </div>
 							</div>
 					  <div class="comment write-comment">

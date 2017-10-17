@@ -31,6 +31,7 @@
 						<img src="{{ page.logo }}" alt="">
 					</div>
 				</div>
+
 				<div class="profile-editors">
 
           <a *ngIf="page.has_like == false" (click)="likePage(userId, page.id, 'like')" href="#" class="btn btn-theme btn-sm"><i class="fa fa-thumbs-o-up"></i>&nbsp; Like</a>
@@ -42,7 +43,7 @@
 								<a href="#" class="btn btn-theme btn-sm" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
 							<ul class="dropdown-menu dropdown-menu-right">
                 <li><a (click)="editPage()" href="#" style="color: #5c0632;" *ngIf="page.is_admin == true"><i class="fa fa-edit"></i>&nbsp; Edit</a></li>
-								<li><a href="#" style="color: #5c0632;"><i class="fa fa-share"></i>&nbsp; Share</a></li>
+								<li><a (click)="regularShare()" href="#" style="color: #5c0632;"><i class="fa fa-share"></i>&nbsp; Share</a></li>
 								<li><a (click)="savePage(page.id)" href="#" *ngIf="saved == false" style="color: #5c0632;"><i class="fa fa-bookmark"></i>&nbsp; Save</a></li>
                 <li><a (click)="unsavePage(page.id)" href="#" *ngIf="saved == true" style="color: #5c0632;"><i class="fa fa-bookmark"></i>&nbsp; Unsave</a></li>
               </ul>

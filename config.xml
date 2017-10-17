@@ -101,4 +101,5 @@
     </plugin>
     <plugin name="cordova-plugin-file-transfer" spec="^1.6.3" />
     <plugin name="cordova-plugin-file" spec="^4.3.2" />
+    <plugin name="cordova-plugin-x-socialsharing" spec="^5.2.0" />
 </widget>
