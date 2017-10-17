@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController} from 'ionic-angular';
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
 import {TabsPage} from '../tabs/tabs';
 import {GroupPage} from '../group/group';
@@ -23,7 +23,7 @@ export class GroupsPage {
   filter
   page :number;
   type
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
+  constructor(public alert:AlertController, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.filter = 'all';
     this.search = '';
@@ -37,6 +37,9 @@ export class GroupsPage {
   }
 
   getGroups(type, term, filter, userId, page){
+    $('#noGroups1').hide();
+    $('#noGroups2').hide();
+    $('#noGroups3').hide();
     let loading = this.loadingCtrl.create({
       content: "Loading",
     });
@@ -80,6 +83,13 @@ export class GroupsPage {
             $('#all').show();
             $('#member').show();
             $('#my').show();
+        }else{
+          $('#noGroups1').show();
+          $('#noGroups2').show();
+          $('#noGroups3').show();
+          $('#all').hide();
+          $('#member').hide();
+          $('#my').hide();
         }
           loading.dismiss();
           this.groups = res;
@@ -91,14 +101,33 @@ export class GroupsPage {
   }
 
   joinGroup(group_id, status, userId, index){
-    this.remoteService.joinGroup(group_id, status, userId).subscribe(res =>{
-      if(status == '0'){
-        this.groups[index].is_member = true;
-      }else{
-        this.groups[index].is_member = false;
-      }
-    });
+    console.log(group_id, status, userId, index);
+    if(status == '0'){
+      this.remoteService.joinGroup(group_id, '0', userId).subscribe(res =>{});
+      this.groups[index].is_member = true;
+    }else{
 
+      let alert = this.alert.create({
+        title: 'Leave',
+        message: 'Do you want to leave group?',
+        buttons: [
+          {
+            text: 'Yes',
+            handler: () => {
+              this.remoteService.joinGroup(group_id, '1', userId).subscribe(res =>{});
+              this.groups[index].is_member = false;
+            }
+          },
+          {
+            text: 'No',
+            role: 'cancel',
+            handler: () => {
+            }
+          }
+        ]
+      });
+      alert.present();
+    }
   }
 
   newGroup(){
