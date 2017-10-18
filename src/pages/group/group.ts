@@ -115,6 +115,50 @@ export class GroupPage {
       group : this.group
     })
   }
+  reportGroup(){
+    let alert = this.alert.create({
+      title: 'Report',
+      inputs: [
+      {
+        name: 'reason',
+        placeholder: 'Reason ...'
+      }
+    ],
+      buttons: [
+        {
+          text: 'Send',
+          handler: data => {
+            this.remoteService.reportItem("group", this.group.group_url, data.reason, this.userId).subscribe(res => {
+              if(res.status == "1"){
+                let toast = this.toastCtrl.create({
+                  message: 'Report sent successfully',
+                  duration: 2000,
+                  position: 'top'
+                });
+                toast.present();
+              }else{
+                let toast = this.toastCtrl.create({
+                  message: 'You have reported this group before',
+                  duration: 2000,
+                  position: 'top'
+                });
+                toast.present();
+              }
+            });
+
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    alert.present();
+
+  }
   back() {
     this.navCtrl.pop();
   }
