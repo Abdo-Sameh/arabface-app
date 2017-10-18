@@ -92,9 +92,7 @@ export class EditEventPage {
 
   }
   back(){
-    this.navCtrl.push(EventPage,{
-      'event': this.event
-    });
+    this.navCtrl.pop();
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { TabsPage } from '../tabs/tabs';
 import { PagesPage } from '../pages/pages';
@@ -24,8 +24,9 @@ export class Page {
   page
   userId
   saved
+  message
   likes = 0
-  constructor(private socialSharing: SocialSharing, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
+  constructor(public alert:AlertController, private socialSharing: SocialSharing, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.page = navParams.get("page");
     this.isSaved(this.page.id);
@@ -93,6 +94,50 @@ export class Page {
     this.socialSharing.share(this.page.title, "Arabface", "assets/images/logo.png", this.page.page_url);
   }
 
+  reportPage(){
+    let alert = this.alert.create({
+      title: 'Report',
+      inputs: [
+      {
+        name: 'reason',
+        placeholder: 'Reason ...'
+      }
+    ],
+      buttons: [
+        {
+          text: 'Send',
+          handler: data => {
+            this.remoteService.reportItem("page", this.page.page_url, data.reason, this.userId).subscribe(res => {
+              if(res.status == "1"){
+                let toast = this.toastCtrl.create({
+                  message: 'Report sent successfully',
+                  duration: 2000,
+                  position: 'top'
+                });
+                toast.present();
+              }else{
+                let toast = this.toastCtrl.create({
+                  message: 'You have reported this page before',
+                  duration: 2000,
+                  position: 'top'
+                });
+                toast.present();
+              }
+            });
+
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    alert.present();
+
+  }
   back()
   {
     this.navCtrl.pop();

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
 import { VideosPage } from '../videos/videos';
 import { EditVideoPage } from '../edit-video/edit-video';
@@ -20,7 +20,7 @@ export class VideoPage {
 
   video
   userId
-  constructor(private socialSharing: SocialSharing, public navCtrl: NavController, public navParams: NavParams, public remoteService :RemoteServiceProvider, public toastCtrl :ToastController) {
+  constructor(public alert:AlertController, private socialSharing: SocialSharing, public navCtrl: NavController, public navParams: NavParams, public remoteService :RemoteServiceProvider, public toastCtrl :ToastController) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.video = this.navParams.get('video');
     // this.video.code = this.video.code.substr(1);
@@ -51,6 +51,49 @@ export class VideoPage {
   regularShare(){
     // share(message, subject, file, url)
     this.socialSharing.share(this.video.title, "Arabface", "assets/images/logo.png", this.video.video_url);
+  }
+  reportVideo(){
+    let alert = this.alert.create({
+      title: 'Report',
+      inputs: [
+      {
+        name: 'reason',
+        placeholder: 'Reason ...'
+      }
+    ],
+      buttons: [
+        {
+          text: 'Send',
+          handler: data => {
+            this.remoteService.reportItem("video", this.video.video_url, data.reason, this.userId).subscribe(res => {
+              if(res.status == "1"){
+                let toast = this.toastCtrl.create({
+                  message: 'Report sent successfully',
+                  duration: 2000,
+                  position: 'top'
+                });
+                toast.present();
+              }else{
+                let toast = this.toastCtrl.create({
+                  message: 'You have reported this video before',
+                  duration: 2000,
+                  position: 'top'
+                });
+                toast.present();
+              }
+            });
+
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    alert.present();
   }
   back(){
     this.navCtrl.pop();
