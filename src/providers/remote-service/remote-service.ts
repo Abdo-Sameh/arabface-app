@@ -980,8 +980,8 @@ console.log(url)
          return this.http.post("http://192.168.1.252/arabface/api/14789632/saved/item", body, {headers: headers})
          .map((res : Response ) => res.json());
         }
-        reportItem(type, link, message, userId){
-          return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/report?type=' + type + "&type=" + type + "&link=" + link + "&message=" + message + "&userid=" + userId)
+        reportItem(type, link, reason, userId){
+          return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/report?type=' + type + "&type=" + type + "&link=" + link + "&reason=" + reason + "&userid=" + userId)
           .map((res : Response ) => res.json());
         }
 

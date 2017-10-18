@@ -89,7 +89,7 @@ export class Page {
       page: this.page
     });
   }
-  reportPage(message){
+  reportPage(){
     let alert = this.alert.create({
       title: 'Report',
       inputs: [
@@ -101,8 +101,8 @@ export class Page {
       buttons: [
         {
           text: 'Send',
-          handler: () => {
-            this.remoteService.reportItem("page", this.page.page_url, message, this.userId).subscribe(res => {
+          handler: data => {
+            this.remoteService.reportItem("page", this.page.page_url, data.reason, this.userId).subscribe(res => {
               if(res.status == "1"){
                 let toast = this.toastCtrl.create({
                   message: 'Report sent successfully',
