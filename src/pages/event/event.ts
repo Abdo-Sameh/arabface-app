@@ -9,6 +9,8 @@ import {FriendProfilePage} from '../friend-profile/friend-profile'
 import {DisplayPostPage} from '../display-post/display-post'
 import {TabsPage} from '../tabs/tabs';
 import {ProfilePage} from '../profile/profile';
+import { SocialSharing } from '@ionic-native/social-sharing';
+
 /**
  * Generated class for the EventPage page.
  *
@@ -40,7 +42,7 @@ export class EventPage {
   }
   hiddenPost
   feed = { 'feedid' :""}
-  constructor(public navCtrl: NavController,public popOver : PopoverController  ,public toast:ToastController, public navParams: NavParams ,public alert:AlertController,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
+  constructor(private socialSharing: SocialSharing, public navCtrl: NavController,public popOver : PopoverController  ,public toast:ToastController, public navParams: NavParams ,public alert:AlertController,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.event = navParams.get("event");
     this.isSaved(this.event.id);
@@ -544,6 +546,10 @@ export class EventPage {
     });
     alert.present();
 
+  }
+  regularShare(){
+    // share(message, subject, file, url)
+    this.socialSharing.share(this.event.title, "Arabface", "assets/images/logo.png", this.event.event_url);
   }
   inviteFriend(){
     this.navCtrl.push(InviteFriendPage, {

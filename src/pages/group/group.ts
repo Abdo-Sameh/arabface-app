@@ -4,7 +4,7 @@ import { RemoteServiceProvider} from './../../providers/remote-service/remote-se
 import { InviteFriendPage } from '../invite-friend/invite-friend';
 import {GroupsPage} from '../groups/groups';
 import {EditGroupPage} from '../edit-group/edit-group';
-
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 /**
  * Generated class for the GroupPage page.
@@ -26,7 +26,7 @@ export class GroupPage {
 
   }
   userId :any;
-  constructor(public alert:AlertController, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
+  constructor(private socialSharing: SocialSharing, public alert:AlertController, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.group = navParams.get("group");
     this.isSaved(this.group.id);
@@ -158,6 +158,10 @@ export class GroupPage {
     });
     alert.present();
 
+  }
+  regularShare(){
+    // share(message, subject, file, url)
+    this.socialSharing.share(this.group.title, "Arabface", "assets/images/logo.png", this.group.group_url);
   }
   back() {
     this.navCtrl.pop();
