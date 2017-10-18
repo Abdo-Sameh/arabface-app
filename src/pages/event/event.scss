@@ -20,18 +20,15 @@ page-event {
     .feed-footer {
         color: #777;
     }
-    .panel{
-        margin-bottom: 0px !important
-    }
     .feed-editors {
          margin-top: 0px !important;
-     margin-left: 0px !important;
+         margin-left: 0px !important;
     }
     #map { height: 200px}
 
     .feed-footer .comment-action    {
         margin-left: 40px !important;
-        
+
     }
     .comment-action .pull-left {
         margin:6px !important
@@ -71,5 +68,38 @@ page-event {
     $popover-wp-width: 320px;
         .alert {
             background: white
-        }
+    }
+    .event-rsvp-statistic li {
+        display: inline-block;
+        width: 30%;
+        text-align: center;
+    }
+    .event-rsvp-statistic li span {
+        display: block;
+        margin: 5px;
+        font-size: 15px;
+        font-weight: bold;
+    }
+    .pt-70 {
+         padding-top: 0px !important; 
+    }
+    #profile-menu {
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        margin-top: 27px;
+        margin-bottom: -15px
+    }
+    #profile-menu #menu {
+        margin: 0;
+        position: relative;
+        text-align: center;
+    }
+    #profile-menu {
+        position: relative;
+        background: #f1f2f3;
+        padding: 0 !important;
+    }
+    #profile-menu .navbar {
+        padding: 0;
+    }
 }

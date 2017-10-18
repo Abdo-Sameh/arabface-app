@@ -26,13 +26,14 @@
 
 <ion-content >
   <section class="bg_grey full_vh pt-70 pages">
-			<div class="user_cover">
+			<div class="user_cover" style="margin-top: 54px;">
 				<div class="friend_profile_box">
 					<div class="img-upload">
 						<img src="{{ event.image }}" alt="">
 					</div>
 				</div>
-				<div class="profile-editors">
+
+        <div class="profile-editors">
           <select class="btn btn-theme btn-sm" [(ngModel)]="event.rsvp" [ngModelOptions]="{ standalone :true}" *ngIf="event.is_admin == false" (ngModelChange)="rsvp(event.id, event.rsvp)">
             <option value="1">Going</option>
             <option value="2">Maybe</option>
@@ -54,10 +55,26 @@
 					</div>
 				</div>
 			</div>
-			<div class="container pt-70">
+
+			<div class="container">
+        <div class="panel panel-theme mt-30">
+            <div class="box-content">
+                <ul class="event-rsvp-statistic">
+                    <li><span class="event-going-stats">{{event.count_going}} </span>Going</li>
+                    <li><span class="event-maybe-stats">{{event.count_maybe}} </span>Maybe</li>
+                    <li><span class="event-invited-stats">{{event.count_invited}} </span>Invited</li>
+                </ul>
+            </div>
+        </div>
+        <div class="panel panel-theme">
+
+          <i class="ion-android-calendar"></i> {{event.privacy}} - Hosted by  - <a> {{event.owner.name}} </a>
+
+				</div>
 				<div class="panel panel-theme">
 					<a (click)="inviteFriend()" href="#">Invite Friends</a>
 				</div>
+
 				<div class="panel panel-theme">
 					<a href="#"><i class="fa fa-calendar fa-fw"></i> {{ event.event_time }}</a>
 				</div>
