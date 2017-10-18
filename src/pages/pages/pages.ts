@@ -43,7 +43,8 @@ export class PagesPage {
       content: "Loading",
     });
 
-
+    $('#noPages1').hide();
+    $('#noPages2').hide();
       $('#active1, #active2').click(function(){
         if(this.id == 'active1'){
           type = "all";
@@ -78,6 +79,11 @@ export class PagesPage {
               $('#all').show();
             // else
               $('#my').show();
+          }else{
+            $('#noPages1').show();
+            $('#noPages2').show();
+            $('#my').hide();
+            $('#all').hide();
           }
             loading.dismiss();
             console.log(type);

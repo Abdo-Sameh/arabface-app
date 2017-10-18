@@ -53,6 +53,7 @@
 				</form>
 				<div class="tab-content">
 					<div id="tab-content-1" class="tab-pane fade in active">
+            <div id="noGroups1" style="display: none;" class="box-content alert alert-danger">No groups found here</div>
 						<div class="row thumbnails">
 							<div class="col-xs-6" *ngFor="let group of groups; let i = index;">
 							    <div class="thumbnail">
@@ -62,7 +63,7 @@
 								        <h3><a (click)="groupPage(group)" href="#">{{ group.title }}</a></h3>
 								        <p>{{ group.description }}</p>
 								        <a (click)="joinGroup(group.id, 0, userId, i)" href="#" *ngIf="group.is_member == false" class="btn btn-default btn-sm"><i class="fa fa-plus"></i> Join</a>
-                        <a (click)="joinGroup(group.id, 1, userId, i)" style="color: #488aff" href="#" *ngIf="group.is_member == true" class="btn btn-default btn-sm"><i class="ion-checkmark-circled"></i> Joined</a>
+                        <a (click)="joinGroup(group.id, 1, userId, i)" style="color: #488aff" href="#" *ngIf="group.is_member == true" class="btn btn-default btn-sm"><i class="fa fa-check-circle"></i> Joined</a>
 								    </div>
 							    </div>
 							</div>
@@ -70,6 +71,7 @@
             <a id="all" (click)="getGroups(this.type, this.search, this.filter, userId, page + 1)" href="#" class="btn btn-default btn-block">See More</a>
 					</div>
 					<div id="tab-content-2" class="tab-pane fade">
+            <div id="noGroups2" style="display: none;" class="box-content alert alert-danger">No groups found here</div>
 						<div class="row thumbnails">
 							<div class="col-xs-6" *ngFor="let group of groups; let i = index;">
 							    <div class="thumbnail">
@@ -79,7 +81,7 @@
 								        <h3><a (click)="groupPage(group)" href="#">{{ group.title }}</a></h3>
 								        <p>{{ group.description }}</p>
                         <a (click)="joinGroup(group.id, 0, userId, i)" href="#" *ngIf="group.is_member == false" class="btn btn-default btn-sm"><i class="fa fa-plus"></i> Join</a>
-                        <a (click)="joinGroup(group.id, 1, userId, i)" style="color: #488aff" href="#" *ngIf="group.is_member == true" class="btn btn-default btn-sm"><i class="ion-checkmark-circled"></i> Joined</a>
+                        <a (click)="joinGroup(group.id, 1, userId, i)" style="color: #488aff" href="#" *ngIf="group.is_member == true" class="btn btn-default btn-sm"><i class="fa fa-check-circle"></i> Joined</a>
 								    </div>
 							    </div>
 							</div>
@@ -87,6 +89,7 @@
             <a id="member" (click)="getGroups(this.type, this.search, this.filter, userId, page + 1)" href="#" class="btn btn-default btn-block">See More</a>
 					</div>
           <div id="tab-content-3" class="tab-pane fade">
+            <div id="noGroups3" style="display: none;" class="box-content alert alert-danger">No groups found here</div>
 						<div class="row thumbnails">
 							<div class="col-xs-6" *ngFor="let group of groups; let i = index;">
 							    <div class="thumbnail">
@@ -96,7 +99,7 @@
 								        <h3><a (click)="groupPage(group)" href="#">{{ group.title }}</a></h3>
 								        <p>{{ group.description }}</p>
                         <a (click)="joinGroup(group.id, 0, userId, i)" href="#" *ngIf="group.is_member == false" class="btn btn-default btn-sm"><i class="fa fa-plus"></i> Join</a>
-                        <a (click)="joinGroup(group.id, 1, userId, i)" style="color: #488aff" href="#" *ngIf="group.is_member == true" class="btn btn-default btn-sm"><i class="ion-checkmark-circled"></i> Joined</a>
+                        <a (click)="joinGroup(group.id, 1, userId, i)" style="color: #488aff" href="#" *ngIf="group.is_member == true" class="btn btn-default btn-sm"><i class="fa fa-check-circle"></i> Joined</a>
 								    </div>
 							    </div>
 							</div>

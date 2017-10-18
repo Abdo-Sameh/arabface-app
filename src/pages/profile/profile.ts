@@ -5,6 +5,7 @@ import { RemoteServiceProvider } from './../../providers/remote-service/remote-s
 //import { Transfer, TransferObject } from '@ionic-native/transfer';
 //import { FilePath } from '@ionic-native/file-path';
 //import { Camera } from '@ionic-native/camera';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 import {TabsPage} from '../tabs/tabs';
 import { PhotosPage} from '../photos/photos'
 import {FriendProfilePage} from '../friend-profile/friend-profile'
@@ -57,8 +58,8 @@ export class ProfilePage {
     imageFileName:any;
     offset
     limit
-    
-    
+
+
     post ={ 'text' : ""}
     comment={
     'comment' : '',
@@ -67,7 +68,7 @@ export class ProfilePage {
     }
     hiddenPost
     feed = { 'feedid' :""}
-  constructor( public navCtrl: NavController, public navParams: NavParams,public alert :AlertController,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider,  public toast: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
+  constructor(public camera: Camera, public navCtrl: NavController, public navParams: NavParams,public alert :AlertController,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider,  public toast: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
     let data = navParams.get('userData');
     console.log()
     this.limit = 4;
@@ -93,7 +94,7 @@ export class ProfilePage {
     });
     loading.present()
         this.remoteService.feedsListApiCall(id,id,'timeline',10).subscribe(res =>{
-  
+
           for(let i =0 ; i < res.length;i++)
           {
             let newFeedID = res[i].id
@@ -102,14 +103,14 @@ export class ProfilePage {
               for(let g = 0 ;g < newFeed[0].length; g++)
                 {
                   this.remoteService.loadReplies(newFeed[0][g].id).subscribe(res3 => {
-  
+
                     newFeed[0][g]['repliesContent']=res3
-  
+
                   });
-  
+
                 }
               });
-  
+
           }
           this.feeds=res
           if(GotPosts > 30)
@@ -119,17 +120,17 @@ export class ProfilePage {
           }
           loading.dismiss();
           console.log(this.feeds)
-  
+
         });
-  
+
   }
-  
+
   loadMoreFeeds(feedlength)
   {
     console.log(feedlength)
     this.getFeedsList(this.userId,true,feedlength)
   }
-  
+
 likeFeed(userid =this.userId,feedid,postIndex)
 {
 
@@ -406,9 +407,22 @@ replyOnComment(postindex,commentindex,postOwner,commentID,whoCommented=this.user
 
 
     // }
-    changeProfilePicture(userid , avatar){
-      console.log(avatar);
-      this.remoteService.changeProfilePicture(this.userId, avatar).subscribe(res =>{console.log("success")});
+    changeProfilePicture(userid){
+      const options: CameraOptions = {
+        quality: 100,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE
+      }
+      this.camera.getPicture(options).then((imageData) => {
+       // imageData is either a base64 encoded string or a file URI
+       // If it's base64:
+       let base64Image = 'data:image/jpeg;base64,' + imageData;
+       this.remoteService.changeProfilePicture(this.userId, base64Image).subscribe(res =>{console.log("success")});
+      }, (err) => {
+       // Handle error
+      });
+
     }
 
 
@@ -538,27 +552,27 @@ presentToast(msg) {
   edit() {
     $(document).on('click','.comment-edit',function(){
       $(this).parent().prev().find('.input-group').show();
-  
+
     })
     $(document).on('click','.cancel-edit',function(){
       $(this).parent().hide();
-  
+
     })
-  
+
   }
   reply()
     {
       $(document).on('click','.comment-reply',function(){
         $(this).closest('.comment').find('.reply-input').show();
-  
+
       })
       $(document).on('click','.reply-close',function(){
         $(this).closest('.reply-input').hide();
-  
+
       })
-  
-  
-  
+
+
+
       }
    //////////////////////////////////////////////
    back()
@@ -566,8 +580,8 @@ presentToast(msg) {
      //this.navCtrl.pop();
           this.navCtrl.push(TabsPage);
    }
-  
-  
+
+
      /* feed options
       which contain
       -i don't like post
@@ -575,23 +589,23 @@ presentToast(msg) {
       -delete post
       -view post
      */
-  
+
       editPost()
       {
         $(document).on('click','.comment-edit',function(){
           $(this).parent().prev().find('.input-group').show();
-  
+
         })
         $(document).on('click','.cancel-edit',function(){
           $(this).parent().hide();
-  
+
         })
       }
       ConfirmEditPost(text,feedid)
       {
           this.remoteService.editPost(text,feedid,this.userId).subscribe((data) => {console.log(data)})
       }
-  
+
       savePost(feedid)
     {
       let toast = this.toast.create({
@@ -611,7 +625,7 @@ presentToast(msg) {
           if(res.status == 1 )
           {
             this.feeds.splice(index,1)
-  
+
             let toast = this.toast.create({
               message: 'This post will no longer show to you',
               duration : 2000
@@ -625,12 +639,12 @@ presentToast(msg) {
         let alert = this.alert.create({
           title: 'Delete',
           message: 'Do you want to delete this post?',
-  
+
           buttons: [
             {
               text: 'Ok',
               handler: () => {
-  
+
                 this.remoteService.removePost(feedid,userID).subscribe(res => {
                   if(res.status == 1 )
                   {
@@ -638,8 +652,8 @@ presentToast(msg) {
                     let toast = this.toast.create({
                       message: 'You deleted this post ',
                       duration : 2000
-  
-  
+
+
                     });
                     toast.present();
                   }
@@ -668,11 +682,11 @@ presentToast(msg) {
                 this.remoteService.removeComment(commentId,this.userId).subscribe(res => {
                   if(res.status == 1 )
                   {
-  
+
                     let toast = this.toast.create({
                       message: 'You deleted this comment ',
                       duration : 2000
-  
+
                     });
                     toast.present();
                   }
@@ -688,8 +702,8 @@ presentToast(msg) {
           ]
         });
         alert.present();
-  
-  
+
+
       }
       turnOffNotifications(feedid,userID=this.userId)
       {
@@ -706,12 +720,12 @@ presentToast(msg) {
    {
      $(this).css('background-color','grey')
    }
-  
+
   goToPost()
    {
   //   let popover = this.popOver.create(PostFeatursPage, {}, {cssClass: 'contpopover'});
   //   popover.present({
-  
+
   //   });
     this.navCtrl.push(PostFeatursPage)
   }

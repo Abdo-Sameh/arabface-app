@@ -39,6 +39,8 @@ export class EventsPage {
     console.log('ionViewDidLoad EventsPage');
   }
   getEvents(type, categoryId, term, userId, page){
+
+    $('#noEvents').hide();
     let loading = this.loadingCtrl.create({
       content: "Loading",
     });
@@ -70,6 +72,10 @@ export class EventsPage {
       this.remoteService.getEvents(type, categoryId, term , userId, page, 2).subscribe(res =>{
         if(res.events.length > 0){
             $('#more').show();
+        }
+        else{
+          $('#noEvents').show();
+          $('#more').hide();
         }
           loading.dismiss();
           console.log(type);
