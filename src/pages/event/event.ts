@@ -57,7 +57,7 @@ export class EventPage {
     });
     loading.present()
         this.remoteService.feedsListApiCall(id,this.event.id,'event',10).subscribe(res =>{
-  
+
           for(let i =0 ; i < res.length;i++)
           {
             let newFeedID = res[i].id
@@ -66,14 +66,14 @@ export class EventPage {
               for(let g = 0 ;g < newFeed[0].length; g++)
                 {
                   this.remoteService.loadReplies(newFeed[0][g].id).subscribe(res3 => {
-  
+
                     newFeed[0][g]['repliesContent']=res3
-  
+
                   });
-  
+
                 }
               });
-  
+
           }
           this.feeds=res
           if(GotPosts > 30)
@@ -83,35 +83,35 @@ export class EventPage {
           }
           loading.dismiss();
           console.log(this.feeds)
-  
+
         });
-  
+
   }
-  
+
   loadMoreFeeds(feedlength)
   {
     console.log(feedlength)
     this.getFeedsList(this.userId,true,feedlength)
   }
-  
+
   ///////////////////// post feed //////////////
-  
+
   likeFeed(userid =this.userId,feedid,postIndex)
   {
-  
+
     this.remoteService.likeFeedApiCall(this.userId,feedid).subscribe(res =>{
-  
+
               this.feeds[postIndex].like_count=res.likes;
               this.feeds[postIndex].has_like=res.has_like;
     })
-  
-  
+
+
   }
-  
+
   likeComment(userid =this.userId,commentID,postIndex,commentIndex)
   {
-  
-  
+
+
     this.remoteService.likeCommentApiCall(this.userId,commentID).subscribe(res =>{
       this.likes = res;
       for(let i =0 ; i<this.feeds[postIndex].answers[0].length ;i++)
@@ -120,19 +120,19 @@ export class EventPage {
           {
             this.feeds[postIndex].answers[0][commentIndex].like_count=this.likes.likes;
             this.feeds[postIndex].answers[0][commentIndex].has_like=this.likes.has_like;
-  
+
             break
           }
         }
-  
-  
+
+
     })
-  
-  
+
+
   }
   likeReply(userid =this.userId,replyID,postIndex,commentIndex,replyIndex)
   {
-  
+
     this.remoteService.likeCommentApiCall(this.userId,replyID).subscribe(res =>{
       for(let i =0 ; i<this.feeds[postIndex].answers[0][commentIndex].repliesContent.length ;i++)
         {
@@ -140,24 +140,24 @@ export class EventPage {
             {
               this.feeds[postIndex].answers[0][commentIndex].repliesContent[i].like_count=res.likes;
               this.feeds[postIndex].answers[0][commentIndex].repliesContent[i].has_like=res.has_like;
-  
+
               break
             }
         }
-  
-  
+
+
     })
-  
-  
+
+
   }
   // postFeed(userID=this.userId,postText=this.post.text)
   // {
   //   console.log(this.feeds)
-  
+
   //   let loading = this.loadingCtrl.create({
   //     content: "",
   //     spinner: "bubbles",
-  
+
   //   });
   //   loading.present()
   //   this.remoteService.feedPosting(userID,postText).subscribe( res => {
@@ -166,18 +166,18 @@ export class EventPage {
   //     //this.getFeedsList(this.userId);
   //     loading.dismiss();
   //   });
-  
+
   // }
   commentOnFeed(postOwner,postID,whoCommented=this.userId,comment=this.comment.comment)
   {
     let loading = this.loadingCtrl.create({
       content: "",
       spinner: "bubbles",  });
-  
+
     loading.present()
     this.remoteService.commentOnFeeds(postOwner,postID,whoCommented,comment).subscribe(res => {
-  
-  
+
+
       res.postid = postID
       for( let x in this.feeds)
         {
@@ -187,34 +187,34 @@ export class EventPage {
                 }
         }
         this.remoteService.loadComments(postID).subscribe(res2 =>{ });
-  
+
         this.comment.comment = ''
         loading.dismiss()
     })
-  
+
   }
   replyOnComment(postindex,commentindex,postOwner,commentID,whoCommented=this.userId,comment=this.comment.reply)
   {
     let loading = this.loadingCtrl.create({
       content: "",
       spinner: "bubbles",  });
-  
+
     loading.present()
     this.remoteService.ReplyOnComment(postOwner,commentID,whoCommented,comment).subscribe(res => {
-  
-  
+
+
       res.postid = commentID
-  
+
                   this.feeds[postindex].answers[0][commentindex].repliesContent.push(res)
-  
+
         this.remoteService.loadReplies(commentID).subscribe(res2 =>{ });
-  
+
         this.comment.reply = ''
         loading.dismiss()
     })
-  
+
   }
-  
+
   sharePost(feedid,userID=this.userId)
   {
     let alert = this.alert.create({
@@ -225,7 +225,7 @@ export class EventPage {
           text: 'Ok',
           handler: () => {
             this.remoteService.sharePost(feedid,userID).subscribe(res => {
-  
+
             })
           }
         },
@@ -238,12 +238,12 @@ export class EventPage {
       ]
     });
     alert.present();
-  
+
   }
-  
-  
-  
-  
+
+
+
+
   /////////////////////////////////////////
   GoToProfile(id,userId)
   {
@@ -251,7 +251,7 @@ export class EventPage {
       content: "",
       spinner: "bubbles",  });
     loading.present()
-  
+
       this.remoteService.profileDetailsApiCall(id,userId).subscribe(res => {
           loading.dismiss();this.userData = res ;
           console.log("---------------------------");
@@ -267,13 +267,13 @@ export class EventPage {
               "userData" : res
             })
           }
-  
+
     });
-  
+
   }
-  
+
   // count=1;
-  
+
   // setColor(btn)
   // {
   //     var property = document.getElementById(btn);
@@ -285,32 +285,32 @@ export class EventPage {
   //         property.style.color = "blue"
   //         this.count=0;
   //     }
-  
+
   // }
   edit() {
     $(document).on('click','.comment-edit',function(){
       $(this).parent().prev().find('.input-group').show();
-  
+
     })
     $(document).on('click','.cancel-edit',function(){
       $(this).parent().hide();
-  
+
     })
-  
+
   }
   reply()
     {
       $(document).on('click','.comment-reply',function(){
         $(this).closest('.comment').find('.reply-input').show();
-  
+
       })
       $(document).on('click','.reply-close',function(){
         $(this).closest('.reply-input').hide();
-  
+
       })
-  
-  
-  
+
+
+
       }
    //////////////////////////////////////////////
    back()
@@ -318,8 +318,8 @@ export class EventPage {
      this.navCtrl.pop();
         //  this.navCtrl.push(TabsPage);
    }
-  
-  
+
+
      /* feed options
       which contain
       -i don't like post
@@ -327,23 +327,23 @@ export class EventPage {
       -delete post
       -view post
      */
-  
+
       editPost()
       {
         $(document).on('click','.comment-edit',function(){
           $(this).parent().prev().find('.input-group').show();
-  
+
         })
         $(document).on('click','.cancel-edit',function(){
           $(this).parent().hide();
-  
+
         })
       }
       ConfirmEditPost(text,feedid)
       {
           this.remoteService.editPost(text,feedid,this.userId).subscribe((data) => {console.log(data)})
       }
-  
+
       savePost(feedid)
     {
       let toast = this.toast.create({
@@ -363,7 +363,7 @@ export class EventPage {
           if(res.status == 1 )
           {
             this.feeds.splice(index,1)
-  
+
             let toast = this.toast.create({
               message: 'This post will no longer show to you',
               duration : 2000
@@ -377,12 +377,12 @@ export class EventPage {
         let alert = this.alert.create({
           title: 'Delete',
           message: 'Do you want to delete this post?',
-  
+
           buttons: [
             {
               text: 'Ok',
               handler: () => {
-  
+
                 this.remoteService.removePost(feedid,userID).subscribe(res => {
                   if(res.status == 1 )
                   {
@@ -390,8 +390,8 @@ export class EventPage {
                     let toast = this.toast.create({
                       message: 'You deleted this post ',
                       duration : 2000
-  
-  
+
+
                     });
                     toast.present();
                   }
@@ -420,11 +420,11 @@ export class EventPage {
                 this.remoteService.removeComment(commentId,this.userId).subscribe(res => {
                   if(res.status == 1 )
                   {
-  
+
                     let toast = this.toast.create({
                       message: 'You deleted this comment ',
                       duration : 2000
-  
+
                     });
                     toast.present();
                   }
@@ -440,8 +440,8 @@ export class EventPage {
           ]
         });
         alert.present();
-  
-  
+
+
       }
       turnOffNotifications(feedid,userID=this.userId)
       {
@@ -458,12 +458,12 @@ export class EventPage {
    {
      $(this).css('background-color','grey')
    }
-  
+
   goToPost()
    {
   //   let popover = this.popOver.create(PostFeatursPage, {}, {cssClass: 'contpopover'});
   //   popover.present({
-  
+
   //   });
     this.navCtrl.push(PostFeatursPage)
   }
@@ -500,6 +500,50 @@ export class EventPage {
       this.event.rsvp = rsvp;
       console.log(res);
     });
+  }
+  reportEvent(){
+    let alert = this.alert.create({
+      title: 'Report',
+      inputs: [
+      {
+        name: 'reason',
+        placeholder: 'Reason ...'
+      }
+    ],
+      buttons: [
+        {
+          text: 'Send',
+          handler: data => {
+            this.remoteService.reportItem("event", this.event.event_url, data.reason, this.userId).subscribe(res => {
+              if(res.status == "1"){
+                let toast = this.toast.create({
+                  message: 'Report sent successfully',
+                  duration: 2000,
+                  position: 'top'
+                });
+                toast.present();
+              }else{
+                let toast = this.toast.create({
+                  message: 'You have reported this event before',
+                  duration: 2000,
+                  position: 'top'
+                });
+                toast.present();
+              }
+            });
+
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    alert.present();
+
   }
   inviteFriend(){
     this.navCtrl.push(InviteFriendPage, {
