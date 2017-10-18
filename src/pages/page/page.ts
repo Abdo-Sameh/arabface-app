@@ -5,7 +5,7 @@ import { TabsPage } from '../tabs/tabs';
 import { PagesPage } from '../pages/pages';
 import { InviteFriendPage } from '../invite-friend/invite-friend';
 import { EditPagePage } from '../edit-page/edit-page';
-
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 /**
  * Generated class for the Page page.
@@ -26,7 +26,7 @@ export class Page {
   saved
   message
   likes = 0
-  constructor(public alert:AlertController, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
+  constructor(public alert:AlertController, private socialSharing: SocialSharing, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.page = navParams.get("page");
     this.isSaved(this.page.id);
@@ -89,6 +89,11 @@ export class Page {
       page: this.page
     });
   }
+  regularShare(){
+    // share(message, subject, file, url)
+    this.socialSharing.share(this.page.title, "Arabface", "assets/images/logo.png", this.page.page_url);
+  }
+
   reportPage(){
     let alert = this.alert.create({
       title: 'Report',

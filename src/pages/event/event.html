@@ -34,21 +34,21 @@
 				</div>
 				<div class="profile-editors">
           <select class="btn btn-theme btn-sm" [(ngModel)]="event.rsvp" [ngModelOptions]="{ standalone :true}" *ngIf="event.is_admin == false" (ngModelChange)="rsvp(event.id, event.rsvp)">
-            <option value="1">going</option>
-            <option value="2">maybe</option>
-            <option value="0">not going</option>
+            <option value="1">Going</option>
+            <option value="2">Maybe</option>
+            <option value="0">Not going</option>
 
 
           </select>
 					<!-- <a href="#" *ngIf="event.is_admin == true" class="btn btn-theme btn-sm"><i class="fa fa-check"></i>&nbsp; Going</a> -->
-					<a href="#" class="btn btn-theme btn-sm"><i class="fa fa-share"></i>&nbsp; Share</a>
 					<div class="dropdown dropdown-cover" style="display:inline-block">
 						<a href="#" class="btn btn-theme btn-sm" data-toggle="dropdown"><span class="caret"></span></a>
 						<ul class="dropdown-menu dropdown-menu-right">
-							<li><a (click)="saveEvent(event.id)" *ngIf="saved == false" href="#"><i class="fa fa-bookmark-o fa-fw"></i>&nbsp; Save</a></li>
-              <li><a (click)="unsaveEvent(event.id)" *ngIf="saved == true" href="#"><i class="fa fa-bookmark-o fa-fw"></i>&nbsp; Unsave</a></li>
-							<li><a (click)="editEventPage()" *ngIf="event.is_admin == true" href="#"><i class="fa fa-pencil-square-o fa-fw"></i>&nbsp; Edit</a></li>
-							<li><a *ngIf="event.is_admin == true" href="#"><i class="fa fa-picture-o fa-fw"></i>&nbsp; Change Cover</a></li>
+              <li><a (click)="regularShare()" style="color: #5c0632;" href="#"><i class="fa fa-share fa-fw"></i>&nbsp; Share</a></li>
+							<li><a (click)="saveEvent(event.id)" style="color: #5c0632;" *ngIf="saved == false" href="#"><i class="fa fa-bookmark fa-fw"></i>&nbsp; Save</a></li>
+              <li><a (click)="unsaveEvent(event.id)" style="color: #5c0632;" *ngIf="saved == true" href="#"><i class="fa fa-bookmark fa-fw"></i>&nbsp; Unsave</a></li>
+							<li><a (click)="editEventPage()" style="color: #5c0632;" *ngIf="event.is_admin == true" href="#"><i class="fa fa-pencil-square-o fa-fw"></i>&nbsp; Edit</a></li>
+							<li><a *ngIf="event.is_admin == true" style="color: #5c0632;" href="#"><i class="fa fa-picture-o fa-fw"></i>&nbsp; Change Cover</a></li>
               <li><a (click)="reportEvent()" href="#" style="color: #5c0632;"><i class="fa fa-flag"></i>&nbsp; Report</a></li>
 						</ul>
 					</div>
