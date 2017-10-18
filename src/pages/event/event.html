@@ -47,7 +47,7 @@
 						<ul class="dropdown-menu dropdown-menu-right">
 							<li><a (click)="saveEvent(event.id)" *ngIf="saved == false" href="#"><i class="fa fa-bookmark-o fa-fw"></i>&nbsp; Save</a></li>
               <li><a (click)="unsaveEvent(event.id)" *ngIf="saved == true" href="#"><i class="fa fa-bookmark-o fa-fw"></i>&nbsp; Unsave</a></li>
-							<li><a *ngIf="event.is_admin == true" href="#"><i class="fa fa-pencil-square-o fa-fw"></i>&nbsp; Edit</a></li>
+							<li><a (click)="editEventPage()" *ngIf="event.is_admin == true" href="#"><i class="fa fa-pencil-square-o fa-fw"></i>&nbsp; Edit</a></li>
 							<li><a *ngIf="event.is_admin == true" href="#"><i class="fa fa-picture-o fa-fw"></i>&nbsp; Change Cover</a></li>
 						</ul>
 					</div>
