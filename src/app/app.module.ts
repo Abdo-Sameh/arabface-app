@@ -32,26 +32,26 @@ import { HttpModule } from '@angular/http';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { RemoteServiceProvider } from '../providers/remote-service/remote-service';
-import {OnlinePage} from '../pages/online/online'
-import {ContactUsPage} from '../pages/contact-us/contact-us'
-import {FindFriendsPage}  from '../pages/find-friends/find-friends'
-import {FriendListPage}  from '../pages/friend-list/friend-list'
-import {FriendRequestsPage}  from '../pages/friend-requests/friend-requests'
-import {GiftsPage}  from '../pages/gifts/gifts'
-import {FriendProfilePage}  from '../pages/friend-profile/friend-profile'
-import {PostPage}  from '../pages/post/post'
-import {TrendingPage}  from '../pages/trending/trending'
-import {CreatePagePage}  from '../pages/create-page/create-page'
-import {CreateGroupPage}  from '../pages/create-group/create-group'
-import {EditGroupPage}  from '../pages/edit-group/edit-group'
-import {PostFeatursPage}  from '../pages/post-featurs/post-featurs'
-import {DisplayPostPage} from '../pages/display-post/display-post'
+import { OnlinePage } from '../pages/online/online'
+import { ContactUsPage } from '../pages/contact-us/contact-us'
+import { FindFriendsPage }  from '../pages/find-friends/find-friends'
+import { FriendListPage }  from '../pages/friend-list/friend-list'
+import { FriendRequestsPage }  from '../pages/friend-requests/friend-requests'
+import { GiftsPage }  from '../pages/gifts/gifts'
+import { FriendProfilePage }  from '../pages/friend-profile/friend-profile'
+import { PostPage }  from '../pages/post/post'
+import { TrendingPage }  from '../pages/trending/trending'
+import { CreatePagePage }  from '../pages/create-page/create-page'
+import { CreateGroupPage }  from '../pages/create-group/create-group'
+import { EditGroupPage }  from '../pages/edit-group/edit-group'
+import { PostFeatursPage }  from '../pages/post-featurs/post-featurs'
+import { DisplayPostPage } from '../pages/display-post/display-post'
 import { CreateAlbumPage } from '../pages/create-album/create-album';
-import {EditPagePage}  from '../pages/edit-page/edit-page'
-import {CreateEventPage}  from '../pages/create-event/create-event'
-import {EditEventPage}  from '../pages/edit-event/edit-event'
-import {EventPage}  from '../pages/event/event'
-import {PhotoselectionPage}  from '../pages/photoselection/photoselection'
+import { EditPagePage }  from '../pages/edit-page/edit-page'
+import { CreateEventPage }  from '../pages/create-event/create-event'
+import { EditEventPage }  from '../pages/edit-event/edit-event'
+import { EventPage }  from '../pages/event/event'
+import { PhotoselectionPage }  from '../pages/photoselection/photoselection'
 import { SavedPage } from '../pages/saved/saved';
 import { VideoPage } from '../pages/video/video';
 import { AddVideoPage } from '../pages/add-video/add-video';
@@ -59,6 +59,7 @@ import { EditVideoPage } from '../pages/edit-video/edit-video';
 import { InviteFriendPage } from '../pages/invite-friend/invite-friend';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { MembersPage } from '../pages/members/members';
 // import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 
 // import { File } from '@ionic-native/file';
@@ -107,7 +108,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
     PhotoselectionPage,
     PostFeatursPage,
     DisplayPostPage,
-
+    MembersPage,
     InviteFriendPage,
     SavedPage,
     CreateAlbumPage,
@@ -157,6 +158,7 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule
     EditPagePage,
     SavedPage,
     DisplayPostPage,
+    MembersPage,
     CreateAlbumPage,
     InviteFriendPage,
     PhotoselectionPage, CreateEventPage, EditEventPage, EventPage

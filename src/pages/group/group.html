@@ -54,10 +54,9 @@
 					<a (click)="addMembers()" href="#">Add Members</a>
 				</div>
 				<div class="panel panel-theme">
-					<a href="#">{{members.length}} Members</a>
+					<a (click)="membersPage()" href="#">{{members.length}} Members</a>
 				</div>
 				<div class="panel panel-theme">
-
 					<p>{{ group.description }}</p>
 				</div>
 				<div class="panel panel-theme">

@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController} from 'ionic-angular';
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
 import { InviteFriendPage } from '../invite-friend/invite-friend';
-import {GroupsPage} from '../groups/groups';
-import {EditGroupPage} from '../edit-group/edit-group';
+import { GroupsPage } from '../groups/groups';
+import { EditGroupPage } from '../edit-group/edit-group';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { MembersPage } from '../members/members';
 
 /**
  * Generated class for the GroupPage page.
@@ -22,9 +23,7 @@ export class GroupPage {
   group
   posts
   saved
-  members = {
-
-  }
+  members = {}
   userId :any;
   constructor(private socialSharing: SocialSharing, public alert:AlertController, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
@@ -162,6 +161,11 @@ export class GroupPage {
   regularShare(){
     // share(message, subject, file, url)
     this.socialSharing.share(this.group.title, "Arabface", "assets/images/logo.png", this.group.group_url);
+  }
+  membersPage(){
+    this.navCtrl.push(MembersPage, {
+      members: this.members
+    });
   }
   back() {
     this.navCtrl.pop();

@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-    <header class="header_title"  >
+    <header class="header_title">
         <div class="container" style="width: 94% !important;DISPLAY: FLEX; ALIGN-ITEMS: center;">
             <div class="back_btn">
               <a (click)="back()" href="#"><i class="fa fa-arrow-left" style="font-size: 19px;line-height: 43px;"></i></a>
@@ -15,7 +15,7 @@
               <h3 style="font-size:24px !IMPORTANT">Profile</h3>
             </div>
             <div class="menu_btn">
-                <a href="#"><i class="fa fa-bars"  style="font-size: 19px; line-height: 43px;"></i></a>
+                <a (click)="openMenu()" href="#"><i class="fa fa-bars"  style="font-size: 19px; line-height: 43px;"></i></a>
               </div>
           </div>
       </header>
@@ -27,6 +27,17 @@
 
   <section class="bg_grey full_vh profile pt-14">
   <div class="user_cover" [ngStyle]="{ 'background-image': 'url('  + userData['cover'] + ')'}">
+    <div class="pull-right">
+      <div class="dropdown" style="margin-top: -50px; !important">
+        <a href="#" class="btn btn-default btn-sm" data-toggle="dropdown"><span class="fa fa-bars"></span></a>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li><a (click)="editVideoPage()" href="#"style="color: #5c0632;" ><i class="fa fa-edit"></i>&nbsp; Edit</a></li>
+          <li><a (click)="deleteVideo(video.id)" href="#" style="color: #5c0632;" ><i class="fa fa-trash"></i>&nbsp; Delete</a></li>
+          <li><a (click)="reportVideo()" href="#" style="color: #5c0632;"><i class="fa fa-flag"></i>&nbsp; Report</a></li>
+          <!-- <li><a href="#">Save</a></li> -->
+        </ul>
+      </div>
+    </div>
     <div class="friend_profile_box">
       <form class="img-upload">
         <img src="{{userData['avatar']}}" alt="Arabface" title="Arabface">
