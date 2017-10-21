@@ -28,7 +28,6 @@ import { NotificationsPage } from '../pages/notifications/notifications';
 import { ProfilePage } from '../pages/profile/profile';
 import { ChatPage } from '../pages/chat/chat';
 import { MessagesPage } from '../pages/messages/messages';
-import { HttpModule } from '@angular/http';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { RemoteServiceProvider } from '../providers/remote-service/remote-service';
@@ -60,6 +59,9 @@ import { InviteFriendPage } from '../pages/invite-friend/invite-friend';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { MembersPage } from '../pages/members/members';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpModule, Http } from '@angular/http';
 // import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 
 // import { File } from '@ionic-native/file';
@@ -115,7 +117,13 @@ import { MembersPage } from '../pages/members/members';
     PhotoselectionPage, CreateEventPage, EditEventPage, EventPage
   ],
   imports: [
-BrowserModule , IonicModule.forRoot(MyApp), HttpModule
+BrowserModule , IonicModule.forRoot(MyApp), HttpModule, TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [Http]
+      }
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -179,3 +187,6 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule
   ]
 })
 export class AppModule {}
+export function createTranslateLoader(http: Http) {
+  return new TranslateHttpLoader(http, 'assets/lang/', '.json');
+}

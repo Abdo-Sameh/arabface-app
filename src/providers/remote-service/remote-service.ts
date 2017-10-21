@@ -30,7 +30,7 @@ let config = {
   for more info on providers and Angular DI.
 */
 
-let apiURL = 'http://localhost/arabface/api/'+this.KEY+'/';
+let apiURL = 'http://localhost/arabface/api/14789632/';
 
 @Injectable()
 export class RemoteServiceProvider {
