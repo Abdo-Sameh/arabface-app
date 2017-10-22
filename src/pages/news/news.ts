@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController,PopoverController ,ToastController, NavParams ,LoadingController ,AlertController} from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, Nav, NavController,PopoverController ,ToastController, NavParams ,LoadingController ,AlertController} from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
-import {TabsPage} from '../tabs/tabs';
-import {ProfilePage} from '../profile/profile';
-import {PostFeatursPage} from '../post-featurs/post-featurs'
-import {FriendProfilePage} from '../friend-profile/friend-profile'
-import {DisplayPostPage} from '../display-post/display-post'
+import { TabsPage } from '../tabs/tabs';
+import { ProfilePage } from '../profile/profile';
+import { PostFeatursPage } from '../post-featurs/post-featurs'
+import { FriendProfilePage } from '../friend-profile/friend-profile'
+import { DisplayPostPage } from '../display-post/display-post'
 
 import {MyApp} from '../../app/app.component';
 //import $ from "jquery";
@@ -23,6 +23,7 @@ declare var google;
   templateUrl: 'news.html',
 })
 export class NewsPage {
+  // @ViewChild(Nav) nav: any;
   videoURL
     feeds ;
     likes;
@@ -40,8 +41,8 @@ export class NewsPage {
     }
     hiddenPost
     feed = { 'feedid' :""}
-    userId 
-    userAvatar 
+    userId
+    userAvatar
 
   constructor(public navCtrl: NavController,public popOver : PopoverController  ,public toast:ToastController, public navParams: NavParams ,public alert:AlertController,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
     if(localStorage.getItem('userDataID'))
@@ -52,9 +53,9 @@ export class NewsPage {
     {
       this.userAvatar = localStorage.getItem('userAvatar').slice(8,-1);
     }
-    
+
     this.getFeedsList(this.userId);
-    
+
     this.userAvatar ="http://"+this.userAvatar;
   }
 
@@ -288,13 +289,19 @@ GoToProfile(id,userId)
         console.log(res);
         console.log("----------------------------");
         if(id == userId){
-          this.navCtrl.push(ProfilePage,{
+          this.navCtrl.setRoot(ProfilePage, {
             "userData" : res
-          })
+          });
+          // this.navCtrl.push(ProfilePage,{
+          //   "userData" : res
+          // })
         }else{
-          this.navCtrl.push(FriendProfilePage,{
+          this.navCtrl.setRoot(FriendProfilePage, {
             "userData" : res
-          })
+          });
+          // this.navCtrl.push(FriendProfilePage,{
+          //   "userData" : res
+          // })
         }
 
   });
@@ -482,7 +489,7 @@ reply()
           this.feeds[index].has_subscribed = !feedType
         }
         })
-        
+
       }else {
         this.remoteService.subscribePost(feedid,userID).subscribe((data) => { console.log(data)
           if(data.status == 1)
@@ -490,7 +497,7 @@ reply()
             this.feeds[index].has_subscribed = !feedType
           }
         })
-        
+
       }
     }
     showPost(feed)

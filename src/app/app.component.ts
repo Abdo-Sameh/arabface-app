@@ -13,7 +13,7 @@ import { PhotosPage } from '../pages/photos/photos';
 import { PagesPage } from '../pages/pages/pages';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SavedPage } from '../pages/saved/saved';
-
+import { TranslateService } from '@ngx-translate/core';
 import { ProfilePage } from '../pages/profile/profile';
 import { GroupsPage } from '../pages/groups/groups';
 import { EventsPage } from '../pages/events/events';
@@ -45,7 +45,8 @@ export class MyApp {
     pages: Array<{title: string, component: any , icon: string}>;
 
 
-    constructor(public database:RemoteServiceProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen , public http :Http) {
+    constructor(public translate: TranslateService, public database:RemoteServiceProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen , public http :Http) {
+      translate.setDefaultLang('ar');
       this.deviceLanguage = this.platform.lang();
 
       firebase = this.database ;
@@ -54,19 +55,19 @@ export class MyApp {
      // this.userAvatar ="http://"+this.userAvatar;
       // used for an example of ngFor and navigation
       this.pages = [
-        { title: 'Profile', component: ProfilePage ,icon : 'fa fa-user'  },
-        { title: 'Online friends', component:  OnlinePage ,icon : 'fa fa-circle'},
-        { title: 'Videos', component: VideosPage ,icon : 'fa fa-video-camera' },
-        { title: 'Photos', component: PhotosPage ,icon : 'fa fa-camera'},
-        { title: 'Pages', component: PagesPage ,icon : 'fa fa-file'},
-        { title: 'Forums', component: ForumsPage ,icon : 'fa fa-commenting'},
-        { title: 'Groups', component: GroupsPage ,icon : 'fa fa-users'},
-        { title: 'Events', component: EventsPage ,icon : 'fa fa-calendar'},
-        { title: 'Contact Us', component: ContactUsPage ,icon : 'fa fa-envelope'},
-        { title: 'Gift Shop', component: GiftsPage ,icon : 'fa fa-shopping-bag'},
-        { title: 'Saved', component: SavedPage ,icon : 'fa fa-bookmark'},
-        { title: 'Discover', component: TrendingPage,icon : 'fa fa-hashtag'},
-        { title: 'Settings', component: SettingsPage ,icon : 'fa fa-cog'},
+        { title: 'profile', component: ProfilePage ,icon : 'fa fa-user'  },
+        { title: 'online friends', component:  OnlinePage ,icon : 'fa fa-circle'},
+        { title: 'videos', component: VideosPage ,icon : 'fa fa-video-camera' },
+        { title: 'photos', component: PhotosPage ,icon : 'fa fa-camera'},
+        { title: 'pages', component: PagesPage ,icon : 'fa fa-file'},
+        { title: 'forums', component: ForumsPage ,icon : 'fa fa-commenting'},
+        { title: 'groups', component: GroupsPage ,icon : 'fa fa-users'},
+        { title: 'events', component: EventsPage ,icon : 'fa fa-calendar'},
+        { title: 'contact Us', component: ContactUsPage ,icon : 'fa fa-envelope'},
+        { title: 'gift Shop', component: GiftsPage ,icon : 'fa fa-shopping-bag'},
+        { title: 'saved', component: SavedPage ,icon : 'fa fa-bookmark'},
+        { title: 'discover', component: TrendingPage,icon : 'fa fa-hashtag'},
+        { title: 'settings', component: SettingsPage ,icon : 'fa fa-cog'},
       ];
      // console.log(this.userName);
       //console.log(this.userCover)
@@ -147,7 +148,7 @@ export class MyApp {
       this.nav.setRoot(LoginPage)
     }else{
       this.nav.setRoot(TabsPage)
-      
+
     }
     //   firebase.user.subscribe (snapshot => {
     //     console.log(snapshot)
@@ -160,22 +161,22 @@ export class MyApp {
     //         this.database.set_userid(localStorage.getItem('userid'));
     //         firebase.set_active("true");
     //       }
-          
-          
-         
+
+
+
     //       this.nav.setRoot (TabsPage);
 
     //     }else if(snapshot == null) {
-    
+
     //       this.nav.setRoot(TabsPage);
-    
+
     //   //     when deploying uncomment the next and comment above
     // //when in development comment next line and uncommnt above tel snapshot == logged
 
     //       // this.nav.setRoot(LoginPage);
     //     }
     //   })
-    
+
 
     }
 
@@ -194,7 +195,7 @@ export class MyApp {
   //  signout () {
   // this.na
   //  console.log("success")
- 
+
   //  }
 
 

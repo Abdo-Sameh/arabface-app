@@ -29,7 +29,7 @@
   <div class="user_cover" [ngStyle]="{ 'background-image': 'url('  + cover + ')'}">
     <div class="friend_profile_box">
       <form class="img-upload">
-        <img src="{{userData['avatar']}}" alt="Arabface" title="Arabface">
+        <img src={{userData.avatar}} alt="Arabface" title="Arabface">
         <div class="file-input file-input-profile">
           <!-- <ion-item>
           <p>{{imageURI}}</p>
@@ -74,7 +74,7 @@
     <div class="tab-content">
       <div id="tab-content-1{{this.userId}}" class="tab-pane fade timeline active in">
           <div class="share-post panel panel-theme mt-30">
-              <img src={{userAvatar}} alt="">
+              <img src={{userData.avatar}} alt="">
       <form><textarea (click)="goToPost()" placeholder="what's in your mind?"></textarea></form>
     </div>
     <div class="panel panel-theme flex-space-around">
