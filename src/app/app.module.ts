@@ -58,6 +58,7 @@ import { EditVideoPage } from '../pages/edit-video/edit-video';
 import { InviteFriendPage } from '../pages/invite-friend/invite-friend';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { MembersPage } from '../pages/members/members';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -175,6 +176,7 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule, TranslateModule.forRoot(
     StatusBar,
     SplashScreen,
     SocialSharing,
+    PhotoViewer,
     // FileTransfer,Camera,
     // FileTransferObject,
     // File,

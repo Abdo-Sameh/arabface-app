@@ -35,26 +35,26 @@
 				</div>
         <div class="profile-editors">
           <div class="dropdown" style="display:inline-block">
-            <a (click)="joinGroup(group.id, 0, userId)" href="#" class="btn btn-theme btn-sm" style="color: #5c0632;" *ngIf="group.is_admin == false && group.is_member == false"><i style="margin-right: 6px;" class="fa fa-plus fz-11"></i> Join Group</a>
-            <a (click)="joinGroup(group.id, 1, userId)" href="#" class="btn btn-theme btn-sm" style="color: #5c0632;" *ngIf="group.is_admin == false && group.is_member == true"><i style="margin-right: 6px;" class="fz-11"></i> Leave Group</a>
+            <a (click)="joinGroup(group.id, 0, userId)" href="#" class="btn btn-theme btn-sm" style="color: #5c0632;" *ngIf="group.is_admin == false && group.is_member == false"><i style="margin-right: 6px;" class="fa fa-plus fz-11"></i> {{'join-group' | translate}}</a>
+            <a (click)="joinGroup(group.id, 1, userId)" href="#" class="btn btn-theme btn-sm" style="color: #5c0632;" *ngIf="group.is_admin == false && group.is_member == true"><i style="margin-right: 6px;" class="fz-11"></i> {{'leave-group' | translate}}</a>
 						<a href="#" class="btn btn-theme btn-sm" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
 							<ul class="dropdown-menu dropdown-menu-right">
 
-                <li><a (click)="editGroup()" href="#" style="color: #5c0632;" *ngIf="group.is_admin == true"><i style="margin-right: 6px;" class="fa fa-pencil-square-o fz-11"></i> Edit Group</a></li>
-                <li><a (click)="saveGroup(group.id)" href="#" style="color: #5c0632;" *ngIf="saved == false"><i style="margin-right: 6px;" class="fa fa-bookmark fz-11"></i> Save Group</a></li>
-                <li><a (click)="unsaveGroup(group.id)" href="#" style="color: #5c0632;" *ngIf="saved == true"><i style="margin-right: 6px;" class="fa fa-bookmark fz-11"></i> Unsave Group</a></li>
-                <li><a (click)="regularShare()" href="#"style="color: #5c0632;" ><i style="margin-right: 6px;" class="fa fa-share fz-11"></i> Share</a></li>
-                <li><a (click)="reportGroup()" href="#" style="color: #5c0632;"><i style="margin-right: 6px;" class="fa fa-flag fz-11"></i> Report</a></li>
+                <li><a (click)="editGroup()" href="#" style="color: #5c0632;" *ngIf="group.is_admin == true"><i style="margin-right: 6px;" class="fa fa-pencil-square-o fz-11"></i> {{'edit-group' | translate}}</a></li>
+                <li><a (click)="saveGroup(group.id)" href="#" style="color: #5c0632;" *ngIf="saved == false"><i style="margin-right: 6px;" class="fa fa-bookmark fz-11"></i> {{'save-group' | translate}}</a></li>
+                <li><a (click)="unsaveGroup(group.id)" href="#" style="color: #5c0632;" *ngIf="saved == true"><i style="margin-right: 6px;" class="fa fa-bookmark fz-11"></i> {{'unsave-group' | translate}}</a></li>
+                <li><a (click)="regularShare()" href="#"style="color: #5c0632;" ><i style="margin-right: 6px;" class="fa fa-share fz-11"></i> {{'share' | translate}}</a></li>
+                <li><a (click)="reportGroup()" href="#" style="color: #5c0632;"><i style="margin-right: 6px;" class="fa fa-flag fz-11"></i> {{'report' | translate}}</a></li>
               </ul>
 						</div>
 				</div>
 			</div>
 			<div class="container pt-70">
 				<div class="panel panel-theme">
-					<a (click)="addMembers()" href="#">Add Members</a>
+					<a (click)="addMembers()" href="#">{{'add-member-to-group' | translate}}</a>
 				</div>
 				<div class="panel panel-theme">
-					<a (click)="membersPage()" href="#">{{members.length}} Members</a>
+					<a (click)="membersPage()" href="#">{{members.length}} {{'members' | translate}}</a>
 				</div>
 				<div class="panel panel-theme">
 					<p>{{ group.description }}</p>

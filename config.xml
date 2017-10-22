@@ -100,4 +100,5 @@
     <plugin name="cordova-plugin-x-socialsharing" spec="^5.2.0" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="cordova-plugin-file" spec="^4.3.2" />
+    <plugin name="com-sarriaroman-photoviewer" spec="^1.1.10" />
 </widget>

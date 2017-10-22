@@ -12,7 +12,7 @@
 					<a (click)="back()"><i class="fa fa-arrow-left"></i></a>
 				</div>
 				<div class="page_title text-center">
-					<h3>Settings</h3>
+					<h3>{{'account-settings' | translate}}</h3>
 				</div>
 				<div class="menu_btn text-right">
 					<a href="#"><i class="fa fa-bars" style="color:#fff;font-size:18px"></i></a>
@@ -26,27 +26,27 @@
 	    <section class="bg_grey full_vh pt-70">
 			<div class="list-group list-group-theme">
 			    <a (click)="generalPage()" href="#" class="list-group-item">
-				    <h4 class="list-group-item-heading">General</h4>
+				    <h4 class="list-group-item-heading">{{'general' | translate}}</h4>
 				    <p class="list-group-item-text">Manage your first, last name and city e.t.c</p>
 			    </a>
 			    <a (click)="passwordPage()" href="#" class="list-group-item">
-				    <h4 class="list-group-item-heading">Change Password</h4>
+				    <h4 class="list-group-item-heading">{{'change-your-password' | translate}}</h4>
 				    <p class="list-group-item-text">Provide your old password and choose a new password</p>
 			    </a>
 			    <a (click)="notificationsPage()" href="#" class="list-group-item">
-				    <h4 class="list-group-item-heading">Notifications</h4>
+				    <h4 class="list-group-item-heading">{{'notifications' | translate}}</h4>
 				    <p class="list-group-item-text">Control what notifications you receive from us</p>
 			    </a>
 			    <a (click)="privacyPage()" href="#" class="list-group-item">
-				    <h4 class="list-group-item-heading">Privacy</h4>
+				    <h4 class="list-group-item-heading">{{'privacy' | translate}}</h4>
 				    <p class="list-group-item-text">Control who can view your profile e.t.c</p>
 			    </a>
 			    <a (click)="blockingPage()" href="#" class="list-group-item">
-				    <h4 class="list-group-item-heading">Blocking</h4>
+				    <h4 class="list-group-item-heading">{{'blocked-members' | translate}}</h4>
 				    <p class="list-group-item-text">You can block someone from contacting you</p>
 			    </a>
-			    <a (click)="blockingPage()" href="#" class="list-group-item">
-				    <h4 class="list-group-item-heading">Delete Account</h4>
+			    <a (click)="deletePage()" href="#" class="list-group-item">
+				    <h4 class="list-group-item-heading">{{'delete-my-account' | translate}}</h4>
 				    <p class="list-group-item-text">You can delete your account permanently</p>
 			    </a>
 			</div>

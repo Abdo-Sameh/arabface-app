@@ -1318,3 +1318,7 @@ top: -4px;
 	.user_cover .dropdown-menu>li>a {
 		padding: 5px 20px;
 	}
+	.scroll-bar-indicator
+	{
+		display: none;
+	}

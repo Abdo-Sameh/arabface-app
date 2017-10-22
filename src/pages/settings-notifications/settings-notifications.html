@@ -12,7 +12,7 @@
   					<a (click)="back()"><i class="fa fa-arrow-left"></i></a>
   				</div>
   				<div class="page_title text-center">
-  					<h3>Notifications Settings</h3>
+  					<h3>{{'notification-settings' | translate}}</h3>
   				</div>
   				<div class="menu_btn text-right">
   					<a href="#"><i class="fa fa-bars" style="color:#fff;font-size:18px"></i></a>
@@ -36,7 +36,7 @@
               <ion-toggle [(ngModel)]="settings['notify-following-you']" [ngModelOptions]="{ standalone :true}" class="pull-right"></ion-toggle>
               <!-- <input type="checkbox" class="check_1" id="check_1" value="1" *ngIf="settings['notify-following-you'] == '1'" checked>
               <input type="checkbox" class="check_1" id="check_1" value="0" *ngIf="settings['notify-following-you'] == '0'" > -->
-              <label for="check_1" class="pull-left" style="margin-top:12px">Someone followed you</label>
+              <label for="check_1" class="pull-left" style="margin-top:12px">{{'someone-started-following-you' | translate}}</label>
               <div class="clearfix"></div>
             </div>
 			    </a>
@@ -45,7 +45,7 @@
               <ion-toggle [(ngModel)]="settings['notify-site-mention-you']" [ngModelOptions]="{ standalone :true}" class="pull-right"></ion-toggle>
               <!-- <input type="checkbox" id="check_2" class="check_2" value="1" *ngIf="settings['notify-site-mention-you'] == '1'" checked>
               <input type="checkbox" id="check_2" class="check_2" value="0" *ngIf="settings['notify-site-mention-you'] == '0'"> -->
-              <label for="check_2" class="pull-left" style="margin-top:12px">You are Mentioned</label>
+              <label for="check_2" class="pull-left" style="margin-top:12px">{{'you-are-mentioned' | translate}}</label>
               <div class="clearfix"></div>
             </div>
 			    </a>
@@ -54,7 +54,7 @@
               <ion-toggle [(ngModel)]="settings['notify-site-tag-you']" [ngModelOptions]="{ standalone :true}" class="pull-right"></ion-toggle>
               <!-- <input type="checkbox" id="check_3" class="check_3" value="1" *ngIf="settings['notify-site-tag-you'] == '1'" checked>
               <input type="checkbox" id="check_3" class="check_3" value="0" *ngIf="settings['notify-site-tag-you'] == '0'" > -->
-              <label for="check_3" class="pull-left" style="margin-top:12px">You are tagged</label>
+              <label for="check_3" class="pull-left" style="margin-top:12px">{{'you-are-tagged' | translate}}</label>
               <div class="clearfix"></div>
             </div>
 			    </a>
@@ -63,7 +63,7 @@
               <ion-toggle [(ngModel)]="settings['notify-site-comment']" [ngModelOptions]="{ standalone :true}" class="pull-right"></ion-toggle>
               <!-- <input type="checkbox" id="check_4" class="check_4" value="1" *ngIf="settings['notify-site-comment'] == '1'" checked>
               <input type="checkbox" id="check_4" class="check_4" value="0" *ngIf="settings['notify-site-comment'] == '0'"> -->
-              <label for="check_4" class="pull-left" style="margin-top:12px">Commented on your post</label>
+              <label for="check_4" class="pull-left" style="margin-top:12px">{{'comment-on-your-post' | translate}}</label>
               <div class="clearfix"></div>
             </div>
 			    </a>
@@ -72,7 +72,7 @@
               <ion-toggle [(ngModel)]="settings['notify-site-reply-comment']" [ngModelOptions]="{ standalone :true}" class="pull-right"></ion-toggle>
               <!-- <input type="checkbox" id="check_5" class="check_5" value="1" *ngIf="settings['notify-site-reply-comment'] == '1'" checked>
               <input type="checkbox" id="check_5" class="check_5" value="0" *ngIf="settings['notify-site-reply-comment'] == '0'"> -->
-              <label for="check_5" class="pull-left" style="margin-top:12px">Replied your comment</label>
+              <label for="check_5" class="pull-left" style="margin-top:12px">{{'reply-your-comment' | translate}}</label>
               <div class="clearfix"></div>
             </div>
 			    </a>
@@ -81,7 +81,7 @@
               <ion-toggle [(ngModel)]="settings['notify-site-like']" [ngModelOptions]="{ standalone :true}" class="pull-right"></ion-toggle>
               <!-- <input type="checkbox" id="check_6" class="check_6" value="1" *ngIf="settings['notify-site-like'] == '1'" checked>
               <input type="checkbox" id="check_6" class="check_6" value="0" *ngIf="settings['notify-site-like'] == '0'"> -->
-              <label for="check_6" class="pull-left" style="margin-top:12px">Like your posts,photos e.t.c</label>
+              <label for="check_6" class="pull-left" style="margin-top:12px">{{"like-your-item" | translate}}</label>
               <div class="clearfix"></div>
             </div>
 			    </a>
@@ -90,7 +90,7 @@
               <ion-toggle [(ngModel)]="settings['notify-site-share-item']" [ngModelOptions]="{ standalone :true}" class="pull-right"></ion-toggle>
               <!-- <input type="checkbox" id="check_7" class="check_7" value="1" *ngIf="settings['notify-site-share-item'] == '1'" checked>
               <input type="checkbox" id="check_7" class="check_7" value="0" *ngIf="settings['notify-site-share-item'] == '0'"> -->
-              <label for="check_7" class="pull-left" style="margin-top:12px">Shared your posts</label>
+              <label for="check_7" class="pull-left" style="margin-top:12px">{{'share-your-item' | translate}}</label>
               <div class="clearfix"></div>
             </div>
 			    </a>
@@ -102,7 +102,7 @@
             </div>
 			    </a>
           <div class="form-group mt-30 mb-30">
-            <button (click)="saveSettings()" type="submit" class="btn btn-theme">Save</button>
+            <button (click)="saveSettings()" type="submit" class="btn btn-theme">{{'save' | translate}}</button>
           </div>
 			</form>
 		</section>

@@ -29,14 +29,14 @@ export class LoginPage {
   };
 
   constructor(public navCtrl: NavController,public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl :ToastController,public menu: MenuController,public remoteService : RemoteServiceProvider) {
-    
-    // if( localStorage.getItem('lang') !=undefined)
-    //   {  this.xmlLang = JSON.parse(localStorage.getItem('lang'))
-    //   }
+
+    if( localStorage.getItem('lang') !=undefined)
+      {  this.xmlLang = JSON.parse(localStorage.getItem('lang'))
+      }
 
     // if(this.loggedIn == "null"  )
     //   {
-
+    //
     //   }else{
     //     this.navCtrl.push(TabsPage);
     //   }

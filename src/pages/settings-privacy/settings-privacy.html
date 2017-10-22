@@ -12,7 +12,7 @@
   					<a (click)="back()"><i class="fa fa-arrow-left"></i></a>
   				</div>
   				<div class="page_title text-center">
-  					<h3>Privacy Settings</h3>
+  					<h3>{{'privacy-settings' | translate}}</h3>
   				</div>
   				<div class="menu_btn text-right">
   					<a href="#"><i class="fa fa-bars" style="color:#fff;font-size:18px"></i></a>
@@ -27,17 +27,17 @@
   <section class="bg_grey full_vh pt-70">
 			<div class="list-group list-group-theme">
 			    <a href="#" data-toggle="modal" data-target="#privacy_modal1" class="list-group-item">
-				    <p class="list-group-item-text">Who can see my profile?</p>
+				    <p class="list-group-item-text">{{'who-can-see-profile' | translate}}?</p>
 			    </a>
 			    <a href="#" data-toggle="modal" data-target="#privacy_modal2" class="list-group-item">
-				    <p class="list-group-item-text">Who can post on your timeline?</p>
+				    <p class="list-group-item-text">{{'who-can-post-profile' | translate}}?</p>
 			    </a>
           <div class="divider" style="width: 100%; border-top: solid 1px lightgray; margin: 10px 0;"></div>
 			    <a href="#" data-toggle="modal" data-target="#privacy_modal3" class="list-group-item">
-				    <p class="list-group-item-text">Who can see your birth date?</p>
+				    <p class="list-group-item-text">{{'who-can-see-birthdate' | translate}}?</p>
 			    </a>
 			    <a href="#" data-toggle="modal" data-target="#privacy_modal4" class="list-group-item">
-				    <p class="list-group-item-text">who can send you messages?</p>
+				    <p class="list-group-item-text">{{'who-can-send-message' | translate}}?</p>
 			    </a>
           <a href="#" data-toggle="modal" data-target="#privacy_modal5" class="list-group-item">
 				    <p class="list-group-item-text">Who can see my latest profile visitors?</p>
@@ -46,7 +46,7 @@
           <a href="#" class="list-group-item">
 				    <div>
               <ion-toggle [(ngModel)]="settings['email-notification']" [ngModelOptions]="{ standalone :true}" class="pull-right"></ion-toggle>
-              <label for="check_2" class="pull-left" style="margin-top:12px">Email Notifications</label>
+              <label for="check_2" class="pull-left" style="margin-top:12px">{{'email-notifications' | translate}}</label>
               <div class="clearfix"></div>
             </div>
 			    </a>
@@ -64,7 +64,7 @@
 					        		<a href="#" class="list-group-item">
   									    <div class="radio radio-list">
   					               <input type="radio" name="radio" id="radio_1_1" [(ngModel)]="settings['who_can_view_profile']" [ngModelOptions]="{ standalone :true}" value="1">
-  					               <label for="radio_1_1">Everyone</label>
+  					               <label for="radio_1_1">{{'everyone' | translate}}</label>
   					            </div>
 				              </a>
 				              <a href="#" class="list-group-item">
@@ -105,7 +105,7 @@
 					        		<a href="#" class="list-group-item">
   									    <div class="radio radio-list">
   					               <input type="radio" name="radio" id="radio_2_1" [(ngModel)]="settings['who_can_post_profile']" [ngModelOptions]="{ standalone :true}" value="1">
-  					               <label for="radio_2_1">Everyone</label>
+  					               <label for="radio_2_1">{{'everyone' | translate}}</label>
   					            </div>
 				              </a>
 				              <a href="#" class="list-group-item">
@@ -144,7 +144,7 @@
 					        		<a href="#" class="list-group-item">
   									    <div class="radio radio-list">
   					               <input type="radio" name="radio" id="radio_3_1" [(ngModel)]="settings['who_can_see_birth']" [ngModelOptions]="{ standalone :true}" value="1">
-  					               <label for="radio_3_1">Everyone</label>
+  					               <label for="radio_3_1">{{'everyone' | translate}}</label>
   					            </div>
 				              </a>
 				              <a href="#" class="list-group-item">
@@ -184,7 +184,7 @@
 					        		<a href="#" class="list-group-item">
   									    <div class="radio radio-list">
   					               <input type="radio" name="radio" id="radio_4_1" [(ngModel)]="settings['who_can_send_message']" [ngModelOptions]="{ standalone :true}" value="1">
-  					               <label for="radio_4_1">Everyone</label>
+  					               <label for="radio_4_1">{{'everyone' | translate}}</label>
   					            </div>
 				              </a>
 				              <a href="#" class="list-group-item">
@@ -224,7 +224,7 @@
 					        		<a href="#" class="list-group-item">
   									    <div class="radio radio-list">
   					               <input type="radio" name="radio" id="radio_5_1" [(ngModel)]="settings['who_can_see_visitors']" [ngModelOptions]="{ standalone :true}" value="1">
-  					               <label for="radio_5_1">Everyone</label>
+  					               <label for="radio_5_1">{{'everyone' | translate}}</label>
   					            </div>
 				              </a>
 				              <a href="#" class="list-group-item">

@@ -13,7 +13,7 @@
 					<a (click)="back()"><i class="fa fa-arrow-left"></i></a>
 				</div>
 				<div class="page_title text-center">
-					<h3>Photos</h3>
+					<h3>{{'photos' | translate}}</h3>
 				</div>
 				<div class="menu_btn text-right">
 					<a href="#"><i class="fa fa-bars" style="color:#fff;font-size:18px"></i></a>
@@ -33,10 +33,10 @@
 						<a class="p-0" data-toggle="tab" href="#">
 							<form>
 								<select [(ngModel)]="category" [ngModelOptions]="{ standalone :true}" (ngModelChange)="getPhotos(category, limit, 0)">
-									<option value="1">All Albums</option>
-									<option value="2">My Albums</option>
-									<option value="3">All Photos</option>
-									<option value="4">My Photos</option>
+									<option value="1">{{'all-albums' | translate}}</option>
+									<option value="2">{{'my-albums' | translate}}</option>
+									<option value="3">{{'all-photos' | translate}}</option>
+									<option value="4">{{'my-photos' | translate}}</option>
 								</select>
 							</form>
 						</a>
@@ -47,11 +47,11 @@
 								<div class="file-input">
 									<label *ngIf="category == 3 || category == 4" for="photo-upload">
 										<i class="ion-android-add-circle mr-5"></i>
-										Add New Photo
+										{{'add-new-photo' | translate}}
 									</label>
                   <label *ngIf="category == 1 || category == 2" (click)="createAlbum()" for="photo-upload">
 										<i class="ion-android-add-circle mr-5"></i>
-										Create New Album
+										{{'create-new-album' | translate}}
 									</label>
 									<!-- <input id="photo-upload" type="file"> -->
 								</div>
@@ -65,10 +65,10 @@
   				<div class="panel panel-theme mb-30">
   					<div class="photos mt-5 mb-5 row thumbnails">
                 <div class="col-xs-6" *ngFor="let photo of photos">
-  						     <a href="#" class="thumbnail"><img src="{{photo.path}}" alt=""></a>
+  						     <a (click)="viewPhoto(photo.path)" href="#" class="thumbnail"><img src="{{photo.path}}" alt=""></a>
                 </div>
   					</div>
-            <a (click)="getPhotos(category, limit, offset)" href="#" class="btn btn-default btn-block">See More</a>
+            <a (click)="getPhotos(category, limit, offset)" href="#" class="btn btn-default btn-block">{{'view-more' | translate}}</a>
   				</div>
 			  </div>
         <div *ngIf="category == 1 || category == 2">
@@ -83,7 +83,7 @@
 						    </div>
 					    </div>
 					</div>
-          <a (click)="getPhotos(category, limit, offset)" href="#" class="btn btn-default btn-block">See More</a>
+          <a (click)="getPhotos(category, limit, offset)" href="#" class="btn btn-default btn-block">{{'view-more' | translate}}</a>
 				</div>
       </div>
     </div>
@@ -121,7 +121,7 @@
   						<a href="#" *ngFor="let photo of photos"><img src="{{photo.path}}" alt=""></a>
 
   					</div>
-            <a (click)="getPhotos('all', limit, offset)" href="#" class="btn btn-default btn-block">See More</a>
+            <a (click)="getPhotos('all', limit, offset)" href="#" class="btn btn-default btn-block">{{'view-more' | translate}}</a>
   				</div>
         </div>
         <div id="tab-content-2" class="tab-pane fade">
@@ -130,7 +130,7 @@
   						<a href="#" *ngFor="let photo of photos"><img src="{{photo.path}}" alt=""></a>
 
   					</div>
-            <a (click)="getPhotos('user-all', limit, offset)" href="#" class="btn btn-default btn-block">See More</a>
+            <a (click)="getPhotos('user-all', limit, offset)" href="#" class="btn btn-default btn-block">{{'view-more' | translate}}</a>
   				</div>
         </div>
         <div id="tab-content-3" class="tab-pane fade">
