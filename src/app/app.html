@@ -7,16 +7,16 @@
 
   <ion-content>
       <div class="" style="min-height:17px;background-size: cover;      ">
-         
+
         </div>
         <div class="menu_items">
             <div class="container">
                <ion-list >
                  <button menuClose ion-item *ngFor="let p of pages" class="menu_items"  (click)="openPage(p)">
-                   
+
               <i class="{{p.icon}} icons"></i>
-        
-                  <span>{{p.title}}</span>
+
+                  <span>{{p.title | translate}}</span>
                </button>
               </ion-list>
             </div>
@@ -30,5 +30,3 @@
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
-
-
