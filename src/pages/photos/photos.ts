@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
 import { CreateAlbumPage } from '../create-album/create-album';
-
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 /**
  * Generated class for the PhotosPage page.
  *
@@ -22,7 +22,7 @@ export class PhotosPage {
   limit
   offset
   category
-  constructor(public navCtrl: NavController,public remoteService : RemoteServiceProvider, public navParams: NavParams) {
+  constructor(private photoViewer: PhotoViewer, public navCtrl: NavController,public remoteService : RemoteServiceProvider, public navParams: NavParams) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "")
     this.limit = 10;
     this.offset = 0;
@@ -32,6 +32,9 @@ export class PhotosPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PhotosPage');
+  }
+  viewPhoto(url){
+    this.photoViewer.show(url);
   }
   getPhotos(category, limit, offset){
     this.category = category;

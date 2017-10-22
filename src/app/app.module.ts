@@ -59,6 +59,7 @@ import { EditVideoPage } from '../pages/edit-video/edit-video';
 import { InviteFriendPage } from '../pages/invite-friend/invite-friend';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 // import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 
 // import { File } from '@ionic-native/file';
@@ -165,6 +166,7 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule
     StatusBar,
     SplashScreen,
     SocialSharing,
+    PhotoViewer,
     // FileTransfer,Camera,
     // FileTransferObject,
     // File,
