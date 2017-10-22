@@ -943,6 +943,10 @@ console.log(url)
           .map((res : Response ) => res.json());
 
         }
+        deleteAccount(userid, password){
+          return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/delete/account?userid=' + userid + "&password=" + password)
+         .map((res : Response ) => res.json());
+        }
 
         saveItem(type, typeId, userid){
           let headers = new Headers();

@@ -48,8 +48,8 @@
 								<a href="#" class="btn btn-default btn-sm" data-toggle="dropdown"><span class="caret"></span></a>
 								<ul class="dropdown-menu dropdown-menu-right">
                   <li><a (click)="regularShare()" href="#"style="color: #5c0632;" ><i class="fa fa-share"></i>&nbsp; Share</a></li>
-									<li><a (click)="editVideoPage()" href="#"style="color: #5c0632;" ><i class="fa fa-edit"></i>&nbsp; Edit</a></li>
-									<li><a (click)="deleteVideo(video.id)" href="#" style="color: #5c0632;" ><i class="fa fa-trash"></i>&nbsp; Delete</a></li>
+									<li><a (click)="editVideoPage()" *ngIf="video.owner.userid == userId" href="#"style="color: #5c0632;" ><i class="fa fa-edit"></i>&nbsp; Edit</a></li>
+									<li><a (click)="deleteVideo(video.id)" *ngIf="video.owner.userid == userId" href="#" style="color: #5c0632;" ><i class="fa fa-trash"></i>&nbsp; Delete</a></li>
                   <li><a (click)="reportVideo()" href="#" style="color: #5c0632;"><i class="fa fa-flag"></i>&nbsp; Report</a></li>
 									<!-- <li><a href="#">Save</a></li> -->
 								</ul>
