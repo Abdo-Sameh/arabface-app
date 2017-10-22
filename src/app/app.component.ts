@@ -46,7 +46,8 @@ export class MyApp {
 
 
     constructor(public translate: TranslateService, public database:RemoteServiceProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen , public http :Http) {
-      translate.setDefaultLang('ar');
+      translate.setDefaultLang('en');
+      this.platform.setDir('ltr',true);
       this.deviceLanguage = this.platform.lang();
 
       firebase = this.database ;
@@ -63,7 +64,7 @@ export class MyApp {
         { title: 'forums', component: ForumsPage ,icon : 'fa fa-commenting'},
         { title: 'groups', component: GroupsPage ,icon : 'fa fa-users'},
         { title: 'events', component: EventsPage ,icon : 'fa fa-calendar'},
-        { title: 'contact Us', component: ContactUsPage ,icon : 'fa fa-envelope'},
+        { title: 'contact-us', component: ContactUsPage ,icon : 'fa fa-envelope'},
         { title: 'gift Shop', component: GiftsPage ,icon : 'fa fa-shopping-bag'},
         { title: 'saved', component: SavedPage ,icon : 'fa fa-bookmark'},
         { title: 'discover', component: TrendingPage,icon : 'fa fa-hashtag'},

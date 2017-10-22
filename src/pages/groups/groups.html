@@ -12,7 +12,7 @@
 					<a (click)="back()"><i class="fa fa-arrow-left"></i></a>
 				</div>
 				<div class="page_title text-center">
-					<h3>Groups</h3>
+					<h3>{{'groups' | translate}}</h3>
 				</div>
 				<div class="menu_btn text-right">
 					<a href="#"><i class="fa fa-bars" style="color:#fff;font-size:18px"></i></a>
@@ -28,9 +28,9 @@
   <section class="bg_grey full_vh pages">
 			<div class="panel panel-theme">
 				<ul class="nav nav-tabs flex-space-around">
-					<li id="active1" class="active"><a (click)="getGroups('recommend','', this.filter, userId, 1)" data-toggle="tab" href="#tab-content-1"> Groups</a></li>
-					<li id="active2"><a (click)="getGroups('member', '', this.filter, userId, 1)" data-toggle="tab" href="#tab-content-2"> Member</a></li>
-          <li id="active3"><a (click)="getGroups('yours','',this.filter, userId, 1)" data-toggle="tab" href="#tab-content-3"> My Groups</a></li>
+					<li id="active1" class="active"><a (click)="getGroups('recommend','', this.filter, userId, 1)" data-toggle="tab" href="#tab-content-1"> {{'all-groups' | translate}}</a></li>
+					<li id="active2"><a (click)="getGroups('member', '', this.filter, userId, 1)" data-toggle="tab" href="#tab-content-2"> {{'groups-member' | translate}}</a></li>
+          <li id="active3"><a (click)="getGroups('yours','',this.filter, userId, 1)" data-toggle="tab" href="#tab-content-3"> {{'my-groups' | translate}}</a></li>
 				</ul>
 			</div>
 			<div class="container">
@@ -39,9 +39,9 @@
 						<input type="text" class="form-control" [(ngModel)]="search" [ngModelOptions]="{ standalone :true}" placeholder="Search here ...">
 
 						<select class="form-control" [(ngModel)]="filter" [ngModelOptions]="{ standalone :true}" (ngModelChange)="getGroups(this.type, '' ,this.filter, userId, 1)">
-							<option value="all">All</option>
-							<option value="top">Top</option>
-							<option value="featured">Featured</option>
+							<option value="all">{{'all' | translate}}</option>
+							<option value="top">{{'top' | translate}}</option>
+							<option value="featured">{{'featured' | translate}}</option>
 						</select>
 						<div class="input-group-btn">
 
@@ -53,7 +53,7 @@
 				</form>
 				<div class="tab-content">
 					<div id="tab-content-1" class="tab-pane fade in active">
-            <div id="noGroups1" style="display: none;" class="box-content alert alert-danger">No groups found here</div>
+            <div id="noGroups1" style="display: none;" class="box-content alert alert-danger">{{'no-grouo-found' | translate}}</div>
 						<div class="row thumbnails">
 							<div class="col-xs-6" *ngFor="let group of groups; let i = index;">
 							    <div class="thumbnail">
@@ -62,16 +62,16 @@
 								    <div class="caption">
 								        <h3><a (click)="groupPage(group)" href="#">{{ group.title }}</a></h3>
 								        <p>{{ group.description }}</p>
-								        <a (click)="joinGroup(group.id, 0, userId, i)" href="#" *ngIf="group.is_member == false" class="btn btn-default btn-sm"><i class="fa fa-plus"></i> Join</a>
-                        <a (click)="joinGroup(group.id, 1, userId, i)" style="color: #488aff" href="#" *ngIf="group.is_member == true" class="btn btn-default btn-sm"><i class="fa fa-check-circle"></i> Joined</a>
+								        <a (click)="joinGroup(group.id, 0, userId, i)" href="#" *ngIf="group.is_member == false" class="btn btn-default btn-sm"><i class="fa fa-plus"></i> {{'join' | translate}}</a>
+                        <a (click)="joinGroup(group.id, 1, userId, i)" style="color: #488aff" href="#" *ngIf="group.is_member == true" class="btn btn-default btn-sm"><i class="fa fa-check-circle"></i> {{'leave-group' | translate}}</a>
 								    </div>
 							    </div>
 							</div>
 						</div>
-            <a id="all" (click)="getGroups(this.type, this.search, this.filter, userId, page + 1)" href="#" class="btn btn-default btn-block">See More</a>
+            <a id="all" (click)="getGroups(this.type, this.search, this.filter, userId, page + 1)" href="#" class="btn btn-default btn-block">{{'view-more' | translate}}</a>
 					</div>
 					<div id="tab-content-2" class="tab-pane fade">
-            <div id="noGroups2" style="display: none;" class="box-content alert alert-danger">No groups found here</div>
+            <div id="noGroups2" style="display: none;" class="box-content alert alert-danger">{{'no-grouo-found' | translate}}</div>
 						<div class="row thumbnails">
 							<div class="col-xs-6" *ngFor="let group of groups; let i = index;">
 							    <div class="thumbnail">
@@ -80,16 +80,16 @@
 								    <div class="caption">
 								        <h3><a (click)="groupPage(group)" href="#">{{ group.title }}</a></h3>
 								        <p>{{ group.description }}</p>
-                        <a (click)="joinGroup(group.id, 0, userId, i)" href="#" *ngIf="group.is_member == false" class="btn btn-default btn-sm"><i class="fa fa-plus"></i> Join</a>
-                        <a (click)="joinGroup(group.id, 1, userId, i)" style="color: #488aff" href="#" *ngIf="group.is_member == true" class="btn btn-default btn-sm"><i class="fa fa-check-circle"></i> Joined</a>
+                        <a (click)="joinGroup(group.id, 0, userId, i)" href="#" *ngIf="group.is_member == false" class="btn btn-default btn-sm"><i class="fa fa-plus"></i> {{'join' | translate}}</a>
+                        <a (click)="joinGroup(group.id, 1, userId, i)" style="color: #488aff" href="#" *ngIf="group.is_member == true" class="btn btn-default btn-sm"><i class="fa fa-check-circle"></i> {{'leave-group' | translate}}</a>
 								    </div>
 							    </div>
 							</div>
 						</div>
-            <a id="member" (click)="getGroups(this.type, this.search, this.filter, userId, page + 1)" href="#" class="btn btn-default btn-block">See More</a>
+            <a id="member" (click)="getGroups(this.type, this.search, this.filter, userId, page + 1)" href="#" class="btn btn-default btn-block">{{'view-more' | translate}}</a>
 					</div>
           <div id="tab-content-3" class="tab-pane fade">
-            <div id="noGroups3" style="display: none;" class="box-content alert alert-danger">No groups found here</div>
+            <div id="noGroups3" style="display: none;" class="box-content alert alert-danger">{{'no-grouo-found' | translate}}</div>
 						<div class="row thumbnails">
 							<div class="col-xs-6" *ngFor="let group of groups; let i = index;">
 							    <div class="thumbnail">
@@ -98,13 +98,13 @@
 								    <div class="caption">
 								        <h3><a (click)="groupPage(group)" href="#">{{ group.title }}</a></h3>
 								        <p>{{ group.description }}</p>
-                        <a (click)="joinGroup(group.id, 0, userId, i)" href="#" *ngIf="group.is_member == false" class="btn btn-default btn-sm"><i class="fa fa-plus"></i> Join</a>
-                        <a (click)="joinGroup(group.id, 1, userId, i)" style="color: #488aff" href="#" *ngIf="group.is_member == true" class="btn btn-default btn-sm"><i class="fa fa-check-circle"></i> Joined</a>
+                        <a (click)="joinGroup(group.id, 0, userId, i)" href="#" *ngIf="group.is_member == false" class="btn btn-default btn-sm"><i class="fa fa-plus"></i> {{'join' | translate}}</a>
+                        <a (click)="joinGroup(group.id, 1, userId, i)" style="color: #488aff" href="#" *ngIf="group.is_member == true" class="btn btn-default btn-sm"><i class="fa fa-check-circle"></i> {{'leave-group' | translate}}</a>
 								    </div>
 							    </div>
 							</div>
 						</div>
-            <a id="my" (click)="getGroups(this.type, this.search, this.filter, userId, page + 1)" href="#" class="btn btn-default btn-block">See More</a>
+            <a id="my" (click)="getGroups(this.type, this.search, this.filter, userId, page + 1)" href="#" class="btn btn-default btn-block">{{'view-more' | translate}}</a>
 					</div>
 
 

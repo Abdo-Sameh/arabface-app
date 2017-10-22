@@ -26,7 +26,7 @@
         <div *ngFor="let friend of FriendsRequest ; let i = index ">
 					<div class="nav_requests">
 						<div class="pull-left" style="color:#5c0632">
-							<h4>Friends Requests</h4>
+							<h4>{{'friends' | translate}}</h4>
 						</div>
 						<!-- <div class="pull-right">
 							<h4><a href="#">Fiend Friends</a></h4>
@@ -53,7 +53,7 @@
         <div class="users-list friends_requests" *ngIf="FriendsRequest?.length == 0">
             <div class="nav_requests">
               <div class="pull-left" style="color:#5c0632">
-                <h4>Friends Requests</h4>
+                <h4>{{'friend-requests' | translate}}</h4>
               </div>
               <div class="clearfix"></div>
               <!-- <div class="pull-right">
