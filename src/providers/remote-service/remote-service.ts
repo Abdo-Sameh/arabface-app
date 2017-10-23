@@ -670,6 +670,7 @@ user = new Observable(observer => {
 
    changeProfilePicture(userid , avatar)
    {
+     avatar = avatar.toJSON;
     let headers = new Headers();
     headers.append('Content-Type', 'multipart/form-data');
     let urlSearchParams = new URLSearchParams();
@@ -679,7 +680,7 @@ user = new Observable(observer => {
      return this.http.post(this.serverURL+'/arabface/api/'+this.KEY+'/profile/change/avatar', body, {headers: headers})
 
     //  do((res : Response ) => console.log(res.json()))
-    .map((res : Response ) => res.json());
+    // .map((res : Response ) => res.json());
    }
 
 

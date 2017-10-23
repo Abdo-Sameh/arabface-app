@@ -45,10 +45,10 @@
           <label for="profile-upload">
             <i *ngIf="myProfile()" class="fa fa-camera"></i>
           </label>
-          <input id="profile-upload" type="file" [(ngModel)]="picture.path" [ngModelOptions]="{standalone: true}">
+          <input id="profile-upload" type="file" name="avatar" [(ngModel)]="picture.path" [ngModelOptions]="{standalone: true}">
 
         </div>
-        <button id="profile-upload" type="submit" (click)="changeProfilePicture(this.userId)">here</button>
+        <button type="submit" (click)="upload()">here</button>
       </form>
 
     </div>

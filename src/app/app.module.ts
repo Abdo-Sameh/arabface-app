@@ -63,9 +63,12 @@ import { MembersPage } from '../pages/members/members';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpModule, Http } from '@angular/http';
-// import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
+import { Globalization } from '@ionic-native/globalization';
 
-// import { File } from '@ionic-native/file';
+
 // import { Transfer } from '@ionic-native/transfer';
 // import { FilePath } from '@ionic-native/file-path';
 // import { Camera } from '@ionic-native/camera';
@@ -177,9 +180,10 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule, TranslateModule.forRoot(
     SplashScreen,
     SocialSharing,
     PhotoViewer,
-    // FileTransfer,Camera,
-    // FileTransferObject,
-    // File,
+    FileTransfer,
+    LaunchNavigator,
+    Globalization,
+    File,
     // Transfer,
     // Camera,
     // FilePath,
