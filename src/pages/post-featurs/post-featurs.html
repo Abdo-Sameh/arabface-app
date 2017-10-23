@@ -30,7 +30,7 @@
 
    <div class="share-post panel panel-theme postBody" style="margin-bottom:0px;min-height:150px" id="default">
     <form>
-      <textarea class="p-0" rows="6"  [(ngModel)]="post.text" [ngModelOptions]="{ standalone :true}" placeholder="what's in your mind?"></textarea>
+      <textarea class="p-0" rows="6"  [(ngModel)]="post.text" [ngModelOptions]="{ standalone :true}" placeholder="{{'whats-happening' | translate}}"></textarea>
 
       <div class="feeling-div">
           <div class="feelingText btn btn-theme"></div>
@@ -102,19 +102,19 @@
    </div>
    <div class="dropdown dropdown-feeling">
     <ul (click)="selectFeeling()" class="dropdown-menu">
-      <li><a href="#"><img src="assets/images/status/listening-to.png"> Listening to</a></li>
-      <li><a href="#"><img src="assets/images/status/watching.png"> Watching</a></li>
-      <li><a href="#"><img src="assets/images/status/feeling.png"> Feeling</a></li>
-      <li><a href="#"><img src="assets/images/status/thinking-about.png"> Thinking about</a></li>
-      <li><a href="#"><img src="assets/images/status/reading.png"> Reading</a></li>
-      <li><a href="#"><img src="assets/images/status/eating.png"> Eating</a></li>
-      <li><a href="#"><img src="assets/images/status/drinking.png"> Drinking</a></li>
-      <li><a href="#"><img src="assets/images/status/celebrating.png"> Celebrating</a></li>
-      <li><a href="#"><img src="assets/images/status/traveling-to.png"> Traveling to</a></li>
-      <li><a href="#"><img src="assets/images/status/exercising.png"> Exercising</a></li>
-      <li><a href="#"><img src="assets/images/status/meeting.png"> Meeting</a></li>
-      <li><a href="#"><img src="assets/images/status/playing.png"> Playing</a></li>
-      <li><a href="#"><img src="assets/images/status/looking-for.png"> Looking for</a></li>
+      <li><a href="#"><img src="assets/images/status/listening-to.png"> {{'listening-to' | translate}}</a></li>
+      <li><a href="#"><img src="assets/images/status/watching.png"> {{'watching' | translate}}</a></li>
+      <li><a href="#"><img src="assets/images/status/feeling.png"> {{'feeling' | translate}}</a></li>
+      <li><a href="#"><img src="assets/images/status/thinking-about.png"> {{'thinking-about' | translate}}</a></li>
+      <li><a href="#"><img src="assets/images/status/reading.png"> {{'reading' | translate}}</a></li>
+      <li><a href="#"><img src="assets/images/status/eating.png"> {{'eating' | translate}}</a></li>
+      <li><a href="#"><img src="assets/images/status/drinking.png"> {{'drinking' | translate}}</a></li>
+      <li><a href="#"><img src="assets/images/status/celebrating.png"> {{'celebrating' | translate}}</a></li>
+      <li><a href="#"><img src="assets/images/status/traveling-to.png"> {{'traveling-to' | translate}}</a></li>
+      <li><a href="#"><img src="assets/images/status/exercising.png"> {{'exercising' | translate}}</a></li>
+      <li><a href="#"><img src="assets/images/status/meeting.png"> {{'Meeting' | translate}}</a></li>
+      <li><a href="#"><img src="assets/images/status/playing.png"> {{'playing' | translate}}</a></li>
+      <li><a href="#"><img src="assets/images/status/looking-for.png"> {{'looking-for' | translate}}</a></li>
     </ul>
   </div>
   <div class="panel panel-theme privacy mt-20 " >
@@ -124,14 +124,14 @@
       <div class="dropdown inline-block ml-10">
         <a href="#"  class="btn btn-default btn-sm" data-toggle="dropdown" aria-expanded="false"><i id="privacy" class="fa fa-globe"></i> <span class="caret"></span></a>
         <ul class="privacyDropdown dropdown-menu" (click)="selectPrivacy()">
-          <li><a href="#"><i class="fa fa-globe"></i> Public</a></li>
+          <li><a href="#"><i class="fa fa-globe"></i> {{'public' | translate}}</a></li>
           <li><a href="#"><i class="fa fa-group"></i> Friends only</a></li>
           <li><a href="#"> <i class="fa fa-lock"></i> Only me</a></li>
         </ul>
       </div>
      </div>
      <div class="pull-right">
-      <a href="#" (click)="postFeed()" class="btn btn-theme">Post</a>
+      <a href="#" (click)="postFeed()" class="btn btn-theme">{{'post' | translate}}</a>
     </div>
     <div class="clearfix"></div>
    </div>

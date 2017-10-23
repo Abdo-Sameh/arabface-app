@@ -689,7 +689,7 @@ user = new Observable(observer => {
 
   //////////// post in feed ///////////////////////
 
-  feedPosting(userID,post,feeling='none',postType='text',privacy,background='default',tag :any='no')
+  feedPosting(userID,post,feeling='none',postType='text',privacy,background='default',tag :any='no', type, type_id)
   {
 
     let headers = new Headers();
@@ -725,7 +725,8 @@ user = new Observable(observer => {
     }
     urlSearchParams.append('privacy', privacy );
 
-    urlSearchParams.append('type', 'feed' );
+    urlSearchParams.append('type', type );
+    urlSearchParams.append('type_id', type_id );
     urlSearchParams.append('background', background );
     urlSearchParams.append('entity_type', 'user' );
     let body = urlSearchParams.toString()

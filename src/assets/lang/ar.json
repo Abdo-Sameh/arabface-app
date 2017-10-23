@@ -490,7 +490,7 @@
 
 	"preview": "معاينة",
 
-	"name": "اسم",
+	"name": "الاسم",
 
 	"author": "مؤلف",
 
@@ -714,6 +714,8 @@
 
 	"save-role": "حفظ دور",
 
+	"save-group" : "حفظ المجموعة",
+
 	"custom_field-category_1447632024_title": "موقع",
 
 	"custom_field-category_1447632047_title": "الهوايات",
@@ -758,7 +760,7 @@
 
 	"add-friend": "اضف صديق",
 
-	"friends": "هل نبقى اصدقاء",
+	"friends": "الاصدقاء",
 
 	"request-sent": "تم ارسال الطلب",
 
@@ -774,7 +776,7 @@
 
 	"no-friend-requests": "ليس صديقا الطلبات",
 
-	"friend-requests": "طلبات صداقة",
+	"friend-requests": "طلبات الصداقة",
 
 	"respond-to-request": "الرد على طلب",
 
@@ -924,7 +926,7 @@
 
 	"notifications": "الإشعارات",
 
-	"privacy": "خصوصية",
+	"privacy": "الخصوصية",
 
 	"first-name": "الاسم الأول",
 
@@ -946,7 +948,7 @@
 
 	"female": "أنثى",
 
-	"change-password-info": "لتغيير كلمة المرور الخاصة بك، وتوفير كلمة المرور القديمة واختيار كلمة مرور جديدة",
+	"change-password-info": "لتغيير كلمه المرور الخاصه بك , اكتب كلمه المرور القديمه واختار كلمه مرور جديده",
 
 	"current-password": "كلمة السر الحالية",
 
@@ -1372,7 +1374,7 @@
 
 	"new-message": "رسالة جديدة",
 
-	"who-can-see-send-message": "الذين يمكن أن نرسل لك رسالة",
+	"who-can-send-message": "الذين يمكن أن نرسل لك رسالة",
 
 	"default-send-message-privacy": "ضبط رسالة إرسال الخصوصية",
 
@@ -1393,6 +1395,8 @@
 	"invisible": "خفي",
 
 	"groups": "المجموعات",
+
+	"groups-member" : "المجموعات المشترك بها",
 
 	"search-friends": "ابحث عن أصدقاء",
 
@@ -1486,6 +1490,8 @@
 
 	"posts": "المشاركات",
 
+	"comment" :"تعليق",
+
 	"join-group": "إنضم للمجموعة",
 
 	"leave-group": "غادر المجموعة",
@@ -1510,7 +1516,7 @@
 
 	"made-you-moderator-of": "جعلك مشرف ",
 
-	"ad-member-to-group": "أضف عضو إلى مجموعة",
+	"add-member-to-group": "أضف عضو إلى المجموعة",
 
 	"is-already-group-member": "المستخدم المحدد هو بالفعل عضو في هذه المجموعة",
 
@@ -1522,7 +1528,7 @@
 
 	"yours": "خاصة بك",
 
-	"no-grouo-found": "لم يتم العثور على مجموعات. يمكنك إنشاء لك",
+	"no-groups-found": "لم يتم العثور على مجموعات. يمكنك إنشاء لك",
 
 	"group-profile": "الملف المجموعة",
 
@@ -1574,7 +1580,7 @@
 
 	"send-site-notification-when": "أرسل لي الإخطارات الموقع عندما",
 
-	"someone-started-following-you": "شخص يتبعك",
+	"someone-started-following-you": "قام شخص بمتابعتك",
 
 	"you-are-mentioned": "تمت الإشارة إليك",
 
@@ -1604,7 +1610,7 @@
 
 	"edit-category": "تحرير الفئة",
 
-	"pages": "صفحات",
+	"pages": "الصفحات",
 
 	"page-i-like": "صفحات أنا أحب",
 
@@ -1618,7 +1624,7 @@
 
 	"create-page": "انشئ صفحة",
 
-	"timeline": "الجدول الزمني",
+	"timeline": "صفحة المشاركات",
 
 	"likes": "اعجابات",
 
@@ -2063,6 +2069,18 @@
 	"save-post": "حفظ",
 
 	"unsave-post": "Unsave",
+
+	"unsave-event" : "الغاء الحفظ",
+
+	"All Categories" : "جميع الفئات",
+
+	"Wedding" : "حفل زفاف",
+
+	"Outing" : "نزهة",
+
+	"Party" : "حفلة",
+
+	"unsave-group" : "ازالة الحفظ",
 
 	"successfully-saved": "حفظ بنجاح",
 
@@ -2680,6 +2698,8 @@
 
 	"new": "جديد",
 
+	"someone-followed-you" : "قام شخص بمتابعتك",
+
 	"new-topic": "موضوع جديد",
 
 	"new-desc": "المواضيع التي تم إنشاؤها مؤخرا",
@@ -2953,6 +2973,8 @@
 	"invite-by-email-desc": "أدخل عنوان بريد صديقك مفصولة بفواصل (،)",
 
 	"send-invites": "إرسال الدعوات",
+
+	"send-invite" : "ارسال دعوة",
 
 	"invite-mail-sent": "تم ارسال دعوة الإلكتروني بنجاح",
 
@@ -4358,6 +4380,8 @@
 
 	"edit-gift": "تحرير هدية",
 
+	"edit-group" : "تحرير المجموعة",
+
 	"gift-category": "هدية الفئة",
 
 	"giftshop-edit": "تحرير الفئة",
@@ -4369,6 +4393,8 @@
 	"all-gift": "كل الهدايا",
 
 	"my-gift": "هديتى",
+
+	"my-groups" : "المجموعات الخاصة بك",
 
 	"gift-categories": "الفئات",
 
