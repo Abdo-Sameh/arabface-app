@@ -19,8 +19,11 @@ export class PostFeatursPage {
    userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
   userAvatar = localStorage.getItem('userAvatar').slice(8,-1);
   users
+  type
+  typeId
   constructor(public navCtrl: NavController,public navParams: NavParams ,public alert:AlertController,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
-
+      this.type = navParams.get('type');
+      this.typeId = navParams.get('type_id');
   }
   selectPrivacy()
   {
@@ -71,7 +74,7 @@ export class PostFeatursPage {
       //  this.navCtrl.pop()
       if($('.feeling-div').attr('id') && this.post.text == "") {
       let selectedFeeling=$('.feeling-div').attr('id')
-        this.remoteService.feedPosting(userID,postText.feeling,selectedFeeling,'feeling',privacy,id).subscribe( res => {
+        this.remoteService.feedPosting(userID,postText.feeling,selectedFeeling,'feeling',privacy,id, 'no' ,this.type, this.typeId).subscribe( res => {
           // this.feeds.unshift(res.feed)
            this.post.text= ""
            //this.getFeedsList(this.userId);
@@ -82,7 +85,7 @@ export class PostFeatursPage {
        {
         let selectedFeeling=$('.feeling-div').attr('id')
 
-        this.remoteService.feedPosting(userID,postText,selectedFeeling,'feeling&text',privacy,id).subscribe( res => {
+        this.remoteService.feedPosting(userID,postText,selectedFeeling,'feeling&text',privacy,id, 'no' ,this.type, this.typeId).subscribe( res => {
           // this.feeds.unshift(res.feed)
            this.post.text= ""
            //this.getFeedsList(this.userId);
@@ -92,7 +95,7 @@ export class PostFeatursPage {
 
        }else if(Tagedusers.length > 0)
        {
-        this.remoteService.feedPosting(userID,postText.text,'none','text',privacy,id,Tagedusers).subscribe( res => {
+        this.remoteService.feedPosting(userID,postText.text,'none','text',privacy,id,Tagedusers ,this.type, this.typeId).subscribe( res => {
 
           // this.feeds.unshift(res.feed)
            this.post.text= ""
@@ -106,7 +109,7 @@ export class PostFeatursPage {
          this.navCtrl.pop()
        }
        else{
-      this.remoteService.feedPosting(userID,postText.text,'none','text',privacy,id).subscribe( res => {
+      this.remoteService.feedPosting(userID,postText.text,'none','text',privacy,id, 'no' ,this.type, this.typeId).subscribe( res => {
         // this.feeds.unshift(res.feed)
          this.post.text= ""
          //this.getFeedsList(this.userId);
@@ -217,7 +220,7 @@ export class PostFeatursPage {
         console.log(index)
       })
       console.log(Tagedusers)
-  
+
     }
 back()
 {

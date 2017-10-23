@@ -12,7 +12,7 @@
 					<a (click)="back()"><i class="fa fa-arrow-left"></i></a>
 				</div>
 				<div class="page_title text-center">
-					<h3>Events</h3>
+					<h3>{{'events' | translate}}</h3>
 				</div>
 				<div class="menu_btn text-right">
 					<a href="#"><i class="fa fa-bars" style="color:#fff;font-size:18px"></i></a>
@@ -32,11 +32,11 @@
 						<a class="p-0" data-toggle="tab" href="#tab-content-2">
 							<form>
 								<select id="selectType" [(ngModel)]="type" [ngModelOptions]="{ standalone :true}" (ngModelChange)="getEvents(this.type ,'all', this.search, userId, 1)">
-									<option value="upcoming">All Events</option>
-									<option value="invite">Invites</option>
-									<option value="me">Yours</option>
-									<option value="past">Past Events</option>
-                  <option value="birthdays">Birthdays</option>
+									<option value="upcoming">{{'all-events' | translate}}</option>
+									<option value="invite">{{'invites' | translate}}</option>
+									<option value="me">{{'yours' | translate}}</option>
+									<option value="past">{{'past-events' | translate}}</option>
+                  <option value="birthdays">{{'birthdays' | translate}}</option>
 								</select>
 							</form>
 						</a>
@@ -48,7 +48,7 @@
 					<div class="input-group">
 						<input type="text" class="form-control" [(ngModel)]="search" [ngModelOptions]="{ standalone :true}" placeholder="Search here ...">
 						<select id="selectCat" class="form-control" [(ngModel)]="category" [ngModelOptions]="{ standalone :true}" (ngModelChange)="getEvents(this.type,this.category,  '', userId, 1)">
-							<option *ngFor="let category of categories"  value="{{ category.id }}">{{ category.title }}</option>
+							<option *ngFor="let category of categories"  value="{{ category.id }}">{{ category.title | translate }}</option>
 						</select>
 						<div class="input-group-btn">
 							<button (click)="getEvents(this.type ,this.category, this.search, userId, 1)" type="submit" class="btn btn-default">
@@ -59,7 +59,7 @@
 				</form>
 				<div class="tab-content">
 					<div id="tab-content-1" class="tab-pane fade in active">
-            <div id="noEvents" style="display: none;" class="box-content alert alert-danger">No Events found here</div>
+            <div id="noEvents" style="display: none;" class="box-content alert alert-danger">{{'no-event-display' | translate}}</div>
 						<div class="row thumbnails">
 
 							<div class="col-xs-6" *ngFor="let event of events">
@@ -73,7 +73,7 @@
 							    </div>
 							</div>
 						</div>
-            <a id="more" (click)="getEvents(this.type ,this.category, this.search, userId, page + 1)" href="#" class="btn btn-default btn-block">See More</a>
+            <a id="more" (click)="getEvents(this.type ,this.category, this.search, userId, page + 1)" href="#" class="btn btn-default btn-block">{{'view-more' | translate}}</a>
 					</div>
 				</div>
 			</div>

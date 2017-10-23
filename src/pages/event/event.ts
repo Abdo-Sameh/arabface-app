@@ -41,9 +41,12 @@ export class EventPage {
   'edited':'',
   }
   hiddenPost
+  userAvatar
   feed = { 'feedid' :""}
   constructor(private socialSharing: SocialSharing, public navCtrl: NavController,public popOver : PopoverController  ,public toast:ToastController, public navParams: NavParams ,public alert:AlertController,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
+    this.userAvatar = "http://" + localStorage.getItem('userAvatar').slice(8,-1);
+
     this.event = navParams.get("event");
     this.isSaved(this.event.id);
     this.getFeedsList(this.userId)
@@ -274,21 +277,7 @@ export class EventPage {
 
   }
 
-  // count=1;
 
-  // setColor(btn)
-  // {
-  //     var property = document.getElementById(btn);
-  //     if (this.count == 0){
-  //         property.style.color = "gray"
-  //         this.count=1;
-  //     }
-  //     else{
-  //         property.style.color = "blue"
-  //         this.count=0;
-  //     }
-
-  // }
   edit() {
     $(document).on('click','.comment-edit',function(){
       $(this).parent().prev().find('.input-group').show();
@@ -467,7 +456,10 @@ export class EventPage {
   //   popover.present({
 
   //   });
-    this.navCtrl.push(PostFeatursPage)
+    this.navCtrl.push(PostFeatursPage,{
+      type: 'event',
+      type_id: this.event.id
+    })
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad EventPage');

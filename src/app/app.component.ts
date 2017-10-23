@@ -46,7 +46,7 @@ export class MyApp {
 
 
     constructor(public translate: TranslateService, public database:RemoteServiceProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen , public http :Http) {
-      translate.setDefaultLang('en');
+      translate.setDefaultLang('ar');
       this.platform.setDir('ltr',true);
       this.deviceLanguage = this.platform.lang();
 

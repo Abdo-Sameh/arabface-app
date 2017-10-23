@@ -31,10 +31,10 @@
 						<a class="p-0" data-toggle="tab" href="#">
 							<form>
 								<select [(ngModel)]="type" [ngModelOptions]="{ standalone :true}" (ngModelChange)="display(type)">
-									<option value="posts">Posts</option>
-                  <option value="events">Events</option>
-									<option value="pages">Pages</option>
-									<option value="groups">Groups</option>
+									<option value="posts">{{'posts' | translate}}</option>
+                  <option value="events">{{'events' | translate}}</option>
+									<option value="pages">{{'pages' | translate}}</option>
+									<option value="groups">{{'groups' | translate}}</option>
 								</select>
 							</form>
 						</a>
@@ -82,7 +82,7 @@
 						<div class="clearfix"></div>
 					</div>
 					<div class="feed-body">
-						<h3>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. <a href="#">See More ...</a></h3>
+						<h3>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. <a href="#">{{'view-more' | translate}} ...</a></h3>
 						<a href="#"><img src="images/post.jpg" alt=""></a>
 					</div>
 					<div class="feed-footer">
@@ -199,7 +199,7 @@
                 </div>
             </div>
           </div>
-          <a (click)="getSavedPages(page + 1)" href="#" class="btn btn-default btn-block">See More</a>
+          <a (click)="getSavedPages(page + 1)" href="#" class="btn btn-default btn-block">{{'view-more' | translate}}</a>
         </div>
 
         <!-- <div class="tab-content"> -->
@@ -217,7 +217,7 @@
 							    </div>
 							</div>
 						</div>
-            <a (click)="getSavedEvents(page + 1)" href="#" class="btn btn-default btn-block">See More</a>
+            <a (click)="getSavedEvents(page + 1)" href="#" class="btn btn-default btn-block">{{'view-more' | translate}}</a>
 					</div>
 				<!-- </div> -->
         <div class="tab-pane" *ngIf="type == 'groups'">
@@ -235,7 +235,7 @@
                 </div>
             </div>
           </div>
-          <a (click)="getSavedGroups(page + 1)" href="#" class="btn btn-default btn-block">See More</a>
+          <a (click)="getSavedGroups(page + 1)" href="#" class="btn btn-default btn-block">{{'view-more' | translate}}</a>
         </div>
 
 			</div>
