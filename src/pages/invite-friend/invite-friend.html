@@ -12,7 +12,7 @@
 					<a (click)="back()"><i class="fa fa-arrow-left"></i></a>
 				</div>
 				<div class="page_title text-center">
-					<h3>Invite Friends</h3>
+					<h3>{{'invite-friends' | translate}}</h3>
 				</div>
 				<div class="menu_btn text-right">
 					<a href="#"><i class="fa fa-bars" style="color:#fff;font-size:18px"></i></a>
@@ -48,11 +48,11 @@
 						</div>
             <div *ngIf="page">
               <button *ngIf="friend.invited == true" type="submit" class="fa fa-check btn btn-theme pull-right">Invited</button>
-              <button *ngIf="friend.invited == false" (click)="inviteFriendTolikepage(friend.id, i)" type="submit" class="btn btn-theme pull-right">Invite</button>
+              <button *ngIf="friend.invited == false" (click)="inviteFriendTolikepage(friend.id, i)" type="submit" class="btn btn-theme pull-right">{{'send-invite' | translate}}</button>
             </div>
             <div *ngIf="event">
               <button *ngIf="friend.invited == true" type="submit" class="fa fa-check btn btn-theme pull-right">Invited</button>
-              <button *ngIf="friend.invited == false" (click)="inviteFriendToEvent(friend.id, i)" type="submit" class="btn btn-theme pull-right">Invite</button>
+              <button *ngIf="friend.invited == false" (click)="inviteFriendToEvent(friend.id, i)" type="submit" class="btn btn-theme pull-right">{{'send-invite' | translate}}</button>
             </div>
             <div *ngIf="group">
               <button *ngIf="friend.added == true" type="submit" class="fa fa-check btn btn-theme pull-right">Added</button>

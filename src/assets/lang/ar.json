@@ -1490,6 +1490,8 @@
 
 	"posts": "المشاركات",
 
+	"comment" :"تعليق",
+
 	"join-group": "إنضم للمجموعة",
 
 	"leave-group": "غادر المجموعة",
@@ -2067,6 +2069,16 @@
 	"save-post": "حفظ",
 
 	"unsave-post": "Unsave",
+
+	"unsave-event" : "الغاء الحفظ",
+
+	"All Categories" : "جميع الفئات",
+
+	"Wedding" : "حفل زفاف",
+
+	"Outing" : "نزهة",
+
+	"Party" : "حفلة",
 
 	"unsave-group" : "ازالة الحفظ",
 
@@ -2961,6 +2973,8 @@
 	"invite-by-email-desc": "أدخل عنوان بريد صديقك مفصولة بفواصل (،)",
 
 	"send-invites": "إرسال الدعوات",
+
+	"send-invite" : "ارسال دعوة",
 
 	"invite-mail-sent": "تم ارسال دعوة الإلكتروني بنجاح",
 
