@@ -11,6 +11,8 @@ import { PhotosPage} from '../photos/photos'
 import {FriendProfilePage} from '../friend-profile/friend-profile'
 import {DisplayPostPage} from '../display-post/display-post'
 import {PostFeatursPage} from '../post-featurs/post-featurs'
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
 
 // import { Camera, CameraOptions } from '@ionic-native/camera';
 // import { FileTransfer, FileUploadOptions, FileTransferObject  } from '@ionic-native/file-transfer';
@@ -28,8 +30,9 @@ import {PostFeatursPage} from '../post-featurs/post-featurs'
 })
 export class ProfilePage {
     userData = [];
-    userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
 
+    userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
+    captureDataUrl:any;
     profileInfo = {
       'online_time' : '',
       "gender" : '',
@@ -59,7 +62,6 @@ export class ProfilePage {
     offset
     limit
 
-
     post ={ 'text' : ""}
     comment={
     'comment' : '',
@@ -68,7 +70,7 @@ export class ProfilePage {
     }
     hiddenPost
     feed = { 'feedid' :""}
-  constructor(public camera: Camera, public navCtrl: NavController, public navParams: NavParams,public alert :AlertController,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider,  public toast: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
+  constructor(private transfer: FileTransfer, private file: File, public camera: Camera, public navCtrl: NavController, public navParams: NavParams,public alert :AlertController,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider,  public toast: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
     let data = navParams.get('userData');
     console.log()
     this.limit = 4;
@@ -79,6 +81,7 @@ export class ProfilePage {
         this.getProfileData(this.userId, this.userId);
         this.getFeedsList(this.userId)
         this.getPhotsFromProvider(this.userID);
+
   }
 
   ionViewDidLoad() {
@@ -407,23 +410,129 @@ replyOnComment(postindex,commentindex,postOwner,commentID,whoCommented=this.user
 
 
     // }
-    changeProfilePicture(userid){
-      const options: CameraOptions = {
-        quality: 100,
-        destinationType: this.camera.DestinationType.DATA_URL,
+
+
+    upload() {
+      const camOptions: CameraOptions = {
+        sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+        destinationType: this.camera.DestinationType.FILE_URI,
         encodingType: this.camera.EncodingType.JPEG,
         mediaType: this.camera.MediaType.PICTURE
       }
-      this.camera.getPicture(options).then((imageData) => {
+      const fileTransfer: FileTransferObject = this.transfer.create();
+this.camera.getPicture(camOptions).then((imageData) => {
+      let options: FileUploadOptions = {
+         fileKey: 'avatar',
+         fileName: 'name.png',
+         headers: {
+           'Content-Type': 'multipart/form-data'
+         },
+         params:{
+           'userid': this.userId,
+           'avatar' : imageData
+         }
+      }
+
+
+        alert(imageData);
+
+
+      fileTransfer.upload(imageData, 'http://192.168.1.252/arabface/api/14789632/profile/change/avatar', options)
+       .then((data) => {
+         alert(data.response);
+         alert(data.bytesSent);
+
+       }, (err) => {
+         alert(err);
+       })
+
+       });
+    }
+
+    changeProfilePicture(event){
+      // var files = (<HTMLInputElement>document.getElementById("profile-upload")).files;
+      //
+      // for (var i = 0; i < files.length; i++)
+      // {
+      //  console.log(files[i]);
+      // }
+      //
+      //
+      //
+      // let options: FileUploadOptions = {
+      //   fileKey: 'file',
+      //   fileName: 'tmpTestfile.jpg',
+      //   chunkedMode: false,
+      //   mimeType: "multipart/form-data",
+      //   headers:  {
+      //     'Content-Type': 'application/json',
+      //     'Auth': this.localData.getApiKey()
+      //   }
+      // };
+
+      // const fileTransfer: TransferObject = this.transfer.create();
+      // Use the FileTransfer to upload the image
+      // return fileTransfer.upload(imageData, '/api/image/', options)
+
+      // const options: CameraOptions = {
+      //   sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      //   destinationType: this.camera.DestinationType.DATA_URL,
+      //   encodingType: this.camera.EncodingType.JPEG,
+      //   mediaType: this.camera.MediaType.PICTURE
+      // }
+      // console.log($("#profile-upload").file);
+      // console.log(this.picture.path);
+      //this.camera.getPicture(options).then((imageData) => {
        // imageData is either a base64 encoded string or a file URI
        // If it's base64:
-       let base64Image = 'data:image/jpeg;base64,' + imageData;
-       this.remoteService.changeProfilePicture(this.userId, base64Image).subscribe(res =>{console.log("success")});
-      }, (err) => {
-       // Handle error
-      });
+      //  console.log(this.picture.path);
+      // let base64Image = 'data:image/jpeg;base64,' + "assets/images/avatar.png";
+      //alert(imageData);
+      // console.log(base64Image);
+      //  this.remoteService.changeProfilePicture(this.userId, files[0]).subscribe(res =>{
+      //    console.log("success")
+      //    console.log(res);
+      //  });
+      // }, (err) => {
+      //  // Handle error
+      // });
 
     }
+  //   openCamera() {
+  //     const cameraOptions: CameraOptions = {
+  //      targetHeight:150,
+  //      targetWidth:150,
+  //      quality: 50,
+  //      destinationType: this.camera.DestinationType.DATA_URL,
+  //      encodingType: this.camera.EncodingType.JPEG,
+  //      mediaType: this.camera.MediaType.PICTURE,
+  //     };
+   //
+  //     this.camera.getPicture(cameraOptions).then((imageData) => {
+  //       this.captureDataUrl = imageData;
+  //       console.log("CaptureDataUrl:" + this.captureDataUrl);
+  //       this.upload();
+  //     }, (err) => {
+  //   });
+  //  }
+   //
+  //  upload(){
+  //   //  var profildata={
+  //   //    "name"  :'HR PATEL',
+  //   //    "image" : this.captureDataUrl
+  //   //  }
+   //
+  //    this.remoteService.changeProfilePicture(this.userId, this.captureDataUrl).subscribe(
+  //     response => {
+  //       alert(this.captureDataUrl);
+  //       alert("user add sucessfully");
+  //       alert(response.status);
+  //     },
+  //     err => {
+  //     alert("err...."+err );
+  //    }
+  //   );
+  //  }
 
 
 

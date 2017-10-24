@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { RemoteServiceProvider} from '../providers/remote-service/remote-service';
-
+import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 import 'rxjs/add/operator/map';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -22,6 +22,7 @@ import { ForumsPage } from '../pages/forums/forums';
 import { TrendingPage } from '../pages/trending/trending';
 import { ContactUsPage } from "../pages/contact-us/contact-us";
 import { GiftsPage } from "../pages/gifts/gifts";
+import { Globalization } from '@ionic-native/globalization';
 //import { TabsPage } from '../pages/tabs/tabs';
 
 import xml2js from 'xml2js';
@@ -45,10 +46,9 @@ export class MyApp {
     pages: Array<{title: string, component: any , icon: string}>;
 
 
-    constructor(public translate: TranslateService, public database:RemoteServiceProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen , public http :Http) {
-      translate.setDefaultLang('ar');
-      this.platform.setDir('ltr',true);
-      this.deviceLanguage = this.platform.lang();
+    constructor(public globalization: Globalization, public launchNavigator: LaunchNavigator, public translate: TranslateService, public database:RemoteServiceProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen , public http :Http) {
+      // translate.setDefaultLang('ar');
+
 
       firebase = this.database ;
       //this.loadXML('ar')
@@ -80,6 +80,15 @@ export class MyApp {
   }
   initializeApp() {
     this.platform.ready().then(() => {
+      this.globalization.getPreferredLanguage()
+      .then( res => {
+        this.translate.use((res.value).split("-")[0]);
+        this.translate.setDefaultLang((res.value).split("-")[0]);
+        this.deviceLanguage = this.platform.lang();
+
+      });
+      console.log(this.launchNavigator);
+
 
       this.statusBar.styleDefault();
       this.splashScreen.hide();

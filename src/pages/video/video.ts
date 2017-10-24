@@ -4,7 +4,7 @@ import { RemoteServiceProvider} from './../../providers/remote-service/remote-se
 import { VideosPage } from '../videos/videos';
 import { EditVideoPage } from '../edit-video/edit-video';
 import { SocialSharing } from '@ionic-native/social-sharing';
-
+import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
 /**
  * Generated class for the VideoPage page.
  *
@@ -20,7 +20,7 @@ export class VideoPage {
 
   video
   userId
-  constructor(public alert:AlertController, private socialSharing: SocialSharing, public navCtrl: NavController, public navParams: NavParams, public remoteService :RemoteServiceProvider, public toastCtrl :ToastController) {
+  constructor(private youtube: YoutubeVideoPlayer, public alert:AlertController, private socialSharing: SocialSharing, public navCtrl: NavController, public navParams: NavParams, public remoteService :RemoteServiceProvider, public toastCtrl :ToastController) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.video = this.navParams.get('video');
     // this.video.code = this.video.code.substr(1);
