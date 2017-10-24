@@ -296,33 +296,31 @@ GoToProfile(id,userId)
           //   "userData" : res
           // })
         }else{
-          this.navCtrl.setRoot(FriendProfilePage, {
-            "userData" : res
-          });
+            this.remoteService.isBlocked(res.id, this.userId).subscribe(res2 => {
+              if(res2.status == 1){
+                this.navCtrl.setRoot(FriendProfilePage, {
+                  "userData" : res,
+                  "blocked" : true
+                });
+              }else{
+                this.navCtrl.setRoot(FriendProfilePage, {
+                  "userData" : res,
+                  "blocked" : false
+                });
+              }
+            });
+          
+
           // this.navCtrl.push(FriendProfilePage,{
           //   "userData" : res
           // })
         }
 
   });
-
 }
 
-// count=1;
 
-// setColor(btn)
-// {
-//     var property = document.getElementById(btn);
-//     if (this.count == 0){
-//         property.style.color = "gray"
-//         this.count=1;
-//     }
-//     else{
-//         property.style.color = "blue"
-//         this.count=0;
-//     }
 
-// }
 edit() {
   $(document).on('click','.comment-edit',function(){
     $(this).parent().prev().find('.input-group').show();

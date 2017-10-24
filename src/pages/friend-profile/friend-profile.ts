@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams ,LoadingController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams ,LoadingController, ToastController, AlertController} from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
-import {ProfilePage} from '../profile/profile'
-import {TabsPage} from '../tabs/tabs';
-import { PhotosPage} from '../photos/photos'
+import { ProfilePage } from '../profile/profile'
+import { TabsPage } from '../tabs/tabs';
+import { PhotosPage } from '../photos/photos'
+import { NotFound_404Page } from '../not-found-404/not-found-404';
 
 /**
  * Generated class for the FriendProfilePage page.
@@ -32,8 +33,13 @@ export class FriendProfilePage {
   myFriendsList
   cover
   profileInfo
-  constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider) {
+  blocked = false
+  constructor(public alert:AlertController, public navCtrl: NavController, public toastCtrl: ToastController,public navParams: NavParams,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider) {
     let data = navParams.get('userData');
+    this.blocked = navParams.get('blocked');
+    if(this.blocked){
+      navCtrl.push(NotFound_404Page);
+    }
       this.friendslist = [];
       this.myFriendsList = [];
       this.profileInfo = {
@@ -45,9 +51,8 @@ export class FriendProfilePage {
         "state" : '',
         "country" : ''
       }
-      this.userID= data.id;
+      this.userID = data.id;
       console.log(data)
-      // this.cover
       console.log(this.userID , this.userId);
       this.getProfileData(this.userID, this.userId);
       this.getProfilePosts(this.userID)
@@ -165,8 +170,7 @@ export class FriendProfilePage {
       });
 
   }
-  goToPhotos()
-  {
+  goToPhotos() {
     this.navCtrl.push(PhotosPage)
   }
 
@@ -189,9 +193,9 @@ export class FriendProfilePage {
         content: "Loading",
       });
       loading.present()
-      this.remoteService.profilePosts(userid).subscribe((res) => {           loading.dismiss();
+      this.remoteService.profilePosts(userid).subscribe((res) => { loading.dismiss();
 
-        for(let i =0 ; i < res.length;i++)
+        for(let i = 0 ; i < res.length; i++)
           {
             let newFeedID=res[i].id
             let newFeed =res[i].answers
@@ -206,7 +210,7 @@ export class FriendProfilePage {
 
     }
 
-    addfriend(friendId,index,userid=this.userId)
+    addfriend(friendId, index, userid = this.userId)
     {
 
       this.remoteService.addFriend(userid,friendId).subscribe(res => {
@@ -217,56 +221,87 @@ export class FriendProfilePage {
 
       })
     }
-    likeFeed(userid =this.userId,feedid)
-    {
-    //   "use strict";
-    //   $(".feed-box").on("click", function() {
-    //     console.info($(this).index())
-    // });
+    likeFeed(userid = this.userId, feedid) {
+
       this.remoteService.likeFeedApiCall(this.userId,feedid).subscribe(res =>{
         this.likes = res;
-        for(let i =0 ; i<this.posts.length ;i++)
+        for(let i = 0 ; i < this.posts.length; i++)
           {
               if(this.posts[i].id == feedid)
               {
-                this.posts[i].like_count=this.likes.likes;
+                this.posts[i].like_count = this.likes.likes;
                 break
               }
           }
-
-
       })
-
-
     }
 
-
-
-
-
-  count=1;
-
-  setColor(btn)
-  {
-    var property = document.getElementById(btn);
-    if (this.count == 0){
-        property.style.color = "gray"
-        this.count=1;
-    }
-    else{
-        property.style.color = "blue"
-        this.count=0;
-    }
-
-  }
-
-  back()
-  {
+  back() {
     this.navCtrl.pop();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FriendProfilePage');
+  }
+
+
+
+  blockUser(){
+    this.remoteService.blockUser(this.userID, this.userId).subscribe(res => {
+      if(res.status == 1){
+        let toast = this.toastCtrl.create({
+          message: 'User blocked successfully',
+          duration: 2000,
+          position: 'top'
+        });
+        toast.present();
+        this.navCtrl.pop();
+      }
+    });
+  }
+
+  reportUser(){
+    let alert = this.alert.create({
+      title: 'Report',
+      inputs: [
+      {
+        name: 'reason',
+        placeholder: 'Reason ...'
+      }
+    ],
+      buttons: [
+        {
+          text: 'Send',
+          handler: data => {
+            this.remoteService.reportItem("profile", this.userData['url'], data.reason, this.userId).subscribe(res => {
+              console.log(this.userData['url']);
+              if(res.status == "1"){
+                let toast = this.toastCtrl.create({
+                  message: 'Report sent successfully',
+                  duration: 2000,
+                  position: 'top'
+                });
+                toast.present();
+              }else{
+                let toast = this.toastCtrl.create({
+                  message: 'You have reported this profile before',
+                  duration: 2000,
+                  position: 'top'
+                });
+                toast.present();
+              }
+            });
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
 }

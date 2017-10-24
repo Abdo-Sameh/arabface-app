@@ -31,9 +31,8 @@
       <div class="dropdown" style="margin-top: -50px; !important">
         <a href="#" class="btn btn-default btn-sm" data-toggle="dropdown"><span class="fa fa-bars"></span></a>
         <ul class="dropdown-menu dropdown-menu-right">
-          <li><a (click)="editVideoPage()" href="#"style="color: #5c0632;" ><i class="fa fa-edit"></i>&nbsp; Edit</a></li>
-          <li><a (click)="deleteVideo(video.id)" href="#" style="color: #5c0632;" ><i class="fa fa-trash"></i>&nbsp; Delete</a></li>
-          <li><a (click)="reportVideo()" href="#" style="color: #5c0632;"><i class="fa fa-flag"></i>&nbsp; Report</a></li>
+          <li><a (click)="blockUser()" href="#" style="color: #5c0632;" ><i class="fa fa-ban"></i>&nbsp; {{'Block' | translate}}</a></li>
+          <li><a (click)="reportUser()" href="#" style="color: #5c0632;"><i class="fa fa-flag"></i>&nbsp; {{'report' | translate}}</a></li>
           <!-- <li><a href="#">Save</a></li> -->
         </ul>
       </div>
