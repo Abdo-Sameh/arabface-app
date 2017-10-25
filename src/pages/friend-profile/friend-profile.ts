@@ -34,6 +34,14 @@ export class FriendProfilePage {
   cover
   profileInfo
   blocked = false
+  post ={ 'text' : ""}
+  comment={
+  'comment' : '',
+  'reply' :'',
+  'edited':'',
+  }
+  hiddenPost
+  feed = { 'feedid' :""}
   constructor(public alert:AlertController, public navCtrl: NavController, public toastCtrl: ToastController,public navParams: NavParams,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider) {
     let data = navParams.get('userData');
     this.blocked = navParams.get('blocked');
@@ -55,7 +63,7 @@ export class FriendProfilePage {
       console.log(data)
       console.log(this.userID , this.userId);
       this.getProfileData(this.userID, this.userId);
-      this.getProfilePosts(this.userID)
+      this.getFeedsList(this.userID)
   }
   getFollowing(userId){
     if(this.userID == null){
@@ -128,9 +136,19 @@ export class FriendProfilePage {
               "userData" : res
             })
           }else{
-            this.navCtrl.push(FriendProfilePage,{
-              "userData" : res
-            })
+            this.remoteService.isBlocked(res.id, this.userId).subscribe(res2 => {
+              if(res2.status == 1){
+                this.navCtrl.push(NotFound_404Page, {
+                  "userData" : res,
+                  "blocked" : true
+                });
+              }else{
+                this.navCtrl.push(FriendProfilePage, {
+                  "userData" : res,
+                  "blocked" : false
+                });
+              }
+            });
           }
 
     });
@@ -174,8 +192,7 @@ export class FriendProfilePage {
     this.navCtrl.push(PhotosPage)
   }
 
-  getPhotsFromProvider (userid)
-  {
+  getPhotsFromProvider (userid) {
     if(this.userID == null){
       userid = this.userId;
     }else{
@@ -187,53 +204,138 @@ export class FriendProfilePage {
       this.remoteService.userPhotosAlbumOnProfile(userid).subscribe((res) => { loading.dismiss();this.photos = res})
   }
 
-  getProfilePosts(userid)
-    {
-      let loading = this.loadingCtrl.create({
-        content: "Loading",
-      });
-      loading.present()
-      this.remoteService.profilePosts(userid).subscribe((res) => { loading.dismiss();
+  getFeedsList(id,more=false,GotPosts= 30)
+  {
+    let loading = this.loadingCtrl.create({
+      content: "",
+      spinner: "bubbles",
+      showBackdrop: true,
+    });
+    loading.present()
+        this.remoteService.feedsListApiCall(id,id,'timeline',10).subscribe(res =>{
 
-        for(let i = 0 ; i < res.length; i++)
+          for(let i =0 ; i < res.length;i++)
           {
-            let newFeedID=res[i].id
-            let newFeed =res[i].answers
+            let newFeedID = res[i].id
+            let newFeed = res[i].answers
+            this.remoteService.loadComments(newFeedID).subscribe(res2 =>{newFeed.unshift(res2)
+              for(let g = 0 ;g < newFeed[0].length; g++)
+                {
+                  this.remoteService.loadReplies(newFeed[0][g].id).subscribe(res3 => {
+                    newFeed[0][g]['repliesContent']=res3
 
-            this.remoteService.loadProfileComments(newFeedID).subscribe(res2 =>{newFeed.push(res2); })
+                  });
+
+                }
+              });
+
           }
           this.posts=res
+
+          loading.dismiss();
           console.log(this.posts)
+        });
+  }
 
+  loadMoreFeeds(feedlength) {
+    console.log(feedlength)
+    this.getFeedsList(this.userId, true, feedlength)
+  }
 
-      })
+likeFeed(userid = this.userId, feedid, postIndex) {
+  this.remoteService.likeFeedApiCall(this.userId, feedid).subscribe(res =>{
+        this.posts[postIndex].like_count = res.likes;
+        this.posts[postIndex].has_like = res.has_like;
+  })
+}
 
+likeComment(userid =this.userId,commentID,postIndex,commentIndex) {
+  this.remoteService.likeCommentApiCall(this.userId, commentID).subscribe(res =>{
+    this.likes = res;
+    for(let i = 0 ; i < this.posts[postIndex].answers[0].length; i++)
+      {
+        if(this.posts[postIndex].answers[0][commentIndex].id == commentID)
+        {
+          this.posts[postIndex].answers[0][commentIndex].like_count = this.likes.likes;
+          this.posts[postIndex].answers[0][commentIndex].has_like = this.likes.has_like;
+          break
+        }
+      }
+  })
+}
+likeReply(userid =this.userId,replyID,postIndex,commentIndex,replyIndex) {
+  this.remoteService.likeCommentApiCall(this.userId,replyID).subscribe(res =>{
+    for(let i =0 ; i<this.posts[postIndex].answers[0][commentIndex].repliesContent.length ;i++)
+      {
+          if(this.posts[postIndex].answers[0][commentIndex].repliesContent[i].id == replyID)
+          {
+            this.posts[postIndex].answers[0][commentIndex].repliesContent[i].like_count=res.likes;
+            this.posts[postIndex].answers[0][commentIndex].repliesContent[i].has_like=res.has_like;
+            break
+          }
+      }
+  })
+}
+
+commentOnFeed(postOwner,postID,whoCommented=this.userId,comment=this.comment.comment) {
+  let loading = this.loadingCtrl.create({
+    content: "",
+    spinner: "bubbles"
+  });
+  loading.present()
+  this.remoteService.commentOnFeeds(postOwner,postID,whoCommented,comment).subscribe(res => {
+    res.postid = postID
+    for( let x in this.posts) {
+        if(this.posts[x].id == res.postid) {
+                this.posts[x].answers[0].push(res)
+        }
     }
+      this.remoteService.loadComments(postID).subscribe(res2 =>{ });
+      this.comment.comment = ''
+      loading.dismiss()
+  })
+}
 
-    addfriend(friendId, index, userid = this.userId)
-    {
+replyOnComment(postindex,commentindex,postOwner,commentID,whoCommented=this.userId,comment=this.comment.reply)
+{
+  let loading = this.loadingCtrl.create({
+    content: "",
+    spinner: "bubbles",  });
 
+  loading.present()
+  this.remoteService.ReplyOnComment(postOwner,commentID,whoCommented,comment).subscribe(res => {
+    res.postid = commentID
+    this.posts[postindex].answers[0][commentindex].repliesContent.push(res)
+      this.remoteService.loadReplies(commentID).subscribe(res2 =>{ });
+
+      this.comment.reply = ''
+      loading.dismiss()
+  })
+
+}
+
+    addfriend(friendId, index, userid = this.userId) {
       this.remoteService.addFriend(userid,friendId).subscribe(res => {
         console.log(res)
         if(res.status == 1) {
-          this.friendslist[index].friend_status = 1;
+          if(index == -1)
+            this.userData['friend_status'] = 1;
+          else
+            this.friendslist[index].friend_status = 1;
         }
 
       })
     }
-    likeFeed(userid = this.userId, feedid) {
 
-      this.remoteService.likeFeedApiCall(this.userId,feedid).subscribe(res =>{
-        this.likes = res;
-        for(let i = 0 ; i < this.posts.length; i++)
-          {
-              if(this.posts[i].id == feedid)
-              {
-                this.posts[i].like_count = this.likes.likes;
-                break
-              }
-          }
-      })
+    follow(type){
+      this.remoteService.follow(this.userId, this.userData['id'], type).subscribe(res => {
+        if(res.status == 1){
+          if(type == "follow")
+            this.userData['follow_status'] = true;
+          else
+            this.userData['follow_status'] = false;
+        }
+      });
     }
 
   back() {
@@ -243,8 +345,6 @@ export class FriendProfilePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad FriendProfilePage');
   }
-
-
 
   blockUser(){
     this.remoteService.blockUser(this.userID, this.userId).subscribe(res => {
@@ -295,6 +395,57 @@ export class FriendProfilePage {
         },
         {
           text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+  DeleteFriendrequest() {
+    let alert = this.alert.create({
+      title: 'Friend Request',
+      message: 'Do you want to cancel this friend request?',
+      buttons: [
+        {
+          text: 'Yes',
+          handler: data => {
+            this.remoteService.deleteFriendRequest(this.userID, this.userId).subscribe(res => {
+              if(res.status == 1) {
+                  this.userData['friend_status'] = '0';
+              }
+            })
+          }
+        },
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    alert.present();
+
+  }
+  deleteFriend(){
+    let alert = this.alert.create({
+      title: 'Remove Friend',
+      message: 'Do you want to remove this friend?',
+      buttons: [
+        {
+          text: 'Yes',
+          handler: data => {
+            this.remoteService.deleteFriendRequest(this.userID, this.userId).subscribe(res => {
+              if(res.status == 1) {
+                  this.userData['friend_status'] = '0';
+              }
+            })
+          }
+        },
+        {
+          text: 'No',
           role: 'cancel',
           handler: () => {
           }

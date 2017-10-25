@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController, Platform, ToastController ,AlertController,LoadingController} from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
-//import { File } from '@ionic-native/file';
-//import { Transfer, TransferObject } from '@ionic-native/transfer';
-//import { FilePath } from '@ionic-native/file-path';
-//import { Camera } from '@ionic-native/camera';
+import { NotFound_404Page } from '../not-found-404/not-found-404';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import {TabsPage} from '../tabs/tabs';
 import { PhotosPage} from '../photos/photos'
@@ -81,7 +78,6 @@ export class ProfilePage {
         this.getProfileData(this.userId, this.userId);
         this.getFeedsList(this.userId)
         this.getPhotsFromProvider(this.userID);
-
   }
 
   ionViewDidLoad() {
@@ -123,33 +119,22 @@ export class ProfilePage {
           }
           loading.dismiss();
           console.log(this.feeds)
-
         });
-
   }
 
-  loadMoreFeeds(feedlength)
-  {
+  loadMoreFeeds(feedlength) {
     console.log(feedlength)
     this.getFeedsList(this.userId,true,feedlength)
   }
 
-likeFeed(userid =this.userId,feedid,postIndex)
-{
-
+likeFeed(userid =this.userId,feedid,postIndex) {
   this.remoteService.likeFeedApiCall(this.userId,feedid).subscribe(res =>{
-
-            this.feeds[postIndex].like_count=res.likes;
-            this.feeds[postIndex].has_like=res.has_like;
+        this.feeds[postIndex].like_count=res.likes;
+        this.feeds[postIndex].has_like=res.has_like;
   })
-
-
 }
 
-likeComment(userid =this.userId,commentID,postIndex,commentIndex)
-{
-
-
+likeComment(userid =this.userId,commentID,postIndex,commentIndex) {
   this.remoteService.likeCommentApiCall(this.userId,commentID).subscribe(res =>{
     this.likes = res;
     for(let i =0 ; i<this.feeds[postIndex].answers[0].length ;i++)
@@ -158,15 +143,10 @@ likeComment(userid =this.userId,commentID,postIndex,commentIndex)
         {
           this.feeds[postIndex].answers[0][commentIndex].like_count=this.likes.likes;
           this.feeds[postIndex].answers[0][commentIndex].has_like=this.likes.has_like;
-
           break
         }
       }
-
-
   })
-
-
 }
 likeReply(userid =this.userId,replyID,postIndex,commentIndex,replyIndex)
 {
@@ -329,9 +309,19 @@ replyOnComment(postindex,commentindex,postOwner,commentID,whoCommented=this.user
               "userData" : res
             })
           }else{
-            this.navCtrl.push(FriendProfilePage,{
-              "userData" : res
-            })
+            this.remoteService.isBlocked(res.id, this.userId).subscribe(res2 => {
+              if(res2.status == 1){
+                this.navCtrl.push(NotFound_404Page, {
+                  "userData" : res,
+                  "blocked" : true
+                });
+              }else{
+                this.navCtrl.push(FriendProfilePage, {
+                  "userData" : res,
+                  "blocked" : false
+                });
+              }
+            });
           }
 
     });
@@ -830,12 +820,7 @@ presentToast(msg) {
      $(this).css('background-color','grey')
    }
 
-  goToPost()
-   {
-  //   let popover = this.popOver.create(PostFeatursPage, {}, {cssClass: 'contpopover'});
-  //   popover.present({
-
-  //   });
+  goToPost() {
     this.navCtrl.push(PostFeatursPage)
   }
 }

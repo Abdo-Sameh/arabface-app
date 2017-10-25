@@ -80,8 +80,8 @@ export class MyApp {
   }
   initializeApp() {
     this.platform.ready().then(() => {
-      this.translate.setDefaultLang("ar");
-      
+      this.translate.setDefaultLang("en");
+
       // this.globalization.getPreferredLanguage()
       // .then( res => {
       //   this.translate.use((res.value).split("-")[0]);

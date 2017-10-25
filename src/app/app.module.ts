@@ -118,7 +118,8 @@ import { NotFound_404Page } from '../pages/not-found-404/not-found-404';
     InviteFriendPage,
     SavedPage,
     CreateAlbumPage,
-    PhotoselectionPage, CreateEventPage, EditEventPage, EventPage
+    PhotoselectionPage, CreateEventPage, EditEventPage, EventPage,
+    NotFound_404Page
   ],
   imports: [
 BrowserModule , IonicModule.forRoot(MyApp), HttpModule, TranslateModule.forRoot({
@@ -173,7 +174,8 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule, TranslateModule.forRoot(
     MembersPage,
     CreateAlbumPage,
     InviteFriendPage,
-    PhotoselectionPage, CreateEventPage, EditEventPage, EventPage
+    PhotoselectionPage, CreateEventPage, EditEventPage, EventPage,
+    NotFound_404Page
   ],
   providers: [
     StatusBar,

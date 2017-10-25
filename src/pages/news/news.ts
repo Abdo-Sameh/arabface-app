@@ -6,8 +6,8 @@ import { ProfilePage } from '../profile/profile';
 import { PostFeatursPage } from '../post-featurs/post-featurs'
 import { FriendProfilePage } from '../friend-profile/friend-profile'
 import { DisplayPostPage } from '../display-post/display-post'
-
-import {MyApp} from '../../app/app.component';
+import { NotFound_404Page } from '../not-found-404/not-found-404';
+import { MyApp } from '../../app/app.component';
 //import $ from "jquery";
 
 /**
@@ -298,24 +298,18 @@ GoToProfile(id,userId)
         }else{
             this.remoteService.isBlocked(res.id, this.userId).subscribe(res2 => {
               if(res2.status == 1){
-                this.navCtrl.setRoot(FriendProfilePage, {
+                this.navCtrl.push(NotFound_404Page, {
                   "userData" : res,
                   "blocked" : true
                 });
               }else{
-                this.navCtrl.setRoot(FriendProfilePage, {
+                this.navCtrl.push(FriendProfilePage, {
                   "userData" : res,
                   "blocked" : false
                 });
               }
             });
-          
-
-          // this.navCtrl.push(FriendProfilePage,{
-          //   "userData" : res
-          // })
         }
-
   });
 }
 
@@ -510,12 +504,14 @@ reply()
    $(this).css('background-color','grey')
  }
 
-goToPost()
- {
-//   let popover = this.popOver.create(PostFeatursPage, {}, {cssClass: 'contpopover'});
-//   popover.present({
-
-//   });
-  this.navCtrl.push(PostFeatursPage)
-}
+  goToPost() {
+    this.navCtrl.push(PostFeatursPage, {
+      type: 'feed',
+      type_id: ''
+    });
+  }
+  showComments(id){
+    $('#' + id).show();
+    console.log('#' + id);
+  }
 }
