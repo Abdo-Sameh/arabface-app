@@ -82,8 +82,8 @@
                     </div>
                     <div class="feed-action flex-space-around">
                       <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
-                      <a href="#" *ngIf="feed.has_like" style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>
-                                  <a href="#"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
+                      <a href="#" *ngIf="feed.has_like" style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
+                      <a href="#" (click)="showComments(feed.id)"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
                       <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
                     </div>
 
@@ -91,7 +91,7 @@
 
 
                 <div class="clearfix"></div>
-                <div class="comment-list" >
+                <div id="{{feed.id}}" class="comment-list" style="display:none;">
                     <div class="comment" *ngFor="let comments of feed.answers[0];let commentIndex=index">
                         <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
                         <div class="feed-title">
@@ -116,7 +116,7 @@
 
 
                                     <span class="mr-10"*ngIf="comments.has_like ==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}}{{'like' | translate}}</span>
-                                    <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
+                                    <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
                                         <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
                                     <span class="mr-10">-</span>
                                     <span>{{comments.time}}</span>
@@ -140,7 +140,7 @@
                               <div class="comment-action">
                                 <div class="pull-left">
                                   <a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}}{{'like' | translate}}</a>
-                                  <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                    <span class="mr-10">-</span>
+                                  <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} {{'like' | translate}}</a>                                    <span class="mr-10">-</span>
                                   <span>{{replies.time}}</span>
 
                                 </div>
@@ -252,12 +252,12 @@
                       </div>
                       <div class="feed-action flex-space-around">
                         <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
-                        <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>
-                                                 <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+                        <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
+                                                 <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> Comment</a>
                         <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
                       </div>
                   <div class="clearfix"></div>
-                  <div class="comment-list" >
+                  <div id="{{feed.id}}" class="comment-list"  style="display:none;" >
                       <div class="comment" *ngFor="let comments of feed.answers[0];let commentIndex=index">
                           <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
                           <div class="feed-title">
@@ -282,7 +282,7 @@
 
 
                                       <span class="mr-10"*ngIf="comments.has_like ==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}}{{'like' | translate}}</span>
-                                      <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
+                                      <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
                                           <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
                                       <span class="mr-10">-</span>
                                       <span>{{comments.time}}</span>
@@ -306,7 +306,7 @@
                                 <div class="comment-action">
                                   <div class="pull-left">
                                     <a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}}{{'like' | translate}}</a>
-                                    <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                    <span class="mr-10">-</span>
+                                    <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} {{'like' | translate}}</a>                                    <span class="mr-10">-</span>
                                     <span>{{replies.time}}</span>
 
                                   </div>
@@ -429,12 +429,12 @@
                       </div>
                       <div class="feed-action flex-space-around">
                         <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
-                        <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>
-                                                 <a href="#"><i class="fa fa-commenting"></i> Comment </a>
+                        <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
+                                                 <a href="#" (click)="showComments(feed.id)"><i class="fa fa-commenting"></i> Comment </a>
                         <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
                       </div>
                   <div class="clearfix"></div>
-                  <div class="comment-list" >
+                  <div id="{{feed.id}}" class="comment-list"  style="display:none;">
                       <div class="comment" *ngFor="let comments of feed.answers[0];let commentIndex=index">
                           <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
                           <div class="feed-title">
@@ -459,7 +459,7 @@
 
 
                                       <span class="mr-10"*ngIf="comments.has_like ==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}}{{'like' | translate}}</span>
-                                      <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
+                                      <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
                                           <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
                                       <span class="mr-10">-</span>
                                       <span>{{comments.time}}</span>
@@ -483,7 +483,7 @@
                                 <div class="comment-action">
                                   <div class="pull-left">
                                     <a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}}{{'like' | translate}}</a>
-                                    <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                    <span class="mr-10">-</span>
+                                    <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} {{'like' | translate}}</a>                                    <span class="mr-10">-</span>
                                     <span>{{replies.time}}</span>
 
                                   </div>
@@ -608,12 +608,12 @@
               </div>
               <div class="feed-action flex-space-around">
                 <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
-                <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>
-                                         <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+                <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
+                                         <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> Comment</a>
                 <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
               </div>
           <div class="clearfix"></div>
-          <div class="comment-list" >
+          <div id="{{feed.id}}" class="comment-list" style="display:none;" >
               <div class="comment" *ngFor="let comments of feed.answers[0];let commentIndex=index">
                   <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
                   <div class="feed-title">
@@ -638,7 +638,7 @@
 
 
                               <span class="mr-10"*ngIf="comments.has_like ==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}}{{'like' | translate}}</span>
-                              <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
+                              <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
                                   <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
                               <span class="mr-10">-</span>
                               <span>{{comments.time}}</span>
@@ -662,7 +662,7 @@
                         <div class="comment-action">
                           <div class="pull-left">
                             <a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}}{{'like' | translate}}</a>
-                            <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                    <span class="mr-10">-</span>
+                            <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} {{'like' | translate}}</a>                                    <span class="mr-10">-</span>
                             <span>{{replies.time}}</span>
 
                           </div>
@@ -776,12 +776,12 @@
                         </div>
                         <div class="feed-action flex-space-around">
                           <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
-                          <a href="#" *ngIf="feed.has_like" style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>
-                                    <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+                          <a href="#" *ngIf="feed.has_like" style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
+                                    <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> Comment</a>
                           <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
                         </div>
                     <div class="clearfix"></div>
-                    <div class="comment-list" >
+                    <div id="{{feed.id}}" class="comment-list"  style="display:none;">
                         <div class="comment" *ngFor="let comments of feed.answers[0];let commentIndex=index">
                             <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
                             <div class="feed-title">
@@ -806,7 +806,7 @@
 
 
                                         <span class="mr-10"*ngIf="comments.has_like ==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}}{{'like' | translate}}</span>
-                                        <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
+                                        <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
                                             <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
                                         <span class="mr-10">-</span>
                                         <span>{{comments.time}}</span>
@@ -830,7 +830,7 @@
                                   <div class="comment-action">
                                     <div class="pull-left">
                                       <a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}}{{'like' | translate}}</a>
-                                      <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                    <span class="mr-10">-</span>
+                                      <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} {{'like' | translate}}</a>                                    <span class="mr-10">-</span>
                                       <span>{{replies.time}}</span>
 
                                     </div>
@@ -943,12 +943,12 @@
                         </div>
                         <div class="feed-action flex-space-around">
                           <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
-                          <a href="#" *ngIf="feed.has_like" style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up" ></i> Liked</a>
-                                            <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+                          <a href="#" *ngIf="feed.has_like" style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up" ></i> {{'like' | translate}}</a>
+                                            <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> Comment</a>
                           <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
                         </div>
                     <div class="clearfix"></div>
-                    <div class="comment-list" >
+                    <div id="{{feed.id}}" class="comment-list"  style="display:none;">
                         <div class="comment" *ngFor="let comments of feed.answers[0];let commentIndex=index">
                             <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
                             <div class="feed-title">
@@ -973,7 +973,7 @@
 
 
                                         <span class="mr-10"*ngIf="comments.has_like ==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}}{{'like' | translate}}</span>
-                                        <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
+                                        <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
                                             <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
                                         <span class="mr-10">-</span>
                                         <span>{{comments.time}}</span>
@@ -997,7 +997,7 @@
                                   <div class="comment-action">
                                     <div class="pull-left">
                                       <a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}}{{'like' | translate}}</a>
-                                      <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                    <span class="mr-10">-</span>
+                                      <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} {{'like' | translate}}</a>                                    <span class="mr-10">-</span>
                                       <span>{{replies.time}}</span>
 
                                     </div>
@@ -1109,12 +1109,12 @@
                           </div>
                           <div class="feed-action flex-space-around">
                             <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
-                            <a href="#" *ngIf="feed.has_like" style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>
-                                              <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+                            <a href="#" *ngIf="feed.has_like" style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
+                                              <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> Comment</a>
                             <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
                           </div>
                       <div class="clearfix"></div>
-                      <div class="comment-list" >
+                      <div id="{{feed.id}}" class="comment-list"  style="display:none;">
                           <div class="comment" *ngFor="let comments of feed.answers[0];let commentIndex=index">
                               <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
                               <div class="feed-title">
@@ -1139,7 +1139,7 @@
 
 
                                           <span class="mr-10"*ngIf="comments.has_like ==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}}{{'like' | translate}}</span>
-                                          <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
+                                          <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
                                               <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
                                           <span class="mr-10">-</span>
                                           <span>{{comments.time}}</span>
@@ -1163,7 +1163,7 @@
                                     <div class="comment-action">
                                       <div class="pull-left">
                                         <a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}}{{'like' | translate}}</a>
-                                        <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                    <span class="mr-10">-</span>
+                                        <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} {{'like' | translate}}</a>                                    <span class="mr-10">-</span>
                                         <span>{{replies.time}}</span>
 
                                       </div>
@@ -1287,12 +1287,12 @@
                           </div>
                           <div class="feed-action flex-space-around">
                             <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
-                            <a href="#" *ngIf="feed.has_like"  style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up" ></i> Liked</a>
-                                                         <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+                            <a href="#" *ngIf="feed.has_like"  style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up" ></i> {{'like' | translate}}</a>
+                                                         <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> Comment</a>
                             <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
                           </div>
                       <div class="clearfix"></div>
-                      <div class="comment-list" >
+                      <div id="{{feed.id}}" class="comment-list"  style="display:none;">
                           <div class="comment" *ngFor="let comments of feed.answers[0];let commentIndex=index">
                               <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
                               <div class="feed-title">
@@ -1317,7 +1317,7 @@
 
 
                                           <span class="mr-10"*ngIf="comments.has_like ==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}}{{'like' | translate}}</span>
-                                          <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
+                                          <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
                                               <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
                                           <span class="mr-10">-</span>
                                           <span>{{comments.time}}</span>
@@ -1341,7 +1341,7 @@
                                     <div class="comment-action">
                                       <div class="pull-left">
                                         <a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}}{{'like' | translate}}</a>
-                                        <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                    <span class="mr-10">-</span>
+                                        <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} {{'like' | translate}}</a>                                    <span class="mr-10">-</span>
                                         <span>{{replies.time}}</span>
 
                                       </div>
@@ -1465,12 +1465,12 @@
                 </div>
                 <div class="feed-action flex-space-around">
                   <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
-                  <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"   ></i> Liked</a>
-                             <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+                  <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"   ></i> {{'like' | translate}}</a>
+                             <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> Comment</a>
                   <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
                 </div>
             <div class="clearfix"></div>
-            <div class="comment-list" >
+            <div id="{{feed.id}}" class="comment-list"  style="display:none;">
                 <div class="comment" *ngFor="let comments of feed.answers[0];let commentIndex=index">
                     <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
                     <div class="feed-title">
@@ -1495,7 +1495,7 @@
 
 
                                 <span class="mr-10"*ngIf="comments.has_like ==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}}{{'like' | translate}}</span>
-                                <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
+                                <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
                                     <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
                                 <span class="mr-10">-</span>
                                 <span>{{comments.time}}</span>
@@ -1519,7 +1519,7 @@
                           <div class="comment-action">
                             <div class="pull-left">
                               <a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}}{{'like' | translate}}</a>
-                              <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                    <span class="mr-10">-</span>
+                              <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} {{'like' | translate}}</a>                                    <span class="mr-10">-</span>
                               <span>{{replies.time}}</span>
 
                             </div>
@@ -1632,12 +1632,12 @@
                   </div>
                   <div class="feed-action flex-space-around">
                     <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
-                    <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>
-                    <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+                    <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
+                    <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> Comment</a>
                     <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
                   </div>
               <div class="clearfix"></div>
-              <div class="comment-list" >
+              <div id="{{feed.id}}" class="comment-list" style="display:none;" >
                   <div class="comment" *ngFor="let comments of feed.answers[0];let commentIndex=index">
                       <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
                       <div class="feed-title">
@@ -1662,7 +1662,7 @@
 
 
                                   <span class="mr-10"*ngIf="comments.has_like ==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}}{{'like' | translate}}</span>
-                                  <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
+                                  <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
                                       <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
                                   <span class="mr-10">-</span>
                                   <span>{{comments.time}}</span>
@@ -1686,7 +1686,7 @@
                             <div class="comment-action">
                               <div class="pull-left">
                                 <a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}}{{'like' | translate}}</a>
-                                <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                    <span class="mr-10">-</span>
+                                <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} {{'like' | translate}}</a>                                    <span class="mr-10">-</span>
                                 <span>{{replies.time}}</span>
 
                               </div>
@@ -1797,12 +1797,12 @@
                 </div>
                 <div class="feed-action flex-space-around">
                   <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
-                  <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"   ></i> Liked</a>
-                                  <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+                  <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"   ></i> {{'like' | translate}}</a>
+                                  <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> Comment</a>
                   <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
                 </div>
             <div class="clearfix"></div>
-            <div class="comment-list" >
+            <div id="{{feed.id}}" class="comment-list"  style="display:none;">
                 <div class="comment" *ngFor="let comments of feed.answers[0];let commentIndex=index">
                     <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
                     <div class="feed-title">
@@ -1827,7 +1827,7 @@
 
 
                                 <span class="mr-10"*ngIf="comments.has_like ==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}}{{'like' | translate}}</span>
-                                <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
+                                <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
                                     <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
                                 <span class="mr-10">-</span>
                                 <span>{{comments.time}}</span>
@@ -1851,7 +1851,7 @@
                           <div class="comment-action">
                             <div class="pull-left">
                               <a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}}{{'like' | translate}}</a>
-                              <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                    <span class="mr-10">-</span>
+                              <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} {{'like' | translate}}</a>                                    <span class="mr-10">-</span>
                               <span>{{replies.time}}</span>
 
                             </div>
@@ -1963,14 +1963,14 @@
                   </div>
                   <div class="feed-action flex-space-around">
                     <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
-                    <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>
+                    <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
 
 
-                      <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+                      <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> Comment</a>
                     <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
                   </div>
               <div class="clearfix"></div>
-              <div class="comment-list" >
+              <div id="{{feed.id}}" class="comment-list"  style="display:none;">
                   <div class="comment" *ngFor="let comments of feed.answers[0];let commentIndex=index">
                       <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
                       <div class="feed-title">
@@ -1995,7 +1995,7 @@
 
 
                                   <span class="mr-10"*ngIf="comments.has_like ==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}}{{'like' | translate}}</span>
-                                  <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
+                                  <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
                                       <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
                                   <span class="mr-10">-</span>
                                   <span>{{comments.time}}</span>
@@ -2019,7 +2019,7 @@
                             <div class="comment-action">
                               <div class="pull-left">
                                 <a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}}{{'like' | translate}}</a>
-                                <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} Liked</a>                                    <span class="mr-10">-</span>
+                                <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} {{'like' | translate}}</a>                                    <span class="mr-10">-</span>
                                 <span>{{replies.time}}</span>
 
                               </div>

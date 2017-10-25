@@ -1322,3 +1322,26 @@ top: -4px;
 	{
 		display: none;
 	}
+	.not-found>i {
+		color: #5c0632;
+		font-size: 180px;
+		line-height: 0;
+	}
+	.not-found h1 {
+		color: #555;
+		font-size: 80px;
+		font-weight: 600;
+		line-height: 1.3;
+	}
+	.not-found h3 {
+		color: #777;
+		font-size: 30px;
+		text-transform: uppercase;
+	}
+	.not-found p {
+		color: #777;
+		font-size: 16px;
+	}
+	.not-found p a {
+		color: #5c0632;
+	}

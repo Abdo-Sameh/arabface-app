@@ -21,7 +21,7 @@ export class AddVideoPage {
   privacy
   link
   category
-  constructor(public navCtrl: NavController, public navParams: NavParams, public remoteService :RemoteServiceProvider, public toastCtrl :ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public remoteService :RemoteServiceProvider, public toastCtrl :ToastController) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.getCategories();
   }
@@ -35,8 +35,15 @@ export class AddVideoPage {
     });
   }
   addVideo(title, description, privacy, link, category){
+    let loading = this.loadingCtrl.create({
+      content: "",
+      spinner: "bubbles",
+    });
+    loading.present()
     this.remoteService.addNewVideo(title, description, privacy, link, category, this.userId).subscribe(res => {
+
       console.log(res);
+      loading.dismiss();
       let toast = this.toastCtrl.create({
         message: 'Video created successfully',
         duration: 3000,

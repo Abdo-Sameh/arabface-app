@@ -6,8 +6,8 @@ import { ProfilePage } from '../profile/profile';
 import { PostFeatursPage } from '../post-featurs/post-featurs'
 import { FriendProfilePage } from '../friend-profile/friend-profile'
 import { DisplayPostPage } from '../display-post/display-post'
-
-import {MyApp} from '../../app/app.component';
+import { NotFound_404Page } from '../not-found-404/not-found-404';
+import { MyApp } from '../../app/app.component';
 //import $ from "jquery";
 
 /**
@@ -296,33 +296,25 @@ GoToProfile(id,userId)
           //   "userData" : res
           // })
         }else{
-          this.navCtrl.setRoot(FriendProfilePage, {
-            "userData" : res
-          });
-          // this.navCtrl.push(FriendProfilePage,{
-          //   "userData" : res
-          // })
+            this.remoteService.isBlocked(res.id, this.userId).subscribe(res2 => {
+              if(res2.status == 1){
+                this.navCtrl.push(NotFound_404Page, {
+                  "userData" : res,
+                  "blocked" : true
+                });
+              }else{
+                this.navCtrl.push(FriendProfilePage, {
+                  "userData" : res,
+                  "blocked" : false
+                });
+              }
+            });
         }
-
   });
-
 }
 
-// count=1;
 
-// setColor(btn)
-// {
-//     var property = document.getElementById(btn);
-//     if (this.count == 0){
-//         property.style.color = "gray"
-//         this.count=1;
-//     }
-//     else{
-//         property.style.color = "blue"
-//         this.count=0;
-//     }
 
-// }
 edit() {
   $(document).on('click','.comment-edit',function(){
     $(this).parent().prev().find('.input-group').show();
@@ -512,12 +504,14 @@ reply()
    $(this).css('background-color','grey')
  }
 
-goToPost()
- {
-//   let popover = this.popOver.create(PostFeatursPage, {}, {cssClass: 'contpopover'});
-//   popover.present({
-
-//   });
-  this.navCtrl.push(PostFeatursPage)
-}
+  goToPost() {
+    this.navCtrl.push(PostFeatursPage, {
+      type: 'feed',
+      type_id: ''
+    });
+  }
+  showComments(id){
+    $('#' + id).show();
+    console.log('#' + id);
+  }
 }

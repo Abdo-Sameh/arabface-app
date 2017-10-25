@@ -16,7 +16,7 @@ export class PostFeatursPage {
   searchedUsers
   chosenUsers
   listeningShow=true
-   userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
+  userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
   userAvatar = localStorage.getItem('userAvatar').slice(8,-1);
   users
   type
