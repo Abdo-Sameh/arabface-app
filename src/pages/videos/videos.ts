@@ -47,7 +47,8 @@ export class VideosPage {
 
     this.type = type;
     this.category = categoryId;
-
+    $('#noVideos1').hide();
+    $('#noVideos2').hide();
     let loading = this.loadingCtrl.create({
       content: "Loading",
     });
@@ -56,9 +57,9 @@ export class VideosPage {
       this.remoteService.getVideos(categoryId, term, type, filter, userId, page, 4).subscribe(res =>{
         console.log(res.videos.length, type);
         if(res.videos.length == 0){
-          if(type == "browse")
+          // if(type == "browse")
             $('#all').hide();
-          else
+          // else
             $('#my').hide();
         }
         for(let x of res.videos){
@@ -72,10 +73,18 @@ export class VideosPage {
       loading.present()
       this.remoteService.getVideos(categoryId, term, type, filter, userId, page, 4).subscribe(res =>{
         if(res.videos.length > 0){
-          if(type == "browse")
-            $('#all').show();
-          else
-            $('#my').show();
+          if(res.videos.length < 4){
+            $('#all').hide();
+            $('#my').hide();
+          }else{
+            // if(type == "browse")
+              $('#all').show();
+            // else
+              $('#my').show();
+            }
+        }else{
+          $('#noVideos1').show();
+          $('#noVideos2').show();
         }
           loading.dismiss();
           console.log(this.type);
