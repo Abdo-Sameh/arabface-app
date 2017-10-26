@@ -99,7 +99,7 @@
 
 	"user-roles": "User Roles",
 
-
+	"page-not-found" : "Page Not Found",
 
 	"go-home": "Go Home",
 
@@ -203,7 +203,29 @@
 
 	"update-system-message": "System database tables and core settings updated",
 
+	"all-pages" : "All Pages",
 
+	"my-pages" : "My Pages",
+
+	"all-groups" : "All Groups",
+
+	"groups-member" : "Member",
+
+	"my-groups" : "My Groups",
+
+	"leave-group" : "Leave",
+
+	"no-events-display" : "No events found",
+
+	"all-events" : "All",
+
+	"invites" : "Invites",
+
+	"yours" : "Yours",
+
+	"past-events" : "Past",
+
+	"birthdays" : "Birthdays",
 
 	"blocks-manager-description": "Manage pages blocks list, you can select which page with the dropdown list and drag and drop blocks from left to the right",
 
@@ -418,6 +440,12 @@
 
 	"hours": "Hours",
 
+	"like" : "Like",
+
+	"share" : "Share",
+
+	"write-comment" : "Write comment ...",
+
 	"user-settings-description": "Manage user settings, control who can register,manage welcome signup step, account activation e.t.c",
 
 	"enable-user-registration": "Enable user registration",
@@ -543,6 +571,8 @@
 	"add-birth-date": "Add Birth Date",
 
 	"add-friends": "Add Friends",
+
+	"friends" : "Friends",
 
 	"edit-profile-details": "Edit Profile Details",
 
@@ -957,6 +987,7 @@
 
 	"block-user": "Block User",
 
+
 	"report-profile": "Report Profile",
 
 	"symbol": "Symbol",
@@ -1157,6 +1188,8 @@
 	"mutual-friends": "Mutual Friends",
 
 	"nill": "Nill",
+
+	"remove-friend" : "Remove friend",
 
 	"timeline": "Timeline",
 
@@ -1475,6 +1508,22 @@
 	"location" : "Location",
 
 	"main-menu": "Main Menu",
+
+	"location" : "Location",
+
+	"whats-happening" : "What is on your mind?",
+
+	"Photo" : "Photo",
+
+	"pages" : "Pages",
+
+	"forums" : "Forums",
+
+	"groups" : "Groups",
+
+	"events" : "Events",
+
+	"contact-us" : "Contact Us",
 
 	"footer-menu": "Footer Menu",
 

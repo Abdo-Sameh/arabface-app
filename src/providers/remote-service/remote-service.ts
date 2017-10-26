@@ -447,8 +447,13 @@ user = new Observable(observer => {
    }
    following(userid)
    {
-    return  this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/profile/getfollowing?userid='+userid)
-    .map((res : Response ) => res.json());
+      return  this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/profile/getfollowing?userid='+userid)
+      .map((res : Response ) => res.json());
+   }
+
+   follow(userid, to_userid, type){
+     return  this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/friend/follow?userid=' + userid + "&to_userid=" + to_userid + "&type=" + type)
+     .map((res : Response ) => res.json());
    }
 
     ///////// Friends Request function Start ////////

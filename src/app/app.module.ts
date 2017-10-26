@@ -67,8 +67,8 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 import { File } from '@ionic-native/file';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 import { Globalization } from '@ionic-native/globalization';
-
-
+import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
+import { NotFound_404Page } from '../pages/not-found-404/not-found-404';
 // import { Transfer } from '@ionic-native/transfer';
 // import { FilePath } from '@ionic-native/file-path';
 // import { Camera } from '@ionic-native/camera';
@@ -118,7 +118,8 @@ import { Globalization } from '@ionic-native/globalization';
     InviteFriendPage,
     SavedPage,
     CreateAlbumPage,
-    PhotoselectionPage, CreateEventPage, EditEventPage, EventPage
+    PhotoselectionPage, CreateEventPage, EditEventPage, EventPage,
+    NotFound_404Page
   ],
   imports: [
 BrowserModule , IonicModule.forRoot(MyApp), HttpModule, TranslateModule.forRoot({
@@ -173,7 +174,8 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule, TranslateModule.forRoot(
     MembersPage,
     CreateAlbumPage,
     InviteFriendPage,
-    PhotoselectionPage, CreateEventPage, EditEventPage, EventPage
+    PhotoselectionPage, CreateEventPage, EditEventPage, EventPage,
+    NotFound_404Page
   ],
   providers: [
     StatusBar,
@@ -184,9 +186,7 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule, TranslateModule.forRoot(
     LaunchNavigator,
     Globalization,
     File,
-    // Transfer,
-    // Camera,
-    // FilePath,
+    YoutubeVideoPlayer,
     Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RemoteServiceProvider
