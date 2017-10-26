@@ -845,7 +845,13 @@
 
 	"photos": "Photos",
 
+	"my-videos" : "My Videos",
 
+	"all-videos" : "All",
+
+	"top-videos" : "Top",
+
+	"featured-videos" : "Featured",
 
 	"find-people": "Find People",
 
@@ -884,6 +890,12 @@
 	"changed-profile-cover": "changed profile cover",
 
 	"home": "Home",
+
+	"no-pages-found" : "No pages found here",
+
+	"no-videos-found" : "No videos found here",
+
+	"no-groups-found" : "No groups found here",
 
 	"discover": "Discover",
 
