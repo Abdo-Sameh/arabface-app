@@ -85,13 +85,13 @@
 					<p>{{ event.description }}</p>
 				</div>
 				<div class="share-post panel panel-theme mt-30">
-						<img src={{userAvatar}} alt="">
-				<form><textarea (click)="goToPost()" placeholder="{{'whats-happening' | translate}}"></textarea></form>
+					<img src={{userAvatar}} alt="">
+				  <form><textarea (click)="goToPost()" placeholder="{{'whats-happening' | translate}}"></textarea></form>
 			  </div>
 			  <div class="panel panel-theme flex-space-around">
-				<a href="#">{{'status' | translate}}</a>
-				<a href="#"><i class="fa fa-camera"></i> {{'photo' | translate}}</a>
-				<a href="#">{{'location' | translate}}</a>
+  				<a href="#">{{'status' | translate}}</a>
+  				<a href="#"><i class="fa fa-camera"></i> {{'photo' | translate}}</a>
+  				<a href="#">{{'location' | translate}}</a>
 			  </div>
 			  <div *ngFor="let feed of feeds ; let mainI =index" [ngSwitch]="true">
 

@@ -694,14 +694,23 @@ user = new Observable(observer => {
 
   //////////// post in feed ///////////////////////
 
-  feedPosting(userID,post,feeling='none',postType='text',privacy,background='default',tag :any='no', type, type_id)
+  feedPosting(userID,post,feeling='none',postType='text',privacy='1',background='default',tag :any='no', type, type_id)
   {
 
     let headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     let urlSearchParams = new URLSearchParams();
     urlSearchParams.append('userid', userID );
-    urlSearchParams.append('entity_id', userID );
+
+    if(type == 'page'){
+      urlSearchParams.append('entity_id', type_id );
+      urlSearchParams.append('entity_type', 'page' );
+
+    }else{
+      urlSearchParams.append('entity_id', userID );
+      urlSearchParams.append('entity_type', 'user' );
+
+    }
     if(postType=='feeling')
     {
       urlSearchParams.append('feeling_type', feeling );
@@ -733,7 +742,7 @@ user = new Observable(observer => {
     urlSearchParams.append('type', type );
     urlSearchParams.append('type_id', type_id );
     urlSearchParams.append('background', background );
-    urlSearchParams.append('entity_type', 'user' );
+
     let body = urlSearchParams.toString()
 
    return this.http.post(this.serverURL+'/arabface/api/'+this.KEY+'/feed/add', body, {headers: headers})

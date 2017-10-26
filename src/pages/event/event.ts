@@ -4,11 +4,11 @@ import { RemoteServiceProvider} from './../../providers/remote-service/remote-se
 import { EditEventPage } from '../edit-event/edit-event';
 import { EventsPage } from '../events/events';
 import { InviteFriendPage } from '../invite-friend/invite-friend';
-import {PostFeatursPage} from '../post-featurs/post-featurs'
-import {FriendProfilePage} from '../friend-profile/friend-profile'
-import {DisplayPostPage} from '../display-post/display-post'
-import {TabsPage} from '../tabs/tabs';
-import {ProfilePage} from '../profile/profile';
+import { PostFeatursPage } from '../post-featurs/post-featurs'
+import { FriendProfilePage } from '../friend-profile/friend-profile'
+import { DisplayPostPage } from '../display-post/display-post'
+import { TabsPage} from '../tabs/tabs';
+import { ProfilePage } from '../profile/profile';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
 /**
