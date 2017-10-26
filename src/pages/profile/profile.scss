@@ -2,9 +2,9 @@ page-profile {
 
  .profile-editors
  {
-    position: absolute !important;
-    top: 10px !important;
-    right: 10px !important;
+    position: absolute ;
+    top: 10px;
+    right: 10px;
  }
  @media (max-width: 460px) {
 .profile-editors {
@@ -97,7 +97,7 @@ page-profile {
 
 .feed-footer .comment-action    {
     margin-left: 40px !important;
-    
+
 }
 .comment-action .pull-left {
     margin:6px !important
@@ -127,7 +127,7 @@ page-profile {
 }
 .dropdown-menu>li>a{
     padding: 7px 30px !important;
-    
+
 }
 .contpopover .popover-wrapper .popover-content{
     left: 50px !important;

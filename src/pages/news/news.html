@@ -28,11 +28,11 @@
                 <div class="pull-left">
                   <img class="feed-img" src={{feed.avatar}} alt="">
                   <div class="feed-title">
-                      <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{feed.name}} </a>  <span *ngIf="feed.tag_users != ''">  with  <span *ngFor="let tag of feed.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
+                      <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;  ">{{feed.name}} </a>  <span *ngIf="feed.tag_users != ''">  with  <span *ngFor="let tag of feed.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
                       <span>{{feed.time}} </span>
                       <span class="dropdown ml-5">
-                          <a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
-                          <a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
+                          <a href="#" *ngIf="feed.privacy == 1" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
+                          <a href="#" *ngIf="feed.privacy == 2" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
                           <a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
 
                           <ul class="dropdown-menu">
@@ -50,8 +50,8 @@
                           <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> i don't like this post</a></li>
                           <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
                           <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>
-
-                          <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> </a></li>
+                          <li><a (click)="reportFeed(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-flag"></i> {{'report' | translate}}</a></li>
+                          <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save' | translate}}</a></li>
                           <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> view post</a></li>
                         </ul>
                         <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == true">
@@ -68,7 +68,7 @@
                   </div>
               <div class="feed-body">
                 <img src="{{feed.images}}" alt="">
-                <p>{{feed.full_message}} </p>
+                <p [innerHTML]="feed.full_message"></p>
               </div><br>
               <div class="feed-footer">
 
@@ -220,7 +220,7 @@
                             <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> i don't like this post</a></li>
                             <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
                             <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>
-
+                            <li><a (click)="reportFeed(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-flag"></i> {{'report' | translate}}</a></li>
                             <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                             <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> view post</a></li>
                           </ul>
@@ -253,7 +253,7 @@
                       <div class="feed-action flex-space-around">
                         <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
                         <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
-                                                 <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> Comment</a>
+                                                 <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
                         <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
                       </div>
                   <div class="clearfix"></div>
@@ -366,7 +366,7 @@
                   <div class="pull-left">
                     <img class="feed-img" src={{feed.avatar}} alt="">
                     <div class="feed-title">
-                      <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{feed.name}} </a>  <span *ngIf="feed.tag_users != ''">  with  <span *ngFor="let tag of feed.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
+                      <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;">{{feed.name}} </a>  <span *ngIf="feed.tag_users != ''">  with  <span *ngFor="let tag of feed.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
                       <span>{{feed.time}} </span>
                       <span class="dropdown ml-5">
                           <a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
@@ -388,7 +388,7 @@
                           <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> i don't like this post</a></li>
                           <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
                           <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>
-
+                          <li><a (click)="reportFeed(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-flag"></i> {{'report' | translate}}</a></li>
                           <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                           <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> view post</a></li>
                         </ul>
@@ -406,7 +406,7 @@
                   </div>
                 <div class="feed-body" id="{{feed.background}}" style="padding:25px;">
                   <img src="{{feed.images}}" alt="">
-                  <p>{{feed.full_message}}</p>
+                  <p [innerHTML]="feed.full_message"></p>
 
                   <div class="pull-left comment-edit-input">
 
@@ -565,7 +565,7 @@
                   <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> i don't like this post</a></li>
                   <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
                   <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>
-
+                  <li><a (click)="reportFeed(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-flag"></i> {{'report' | translate}}</a></li>
                   <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                   <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> view post</a></li>
                 </ul>
@@ -609,7 +609,7 @@
               <div class="feed-action flex-space-around">
                 <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
                 <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
-                                         <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> Comment</a>
+                                         <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
                 <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
               </div>
           <div class="clearfix"></div>
@@ -745,7 +745,7 @@
                               <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> i don't like this post</a></li>
                               <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
                               <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>
-
+                              <li><a (click)="reportFeed(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-flag"></i> {{'report' | translate}}</a></li>
                               <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                               <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> view post</a></li>
                             </ul>
@@ -777,7 +777,7 @@
                         <div class="feed-action flex-space-around">
                           <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
                           <a href="#" *ngIf="feed.has_like" style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
-                                    <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> Comment</a>
+                                    <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
                           <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
                         </div>
                     <div class="clearfix"></div>
@@ -913,7 +913,7 @@
                                         <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> i don't like this post</a></li>
                                         <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
                                         <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>
-
+                                        <li><a (click)="reportFeed(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-flag"></i> {{'report' | translate}}</a></li>
                                         <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                                         <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> view post</a></li>
                                       </ul>
@@ -945,7 +945,7 @@
                                   <div class="feed-action flex-space-around">
                                     <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
                                     <a href="#" *ngIf="feed.has_like" style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
-                                              <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> Comment</a>
+                                              <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
                                     <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
                                   </div>
                               <div class="clearfix"></div>
@@ -1079,7 +1079,7 @@
                               <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> i don't like this post</a></li>
                               <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
                               <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>
-
+                              <li><a (click)="reportFeed(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-flag"></i> {{'report' | translate}}</a></li>
                               <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                               <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> view post</a></li>
                             </ul>
@@ -1111,7 +1111,7 @@
                         <div class="feed-action flex-space-around">
                           <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
                           <a href="#" *ngIf="feed.has_like" style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up" ></i> {{'like' | translate}}</a>
-                                            <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> Comment</a>
+                                            <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
                           <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
                         </div>
                     <div class="clearfix"></div>
@@ -1244,7 +1244,7 @@
                                 <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> i don't like this post</a></li>
                                 <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
                                 <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>
-
+                                <li><a (click)="reportFeed(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-flag"></i> {{'report' | translate}}</a></li>
                                 <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                                 <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> view post</a></li>
                               </ul>
@@ -1277,7 +1277,7 @@
                           <div class="feed-action flex-space-around">
                             <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
                             <a href="#" *ngIf="feed.has_like" style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
-                                              <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> Comment</a>
+                                              <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
                             <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
                           </div>
                       <div class="clearfix"></div>
@@ -1412,7 +1412,7 @@
                                 <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> i don't like this post</a></li>
                                 <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
                                 <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>
-
+                                <li><a (click)="reportFeed(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-flag"></i> {{'report' | translate}}</a></li>
                                 <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                                 <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> view post</a></li>
                               </ul>
@@ -1455,7 +1455,7 @@
                           <div class="feed-action flex-space-around">
                             <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
                             <a href="#" *ngIf="feed.has_like"  style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up" ></i> {{'like' | translate}}</a>
-                                                         <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> Comment</a>
+                                                         <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
                             <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
                           </div>
                       <div class="clearfix"></div>
@@ -1590,7 +1590,7 @@
                       <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> i don't like this post</a></li>
                       <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
                       <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>
-
+                      <li><a (click)="reportFeed(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-flag"></i> {{'report' | translate}}</a></li>
                       <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                       <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> view post</a></li>
                     </ul>
@@ -1633,7 +1633,7 @@
                 <div class="feed-action flex-space-around">
                   <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
                   <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"   ></i> {{'like' | translate}}</a>
-                             <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> Comment</a>
+                             <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
                   <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
                 </div>
             <div class="clearfix"></div>
@@ -1769,7 +1769,7 @@
                         <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> i don't like this post</a></li>
                         <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
                         <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>
-
+                        <li><a (click)="reportFeed(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-flag"></i> {{'report' | translate}}</a></li>
                         <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                         <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> view post</a></li>
                       </ul>
@@ -1800,7 +1800,7 @@
                   <div class="feed-action flex-space-around">
                     <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
                     <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
-                    <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> Comment</a>
+                    <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
                     <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
                   </div>
               <div class="clearfix"></div>
@@ -1934,7 +1934,7 @@
                       <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> i don't like this post</a></li>
                       <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
                       <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>
-
+                      <li><a (click)="reportFeed(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-flag"></i> {{'report' | translate}}</a></li>
                       <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                       <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> view post</a></li>
                     </ul>
@@ -1965,7 +1965,7 @@
                 <div class="feed-action flex-space-around">
                   <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
                   <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"   ></i> {{'like' | translate}}</a>
-                                  <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> Comment</a>
+                                  <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
                   <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
                 </div>
             <div class="clearfix"></div>
@@ -2100,7 +2100,7 @@
                         <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> i don't like this post</a></li>
                         <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
                         <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>
-
+                        <li><a (click)="reportFeed(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-flag"></i> {{'report' | translate}}</a></li>
                         <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                         <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> view post</a></li>
                       </ul>
@@ -2133,7 +2133,7 @@
                     <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
 
 
-                      <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> Comment</a>
+                      <a href="#"(click)="showComments(feed.id)"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
                     <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
                   </div>
               <div class="clearfix"></div>

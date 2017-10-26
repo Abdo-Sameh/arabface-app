@@ -514,4 +514,48 @@ reply()
     $('#' + id).show();
     console.log('#' + id);
   }
+  reportFeed(index){
+    let alert = this.alert.create({
+      title: 'Report',
+      inputs: [
+      {
+        name: 'reason',
+        placeholder: 'Reason ...'
+      }
+    ],
+      buttons: [
+        {
+          text: 'Send',
+          handler: data => {
+            this.remoteService.reportItem("feed", this.feeds[index].feed_url, data.reason, this.userId).subscribe(res => {
+              if(res.status == "1"){
+                let toast = this.toast.create({
+                  message: 'Report sent successfully',
+                  duration: 2000,
+                  position: 'top'
+                });
+                toast.present();
+              }else{
+                let toast = this.toast.create({
+                  message: 'You have reported this post before',
+                  duration: 2000,
+                  position: 'top'
+                });
+                toast.present();
+              }
+            });
+
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    alert.present();
+
+  }
 }

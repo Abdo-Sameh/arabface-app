@@ -12,7 +12,7 @@
 					<a (click)="back()"><i class="fa fa-arrow-left"></i></a>
 				</div>
 				<div class="page_title text-center">
-					<h3>Add Video</h3>
+					<h3>{{'add-video' | translate}}</h3>
 				</div>
 				<div class="menu_btn text-right">
 					<a href="#"><i class="fa fa-bars" style="color:#fff;font-size:18px"></i></a>
@@ -27,33 +27,31 @@
   <section class="bg_white full_vh pt-70">
 			<div class="container">
 				<form>
-		       	<!-- <div class="form-group mt-20">
-				        <label for="title">Title:</label>
-				        <input type="text" class="form-control" id="title" [(ngModel)]="title" [ngModelOptions]="{ standalone :true}">
+            <div class="form-group">
+				        <label for="g_priv">{{'source' | translate}}:</label>
+				        <select class="form-control" id="source">
+							      <option>{{ 'external-link' | translate }}</option>
+				        </select>
 				    </div>
-            <div class="form-group mt-20">
-				        <label for="description">description:</label>
-                <textarea rows="7" class="form-control" id="description" [(ngModel)]="description" [ngModelOptions]="{ standalone :true}"></textarea>
-				    </div> -->
 				    <div class="form-group">
-				        <label for="url">URL:</label>
+				        <label for="url">{{'url' | translate}}:</label>
 				        <input type="url" class="form-control" id="url" [(ngModel)]="link" [ngModelOptions]="{ standalone :true}">
 				    </div>
 				    <div class="form-group">
-				        <label for="cat">Category:</label>
+				        <label for="cat">{{'category' | translate}}:</label>
 				        <select class="form-control" id="cat" [(ngModel)]="category" [ngModelOptions]="{ standalone :true}">
-    							<option *ngFor="let category of categories"  value="{{ category.id }}">{{ category.title }}</option>
+    							<option *ngFor="let category of categories"  value="{{ category.id }}">{{ category.title | translate}}</option>
 				        </select>
 				    </div>
 				    <div class="form-group">
-				        <label for="priv">Privacy:</label>
+				        <label for="priv">{{'privacy' | translate}}:</label>
 				        <select class="form-control" id="priv" [(ngModel)]="privacy" [ngModelOptions]="{ standalone :true}">
-    							<option value="1">Public</option>
-    							<option value="2">Private</option>
+    							<option value="1">{{'public' | translate}}</option>
+    							<option value="2">{{'private' | translate}}</option>
 				        </select>
 				    </div>
 				    <div class="form-group mt-30 mb-30">
-		            <button (click)="addVideo(title, description, privacy, link, category)" type="submit" class="btn btn-theme">Add</button>
+		            <button (click)="addVideo(title, description, privacy, link, category)" type="submit" class="btn btn-theme">{{'add' | translate}}</button>
 	          </div>
 				</form>
 			</div>
