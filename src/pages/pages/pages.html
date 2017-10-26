@@ -36,7 +36,7 @@
 			<div class="container">
 				<form class="search-form search-filter mt-10 mb-30">
 					<div class="input-group">
-						<input type="text" class="form-control"  [(ngModel)]="search" [ngModelOptions]="{ standalone :true}" placeholder="Search here ...">
+						<input type="text" class="form-control"  [(ngModel)]="search" [ngModelOptions]="{ standalone :true}" placeholder="{{'search-here' | translate}}">
 						<select class="form-control"  [(ngModel)]="category" [ngModelOptions]="{ standalone :true}" (ngModelChange)="getPages(this.type, '' ,this.category, userId, 1)">
 							<option *ngFor="let category of categories"  value="{{ category.id }}">{{ category.title | translate }}</option>
 						</select>
@@ -49,7 +49,7 @@
 				</form>
 				<div class="tab-content">
 					<div id="tab-content-1" class="tab-pane fade in active">
-            <div id="noPages1" style="display: none;" class="box-content alert alert-danger">{{'no-pages-found' | translate}}<</div>
+            <div id="noPages1" style="display: none;" class="box-content alert alert-danger">{{'no-pages-found' | translate}}</div>
 						<div class="row thumbnails">
 
 							<div class="col-xs-6" *ngFor="let page of pages; let i = index; ">
@@ -59,7 +59,7 @@
 								        <h3><a (click)="pagePage(page)" href="#">{{ page.title }}</a></h3>
 								        <p>{{ page.description }}</p>
 								        <a *ngIf="page.has_like == false" (click)="likePage(userId, page.id, 'like', i)" href="#"  class="btn btn-default btn-sm"><i class="fa fa-thumbs-o-up"></i> {{'like' | translate}}</a>
-                        <a *ngIf="page.has_like == true" style="color: #488aff" (click)="likePage(userId, page.id, 'dislike', i)" href="#"  class="btn btn-default btn-sm"><i class="fa fa-check"></i> Liked</a>
+                        <a *ngIf="page.has_like == true" style="color: #488aff" (click)="likePage(userId, page.id, 'dislike', i)" href="#"  class="btn btn-default btn-sm"><i class="fa fa-check"></i> {{'like' | translate}}</a>
                     </div>
 							    </div>
 							</div>
@@ -67,7 +67,7 @@
             <a id="all" (click)="getPages(this.type, this.search ,this.category, userId, page+1)" href="#" class="btn btn-default btn-block">{{'view-more' | translate}}</a>
 					</div>
 					<div id="tab-content-2" class="tab-pane fade">
-            <div id="noPages2" style="display: none;" class="box-content alert alert-danger">{{'no-pages-found' | translate}}<</div>
+            <div id="noPages2" style="display: none;" class="box-content alert alert-danger">{{'no-pages-found' | translate}}</div>
 						<div class="row thumbnails">
 							<div class="col-xs-6" *ngFor="let page of pages; let i = index;">
 							    <div class="thumbnail">
@@ -76,7 +76,7 @@
 								        <h3><a (click)="pagePage(page)" href="#">{{ page.title }}</a></h3>
 								        <p>{{ page.description }}</p>
                         <a *ngIf="page.has_like == false" (click)="likePage(userId, page.id, 'like', i)" href="#"  class="btn btn-default btn-sm"><i class="fa fa-thumbs-o-up"></i> {{'like' | translate}}</a>
-                        <a *ngIf="page.has_like == true" style="color: #488aff" (click)="likePage(userId, page.id, 'dislike', i)" href="#"  class="btn btn-default btn-sm"><i class="fa fa-thumbs-o-up"></i> Liked</a>
+                        <a *ngIf="page.has_like == true" style="color: #488aff" (click)="likePage(userId, page.id, 'dislike', i)" href="#"  class="btn btn-default btn-sm"><i class="fa fa-thumbs-o-up"></i> {{'like' | translate}}</a>
                     </div>
 							    </div>
 							</div>

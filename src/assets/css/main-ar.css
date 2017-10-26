@@ -154,13 +154,13 @@ body {
 .panel-theme {
 	padding: 10px 15px;
     border-bottom: 1px solid transparent;
-    border-top-left-radius: 3px;
     border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
 }
 .add-btn {
 	position: fixed;
 	bottom: 30px;
-	right: 20px;
+	left: 20px;
 	z-index: 9999;
 	background: #5c0632;
 	width: 40px;
@@ -178,8 +178,8 @@ body {
 .panel-theme {
 	padding: 10px 15px;
     border-bottom: 1px solid transparent;
-    border-top-left-radius: 3px;
     border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
 }
 .flex {
 	display: flex;
@@ -200,9 +200,9 @@ body {
 	display: flex;
 	justify-content: space-between;
 }
-.dropdown-menu-right {
-    right: 0;
-    left: auto;
+.dropdown-menu-left {
+    left: 0;
+    right: auto;
 }
 .form-group>label {
 	margin-bottom: 5px;
@@ -223,7 +223,7 @@ body {
 }
 .checkbox, .radio {
 	position: relative;
-	padding-left: 20px;
+	padding-right: 20px;
 	margin: 5px 0;
 }
 .checkbox-inline, .radio-inline {
@@ -233,14 +233,14 @@ body {
 .checkbox label, .radio label {
 	display: inline-block;
     position: relative;
-    padding-left: 5px;
+    padding-right: 5px;
 }
 .checkbox-list label, .radio-list label {
 	display: block;
 	position: static;
 }
 .checkbox-list, .checkbox-list label, .radio-list, .radio-list label {
-	padding-left: 0;
+	padding-right: 0;
 }
 .checkbox input[type="checkbox"], .radio input[type="radio"] {
     opacity: 0;
@@ -255,30 +255,30 @@ body {
 	top: 3px;
 }
 .checkbox label:before, .radio label:before {
-    left: -20px;
+    right: -20px;
 	background-color: #FFF;
 	border: 1px solid #CCC;
 	border-radius: 3px;
 }
 .checkbox-list label:before, .radio-list label:before {
-	left: auto;
-    right: 0;
+	right: auto;
+    left: 0;
 }
 .radio label:before, .radio label:after {
 	border-radius: 50%;
 }
 .checkbox label:after {
-    left: -16px;
+    right: -16px;
 	font-size: 11px;
 	color: #FFF;
 }
 .checkbox-list label:after {
-	left: auto;
-    right: -4px;
+	right: auto;
+    left: -4px;
 }
 .radio label:after {
 	top: 6px;
-	left: -17px;
+	right: -17px;
 	width: 11px;
 	height: 11px;
 	background-color: #5c0632;
@@ -286,8 +286,8 @@ body {
 	transform: scale(0)
 }
 .radio-list label:after {
-	left: auto;
-	right: 3px;
+	right: auto;
+	left: 3px;
 }
 .checkbox input[type="checkbox"]:checked + label:before {
 	background-color: #5c0632;
@@ -332,7 +332,7 @@ body {
 	font-size: 12px;
 	position: relative;
 	top: -3px;
-	left: -2px;
+	right: -2px;
 }
 .nav-tabs>li>a>i.ion-chatboxes,
 .nav-tabs>li>a>i.ion-more {
@@ -359,10 +359,10 @@ body {
 	border: 1px solid #fff;
 }
 .ui-datepicker .ui-datepicker-prev-hover {
-	left: 2px;
+	right: 2px;
 }
 .ui-datepicker .ui-datepicker-next-hover {
-	right: 2px;
+	left: 2px;
 }
 .ui-datepicker .ui-datepicker-title select {
 	color: #333;
@@ -380,16 +380,16 @@ body {
 .mb-15 { margin-bottom: 15px !important; }
 .mb-20 { margin-bottom: 20px !important; }
 .mb-30 { margin-bottom: 30px !important; }
-.ml-5 { margin-left: 5px !important; }
-.ml-10 { margin-left: 10px !important; }
-.ml-15 { margin-left: 15px !important; }
-.ml-20 { margin-left: 20px !important; }
-.ml-30 { margin-left: 30px !important; }
-.mr-5 { margin-right: 5px !important; }
-.mr-10 { margin-right: 10px !important; }
-.mr-15 { margin-right: 15px !important; }
-.mr-20 { margin-right: 20px !important; }
-.mr-30 { margin-right: 30px !important; }
+.ml-5 { margin-right: 5px !important; }
+.ml-10 { margin-right: 10px !important; }
+.ml-15 { margin-right: 15px !important; }
+.ml-20 { margin-right: 20px !important; }
+.ml-30 { margin-right: 30px !important; }
+.mr-5 { margin-left: 5px !important; }
+.mr-10 { margin-left: 10px !important; }
+.mr-15 { margin-left: 15px !important; }
+.mr-20 { margin-left: 20px !important; }
+.mr-30 { margin-left: 30px !important; }
 .fz-11 { font-size: 11px !important; }
 /*============================
 //End Global
@@ -439,8 +439,8 @@ Start Login & crt_account
 	content: '';
 	position: absolute;
 	top: 20px;
-	left: 0;
 	right: 0;
+	left: 0;
     width: 100%;
 	height: 1px;
 	background: #AAA;
@@ -448,8 +448,8 @@ Start Login & crt_account
 }
 .line_or h3 {
 	position: absolute;
-	left: 0;
 	right: 0;
+	left: 0;
 	width: 80px;
 	height: 40px;
 	margin: 0 auto;
@@ -498,8 +498,8 @@ Start Main Navigation
 	border-bottom-color: #FFF;
 	position: absolute;
 	bottom: -6px;
-	left: 50%;
-	margin-left: -10px;
+	right: 50%;
+	margin-right: -10px;
 }
 .top-nav a i {
 	color: #CACACA;
@@ -517,7 +517,7 @@ Start Main Navigation
 }
 .navigation ul li {
 	width: 20%;
-	float: left;
+	float: right;
 }
 .navigation ul li a {
 	background: #8f064e;
@@ -541,10 +541,11 @@ Start Main Navigation
 Start Header Title
 ===========================*/
 .header_title {
+	direction: ltr;
 	position: fixed;
     top: 0;
-    left: 0;
     right: 0;
+    left: 0;
     width: 100%;
     max-width: 768px;
     margin: 0 auto;
@@ -557,7 +558,7 @@ Start Header Title
 .header_title .back_btn,
 .header_title .page_title,
 .header_title .menu_btn {
-	float: left;
+	float: right;
 	width: 15%;
 }
 .header_title .back_btn i {
@@ -596,15 +597,15 @@ Start Menu
 	    min-height: 200px;
 }
 .menu .user_cover img {
-	float: left;
+	float: right;
 	width: 80px;
 	height: 80px;
 	border-radius: 50%;
 	border: 3px solid #FFF;
-	margin-right: 20px;
+	margin-left: 20px;
 }
 .menu .user_cover h3 {
-	float: left;
+	float: right;
 	color: #FFF;
 	font-size: 20px;
 	text-transform: uppercase;
@@ -663,7 +664,7 @@ Start News
 }
 .share-post textarea {
 	width: 100%;
-	padding-left: 60px;
+	padding-right: 60px;
 	border: none;
 	resize: none;
 }
@@ -673,11 +674,11 @@ Start News
 .feed-img {
 	width: 50px;
 	height: 50px;
-	float: left;
-	margin-right: 10px;
+	float: right;
+	margin-left: 10px;
 }
 .feed-header .feed-title {
-	float: left;
+	float: right;
 	width: calc(100% - 60px);
 }
 .feed-title h3 {
@@ -726,7 +727,7 @@ Start News
     overflow: hidden;
 }
 .feed-footer .comment .comment:not(.write-comment) {
-	margin-left: 50px;
+	margin-right: 50px;
 }
 .feed-footer .comment .comment:last-child {
 	margin-bottom: 0;
@@ -759,11 +760,11 @@ Start News
 }
 .feed-editors {
 	margin-top: 10px;
-	margin-left: 40px;
+	margin-right: 40px;
 }
 .feed-editors li {
-	float: left;
-	margin-right: 10px;
+	float: right;
+	margin-left: 10px;
 }
 .feed-editors a:hover {
 	color: #5c0632;
@@ -782,14 +783,14 @@ Start Chat
 }
 .chat>div {
 	width: 85%;
-	float: left;
+	float: right;
 	margin-bottom: 15px;
 	overflow: hidden;
 }
 .chat .user_img {
 	width: 60px;
 	height: 60px;
-	float: left;
+	float: right;
 }
 .chat .user_img img {
 	width: 100%;
@@ -797,17 +798,17 @@ Start Chat
 }
 .chat .text_box {
 	width: calc(100% - 85px);
-	float: left;
-	margin-left: 25px;
+	float: right;
+	margin-right: 25px;
 	position: relative;
 }
 .chat .text_box:before {
 	content: '';
 	position: absolute;
 	top: 10px;
-	left: -20px;
+	right: -20px;
     border: 10px solid transparent;
-    border-right-color: #8f064e;
+    border-left-color: #8f064e;
 }
 .chat .text_box p {
     background: #8f064e;
@@ -819,39 +820,39 @@ Start Chat
 .chat .text_box i {
 	color: #8f064e;
 	font-size: 12px;
-	margin-right: 5px;
+	margin-left: 5px;
 }
 .chat .text_box time {
 	color: #8f064e;
 	font-size: 12px;
 }
-.chat .right_side,
-.chat .right_side .user_img,
-.chat .right_side .text_box,
-.chat .right_side .text_box i,
-.chat .right_side .text_box time {
-	float: right;
+.chat .left_side,
+.chat .left_side .user_img,
+.chat .left_side .text_box,
+.chat .left_side .text_box i,
+.chat .left_side .text_box time {
+	float: left;
 }
-.chat .right_side .text_box {
-	margin-right: 25px;
-	margin-left: 0;
+.chat .left_side .text_box {
+	margin-left: 25px;
+	margin-right: 0;
 }
-.chat .right_side .text_box:before {
-	right: -20px;
-	left: auto;
-	border-left-color: #5c0632;
-	border-right-color: transparent;
+.chat .left_side .text_box:before {
+	left: -20px;
+	right: auto;
+	border-right-color: #5c0632;
+	border-left-color: transparent;
 
 }
-.chat .right_side .text_box p {
+.chat .left_side .text_box p {
     background: #5c0632;
 }
-.chat .right_side .text_box i {
-	margin-right: 0;
-    margin-left: 5px;
+.chat .left_side .text_box i {
+	margin-left: 0;
+    margin-right: 5px;
     margin-top: 3px;
 }
-.chat .right_side .text_box time {
+.chat .left_side .text_box time {
 	margin-top: 3px;
 }
 .message-box {
@@ -881,8 +882,8 @@ Start Friends Requests
 	overflow: hidden;
 }
 @media(max-width: 380px) {
-	.friends_requests .user-item>.pull-right {
-		float: left !important;
+	.friends_requests .user-item>.pull-left {
+		float: right !important;
 		margin-top: 20px;
 	}
 }
@@ -910,7 +911,7 @@ Start Friend List
     font-family: "Ionicons";
     position: absolute;
     bottom: -6px;
-    right: -8px;
+    left: -8px;
     color: #fff;
     background: #4caf50;
     width: 17px;
@@ -921,11 +922,11 @@ Start Friend List
     border-radius: 50%;
 }
 .user-img {
-	float: left;
+	float: right;
 	width: 60px;
 	height: 60px;
 	border: 3px solid #5c0632;
-	margin-right: 20px;
+	margin-left: 20px;
 }
 .user-item img {
 	width: 100%;
@@ -954,15 +955,15 @@ Start Friend Profile
 ====================================*/
 .user_cover h3 {
 	font-size: 16px;
-    margin-left: 22px;
+    margin-right: 22px;
 }
 .friend_profile_box {
 		width: 110px;
 		height: 110px;
     position: absolute;
     bottom: -30px;
-    left: 50%;
-    margin-left: -60px;
+    right: 50%;
+    margin-right: -60px;
     border: 3px solid #fff;
     border-radius: 3px;
 }
@@ -996,8 +997,8 @@ Start Profile
 ====================================*/
 .profile .friend_profile_box {
 	bottom: -40px;
-	left: 40px;
-	margin-left: 0;
+	right: 40px;
+	margin-right: 0;
 }
 .img-upload {
 	position: relative;
@@ -1008,7 +1009,7 @@ Start Profile
 .file-input-profile {
 	position: absolute;
     bottom: 6px;
-    left: 0px;
+    right: 0px;
 }
 .file-input-profile i {
     background: rgba(0,0,0,0.4);
@@ -1025,7 +1026,7 @@ Start Profile
 .profile-editors {
 	position: absolute;
 	bottom: 10px;
-	right: 10px;
+	left: 10px;
 }
 @media (max-width: 460px) {
 	.profile-editors {
@@ -1041,7 +1042,7 @@ Start Profile
 }
 .timeline {
 	position: relative;
-	padding-left: 20px;
+	padding-right: 20px;
 }
 .timeline:before, .timeline .feed-box:before {
     content: "";
@@ -1049,7 +1050,7 @@ Start Profile
     top: 0;
 }
 .timeline:before {
-    left: 0;
+    right: 0;
     bottom: 0px;
     width: 2px;
     background: rgba(0,0,0,0.1);
@@ -1060,7 +1061,7 @@ Start Profile
 }
 .timeline .feed-box:before {
     top: 20px;
-    left: -25px;
+    right: -25px;
     width: 10px;
     height: 10px;
     background: #fff;
@@ -1169,8 +1170,8 @@ Start Profile
 .forum-details h3 span {
 	position: absolute;
 	top: 4px;
-	left: 0;
-	margin-left: 90px;
+	right: 0;
+	margin-right: 90px;
 	line-height: 16px;
 	font-weight: 300;
 }
@@ -1186,8 +1187,8 @@ top: -4px;
 }
 .profile .friend_profile_box {
 	bottom: -40px;
-	left: 40px;
-	margin-left: 0;
+	right: 40px;
+	margin-right: 0;
 }
 .img-upload {
 	position: relative;
@@ -1199,7 +1200,7 @@ top: -4px;
 .file-input-profile {
 	position: absolute;
     bottom: 6px;
-    left: 0px;
+    right: 0px;
 }
 .file-input-profile i {
     background: rgba(0,0,0,0.4);
@@ -1216,7 +1217,7 @@ top: -4px;
 .profile .profile-editors {
 	position: absolute !important;
 	bottom: 10px !important;
-	right: 10px !important;
+	left: 10px !important;
 	    top: auto !important;
 }
 @media (max-width: 460px) {
@@ -1277,7 +1278,7 @@ top: -4px;
     margin-top: 0;
 }
 .feed-header .feed-title {
-    float: left;
+    float: right;
     width: calc(100% - 60px);
 }
 #ion-diagnostics-toast {
@@ -1302,7 +1303,7 @@ top: -4px;
 	  top: 2px;
   }
   .poll-options-container .options input[type="text"] {
-  margin-left:3px
+  margin-right:3px
   }
   .poll-options-container .options input[type=text] {
 	  border: none;
@@ -1350,3 +1351,32 @@ top: -4px;
 		background-color: transparent;
 		display: none;
 	}
+	.pull-left {
+		float: right !important;
+	}
+	.pull-right {
+		float: left !important;
+	}
+	.dropdown-menu-right {
+    left: 0 !important;
+    right: auto !important;
+  }
+	.dropdown-menu-right i {
+		margin-right: -3px !important;
+		margin-left: 5px !important;
+	}
+	.feed-action a i {
+		margin-left: 3px;
+	}
+	.menu_items .input-wrapper .label {
+		text-align: right !important;
+	}
+	.profile .profile-editors {
+    position: absolute !important;
+     top: 10px !important;
+     left: 10px !important;
+		 right: auto !important;
+	 }
+	 .online_mark {
+	   float: left !important;
+   }

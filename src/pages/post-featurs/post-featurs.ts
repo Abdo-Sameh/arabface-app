@@ -21,9 +21,10 @@ export class PostFeatursPage {
   users
   type
   typeId
-  constructor(public navCtrl: NavController,public navParams: NavParams ,public alert:AlertController,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams ,public alert:AlertController,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
       this.type = navParams.get('type');
       this.typeId = navParams.get('type_id');
+      console.log(this.type, this.typeId);
   }
   selectPrivacy()
   {
@@ -47,16 +48,14 @@ export class PostFeatursPage {
         $('#privacy').removeClass('fa fa-globe');
         $('#privacy').removeClass('fa fa-group');
         $('#privacy').addClass('fa fa-lock');
-
       }
-
      })
   }
+
   postFeed(userID=this.userId,postText=this.post)
   {
     let privacy= $('.privacy').attr('id')
     let id=$('.postBody').attr('id')
-
 
     let loading = this.loadingCtrl.create({
       content: "Posting",
@@ -109,8 +108,9 @@ export class PostFeatursPage {
          this.navCtrl.pop()
        }
        else{
+         console.log(userID,postText.text,'none','text',privacy,id, 'no' ,this.type, this.typeId);
       this.remoteService.feedPosting(userID,postText.text,'none','text',privacy,id, 'no' ,this.type, this.typeId).subscribe( res => {
-        // this.feeds.unshift(res.feed)
+
          this.post.text= ""
          //this.getFeedsList(this.userId);
          loading.dismiss();
