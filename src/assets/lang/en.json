@@ -67,7 +67,7 @@
 
 	"terms": "Terms and Conditions",
 
-
+	"pages" : "Pages",
 
 	"support-no-categories": "No categories created! Add new",
 
@@ -556,7 +556,9 @@
 
 	"privacy-settings": "Privacy Settings",
 
+	"photo" : "Photo",
 
+	"whats-happening" : "What is on your mind?",
 
 	"themes": "Themes",
 
@@ -624,7 +626,7 @@
 
 	"get-help": "Get Help",
 
-
+	"my-pages" : "My Pages",
 
 	"first_name": "First Name",
 
@@ -1469,6 +1471,8 @@
 	"menu-structure": "Menu Structure",
 
 	"menu-location": "Menu Location",
+
+	"location" : "Location",
 
 	"main-menu": "Main Menu",
 

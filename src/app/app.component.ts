@@ -80,16 +80,16 @@ export class MyApp {
   }
   initializeApp() {
     this.platform.ready().then(() => {
-      this.globalization.getPreferredLanguage()
-      .then( res => {
-        this.translate.use((res.value).split("-")[0]);
-        this.translate.setDefaultLang((res.value).split("-")[0]);
-        this.deviceLanguage = this.platform.lang();
+      //running from browser
+      this.translate.setDefaultLang("ar");
 
-      });
-      console.log(this.launchNavigator);
+      //running from app
 
-
+      // this.globalization.getPreferredLanguage()
+      // .then( res => {
+      //   this.translate.use((res.value).split("-")[0]);
+      //   this.translate.setDefaultLang((res.value).split("-")[0]);
+      // });
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
