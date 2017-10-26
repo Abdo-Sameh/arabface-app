@@ -206,6 +206,8 @@
 
 	"add-category": "إضافة فئة",
 
+	"category" : "الفئة",
+
 	"title": "العنوان",
 
 	"slug": "سبيكة",
@@ -1122,8 +1124,6 @@
 
 	"height": "ارتفاع",
 
-	"category": "فئة",
-
 	"remove": "إزالة",
 
 	"change-icon": "تغيير أيقونة",
@@ -1568,7 +1568,7 @@
 
 	"people-who-likes": "الناس الذي يحب هذا",
 
-	"people-like-this": "الناس مثل هذا",
+	"people-like-this-page": "الأشخاص الذين أعجبوا بالصفحة",
 
 	"enable-dislike-notification": "إعلام لا يروق لك",
 
@@ -1620,7 +1620,7 @@
 
 	"my-pages": "صفحتي",
 
-	"create": "خلق",
+	"create": "انشاء",
 
 	"create-a-page": "إصنع صفحة",
 
@@ -1645,6 +1645,8 @@
 	"page-information": "معلومات الصفحة",
 
 	"add-role": "إضافة دور:",
+
+	"post" : "نشر" ,
 
 	"save-roles": "حفظ الأدوار",
 
@@ -2085,6 +2087,8 @@
 	"Outing" : "نزهة",
 
 	"Party" : "حفلة",
+
+	"unsave" : "الغاء الحفظ",
 
 	"unsave-group" : "ازالة الحفظ",
 
@@ -2665,6 +2669,10 @@
 	"followed-desc": "مواضيع يتبع",
 
 	"forum": "المنتدى",
+
+	"forums" : "المنتديات",
+
+	"gift-shop" : "معرض الهدايا",
 
 	"forum-create-login-error": "عذرا، يجب أن تكون مسجلا لإنشاء موضوع",
 
@@ -3334,6 +3342,8 @@
 
 	"search-people": "البحث عن أشخاص",
 
+	"search-here": "ابحث هنا ...",
+
 	"show-people-dashboard-link": "يرتبط الناس لوحة القيادة",
 
 	"show-people-dashboard-link-desc": "رابط مشاهدة الناس دليل على لوحة الرئيسية",
@@ -3404,7 +3414,7 @@
 
 	"videos-create-page": "أشرطة الفيديو إنشاء الصفحة",
 
-	"source": "Source",
+	"source": "المصدر",
 
 	"upload-from-computer": "تحميل من الكمبيوتر",
 
@@ -3413,6 +3423,8 @@
 	"external-url-info": "إدخال وصلات الفيديو الخارجية على سبيل المثال يوتيوب، فيميو ",
 
 	"external-link": "رابط خارجي",
+
+	"url" : "الرابط",
 
 	"add-video": "إضافة فيديو",
 
@@ -3979,6 +3991,8 @@
 	"save-badge": "حفظ شارة",
 
 	"badge-type": "نوع شارة",
+
+	"Marketing" : "تسويق",
 
 	"default": "افتراضي",
 

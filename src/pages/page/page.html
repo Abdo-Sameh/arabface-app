@@ -54,7 +54,7 @@
 					<a (click)="inviteFriend()" href="#">{{'invite-friends' | translate}}</a>
 				</div>
 				<div class="panel panel-theme">
-					<a href="#">{{likes}} people like this</a>
+					<a href="#">{{likes}} {{'people-like-this-page' | translate}}</a>
 				</div>
 				<div class="panel panel-theme">
 					<!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit culpa mollitia veniam officiis ex impedit totam, hic nam voluptas temporibus nihil libero ipsam ab distinctio quae nulla quo, aliquam incidunt!</p> -->
@@ -132,7 +132,7 @@
 							<div class="feed-action flex-space-around">
 							  <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
 							  <a href="#" *ngIf="feed.has_like" style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>
-										  <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+										  <a href="#"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
 							  <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
 							</div>
 
@@ -300,7 +300,7 @@
 							  <div class="feed-action flex-space-around">
 								<a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
 								<a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>
-														 <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+														 <a href="#"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
 								<a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
 							  </div>
 						  <div class="clearfix"></div>
@@ -475,7 +475,7 @@
 							  <div class="feed-action flex-space-around">
 								<a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
 								<a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>
-														 <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+														 <a href="#"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
 								<a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
 							  </div>
 						  <div class="clearfix"></div>
@@ -652,7 +652,7 @@
 					  <div class="feed-action flex-space-around">
 						<a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
 						<a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>
-												 <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+												 <a href="#"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
 						<a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
 					  </div>
 				  <div class="clearfix"></div>
@@ -818,7 +818,7 @@
 								<div class="feed-action flex-space-around">
 								  <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
 								  <a href="#" *ngIf="feed.has_like" style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>
-											<a href="#"><i class="fa fa-commenting"></i> Comment</a>
+											<a href="#"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
 								  <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
 								</div>
 							<div class="clearfix"></div>
@@ -983,7 +983,7 @@
 								<div class="feed-action flex-space-around">
 								  <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
 								  <a href="#" *ngIf="feed.has_like" style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up" ></i> Liked</a>
-													<a href="#"><i class="fa fa-commenting"></i> Comment</a>
+													<a href="#"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
 								  <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
 								</div>
 							<div class="clearfix"></div>
@@ -1147,7 +1147,7 @@
 								  <div class="feed-action flex-space-around">
 									<a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
 									<a href="#" *ngIf="feed.has_like" style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>
-													  <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+													  <a href="#"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
 									<a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
 								  </div>
 							  <div class="clearfix"></div>
@@ -1323,7 +1323,7 @@
 								  <div class="feed-action flex-space-around">
 									<a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
 									<a href="#" *ngIf="feed.has_like"  style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up" ></i> Liked</a>
-																 <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+																 <a href="#"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
 									<a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
 								  </div>
 							  <div class="clearfix"></div>
@@ -1499,7 +1499,7 @@
 						<div class="feed-action flex-space-around">
 						  <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
 						  <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"   ></i> Liked</a>
-									 <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+									 <a href="#"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
 						  <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
 						</div>
 					<div class="clearfix"></div>
@@ -1664,7 +1664,7 @@
 						  <div class="feed-action flex-space-around">
 							<a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
 							<a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>
-							<a href="#"><i class="fa fa-commenting"></i> Comment</a>
+							<a href="#"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
 							<a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
 						  </div>
 					  <div class="clearfix"></div>
@@ -1827,7 +1827,7 @@
 						<div class="feed-action flex-space-around">
 						  <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
 						  <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"   ></i> Liked</a>
-										  <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+										  <a href="#"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
 						  <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
 						</div>
 					<div class="clearfix"></div>
@@ -1993,7 +1993,7 @@
 							<a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> Liked</a>
 
 
-							  <a href="#"><i class="fa fa-commenting"></i> Comment</a>
+							  <a href="#"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
 							<a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
 						  </div>
 					  <div class="clearfix"></div>

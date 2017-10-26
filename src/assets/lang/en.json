@@ -175,9 +175,11 @@
 
 	"search": "Search",
 
+	"search-here": "Search here ...",
+
 	"search-phrase-placeholder": "Search for phrases in this language",
 
-
+	"Marketing" : "Marketing",
 
 	"country-manager": "Country Manager",
 
@@ -897,6 +899,8 @@
 
 	"no-groups-found" : "No groups found here",
 
+	"no-events-found" : "No events found here",
+
 	"discover": "Discover",
 
 	"core-plugins": "Core Plugins",
@@ -1018,11 +1022,9 @@
 
 	"change-icon": "Change Icon",
 
-
+	"people-like-this-page" : "People like this page",
 
 	"message": "Message",
-
-
 
 	"ajax-long-polling": "Ajax Long Polling",
 
@@ -1231,7 +1233,9 @@
 
 	"enable-https-desc": "Please confirm your server is enabled with https before enabling this option",
 
+	"unsave" : "Unsave",
 
+	"post" : "Post" ,
 
 	"save-post": "Save",
 
@@ -1242,6 +1246,8 @@
 	"successfully-unsaved": "Successfully removed",
 
 	"saved": "Saved",
+
+	"external-link" : "External link",
 
 	"no-saved-content": "You don't have any content saved here",
 
