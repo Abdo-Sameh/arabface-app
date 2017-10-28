@@ -7,14 +7,14 @@
 <ion-header>
 
     <header class="header_title">
-        <div class="container" style="width: 94% !important;DISPLAY: FLEX; ALIGN-ITEMS: center;">
+        <div class="container">
             <div class="back_btn">
               <a (click)="back()" href="#"><i class="fa fa-arrow-left" style="font-size: 19px;line-height: 43px;"></i></a>
             </div>
-            <div class="page_title text_center">
-              <h3 style="font-size:24px !IMPORTANT">{{userData.name}}</h3>
+            <div class="page_title text-center">
+              <h3>{{userData.name}}</h3>
             </div>
-            <div class="menu_btn">
+            <div class="menu_btn text-right">
                 <a (click)="openMenu()" href="#"><i class="fa fa-bars"  style="font-size: 19px; line-height: 43px;"></i></a>
               </div>
           </div>
@@ -25,7 +25,7 @@
 <ion-content >
 
 
-  <section class="bg_grey full_vh profile pt-14">
+  <section class="bg_grey full_vh profile pt-70">
   <div class="user_cover" [ngStyle]="{ 'background-image': 'url('  + userData['cover'] + ')'}">
     <div class="pull-right">
       <div class="dropdown" style="margin-top: -50px; !important">
@@ -78,7 +78,7 @@
       <div id="tab-content-1{{this.userID}}" class="tab-pane fade timeline active in">
         <div class="share-post panel panel-theme mt-30">
           <img src={{userData.avatar}} alt="">
-          <form><textarea (click)="goToPost()" placeholder="what's in your mind?"></textarea></form>
+          <form><textarea (click)="goToPost()" placeholder="{{'whats-happening' | translate}}"></textarea></form>
         </div>
         <div class="panel panel-theme flex-space-around">
           <a href="#">{{'status' | translate}}</a>
@@ -150,7 +150,7 @@
                         <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
                         <a href="#" *ngIf="feed.has_like" style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
                                     <a href="#"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
-                        <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> Share</a>
+                        <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
                       </div>
 
 
@@ -248,7 +248,7 @@
                     </div>
                     <form>
                       <div class="input-group">
-                        <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
+                        <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}">
                         <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
                       </div>
                     </form>
@@ -318,7 +318,7 @@
                           <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
                           <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
                                                    <a href="#"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
-                          <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> Share</a>
+                          <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
                         </div>
                     <div class="clearfix"></div>
                     <div class="comment-list" >
@@ -412,7 +412,7 @@
                       </div>
                       <form>
                         <div class="input-group">
-                          <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
+                          <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}">
                           <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
                         </div>
                       </form>
@@ -493,7 +493,7 @@
                           <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
                           <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
                                                    <a href="#"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
-                          <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> Share</a>
+                          <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
                         </div>
                     <div class="clearfix"></div>
                     <div class="comment-list" >
@@ -587,7 +587,7 @@
                       </div>
                       <form>
                         <div class="input-group">
-                          <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
+                          <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}">
                           <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
                         </div>
                       </form>
@@ -670,7 +670,7 @@
                   <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
                   <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
                                            <a href="#"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
-                  <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> Share</a>
+                  <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
                 </div>
             <div class="clearfix"></div>
             <div class="comment-list" >
@@ -764,7 +764,7 @@
               </div>
               <form>
                 <div class="input-group">
-                  <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
+                  <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}">
                   <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
                 </div>
               </form>
@@ -836,7 +836,7 @@
                             <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
                             <a href="#" *ngIf="feed.has_like" style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
                                       <a href="#"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
-                            <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> Share</a>
+                            <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
                           </div>
                       <div class="clearfix"></div>
                       <div class="comment-list" >
@@ -930,7 +930,7 @@
                         </div>
                         <form>
                           <div class="input-group">
-                            <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
+                            <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}">
                             <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
                           </div>
                         </form>
@@ -1001,7 +1001,7 @@
                             <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
                             <a href="#" *ngIf="feed.has_like" style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up" ></i> {{'like' | translate}}</a>
                                               <a href="#"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
-                            <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> Share</a>
+                            <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
                           </div>
                       <div class="clearfix"></div>
                       <div class="comment-list" >
@@ -1095,7 +1095,7 @@
                         </div>
                         <form>
                           <div class="input-group">
-                            <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
+                            <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}">
                             <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
                           </div>
                         </form>
@@ -1165,7 +1165,7 @@
                               <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
                               <a href="#" *ngIf="feed.has_like" style="color:#488aff" (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
                                                 <a href="#"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
-                              <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> Share</a>
+                              <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
                             </div>
                         <div class="clearfix"></div>
                         <div class="comment-list" >
@@ -1259,7 +1259,7 @@
                           </div>
                           <form>
                             <div class="input-group">
-                              <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
+                              <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}">
                               <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
                             </div>
                           </form>
@@ -1435,7 +1435,7 @@
                           </div>
                           <form>
                             <div class="input-group">
-                              <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
+                              <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}">
                               <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
                             </div>
                           </form>
@@ -1517,7 +1517,7 @@
                     <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
                     <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"   ></i> {{'like' | translate}}</a>
                                <a href="#"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
-                    <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> Share</a>
+                    <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
                   </div>
               <div class="clearfix"></div>
               <div class="comment-list" >
@@ -1611,7 +1611,7 @@
                 </div>
                 <form>
                   <div class="input-group">
-                    <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
+                    <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}">
                     <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
                   </div>
                 </form>
@@ -1682,7 +1682,7 @@
                       <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
                       <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
                       <a href="#"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
-                      <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> Share</a>
+                      <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
                     </div>
                 <div class="clearfix"></div>
                 <div class="comment-list" >
@@ -1776,7 +1776,7 @@
                   </div>
                   <form>
                     <div class="input-group">
-                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
+                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}">
                       <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
                     </div>
                   </form>
@@ -1845,7 +1845,7 @@
                     <a href="#" *ngIf="feed.has_like ==false"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
                     <a href="#" *ngIf="feed.has_like" style="color:#488aff"  (click)= "likeFeed(30,feed.id,mainI)" ><i class="fa fa-thumbs-o-up"   ></i> {{'like' | translate}}</a>
                                     <a href="#"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
-                    <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> Share</a>
+                    <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
                   </div>
               <div class="clearfix"></div>
               <div class="comment-list" >
@@ -1939,7 +1939,7 @@
                 </div>
                 <form>
                   <div class="input-group">
-                    <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
+                    <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}">
                     <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
                   </div>
                 </form>
@@ -2011,7 +2011,7 @@
 
 
                         <a href="#"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
-                      <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> Share</a>
+                      <a href="#" (click)="sharePost(feed.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
                     </div>
                 <div class="clearfix"></div>
                 <div class="comment-list" >
@@ -2105,7 +2105,7 @@
                   </div>
                   <form>
                     <div class="input-group">
-                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="write a comment ...">
+                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}">
                       <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
                     </div>
                   </form>

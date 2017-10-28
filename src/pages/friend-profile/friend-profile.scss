@@ -1,12 +1,9 @@
 page-friend-profile {
-  .header_title{
-     padding: 7px 0 5px !important
-  }
   .profile-editors
   {
-     position: absolute !important;
-     top: 10px !important;
-     right: 10px !important;
+     position: absolute ;
+     top: 10px;
+     right: 10px;
   }
   @media (max-width: 460px) {
  .profile-editors {
@@ -27,15 +24,15 @@ page-friend-profile {
      padding-bottom: 10px !important;
  }
  @media(min-width: 601px) {
- 	.thumbnails .thumbnail img {
- 	    width: 100%;
- 	    height: 200px;
- 	    object-fit: cover;
- 	}
+   .thumbnails .thumbnail img {
+       width: 100%;
+       height: 200px;
+       object-fit: cover;
+   }
  }
  .thumbnails img {
- 		width: 100%;
- 	}
+     width: 100%;
+   }
  .thumbnails .thumbnail h3 {
      font-weight: 600;
      text-transform: uppercase;
@@ -55,24 +52,17 @@ page-friend-profile {
      font-size: 12px;
  }
  .thumbnails.videos .caption p i {
- 	color: #777;
- 	font-size: 16px;
+   color: #777;
+   font-size: 16px;
      position: relative;
      top: 1px;
  }
  #ion-diagnostics-toast {
- 	background: none !important
+   background: none !important
  }
  .friend_profile_box {
      width: 110px;
      height: 110px;
- }
- .user_cover{
-       margin-top: 66px !important;
- }
- .pages .nav-tabs {
-   margin-top:37px;
-   border: none !important;
  }
  .feed-footer .feed-title h3{
      margin: -1px 0 2px !important;
@@ -116,7 +106,7 @@ page-friend-profile {
      width: 80% !important;
      margin-left: 50px !important;
  }
-.contact-popover {
+ .contact-popover {
      padding: 0px !important;
      top: 115.3789px !important;
      left: 42px !important;

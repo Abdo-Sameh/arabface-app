@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, Nav, NavController,PopoverController ,ToastController, NavParams ,LoadingController ,AlertController} from 'ionic-angular';
+import { IonicPage, App, NavController,PopoverController ,ToastController, NavParams ,LoadingController ,AlertController} from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { TabsPage } from '../tabs/tabs';
 import { ProfilePage } from '../profile/profile';
@@ -44,7 +44,7 @@ export class NewsPage {
     userId
     userAvatar
 
-  constructor(public navCtrl: NavController,public popOver : PopoverController  ,public toast:ToastController, public navParams: NavParams ,public alert:AlertController,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
+  constructor(private app: App, public navCtrl: NavController,public popOver : PopoverController  ,public toast:ToastController, public navParams: NavParams ,public alert:AlertController,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
     if(localStorage.getItem('userDataID'))
     {
      this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "")
@@ -289,7 +289,7 @@ GoToProfile(id,userId)
         console.log(res);
         console.log("----------------------------");
         if(id == userId){
-          this.navCtrl.setRoot(ProfilePage, {
+          this.app.getRootNav().push(ProfilePage, {
             "userData" : res
           });
           // this.navCtrl.push(ProfilePage,{
@@ -298,12 +298,12 @@ GoToProfile(id,userId)
         }else{
             this.remoteService.isBlocked(res.id, this.userId).subscribe(res2 => {
               if(res2.status == 1){
-                this.navCtrl.push(NotFound_404Page, {
+                this.app.getRootNav().push(NotFound_404Page, {
                   "userData" : res,
                   "blocked" : true
                 });
               }else{
-                this.navCtrl.push(FriendProfilePage, {
+                this.app.getRootNav().push(FriendProfilePage, {
                   "userData" : res,
                   "blocked" : false
                 });

@@ -59,7 +59,7 @@
 								        <h3><a (click)="pagePage(page)" href="#">{{ page.title }}</a></h3>
 								        <p>{{ page.description }}</p>
 								        <a *ngIf="page.has_like == false" (click)="likePage(userId, page.id, 'like', i)" href="#"  class="btn btn-default btn-sm"><i class="fa fa-thumbs-o-up"></i> {{'like' | translate}}</a>
-                        <a *ngIf="page.has_like == true" style="color: #488aff" (click)="likePage(userId, page.id, 'dislike', i)" href="#"  class="btn btn-default btn-sm"><i class="fa fa-check"></i> Liked</a>
+                        <a *ngIf="page.has_like == true" style="color: #488aff" (click)="likePage(userId, page.id, 'dislike', i)" href="#"  class="btn btn-default btn-sm"><i class="fa fa-check"></i> {{'like' | translate}}</a>
                     </div>
 							    </div>
 							</div>
@@ -76,7 +76,7 @@
 								        <h3><a (click)="pagePage(page)" href="#">{{ page.title }}</a></h3>
 								        <p>{{ page.description }}</p>
                         <a *ngIf="page.has_like == false" (click)="likePage(userId, page.id, 'like', i)" href="#"  class="btn btn-default btn-sm"><i class="fa fa-thumbs-o-up"></i> {{'like' | translate}}</a>
-                        <a *ngIf="page.has_like == true" style="color: #488aff" (click)="likePage(userId, page.id, 'dislike', i)" href="#"  class="btn btn-default btn-sm"><i class="fa fa-thumbs-o-up"></i> Liked</a>
+                        <a *ngIf="page.has_like == true" style="color: #488aff" (click)="likePage(userId, page.id, 'dislike', i)" href="#"  class="btn btn-default btn-sm"><i class="fa fa-thumbs-o-up"></i> {{'like' | translate}}</a>
                     </div>
 							    </div>
 							</div>

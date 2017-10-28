@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams ,LoadingController, ToastController, AlertController} from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Nav, IonicPage, NavController, NavParams ,LoadingController, ToastController, AlertController} from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { ProfilePage } from '../profile/profile'
 import { TabsPage } from '../tabs/tabs';
@@ -13,11 +13,13 @@ import { NotFound_404Page } from '../not-found-404/not-found-404';
  * Ionic pages and navigation.
  */
 
+
 @Component({
   selector: 'page-friend-profile',
   templateUrl: 'friend-profile.html',
 })
 export class FriendProfilePage {
+  @ViewChild(Nav) nav: Nav;
   userData =[];
   userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
   userID
@@ -132,18 +134,18 @@ export class FriendProfilePage {
           loading.dismiss();this.userData = res ;
           res.id=id;
           if(id == userId){
-            this.navCtrl.push(ProfilePage,{
+            this.nav.setRoot(ProfilePage,{
               "userData" : res
             })
           }else{
             this.remoteService.isBlocked(res.id, this.userId).subscribe(res2 => {
               if(res2.status == 1){
-                this.navCtrl.push(NotFound_404Page, {
+                this.nav.setRoot(NotFound_404Page, {
                   "userData" : res,
                   "blocked" : true
                 });
               }else{
-                this.navCtrl.push(FriendProfilePage, {
+                this.nav.setRoot(FriendProfilePage, {
                   "userData" : res,
                   "blocked" : false
                 });

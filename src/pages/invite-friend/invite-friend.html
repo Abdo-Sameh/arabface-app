@@ -28,7 +28,7 @@
 			<div class="container">
 				<form class="search-form user-item pb-25">
 					<div class="input-group">
-						<input type="text" class="form-control" [(ngModel)]="search" [ngModelOptions]="{ standalone :true}" (keyup)="friendsListApiCall(userId, userId, search)" placeholder="Search here ...">
+						<input type="text" class="form-control" [(ngModel)]="search" [ngModelOptions]="{ standalone :true}" (keyup)="friendsListApiCall(userId, userId, search)" placeholder="{{'search-here' | translate}}">
 						<div class="input-group-btn">
 							<!-- <button type="submit" class="btn btn-default">
 								<i class="fa fa-search"></i>
@@ -47,16 +47,16 @@
 							</div>
 						</div>
             <div *ngIf="page">
-              <button *ngIf="friend.invited == true" type="submit" class="fa fa-check btn btn-theme pull-right">Invited</button>
+              <button *ngIf="friend.invited == true" type="submit" class="fa fa-check btn btn-theme pull-right">{{'invited' | translate}}</button>
               <button *ngIf="friend.invited == false" (click)="inviteFriendTolikepage(friend.id, i)" type="submit" class="btn btn-theme pull-right">{{'send-invite' | translate}}</button>
             </div>
             <div *ngIf="event">
-              <button *ngIf="friend.invited == true" type="submit" class="fa fa-check btn btn-theme pull-right">Invited</button>
+              <button *ngIf="friend.invited == true" type="submit" class="fa fa-check btn btn-theme pull-right">{{'invited' | translate}}</button>
               <button *ngIf="friend.invited == false" (click)="inviteFriendToEvent(friend.id, i)" type="submit" class="btn btn-theme pull-right">{{'send-invite' | translate}}</button>
             </div>
             <div *ngIf="group">
-              <button *ngIf="friend.added == true" type="submit" class="fa fa-check btn btn-theme pull-right">Added</button>
-              <button *ngIf="friend.added == false" (click)="addMember(friend.id, i)" type="submit" class="btn btn-theme pull-right">Add</button>
+              <button *ngIf="friend.added == true" type="submit" class="fa fa-check btn btn-theme pull-right">{{'added' | translate}}</button>
+              <button *ngIf="friend.added == false" (click)="addMember(friend.id, i)" type="submit" class="btn btn-theme pull-right">{{'add' | translate}}</button>
             </div>
           </div>
 

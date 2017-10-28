@@ -832,11 +832,13 @@ console.log(url)
   ////////////////////////////////////////////////
 
   ////////////// get notifications /////////////////
-  getNotifications(userid)
-  {
-    return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/notifications?userid='+userid)
+  getNotifications(userid, limit, page) {
+    return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/notifications?userid='+userid + "&limit=" + limit + "&page=" + page)
+      .map((res : Response ) => res.json());
+  }
 
-    //do((res : Response ) => console.log(res.json()))
+  getUnreadNotifications(userid, limit, page){
+    return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/notifications/unread?userid='+userid + "&limit=" + limit + "&page=" + page)
       .map((res : Response ) => res.json());
   }
 

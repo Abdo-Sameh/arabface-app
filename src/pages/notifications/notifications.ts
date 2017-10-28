@@ -18,10 +18,12 @@ import { ProfilePage} from '../profile/profile'
 export class NotificationsPage {
   public userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
   notifications;
+  unread;
   userData
 
   constructor(public navCtrl: NavController, public navParams: NavParams ,public loadingCtrl :LoadingController, public remoteService : RemoteServiceProvider , public loading: LoadingController) {
-    this.getNotifications(this.userId)
+    this.getNotifications(this.userId);
+    this.getUnreadNotifications();
   }
 
   ionViewDidLoad() {
@@ -33,28 +35,34 @@ export class NotificationsPage {
   {
     let loading = this.loading.create({
       content: "Loading",
-    });        
-    loading.present()  
-    this.remoteService.getNotifications(userid).subscribe(res => { loading.dismiss();console.log(res);this.notifications=res
-    
+    });
+    loading.present()
+    this.remoteService.getNotifications(userid, 10, 1).subscribe(res => { loading.dismiss();console.log(res);this.notifications=res
+
       console.log(this.notifications)
+    });
+  }
+  getUnreadNotifications(){
+    this.remoteService.getUnreadNotifications(this.userId, 10, 1).subscribe(res => {
+      this.unread = res;
+      console.log(res);
     });
   }
   GoToProfile(id)
   {
     let loading = this.loadingCtrl.create({
       content: "Loading",
-    });        
+    });
     loading.present()
-  
-      this.remoteService.profileDetailsApiCall(this.userId,id).subscribe(res =>{loading.dismiss();this.userData = res ; res.id=id;    
+
+      this.remoteService.profileDetailsApiCall(this.userId,id).subscribe(res =>{loading.dismiss();this.userData = res ; res.id=id;
        this.navCtrl.push(ProfilePage,{"userData" : res})
     });
-    
+
   }
-  
+
   displayPost(feed,type,userid)
-  { 
+  {
     if(type == 'profile.view')
     {
       console.log(userid)
@@ -62,9 +70,9 @@ export class NotificationsPage {
     }else if(type == 'relationship.confirm')
     {
       console.log(userid)
-      
+
       this.GoToProfile(userid)
-      
+
     }else if(type == 'relationship.add')
     {
 
@@ -79,7 +87,7 @@ export class NotificationsPage {
 
     }else if(type == 'group.add.member')
     {
-      
+
     }else{
     this.navCtrl.push(PostPage , { 'feed' : feed[0]})
     }

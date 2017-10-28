@@ -33,6 +33,7 @@ export class TabsPage {
   tab5Root = FriendsPage;
   tab6Root = MenuPage;
   FriendsRequest
+  notifications
   userId
 
   pages: Array<{title: string, component: any}>;
@@ -41,9 +42,11 @@ export class TabsPage {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     console.log(localStorage.getItem('loggedIn'))
     this.getFriendsRequestList(this.userId);
+    this.getUnreadNotifications();
     this.menu = menu;
     this.menu.enable(true)
     this.FriendsRequest = [];
+    this.notifications = [];
     this.pages = [
       { title: 'Profile', component: ProfilePage },
       { title: 'Online friends', component:  OnlinePage},
@@ -71,6 +74,12 @@ export class TabsPage {
   }
   getFriendsRequestList(Id) {
     this.remoteService.friendsRequestListApiCall(Id).subscribe(res =>{this.FriendsRequest = res; console.log(res)});
+  }
+  getUnreadNotifications(){
+    this.remoteService.getUnreadNotifications(this.userId, 10, 1).subscribe(res => {
+      this.notifications = res;
+      console.log(res);
+    });
   }
 
 }
