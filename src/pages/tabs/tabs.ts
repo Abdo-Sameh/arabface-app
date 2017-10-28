@@ -26,20 +26,20 @@ import { GiftsPage } from "../gifts/gifts";
 })
 export class TabsPage {
   @ViewChild(Nav) nav: Nav;
-  
+
   tab2Root = NewsPage;
   tab3Root = NotificationsPage;
   tab4Root  = MessagesPage;
   tab5Root = FriendsPage;
   tab6Root = MenuPage;
-  
+
 
   pages: Array<{title: string, component: any}>;
-  
+
   constructor(public navCtrl: NavController,public menu: MenuController) {
     console.log(localStorage.getItem('loggedIn'))
     this.menu = menu;
-    this.menu.enable(true)    
+    this.menu.enable(true)
     this.pages = [
       { title: 'Profile', component: ProfilePage },
       { title: 'Online friends', component:  OnlinePage},
@@ -58,12 +58,12 @@ export class TabsPage {
   }
   openMenu()
   {
-    this.menu.open();    
+    this.menu.open();
   }
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
-  
+
 }

@@ -12,7 +12,7 @@
 					<a (click)="back()"><i class="fa fa-arrow-left"></i></a>
 				</div>
 				<div class="page_title text-center">
-					<h3>Delete Account</h3>
+					<h3>{{'delete-my-account' | translate}}</h3>
 				</div>
 				<div class="menu_btn text-right">
 					<a href="#"><i class="fa fa-bars" style="color:#fff;font-size:18px"></i></a>
@@ -28,12 +28,12 @@
 			<div class="container">
 				<form>
 					<div class="form-group mt-20">
-						<p class="help-block">To delete your account, enter your current password, please note that you cannot undo this action</p>
-						<label for="cur_pass">Current Password:</label>
+						<p class="help-block">{{'delete-account-description' | translate}}</p>
+						<label for="cur_pass">{{'current-password' | translate}}:</label>
 				        <input type="password" class="form-control" id="cur_pass" [(ngModel)]="password" [ngModelOptions]="{ standalone :true}">
 					</div>
 					<div class="form-group mt-30">
-						<button (click)="deleteAccount(password)" type="submit" class="btn btn-theme">Delete</button>
+						<button (click)="deleteAccount(password)" type="submit" class="btn btn-theme">{{'delete' | translate}}</button>
 					</div>
 	      	    </form>
       	    </div>

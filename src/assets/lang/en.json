@@ -95,7 +95,7 @@
 
 	"general-image-error": "Failed to process your image",
 
-
+	"general-settings-info" : "Manage your first, last name and city e.t.c",
 
 	"user-roles": "User Roles",
 
@@ -382,6 +382,10 @@
 
 	"manage": "Manage",
 
+	"delete-account-description" : "To delete your account, enter your current password, please note that you cannot undo this action",
+
+	"block-description" : "Once you block someone, that person can no longer see things you post on your timeline, tag you, invite you to events or groups, start a conversation with you, or add you as a friend. This doesn't include apps, games or groups you both participate in.",
+
 	"save-settings": "Save settings",
 
 	"general-settings-description": "Manage general settings like site title,description,keywords and more settings you can find below",
@@ -393,6 +397,12 @@
 	"choose-logo": "Choose logo",
 
 	"theme-settings": "Theme Settings",
+
+	"privacy-settings-info" : "Control who can view your profile e.t.c",
+
+	"blocking-settings-info" : "You can block someone from contacting you",
+
+	"notification-settings-info" : "Control what notifications you receive from us",
 
 	"theme-settings-description": "Control your site appearance with new logo, select good site column and more settings you can find below",
 
@@ -1098,6 +1108,8 @@
 
 	"payments": "Payment Gateway",
 
+	"send-me-notifications-when" : "Send me notifications when",
+
 	"payments-settings-description": "Set up available payment gateway and default currency use ",
 
 	"default-currency-desc": "Select the preferred currency and note that not all payment gateway support it",
@@ -1122,6 +1134,8 @@
 	"enable-stripe-desc": "With this option you can enable or disable stripe payment options for your members",
 
 	"stripe-secret-key": "Stripe Secret Key",
+
+	"enable-store-notifications" : "Enable store notifications",
 
 	"stripe-secret-key-desc": "Set your stripe secret key",
 
