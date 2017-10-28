@@ -36,7 +36,7 @@
 			<div class="container">
 				<form class="search-form search-filter mt-10 mb-30">
 					<div class="input-group">
-						<input type="text" class="form-control" [(ngModel)]="search" [ngModelOptions]="{ standalone :true}" placeholder="Search here ...">
+						<input type="text" class="form-control" [(ngModel)]="search" [ngModelOptions]="{ standalone :true}" placeholder="{{'search-here' | translate}}">
 
 						<select class="form-control" [(ngModel)]="filter" [ngModelOptions]="{ standalone :true}" (ngModelChange)="getGroups(this.type, '' ,this.filter, userId, 1)">
 							<option value="all">{{'all' | translate}}</option>

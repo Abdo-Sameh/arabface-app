@@ -12,7 +12,7 @@
 					<a (click)="back()"><i class="fa fa-arrow-left"></i></a>
 				</div>
 				<div class="page_title text-center">
-					<h3>Create Group</h3>
+					<h3>{{'create-group' | translate}}</h3>
 				</div>
 				<div class="menu_btn text-right">
 					<a href="#"><i class="fa fa-bars" style="color:#fff;font-size:18px"></i></a>
@@ -28,22 +28,22 @@
 			<div class="container">
 				<form>
 		       	    <div class="form-group mt-20">
-				        <label for="g_name">Title:</label>
+				        <label for="g_name">{{'title' | translate}}:</label>
 				        <input type="text" class="form-control" id="g_name" [(ngModel)]="title" [ngModelOptions]="{ standalone :true}">
 				    </div>
 				    <div class="form-group">
-				        <label for="g_desc">Description:</label>
+				        <label for="g_desc">{{'description' | translate}}:</label>
 				        <textarea rows="7" class="form-control" id="g_desc" [(ngModel)]="description" [ngModelOptions]="{ standalone :true}"></textarea>
 				    </div>
 				    <div class="form-group">
-				        <label for="g_priv">Privacy:</label>
+				        <label for="g_priv">{{'privacy' | translate}}:</label>
 				        <select class="form-control" id="g_priv" [(ngModel)]="privacy" [ngModelOptions]="{ standalone :true}">
-    							<option value="1">Public</option>
-    							<option value="2">Private</option>
+    							<option value="1">{{'public' | translate}}</option>
+    							<option value="2">{{'private' | translate}}</option>
 				        </select>
 				    </div>
 				    <div class="form-group mt-30 mb-30">
-		            	<button (click)="createGroup(this.title, this.description, this.privacy, this.userId)" type="submit" class="btn btn-theme">Create</button>
+		            	<button (click)="createGroup(this.title, this.description, this.privacy, this.userId)" type="submit" class="btn btn-theme">{{'create' | translate}}</button>
 	            	</div>
 				</form>
 			</div>

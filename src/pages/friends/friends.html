@@ -4,21 +4,7 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
-<!-- <header class="header_title">
-  <div class="container">
-    <div class="back_btn">
-      <a  (click)="back()"><i class="fa fa-arrow-left"></i></a>
-    </div>
-    <div class="page_title text_center">
-      <h3>Friends</h3>
-    </div>
-    <div class="menu_btn">
-        <a href="#"><i class="fa fa-bars" style="color:#fff;font-size:18px"></i></a>
-      </div>
-  </div>
-</header> -->
-</ion-header>
+
 <ion-content>
 <section >
   <div class="container" >
@@ -26,7 +12,7 @@
         <div *ngFor="let friend of FriendsRequest ; let i = index ">
 					<div class="nav_requests">
 						<div class="pull-left" style="color:#5c0632">
-							<h4>{{'friends' | translate}}</h4>
+							<h4>{{'friend-requests' | translate}}</h4>
 						</div>
 						<!-- <div class="pull-right">
 							<h4><a href="#">Fiend Friends</a></h4>
@@ -43,8 +29,8 @@
 							</div>
 						</div>
 						<div class="pull-right">
-							<a href="#" (click)="confirmFriendrequest(friend.id,i)" class="btn btn-default btn-sm mr-10">Confirm</a>
-							<a href="#" (click)="DeleteFriendrequest(friend.id,i)" class="btn btn-default btn-sm">Cancel</a>
+							<a href="#" (click)="confirmFriendrequest(friend.id,i)" class="btn btn-default btn-sm mr-10">{{'confirm' | translate}}</a>
+							<a href="#" (click)="DeleteFriendrequest(friend.id,i)" class="btn btn-default btn-sm">{{'cancel' | translate}}</a>
 						</div>
 						<div class="clearfix"></div>
 					</div> <!-- //user-item -->
@@ -60,44 +46,26 @@
                 <h4><a href="#">Fiend Friends</a></h4>
               </div> -->
             </div>
-            <div class="user-item"   >
-
-                  <h6>There is no friend request</h6>
-
+            <div class="user-item">
+                <h6>{{'no-friend-requests' | translate}}</h6>
             </div> <!-- //user-item -->
-
           </div>
-
-    <!-- <div class="users-list">
-      	<div class="pull-left" style="color:#5c0632"  >
-            <h4>Friends </h4>
-          </div><br>
-          <br><br>
-      <div class="user-item" *ngFor="let friend of friendslist" >
-        <div class="user-img active">
-          <img (click)="GoToProfile(friend.userid)" src="{{friend.avatar}}" alt="Arabface" title="Arabface">
-        </div>
-        <div class="user-info">
-          <a (click)="GoToProfile(friend.userid)" style="cursor:pointer">{{friend.name}}</a>
-          <p></p>
-        </div>
-
-      </div>
-
-    </div> -->
 
     <div class="users-list">
       	<div class="pull-left" style="color:#5c0632">
-            <h4>Suggestions </h4>
+            <h4>{{'suggestions' | translate}} </h4>
           </div><br>
           <br><br>
       <div class="user-item" *ngFor="let friend of FriendsSuggestion ; let i = index" >
-        <div class="user-img active">
+        <div class="user-img">
           <img (click)="GoToProfile(friend.userid, Id)" src="{{friend.avatar}}" alt="Arabface" title="Arabface">
         </div>
         <div class="user-info">
           <a (click)="GoToProfile(friend.userid, Id)" style="cursor:pointer;color:#333">{{friend.name}}</a>
-          <p><a  (click)="addfriend(friend.userid,i)"  class="btn btn-default btn-sm mr-10 Addfriend">add friend </a></p>
+          <a href="#" *ngIf="friend.friend_status == 2" style="color: #488aff" class="btn btn-default btn-sm"><i  class="fa fa-check"></i> {{'friends' | translate}}</a>
+          <a href="#" *ngIf="friend.friend_status == 1" style="color: #488aff" class="btn btn-default btn-sm"><i  class="fa fa-check"></i> {{'request-sent' | translate}}</a>
+          <a (click)="addfriend(friend.id,i)" href="#" *ngIf="friend.friend_status == '0'" class="btn btn-default btn-sm mr-10 Addfriend"><i  class="fa fa-user-plus"></i> {{'add-friend' | translate}}</a>
+          <!-- <p><a (click)="addfriend(friend.userid,i)"  class="btn btn-default btn-sm mr-10 Addfriend">{{'add-friend' | translate}}</a></p> -->
         </div>
       </div> <!-- //user-item -->
 

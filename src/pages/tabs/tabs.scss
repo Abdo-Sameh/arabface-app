@@ -23,11 +23,12 @@
        margin: 0 auto;
     }
     .tabs-md .tab-button[aria-selected=true] .tab-button-icon {
-   
-        font-size: 36px ; 
+
+        font-size: 36px ;
     }
     .tabs-md .tab-button-icon {
-   font-size: 36px ; 
+   font-size: 36px ;
     }
-   
-   
+    .badge {
+    background-color: #f53d3d !important;
+}

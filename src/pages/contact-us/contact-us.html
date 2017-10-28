@@ -28,23 +28,23 @@
 			<div class="container">
 				<form>
 					<div class="form-group mt-20">
-						<label for="name">Name:</label>
+						<label for="name">{{'name' | translate}}:</label>
 				        <input type="text" class="form-control" id="name" [(ngModel)]="name" [ngModelOptions]="{ standalone :true}">
 					</div>
 					<div class="form-group">
-						<label for="email">Email Address:</label>
+						<label for="email">{{'email-address' | translate}}:</label>
 				        <input type="email" class="form-control" id="email" [(ngModel)]="email" [ngModelOptions]="{ standalone :true}">
 					</div>
 					<div class="form-group">
-						<label for="subject">Subject:</label>
+						<label for="subject">{{'subject' | translate}}:</label>
 				        <input type="text" class="form-control" id="subject" [(ngModel)]="subject" [ngModelOptions]="{ standalone :true}">
 					</div>
 					<div class="form-group">
-						<label for="message">Message:</label>
+						<label for="message">{{'message' | translate}}:</label>
 				        <textarea rows="7" class="form-control" id="message" [(ngModel)]="message" [ngModelOptions]="{ standalone :true}"></textarea>
 					</div>
 					<div class="form-group mt-30 mb-30">
-						<button (click)="contactUs(name, email, subject, message)" type="submit" class="btn btn-theme">Send</button>
+						<button (click)="contactUs(name, email, subject, message)" type="submit" class="btn btn-theme">{{'send' | translate}}</button>
 					</div>
 	      	    </form>
       	    </div>
