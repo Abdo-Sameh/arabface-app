@@ -1,3 +1,18 @@
 page-notifications {
-
+  .container {
+    width: 100%;
+  }
+  .user-item {
+    position: relative;
+    margin-top: 0;
+    padding-top: 20px;
+  }
+  .user-info {
+    position: absolute;top: 26px;right: 92px;
+  }
+  .read-mark {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+  }
 }

@@ -65,7 +65,7 @@ export class MyApp {
         { title: 'groups', component: GroupsPage ,icon : 'fa fa-users'},
         { title: 'events', component: EventsPage ,icon : 'fa fa-calendar'},
         { title: 'contact-us', component: ContactUsPage ,icon : 'fa fa-envelope'},
-        { title: 'gift Shop', component: GiftsPage ,icon : 'fa fa-shopping-bag'},
+        { title: 'gift-shop', component: GiftsPage ,icon : 'fa fa-shopping-bag'},
         { title: 'saved', component: SavedPage ,icon : 'fa fa-bookmark'},
         { title: 'discover', component: TrendingPage,icon : 'fa fa-hashtag'},
         { title: 'settings', component: SettingsPage ,icon : 'fa fa-cog'},
@@ -82,7 +82,7 @@ export class MyApp {
     this.platform.ready().then(() => {
       //running from browser
       this.translate.setDefaultLang("ar");
-      // this.platform.setDir('rtl', true);
+      this.platform.setDir('rtl', true);
 
       //running from app
 

@@ -36,7 +36,7 @@
 			<div class="container">
 				<form class="search-form search-filter mt-10 mb-30">
 					<div class="input-group">
-						<input type="text" class="form-control"  [(ngModel)]="search" [ngModelOptions]="{ standalone :true}" placeholder="Search here ...">
+						<input type="text" class="form-control"  [(ngModel)]="search" [ngModelOptions]="{ standalone :true}" placeholder="{{'search-here' | translate}}">
 						<select class="form-control"  [(ngModel)]="category" [ngModelOptions]="{ standalone :true}" (ngModelChange)="getPages(this.type, '' ,this.category, userId, 1)">
 							<option *ngFor="let category of categories"  value="{{ category.id }}">{{ category.title | translate }}</option>
 						</select>

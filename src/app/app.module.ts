@@ -69,9 +69,7 @@ import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-na
 import { Globalization } from '@ionic-native/globalization';
 import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
 import { NotFound_404Page } from '../pages/not-found-404/not-found-404';
-// import { Transfer } from '@ionic-native/transfer';
-// import { FilePath } from '@ionic-native/file-path';
-// import { Camera } from '@ionic-native/camera';
+import { LatestVisitorsPage } from '../pages/latest-visitors/latest-visitors';
 
 @NgModule({
   declarations: [
@@ -119,7 +117,7 @@ import { NotFound_404Page } from '../pages/not-found-404/not-found-404';
     SavedPage,
     CreateAlbumPage,
     PhotoselectionPage, CreateEventPage, EditEventPage, EventPage,
-    NotFound_404Page
+    NotFound_404Page, LatestVisitorsPage
   ],
   imports: [
 BrowserModule , IonicModule.forRoot(MyApp), HttpModule, TranslateModule.forRoot({
@@ -175,7 +173,7 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule, TranslateModule.forRoot(
     CreateAlbumPage,
     InviteFriendPage,
     PhotoselectionPage, CreateEventPage, EditEventPage, EventPage,
-    NotFound_404Page
+    NotFound_404Page, LatestVisitorsPage
   ],
   providers: [
     StatusBar,
