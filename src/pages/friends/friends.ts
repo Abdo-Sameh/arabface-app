@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,LoadingController,ToastController } from 'ionic-angular';
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
-import {TabsPage} from '../tabs/tabs';
-import {ProfilePage} from '../profile/profile';
+import { TabsPage } from '../tabs/tabs';
+import { ProfilePage } from '../profile/profile';
 
 /**
  * Generated class for the FriendsPage page.
@@ -38,7 +38,7 @@ export class FriendsPage {
   getFriendsList(Id, term="")
   {
 
- 
+
     this.remoteService.friendsListApiCall(Id, Id, term).subscribe(res =>{this.friendslist=res ;console.log(res)});
   }
 
@@ -67,9 +67,8 @@ export class FriendsPage {
 
     this.remoteService.addFriend(userid,friendId).subscribe(res => {
       console.log(res)
-      if(res.status == 1)
-      {
-        this.FriendsSuggestion.splice(index,1)
+      if(res.status == 1) {
+        this.FriendsSuggestion[index].friend_status = 1;
       }
        let toast = this.toastCtrl.create({
         message: "friend request sent",
@@ -82,11 +81,11 @@ export class FriendsPage {
   confirmFriendrequest(friendId,index,userid=this.Id)
   {
 
-    this.remoteService.ConfirmFriendRequest(friendId,userid).subscribe(res => {
+    this.remoteService.ConfirmFriendRequest(userid,friendId).subscribe(res => {
       if(res.status == 1)
       {
         this.FriendsRequest.splice(index,1)
-      }
+      };
       let toast = this.toastCtrl.create({
         message: "added",
         duration: 2000

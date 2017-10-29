@@ -12,7 +12,7 @@
 					<a (click)="back()"><i class="fa fa-arrow-left"></i></a>
 				</div>
 				<div class="page_title text-center">
-					<h3>Edit Group</h3>
+					<h3>{{'edit-group' | translate}}</h3>
 				</div>
 				<div class="menu_btn text-right">
 					<a href="#"><i class="fa fa-bars" style="color:#fff;font-size:18px"></i></a>
@@ -28,39 +28,39 @@
 			<div class="container">
 				<form>
 		       	    <div class="form-group mt-20">
-				        <label for="g_name">Title:</label>
+				        <label for="g_name">{{'title' | translate}}:</label>
 				        <input type="text" class="form-control" id="g_name" value="{{ group.title }}" [(ngModel)]="group.title" [ngModelOptions]="{ standalone :true}">
 				    </div>
 				    <div class="form-group">
-				        <label for="g_desc">Description:</label>
+				        <label for="g_desc">{{'description' | translate}}:</label>
 				        <textarea rows="7" class="form-control" id="g_desc" value="{{ group.description }}" [(ngModel)]="group.description" [ngModelOptions]="{ standalone :true}"></textarea>
 				    </div>
 				    <div class="form-group">
-				        <label for="g_priv">Privacy:</label>
+				        <label for="g_priv">{{'privacy' | translate}}:</label>
 				        <select class="form-control" id="g_priv" [(ngModel)]="privacy" [ngModelOptions]="{ standalone :true}">
-    							<option value="1">Public</option>
-    							<option value="2">Private</option>
+    							<option value="1">{{'public' | translate}}</option>
+    							<option value="2">{{'private' | translate}}</option>
 				        </select>
 				    </div>
 				    <div class="form-group">
-				        <label for="g_priv">Who can post to this group?</label>
+				        <label for="g_priv">{{'group-who-can-post' | translate}}</label>
 				        <select class="form-control" id="g_priv" [(ngModel)]="canPost" [ngModelOptions]="{ standalone :true}">
-    							<option value="3">Admins</option>
-    							<option value="2">Moderators &amp; Admins</option>
-    							<option value="1">Members</option>
+    							<option value="3">{{'admins' | translate}}</option>
+    							<option value="2">{{'moderators' | translate}} &amp; {{'admins' | translate}}</option>
+    							<option value="1">{{'members' | translate}}</option>
 				        </select>
 				    </div>
 				    <div class="form-group">
-				        <label for="g_priv">Who can add member to this group?</label>
+				        <label for="g_priv">{{'group-who-can-add-member' | translate}}</label>
 				        <select class="form-control" id="g_priv" [(ngModel)]="canAddMember" [ngModelOptions]="{ standalone :true}">
-    							<option value="3">Admins</option>
-    							<option value="2">Moderators &amp; Admins</option>
-    							<option value="1">Members</option>
+    							<option value="3">{{'admins' | translate}}</option>
+    							<option value="2">{{'moderators' | translate}} &amp; {{'admins' | translate}}</option>
+    							<option value="1">{{'members' | translate}}</option>
 				        </select>
 				    </div>
 				    <div class="form-group mt-30 mb-30">
-		            <button (click)="editGroup(group.title, group.description, this.privacy, group.id, this.canPost, this.canAddMember)" type="submit" class="btn btn-theme">Save</button>
-                <button (click)="deleteGroup(group.id)" type="submit" class="btn btn-theme">Delete</button>
+		            <button (click)="editGroup(group.title, group.description, this.privacy, group.id, this.canPost, this.canAddMember)" type="submit" class="btn btn-theme">{{'save' | translate}}</button>
+                <button (click)="deleteGroup(group.id)" type="submit" class="btn btn-theme">{{'delete' | translate}}</button>
             </div>
 				</form>
 			</div>

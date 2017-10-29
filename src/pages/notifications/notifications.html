@@ -22,12 +22,12 @@
           <div (click)="displayPost(notify.feed,notify.type,notify.userid)" class="user-info" *ngSwitchCase="notify.type == 'feed.like.comment'" >
             <h5>{{notify.name}} <span>Liked your comment</span></h5>
             <p>{{notify.time}}</p>
-          </div>	
+          </div>
 
           <div (click)="displayPost(notify.feed,notify.type,notify.userid)" class="user-info" *ngSwitchCase="notify.type == 'profile.view'" >
             <h5>{{notify.name}} <span>viewed your profile</span></h5>
             <p>{{notify.time}}</p>
-          </div>	
+          </div>
           <div (click)="displayPost(notify.feed,notify.type,notify.userid)" class="user-info" *ngSwitchCase="notify.type == 'feed.shared'" >
             <h5>{{notify.name}} <span>shared your post</span></h5>
             <p>{{notify.time}}</p>
@@ -61,37 +61,37 @@
            <div (click)="displayPost(notify.feed,notify.type,notify.userid)" class="user-info" *ngSwitchCase="notify.type == 'group.add.member'" >
               <h5>{{notify.name}} <span>added you to  group {{notify.title}}</span></h5>
               <p>{{notify.time}}</p>
-           </div>	
+           </div>
            <div (click)="displayPost(notify.feed,notify.type,notify.userid)" class="user-info" *ngSwitchCase="notify.type == 'feed.comment.reply'" >
               <h5>{{notify.name}} <span>replied on your  comment </span></h5>
               <p>{{notify.time}}</p>
-           </div>	
+           </div>
            <div (click)="displayPost(notify.feed,notify.type,notify.userid)" class="user-info" *ngSwitchCase="notify.type == 'page.invite'" >
               <h5>{{notify.name}} <span>invited you to  page {{notify.title}}</span></h5>
               <p>{{notify.time}}</p>
-           </div>			
+           </div>
            <div (click)="displayPost(notify.feed,notify.type,notify.userid)" class="user-info" *ngSwitchCase="notify.type == 'feed.mention'" >
               <h5>{{notify.name}} <span>mentioned you in  post {{notify.title}}</span></h5>
               <p>{{notify.time}}</p>
-           </div>		
+           </div>
            <div (click)="displayPost(notify.feed,notify.type,notify.userid)" class="user-info" *ngSwitchCase="notify.type == 'feed.like'" >
               <h5>{{notify.name}} <span>liked your post</span></h5>
               <p>{{notify.time}}</p>
-           </div>	
+           </div>
            <div (click)="displayPost(notify.feed,notify.type,notify.userid)" class="user-info" *ngSwitchCase="notify.type == 'relationship.confirm'" >
               <h5>{{notify.name}} <span>accepted your friend request</span></h5>
               <p>{{notify.time}}</p>
-           </div>	
+           </div>
            <div (click)="displayPost(notify.feed,notify.type,notify.userid)" class="user-info" *ngSwitchCase="notify.type == 'relationship.add'" >
               <h5>{{notify.name}} <span>sent you friend request</span></h5>
               <p>{{notify.time}}</p>
-           </div>	
+           </div>
            <div (click)="displayPost(notify.feed,notify.type,notify.userid)" class="user-info" *ngSwitchCase="notify.type == 'feed.comment'" >
               <h5>{{notify.name}} <span>commented on your post</span></h5>
               <p>{{notify.time}}</p>
-           </div>	
+           </div>
           </div>
-          
+
           <div class="clearfix"></div>
         </div> <!-- //user-item -->
 

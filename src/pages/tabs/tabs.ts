@@ -1,6 +1,6 @@
 import { Component ,ViewChild} from '@angular/core';
 import { HomePage} from '../home/home';
-
+import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
 import { NewsPage} from '../news/news';
 import { MessagesPage} from '../messages/messages';
 import { NotificationsPage} from '../notifications/notifications';
@@ -26,20 +26,27 @@ import { GiftsPage } from "../gifts/gifts";
 })
 export class TabsPage {
   @ViewChild(Nav) nav: Nav;
-  
+
   tab2Root = NewsPage;
   tab3Root = NotificationsPage;
   tab4Root  = MessagesPage;
   tab5Root = FriendsPage;
   tab6Root = MenuPage;
-  
+  FriendsRequest
+  notifications
+  userId
 
   pages: Array<{title: string, component: any}>;
-  
-  constructor(public navCtrl: NavController,public menu: MenuController) {
+
+  constructor(public remoteService :RemoteServiceProvider, public navCtrl: NavController,public menu: MenuController) {
+    this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     console.log(localStorage.getItem('loggedIn'))
+    this.getFriendsRequestList(this.userId);
+    this.getUnreadNotifications();
     this.menu = menu;
-    this.menu.enable(true)    
+    this.menu.enable(true)
+    this.FriendsRequest = [];
+    this.notifications = [];
     this.pages = [
       { title: 'Profile', component: ProfilePage },
       { title: 'Online friends', component:  OnlinePage},
@@ -58,12 +65,21 @@ export class TabsPage {
   }
   openMenu()
   {
-    this.menu.open();    
+    this.menu.open();
   }
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
-  
+  getFriendsRequestList(Id) {
+    this.remoteService.friendsRequestListApiCall(Id).subscribe(res =>{this.FriendsRequest = res; console.log(res)});
+  }
+  getUnreadNotifications(){
+    this.remoteService.getUnreadNotifications(this.userId, 10, 1).subscribe(res => {
+      this.notifications = res;
+      console.log(res);
+    });
+  }
+
 }

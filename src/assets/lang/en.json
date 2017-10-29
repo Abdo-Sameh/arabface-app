@@ -67,7 +67,7 @@
 
 	"terms": "Terms and Conditions",
 
-
+	"pages" : "Pages",
 
 	"support-no-categories": "No categories created! Add new",
 
@@ -95,7 +95,7 @@
 
 	"general-image-error": "Failed to process your image",
 
-
+	"general-settings-info" : "Manage your first, last name and city e.t.c",
 
 	"user-roles": "User Roles",
 
@@ -175,11 +175,9 @@
 
 	"search": "Search",
 
-	"search-here": "Search here ...",
-
 	"search-phrase-placeholder": "Search for phrases in this language",
 
-	"Marketing" : "Marketing",
+
 
 	"country-manager": "Country Manager",
 
@@ -384,6 +382,10 @@
 
 	"manage": "Manage",
 
+	"delete-account-description" : "To delete your account, enter your current password, please note that you cannot undo this action",
+
+	"block-description" : "Once you block someone, that person can no longer see things you post on your timeline, tag you, invite you to events or groups, start a conversation with you, or add you as a friend. This doesn't include apps, games or groups you both participate in.",
+
 	"save-settings": "Save settings",
 
 	"general-settings-description": "Manage general settings like site title,description,keywords and more settings you can find below",
@@ -395,6 +397,12 @@
 	"choose-logo": "Choose logo",
 
 	"theme-settings": "Theme Settings",
+
+	"privacy-settings-info" : "Control who can view your profile e.t.c",
+
+	"blocking-settings-info" : "You can block someone from contacting you",
+
+	"notification-settings-info" : "Control what notifications you receive from us",
 
 	"theme-settings-description": "Control your site appearance with new logo, select good site column and more settings you can find below",
 
@@ -588,7 +596,9 @@
 
 	"privacy-settings": "Privacy Settings",
 
+	"photo" : "Photo",
 
+	"whats-happening" : "What is on your mind?",
 
 	"themes": "Themes",
 
@@ -656,7 +666,7 @@
 
 	"get-help": "Get Help",
 
-
+	"my-pages" : "My Pages",
 
 	"first_name": "First Name",
 
@@ -899,8 +909,6 @@
 
 	"no-groups-found" : "No groups found here",
 
-	"no-events-found" : "No events found here",
-
 	"discover": "Discover",
 
 	"core-plugins": "Core Plugins",
@@ -1022,9 +1030,11 @@
 
 	"change-icon": "Change Icon",
 
-	"people-like-this-page" : "People like this page",
+
 
 	"message": "Message",
+
+
 
 	"ajax-long-polling": "Ajax Long Polling",
 
@@ -1098,6 +1108,8 @@
 
 	"payments": "Payment Gateway",
 
+	"send-me-notifications-when" : "Send me notifications when",
+
 	"payments-settings-description": "Set up available payment gateway and default currency use ",
 
 	"default-currency-desc": "Select the preferred currency and note that not all payment gateway support it",
@@ -1122,6 +1134,8 @@
 	"enable-stripe-desc": "With this option you can enable or disable stripe payment options for your members",
 
 	"stripe-secret-key": "Stripe Secret Key",
+
+	"enable-store-notifications" : "Enable store notifications",
 
 	"stripe-secret-key-desc": "Set your stripe secret key",
 
@@ -1233,9 +1247,7 @@
 
 	"enable-https-desc": "Please confirm your server is enabled with https before enabling this option",
 
-	"unsave" : "Unsave",
 
-	"post" : "Post" ,
 
 	"save-post": "Save",
 
@@ -1246,8 +1258,6 @@
 	"successfully-unsaved": "Successfully removed",
 
 	"saved": "Saved",
-
-	"external-link" : "External link",
 
 	"no-saved-content": "You don't have any content saved here",
 
@@ -1520,6 +1530,8 @@
 	"menu-structure": "Menu Structure",
 
 	"menu-location": "Menu Location",
+
+	"location" : "Location",
 
 	"main-menu": "Main Menu",
 

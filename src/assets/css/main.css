@@ -1345,8 +1345,3 @@ top: -4px;
 	.not-found p a {
 		color: #5c0632;
 	}
-	::-webkit-scrollbar {
-		width: 0;
-		background-color: transparent;
-		display: none;
-	}

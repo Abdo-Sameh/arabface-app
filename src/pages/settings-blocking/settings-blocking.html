@@ -12,7 +12,7 @@
 					<a (click)="back()"><i class="fa fa-arrow-left"></i></a>
 				</div>
 				<div class="page_title text-center">
-					<h3>Manage Blocking</h3>
+					<h3>{{'blocked-members' | translate}}</h3>
 				</div>
 				<div class="menu_btn text-right">
 					<a href="#"><i class="fa fa-bars" style="color:#fff;font-size:18px"></i></a>
@@ -29,8 +29,8 @@
 				<form class="users-list">
 					<div class="user-item">
 						<div class="user-info">
-							<h3 class="mb-5">Blocked People</h3>
-							<p>Once you block someone, that person can no longer see things you post on your timeline, tag you, invite you to events or groups, start a conversation with you, or add you as a friend. This doesn't include apps, games or groups you both participate in.</p>
+							<!-- <h3 class="mb-5">Blocked People</h3> -->
+							<p>{{'block-description' | translate}}</p>
 							<!-- <a href="#" class="btn btn-theme mt-15"><i class="ion-android-add fz-11"></i> Add to blocked list</a> -->
 						</div>
 					</div>
@@ -44,7 +44,7 @@
 							</div>
 						</div>
 						<div class="pull-right pt-15">
-              <a (click)="unblockUser(user.id, i)" href="#" class="btn btn-default btn-sm">Unblock</a>
+              <a (click)="unblockUser(user.id, i)" href="#" class="btn btn-default btn-sm">{{'unblock' | translate}}</a>
 						</div>
 						<div class="clearfix"></div>
 					</div> <!-- //user-item -->
