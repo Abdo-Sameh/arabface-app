@@ -450,7 +450,7 @@
 
 	"version": "الإصدار",
 
-	"send-me-notifications-when" : "أرسل لي تنبيهات عندما",
+	"send-me-notifications-when" : "يرسل الي التطبيق الاشعارات عندما ",
 
 	"visit-plugin-site": "زيارة موقع المساعد",
 
@@ -960,7 +960,7 @@
 
 	"current-password": "كلمة السر الحالية",
 
-	"new-password": "كلمة سر جديدة",
+	"new-password": "كلمة السر الجديدة",
 
 	"confirm-new-password": "تأكيد كلمة السر الجديدة",
 
@@ -968,7 +968,7 @@
 
 	"site-notifications": "موقع الإخطارات",
 
-	"email-notifications": "اشعارات البريد الالكتروني",
+	"email-notifications": "ارسال الاشعارات الى البريد الالكترونى",
 
 	"save-details": "حفظ تفاصيل",
 
@@ -1066,13 +1066,13 @@
 
 	"default-profile-privacy-desc": "تعيين خصوصية الوضع الافتراضي للمستخدمين",
 
-	"who-can-see-profile": "الذين يمكن أن نرى ملفي الشخصي",
+	"who-can-see-profile": "من يمكنه رؤية صفحتك الشخصية ؟",
 
 	"who-can-see-profile-desc": "تعيين الأشخاص الذين يمكنهم عرض ملف التعريف الخاص بك زمني والصور والفيديو وغيرها",
 
 	"turn-on-friend-requests": "بدوره على طلبات الصداقة",
 
-	"who-can-post-profile": "من يستطيع الرد على الجدول الزمني الخاص بك؟",
+	"who-can-post-profile": "من يستطيع النشر علي صحفتك الشخصية ؟",
 
 	"who-can-post-profile-desc": "تعيين الذين يمكن إضافة وقتك على الانترنت",
 
@@ -1080,7 +1080,7 @@
 
 	"default-birthdate-privacy-desc": "تعيين الافتراضي تاريخ الميلاد الخصوصية",
 
-	"who-can-see-birthdate": "الذين يمكن أن نرى تاريخ ميلادك",
+	"who-can-see-birthdate": "من يمكنه رؤية تاريخ ميلادك ؟",
 
 	"who-can-see-birthdate-desc": "مجموعة من يمكنه رؤية تاريخ ميلادك في ملفك الشخصي",
 
@@ -1111,6 +1111,8 @@
 	"unblock": "رفع الحظر",
 
 	"block" : "حظر",
+
+	"search-here" : "ابحث هنا ...",
 
 	"block-user": "حظر المستخدم",
 
@@ -1386,7 +1388,9 @@
 
 	"new-message": "رسالة جديدة",
 
-	"who-can-send-message": "الذين يمكن أن نرسل لك رسالة",
+	"who-can-send-message": "من يمكنه ارسال رسالة شخصية لك ؟",
+
+	"who-can-see-latest-profile-visitors" : "من يمكنه رؤية اخر زوار لصفحتك الشخصية ؟",
 
 	"default-send-message-privacy": "ضبط رسالة إرسال الخصوصية",
 
@@ -1464,7 +1468,11 @@
 
 	"tag-you-in-post": "باسمك في هذا المنصب",
 
+	"profile-visitors" : "زوار الصفحة الشخصية",
+
 	"retrieving-link-details": "استرجاع تفاصيل الرابط",
+
+	"latest-profile-visitors" : "أحدث زوار الصفحة الشخصية",
 
 	"feed-no-longer-show": "وهذه الوظيفة لم تعد تظهر لك.",
 
@@ -1536,6 +1544,10 @@
 
 	"added-you-to-group": "إضافتك إلى هذه المجموعة: ",
 
+	"added" : "تمت الاضافة",
+
+	"Marketing" : "تسويق",
+
 	"recommended": "موصى به",
 
 	"yours": "خاصة بك",
@@ -1560,7 +1572,7 @@
 
 	"trending-hashtag-limit-desc": "ضبط عدد تتجه #hashtags لعرضه",
 
-	"trending": "تتجه",
+	"trending": "الشائع",
 
 	"like": "أعجبنى",
 
@@ -1594,17 +1606,17 @@
 
 	"someone-started-following-you": "قام شخص بمتابعتك",
 
-	"you-are-mentioned": "تمت الإشارة إليك",
+	"you-are-mentioned": "تمت الإشارة إليك فى المنشور",
 
-	"you-are-tagged": "تم وضع علامة باسمك",
+	"you-are-tagged": "ذكرك شخص ما فى تعليق",
 
-	"comment-on-your-post": "علق على مشاركتك",
+	"comment-on-your-post": "قام شخص بالتعليق على مشاركتك",
 
-	"reply-your-comment": "أجاب تعليقك",
+	"reply-your-comment": "قام شخص بالرد على تعليقك",
 
-	"like-your-item": "مثل مشاركاتك والصور .....إلخ",
+	"like-your-item": "اعجب شخص بمشاركاتك",
 
-	"share-your-item": "المشتركة مشاركاتك",
+	"share-your-item": "قام شخص بمشاركة منشوراتك",
 
 	"dislike-your-item": "لم يعجبني مشاركاتك والصور .....إلخ",
 
@@ -1626,9 +1638,13 @@
 
 	"page-i-like": "صفحات أنا أحب",
 
-	"my-pages": "صفحتي",
+	"my-pages": "صفحاتي",
 
-	"create": "خلق",
+	"create": "انشاء",
+
+	"friends-only" : "الاصدقاء فقط",
+
+	"only-me" : "انا فقط",
 
 	"create-a-page": "إصنع صفحة",
 
@@ -1916,7 +1932,7 @@
 
 	"start-time": "وقت البدء",
 
-	"end-time": "نهاية الوقت",
+	"end-time": "وقت الانتهاء",
 
 	"hosted-by": "استضافته ",
 
@@ -3866,7 +3882,7 @@
 
 	"restore-url": "بعد استعادة رابط",
 
-	"enable-store-notifications" : "تشغيل تنبيهات المتجر",
+	"enable-store-notifications" : "تفعيل إشعارات المتجر",
 
 	"delete-account-description" : "لحدف حسابك, ادخل كلمة المرور الحالية. ملحوظه: لا يمكنك ان تعيد الحساب مرة اخري بعد حذفه.",
 

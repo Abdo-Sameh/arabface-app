@@ -30,14 +30,14 @@ let config = {
   for more info on providers and Angular DI.
 */
 
-let apiURL = 'http://localhost/arabface/api/14789632/';
+let apiURL = 'http://192.168.1.252/arabface/api/14789632/';
 
 @Injectable()
 export class RemoteServiceProvider {
  public Id :number;
  deviceLanguage
  response ;
- serverURL ='http://localhost'
+ serverURL ='http://192.168.1.252'
  KEY = '14789632'
 
 
@@ -842,6 +842,16 @@ console.log(url)
       .map((res : Response ) => res.json());
   }
 
+  deleteNotification(userid, id){
+    return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/notification/delete?userid='+userid + "&id=" + id)
+      .map((res : Response ) => res.json());
+  }
+
+  markReadNotification(userid, id, type){
+    return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/notification/mark/read?userid='+userid + "&id=" + id + "&type=" + type)
+      .map((res : Response ) => res.json());
+  }
+
   //////////////////////////////////////////////
 
 
@@ -863,18 +873,17 @@ console.log(url)
   loadReplies(commentID)
   {
     return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/comment/load?type=comment&limit=10&type_id='+commentID)
-
-    //do((res : Response ) => console.log(res.json()))
       .map((res : Response ) => res.json());
   }
-
-
 
   loadProfileComments(feedid)
   {
     return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/comment/load?type=feed&limit=5&type_id='+feedid)
+      .map((res : Response ) => res.json());
+  }
 
-    //do((res : Response ) => console.log(res.json()))
+  getProfileVisitors(userid, limit){
+    return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/get/lastvisitors?userid=' + userid + "&limit=" + limit)
       .map((res : Response ) => res.json());
   }
 
@@ -1013,6 +1022,10 @@ console.log(url)
           .map((res : Response ) => res.json());
         }
 
+        getPageDetails(userid, id){
+          return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/page/get/details?userid=' + userid + '&id=' + id)
+          .map((res : Response ) => res.json());
+        }
 
         getPagesCategories(){
           return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/page/get/categories')

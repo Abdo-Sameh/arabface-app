@@ -24,7 +24,7 @@ import { PostFeatursPage } from '../post-featurs/post-featurs';
 export class Page {
 
   id
-  page
+  page = {id: '', logo : '', has_like: false, title: '', page_url: ''}
   userId
   saved
   message
@@ -48,6 +48,14 @@ export class Page {
   constructor(public alert:AlertController, private socialSharing: SocialSharing, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.page = navParams.get("page");
+    let loading = this.loadingCtrl.create({
+      content: "Loading",
+    });
+    if(this.page == undefined){
+      loading.present()
+    }else{
+      loading.dismiss()
+    }
     this.isSaved(this.page.id);
     this.pageLikes(this.page.id, '1')
     this.userAvatar = this.page.logo;

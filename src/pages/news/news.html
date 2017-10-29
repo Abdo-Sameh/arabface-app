@@ -47,20 +47,20 @@
                       <div class="dropdown">
                         <a href="#" data-toggle="dropdown"><span class="caret"></span></a>
                         <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == false">
-                          <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> i don't like this post</a></li>
-                          <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
-                          <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>
+                          <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> {{'dont-like-post' | translate}}</a></li>
+                          <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'stop-notifications' | translate}}</a></li>
+                          <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>
 
                           <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> </a></li>
-                          <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> view post</a></li>
+                          <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> {{'view-post' | translate}}</a></li>
                         </ul>
                         <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == true">
-                            <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  i don't like this post</a></li>
-                            <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
-                            <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>                            <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
-                            <li><a (click)="editPost()"  href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> Edit post</a></li>
-                            <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> Delete post</a></li>
-                            <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>view post</a></li>
+                            <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  {{'dont-like-post' | translate}}</a></li>
+                            <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'stop-notifications' | translate}}</a></li>
+                            <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>                            <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
+                            <li><a (click)="editPost()"  href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
+                            <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> {{'delete-post' | translate}}</a></li>
+                            <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>{{'view-post' | translate}}</a></li>
                           </ul>
                       </div>
                     </div>
@@ -217,20 +217,20 @@
                         <div class="dropdown">
                           <a href="#" data-toggle="dropdown"><span class="caret"></span></a>
                           <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == false">
-                            <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> i don't like this post</a></li>
-                            <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
-                            <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>
+                            <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> {{'dont-like-post' | translate}}</a></li>
+                            <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'stop-notifications' | translate}}</a></li>
+                            <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>
 
                             <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
-                            <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> view post</a></li>
+                            <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> {{'view-post' | translate}}</a></li>
                           </ul>
                           <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == true">
-                              <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  i don't like this post</a></li>
-                              <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
-                              <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>                            <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
-                              <li><a (click)="editPost()"  href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> Edit post</a></li>
-                              <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> Delete post</a></li>
-                              <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>view post</a></li>
+                              <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  {{'dont-like-post' | translate}}</a></li>
+                              <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'stop-notifications' | translate}}</a></li>
+                              <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>                            <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
+                              <li><a (click)="editPost()"  href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
+                              <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> {{'delete-post' | translate}}</a></li>
+                              <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>{{'view-post' | translate}}</a></li>
                             </ul>
                         </div>
                       </div>
@@ -385,20 +385,20 @@
                       <div class="dropdown">
                         <a href="#" data-toggle="dropdown"><span class="caret"></span></a>
                         <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == false">
-                          <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> i don't like this post</a></li>
-                          <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
-                          <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>
+                          <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> {{'dont-like-post' | translate}}</a></li>
+                          <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'stop-notifications' | translate}}</a></li>
+                          <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>
 
                           <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
-                          <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> view post</a></li>
+                          <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> {{'view-post' | translate}}</a></li>
                         </ul>
                         <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == true">
-                            <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  i don't like this post</a></li>
-                            <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
-                            <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>                            <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
-                            <li><a (click)="editPost()"  href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> Edit post</a></li>
-                            <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> Delete post</a></li>
-                            <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>view post</a></li>
+                            <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  {{'dont-like-post' | translate}}</a></li>
+                            <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'stop-notifications' | translate}}</a></li>
+                            <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>                            <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
+                            <li><a (click)="editPost()"  href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
+                            <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> {{'delete-post' | translate}}</a></li>
+                            <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>{{'view-post' | translate}}</a></li>
                           </ul>
                       </div>
                     </div>
@@ -406,7 +406,7 @@
                   </div>
                 <div class="feed-body" id="{{feed.background}}" style="padding:25px;">
                   <img src="{{feed.images}}" alt="">
-                  <p>{{feed.full_message}}</p>
+                  <p [innerHTML]="feed.full_message"></p>
 
                   <div class="pull-left comment-edit-input">
 
@@ -562,20 +562,20 @@
               <div class="dropdown">
                 <a href="#" data-toggle="dropdown"><span class="caret"></span></a>
                 <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == false">
-                  <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> i don't like this post</a></li>
-                  <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
-                  <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>
+                  <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> {{'dont-like-post' | translate}}</a></li>
+                  <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'stop-notifications' | translate}}</a></li>
+                  <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>
 
                   <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
-                  <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> view post</a></li>
+                  <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> {{'view-post' | translate}}</a></li>
                 </ul>
                 <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == true">
-                    <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  i don't like this post</a></li>
-                    <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
-                    <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>                            <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
-                    <li><a (click)="editPost()"  href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> Edit post</a></li>
-                    <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> Delete post</a></li>
-                    <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>view post</a></li>
+                    <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  {{'dont-like-post' | translate}}</a></li>
+                    <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'stop-notifications' | translate}}</a></li>
+                    <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>                            <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
+                    <li><a (click)="editPost()"  href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
+                    <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> {{'delete-post' | translate}}</a></li>
+                    <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>{{'view-post' | translate}}</a></li>
                   </ul>
               </div>
             </div>
@@ -742,20 +742,20 @@
                           <div class="dropdown">
                             <a href="#" data-toggle="dropdown"><span class="caret"></span></a>
                             <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == false">
-                              <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> i don't like this post</a></li>
-                              <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
-                              <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>
+                              <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> {{'dont-like-post' | translate}}</a></li>
+                              <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'stop-notifications' | translate}}</a></li>
+                              <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>
 
                               <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
-                              <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> view post</a></li>
+                              <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> {{'view-post' | translate}}</a></li>
                             </ul>
                             <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == true">
-                                <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  i don't like this post</a></li>
-                                <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
-                                <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>                            <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
-                                <li><a (click)="editPost()"  href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> Edit post</a></li>
-                                <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> Delete post</a></li>
-                                <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>view post</a></li>
+                                <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  {{'dont-like-post' | translate}}</a></li>
+                                <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'stop-notifications' | translate}}</a></li>
+                                <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>                            <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
+                                <li><a (click)="editPost()"  href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
+                                <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> {{'delete-post' | translate}}</a></li>
+                                <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>{{'view-post' | translate}}</a></li>
                               </ul>
                           </div>
                         </div>
@@ -910,20 +910,20 @@
                                     <div class="dropdown">
                                       <a href="#" data-toggle="dropdown"><span class="caret"></span></a>
                                       <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == false">
-                                        <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> i don't like this post</a></li>
-                                        <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
-                                        <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>
+                                        <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> {{'dont-like-post' | translate}}</a></li>
+                                        <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'stop-notifications' | translate}}</a></li>
+                                        <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>
 
                                         <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
-                                        <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> view post</a></li>
+                                        <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> {{'view-post' | translate}}</a></li>
                                       </ul>
                                       <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == true">
-                                          <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  i don't like this post</a></li>
-                                          <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
-                                          <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>                            <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
-                                          <li><a (click)="editPost()"  href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> Edit post</a></li>
-                                          <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> Delete post</a></li>
-                                          <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>view post</a></li>
+                                          <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  {{'dont-like-post' | translate}}</a></li>
+                                          <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'stop-notifications' | translate}}</a></li>
+                                          <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>                            <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
+                                          <li><a (click)="editPost()"  href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
+                                          <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> {{'delete-post' | translate}}</a></li>
+                                          <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>{{'view-post' | translate}}</a></li>
                                         </ul>
                                     </div>
                                   </div>
@@ -1076,20 +1076,20 @@
                           <div class="dropdown">
                             <a href="#" data-toggle="dropdown"><span class="caret"></span></a>
                             <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == false">
-                              <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> i don't like this post</a></li>
-                              <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
-                              <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>
+                              <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> {{'dont-like-post' | translate}}</a></li>
+                              <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'stop-notifications' | translate}}</a></li>
+                              <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>
 
                               <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
-                              <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> view post</a></li>
+                              <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> {{'view-post' | translate}}</a></li>
                             </ul>
                             <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == true">
-                                <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  i don't like this post</a></li>
-                                <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
-                                <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>                            <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
-                                <li><a (click)="editPost()"  href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> Edit post</a></li>
-                                <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> Delete post</a></li>
-                                <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>view post</a></li>
+                                <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  {{'dont-like-post' | translate}}</a></li>
+                                <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'stop-notifications' | translate}}</a></li>
+                                <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>                            <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
+                                <li><a (click)="editPost()"  href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
+                                <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> {{'delete-post' | translate}}</a></li>
+                                <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>{{'view-post' | translate}}</a></li>
                               </ul>
                           </div>
                         </div>
@@ -1241,20 +1241,20 @@
                             <div class="dropdown">
                               <a href="#" data-toggle="dropdown"><span class="caret"></span></a>
                               <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == false">
-                                <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> i don't like this post</a></li>
-                                <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
-                                <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>
+                                <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> {{'dont-like-post' | translate}}</a></li>
+                                <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'stop-notifications' | translate}}</a></li>
+                                <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>
 
                                 <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
-                                <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> view post</a></li>
+                                <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> {{'view-post' | translate}}</a></li>
                               </ul>
                               <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == true">
-                                  <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  i don't like this post</a></li>
-                                  <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
-                                  <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>                            <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
-                                  <li><a (click)="editPost()"  href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> Edit post</a></li>
-                                  <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> Delete post</a></li>
-                                  <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>view post</a></li>
+                                  <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  {{'dont-like-post' | translate}}</a></li>
+                                  <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'stop-notifications' | translate}}</a></li>
+                                  <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>                            <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
+                                  <li><a (click)="editPost()"  href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
+                                  <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> {{'delete-post' | translate}}</a></li>
+                                  <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>{{'view-post' | translate}}</a></li>
                                 </ul>
                             </div>
                           </div>
@@ -1409,20 +1409,20 @@
                             <div class="dropdown">
                               <a href="#" data-toggle="dropdown"><span class="caret"></span></a>
                               <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == false">
-                                <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> i don't like this post</a></li>
-                                <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
-                                <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>
+                                <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> {{'dont-like-post' | translate}}</a></li>
+                                <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'stop-notifications' | translate}}</a></li>
+                                <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>
 
                                 <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
-                                <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> view post</a></li>
+                                <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> {{'view-post' | translate}}</a></li>
                               </ul>
                               <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == true">
-                                  <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  i don't like this post</a></li>
-                                  <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
-                                  <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>                            <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
-                                  <li><a (click)="editPost()"  href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> Edit post</a></li>
-                                  <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> Delete post</a></li>
-                                  <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>view post</a></li>
+                                  <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  {{'dont-like-post' | translate}}</a></li>
+                                  <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'stop-notifications' | translate}}</a></li>
+                                  <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>                            <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
+                                  <li><a (click)="editPost()"  href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
+                                  <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> {{'delete-post' | translate}}</a></li>
+                                  <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>{{'view-post' | translate}}</a></li>
                                 </ul>
                             </div>
                           </div>
@@ -1587,20 +1587,20 @@
                   <div class="dropdown">
                     <a href="#" data-toggle="dropdown"><span class="caret"></span></a>
                     <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == false">
-                      <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> i don't like this post</a></li>
-                      <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
-                      <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>
+                      <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> {{'dont-like-post' | translate}}</a></li>
+                      <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'stop-notifications' | translate}}</a></li>
+                      <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>
 
                       <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
-                      <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> view post</a></li>
+                      <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> {{'view-post' | translate}}</a></li>
                     </ul>
                     <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == true">
-                        <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  i don't like this post</a></li>
-                        <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
-                        <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>                            <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
-                        <li><a (click)="editPost()"  href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> Edit post</a></li>
-                        <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> Delete post</a></li>
-                        <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>view post</a></li>
+                        <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  {{'dont-like-post' | translate}}</a></li>
+                        <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'stop-notifications' | translate}}</a></li>
+                        <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>                            <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
+                        <li><a (click)="editPost()"  href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
+                        <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> {{'delete-post' | translate}}</a></li>
+                        <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>{{'view-post' | translate}}</a></li>
                       </ul>
                   </div>
                 </div>
@@ -1766,20 +1766,20 @@
                     <div class="dropdown">
                       <a href="#" data-toggle="dropdown"><span class="caret"></span></a>
                       <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == false">
-                        <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> i don't like this post</a></li>
-                        <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
-                        <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>
+                        <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> {{'dont-like-post' | translate}}</a></li>
+                        <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'stop-notifications' | translate}}</a></li>
+                        <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>
 
                         <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
-                        <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> view post</a></li>
+                        <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> {{'view-post' | translate}}</a></li>
                       </ul>
                       <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == true">
-                          <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  i don't like this post</a></li>
-                          <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
-                          <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>                            <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
-                          <li><a (click)="editPost()"  href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> Edit post</a></li>
-                          <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> Delete post</a></li>
-                          <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>view post</a></li>
+                          <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  {{'dont-like-post' | translate}}</a></li>
+                          <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'stop-notifications' | translate}}</a></li>
+                          <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>                            <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
+                          <li><a (click)="editPost()"  href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
+                          <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> {{'delete-post' | translate}}</a></li>
+                          <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>{{'view-post' | translate}}</a></li>
                         </ul>
                     </div>
                   </div>
@@ -1931,20 +1931,20 @@
                   <div class="dropdown">
                     <a href="#" data-toggle="dropdown"><span class="caret"></span></a>
                     <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == false">
-                      <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> i don't like this post</a></li>
-                      <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
-                      <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>
+                      <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> {{'dont-like-post' | translate}}</a></li>
+                      <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'stop-notifications' | translate}}</a></li>
+                      <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>
 
                       <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
-                      <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> view post</a></li>
+                      <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> {{'view-post' | translate}}</a></li>
                     </ul>
                     <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == true">
-                        <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  i don't like this post</a></li>
-                        <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
-                        <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>                            <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
-                        <li><a (click)="editPost()"  href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> Edit post</a></li>
-                        <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> Delete post</a></li>
-                        <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>view post</a></li>
+                        <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  {{'dont-like-post' | translate}}</a></li>
+                        <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'stop-notifications' | translate}}</a></li>
+                        <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>                            <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
+                        <li><a (click)="editPost()"  href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
+                        <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> {{'delete-post' | translate}}</a></li>
+                        <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>{{'view-post' | translate}}</a></li>
                       </ul>
                   </div>
                 </div>
@@ -2097,20 +2097,20 @@
                     <div class="dropdown">
                       <a href="#" data-toggle="dropdown"><span class="caret"></span></a>
                       <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == false">
-                        <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> i don't like this post</a></li>
-                        <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
-                        <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>
+                        <li><a (click)="donotLikePost(feed.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> {{'dont-like-post' | translate}}</a></li>
+                        <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'stop-notifications' | translate}}</a></li>
+                        <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>
 
                         <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
-                        <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> view post</a></li>
+                        <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> {{'view-post' | translate}}</a></li>
                       </ul>
                       <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == true">
-                          <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  i don't like this post</a></li>
-                          <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
-                          <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>                            <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
-                          <li><a (click)="editPost()"  href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> Edit post</a></li>
-                          <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> Delete post</a></li>
-                          <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>view post</a></li>
+                          <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  {{'dont-like-post' | translate}}</a></li>
+                          <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'stop-notifications' | translate}}</a></li>
+                          <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>                            <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
+                          <li><a (click)="editPost()"  href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
+                          <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> {{'delete-post' | translate}}</a></li>
+                          <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>{{'view-post' | translate}}</a></li>
                         </ul>
                     </div>
                   </div>
