@@ -886,6 +886,8 @@
 
 	"remember-me": "تذكرنى",
 
+	"ok" : "موافق",
+
 	"login-with-facebook": "تسجيل الدخول باستخدام الفيسبوك",
 
 	"login-with-twitter": "تسجيل الدخول عبر تويتر",
@@ -1558,6 +1560,8 @@
 
 	"group-suggestions": "اقتراحات المجموعة",
 
+	"suggestions" : "الاقتراحات",
+
 	"group-setting-description": "إدارة إعدادات مجموعة هنا",
 
 	"enable-group-posts-in-timeline": "تمكين المجموعة المشاركات في أخرالأخبار ",
@@ -1588,7 +1592,7 @@
 
 	"people-who-likes": "الناس الذي يحب هذا",
 
-	"people-like-this": "الناس مثل هذا",
+	"people-like-this": "الأشخاص الذين أعجبوا بالصفحة",
 
 	"enable-dislike-notification": "إعلام لا يروق لك",
 
@@ -2102,7 +2106,9 @@
 
 	"save-post": "حفظ",
 
-	"unsave-post": "Unsave",
+	"unsave-post": "الغاء الحفظ",
+
+	"unsave" : "الغاء الحفظ",
 
 	"unsave-event" : "الغاء الحفظ",
 
@@ -2693,6 +2699,8 @@
 	"followed-desc": "مواضيع يتبع",
 
 	"forum": "المنتدى",
+
+	"forums" : "المنتديات",
 
 	"forum-create-login-error": "عذرا، يجب أن تكون مسجلا لإنشاء موضوع",
 
@@ -3333,6 +3341,9 @@
 	"enable-online-filter": "تمكين الآن تصفية الحالة",
 
 	"enable-online-filter-desc": "توفير الخيار للحصول على نتيجة البحث تصفية مع الموجودين",
+
+	"online-friends" : "الاصدقاء المتاحين الان",
+
 
 	"feature": "ميزة",
 
@@ -4660,7 +4671,21 @@
 
 	"livestream-servers": "خوادم البث المباشر",
 
+	"Livestream" : "بث مباشر",
+
+	"All" : "الكل",
+
 	"mine": "خاص بى",
+
+	"Comedy" : "كوميدي",
+
+	"Sports" : "رياضة",
+
+	"Entertainment" : "التسلية",
+
+	"Economic" : "اقتصاد",
+
+	"Political" : "سياسة",
 
 	"is-live-on": "مباشر الأن",
 

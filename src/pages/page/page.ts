@@ -10,6 +10,7 @@ import { FriendProfilePage } from '../friend-profile/friend-profile'
 import { ProfilePage } from '../profile/profile';
 import { DisplayPostPage } from '../display-post/display-post';
 import { PostFeatursPage } from '../post-featurs/post-featurs';
+import { TranslateService } from '@ngx-translate/core';
 /**
  * Generated class for the Page page.
  *
@@ -45,7 +46,7 @@ export class Page {
   feeds
   feedLikes
   userData
-  constructor(public alert:AlertController, private socialSharing: SocialSharing, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
+  constructor(public translate: TranslateService, public alert:AlertController, private socialSharing: SocialSharing, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.page = navParams.get("page");
     let loading = this.loadingCtrl.create({
@@ -120,29 +121,37 @@ export class Page {
   }
 
   reportPage(){
+    let title, reason, send, cancel, message;
+    this.translate.get('report').subscribe(value => { title = value; })
+    this.translate.get('report-reason').subscribe(value => { reason = value; })
+    this.translate.get('send').subscribe(value => { send = value; })
+    this.translate.get('cancel').subscribe(value => { cancel = value; })
+
     let alert = this.alert.create({
-      title: 'Report',
+      title: title,
       inputs: [
       {
         name: 'reason',
-        placeholder: 'Reason ...'
+        placeholder: reason
       }
     ],
       buttons: [
         {
-          text: 'Send',
+          text: send,
           handler: data => {
             this.remoteService.reportItem("page", this.page.page_url, data.reason, this.userId).subscribe(res => {
               if(res.status == "1"){
+                this.translate.get('report-success').subscribe(value => { message = value; })
                 let toast = this.toastCtrl.create({
-                  message: 'Report sent successfully',
+                  message: message,
                   duration: 2000,
                   position: 'top'
                 });
                 toast.present();
               }else{
+                this.translate.get('report-failure').subscribe(value => { message = value; })
                 let toast = this.toastCtrl.create({
-                  message: 'You have reported this page before',
+                  message: message,
                   duration: 2000,
                   position: 'top'
                 });
@@ -153,7 +162,7 @@ export class Page {
           }
         },
         {
-          text: 'Cancel',
+          text: cancel,
           role: 'cancel',
           handler: () => {
           }

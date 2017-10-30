@@ -1358,8 +1358,8 @@ top: -4px;
 		float: left !important;
 	}
 	.dropdown-menu-right {
-    left: auto !important;
-    right: 0 !important;
+    left: 0 !important;
+    right: auto !important;
    }
 	 .dropdown-menu>li>a {
 		 text-align: right;

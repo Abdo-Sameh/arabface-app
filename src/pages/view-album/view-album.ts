@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
 import { EditAlbumPage} from '../edit-album/edit-album';
-
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 /**
  * Generated class for the ViewAlbumPage page.
  *
@@ -18,7 +18,7 @@ export class ViewAlbumPage {
   userId
   album
   photos
-  constructor(public navCtrl: NavController, public navParams: NavParams, public remoteService: RemoteServiceProvider, public toastCtrl: ToastController) {
+  constructor(private photoViewer: PhotoViewer, public navCtrl: NavController, public navParams: NavParams, public remoteService: RemoteServiceProvider, public toastCtrl: ToastController) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "")
     this.album = navParams.get("album");
     // this.albumDetails(this.album.id)
@@ -29,6 +29,9 @@ export class ViewAlbumPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ViewAlbumPage');
+  }
+  viewPhoto(url){
+    this.photoViewer.show(url);
   }
   albumPhotos(id, limit, offset){
     this.remoteService.albumPhotos(id, limit, offset, this.userId).subscribe(res => {
@@ -65,5 +68,4 @@ export class ViewAlbumPage {
   back(){
     this.navCtrl.pop();
   }
-
 }

@@ -15,7 +15,7 @@
             <a (click)="back()"><i class="fa fa-arrow-left"></i></a>
           </div>
           <div class="page_title text-center">
-            <h3>post</h3>
+            <h3>{{'post' | translate}}</h3>
           </div>
           <div class="menu_btn text-right">
             <a href="#"><i class="fa fa-bars" style="color:#fff;font-size:18px"></i></a>
@@ -125,8 +125,8 @@
         <a href="#"  class="btn btn-default btn-sm" data-toggle="dropdown" aria-expanded="false"><i id="privacy" class="fa fa-globe"></i> <span class="caret"></span></a>
         <ul class="privacyDropdown dropdown-menu" (click)="selectPrivacy()">
           <li><a href="#"><i class="fa fa-globe"></i> {{'public' | translate}}</a></li>
-          <li><a href="#"><i class="fa fa-group"></i> Friends only</a></li>
-          <li><a href="#"> <i class="fa fa-lock"></i> Only me</a></li>
+          <li><a href="#"><i class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
+          <li><a href="#"> <i class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
         </ul>
       </div>
      </div>
