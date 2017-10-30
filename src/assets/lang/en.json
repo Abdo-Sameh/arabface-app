@@ -271,6 +271,14 @@
 
 	"title": "Title",
 
+	"all-albums" : "All Albums",
+
+	"my-albums" : "My Albums",
+
+	"all-photos" : "All Photos",
+
+	"my-photos" : "My Photos",
+
 	"slug": "Slug",
 
 	"add-custom-field-category": "Add Custom Field Category",

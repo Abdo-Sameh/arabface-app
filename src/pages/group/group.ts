@@ -10,7 +10,7 @@ import { ProfilePage } from '../profile/profile';
 import { FriendProfilePage } from '../friend-profile/friend-profile';
 import { DisplayPostPage } from '../display-post/display-post';
 import { PostFeatursPage } from '../post-featurs/post-featurs';
-
+import { TranslateService } from '@ngx-translate/core';
 /**
  * Generated class for the GroupPage page.
  *
@@ -44,7 +44,7 @@ export class GroupPage {
   }
   hiddenPost
   userAvatar
-  constructor(private socialSharing: SocialSharing, public alert:AlertController, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
+  constructor(public translate: TranslateService, private socialSharing: SocialSharing, public alert:AlertController, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.userAvatar = "http://" + localStorage.getItem('userAvatar').slice(8,-1);
     this.group = navParams.get("group");
@@ -137,7 +137,6 @@ export class GroupPage {
   }
   likeReply(userid =this.userId,replyID,postIndex,commentIndex,replyIndex)
   {
-
     this.remoteService.likeCommentApiCall(this.userId,replyID).subscribe(res =>{
       for(let i =0 ; i<this.posts[postIndex].answers[0][commentIndex].repliesContent.length ;i++)
         {
@@ -145,34 +144,12 @@ export class GroupPage {
             {
               this.posts[postIndex].answers[0][commentIndex].repliesContent[i].like_count=res.likes;
               this.posts[postIndex].answers[0][commentIndex].repliesContent[i].has_like=res.has_like;
-
               break
             }
         }
-
-
     })
-
-
   }
-  // postFeed(userID=this.userId,postText=this.post.text)
-  // {
-  //   console.log(this.posts)
 
-  //   let loading = this.loadingCtrl.create({
-  //     content: "",
-  //     spinner: "bubbles",
-
-  //   });
-  //   loading.present()
-  //   this.remoteService.feedPosting(userID,postText).subscribe( res => {
-  //     this.posts.unshift(res.feed)
-  //     this.post.text= ""
-  //     //this.getpostsList(this.userId);
-  //     loading.dismiss();
-  //   });
-
-  // }
   commentOnFeed(postOwner,postID,whoCommented=this.userId,comment=this.comment.comment)
   {
     let loading = this.loadingCtrl.create({
@@ -184,20 +161,17 @@ export class GroupPage {
 
 
       res.postid = postID
-      for( let x in this.posts)
-        {
-          if(this.posts[x].id == res.postid)
-            {
-                  this.posts[x].answers[0].push(res)
-                }
+      for( let x in this.posts) {
+          if(this.posts[x].id == res.postid) {
+                this.posts[x].answers[0].push(res)
+              }
         }
         this.remoteService.loadComments(postID).subscribe(res2 =>{ });
-
         this.comment.comment = ''
         loading.dismiss()
     })
-
   }
+
   replyOnComment(postindex,commentindex,postOwner,commentID,whoCommented=this.userId,comment=this.comment.reply)
   {
     let loading = this.loadingCtrl.create({
@@ -206,12 +180,8 @@ export class GroupPage {
 
     loading.present()
     this.remoteService.ReplyOnComment(postOwner,commentID,whoCommented,comment).subscribe(res => {
-
-
       res.postid = commentID
-
-                  this.posts[postindex].answers[0][commentindex].repliesContent.push(res)
-
+      this.posts[postindex].answers[0][commentindex].repliesContent.push(res)
         this.remoteService.loadReplies(commentID).subscribe(res2 =>{ });
 
         this.comment.reply = ''
@@ -534,29 +504,37 @@ export class GroupPage {
     })
   }
   reportGroup(){
+    let title, reason, send, cancel, message;
+    this.translate.get('report').subscribe(value => { title = value; })
+    this.translate.get('report-reason').subscribe(value => { reason = value; })
+    this.translate.get('send').subscribe(value => { send = value; })
+    this.translate.get('cancel').subscribe(value => { cancel = value; })
+
     let alert = this.alert.create({
-      title: 'Report',
+      title: title,
       inputs: [
       {
         name: 'reason',
-        placeholder: 'Reason ...'
+        placeholder: reason
       }
     ],
       buttons: [
         {
-          text: 'Send',
+          text: send,
           handler: data => {
             this.remoteService.reportItem("group", this.group.group_url, data.reason, this.userId).subscribe(res => {
               if(res.status == "1"){
+                this.translate.get('report-success').subscribe(value => { message = value; })
                 let toast = this.toastCtrl.create({
-                  message: 'Report sent successfully',
+                  message: message,
                   duration: 2000,
                   position: 'top'
                 });
                 toast.present();
               }else{
+                this.translate.get('report-failure').subscribe(value => { message = value; })
                 let toast = this.toastCtrl.create({
-                  message: 'You have reported this group before',
+                  message: message,
                   duration: 2000,
                   position: 'top'
                 });
@@ -567,7 +545,7 @@ export class GroupPage {
           }
         },
         {
-          text: 'Cancel',
+          text: cancel,
           role: 'cancel',
           handler: () => {
           }

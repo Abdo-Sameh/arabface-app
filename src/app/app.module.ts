@@ -70,7 +70,8 @@ import { Globalization } from '@ionic-native/globalization';
 import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
 import { NotFound_404Page } from '../pages/not-found-404/not-found-404';
 import { LatestVisitorsPage } from '../pages/latest-visitors/latest-visitors';
-
+import { ViewAlbumPage } from '../pages/view-album/view-album';
+import { EditAlbumPage } from '../pages/edit-album/edit-album';
 @NgModule({
   declarations: [
     MyApp,
@@ -115,7 +116,7 @@ import { LatestVisitorsPage } from '../pages/latest-visitors/latest-visitors';
     MembersPage,
     InviteFriendPage,
     SavedPage,
-    CreateAlbumPage,
+    CreateAlbumPage, EditAlbumPage, ViewAlbumPage,
     PhotoselectionPage, CreateEventPage, EditEventPage, EventPage,
     NotFound_404Page, LatestVisitorsPage
   ],
@@ -170,7 +171,7 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule, TranslateModule.forRoot(
     SavedPage,
     DisplayPostPage,
     MembersPage,
-    CreateAlbumPage,
+    CreateAlbumPage, EditAlbumPage, ViewAlbumPage,
     InviteFriendPage,
     PhotoselectionPage, CreateEventPage, EditEventPage, EventPage,
     NotFound_404Page, LatestVisitorsPage

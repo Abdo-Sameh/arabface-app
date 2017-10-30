@@ -46,7 +46,7 @@
 				        <label for="g_priv">{{'group-who-can-post' | translate}}</label>
 				        <select class="form-control" id="g_priv" [(ngModel)]="canPost" [ngModelOptions]="{ standalone :true}">
     							<option value="3">{{'admins' | translate}}</option>
-    							<option value="2">{{'moderators' | translate}} &amp; {{'admins' | translate}}</option>
+    							<option value="2">{{'moderators-admins' | translate}}</option>
     							<option value="1">{{'members' | translate}}</option>
 				        </select>
 				    </div>
@@ -54,7 +54,7 @@
 				        <label for="g_priv">{{'group-who-can-add-member' | translate}}</label>
 				        <select class="form-control" id="g_priv" [(ngModel)]="canAddMember" [ngModelOptions]="{ standalone :true}">
     							<option value="3">{{'admins' | translate}}</option>
-    							<option value="2">{{'moderators' | translate}} &amp; {{'admins' | translate}}</option>
+    							<option value="2">{{'moderators-admins' | translate}}</option>
     							<option value="1">{{'members' | translate}}</option>
 				        </select>
 				    </div>

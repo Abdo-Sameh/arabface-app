@@ -4,6 +4,8 @@ import { TabsPage } from '../tabs/tabs';
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
 import { CreateAlbumPage } from '../create-album/create-album';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
+import { ViewAlbumPage } from '../view-album/view-album';
+
 /**
  * Generated class for the PhotosPage page.
  *
@@ -84,6 +86,11 @@ export class PhotosPage {
   }
   createAlbum(){
     this.navCtrl.push(CreateAlbumPage);
+  }
+  viewAlbum(album){
+    this.navCtrl.push(ViewAlbumPage, {
+      album : album
+    })
   }
 
   back()

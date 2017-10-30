@@ -1345,3 +1345,19 @@ top: -4px;
 	.not-found p a {
 		color: #5c0632;
 	}
+	.notifications .user-item {
+		position: relative;
+		margin-top: 0;
+		padding-top: 20px;
+	}
+ .notifications .user-info {
+	 position: absolute;top: 26px;left: 70px;
+ }
+ .notifications .user-info h5 {
+	 line-height: 16px;p
+ }
+ .notifications .read-mark {
+	 position: absolute;
+	 right: 5px;
+	 top: 5px;
+ }

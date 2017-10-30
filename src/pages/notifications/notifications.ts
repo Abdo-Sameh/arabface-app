@@ -23,9 +23,10 @@ export class NotificationsPage {
   unread;
   userData
   page
-
+  pageNum
   constructor(private app: App, public navCtrl: NavController, public navParams: NavParams ,public loadingCtrl :LoadingController, public remoteService : RemoteServiceProvider , public loading: LoadingController) {
-    this.getNotifications(this.userId);
+    this.pageNum = 1;
+    this.getNotifications(1);
     this.getUnreadNotifications();
   }
 
@@ -33,17 +34,41 @@ export class NotificationsPage {
     console.log('ionViewDidLoad NotificationsPage');
   }
 
-
-  getNotifications(userid)
-  {
+  getNotifications(page) {
     let loading = this.loading.create({
       content: "Loading",
     });
     loading.present()
-    this.remoteService.getNotifications(userid, 10, 1).subscribe(res => { loading.dismiss();console.log(res);this.notifications=res
 
-      console.log(this.notifications)
-    });
+    $('#more').show();
+
+      if(page > 1){
+        this.remoteService.getNotifications(this.userId, 10, page).subscribe(res => {
+          loading.dismiss();
+          if(res.length >= 10){
+              $('#more').show();
+          }else{
+            $('#more').hide();
+          }
+          for(let x of res){
+            this.notifications.push(x);
+          }
+        });
+          this.pageNum = page;
+      }else{
+        this.pageNum = page;
+        this.remoteService.getNotifications(this.userId, 10, page).subscribe(res => {
+          loading.dismiss();
+          if(res.length >= 10){
+              $('#more').show();
+          }else{
+            $('#more').hide();
+          }
+            this.notifications = res;
+            console.log(res);
+          });
+      }
+
   }
   getUnreadNotifications(){
     this.remoteService.getUnreadNotifications(this.userId, 10, 1).subscribe(res => {

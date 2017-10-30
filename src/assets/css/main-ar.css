@@ -1358,15 +1358,27 @@ top: -4px;
 		float: left !important;
 	}
 	.dropdown-menu-right {
-    left: 0 !important;
-    right: auto !important;
-  }
+    left: auto !important;
+    right: 0 !important;
+   }
+	 .dropdown-menu>li>a {
+		 text-align: right;
+	 }
 	.dropdown-menu-right i {
 		margin-right: -3px !important;
 		margin-left: 5px !important;
 	}
+	.feed-header .feed-title {
+    width: calc(100% - 73px);
+}
 	.feed-action a i {
 		margin-left: 3px;
+	}
+	.Addfriend {
+		float: left;
+	}
+	.user-img {
+		margin-right: 0;
 	}
 	.menu_items .input-wrapper .label {
 		text-align: right !important;
@@ -1380,3 +1392,19 @@ top: -4px;
 	 .online_mark {
 	   float: left !important;
    }
+	 .notifications .user-item {
+     position: relative;
+     margin-top: 0;
+     padding-top: 20px;
+   }
+ 	.notifications .user-info {
+ 		position: absolute;top: 26px;right: 70px;
+ 	}
+	.notifications .user-info h5 {
+		line-height: 16px;p
+	}
+ 	.notifications .read-mark {
+ 		position: absolute;
+ 		left: 5px;
+ 		top: 5px;
+ 	}

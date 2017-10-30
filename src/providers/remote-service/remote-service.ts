@@ -1538,12 +1538,27 @@ console.log(url)
           urlSearchParams.append('album_id', album_id);
           urlSearchParams.append('userid', userid);
           let body = urlSearchParams.toString()
-          return this.http.post(this.serverURL+'/arabface/api/'+this.KEY+'/photo/album/add', body, {headers: headers})
+          return this.http.post(this.serverURL+'/arabface/api/'+this.KEY+'/photo/album/edit', body, {headers: headers})
           .map((res : Response ) => res.json());
         }
 
         albumDetails(album_id, userid){
           return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/photo/album/details?userid=' + userid + '&album_id=' + album_id)
+          .map((res : Response ) => res.json());
+        }
+        albumPhotos(id, limit, offset, userid){
+          return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/photo/album/get/photos?userid=' + userid + '&id=' + id + "&limit=" + limit + "&offset=" + offset)
+          .map((res : Response ) => res.json());
+        }
+
+        deleteAlbum(id, userid){
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('id', id);
+          urlSearchParams.append('userid', userid);
+          let body = urlSearchParams.toString()
+          return this.http.post(this.serverURL+'/arabface/api/'+this.KEY+'/photo/album/delete', body, {headers: headers})
           .map((res : Response ) => res.json());
         }
 }
