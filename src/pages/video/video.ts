@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, AlertController, LoadingController } from 'ionic-angular';
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
 import { VideosPage } from '../videos/videos';
 import { EditVideoPage } from '../edit-video/edit-video';
@@ -20,11 +20,22 @@ export class VideoPage {
 
   video
   userId
-  constructor(private youtube: YoutubeVideoPlayer, public alert:AlertController, private socialSharing: SocialSharing, public navCtrl: NavController, public navParams: NavParams, public remoteService :RemoteServiceProvider, public toastCtrl :ToastController) {
+  likes
+  userAvatar
+  comments
+  comment={
+  'comment' : '',
+  'reply' :'',
+  'edited':'',
+  }
+  constructor(public loadingCtrl: LoadingController, private youtube: YoutubeVideoPlayer, public alert:AlertController, private socialSharing: SocialSharing, public navCtrl: NavController, public navParams: NavParams, public remoteService :RemoteServiceProvider, public toastCtrl :ToastController) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
+    this.userAvatar = localStorage.getItem('userAvatar').slice(8,-1);
+    this.userAvatar ="http://"+this.userAvatar;
     this.video = this.navParams.get('video');
     this.video.code = this.video.code.substring(this.video.code.indexOf("src=") + 5);
     this.video.code = this.video.code.substring(0, this.video.code.indexOf("\""));
+    this.getComments('video', this.video.id, 10, 0);
     console.log(this.video.code);
   }
 
@@ -94,9 +105,163 @@ export class VideoPage {
     });
     alert.present();
   }
-  playVideo(){
-    // this.youtube.openVideo('myvideoid');
+
+  getComments(type, type_id, limit, offset){
+    this.remoteService.getComments(type, type_id, limit, offset, this.userId).subscribe(res => {
+      this.comments = res;
+      console.log(res);
+    })
   }
+
+  effects() {
+    $(this).css('background-color','grey')
+  }
+
+  edit() {
+    $(document).on('click','.comment-edit',function(){
+      $(this).parent().prev().find('.input-group').show();
+
+    })
+    $(document).on('click','.cancel-edit',function(){
+      $(this).parent().hide();
+
+    })
+
+  }
+  reply()
+    {
+      $(document).on('click','.comment-reply',function(){
+        $(this).closest('.comment').find('.reply-input').show();
+
+      })
+      $(document).on('click','.reply-close',function(){
+        $(this).closest('.reply-input').hide();
+
+      })
+  }
+
+  ConfirmEditPost(text,feedid)
+  {
+      this.remoteService.editPost(text,feedid,this.userId).subscribe((data) => {console.log(data)})
+  }
+
+  replyOnComment(postindex,commentindex,postOwner,commentID,whoCommented=this.userId,comment=this.comment.reply)
+  {
+    let loading = this.loadingCtrl.create({
+      content: "",
+      spinner: "bubbles",  });
+
+    loading.present()
+    this.remoteService.ReplyOnComment(postOwner,commentID,whoCommented,comment).subscribe(res => {
+
+      res.postid = commentID
+                  this.comments[0][commentindex].repliesContent.push(res)
+        this.remoteService.loadReplies(commentID).subscribe(res2 =>{ });
+
+        this.comment.reply = ''
+        loading.dismiss()
+    })
+
+  }
+
+  deleteComment(commentId)
+  {
+    let alert = this.alert.create({
+      title: 'Delete',
+      message: 'Do you want to delete comment?',
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.remoteService.removeComment(commentId,this.userId).subscribe(res => {
+              if(res.status == 1 )
+              {
+
+                let toast = this.toastCtrl.create({
+                  message: 'You deleted this comment ',
+                  duration : 2000
+
+                });
+                toast.present();
+              }
+            })
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  commentOnFeed(postID,whoCommented=this.userId,comment=this.comment.comment)
+  {
+    let loading = this.loadingCtrl.create({
+      content: "",
+      spinner: "bubbles",  });
+    loading.present()
+    this.remoteService.commentOnFeeds(this.video.owner.id, postID,whoCommented,comment).subscribe(res => {
+      res.postid = postID
+
+      this.comments.push(res)
+        this.remoteService.loadComments(postID).subscribe(res2 =>{ });
+
+        this.comment.comment = ''
+        loading.dismiss()
+    })
+
+  }
+
+
+  likeFeed(userid = this.userId, feedid, postIndex) {
+    this.remoteService.likeFeedApiCall(this.userId, this.video.id).subscribe(res =>{
+        this.video.like_count = res.likes;
+        this.video.has_like = res.has_like;
+    })
+  }
+
+  likeComment(userid = this.userId, commentID, postIndex, commentIndex) {
+    this.remoteService.likeCommentApiCall(this.userId, commentID).subscribe(res =>{
+      this.likes = res;
+      for(let i = 0 ; i < this.video.answers[0].length; i++)
+        {
+          if(this.video.answers[0][commentIndex].id == commentID)
+          {
+            this.video.answers[0][commentIndex].like_count = this.likes.likes;
+            this.video.answers[0][commentIndex].has_like = this.likes.has_like;
+            break
+          }
+        }
+    })
+  }
+
+  sharePost(feedid, userID = this.userId) {
+    let alert = this.alert.create({
+      title: 'share',
+      message: 'Do you want to share this post on your timeline ?',
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.remoteService.sharePost(feedid,userID).subscribe(res => {
+            })
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
   back(){
     this.navCtrl.pop();
   }

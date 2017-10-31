@@ -69,9 +69,14 @@ export class ProfilePage {
     }
     hiddenPost
     feed = { 'feedid' :""}
+<<<<<<< HEAD
     lastImage: string = null;
     loading: Loading;
   constructor(private filePath: FilePath, private transfer: FileTransfer, private file: File, public camera: Camera, public navCtrl: NavController, public navParams: NavParams,public alert :AlertController,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider,  public toast: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
+=======
+    videoURL
+  constructor(private transfer: FileTransfer, private file: File, public camera: Camera, public navCtrl: NavController, public navParams: NavParams,public alert :AlertController,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider,  public toast: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
+>>>>>>> 0d2f82508f0292bbe6da9ba35e45fb12c130090b
     let data = navParams.get('userData');
     console.log()
     this.limit = 4;
@@ -211,6 +216,13 @@ export class ProfilePage {
 
           for(let i =0 ; i < res.length;i++)
           {
+
+            if(res[i].video_embed != '')
+            {
+                res[i].video_embed = res[i].video_embed.substring(res[i].video_embed.indexOf("src=") + 5);
+                res[i].video_embed = res[i].video_embed.substring(0, res[i].video_embed.indexOf("\""));
+                this.videoURL = res[i].video_embed;
+            }
             let newFeedID = res[i].id
             let newFeed = res[i].answers
             this.remoteService.loadComments(newFeedID).subscribe(res2 =>{newFeed.unshift(res2)
