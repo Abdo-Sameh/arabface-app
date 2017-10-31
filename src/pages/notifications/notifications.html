@@ -40,7 +40,7 @@
             <p>{{notify.time}}</p>
           </div>
           <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'page.new.role'" >
-            <h5>{{notify.name}} <span>add  you as admin</span></h5>
+            <h5>{{notify.name}} <span>{{'add-you-as-admin' | translate}}</span></h5>
             <p>{{notify.time}}</p>
           </div>
           <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'page.like'" >
@@ -48,7 +48,7 @@
             <p>{{notify.time}}</p>
           </div>
           <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'group.post'" >
-              <h5>{{notify.name}} <span>posted in group</span></h5>
+              <h5>{{notify.name}} <span>{{'posted-in-group' | translate}}</span></h5>
 
               <p>{{notify.time}}</p>
            </div>
@@ -57,24 +57,24 @@
               <p>{{notify.time}}</p>
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'event.invite'" >
-            <h5>{{notify.name}} <span>invited you to  event {{notify.name}}</span></h5>
+            <h5>{{notify.name}} <span>{{'invited-you-to-event' | translate}} {{notify.name}}</span></h5>
             <p>{{notify.time}}</p>
          </div>
 
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'group.add.member'" >
-              <h5>{{notify.name}} <span>added you to  group {{notify.title}}</span></h5>
+              <h5>{{notify.name}} <span>{{'added-you-to-group' | translate}} {{notify.title}}</span></h5>
               <p>{{notify.time}}</p>
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'feed.comment.reply'" >
-              <h5>{{notify.name}} <span>replied on your  comment </span></h5>
+              <h5>{{notify.name}} <span>{{'replied-on-your-comment' | translate}} </span></h5>
               <p>{{notify.time}}</p>
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'page.invite'" >
-              <h5>{{notify.name}} <span>invited you to  page {{notify.title}}</span></h5>
+              <h5>{{notify.name}} <span>{{'invited-you-to-page' | translate}} {{notify.title}}</span></h5>
               <p>{{notify.time}}</p>
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'feed.mention'" >
-              <h5>{{notify.name}} <span>mentioned you in  post {{notify.title}}</span></h5>
+              <h5>{{notify.name}} <span>{{'mentioned-you-in-post' | translate}} {{notify.title}}</span></h5>
               <p>{{notify.time}}</p>
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'feed.like'" >
@@ -86,11 +86,15 @@
               <p>{{notify.time}}</p>
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'relationship.add'" >
-              <h5>{{notify.name}} <span>sent you friend request</span></h5>
+              <h5>{{notify.name}} <span>{{'sent-you-friend-request' | translate}}</span></h5>
               <p>{{notify.time}}</p>
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'feed.comment'" >
               <h5>{{notify.name}} <span>{{'make-comment-on-your-post' | translate}}</span></h5>
+              <p>{{notify.time}}</p>
+           </div>
+           <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'video.comment'" >
+              <h5>{{notify.name}} <span>{{'make-comment-on-your-video' | translate}}</span></h5>
               <p>{{notify.time}}</p>
            </div>
            <div class="read-mark">

@@ -237,6 +237,14 @@
 
 	"send" : "Send",
 
+	"friends-only" : "Friends only",
+
+	"only-me" : "Only me",
+
+	"who-can-see-latest-profile-visitors" : "Who can see my latest profile visitors ?",
+
+	"who-can-send-message" : "who can send you messages ?",
+
 	"someone-started-following-you" : "Someone followed you",
 
 	"you-are-mentioned" : "You are Mentioned",
@@ -244,6 +252,20 @@
 	"you-are-tagged" : "You are tagged",
 
 	"comment-on-your-post" : "Commented on your post",
+
+	"trending" : "Trending",
+
+	"edit-group" : "Edit",
+
+	"save-group" : "Save",
+
+	"create-group" : "Create group",
+
+	"create-event" : "Create event",
+
+	"stop-notifications" : "Stop notifications",
+
+	"add-member-to-group" : "Add members",
 
 	"reply-your-comment" : "Replied your comment",
 
@@ -1013,7 +1035,7 @@
 
 	"default-profile-privacy-desc": "Set the default profile privacy for your users",
 
-	"who-can-see-profile": "Who can see my profile",
+	"who-can-see-profile": "Who can see my profile ?",
 
 	"who-can-see-profile-desc": "Set who can view your profile timeline, photos,videos e.t.c",
 
@@ -1027,7 +1049,7 @@
 
 	"default-birthdate-privacy-desc": "Set the default Birth Date privacy",
 
-	"who-can-see-birthdate": "Who can see your birth date",
+	"who-can-see-birthdate": "Who can see your birth date ?",
 
 	"who-can-see-birthdate-desc": "Set who can see your birth date on your profile",
 
