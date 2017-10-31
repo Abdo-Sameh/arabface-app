@@ -75,10 +75,6 @@ getFeedsList(id,more=false,GotPosts= 30)
   });
   loading.present()
       this.remoteService.feedsListApiCall(id,'','feed',10).subscribe(res =>{
-
-
-
-
         //////////////////// looping to get comments and their replis ////////////////////////////////
         for(let i =0 ; i < res.length;i++)
         {
