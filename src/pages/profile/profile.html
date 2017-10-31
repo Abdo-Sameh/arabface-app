@@ -30,25 +30,27 @@
       <form class="img-upload">
         <img src={{userData.avatar}} alt="Arabface" title="Arabface">
         <div class="file-input file-input-profile">
-          <!-- <ion-item>
-          <p>{{imageURI}}</p>
-          <button ion-button color="secondary" (click)="getImage()">Get Image</button>
-        </ion-item> -->
-        <!-- <ion-item>
-          <h4>Image Preview</h4>
-          <img src="{{imageFileName}}" *ngIf="imageFileName" alt="Ionic File" width="300" />
-        </ion-item> -->
-        <!-- <ion-item>
-          <button ion-button (click)="uploadFile()">Upload</button>
-        </ion-item> -->
+
           <label for="profile-upload">
             <i *ngIf="myProfile()" class="fa fa-camera"></i>
           </label>
           <input id="profile-upload" type="file" name="avatar" [(ngModel)]="picture.path" [ngModelOptions]="{standalone: true}">
 
         </div>
-        <button type="submit" (click)="upload()">here</button>
+        <img src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
+        <h3 [hidden]="lastImage !== null">Please Select Image!</h3>
+        <!-- <button type="submit" (click)="upload()">here</button> -->
       </form>
+      <ion-toolbar color="primary">
+        <ion-buttons>
+          <button ion-button icon-left (click)="presentActionSheet()">
+            <ion-icon name="camera"></ion-icon>Select Image
+          </button>
+          <button ion-button icon-left (click)="uploadImage()" [disabled]="lastImage === null">
+            <ion-icon name="cloud-upload"></ion-icon>Upload
+          </button>
+        </ion-buttons>
+      </ion-toolbar>
 
     </div>
 <h3 style="position: absolute; bottom: -80px;">{{userData['name']}}</h3>

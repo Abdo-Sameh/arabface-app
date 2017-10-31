@@ -73,7 +73,7 @@ import { LatestVisitorsPage } from '../pages/latest-visitors/latest-visitors';
 import { ViewAlbumPage } from '../pages/view-album/view-album';
 import { EditAlbumPage } from '../pages/edit-album/edit-album';
 import { YoutubePipe } from '../pipes/youtube/youtube';
-
+import { FilePath } from '@ionic-native/file-path';
 
 @NgModule({
   declarations: [
@@ -188,6 +188,7 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule, TranslateModule.forRoot(
     FileTransfer,
     LaunchNavigator,
     Globalization,
+    FilePath,
     File,
     YoutubeVideoPlayer,
     Camera,
