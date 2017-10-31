@@ -862,11 +862,12 @@ console.log(url)
 
   //////////////////// load comments ////////////////////
 
-  loadComments(feedid)
-  {
+  loadComments(feedid) {
     return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/comment/load?type=feed&limit=10&type_id='+feedid)
-
-    //do((res : Response ) => console.log(res.json()))
+      .map((res : Response ) => res.json());
+  }
+  getComments(type, type_id, limit, offset, userid){
+    return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/comment/load?userid=' + userid + '&limit=' + limit + '&type_id=' + type_id + '&offset=' + offset + '&type=' + type)
       .map((res : Response ) => res.json());
   }
 

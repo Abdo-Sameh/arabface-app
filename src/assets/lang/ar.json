@@ -588,7 +588,7 @@
 
 	"image": "صورة",
 
-	"delete-post": "حذف آخر",
+	"delete-post": "حذف المنشور",
 
 	"edit-post": "تعديل المنشور",
 
@@ -618,11 +618,11 @@
 
 	"enable-feed-subscribing-desc": "الخيار لتمكين إخطارات الأعلاف، وهذا المشترك السيارات الحصول على إشعارات حول تحديثات للتغذية مثل تعليق الخ",
 
-	"get-notifications": "احصل على إشعارات",
+	"get-notifications": "الحصول على الاشعارات",
 
 	"notification-settings-info" : "تحكم في الاشعارات التي تأتي اليك",
 
-	"stop-notifications": "أوقف التنبيهات",
+	"stop-notifications": "أوقف الإشعارات",
 
 	"share": "مشاركة",
 
@@ -650,7 +650,11 @@
 
 	"editor": "محرر",
 
-	"public": "عامة",
+	"add-you-as-admin" : "",
+
+	"posted-in-group" : "",
+
+	"public": "عام",
 
 	"private": "خاص",
 
@@ -782,7 +786,7 @@
 
 	"confirm": "تأكيد",
 
-	"no-friend-requests": "ليس صديقا الطلبات",
+	"no-friend-requests": "لا توجد طلبات صداقة",
 
 	"friend-requests": "طلبات الصداقة",
 
@@ -1452,13 +1456,13 @@
 
 	"whats-happening": "بماذا تفكر؟",
 
-	"view-post": "رأي آخر",
+	"view-post": "رؤية المنشور",
 
 	"like-your-post": "أحب رسالتك",
 
 	"dislike-your-post": "كره رسالتك",
 
-	"make-comment-on-your-post": "علق على مشاركتك",
+	"make-comment-on-your-post": "قام بالتعليق على منشورك",
 
 	"comment-on-his-post": "علق على :ad بعد",
 
@@ -1560,7 +1564,7 @@
 
 	"group-suggestions": "اقتراحات المجموعة",
 
-	"suggestions" : "الاقتراحات",
+	"suggestions" : "أشخاص قد تعرفهم",
 
 	"group-setting-description": "إدارة إعدادات مجموعة هنا",
 
@@ -1679,6 +1683,8 @@
 	"manage-pages": "إدارة الصفحات",
 
 	"page-url": "URL الصفحة",
+
+	"url" : "الرابط",
 
 	"go-back-page": "العودة إلى الصفحة",
 
@@ -2456,7 +2462,7 @@
 
 	"can-create-event": "يمكن أن تخلق الحدث",
 
-	"dont-like-post": "أنا لا أحب هذا المنصب",
+	"dont-like-post": "هذا المنشور لا يعجبنى",
 
 	"default-feed-privacy": "افتراضي تغذية الخصوصية",
 
@@ -2506,7 +2512,7 @@
 
 	"page-permission-error": "لم يكن لديك إذن",
 
-	"accepted-friend-request": "قبلت طلب صديقك",
+	"accepted-friend-request": "قام بقبول طلب الصداقة",
 
 	"started-following-you": "بدات الاحقك",
 
@@ -3342,7 +3348,7 @@
 
 	"enable-online-filter-desc": "توفير الخيار للحصول على نتيجة البحث تصفية مع الموجودين",
 
-	"online-friends" : "الاصدقاء المتاحين الان",
+	"online-friends" : "الاصدقاء المتصلين الان",
 
 
 	"feature": "ميزة",
@@ -3437,13 +3443,13 @@
 
 	"friends-videos": "أصدقاء فيديو",
 
-	"my-videos": "بلدي فيديو",
+	"my-videos": "مقاطع الفيديو الخاصة بي",
 
 	"search-videos": "البحث عن مقاطع الفيديو",
 
 	"videos-create-page": "أشرطة الفيديو إنشاء الصفحة",
 
-	"source": "Source",
+	"source": "المصدر",
 
 	"upload-from-computer": "تحميل من الكمبيوتر",
 
@@ -3489,6 +3495,8 @@
 
 	"make-comment-on-your-video": "علق على الفيديو",
 
+	"sent-you-friend-request" : "أرسل اليك طلب صداقة",
+
 	"comment-on-his-video": "فيديو :ad علق على video",
 
 	"comment-on-video": "علق على هذا الفيديو",
@@ -3497,7 +3505,7 @@
 
 	"shared-video": "شارك مقطع فيديو",
 
-	"no-videos-found-here": "لا العثور على الفيديو هنا",
+	"no-videos-found-here": "لم يتم العثور على فيديوهات هنا",
 
 	"recent-videos": "الأخيرة فيديوهات",
 
@@ -3529,7 +3537,9 @@
 
 	"latest-topics": "أحدث الموضوعات",
 
-	"liked-your-post": "أحب مشاركتك في المنتدى",
+	"liked-your-post": "اعجبه منشورك",
+
+	"mentioned-you-in-post" : "",
 
 	"game-play": "تلعب لعبة",
 
@@ -3573,7 +3583,7 @@
 
 	"withavatar-value": "1",
 
-	"view-your-profile": "تم الاطلاع على ملفك",
+	"view-your-profile": "قام بالاطلاع على الملف الخاص بك",
 
 	"view-your-profile-again": "ينظر التعريف الخاص بك مرة أخرى",
 

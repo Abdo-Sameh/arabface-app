@@ -23,24 +23,28 @@
 </ion-header>
 
 
+
 <ion-content>
   <section class="bg_grey full_vh pt-70">
 			<div class="container">
 				<div class="feed-box post panel panel-theme mt-10">
           <div class="feed-header">
 						<div class="pull-left">
-							<a href="#"><img class="feed-img" src="images/avatar.png" alt=""></a>
+							<a href="#"><img class="feed-img" src="{{ video.owner.avatar }}" alt=""></a>
 							<div class="feed-title">
 								<h3><a href="#">{{ video.owner.name }}</a></h3>
-								<span>23 minutes ago .</span>
-								<span class="dropdown ml-5">
-									<a href="#" data-toggle="dropdown"><i class="fa fa-globe"></i></a>
-									<ul class="dropdown-menu">
-										<li><a href="#">Item-1</a></li>
-										<li><a href="#">Item-2</a></li>
-										<li><a href="#">Item-3</a></li>
-									</ul>
-								</span>
+								<span>{{ video.time }}</span>
+                <span class="dropdown ml-5">
+                    <a href="#" *ngIf="video.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
+                    <a href="#" *ngIf="video.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
+                    <a href="#" *ngIf="video.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
+
+                    <ul class="dropdown-menu">
+                      <!-- <li><a href="#">Item-1</a></li>
+                      <li><a href="#">Item-2</a></li>
+                      <li><a href="#">Item-3</a></li> -->
+                    </ul>
+                </span>
 							</div>
 						</div>
 						<div class="pull-right">
@@ -62,123 +66,116 @@
             <iframe style="width: 100%; height: 300" [src]="video.code | sanitizer" framborder="0" gesture="media" allowfullscreen></iframe>
 					</div>
 					<div class="feed-footer">
-						<div class="action-result flex-space-between">
-							<div class="pull-left">
-								<a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
-							</div>
-							<div class="pull-right">
-								<a href="#"><i class="fa fa-commenting"></i></a> 5
-								<a href="#"><i class="fa fa-share ml-10"></i></a> 10
-							</div>
-						</div>
-						<div class="feed-action flex-space-around">
-							<a href="#"><i class="fa fa-thumbs-o-up"></i> Like</a>
-							<a href="#"><i class="fa fa-commenting"></i> Comment</a>
-							<a href="#"><i class="fa fa-share"></i> Share</a>
-						</div>
-						<div class="comment-list">
-							<div class="comment">
-								<a href="#"><img class="feed-img" src="assets/images/avatar.png" alt=""></a>
-								<div class="feed-title">
-									<h3><a href="#">Username</a></h3>
-									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-									<div class="comment-action">
-										<div class="pull-left">
-											<a href="#" class="mr-10">Like</a>
-											<a href="#" class="mr-10">Reply</a>
-											<span class="mr-10">-</span>
-											<span>30 minute ago.</span>
-										</div>
-										<div class="pull-right">
-											<a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
-										</div>
-									</div>
-									<div class="comment">
-										<a href="#"><img class="feed-img" src="assets/images/avatar.png" alt=""></a>
-										<div class="feed-title">
-											<h3><a href="#">Username</a></h3>
-											<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-											<div class="comment-action">
-												<div class="pull-left">
-													<a href="#" class="mr-10">Like</a>
-													<a href="#" class="mr-10">Reply</a>
-													<span class="mr-10">-</span>
-													<span>30 minute ago.</span>
-												</div>
-												<div class="pull-right">
-													<a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
-												</div>
-												<div class="clearfix"></div>
-											</div>
-											<div class="comment write-comment">
-												<div class="pull-left">
-													<img class="feed-img" src="assets/images/avatar.png" alt="">
-												</div>
-												<form>
-													<div class="input-group">
-														<input type="text" class="form-control" placeholder="add to your post ...">
-														<div class="input-group-btn">
-															<button type="submit" class="btn btn-default">
-																<i class="fa fa-paper-plane"></i>
-															</button>
-														</div>
-													</div>
-												</form>
-												<ul class="feed-editors">
-													<li><a href="#"><i class="fa fa-user-plus"></i></a></li>
-													<li><a href="#"><i class="fa fa-camera"></i></a></li>
-													<li><a href="#"><i class="fa fa-video-camera"></i></a></li>
-													<li><a href="#"><i class="fa fa-map-marker"></i></a></li>
-													<li><a href="#"><i class="fa fa-link"></i></a></li>
-													<li><a href="#"><i class="fa fa-smile-o"></i></a></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="comment">
-								<a href="#"><img class="feed-img" src="assets/images/avatar.png" alt=""></a>
-								<div class="feed-title">
-									<h3><a href="#">Username</a></h3>
-									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-									<div class="comment-action">
-										<div class="pull-left">
-											<a href="#" class="mr-10">Like</a>
-											<a href="#" class="mr-10">Reply</a>
-											<span class="mr-10">-</span>
-											<span>30 minute ago.</span>
-										</div>
-										<div class="pull-right">
-											<a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="comment write-comment">
-								<div class="pull-left">
-									<img class="feed-img" src="assets/images/avatar.png" alt="">
-								</div>
-								<form>
-									<div class="input-group">
-										<input type="text" class="form-control" placeholder="add to your post ...">
-										<div class="input-group-btn">
-											<button type="submit" class="btn btn-default">
-												<i class="fa fa-paper-plane"></i>
-											</button>
-										</div>
-									</div>
-								</form>
-								<ul class="feed-editors">
-									<li><a href="#"><i class="fa fa-user-plus"></i></a></li>
-									<li><a href="#"><i class="fa fa-camera"></i></a></li>
-									<li><a href="#"><i class="fa fa-video-camera"></i></a></li>
-									<li><a href="#"><i class="fa fa-map-marker"></i></a></li>
-									<li><a href="#"><i class="fa fa-link"></i></a></li>
-									<li><a href="#"><i class="fa fa-smile-o"></i></a></li>
-								</ul>
-							</div>
-						</div>
+            <div class="action-result flex-space-between">
+                <div class="pull-left">
+                  <a href="#" (click)="effects()" class="effects"><i class="fa fa-thumbs-o-up"></i></a> {{video.like_count}}
+                </div>
+                <div class="pull-right">
+                  <a href="#"><i class="fa fa-commenting"></i></a> {{video.comments}}
+                </div>
+              </div>
+              <div class="feed-action flex-space-around">
+                <a href="#" *ngIf="video.has_like ==false"  (click)= "likeFeed(userId,video.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
+                <a href="#" *ngIf="video.has_like" style="color:#488aff" (click)= "likeFeed(userId,video.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
+                <a href="#"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
+                <a href="#" (click)="sharePost(video.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
+              </div>
+            <div class="clearfix"></div>
+            <div class="comment-list" >
+                <div class="comment" *ngFor="let comment of comments; let commentIndex = index;">
+                    <a href="#"><img class="feed-img" src={{comment.avatar}} alt=""></a>
+                    <div class="feed-title">
+                        <div class="pull-left comment-edit-input">
+                            <h3><a href="#">{{comment.name}}</a></h3>
+                            <p style="margin-left:0 !important;"  >{{comment.text}}</p>
+                            <div class="input-group">
+                            <textarea [(ngModel)]="comment.edited" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
+
+                            <a href="#" (click)="ConfirmEditPost(comment.edited,comment.id)" class="btn btn-theme">{{"save" | translate}}</a>
+                            <a href="#" class="btn btn-danger cancel-edit">{{'cancel' | translate}}</a>
+                          </div>
+                        </div>
+                        <div class="pull-right" *ngIf="comment.can_edit == true">
+                            <a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a>
+                            <a href="#" (click)="deleteComment(comment.id,commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a>
+                        </div>
+                        <div class="clearfix"></div>
+                      <div class="comment-action">
+                          <div class="pull-left" style="width:100%" >
+                              <div class="feed-title">
+                                <span class="mr-10"*ngIf="comment.has_like == false"  (click)= "likeComment(userId,comment.id,mainI,commentIndex)">{{comment.like_count}} {{'like' | translate}}</span>
+                                <span class="mr-10"*ngIf="comment.has_like != false" style="color:#488aff"  (click)= "likeComment(userId,comment.id,mainI,commentIndex)">{{comment.like_count}} {{'like' | translate}}</span>
+                                    <span (click)="reply()" class="mr-10 comment-reply"> {{comment.replies}} {{'reply' | translate}}</span>
+                                <span class="mr-10">-</span>
+                                <span>{{comment.time}}</span>
+                              </div>
+                            </div>
+                        <!-- <div class="pull-right">
+                          <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+                        </div> -->
+                      </div>
+                      <div  class="comment reply-input">
+                          <div class="pull-right">
+                              <a href="#" class="label label-default reply-close" style="margin-bottom: -10px;
+                              display: block;"><i class="fa fa-caret-up reply-close"></i></a>
+                          </div>
+                          <div class="clearfix"></div>
+                        <div *ngFor="let replies of comment.repliesContent ;let replyIndex = index">
+                          <a href="#"><img class="feed-img" src={{replies.avatar}} alt=""></a>
+                        <div class="feed-title">
+                          <h3><a href="#">{{replies.name}}</a></h3>
+                          <p>{{replies.text}}</p>
+                          <div class="comment-action">
+                            <div class="pull-left">
+                              <a href="#" class="mr-10" *ngIf="replies.has_like == false"  (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} {{'like' | translate}}</a>
+                              <a href="#" class="mr-10"  *ngIf="replies.has_like != false" style="color:#488aff" (click)= "likeReply(30,replies.id,mainI,commentIndex,replyIndex)">{{replies.like_count}} {{'like' | translate}}</a>                                    <span class="mr-10">-</span>
+                              <span>{{replies.time}}</span>
+
+                            </div>
+
+                              <!-- <div class="pull-right">
+                              <a href="#"><i class="fa fa-thumbs-o-up"></i></a> 3
+                            </div> -->
+
+                            <div class="clearfix"></div>
+
+                          </div>
+
+                        </div>
+
+                      </div>
+                      <div  class="comment write-comment">
+                          <div class="pull-left">
+                            <img class="feed-img"  src={{userAvatar}}  alt="">
+                          </div>
+                          <form>
+                            <div class="input-group" style="max-width:400px">
+                              <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="reply ...">
+                              <div class="input-group-btn">
+                                <button type="submit" style="height:35px" class="btn btn-default" (click)="replyOnComment(mainI,commentIndex,comment.entity_id,comment.id)">
+                                  <i class="fa fa-paper-plane"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </form>
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+            <div class="comment write-comment">
+              <div class="pull-left">
+                <img class="feed-img" src={{userAvatar}} alt="">
+              </div>
+              <form>
+                <div class="input-group">
+                  <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}">
+                  <span class="input-group-addon" (click)="commentOnFeed(video.id)"><i class="fa fa-paper-plane"></i></span>
+                </div>
+              </form>
+            </div>
+          </div>
 					</div>
 				</div>
 			</div>

@@ -141,6 +141,8 @@
 
 	"add-phrase": "Add Phrase",
 
+	"create" : "Create",
+
 	"create-language-pack": "Create a pack",
 
 	"import-language-pack": "Import  pack",
@@ -215,7 +217,63 @@
 
 	"leave-group" : "Leave",
 
-	"no-events-display" : "No events found",
+	"no-event-display" : "No events found here",
+
+	"external-link" : "External link",
+
+	"add" : "Add",
+
+	"add-video" : "Add Video",
+
+	"edit-video" : "Edit Video",
+
+	"search-here" : "Search here ...",
+
+	"add-new-photo" : "Add new photo",
+
+	"create-new-album" : "Create new album",
+
+	"create-album" : "Create Album",
+
+	"send" : "Send",
+
+	"friends-only" : "Friends only",
+
+	"only-me" : "Only me",
+
+	"who-can-see-latest-profile-visitors" : "Who can see my latest profile visitors ?",
+
+	"who-can-send-message" : "who can send you messages ?",
+
+	"someone-started-following-you" : "Someone followed you",
+
+	"you-are-mentioned" : "You are Mentioned",
+
+	"you-are-tagged" : "You are tagged",
+
+	"comment-on-your-post" : "Commented on your post",
+
+	"trending" : "Trending",
+
+	"edit-group" : "Edit",
+
+	"save-group" : "Save",
+
+	"create-group" : "Create group",
+
+	"create-event" : "Create event",
+
+	"stop-notifications" : "Stop notifications",
+
+	"add-member-to-group" : "Add members",
+
+	"reply-your-comment" : "Replied your comment",
+
+	"like-your-item" : "Like your posts,photos e.t.c",
+
+	"share-your-item" : "Shared your posts",
+
+	"posts" : "Posts",
 
 	"all-events" : "All",
 
@@ -873,6 +931,10 @@
 
 	"top-videos" : "Top",
 
+	"top" : "Top",
+
+	"featured" : "Featured",
+
 	"featured-videos" : "Featured",
 
 	"find-people": "Find People",
@@ -973,7 +1035,7 @@
 
 	"default-profile-privacy-desc": "Set the default profile privacy for your users",
 
-	"who-can-see-profile": "Who can see my profile",
+	"who-can-see-profile": "Who can see my profile ?",
 
 	"who-can-see-profile-desc": "Set who can view your profile timeline, photos,videos e.t.c",
 
@@ -987,7 +1049,7 @@
 
 	"default-birthdate-privacy-desc": "Set the default Birth Date privacy",
 
-	"who-can-see-birthdate": "Who can see your birth date",
+	"who-can-see-birthdate": "Who can see your birth date ?",
 
 	"who-can-see-birthdate-desc": "Set who can see your birth date on your profile",
 
@@ -1616,7 +1678,9 @@
 
 	"add-friend" : "Add friend",
 
+	"people-like this" : "People like this",
 
+	"invite-friends" : "Invite friends",
 
 	"people-you-may-know-page": "People you may know Page",
 

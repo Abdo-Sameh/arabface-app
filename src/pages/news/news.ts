@@ -57,6 +57,8 @@ export class NewsPage {
     this.getFeedsList(this.userId);
 
     this.userAvatar ="http://"+this.userAvatar;
+
+
   }
 
   ionViewDidLoad() {
@@ -75,10 +77,6 @@ getFeedsList(id,more=false,GotPosts= 30)
   });
   loading.present()
       this.remoteService.feedsListApiCall(id,'','feed',10).subscribe(res =>{
-
-
-
-
         //////////////////// looping to get comments and their replis ////////////////////////////////
         for(let i =0 ; i < res.length;i++)
         {
@@ -86,7 +84,9 @@ getFeedsList(id,more=false,GotPosts= 30)
                   ///////////// video url handling ////////////////////////
                   if(res[i].video_embed != '')
                   {
-                    this.videoURL = res[i].video_embed.replace(/[^0-9]/g, "")
+                      res[i].video_embed = res[i].video_embed.substring(res[i].video_embed.indexOf("src=") + 5);
+                      res[i].video_embed = res[i].video_embed.substring(0, res[i].video_embed.indexOf("\""));
+                      this.videoURL = res[i].video_embed;
                   }
 
                   /////////////////////////////////////////////////////
@@ -468,8 +468,6 @@ reply()
         ]
       });
       alert.present();
-
-
     }
     turnNotifications(feedid,index,feedType,userID=this.userId)
     {
