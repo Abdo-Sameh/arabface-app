@@ -32,9 +32,8 @@ export class VideoPage {
     this.userAvatar = localStorage.getItem('userAvatar').slice(8,-1);
     this.userAvatar ="http://"+this.userAvatar;
     this.video = this.navParams.get('video');
-    // this.video.code = this.video.code.substr(1);
-    // this.video.code = this.video.code.substring(1, this.video.code.length-1);
-    // $('#display').append(this.video.code);
+    this.video.code = this.video.code.substring(this.video.code.indexOf("src=") + 5);
+    this.video.code = this.video.code.substring(0, this.video.code.indexOf("\""));
     console.log(this.video.code);
   }
 

@@ -72,6 +72,9 @@ import { NotFound_404Page } from '../pages/not-found-404/not-found-404';
 import { LatestVisitorsPage } from '../pages/latest-visitors/latest-visitors';
 import { ViewAlbumPage } from '../pages/view-album/view-album';
 import { EditAlbumPage } from '../pages/edit-album/edit-album';
+import { YoutubePipe } from '../pipes/youtube/youtube';
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -118,7 +121,8 @@ import { EditAlbumPage } from '../pages/edit-album/edit-album';
     SavedPage,
     CreateAlbumPage, EditAlbumPage, ViewAlbumPage,
     PhotoselectionPage, CreateEventPage, EditEventPage, EventPage,
-    NotFound_404Page, LatestVisitorsPage
+    NotFound_404Page, LatestVisitorsPage,
+    YoutubePipe
   ],
   imports: [
 BrowserModule , IonicModule.forRoot(MyApp), HttpModule, TranslateModule.forRoot({

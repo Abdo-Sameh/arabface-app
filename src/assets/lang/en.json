@@ -1019,6 +1019,7 @@
 
 	"block-user": "Block User",
 
+	"report" : "Report",
 
 	"report-profile": "Report Profile",
 
@@ -1257,6 +1258,8 @@
 
 	"enable-https-desc": "Please confirm your server is enabled with https before enabling this option",
 
+	"unsave" : "Unsave",
+
 
 
 	"save-post": "Save",
@@ -1294,6 +1297,22 @@
 	"background-image-style": "Background Image Style",
 
 	"dont-repeat": "Don't repeat",
+
+	"gift-shop" : "Gift Shop",
+
+	"dont-like-post" : "I don't like this post",
+
+	"get-notifications" : "Get notifications",
+
+	"comment" : "Comment",
+
+	"online-friends" : "Online Friends",
+
+	"like-your-page" : "like your page",
+
+	"view-your-profile" : "view your profile",
+
+	"accepted-friend-request" : "accept your friend request",
 
 	"repeat-hor-ver": "Repeat Horizontally & Vertically",
 
@@ -1588,6 +1607,16 @@
 	"notifications-page": "Notifications Page",
 
 	"friend-requests-page": "Friend Requests Page",
+
+	"friend-requests" : "Friend Requests",
+
+	"no-friend-requests" : "No friend requests",
+
+	"suggestion" : "Suggestion",
+
+	"add-friend" : "Add friend",
+
+
 
 	"people-you-may-know-page": "People you may know Page",
 
