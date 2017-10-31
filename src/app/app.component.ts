@@ -57,7 +57,7 @@ export class MyApp {
       // used for an example of ngFor and navigation
       this.pages = [
         { title: 'profile', component: ProfilePage ,icon : 'fa fa-user'  },
-        { title: 'online friends', component:  OnlinePage ,icon : 'fa fa-circle'},
+        { title: 'online-friends', component:  OnlinePage ,icon : 'fa fa-circle'},
         { title: 'videos', component: VideosPage ,icon : 'fa fa-video-camera' },
         { title: 'photos', component: PhotosPage ,icon : 'fa fa-camera'},
         { title: 'pages', component: PagesPage ,icon : 'fa fa-file'},
@@ -81,8 +81,8 @@ export class MyApp {
   initializeApp() {
     this.platform.ready().then(() => {
       //running from browser
-      this.translate.setDefaultLang("ar");
-      this.platform.setDir('rtl', true);
+      this.translate.setDefaultLang("en");
+      this.platform.setDir('ltr', true);
 
       //running from app
 

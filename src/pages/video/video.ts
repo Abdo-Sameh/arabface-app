@@ -23,9 +23,8 @@ export class VideoPage {
   constructor(private youtube: YoutubeVideoPlayer, public alert:AlertController, private socialSharing: SocialSharing, public navCtrl: NavController, public navParams: NavParams, public remoteService :RemoteServiceProvider, public toastCtrl :ToastController) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.video = this.navParams.get('video');
-    // this.video.code = this.video.code.substr(1);
-    // this.video.code = this.video.code.substring(1, this.video.code.length-1);
-    // $('#display').append(this.video.code);
+    this.video.code = this.video.code.substring(this.video.code.indexOf("src=") + 5);
+    this.video.code = this.video.code.substring(0, this.video.code.indexOf("\""));
     console.log(this.video.code);
   }
 
@@ -94,6 +93,9 @@ export class VideoPage {
       ]
     });
     alert.present();
+  }
+  playVideo(){
+    // this.youtube.openVideo('myvideoid');
   }
   back(){
     this.navCtrl.pop();
