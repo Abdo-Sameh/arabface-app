@@ -75,41 +75,39 @@
                 </div>
               </div>
               <div class="feed-action flex-space-around">
-                <a href="#" *ngIf="video.has_like ==false"  (click)= "likeFeed(30,video.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
-                <a href="#" *ngIf="video.has_like" style="color:#488aff" (click)= "likeFeed(30,video.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
-                            <a href="#"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
+                <a href="#" *ngIf="video.has_like ==false"  (click)= "likeFeed(userId,video.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
+                <a href="#" *ngIf="video.has_like" style="color:#488aff" (click)= "likeFeed(userId,video.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
+                <a href="#"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
                 <a href="#" (click)="sharePost(video.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
               </div>
             <div class="clearfix"></div>
             <div class="comment-list" >
-                <div class="comment" *ngFor="let comments of video.answers;let commentIndex=index">
-                    <a href="#"><img class="feed-img" src={{comments.publisher.avatar}} alt=""></a>
+                <div class="comment" *ngFor="let comment of comments; let commentIndex = index;">
+                    <a href="#"><img class="feed-img" src={{comment.avatar}} alt=""></a>
                     <div class="feed-title">
                         <div class="pull-left comment-edit-input">
-                            <h3><a href="#">{{comments.publisher.name}}</a></h3>
-                            <p style="margin-left:0 !important;"  >{{comments.text}}</p>
+                            <h3><a href="#">{{comment.name}}</a></h3>
+                            <p style="margin-left:0 !important;"  >{{comment.text}}</p>
                             <div class="input-group">
                             <textarea [(ngModel)]="comment.edited" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
 
-                            <a href="#" (click)="ConfirmEditPost(comment.edited,comments.comment_id)" class="btn btn-theme">{{"save" | translate}}</a>
+                            <a href="#" (click)="ConfirmEditPost(comment.edited,comment.id)" class="btn btn-theme">{{"save" | translate}}</a>
                             <a href="#" class="btn btn-danger cancel-edit">{{'cancel' | translate}}</a>
                           </div>
                         </div>
-                        <div class="pull-right" *ngIf="comments.user_id == userId">
+                        <div class="pull-right" *ngIf="comment.can_edit == true">
                             <a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a>
-                            <a href="#" (click)="deleteComment(comments.comment_id,commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a>
+                            <a href="#" (click)="deleteComment(comment.id,commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a>
                         </div>
                         <div class="clearfix"></div>
                       <div class="comment-action">
                           <div class="pull-left" style="width:100%" >
                               <div class="feed-title">
-
-
-                                <span class="mr-10"*ngIf="comments.has_like ==false"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
-                                <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
-                                    <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
+                                <span class="mr-10"*ngIf="comment.has_like == false"  (click)= "likeComment(userId,comment.id,mainI,commentIndex)">{{comment.like_count}} {{'like' | translate}}</span>
+                                <span class="mr-10"*ngIf="comment.has_like != false" style="color:#488aff"  (click)= "likeComment(userId,comment.id,mainI,commentIndex)">{{comment.like_count}} {{'like' | translate}}</span>
+                                    <span (click)="reply()" class="mr-10 comment-reply"> {{comment.replies}} {{'reply' | translate}}</span>
                                 <span class="mr-10">-</span>
-                                <span>{{comments.time}}</span>
+                                <span>{{comment.time}}</span>
                               </div>
                             </div>
                         <!-- <div class="pull-right">
@@ -122,7 +120,7 @@
                               display: block;"><i class="fa fa-caret-up reply-close"></i></a>
                           </div>
                           <div class="clearfix"></div>
-                        <div *ngFor="let replies of comments.repliesContent ;let replyIndex = index">
+                        <div *ngFor="let replies of comment.repliesContent ;let replyIndex = index">
                           <a href="#"><img class="feed-img" src={{replies.avatar}} alt=""></a>
                         <div class="feed-title">
                           <h3><a href="#">{{replies.name}}</a></h3>
@@ -154,7 +152,7 @@
                             <div class="input-group" style="max-width:400px">
                               <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="reply ...">
                               <div class="input-group-btn">
-                                <button type="submit" style="height:35px" class="btn btn-default" (click)="replyOnComment(mainI,commentIndex,comments.entity_id,comments.id)">
+                                <button type="submit" style="height:35px" class="btn btn-default" (click)="replyOnComment(mainI,commentIndex,comment.entity_id,comment.id)">
                                   <i class="fa fa-paper-plane"></i>
                                 </button>
                               </div>
@@ -173,7 +171,7 @@
               <form>
                 <div class="input-group">
                   <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}">
-                  <span class="input-group-addon" (click)="commentOnFeed(userId,video.id)"><i class="fa fa-paper-plane"></i></span>
+                  <span class="input-group-addon" (click)="commentOnFeed(video.id)"><i class="fa fa-paper-plane"></i></span>
                 </div>
               </form>
             </div>
