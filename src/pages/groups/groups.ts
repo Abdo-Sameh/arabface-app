@@ -135,6 +135,7 @@ export class GroupsPage {
   }
 
   groupPage(group){
+    console.log(group);
     this.navCtrl.push(GroupPage,{
       group: group,
     });

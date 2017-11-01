@@ -73,7 +73,8 @@ import { LatestVisitorsPage } from '../pages/latest-visitors/latest-visitors';
 import { ViewAlbumPage } from '../pages/view-album/view-album';
 import { EditAlbumPage } from '../pages/edit-album/edit-album';
 import { YoutubePipe } from '../pipes/youtube/youtube';
-
+import { FilePath } from '@ionic-native/file-path';
+import { UploadImagePage } from '../pages/upload-image/upload-image';
 
 @NgModule({
   declarations: [
@@ -121,7 +122,7 @@ import { YoutubePipe } from '../pipes/youtube/youtube';
     SavedPage,
     CreateAlbumPage, EditAlbumPage, ViewAlbumPage,
     PhotoselectionPage, CreateEventPage, EditEventPage, EventPage,
-    NotFound_404Page, LatestVisitorsPage,
+    NotFound_404Page, LatestVisitorsPage,UploadImagePage,
     YoutubePipe
   ],
   imports: [
@@ -178,7 +179,7 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule, TranslateModule.forRoot(
     CreateAlbumPage, EditAlbumPage, ViewAlbumPage,
     InviteFriendPage,
     PhotoselectionPage, CreateEventPage, EditEventPage, EventPage,
-    NotFound_404Page, LatestVisitorsPage
+    NotFound_404Page, LatestVisitorsPage, UploadImagePage
   ],
   providers: [
     StatusBar,
@@ -188,6 +189,7 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule, TranslateModule.forRoot(
     FileTransfer,
     LaunchNavigator,
     Globalization,
+    FilePath,
     File,
     YoutubeVideoPlayer,
     Camera,
