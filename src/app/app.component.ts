@@ -83,7 +83,8 @@ export class MyApp {
       //running from browser
       this.translate.setDefaultLang("ar");
       this.platform.setDir('rtl', true);
-
+      // this.deviceLanguage = "ar";
+      // this.translate.getDefaultLang()
       //running from app
 
       // this.globalization.getPreferredLanguage()

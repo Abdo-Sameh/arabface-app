@@ -26,7 +26,7 @@
 
 <ion-content >
   <section class="bg_grey full_vh pt-70 pages">
-			<div class="user_cover" style="margin-top: 54px;">
+			<div class="user_cover" style="margin-top: 54px;" [ngStyle]="{ 'background-image': 'url('  + event.cover + ')'}">
 				<div class="friend_profile_box">
 					<div class="img-upload">
 						<img src="{{ event.image }}" alt="">
@@ -49,7 +49,7 @@
 							<li><a (click)="saveEvent(event.id)" style="color: #5c0632;" *ngIf="saved == false" href="#"><i class="fa fa-bookmark fa-fw"></i>&nbsp; {{'save' | translate}}</a></li>
               <li><a (click)="unsaveEvent(event.id)" style="color: #5c0632;" *ngIf="saved == true" href="#"><i class="fa fa-bookmark fa-fw"></i>&nbsp; {{'unsave-event' | translate}}</a></li>
 							<li><a (click)="editEventPage()" style="color: #5c0632;" *ngIf="event.is_admin == true" href="#"><i class="fa fa-pencil-square-o fa-fw"></i>&nbsp; {{'edit' | translate}}</a></li>
-							<li><a *ngIf="event.is_admin == true" style="color: #5c0632;" href="#"><i class="fa fa-picture-o fa-fw"></i>&nbsp; Change Cover</a></li>
+              <li><a (click)="presentActionSheet('event.cover')" *ngIf="event.is_admin == true" style="color: #5c0632;" href="#"><i class="fa fa-picture-o fa-fw"></i>&nbsp; {{'change-cover' | translate}}</a></li>
               <li><a (click)="reportEvent()" href="#" style="color: #5c0632;"><i class="fa fa-flag"></i>&nbsp; {{'report' | translate}}</a></li>
 						</ul>
 					</div>

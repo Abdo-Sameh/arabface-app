@@ -26,11 +26,16 @@
 
 <ion-content >
   <section class="bg_grey full_vh pt-70 pages">
-			<div class="user_cover friend_profile">
+			<div class="user_cover friend_profile" [ngStyle]="{ 'background-image': 'url('  + group.cover + ')'}">
 				<div class="friend_profile_box">
 					<div class="img-upload">
-
 						<img src="{{ group.logo }}" alt="">
+            <div class="file-input file-input-profile">
+              <label *ngIf="group.is_admin == true" for="profile-upload">
+                <i class="fa fa-camera"></i>
+              </label>
+              <input (click)="presentActionSheet('group.logo')" id="profile-upload" name="avatar">
+            </div>
 					</div>
 				</div>
         <div class="profile-editors">
@@ -41,6 +46,7 @@
 							<ul class="dropdown-menu dropdown-menu-right">
 
                 <li><a (click)="editGroup()" href="#" style="color: #5c0632;" *ngIf="group.is_admin == true"><i style="margin-right: 6px;" class="fa fa-pencil-square-o fz-11"></i> {{'edit-group' | translate}}</a></li>
+                <li><a (click)="presentActionSheet('group.cover')" href="#" style="color: #5c0632;" *ngIf="group.is_admin == true"><i style="margin-right: 6px;" class="fa fa-pencil-square-o fz-11"></i> {{'change-cover' | translate}}</a></li>
                 <li><a (click)="saveGroup(group.id)" href="#" style="color: #5c0632;" *ngIf="saved == false"><i style="margin-right: 6px;" class="fa fa-bookmark fz-11"></i> {{'save-group' | translate}}</a></li>
                 <li><a (click)="unsaveGroup(group.id)" href="#" style="color: #5c0632;" *ngIf="saved == true"><i style="margin-right: 6px;" class="fa fa-bookmark fz-11"></i> {{'unsave-group' | translate}}</a></li>
                 <li><a (click)="regularShare()" href="#"style="color: #5c0632;" ><i style="margin-right: 6px;" class="fa fa-share fz-11"></i> {{'share' | translate}}</a></li>

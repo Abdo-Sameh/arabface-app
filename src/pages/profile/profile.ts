@@ -11,6 +11,7 @@ import { PostFeatursPage } from '../post-featurs/post-featurs'
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
+import { UploadImagePage } from '../upload-image/upload-image';
 
 // import { Camera, CameraOptions } from '@ionic-native/camera';
 // import { FileTransfer, FileUploadOptions, FileTransferObject  } from '@ionic-native/file-transfer';
@@ -29,9 +30,7 @@ declare var cordova: any;
 })
 export class ProfilePage {
     userData = [];
-
     userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
-    captureDataUrl:any;
     profileInfo = {
       'online_time' : '',
       "gender" : '',
@@ -69,14 +68,10 @@ export class ProfilePage {
     }
     hiddenPost
     feed = { 'feedid' :""}
-<<<<<<< HEAD
     lastImage: string = null;
     loading: Loading;
-  constructor(private filePath: FilePath, private transfer: FileTransfer, private file: File, public camera: Camera, public navCtrl: NavController, public navParams: NavParams,public alert :AlertController,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider,  public toast: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
-=======
     videoURL
-  constructor(private transfer: FileTransfer, private file: File, public camera: Camera, public navCtrl: NavController, public navParams: NavParams,public alert :AlertController,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider,  public toast: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
->>>>>>> 0d2f82508f0292bbe6da9ba35e45fb12c130090b
+  constructor(private filePath: FilePath, private transfer: FileTransfer, private file: File, public camera: Camera, public navCtrl: NavController, public navParams: NavParams,public alert :AlertController,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider,  public toast: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
     let data = navParams.get('userData');
     console.log()
     this.limit = 4;
@@ -88,32 +83,31 @@ export class ProfilePage {
         this.getFeedsList(this.userId)
         this.getPhotsFromProvider(this.userID);
   }
-  public presentActionSheet() {
+  public presentActionSheet(type) {
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Select Image Source',
+      // title: 'Select Image Source',
       buttons: [
         {
-          text: 'Load from Library',
+          text: 'Library',
           handler: () => {
-            this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
+            this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY, type);
+
           }
         },
         {
-          text: 'Use Camera',
+          text: 'Camera',
           handler: () => {
-            this.takePicture(this.camera.PictureSourceType.CAMERA);
+            this.takePicture(this.camera.PictureSourceType.CAMERA, type);
+
           }
-        },
-        {
-          text: 'Cancel',
-          role: 'cancel'
         }
       ]
     });
     actionSheet.present();
+
   }
 
-  public takePicture(sourceType) {
+  public takePicture(sourceType, type) {
     // Create options for the Camera Dialog
     var options = {
       quality: 100,
@@ -130,12 +124,14 @@ export class ProfilePage {
           .then(filePath => {
             let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
             let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
-            this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+            this.copyFileToLocalDir(correctPath, currentName, this.createFileName(), type);
+
           });
       } else {
         var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
         var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
-        this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+        this.copyFileToLocalDir(correctPath, currentName, this.createFileName(), type);
+
       }
     }, (err) => {
       this.presentToast('Error while selecting image.');
@@ -149,53 +145,15 @@ export class ProfilePage {
     return newFileName;
   }
 
-  private copyFileToLocalDir(namePath, currentName, newFileName) {
+  private copyFileToLocalDir(namePath, currentName, newFileName, type) {
     this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
       this.lastImage = newFileName;
+      this.navCtrl.push(UploadImagePage,{
+        type: type,
+        image: this.lastImage
+      })
     }, error => {
       this.presentToast('Error while storing file.');
-    });
-  }
-
-  public pathForImage(img) {
-    if (img === null) {
-      return '';
-    } else {
-      return cordova.file.dataDirectory + img;
-    }
-  }
-
-  public uploadImage() {
-    // Destination URL
-    var url = "http://192.168.1.252/arabface/api/14789632/profile/change/avatar";
-
-    // File for Upload
-    var targetPath = this.pathForImage(this.lastImage);
-
-    // File name only
-    var filename = this.lastImage;
-
-    var options = {
-      fileKey: "file",
-      fileName: filename,
-      chunkedMode: false,
-      mimeType: "multipart/form-data",
-      params : {'avatar': filename, 'userid' : this.userId}
-    };
-    const fileTransfer: FileTransferObject = this.transfer.create();
-
-    this.loading = this.loadingCtrl.create({
-      content: 'Uploading...',
-    });
-    this.loading.present();
-
-    // Use the FileTransfer to upload the image
-    fileTransfer.upload(targetPath, url, options).then(data => {
-      this.loading.dismissAll()
-      this.presentToast('Image succesful uploaded.');
-    }, err => {
-      this.loading.dismissAll()
-      this.presentToast('Error while uploading file.');
     });
   }
 
@@ -529,131 +487,6 @@ replyOnComment(postindex,commentindex,postOwner,commentID,whoCommented=this.user
     // }
 
 
-    upload() {
-      const camOptions: CameraOptions = {
-        sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-        destinationType: this.camera.DestinationType.FILE_URI,
-        encodingType: this.camera.EncodingType.JPEG,
-        mediaType: this.camera.MediaType.PICTURE
-      }
-      const fileTransfer: FileTransferObject = this.transfer.create();
-this.camera.getPicture(camOptions).then((imageData) => {
-      let options: FileUploadOptions = {
-         fileKey: 'avatar',
-         fileName: 'name.png',
-         headers: {
-           'Content-Type': 'multipart/form-data'
-         },
-         params:{
-           'userid': this.userId,
-           'avatar' : imageData
-         }
-      }
-
-
-        alert(imageData);
-
-
-      fileTransfer.upload(imageData, 'http://192.168.1.252/arabface/api/14789632/profile/change/avatar', options)
-       .then((data) => {
-         alert(data.response);
-         alert(data.bytesSent);
-
-       }, (err) => {
-         alert(err);
-       })
-
-       });
-    }
-
-    changeProfilePicture(event){
-      // var files = (<HTMLInputElement>document.getElementById("profile-upload")).files;
-      //
-      // for (var i = 0; i < files.length; i++)
-      // {
-      //  console.log(files[i]);
-      // }
-      //
-      //
-      //
-      // let options: FileUploadOptions = {
-      //   fileKey: 'file',
-      //   fileName: 'tmpTestfile.jpg',
-      //   chunkedMode: false,
-      //   mimeType: "multipart/form-data",
-      //   headers:  {
-      //     'Content-Type': 'application/json',
-      //     'Auth': this.localData.getApiKey()
-      //   }
-      // };
-
-      // const fileTransfer: TransferObject = this.transfer.create();
-      // Use the FileTransfer to upload the image
-      // return fileTransfer.upload(imageData, '/api/image/', options)
-
-      // const options: CameraOptions = {
-      //   sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      //   destinationType: this.camera.DestinationType.DATA_URL,
-      //   encodingType: this.camera.EncodingType.JPEG,
-      //   mediaType: this.camera.MediaType.PICTURE
-      // }
-      // console.log($("#profile-upload").file);
-      // console.log(this.picture.path);
-      //this.camera.getPicture(options).then((imageData) => {
-       // imageData is either a base64 encoded string or a file URI
-       // If it's base64:
-      //  console.log(this.picture.path);
-      // let base64Image = 'data:image/jpeg;base64,' + "assets/images/avatar.png";
-      //alert(imageData);
-      // console.log(base64Image);
-      //  this.remoteService.changeProfilePicture(this.userId, files[0]).subscribe(res =>{
-      //    console.log("success")
-      //    console.log(res);
-      //  });
-      // }, (err) => {
-      //  // Handle error
-      // });
-
-    }
-  //   openCamera() {
-  //     const cameraOptions: CameraOptions = {
-  //      targetHeight:150,
-  //      targetWidth:150,
-  //      quality: 50,
-  //      destinationType: this.camera.DestinationType.DATA_URL,
-  //      encodingType: this.camera.EncodingType.JPEG,
-  //      mediaType: this.camera.MediaType.PICTURE,
-  //     };
-   //
-  //     this.camera.getPicture(cameraOptions).then((imageData) => {
-  //       this.captureDataUrl = imageData;
-  //       console.log("CaptureDataUrl:" + this.captureDataUrl);
-  //       this.upload();
-  //     }, (err) => {
-  //   });
-  //  }
-   //
-  //  upload(){
-  //   //  var profildata={
-  //   //    "name"  :'HR PATEL',
-  //   //    "image" : this.captureDataUrl
-  //   //  }
-   //
-  //    this.remoteService.changeProfilePicture(this.userId, this.captureDataUrl).subscribe(
-  //     response => {
-  //       alert(this.captureDataUrl);
-  //       alert("user add sucessfully");
-  //       alert(response.status);
-  //     },
-  //     err => {
-  //     alert("err...."+err );
-  //    }
-  //   );
-  //  }
-
-
-
-
 
 count=1;
 
@@ -671,56 +504,6 @@ setColor(btn)
 
 }
 
-// getImage() {
-//     const options: CameraOptions = {
-//       quality: 100,
-//       destinationType: this.camera.DestinationType.FILE_URI,
-//       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
-//     }
-
-//     this.camera.getPicture(options).then((imageData) => {
-//       this.imageURI = imageData;
-//     }, (err) => {
-//       console.log(err);
-//       this.presentToast(err);
-//     });
-// }
-
-// uploadFile() {
-// let loader = this.loadingCtrl.create({
-//   content: "Uploading..."
-// });
-// loader.present();
-// const fileTransfer: FileTransferObject = this.transfer.create();
-
-// let headers = new Headers();
-// headers.append('Content-Type', 'multipart/form-data');
-
-// let options: FileUploadOptions = {
-//   fileKey: 'avatar',
-//   fileName: this.imageURI,
-//   chunkedMode: false,
-//   mimeType: "multipart/form-data",
-//   headers: headers,
-//   params: {
-//     'userid': this.userId,
-//     'avatar': this.imageURI
-//   }
-// }
-
-// fileTransfer.upload(this.imageURI, 'http://nilemm.com/arabface/api/89129812/profile/change/avatar', options)
-//   .then((data) => {
-//   console.log(data+" Uploaded Successfully");
-//   this.imageFileName = "http://192.168.0.7:8080/static/images/ionicfile.jpg"
-//   loader.dismiss();
-//   this.presentToast("Image uploaded successfully");
-// }, (err) => {
-//   console.log(err);
-//   loader.dismiss();
-//   this.presentToast(err);
-// });
-// }
-
 presentToast(msg) {
   let toast = this.toast.create({
     message: msg,
@@ -734,46 +517,6 @@ presentToast(msg) {
 
   toast.present();
 }
-// upload()
-//     {
-//
-//        let options = {
-//
-//            quality: 100
-//             };
-//
-//
-//       this.camera.getPicture(options).then((imageData) => {
-//        // imageData is either a base64 encoded string or a file URI
-//        // If it's base64:
-//
-//      const fileTransfer: TransferObject = this.transfer.create();
-//      let headers = new Headers();
-//      headers.append('Content-Type', 'multipart/form-data');
-//      let urlSearchParams = new URLSearchParams();
-//     //  urlSearchParams.append('avatar', avatar);
-//     //  urlSearchParams.append('userid', userid);
-//       let options1: FileUploadOptions = {
-//          fileKey: 'avatar',
-//          fileName: 'name.jpg',
-//          headers: headers
-//       }
-//
-//   fileTransfer.upload(imageData, 'http://nilemm.com/arabface/api/89129812/profile/change/avatar?userid=66', options1)
-//    .then((data) => {
-//      // success
-//      alert("success");
-//    }, (err) => {
-//      // error
-//      alert("error"+JSON.stringify(err));
-//    });
-//
-//
-//     });
-//
-//
-// }
-
 
   edit() {
     $(document).on('click','.comment-edit',function(){

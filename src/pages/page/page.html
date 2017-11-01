@@ -27,8 +27,13 @@
 			<div class="user_cover friend_profile" [ngStyle]="{ 'background-image': 'url('  + page.cover + ')'}">
 				<div class="friend_profile_box">
 					<div class="img-upload">
-
 						<img src="{{ page.logo }}" alt="">
+            <div class="file-input file-input-profile">
+              <label *ngIf="page.is_admin == true" for="profile-upload">
+                <i class="fa fa-camera"></i>
+              </label>
+              <input (click)="presentActionSheet('page.logo')" id="profile-upload" name="avatar">
+            </div>
 					</div>
 				</div>
 
@@ -38,14 +43,15 @@
     <a *ngIf="page.has_like == true" style="color: #488aff" (click)="likePage(userId, page.id, 'dislike')" href="#" class="btn btn-theme btn-sm"><i class="fa fa-check"></i>&nbsp; {{'like' | translate}}</a>
 
     <div class="dropdown" style="display:inline-block">
-								<a href="#" class="btn btn-theme btn-sm" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
-							<ul class="dropdown-menu dropdown-menu-right">
- <li><a (click)="editPage()" href="#" style="color: #5c0632;" *ngIf="page.is_admin == true"><i class="fa fa-edit"></i>&nbsp; {{'edit' | translate}}</a></li>
+				<a href="#" class="btn btn-theme btn-sm" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
+						<ul class="dropdown-menu dropdown-menu-right">
+               <li><a (click)="editPage()" href="#" style="color: #5c0632;" *ngIf="page.is_admin == true"><i class="fa fa-edit"></i>&nbsp; {{'edit' | translate}}</a></li>
 								<li><a (click)="regularShare()" href="#" style="color: #5c0632;"><i class="fa fa-share"></i>&nbsp; {{'share' | translate}}</a></li>
 								<li><a (click)="savePage(page.id)" href="#" *ngIf="saved == false" style="color: #5c0632;"><i class="fa fa-bookmark"></i>&nbsp; {{'save' | translate}}</a></li>
- <li><a (click)="unsavePage(page.id)" href="#" *ngIf="saved == true" style="color: #5c0632;"><i class="fa fa-bookmark"></i>&nbsp; {{'unsave' | translate}}</a></li>
- <li><a (click)="reportPage()" href="#" style="color: #5c0632;"><i class="fa fa-flag"></i>&nbsp; {{'report' | translate}}</a></li>
-  </ul>
+                <li><a (click)="presentActionSheet('page.cover')" href="#" style="color: #5c0632;" *ngIf="page.is_admin == true"><i class="fa fa-edit"></i>&nbsp; {{'change-cover' | translate}}</a></li>
+             <li><a (click)="unsavePage(page.id)" href="#" *ngIf="saved == true" style="color: #5c0632;"><i class="fa fa-bookmark"></i>&nbsp; {{'unsave' | translate}}</a></li>
+             <li><a (click)="reportPage()" href="#" style="color: #5c0632;"><i class="fa fa-flag"></i>&nbsp; {{'report' | translate}}</a></li>
+          </ul>
 						</div>
 				</div>
 			</div>

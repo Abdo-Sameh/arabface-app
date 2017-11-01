@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController, ActionSheetController, Platform } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { TabsPage } from '../tabs/tabs';
 import { PagesPage } from '../pages/pages';
@@ -11,13 +11,18 @@ import { ProfilePage } from '../profile/profile';
 import { DisplayPostPage } from '../display-post/display-post';
 import { PostFeatursPage } from '../post-featurs/post-featurs';
 import { TranslateService } from '@ngx-translate/core';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+import { FilePath } from '@ionic-native/file-path';
+import { UploadImagePage } from '../upload-image/upload-image';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 /**
  * Generated class for the Page page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
+declare var cordova: any;
 @Component({
   selector: 'page-page',
   templateUrl: 'page.html',
@@ -46,7 +51,8 @@ export class Page {
   feeds
   feedLikes
   userData
-  constructor(public translate: TranslateService, public alert:AlertController, private socialSharing: SocialSharing, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
+  lastImage: string = null;
+  constructor(public file: File, public filePath: FilePath, public platform: Platform, public camera: Camera, public actionSheetCtrl: ActionSheetController, public translate: TranslateService, public alert:AlertController, private socialSharing: SocialSharing, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.page = navParams.get("page");
     let loading = this.loadingCtrl.create({
@@ -62,6 +68,91 @@ export class Page {
     this.userAvatar = this.page.logo;
     console.log(this.page);
     this.getFeedsList(this.userId);
+  }
+  public presentActionSheet(type) {
+    let actionSheet = this.actionSheetCtrl.create({
+      // title: 'Select Image Source',
+      buttons: [
+        {
+          text: 'Library',
+          handler: () => {
+            this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY, type);
+          }
+        },
+        {
+          text: 'Camera',
+          handler: () => {
+            this.takePicture(this.camera.PictureSourceType.CAMERA, type);
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+
+  }
+
+  public takePicture(sourceType, type) {
+    // Create options for the Camera Dialog
+    var options = {
+      quality: 100,
+      sourceType: sourceType,
+      saveToPhotoAlbum: false,
+      correctOrientation: true
+    };
+
+    // Get the data of an image
+    this.camera.getPicture(options).then((imagePath) => {
+      // Special handling for Android library
+      if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
+        this.filePath.resolveNativePath(imagePath)
+          .then(filePath => {
+            let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
+            let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
+            this.copyFileToLocalDir(correctPath, currentName, this.createFileName(), type);
+
+          });
+      } else {
+        var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
+        var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
+        this.copyFileToLocalDir(correctPath, currentName, this.createFileName(), type);
+
+      }
+    }, (err) => {
+      this.presentToast('Error while selecting image.');
+    });
+  }
+
+  private createFileName() {
+    var d = new Date(),
+    n = d.getTime(),
+    newFileName =  n + ".jpg";
+    return newFileName;
+  }
+
+  private copyFileToLocalDir(namePath, currentName, newFileName, type) {
+    this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
+      this.lastImage = newFileName;
+      this.navCtrl.push(UploadImagePage,{
+        type: type,
+        image: this.lastImage,
+        id: this.page.id
+      })
+    }, error => {
+      this.presentToast('Error while storing file.');
+    });
+  }
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    toast.present();
   }
 
   ionViewDidLoad() {
