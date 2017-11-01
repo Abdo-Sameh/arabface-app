@@ -88,6 +88,9 @@ getFeedsList(id,more=false,GotPosts= 30)
                       res[i].video_embed = res[i].video_embed.substring(0, res[i].video_embed.indexOf("\""));
                       this.videoURL = res[i].video_embed;
                   }
+                  ///////////////// split time string to words/////////////////
+
+                  // res[i].time = res[i].time.split(' ');
 
                   /////////////////////////////////////////////////////
           let newFeedID = res[i].id
@@ -503,7 +506,7 @@ reply()
  }
 
   goToPost() {
-    this.navCtrl.push(PostFeatursPage, {
+    this.app.getRootNav().push(PostFeatursPage, {
       type: 'feed',
       type_id: ''
     });

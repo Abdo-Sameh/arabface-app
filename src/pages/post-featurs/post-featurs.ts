@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams ,LoadingController ,AlertController} from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
+import { TranslateService } from '@ngx-translate/core';
 import * as $ from "jquery"
 
 const Tagedusers= []
@@ -21,7 +22,7 @@ export class PostFeatursPage {
   users
   type
   typeId
-  constructor(public navCtrl: NavController, public navParams: NavParams ,public alert:AlertController,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
+  constructor(public translate: TranslateService, public navCtrl: NavController, public navParams: NavParams ,public alert:AlertController,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
       this.type = navParams.get('type');
       this.typeId = navParams.get('type_id');
       console.log(this.type, this.typeId);
@@ -121,17 +122,23 @@ export class PostFeatursPage {
   }
   locationPopUp()
   {
+    let title, yourLocation, post, cancel, message;
+    this.translate.get('location').subscribe(value => { title = value; })
+    this.translate.get('your-location').subscribe(value => { yourLocation = value; })
+    this.translate.get('post').subscribe(value => { post = value; })
+    this.translate.get('cancel').subscribe(value => { cancel = value; })
+    this.translate.get('location-message').subscribe(value => { message = value; })
       let locationAlert = this.alert.create(
         {
-          title : 'location',
-          message: "where are you now ?",
+          title : title,
+          message: message,
           inputs : [{
             name:'location',
-            placeholder : 'your location !'
+            placeholder : yourLocation
           }],
           buttons : [
             {
-              text: 'post',
+              text: post,
               handler: data => {
                 // if (User.isValid(data.username, data.password)) {
                 //   // logged in!
