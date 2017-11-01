@@ -15,7 +15,7 @@
             <a (click)="back()"><i class="fa fa-arrow-left"></i></a>
           </div>
           <div class="page_title text-center">
-            <h3>{{'post' | translate}}</h3>
+            <h3>{{'write-post' | translate}}</h3>
           </div>
           <div class="menu_btn text-right">
             <a href="#"><i class="fa fa-bars" style="color:#fff;font-size:18px"></i></a>
@@ -34,7 +34,7 @@
 
       <div class="feeling-div">
           <div class="feelingText btn btn-theme"></div>
-          <div> <input type='text'[(ngModel)]="post.feeling" [ngModelOptions]="{ standalone :true}" style="width: 100%;margin-top: 10px;border: 1px solid #ccc;padding: 7px;" placeholder="type what you feel" />  </div>
+          <div> <input type='text'[(ngModel)]="post.feeling" [ngModelOptions]="{ standalone :true}" style="width: 100%;margin-top: 10px;border: 1px solid #ccc;padding: 7px;" placeholder="{{'type-what-you-feel' | translate}}" />  </div>
         </div>
 
         <div class="tag-div" style="display:none">
@@ -46,7 +46,7 @@
 
         </div>
             <div>
-              <input type='text'[(ngModel)]="tagedUsers" [ngModelOptions]="{ standalone :true}" (keyup)="getFriendsListToTag(tagedUsers)" style="width: 100%;margin-top: 10px;border: 1px solid #ccc;padding: 7px;" placeholder="type what you feel" />
+              <input type='text'[(ngModel)]="tagedUsers" [ngModelOptions]="{ standalone :true}" (keyup)="getFriendsListToTag(tagedUsers)" style="width: 100%;margin-top: 10px;border: 1px solid #ccc;padding: 7px;" placeholder="{{'tag-people-in-your-post' | translate}}" />
             </div>
             <div *ngIf="searchedUsers">
               <ul (click)="selectUserToTag()" class="tagslist  " style="width:100%" *ngFor="let taged of searchedUsers" >
@@ -112,7 +112,7 @@
       <li><a href="#"><img src="assets/images/status/celebrating.png"> {{'celebrating' | translate}}</a></li>
       <li><a href="#"><img src="assets/images/status/traveling-to.png"> {{'traveling-to' | translate}}</a></li>
       <li><a href="#"><img src="assets/images/status/exercising.png"> {{'exercising' | translate}}</a></li>
-      <li><a href="#"><img src="assets/images/status/meeting.png"> {{'Meeting' | translate}}</a></li>
+      <li><a href="#"><img src="assets/images/status/meeting.png"> {{'meeting' | translate}}</a></li>
       <li><a href="#"><img src="assets/images/status/playing.png"> {{'playing' | translate}}</a></li>
       <li><a href="#"><img src="assets/images/status/looking-for.png"> {{'looking-for' | translate}}</a></li>
     </ul>

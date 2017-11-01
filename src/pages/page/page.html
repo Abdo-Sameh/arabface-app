@@ -29,6 +29,12 @@
 					<div class="img-upload">
 
 						<img src="{{ page.logo }}" alt="">
+            <div class="file-input file-input-profile">
+              <label *ngIf="page.is_admin == true" for="profile-upload">
+                <i  class="fa fa-camera"></i>
+              </label>
+              <input id="profile-upload" type="file" name="avatar">
+            </div>
 					</div>
 				</div>
 

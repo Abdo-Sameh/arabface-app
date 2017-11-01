@@ -526,23 +526,23 @@
 
 	"last_name": "الاسم الاخير",
 
-	"feeling": "شعور",
+	"feeling": "أشعر ب",
 
-	"eating": "يتناول الطعام",
+	"eating": "أتناول طعام",
 
-	"drinking": "الشرب",
+	"drinking": "أتناول مشروب",
 
-	"exercising": "ممارسة",
+	"exercising": "أتمرن",
 
-	"listening-to": "يستمع إلى",
+	"listening-to": "استمع إلى",
 
-	"reading": "قراءة",
+	"reading": "أقرأ",
 
-	"meeting": "عقد اجتماع",
+	"meeting": "اجتمع ب",
 
-	"looking-for": "يبحث عن",
+	"looking-for": "أبحث عن",
 
-	"watching": "مشاهدة",
+	"watching": "اشاهد",
 
 	"in": "في",
 
@@ -650,9 +650,9 @@
 
 	"editor": "محرر",
 
-	"add-you-as-admin" : "",
+	"add-you-as-admin" : "قام باضافتك كمدير",
 
-	"posted-in-group" : "",
+	"posted-in-group" : "قام بالنشر في مجموعة",
 
 	"public": "عام",
 
@@ -1548,6 +1548,8 @@
 
 	"member-added-successfully": "وأضاف عضو بنجاح",
 
+	"invited-you-to-event" : "دعاك الي الحدث",
+
 	"added-you-to-group": "إضافتك إلى هذه المجموعة: ",
 
 	"added" : "تمت الاضافة",
@@ -2264,6 +2266,18 @@
 
 	"ago": "منذ",
 
+	"location-message" : "أين انت الان ؟",
+
+	"your-location" : "موقعك الان",
+
+	"write-post" : "اكتب منشور",
+
+	"post" : "نشر",
+
+	"type-what-you-feel" : "بماذا تشعر ؟",
+
+	"tag-people-in-your-post" : "أشر الى اصدقائك فى المنشور",
+
 	"from-now": "من الان",
 
 	"any-moment": "أي لحظة الآن",
@@ -2468,13 +2482,13 @@
 
 	"default-feed-privacy-desc": "تعيين الخصوصية تغذية الافتراضي لمحرر تغذية",
 
-	"thinking-about": "التفكير",
+	"thinking-about": "أفكر في",
 
-	"celebrating": "الاحتفال",
+	"celebrating": "أحتفل",
 
-	"traveling-to": "السفر الى",
+	"traveling-to": "أسافر الى",
 
-	"playing": "لعب",
+	"playing": "العب",
 
 	"create-poll": "إنشاء الإستطلاع",
 
@@ -3938,6 +3952,10 @@
 	"join": "انضم",
 
 	"on": "على",
+
+	"replied-on-your-comment" : "رد علي تعليقك",
+
+	"invited-you-to-page" : "دعاك الي الاعجاب بصفحة",
 
 	"invited-you-to": "دعوتك ل",
 
