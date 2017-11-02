@@ -1,6 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild,Inject } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { Http } from '@angular/http';
+import { DOCUMENT } from '@angular/platform-browser';
 import { RemoteServiceProvider} from '../providers/remote-service/remote-service';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 import 'rxjs/add/operator/map';
@@ -46,7 +47,7 @@ export class MyApp {
     pages: Array<{title: string, component: any , icon: string}>;
 
 
-    constructor(public globalization: Globalization, public launchNavigator: LaunchNavigator, public translate: TranslateService, public database:RemoteServiceProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen , public http :Http) {
+    constructor(@Inject(DOCUMENT) private document, public globalization: Globalization, public launchNavigator: LaunchNavigator, public translate: TranslateService, public database:RemoteServiceProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen , public http :Http) {
       // translate.setDefaultLang('ar');
 
 
@@ -55,6 +56,7 @@ export class MyApp {
       this.initializeApp();
      // this.userAvatar ="http://"+this.userAvatar;
       // used for an example of ngFor and navigation
+
       this.pages = [
         { title: 'profile', component: ProfilePage ,icon : 'fa fa-user'  },
         { title: 'online-friends', component:  OnlinePage ,icon : 'fa fa-circle'},
@@ -81,17 +83,25 @@ export class MyApp {
   initializeApp() {
     this.platform.ready().then(() => {
       //running from browser
-      this.translate.setDefaultLang("ar");
-      this.platform.setDir('rtl', true);
+      // this.translate.setDefaultLang("en");
+      // this.platform.setDir('ltr', true);
+      // this.document.getElementById('appstyle').setAttribute('href', 'assets/css/main.css');
       // this.deviceLanguage = "ar";
       // this.translate.getDefaultLang()
       //running from app
 
-      // this.globalization.getPreferredLanguage()
-      // .then( res => {
-      //   this.translate.use((res.value).split("-")[0]);
-      //   this.translate.setDefaultLang((res.value).split("-")[0]);
-      // });
+      this.globalization.getPreferredLanguage()
+      .then( res => {
+        this.translate.use((res.value).split("-")[0]);
+        this.translate.setDefaultLang((res.value).split("-")[0]);
+        if(this.translate.getDefaultLang() == "ar"){
+          this.platform.setDir('rtl', true);
+          this.document.getElementById('appstyle').setAttribute('href', 'assets/css/main-ar.css');
+        }else{
+          this.platform.setDir('ltr', true);
+          this.document.getElementById('appstyle').setAttribute('href', 'assets/css/main.css');
+        }
+      });
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });

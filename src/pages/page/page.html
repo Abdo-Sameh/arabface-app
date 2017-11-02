@@ -64,7 +64,9 @@
 				</div>
 				<div class="panel panel-theme">
 					<!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit culpa mollitia veniam officiis ex impedit totam, hic nam voluptas temporibus nihil libero ipsam ab distinctio quae nulla quo, aliquam incidunt!</p> -->
-					<p>{{ page.description }}</p>
+					<!-- <p>{{ page.description }}</p> -->
+          <p><i class="fa fa-list-alt" style="color: #5c0632; padding-right: 5px; margin: 3px;"></i><b> {{'category' | translate}}:</b> {{page.category | translate}}</p>
+          <p><i class="fa fa-info-circle" style="color: #5c0632; padding-right: 5px; margin: 3px;"></i><b> {{'about' | translate}}:</b> {{ page.description }}</p>
 				</div>
   <div class="share-post panel panel-theme mt-30">
 					<img src={{userAvatar}} alt="">

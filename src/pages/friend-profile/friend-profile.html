@@ -33,7 +33,6 @@
         <ul class="dropdown-menu dropdown-menu-right">
           <li><a (click)="addfriend(userData.id, -1)" *ngIf="userData.friend_status == '0'" href="#" style="color: #5c0632;" ><i class="fa fa-user-plus"></i>&nbsp; {{'add-friend' | translate}}</a></li>
           <li><a (click)="DeleteFriendrequest()" *ngIf="userData.friend_status == '1'" href="#" style="color: #5c0632;" ><i class="fa fa-check"></i>&nbsp; {{'request-sent' | translate}}</a></li>
-
           <li><a (click)="deleteFriend()" *ngIf="userData.friend_status == '2'" href="#" style="color: #5c0632;" ><i class="fa fa-minus-circle"></i>&nbsp; {{'remove-friend' | translate}}</a></li>
           <li><a (click)="follow('follow')" *ngIf="userData.follow_status == false" href="#" style="color: #5c0632;" ><i class="fa fa-rss"></i>&nbsp; {{'follow' | translate}}</a></li>
           <li><a (click)="follow('unfollow')" *ngIf="userData.follow_status == true" href="#" style="color: #5c0632;" ><i class="fa fa-rss"></i>&nbsp; {{'unfollow' | translate}}</a></li>
@@ -77,7 +76,7 @@
     <div class="tab-content">
       <div id="tab-content-1{{this.userID}}" class="tab-pane fade timeline active in">
         <div class="share-post panel panel-theme mt-30">
-          <img src={{userData.avatar}} alt="">
+          <img src={{userAvatar}} alt="">
           <form><textarea (click)="goToPost()" placeholder="{{'whats-happening' | translate}}"></textarea></form>
         </div>
         <div class="panel panel-theme flex-space-around">

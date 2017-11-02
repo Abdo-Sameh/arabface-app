@@ -1,5 +1,7 @@
 {
 
+	"delete-friend-request" : "هل تريد فعلا عدم قبول هذا الصديق ؟",
+
 	"welcome-to-site": "مرحبا بكم في شبكة اجتماعية جديدة لدينا",
 
 	"validation-required": "ال :attribute مطلوب الميدان",
@@ -476,7 +478,7 @@
 
 	"are-you-sure": "هل أنت متأكد أنك تريد تنفيذ هذا الإجراء؟",
 
-	"yes": "نعم فعلا",
+	"yes": "نعم",
 
 	"no": "لا",
 
@@ -710,7 +712,9 @@
 
 	"user-permissions": "ضوابط العضو",
 
-	"successfully-done": "العمل المنجز بنجاح",
+	"successfully-done": "تم بنجاح",
+
+	"cancel-friend-request" : "هل تريد الغاء طلب الصداقة ؟",
 
 	"user-role-error": "فشل لإضافة دور المستخدم، ربما كان موجودا بالفعل",
 

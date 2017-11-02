@@ -62,8 +62,8 @@
         </div>
         <div class="user-info">
           <a (click)="GoToProfile(friend.userid, Id)" style="cursor:pointer;color:#333">{{friend.name}}</a>
-          <a href="#" *ngIf="friend.friend_status == 2" style="color: #488aff" class="btn btn-default btn-sm"><i  class="fa fa-check"></i> {{'friends' | translate}}</a>
-          <a href="#" *ngIf="friend.friend_status == 1" style="color: #488aff" class="btn btn-default btn-sm"><i  class="fa fa-check"></i> {{'request-sent' | translate}}</a>
+          <a href="#" *ngIf="friend.friend_status == 2" style="color: #488aff" class="btn btn-default btn-sm mr-10 Addfriend"><i  class="fa fa-check"></i> {{'friends' | translate}}</a>
+          <a (click)="deleteFriendRequest(friend.userid, Id, i)" href="#" *ngIf="friend.friend_status == 1" style="color: #488aff" class="btn btn-default btn-sm mr-10 Addfriend"><i  class="fa fa-check"></i> {{'request-sent' | translate}}</a>
           <a (click)="addfriend(friend.id,i)" href="#" *ngIf="friend.friend_status == '0'" class="btn btn-default btn-sm mr-10 Addfriend"><i  class="fa fa-user-plus"></i> {{'add-friend' | translate}}</a>
           <!-- <p><a (click)="addfriend(friend.userid,i)"  class="btn btn-default btn-sm mr-10 Addfriend">{{'add-friend' | translate}}</a></p> -->
         </div>

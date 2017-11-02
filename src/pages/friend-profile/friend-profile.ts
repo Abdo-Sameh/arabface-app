@@ -5,6 +5,7 @@ import { ProfilePage } from '../profile/profile'
 import { TabsPage } from '../tabs/tabs';
 import { PhotosPage } from '../photos/photos'
 import { NotFound_404Page } from '../not-found-404/not-found-404';
+import { PostFeatursPage } from '../post-featurs/post-featurs';
 
 /**
  * Generated class for the FriendProfilePage page.
@@ -43,9 +44,11 @@ export class FriendProfilePage {
   'edited':'',
   }
   hiddenPost
+  userAvatar
   feed = { 'feedid' :""}
   constructor(public alert:AlertController, public navCtrl: NavController, public toastCtrl: ToastController,public navParams: NavParams,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider) {
     let data = navParams.get('userData');
+    this.userAvatar ="http://" + localStorage.getItem('userAvatar').slice(8,-1);;
     this.blocked = navParams.get('blocked');
     if(this.blocked){
       navCtrl.push(NotFound_404Page);
@@ -455,6 +458,9 @@ replyOnComment(postindex,commentindex,postOwner,commentID,whoCommented=this.user
       ]
     });
     alert.present();
+  }
+  goToPost() {
+    this.navCtrl.push(PostFeatursPage)
   }
 
 }
