@@ -5,7 +5,7 @@ import { PostPage} from '../post/post'
 import { ProfilePage} from '../profile/profile'
 import { Page } from '../page/page';
 import { LatestVisitorsPage } from '../latest-visitors/latest-visitors';
-
+import { VideoPage } from '../video/video';
 /**
  * Generated class for the NotificationsPage page.
  *
@@ -28,6 +28,7 @@ export class NotificationsPage {
     this.pageNum = 1;
     this.getNotifications(1);
     this.getUnreadNotifications();
+
   }
 
   ionViewDidLoad() {
@@ -48,6 +49,8 @@ export class NotificationsPage {
           if(res.length >= 10){
               $('#more').show();
           }else{
+            if(res.length == 0)
+              $('#noNoti').show();
             $('#more').hide();
           }
           for(let x of res){
@@ -62,6 +65,8 @@ export class NotificationsPage {
           if(res.length >= 10){
               $('#more').show();
           }else{
+            if(res.length == 0)
+              $('#noNoti').show();
             $('#more').hide();
           }
             this.notifications = res;
@@ -80,6 +85,9 @@ export class NotificationsPage {
     this.remoteService.deleteNotification(this.userId, id).subscribe(res => {
       console.log(res);
          this.notifications.splice(index, 1);
+         if(this.notifications.length == 0){
+           $('#noNoti').show();
+         }
     });
   }
 
@@ -133,15 +141,24 @@ export class NotificationsPage {
          this.app.getRootNav().push(LatestVisitorsPage);
           break;
        }
-       case "relationship.confirm": {
-          break;
-       }
        case "page.like":{
          this.getPageDetails(notification.type_id)
          break;
        }
-       case "relationship.follow" :{
+       case "feed.like" :{
 
+         break;
+       }
+       case "video.comment" :{
+         this.app.getRootNav().push(VideoPage,{
+           video: notification.video[0]
+         });
+         break;
+       }
+       case "video.like" :{
+         this.app.getRootNav().push(VideoPage,{
+           video: notification.video[0]
+         });
          break;
        }
        default: {

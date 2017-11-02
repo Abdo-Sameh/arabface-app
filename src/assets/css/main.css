@@ -1322,6 +1322,11 @@ top: -4px;
 	{
 		display: none;
 	}
+	::-webkit-scrollbar {
+		width: 0;
+		background-color: transparent;
+		display: none;
+	}
 	.not-found>i {
 		color: #5c0632;
 		font-size: 180px;

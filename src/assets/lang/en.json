@@ -29,6 +29,13 @@
 
 	"validation-username": "The :attribute field already exist",
 
+	"write-post" : "Write Post",
+
+	"unsave-group" : "Unsave",
+
+	"edit-post" : "Edit Post",
+
+	"delete-post" : "Delete Post",
 
 	"january": "January",
 
@@ -470,7 +477,7 @@
 
 	"blocking-settings-info" : "You can block someone from contacting you",
 
-	"notification-settings-info" : "Control what notifications you receive from us",
+	"notification-settings-info" : "Control what are notifications you receive",
 
 	"theme-settings-description": "Control your site appearance with new logo, select good site column and more settings you can find below",
 
@@ -1079,6 +1086,10 @@
 
 	"unblock": "Unblock",
 
+	"block" : "Block",
+
+	"unfollow" : "Unfollow",
+
 	"block-user": "Block User",
 
 	"report" : "Report",
@@ -1674,9 +1685,19 @@
 
 	"no-friend-requests" : "No friend requests",
 
-	"suggestion" : "Suggestion",
+	"suggestions" : "Suggestion",
 
 	"add-friend" : "Add friend",
+
+	"posted-in-group" : "posted in group",
+
+	"liked-your-post" : "like your post",
+
+	"make-comment-on-your-post" : "make comment on your post",
+
+	"make-comment-on-your-video" : "make comment on your video",
+
+	"liked-your-video" : "like your video",
 
 	"people-like this" : "People like this",
 

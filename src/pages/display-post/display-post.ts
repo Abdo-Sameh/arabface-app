@@ -29,16 +29,16 @@ export class DisplayPostPage {
       havePosted =false
       public userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
       userAvatar = localStorage.getItem('userAvatar').slice(8,-1);
-      
+
       feed = { 'feedid' :""}
   constructor(public navCtrl: NavController,public popOver : PopoverController  ,public toast:ToastController , public navParams: NavParams ,public alert:AlertController,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
       this.post=this.navParams.get('post')
     console.log(this.post)
 
 
-      
+
   }
-  
+
 likeFeed(userid =this.userId,feedid,postIndex)
 {
 
@@ -100,12 +100,12 @@ commentOnFeed(postOwner,postID,whoCommented=this.userId,comment=this.comment.com
     spinner: "bubbles",  });
 
   loading.present()
-  this.remoteService.commentOnFeeds(postOwner,postID,whoCommented,comment).subscribe(res => {
+  this.remoteService.commentOnFeeds(postOwner,postID,whoCommented,comment, 'feed').subscribe(res => {
 
 
                 this.post.answers[0].push(res)
-              
-      
+
+
       this.remoteService.loadComments(postID).subscribe(res2 =>{ });
 
       this.comment.comment = ''
@@ -284,7 +284,7 @@ turnNotifications(feedid,index,feedType,userID=this.userId)
       this.post.has_subscribed = !feedType
     }
     })
-    
+
   }else {
     this.remoteService.subscribePost(feedid,userID).subscribe((data) => { console.log(data)
       if(data.status == 1)
@@ -292,7 +292,7 @@ turnNotifications(feedid,index,feedType,userID=this.userId)
         this.post.has_subscribed = !feedType
       }
     })
-    
+
   }
 }
 showPost(feed)

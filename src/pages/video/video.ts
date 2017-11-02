@@ -204,7 +204,7 @@ export class VideoPage {
       content: "",
       spinner: "bubbles",  });
     loading.present()
-    this.remoteService.commentOnFeeds(this.video.owner.id, postID,whoCommented,comment).subscribe(res => {
+    this.remoteService.commentOnFeeds(this.video.owner.id, postID,whoCommented,comment, 'video').subscribe(res => {
       res.postid = postID
 
       this.comments.push(res)
@@ -217,8 +217,8 @@ export class VideoPage {
   }
 
 
-  likeFeed(userid = this.userId, feedid, postIndex) {
-    this.remoteService.likeFeedApiCall(this.userId, this.video.id).subscribe(res =>{
+  likeFeed(type) {
+    this.remoteService.likeVideo(this.userId, this.video.id, type).subscribe(res =>{
         this.video.like_count = res.likes;
         this.video.has_like = res.has_like;
     })

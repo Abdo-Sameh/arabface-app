@@ -1357,6 +1357,10 @@ top: -4px;
 	.pull-right {
 		float: left !important;
 	}
+	.dropdown-menu {
+		right: 0 !important;
+		left: auto !important;
+	}
 	.dropdown-menu-right {
     left: 0 !important;
     right: auto !important;
@@ -1408,3 +1412,6 @@ top: -4px;
  		left: 5px;
  		top: 5px;
  	}
+	/*.dir-text{
+		direction: rtl !important;
+	}*/

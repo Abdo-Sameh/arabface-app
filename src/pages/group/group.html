@@ -457,7 +457,7 @@
 						  </div>
 						<div class="feed-body" id="{{feed.background}}" style="padding:25px;">
 						  <img src="{{feed.images}}" alt="">
-						  <p>{{feed.full_message}}</p>
+						  <p [innerHTML]="feed.full_message"></p>
 
 						  <div class="pull-left comment-edit-input">
 

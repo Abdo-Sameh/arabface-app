@@ -75,8 +75,8 @@
                 </div>
               </div>
               <div class="feed-action flex-space-around">
-                <a href="#" *ngIf="video.has_like == false"  (click)= "likeFeed(userId,video.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
-                <a href="#" *ngIf="video.has_like == true" style="color:#488aff" (click)= "likeFeed(userId,video.id,mainI)" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
+                <a href="#" *ngIf="video.has_like == false"  (click)= "likeFeed('like')" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
+                <a href="#" *ngIf="video.has_like == true" style="color:#488aff" (click)= "likeFeed('dislike')" ><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
                 <a href="#"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
                 <a href="#" (click)="sharePost(video.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
               </div>

@@ -406,7 +406,7 @@
                   </div>
                 <div class="feed-body" id="{{feed.background}}" style="padding:25px;">
                   <img src="{{feed.images}}" alt="">
-                  <p [innerHTML]="feed.full_message"></p>
+                  <p class="dir-text" [innerHTML]="feed.full_message"></p>
 
                   <div class="pull-left comment-edit-input">
 
@@ -723,7 +723,9 @@
                     <div class="pull-left">
                       <img class="feed-img" src={{feed.avatar}} alt="">
                       <div class="feed-title">
-                          <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{feed.name}} </a>  <span *ngIf="feed.tag_users != ''">  with  <span *ngFor="let tag of feed.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
+                          <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;">{{feed.name}} </a>
+                          <span *ngIf="feed.tag_users != ''">  with  <span *ngFor="let tag of feed.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><i class="fa fa-arrow-right"></i>
+                          <a style="color:#5c0632;cursor:pointer;font-size:14px;">{{feed.group_name}} </a><br>
                           <span>{{feed.time}} </span>
                           <span class="dropdown ml-5">
                               <a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
@@ -763,7 +765,7 @@
                       </div>
                   <div class="feed-body">
                     <img src="{{feed.images}}" alt="">
-                    <p>{{feed.full_message}}</p>
+                    <p class="dir-text" [innerHTML]="feed.full_message"></p>
                   </div><br>
                   <div class="feed-footer">
                       <div class="action-result flex-space-between">
@@ -1747,7 +1749,9 @@
               <div class="pull-left">
                 <img class="feed-img" src={{feed.avatar}} alt="">
                 <div class="feed-title">
-                    <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{feed.name}} </a>  <span *ngIf="feed.tag_users != ''">  with  <span *ngFor="let tag of feed.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
+                    <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;">{{feed.name}} </a>
+                    <span *ngIf="feed.tag_users != ''">  with  <span *ngFor="let tag of feed.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span>
+                    <br><span>{{'changed-profile-picture' | translate}}</span><br>
                     <span>{{feed.time}} </span>
                     <span class="dropdown ml-5">
                         <a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
@@ -2078,7 +2082,9 @@
               <div class="pull-left">
                 <img class="feed-img" src={{feed.avatar}} alt="">
                 <div class="feed-title">
-                    <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{feed.name}} </a>  <span *ngIf="feed.tag_users != ''">  with  <span *ngFor="let tag of feed.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
+                    <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;">{{feed.name}} </a>
+                    <span *ngIf="feed.tag_users != ''">  with  <span *ngFor="let tag of feed.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span>
+                    <br><span>{{'changed-profile-cover' | translate}}</span><br>
                     <span>{{feed.time}} </span>
                     <span class="dropdown ml-5">
                         <a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>

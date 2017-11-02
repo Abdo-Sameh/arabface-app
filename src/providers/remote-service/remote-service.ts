@@ -788,9 +788,9 @@ user = new Observable(observer => {
    .map((res : Response ) => res.json());
   }
   ////////////////////////////////////////////////
-  commentOnFeeds(postOwner,postID,whoCommented,comment)
+  commentOnFeeds(postOwner,postID,whoCommented,comment, type)
   {
-    return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/comment/add?userid='+whoCommented+'&entity_id='+postOwner+'&entity_type=user&text='+comment+'&type=feed&type_id='+postID)
+    return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/comment/add?userid='+whoCommented+'&entity_id='+postOwner+'&entity_type=user&text='+comment+'&type=' + type + '&type_id='+postID)
 
     //do((res : Response ) => console.log(res.json()))
       .map((res : Response ) => res.json());
@@ -1373,6 +1373,25 @@ console.log(url)
           let body = urlSearchParams.toString()
           return this.http.post(this.serverURL+'/arabface/api/'+this.KEY+'/video/edit', body, {headers: headers})
           .map((res : Response ) => res.json());
+        }
+
+        likeVideo(userId, videoId, type):any{
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          let urlSearchParams = new URLSearchParams();
+          urlSearchParams.append('userid', userId );
+          urlSearchParams.append('type', 'video');
+          urlSearchParams.append('type_id', videoId );
+          let body = urlSearchParams.toString()
+          if(type == 'like')
+         return this.http.post(this.serverURL+'/arabface/api/'+this.KEY+'/like/item', body, {headers: headers})
+          //do((res : Response ) => console.log(res.json()))
+         .map((res : Response ) => res.json());
+         else
+         return this.http.post(this.serverURL+'/arabface/api/'+this.KEY+'/dislike/item', body, {headers: headers})
+
+          //do((res : Response ) => console.log(res.json()))
+         .map((res : Response ) => res.json());
         }
 
         ///////////////////////////////////////////////////
