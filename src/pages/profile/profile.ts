@@ -363,16 +363,26 @@ replyOnComment(postindex,commentindex,postOwner,commentID,whoCommented=this.user
   {
     this.remoteService.profileDetailsApiCall(id, theUserId).subscribe(res =>{
       this.userData = res;
-      console.log(res)
-      this.profileInfo.online_time = res.profile_info[0].value;
-      this.profileInfo.gender = res.profile_info[1].value;
-      this.profileInfo.birth = res.profile_info[2].value;
-      this.profileInfo.bio = res.profile_info[3].value;
-      // this.profileInfo.city = res.profile_info[4].value;
-      // this.profileInfo.state = res.profile_info[5].value;
-      this.profileInfo.country = res.profile_info[4].value;
+      for(var i = 0; i < res.profile_info.length; i++){
+        console.log(res.profile_info[i]);
+        if(res.profile_info[i]){
+          if(res.profile_info[i].name == "online_time")
+            this.profileInfo.online_time = res.profile_info[i].value;
+          else if(res.profile_info[i].name == "gender")
+            this.profileInfo.gender = res.profile_info[i].value;
+          else if(res.profile_info[i].name == "birth")
+            this.profileInfo.birth = res.profile_info[i].value;
+          else if(res.profile_info[i].name == "bio")
+            this.profileInfo.bio = res.profile_info[i].value;
+          else if(res.profile_info[i].name == "country")
+            this.profileInfo.country = res.profile_info[i].value;
+          else if(res.profile_info[i].name == "city")
+            this.profileInfo.city = res.profile_info[i].value;
+          else if(res.profile_info[i].name == "state")
+            this.profileInfo.state = res.profile_info[i].value;
+          }
+      }
 
-      // console.log(res)
     });
 
   }
