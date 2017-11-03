@@ -13,6 +13,11 @@
                 <img src={{userAvatar}} alt="">
         <form><textarea (click)="goToPost()" placeholder="{{'whats-happening' | translate}}"></textarea></form>
       </div>
+      <ion-refresher (ionRefresh)="doRefresh($event);">
+        <ion-refresher-content
+          refreshingSpinner="circles">
+        </ion-refresher-content>
+     </ion-refresher>
       <div class="panel panel-theme flex-space-around">
         <a href="#">{{ 'status' | translate }}</a>
         <a href="#"><i class="fa fa-camera"></i> {{'photo' | translate}}</a>
@@ -51,8 +56,9 @@
                           <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'stop-notifications' | translate}}</a></li>
                           <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>
 
-                          <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> </a></li>
+                          <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                           <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> {{'view-post' | translate}}</a></li>
+                          <li><a (click)="report(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-flag"></i> {{'report' | translate}}</a></li>
                         </ul>
                         <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == true">
                             <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  {{'dont-like-post' | translate}}</a></li>
@@ -60,7 +66,7 @@
                             <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)"href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li><li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                             <li><a (click)="editPost()"  href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
                             <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> {{'delete-post' | translate}}</a></li>
-                            <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>{{'view-post' | translate}}</a></li>
+                            <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> {{'view-post' | translate}}</a></li>
                           </ul>
                       </div>
                     </div>
@@ -223,6 +229,7 @@
 
                             <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                             <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> {{'view-post' | translate}}</a></li>
+                            <li><a (click)="report(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-flag"></i> {{'report' | translate}}</a></li>
                           </ul>
                           <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == true">
                               <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  {{'dont-like-post' | translate}}</a></li>
@@ -391,6 +398,7 @@
 
                           <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                           <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> {{'view-post' | translate}}</a></li>
+                          <li><a (click)="report(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-flag"></i> {{'report' | translate}}</a></li>
                         </ul>
                         <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == true">
                             <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  {{'dont-like-post' | translate}}</a></li>
@@ -568,6 +576,7 @@
 
                   <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                   <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> {{'view-post' | translate}}</a></li>
+                  <li><a (click)="report(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-flag"></i> {{'report' | translate}}</a></li>
                 </ul>
                 <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == true">
                     <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  {{'dont-like-post' | translate}}</a></li>
@@ -750,6 +759,7 @@
 
                               <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                               <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> {{'view-post' | translate}}</a></li>
+                              <li><a (click)="report(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-flag"></i> {{'report' | translate}}</a></li>
                             </ul>
                             <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == true">
                                 <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  {{'dont-like-post' | translate}}</a></li>
@@ -918,6 +928,7 @@
 
                                         <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                                         <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> {{'view-post' | translate}}</a></li>
+                                        <li><a (click)="report(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-flag"></i> {{'report' | translate}}</a></li>
                                       </ul>
                                       <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == true">
                                           <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  {{'dont-like-post' | translate}}</a></li>
@@ -1084,6 +1095,7 @@
 
                               <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                               <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> {{'view-post' | translate}}</a></li>
+                              <li><a (click)="report(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-flag"></i> {{'report' | translate}}</a></li>
                             </ul>
                             <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == true">
                                 <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  {{'dont-like-post' | translate}}</a></li>
@@ -1249,6 +1261,7 @@
 
                                 <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                                 <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> {{'view-post' | translate}}</a></li>
+                                <li><a (click)="report(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-flag"></i> {{'report' | translate}}</a></li>
                               </ul>
                               <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == true">
                                   <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  {{'dont-like-post' | translate}}</a></li>
@@ -1417,6 +1430,7 @@
 
                                 <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                                 <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> {{'view-post' | translate}}</a></li>
+                                <li><a (click)="report(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-flag"></i> {{'report' | translate}}</a></li>
                               </ul>
                               <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == true">
                                   <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  {{'dont-like-post' | translate}}</a></li>
@@ -1595,6 +1609,7 @@
 
                       <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                       <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> {{'view-post' | translate}}</a></li>
+                      <li><a (click)="report(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-flag"></i> {{'report' | translate}}</a></li>
                     </ul>
                     <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == true">
                         <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  {{'dont-like-post' | translate}}</a></li>
@@ -1776,6 +1791,7 @@
 
                         <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                         <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> {{'view-post' | translate}}</a></li>
+                        <li><a (click)="report(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-flag"></i> {{'report' | translate}}</a></li>
                       </ul>
                       <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == true">
                           <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  {{'dont-like-post' | translate}}</a></li>
@@ -1941,6 +1957,7 @@
 
                       <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                       <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> {{'view-post' | translate}}</a></li>
+                      <li><a (click)="report(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-flag"></i> {{'report' | translate}}</a></li>
                     </ul>
                     <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == true">
                         <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  {{'dont-like-post' | translate}}</a></li>
@@ -2109,6 +2126,7 @@
 
                         <li><a (click)="savePost(feed.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                         <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> {{'view-post' | translate}}</a></li>
+                        <li><a (click)="report(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-flag"></i> {{'report' | translate}}</a></li>
                       </ul>
                       <ul class="dropdown-menu dropdown-menu-right" *ngIf="feed.can_edit_post == true">
                           <li><a (click)="donotLikePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i>  {{'dont-like-post' | translate}}</a></li>

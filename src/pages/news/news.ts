@@ -8,6 +8,7 @@ import { FriendProfilePage } from '../friend-profile/friend-profile'
 import { DisplayPostPage } from '../display-post/display-post'
 import { NotFound_404Page } from '../not-found-404/not-found-404';
 import { MyApp } from '../../app/app.component';
+import { TranslateService } from '@ngx-translate/core';
 //import $ from "jquery";
 
 /**
@@ -44,7 +45,7 @@ export class NewsPage {
     userId
     userAvatar
 
-  constructor(private app: App, public navCtrl: NavController,public popOver : PopoverController  ,public toast:ToastController, public navParams: NavParams ,public alert:AlertController,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
+  constructor(public translate: TranslateService, private app: App, public navCtrl: NavController,public popOver : PopoverController  ,public toast:ToastController, public navParams: NavParams ,public alert:AlertController,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
     if(localStorage.getItem('userDataID'))
     {
      this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "")
@@ -497,7 +498,7 @@ reply()
     {
       this.postToDisplay=feed
       console.log(this.postToDisplay)
-      this.navCtrl.push(DisplayPostPage,{'post':this.postToDisplay})
+      this.app.getRootNav().push(DisplayPostPage,{'post':this.postToDisplay})
     }
    //////////////////////////////////////////
  effects()
@@ -508,11 +509,75 @@ reply()
   goToPost() {
     this.app.getRootNav().push(PostFeatursPage, {
       type: 'feed',
-      type_id: ''
+      type_id: '',
+      callback: this.myCallbackFunction
     });
   }
   showComments(id){
     $('#' + id).show();
     console.log('#' + id);
+  }
+  myCallbackFunction = (post) => {
+   return new Promise((resolve, reject) => {
+       this.feeds.unshift(post);
+       resolve();
+   });
+  }
+  doRefresh(refresher) {
+     this.getFeedsList(this.userId);
+     if(refresher != 0)
+         refresher.complete();
+   }
+  report(index){
+    let title, reason, send, cancel, message;
+    this.translate.get('report').subscribe(value => { title = value; })
+    this.translate.get('report-reason').subscribe(value => { reason = value; })
+    this.translate.get('send').subscribe(value => { send = value; })
+    this.translate.get('cancel').subscribe(value => { cancel = value; })
+
+    let alert = this.alert.create({
+      title: title,
+      inputs: [
+      {
+        name: 'reason',
+        placeholder: reason
+      }
+    ],
+      buttons: [
+        {
+          text: send,
+          handler: data => {
+            this.remoteService.reportItem("post", this.feeds[index].feed_url, data.reason, this.userId).subscribe(res => {
+              if(res.status == "1"){
+                this.translate.get('report-success').subscribe(value => { message = value; })
+                let toast = this.toast.create({
+                  message: message,
+                  duration: 2000,
+                  position: 'top'
+                });
+                toast.present();
+              }else{
+                this.translate.get('report-failure').subscribe(value => { message = value; })
+                let toast = this.toast.create({
+                  message: message,
+                  duration: 2000,
+                  position: 'top'
+                });
+                toast.present();
+              }
+            });
+
+          }
+        },
+        {
+          text: cancel,
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    alert.present();
+
   }
 }

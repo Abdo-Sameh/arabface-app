@@ -22,11 +22,17 @@ export class PostFeatursPage {
   users
   type
   typeId
+  callback
   constructor(public translate: TranslateService, public navCtrl: NavController, public navParams: NavParams ,public alert:AlertController,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
       this.type = navParams.get('type');
       this.typeId = navParams.get('type_id');
       console.log(this.type, this.typeId);
   }
+
+  ionViewWillEnter() {
+      this.callback = this.navParams.get("callback")
+  }
+
   selectPrivacy()
   {
     $(document).on('click','li',function(){
@@ -79,8 +85,11 @@ export class PostFeatursPage {
            this.post.text= ""
            //this.getFeedsList(this.userId);
            loading.dismiss();
+           this.callback(res.feed).then(()=>{
+               this.navCtrl.pop();
+           });
          });
-         this.navCtrl.pop()
+
        }else if($('.feeling-div').attr('id') && this.post.text != "")
        {
         let selectedFeeling=$('.feeling-div').attr('id')
@@ -90,8 +99,11 @@ export class PostFeatursPage {
            this.post.text= ""
            //this.getFeedsList(this.userId);
            loading.dismiss();
+           this.callback(res.feed).then(()=>{
+               this.navCtrl.pop();
+           });
          });
-         this.navCtrl.pop()
+
 
        }else if(Tagedusers.length > 0)
        {
@@ -105,8 +117,11 @@ export class PostFeatursPage {
 
            console.log(Tagedusers)
            loading.dismiss();
+           this.callback(res.feed).then(()=>{
+               this.navCtrl.pop();
+           });
          });
-         this.navCtrl.pop()
+
        }
        else{
          console.log(userID,postText.text,'none','text',privacy,id, 'no' ,this.type, this.typeId);
@@ -114,9 +129,13 @@ export class PostFeatursPage {
 
          this.post.text= ""
          //this.getFeedsList(this.userId);
+         console.log(res);
          loading.dismiss();
+         this.callback(res.feed).then(()=>{
+             this.navCtrl.pop();
+         });
        });
-       this.navCtrl.pop()
+
     }
 
   }
@@ -149,6 +168,9 @@ export class PostFeatursPage {
                 this.remoteService.locationPosting(this.userId,data.location).subscribe(res =>
                 {
                     console.log(res)
+                    this.callback(res.feed).then(()=>{
+                        this.navCtrl.pop();
+                    });
 
                 })
               }

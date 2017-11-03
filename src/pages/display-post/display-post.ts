@@ -311,4 +311,8 @@ $(this).css('background-color','grey')
     console.log('ionViewDidLoad DisplayPostPage');
   }
 
+  back(){
+    this.navCtrl.pop();
+  }
+
 }

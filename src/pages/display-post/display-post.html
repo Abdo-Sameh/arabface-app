@@ -4,12 +4,28 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
+<ion-header>
 
+    <header class="header_title">
+			<div class="container">
+				<div class="back_btn">
+					<a (click)="back()" href="#"><i class="fa fa-arrow-left" style="font-size: 19px;line-height: 43px;"></i></a>
+				</div>
+				<div class="page_title text-center">
+					<!-- <h3>{{'profile' | translate}}</h3> -->
+				</div>
+				<!-- <div class="menu_btn text-right">
+					<a href="#"><i class="fa fa-bars"  style="font-size: 19px; line-height: 43px;"></i></a>
+				</div> -->
+			</div>
+		</header>
+</ion-header>
 
 <ion-content >
+  <section class="bg_grey full_vh  profile pt-70">
     <div  [ngSwitch]="true">
 
-      <div class="feed-box panel panel-theme mt-20"  *ngSwitchCase="post.type_id == 'upload-album-photos' && post.shared == false"  >
+      <div class="feed-box panel panel-theme"  *ngSwitchCase="post.type_id == 'upload-album-photos' && post.shared == false"  >
         <div class="feed-header">
           <div class="pull-left">
             <img class="feed-img" src={{post.avatar}} alt="">
@@ -177,7 +193,7 @@
 
 <!-- ////////////////////////////////  location post         /////////////////////////////////////////////////////////// -->
 
-      <div class="feed-box panel panel-theme mt-20"  *ngSwitchCase=" post.location != '' " >
+      <div class="feed-box panel panel-theme "  *ngSwitchCase=" post.location != '' " >
           <div class="feed-header">
             <div class="pull-left">
               <img class="feed-img" src={{post.avatar}} alt="">
@@ -342,7 +358,7 @@
       <!-- ////////////////////////////////// normal post  /////////////////////////////////////////////////////////////////// -->
 
         <div *ngIf="hiddenPost != 1">
-          <div class="feed-box panel panel-theme mt-20"  *ngSwitchCase="post.type_id == '' && post.shared == false && post.poll_type == '0' && post.type != 'group' && post.location == '' &&post.feeling_type=='' "  >
+          <div class="feed-box panel panel-theme "  *ngSwitchCase="post.type_id == '' && post.shared == false && post.poll_type == '0' && post.type != 'group' && post.location == '' &&post.feeling_type=='' "  >
 
                             <div class="feed-header">
                               <div class="pull-left">
@@ -517,7 +533,7 @@
 <!-- ////////////////////////////////// normal with Feeling post  /////////////////////////////////////////////////////////////////// -->
 
 <div *ngIf="hiddenPost != 1">
-<div class="feed-box panel panel-theme mt-20"  *ngSwitchCase="post.type_id == '' && post.shared == false && post.poll_type == '0' && post.type != 'group' && post.location == '' &&post.feeling_type !='' && post.full_message != '' "  >
+<div class="feed-box panel panel-theme "  *ngSwitchCase="post.type_id == '' && post.shared == false && post.poll_type == '0' && post.type != 'group' && post.location == '' &&post.feeling_type !='' && post.full_message != '' "  >
 
   <div class="feed-header">
     <div class="pull-left">
@@ -695,7 +711,7 @@
 
 
 
-        <div class="feed-box panel panel-theme mt-20"  *ngSwitchCase=" post.shared == false && post.type == 'group'"  >
+        <div class="feed-box panel panel-theme "  *ngSwitchCase=" post.shared == false && post.type == 'group'"  >
             <div class="feed-header">
               <div class="pull-left">
                 <img class="feed-img" src={{post.avatar}} alt="">
@@ -860,7 +876,7 @@
       <!-- ////////////////////////////////// poll post  /////////////////////////////////////////////////////////////////// -->
 
 
-        <div class="feed-box panel panel-theme mt-20"  *ngSwitchCase="post.type_id == '' && post.shared == false && poll_type == '1'"  >
+        <div class="feed-box panel panel-theme "  *ngSwitchCase="post.type_id == '' && post.shared == false && poll_type == '1'"  >
             <div class="feed-header">
               <div class="pull-left">
                 <img class="feed-img" src={{post.avatar}} alt="">
@@ -1023,7 +1039,7 @@
       <!-- ////////////////////////////////// feeling post  /////////////////////////////////////////////////////////////////// -->
 
 
-          <div class="feed-box panel panel-theme mt-20"  *ngSwitchCase="post.feeling_type != '' && post.shared == false && post.type== 'feed' && post.full_message == ''"  >
+          <div class="feed-box panel panel-theme "  *ngSwitchCase="post.feeling_type != '' && post.shared == false && post.type== 'feed' && post.full_message == ''"  >
               <div class="feed-header">
                 <div class="pull-left">
                   <img class="feed-img" src={{post.avatar}} alt="">
@@ -1189,7 +1205,7 @@
       <!-- ////////////////////////////////// shared watching post  /////////////////////////////////////////////////////////////////// -->
 
 
-          <div class="feed-box panel panel-theme mt-20"  *ngSwitchCase="post.feeling_type != '' && post.shared == true"  >
+          <div class="feed-box panel panel-theme "  *ngSwitchCase="post.feeling_type != '' && post.shared == true"  >
               <div class="feed-header">
                 <div class="pull-left">
                   <img class="feed-img" src={{post.avatar}} alt="">
@@ -1364,7 +1380,7 @@
          <!-- ////////////////////////////////// shared post  /////////////////////////////////////////////////////////////////// -->
 
 
-<div class="feed-box panel panel-theme mt-20"  *ngSwitchCase="post.shared == true && feeling_type == ''"  >
+<div class="feed-box panel panel-theme "  *ngSwitchCase="post.shared == true && feeling_type == ''"  >
     <div class="feed-header">
       <div class="pull-left">
         <img class="feed-img" src={{post.avatar}} alt="">
@@ -1541,7 +1557,7 @@
 <!-- ////////////////////////////////// change avatar  post  /////////////////////////////////////////////////////////////////// -->
 
 
-  <div class="feed-box panel panel-theme mt-20"  *ngSwitchCase="post.type_id =='change-avatar'">
+  <div class="feed-box panel panel-theme "  *ngSwitchCase="post.type_id =='change-avatar'">
       <div class="feed-header">
         <div class="pull-left">
           <img class="feed-img" src={{post.avatar}} alt="">
@@ -1704,7 +1720,7 @@
 
       <!-- ////////////////////////////////// upload video post  /////////////////////////////////////////////////////////////////// -->
 
-<div class="feed-box panel panel-theme mt-20"  *ngSwitchCase="post.type_id =='upload-video'">
+<div class="feed-box panel panel-theme "  *ngSwitchCase="post.type_id =='upload-video'">
     <div class="feed-header">
       <div class="pull-left">
         <img class="feed-img" src={{post.avatar}} alt="">
@@ -1867,7 +1883,7 @@
 
  <!-- ////////////////////////////////// change cover post  /////////////////////////////////////////////////////////////////// -->
 
-  <div class="feed-box panel panel-theme mt-20"  *ngSwitchCase="post.type_id =='change-cover'">
+  <div class="feed-box panel panel-theme "  *ngSwitchCase="post.type_id =='change-cover'">
       <div class="feed-header">
         <div class="pull-left">
           <img class="feed-img" src={{post.avatar}} alt="">
@@ -2029,4 +2045,5 @@
       </div>
     </div>
     </div>
+  </section>
 </ion-content>

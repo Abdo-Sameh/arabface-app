@@ -1036,6 +1036,10 @@
 
 	"everyone": "Everyone",
 
+	"location-message" : "Where are you now ?",
+
+	"your-location" : "Your location",
+
 	"friends-followers": "Friends or Followers",
 
 	"default-profile-privacy": "Default User Profile Privacy",
@@ -1095,6 +1099,8 @@
 	"report" : "Report",
 
 	"report-profile": "Report Profile",
+
+	"report-reason" : "Reason",
 
 	"symbol": "Symbol",
 
