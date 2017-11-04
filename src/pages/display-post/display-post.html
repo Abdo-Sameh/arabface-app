@@ -31,7 +31,7 @@
             <img class="feed-img" src={{post.avatar}} alt="">
             <div class="feed-title">
                 <a (click)="GoToProfile(post.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{post.name}} </a>  <span *ngIf="post.tag_users != ''">  with  <span *ngFor="let tag of post.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
-                <span>{{post.time}} </span>
+                <span>{{getTime(post.time)}} </span><span>-</span>
                 <span class="dropdown ml-5">
                     <a href="#" *ngIf="post.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
                     <a href="#" *ngIf="post.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
@@ -52,7 +52,6 @@
                     <li><a (click)="donotLikePost(post.id,mainI)" href="#" ><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye-slash"></i> i don't like this post</a></li>
                     <li><a (click)="turnNotifications(post.id,mainI,post.has_subscribed)"href="#" *ngIf="post.has_subscribed == true"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Stop notifications</a></li>
                     <li><a (click)="turnNotifications(post.id,mainI,post.has_subscribed)"href="#" *ngIf="post.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>Get notifications</a></li>
-
                     <li><a (click)="savePost(post.id)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> save</a></li>
                   </ul>
                   <ul class="dropdown-menu dropdown-menu-right" *ngIf="post.can_edit_post == true">
@@ -199,7 +198,7 @@
               <img class="feed-img" src={{post.avatar}} alt="">
               <div class="feed-title">
                   <a (click)="GoToProfile(post.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{post.name}} at {{post.location}}</a>  <span *ngIf="post.tag_users != ''">  with  <span *ngFor="let tag of post.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
-                  <span>{{post.time}} </span>
+                  <span>{{getTime(post.time)}} </span><span>-</span>
                   <span class="dropdown ml-5">
                       <a href="#" *ngIf="post.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
                       <a href="#" *ngIf="post.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
@@ -365,7 +364,7 @@
                                 <img class="feed-img" src={{post.avatar}} alt="">
                                 <div class="feed-title">
                                   <a (click)="GoToProfile(post.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{post.name}} </a>  <span *ngIf="post.tag_users != ''">  with  <span *ngFor="let tag of post.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
-                                  <span>{{post.time}} </span>
+                                  <span>{{getTime(post.time)}} </span><span>-</span>
                                   <span class="dropdown ml-5">
                                       <a href="#" *ngIf="post.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
                                       <a href="#" *ngIf="post.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
@@ -540,7 +539,7 @@
       <img class="feed-img" src={{post.avatar}} alt="">
       <div class="feed-title">
         <a (click)="GoToProfile(post.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{post.name}} </a>  <span *ngIf="post.tag_users != ''">  with  <span *ngFor="let tag of post.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
-        <span>{{post.time}} </span>
+        <span>{{getTime(post.time)}} </span><span>-</span>
         <span class="dropdown ml-5">
             <a href="#" *ngIf="post.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
             <a href="#" *ngIf="post.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
@@ -717,7 +716,7 @@
                 <img class="feed-img" src={{post.avatar}} alt="">
                 <div class="feed-title">
                     <a (click)="GoToProfile(post.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{post.name}} </a>  <span *ngIf="post.tag_users != ''">  with  <span *ngFor="let tag of post.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
-                    <span>{{post.time}} </span>
+                    <span>{{getTime(post.time)}} </span><span>-</span>
                     <span class="dropdown ml-5">
                         <a href="#" *ngIf="post.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
                         <a href="#" *ngIf="post.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
@@ -882,7 +881,7 @@
                 <img class="feed-img" src={{post.avatar}} alt="">
                 <div class="feed-title">
                     <a (click)="GoToProfile(post.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{post.name}} </a>  <span *ngIf="post.tag_users != ''">  with  <span *ngFor="let tag of post.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
-                    <span>{{post.time}} </span>
+                    <span>{{getTime(post.time)}} </span><span>-</span>
                     <span class="dropdown ml-5">
                         <a href="#" *ngIf="post.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
                         <a href="#" *ngIf="post.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
@@ -1045,7 +1044,7 @@
                   <img class="feed-img" src={{post.avatar}} alt="">
                   <div class="feed-title">
                       <a (click)="GoToProfile(post.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{post.name}} </a>  <span *ngIf="post.tag_users != ''">  with  <span *ngFor="let tag of post.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
-                      <span>{{post.time}} </span>
+                      <span>{{getTime(post.time)}} </span><span>-</span>
                       <span class="dropdown ml-5">
                           <a href="#" *ngIf="post.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
                           <a href="#" *ngIf="post.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
@@ -1211,7 +1210,7 @@
                   <img class="feed-img" src={{post.avatar}} alt="">
                   <div class="feed-title">
                       <a (click)="GoToProfile(post.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{post.name}} </a>  <span *ngIf="post.tag_users != ''">  with  <span *ngFor="let tag of post.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
-                      <span>{{post.time}} </span>
+                      <span>{{getTime(post.time)}} </span><span>-</span>
                       <span class="dropdown ml-5">
                           <a href="#" *ngIf="post.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
                           <a href="#" *ngIf="post.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
@@ -1386,7 +1385,7 @@
         <img class="feed-img" src={{post.avatar}} alt="">
         <div class="feed-title">
             <a (click)="GoToProfile(post.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{post.name}} </a>  <span *ngIf="post.tag_users != ''">  with  <span *ngFor="let tag of post.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
-            <span>{{post.time}} </span>
+            <span>{{getTime(post.time)}} </span><span>-</span>
             <span class="dropdown ml-5">
                 <a href="#" *ngIf="post.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
                 <a href="#" *ngIf="post.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
@@ -1563,7 +1562,7 @@
           <img class="feed-img" src={{post.avatar}} alt="">
           <div class="feed-title">
               <a (click)="GoToProfile(post.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{post.name}} </a>  <span *ngIf="post.tag_users != ''">  with  <span *ngFor="let tag of post.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
-              <span>{{post.time}} </span>
+              <span>{{getTime(post.time)}} </span><span>-</span>
               <span class="dropdown ml-5">
                   <a href="#" *ngIf="post.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
                   <a href="#" *ngIf="post.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
@@ -1726,7 +1725,7 @@
         <img class="feed-img" src={{post.avatar}} alt="">
         <div class="feed-title">
             <a (click)="GoToProfile(post.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{post.name}} </a>  <span *ngIf="post.tag_users != ''">  with  <span *ngFor="let tag of post.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
-            <span>{{post.time}} </span>
+            <span>{{getTime(post.time)}} </span><span>-</span>
             <span class="dropdown ml-5">
                 <a href="#" *ngIf="post.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
                 <a href="#" *ngIf="post.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
@@ -1889,7 +1888,7 @@
           <img class="feed-img" src={{post.avatar}} alt="">
           <div class="feed-title">
               <a (click)="GoToProfile(post.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{post.name}} </a>  <span *ngIf="post.tag_users != ''">  with  <span *ngFor="let tag of post.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
-              <span>{{post.time}} </span>
+              <span>{{getTime(post.time)}} </span><span>-</span>
               <span class="dropdown ml-5">
                   <a href="#" *ngIf="post.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
                   <a href="#" *ngIf="post.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>

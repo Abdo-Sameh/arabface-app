@@ -103,6 +103,11 @@
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'liked-your-video' | translate}}</span></h5>
               <p>{{notify.time}}</p>
            </div>
+           <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'post-on-timeline'" >
+              <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'post-on-timeline' | translate}}</span></h5>
+              <p>{{notify.time}}</p>
+           </div>
+
            <div class="read-mark">
              <i (click)="markReadNotification(notify.id, '0', i)" class="fa fa-check-circle" *ngIf="notify.mark_read == '1'" style="color: green;" id="check{{notify.id}}"></i>
              <i (click)="markReadNotification(notify.id, '1', i)"class="fa fa-check-circle" *ngIf="notify.mark_read == '0'" style="color: black;"id="check{{notify.id}}"></i>
@@ -199,6 +204,10 @@
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'video.like'" >
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'liked-your-video' | translate}}</span></h5>
+              <p>{{notify.time}}</p>
+           </div>
+           <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'post-on-timeline'" >
+              <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'post-on-timeline' | translate}}</span></h5>
               <p>{{notify.time}}</p>
            </div>
            <div class="read-mark">

@@ -30,14 +30,14 @@ let config = {
   for more info on providers and Angular DI.
 */
 
-let apiURL = 'http://localhost/arabface/api/14789632/';
+let apiURL = 'http://192.168.1.252/arabface/api/14789632/';
 
 @Injectable()
 export class RemoteServiceProvider {
  public Id :number;
  deviceLanguage
  response ;
- serverURL ='http://localhost'
+ serverURL ='http://192.168.1.252'
  KEY = '14789632'
 
 
@@ -920,6 +920,11 @@ console.log(url)
     return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/comment/add?userid='+whoCommented+'&entity_id='+postOwner+'&entity_type=user&text='+comment+'&type=feed&type_id='+postID)
 
     //do((res : Response ) => console.log(res.json()))
+      .map((res : Response ) => res.json());
+  }
+
+  editComment(userid, id, text){
+    return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/comment/edit?userid=' + userid + '&id=' + id + "&text=" + text)
       .map((res : Response ) => res.json());
   }
 

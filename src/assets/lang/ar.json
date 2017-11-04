@@ -146,11 +146,17 @@
 
 	"search": "البحث عن",
 
+	"week" : "اسبوع",
+
+	"weeks" : "اسابيع",
+
 	"search-phrase-placeholder": "البحث عن العبارات في هذه اللغة",
 
 	"country-manager": "المدير القطري",
 
 	"manage-countries": "إدارة الدول",
+
+	"post-on-timeline" : "نشر علي صفحتك الشخصية",
 
 	"add-state-province": "إضافة ولاية / المحافظات",
 
@@ -379,6 +385,10 @@
 	"hour": "ساعة",
 
 	"hours": "ساعات",
+
+	"delete-comment" : "حذف التعليق",
+
+	"delete-comment-question" : "هل تريد حذف هذا التعليق ؟",
 
 	"user-settings-description": "إدارة إعدادات المستخدم والتحكم الذين يمكن تسجيل وإدارة ترحيب خطوة الاشتراك، وتفعيل الحساب الخ",
 
@@ -697,6 +707,8 @@
 	"join-network": "انضم إلى شبكتنا",
 
 	"reset-password": "اعادة تعيين كلمة السر",
+
+	"password" : "كلمة المرور",
 
 	"day": "يوم",
 
@@ -1782,9 +1794,9 @@
 
 	"no-suggestions-for-now": "لا توجد اقتراحات هذا الوقت، يرجى المحاولة مرة أخرى في وقت لاحق",
 
-	"followers": "أتباع",
+	"followers": "أشخاص مُتابعون لك",
 
-	"following": "التالي",
+	"following": "أشخاص تتابعهم",
 
 	"user-friends": "قائمة الأصدقاء المستخدم",
 
@@ -3951,11 +3963,13 @@
 
 	"explore-more": "استكشاف المزيد من الألعاب",
 
-	"create-account": "إصنع حساب",
+	"create-account": "انشاء حساب",
 
 	"join": "انضم",
 
 	"on": "على",
+
+	"confirm-password" : "تاكيد كلمة المرور",
 
 	"replied-on-your-comment" : "رد علي تعليقك",
 

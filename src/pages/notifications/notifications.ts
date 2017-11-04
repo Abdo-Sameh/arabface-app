@@ -6,6 +6,8 @@ import { ProfilePage} from '../profile/profile'
 import { Page } from '../page/page';
 import { LatestVisitorsPage } from '../latest-visitors/latest-visitors';
 import { VideoPage } from '../video/video';
+import { DisplayPostPage } from '../display-post/display-post';
+
 /**
  * Generated class for the NotificationsPage page.
  *
@@ -146,7 +148,21 @@ export class NotificationsPage {
          break;
        }
        case "feed.like" :{
-
+         this.app.getRootNav().push(DisplayPostPage,{
+           post: notification.feed[0]
+         });
+         break;
+       }
+       case "post-on-timeline" :{
+         this.app.getRootNav().push(DisplayPostPage,{
+           post: notification.feed[0]
+         });
+         break;
+       }
+       case "feed.comment" :{
+         this.app.getRootNav().push(DisplayPostPage,{
+           post: notification.feed[0]
+         });
          break;
        }
        case "video.comment" :{
@@ -167,32 +183,4 @@ export class NotificationsPage {
     }
   }
 
-  displayPost(feed,type,userid) {
-    if(type == 'profile.view') {
-      console.log(userid)
-      this.GoToProfile(userid)
-    }else if(type == 'relationship.confirm') {
-      console.log(userid)
-
-      this.GoToProfile(userid)
-
-    }else if(type == 'relationship.add')
-    {
-
-    }else if(type == 'relationship.follow')
-    {
-
-    }else if(type == 'event.invite')
-    {
-
-    }else if(type == 'page.invite')
-    {
-
-    }else if(type == 'group.add.member')
-    {
-
-    }else{
-    this.navCtrl.push(PostPage , { 'feed' : feed[0]})
-    }
-  }
 }

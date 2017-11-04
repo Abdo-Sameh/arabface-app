@@ -1276,6 +1276,9 @@ top: -4px;
     padding-bottom: 0;
     margin-top: 0;
 }
+.Addfriend {
+    float: right;
+}
 .feed-header .feed-title {
     float: left;
     width: calc(100% - 60px);

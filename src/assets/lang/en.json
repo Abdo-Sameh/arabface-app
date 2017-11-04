@@ -529,6 +529,8 @@
 
 	"share" : "Share",
 
+	"post-on-timeline" : "posted on your wall",
+
 	"write-comment" : "Write comment ...",
 
 	"user-settings-description": "Manage user settings, control who can register,manage welcome signup step, account activation e.t.c",
@@ -796,7 +798,9 @@
 
 	"user-profile-card": "User Profile Card",
 
+	"delete-comment-question" : "Do you want to delete this comment ?",
 
+	"delete-comment" : "Delete comment",
 
 	"user-permissions": "User Permissions",
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController,PopoverController , NavParams ,LoadingController ,AlertController,ToastController} from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
-
+import { TranslateService } from '@ngx-translate/core';
 /**
  * Generated class for the DisplayPostPage page.
  *
@@ -31,12 +31,109 @@ export class DisplayPostPage {
       userAvatar = localStorage.getItem('userAvatar').slice(8,-1);
 
       feed = { 'feedid' :""}
-  constructor(public navCtrl: NavController,public popOver : PopoverController  ,public toast:ToastController , public navParams: NavParams ,public alert:AlertController,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
-      this.post=this.navParams.get('post')
+  constructor(public translate: TranslateService, public navCtrl: NavController,public popOver : PopoverController  ,public toast:ToastController , public navParams: NavParams ,public alert:AlertController,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
+      this.post = this.navParams.get('post')
     console.log(this.post)
 
 
 
+  }
+  getTime(time_ago){
+    setTimeout("", 10000);
+    var timeNow = new Date().getTime()/1000;
+    // console.log(timeNow);
+    // console.log(time_ago);
+    // setInterval(1000);
+    // console.log(timeNow-time_ago);
+    var time_elapsed = timeNow - time_ago;
+    var seconds	= Math.round(time_elapsed) ;
+    var minutes	= Math.round(time_elapsed / 60 );
+    var hours = Math.round(time_elapsed / 3600);
+    var days = Math.round(time_elapsed / 86400 );
+    var weeks = Math.round(time_elapsed / 604800);
+    var months = Math.round(time_elapsed / 2600640 );
+    var years = Math.round(time_elapsed / 31207680 );
+    // console.log(days);
+    var result = {
+        number : 0,
+        'format' : ''
+    };
+    if(seconds <= 60){
+        result.number = seconds;
+        result['format'] = "seconds";
+    }
+//Minutes
+    else if(minutes <=60){
+        if(minutes==1){
+            result['number'] = 1;
+            result['format'] = "minutes";
+
+        }
+        else{
+            result['number'] = minutes;
+            result['format'] = "minutes";
+        }
+    }
+//Hours
+    else if(hours <=24){
+        if(hours==1){
+            result['number'] = 1;
+            result['format'] = "hours";
+        }else{
+            result['number'] = hours;
+            result['format'] = "hours";
+        }
+    }
+//Days
+    else if(days <= 7){
+        if(days==1){
+            result['number'] = 1;
+            result['format'] = "days";
+        }else{
+            result['number'] = days;
+            result['format'] = "days";
+        }
+    }
+//Weeks
+    else if(weeks <= 4.3){
+        if(weeks==1){
+            result['number'] = 1;
+            result['format'] = "weeks";
+        }else{
+            result['number'] = weeks;
+            result['format'] = "weeks";
+        }
+    }
+//Months
+    else if(months <=12){
+        if(months==1){
+            result['number'] = 1;
+            result['format'] = "months";
+        }else{
+            result['number'] = months;
+            result['format'] = "months";
+        }
+    }
+//Years
+    else{
+        if(years==1){
+            result['number'] = 1;
+            result['format'] = "years";
+        }else{
+            result['number'] = years;
+            result['format'] = "years";
+        }
+    }
+    let format, ago
+    this.translate.get(result['format']).subscribe(value => { format = value; })
+    this.translate.get('ago').subscribe(value => { ago = value; })
+
+    var arabic = /[\u0600-\u06FF]/;
+    if(arabic.test(format)){
+      return ago + " " + result['number'] + " " + format;
+    }else{
+      return result['number'] + " " + format + " " + ago;
+    }
   }
 
 likeFeed(userid =this.userId,feedid,postIndex)
