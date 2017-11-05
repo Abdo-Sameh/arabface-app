@@ -17,96 +17,107 @@
       <div class="users-list notifications" *ngFor="let notify of notifications; let i = index;">
 
         <div class="user-item" loadingEnter="loading-md-pop-in" *ngIf="notify.mark_read == 0" style="background-color: #e2e2e2;" id="{{notify.id}}">
-          <div class="user-img">
-            <img src={{notify.avatar}} alt="">
+          <div class="user-img" style="border-radius: 100px;">
+            <img src={{notify.avatar}} alt="" style="border-radius: 100px;">
           </div>
           <div [ngSwitch]="true">
           <div (click)="gotoNotification(notify.type, notify, i)" class="user-info"  *ngSwitchCase="notify.type == 'feed.like.comment'" >
             <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'like-your-comment' | translate}}</span></h5>
-            <p>{{notify.time}}</p>
+            <p>{{getTime(notify.time)}}</p>
           </div>
           <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'profile.view'" >
             <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'view-your-profile' | translate}}</span></h5>
-            <p>{{notify.time}}</p>
+            <p>{{getTime(notify.time)}}</p>
           </div>
           <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'feed.shared'" >
             <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'shared-your-post' | translate}}</span></h5>
-            <p>{{notify.time}}</p>
+            <p>{{getTime(notify.time)}}</p>
           </div>
           <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'feed.like.react'" >
             <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'reacted-to-post' | translate}}</span></h5>
-            <p>{{notify.time}}</p>
+            <p>{{getTime(notify.time)}}</p>
           </div>
           <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'feed.tag'" >
             <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'tag-you-in-post' | translate}}</span></h5>
-            <p>{{notify.time}}</p>
+            <p>{{getTime(notify.time)}}</p>
           </div>
           <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'page.new.role'" >
-            <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'add-you-as-admin' | translate}}</span></h5>
-            <p>{{notify.time}}</p>
+            <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'add-you-as-admin' | translate}} {{'in' | translate}} <a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.page[0].title}}</a></span></h5>
+            <p>{{getTime(notify.time)}}</p>
           </div>
           <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'page.like'" >
             <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'like-your-page' | translate}}</span></h5>
-            <p>{{notify.time}}</p>
+            <p>{{getTime(notify.time)}}</p>
           </div>
           <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'group.post'" >
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'posted-in-group' | translate}} {{notify.group_name}}</span></h5>
 
-              <p>{{notify.time}}</p>
+              <p>{{getTime(notify.time)}}</p>
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'relationship.follow'" >
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'started-following-you' | translate}}</span></h5>
-              <p>{{notify.time}}</p>
+              <p>{{getTime(notify.time)}}</p>
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'event.invite'" >
             <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'invited-you-to-event' | translate}} <a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a></span></h5>
-            <p>{{notify.time}}</p>
+            <p>{{getTime(notify.time)}}</p>
          </div>
 
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'group.add.member'" >
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'added-you-to-group' | translate}} {{notify.title}}</span></h5>
-              <p>{{notify.time}}</p>
+              <p>{{getTime(notify.time)}}</p>
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'feed.comment.reply'" >
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'replied-on-your-comment' | translate}} </span></h5>
-              <p>{{notify.time}}</p>
+              <p>{{getTime(notify.time)}}</p>
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'page.invite'" >
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'invited-you-to-page' | translate}} {{notify.title}}</span></h5>
-              <p>{{notify.time}}</p>
+              <p>{{getTime(notify.time)}}</p>
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'feed.mention'" >
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'mentioned-you-in-post' | translate}} {{notify.title}}</span></h5>
-              <p>{{notify.time}}</p>
+              <p>{{getTime(notify.time)}}</p>
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'feed.like'" >
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'liked-your-post' | translate}}</span></h5>
-              <p>{{notify.time}}</p>
+              <p>{{getTime(notify.time)}}</p>
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'relationship.confirm'" >
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'accepted-friend-request' | translate}}</span></h5>
-              <p>{{notify.time}}</p>
+              <p>{{getTime(notify.time)}}</p>
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'relationship.add'" >
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'sent-you-friend-request' | translate}}</span></h5>
-              <p>{{notify.time}}</p>
+              <p>{{getTime(notify.time)}}</p>
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'feed.comment'" >
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'make-comment-on-your-post' | translate}}</span></h5>
-              <p>{{notify.time}}</p>
+              <p>{{getTime(notify.time)}}</p>
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'video.comment'" >
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'make-comment-on-your-video' | translate}}</span></h5>
-              <p>{{notify.time}}</p>
+              <p>{{getTime(notify.time)}}</p>
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'video.like'" >
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'liked-your-video' | translate}}</span></h5>
-              <p>{{notify.time}}</p>
+              <p>{{getTime(notify.time)}}</p>
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'post-on-timeline'" >
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'post-on-timeline' | translate}}</span></h5>
-              <p>{{notify.time}}</p>
+              <p>{{getTime(notify.time)}}</p>
            </div>
+           <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'event.rsvp'" >
+               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a>
+                 <span>
+                   <span *ngIf="notify.data_two == 2">{{'might-be-going' | translate}}</span>
+                   <span *ngIf="notify.data_two == 1">{{'is-going-to' | translate}}</span>
+                   <span *ngIf="notify.data_two == 3">{{'not-going' | translate}}</span>
+                   <a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.data_one}} </a>
+                 </span>
+               </h5>
+               <p>{{getTime(notify.time)}}</p>
+            </div>
 
            <div class="read-mark">
              <i (click)="markReadNotification(notify.id, '0', i)" class="fa fa-check-circle" *ngIf="notify.mark_read == '1'" style="color: green;" id="check{{notify.id}}"></i>
@@ -120,95 +131,107 @@
         </div> <!-- //user-item -->
 
         <div class="user-item" loadingEnter="loading-md-pop-in" *ngIf="notify.mark_read == 1" style="background-color: transparent;" id="{{notify.id}}">
-          <div class="user-img">
-            <img src={{notify.avatar}} alt="">
+          <div class="user-img" style="border-radius: 100px;">
+            <img src={{notify.avatar}} alt="" style="border-radius: 100px;">
           </div>
           <div [ngSwitch]="true">
           <div (click)="gotoNotification(notify.type, notify, i)" class="user-info"  *ngSwitchCase="notify.type == 'feed.like.comment'" >
             <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'like-your-comment' | translate}}</span></h5>
-            <p>{{notify.time}}</p>
+            <p>{{getTime(notify.time)}}</p>
           </div>
           <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'profile.view'" >
             <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'view-your-profile' | translate}}</span></h5>
-            <p>{{notify.time}}</p>
+            <p>{{getTime(notify.time)}}</p>
           </div>
           <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'feed.shared'" >
             <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'shared-your-post' | translate}}</span></h5>
-            <p>{{notify.time}}</p>
+            <p>{{getTime(notify.time)}}</p>
           </div>
           <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'feed.like.react'" >
             <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'reacted-to-post' | translate}}</span></h5>
-            <p>{{notify.time}}</p>
+            <p>{{getTime(notify.time)}}</p>
           </div>
           <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'feed.tag'" >
             <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'tag-you-in-post' | translate}}</span></h5>
-            <p>{{notify.time}}</p>
+            <p>{{getTime(notify.time)}}</p>
           </div>
           <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'page.new.role'" >
-            <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>add  you as admin</span></h5>
-            <p>{{notify.time}}</p>
+            <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'add-you-as-admin' | translate}} {{'in' | translate}} <a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.page[0].title}}</a></span></h5>
+            <p>{{getTime(notify.time)}}</p>
           </div>
           <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'page.like'" >
             <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'like-your-page' | translate}}</span></h5>
-            <p>{{notify.time}}</p>
+            <p>{{getTime(notify.time)}}</p>
           </div>
           <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'group.post'" >
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'posted-in-group' | translate}} <a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.group_name}} </a></span></h5>
 
-              <p>{{notify.time}}</p>
+              <p>{{getTime(notify.time)}}</p>
            </div>
+           <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'event.rsvp'" >
+               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a>
+                 <span>
+                   <span *ngIf="notify.data_two == 2">{{'might-be-going' | translate}}</span>
+                   <span *ngIf="notify.data_two == 1">{{'is-going-to' | translate}}</span>
+                   <span *ngIf="notify.data_two == 3">{{'not-going' | translate}}</span>
+                   <a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.data_one}} </a>
+                 </span>
+               </h5>
+               <p>{{getTime(notify.time)}}</p>
+            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'relationship.follow'" >
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'started-following-you' | translate}}</span></h5>
-              <p>{{notify.time}}</p>
+              <p>{{getTime(notify.time)}}</p>
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'event.invite'" >
             <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>invited you to  event <a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a></span></h5>
-            <p>{{notify.time}}</p>
+            <p>{{getTime(notify.time)}}</p>
          </div>
 
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'group.add.member'" >
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>added you to  group {{notify.title}}</span></h5>
-              <p>{{notify.time}}</p>
+              <p>{{getTime(notify.time)}}</p>
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'feed.comment.reply'" >
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>replied on your  comment </span></h5>
-              <p>{{notify.time}}</p>
+              <p>{{getTime(notify.time)}}</p>
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'page.invite'" >
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>invited you to  page {{notify.title}}</span></h5>
-              <p>{{notify.time}}</p>
+              <p>{{getTime(notify.time)}}</p>
            </div>
+
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'feed.mention'" >
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>mentioned you in  post {{notify.title}}</span></h5>
-              <p>{{notify.time}}</p>
+              <p>{{getTime(notify.time)}}</p>
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'feed.like'" >
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'liked-your-post' | translate}}</span></h5>
-              <p>{{notify.time}}</p>
+              <p>{{getTime(notify.time)}}</p>
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'relationship.confirm'" >
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'accepted-friend-request' | translate}}</span></h5>
-              <p>{{notify.time}}</p>
+              <p>{{getTime(notify.time)}}</p>
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'relationship.add'" >
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>sent you friend request</span></h5>
-              <p>{{notify.time}}</p>
+              <p>{{getTime(notify.time)}}</p>
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'feed.comment'" >
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'make-comment-on-your-post' | translate}}</span></h5>
-              <p>{{notify.time}}</p>
+              <p>{{getTime(notify.time)}}</p>
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'video.comment'" >
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'make-comment-on-your-video' | translate}}</span></h5>
-              <p>{{notify.time}}</p>
+              <p>{{getTime(notify.time)}}</p>
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'video.like'" >
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'liked-your-video' | translate}}</span></h5>
-              <p>{{notify.time}}</p>
+              <p>{{getTime(notify.time)}}</p>
            </div>
            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'post-on-timeline'" >
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'post-on-timeline' | translate}}</span></h5>
-              <p>{{notify.time}}</p>
+              <p>{{getTime(notify.time)}}</p>
            </div>
            <div class="read-mark">
              <i (click)="markReadNotification(notify.id, '0', i)" class="fa fa-check-circle" *ngIf="notify.mark_read == '1'" style="color: green;" id="check{{notify.id}}"></i>

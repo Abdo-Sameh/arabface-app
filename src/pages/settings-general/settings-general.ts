@@ -33,10 +33,65 @@ export class SettingsGeneralPage {
     'birth_year' :''
   }
   userId
+  myDate = '';
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.getUserData();
+
     console.log(this.user);
+  }
+
+  getMonth(month){
+    if(month == "january")
+      return "01";
+    else if(month == "february")
+      return "02";
+    else if(month == "march")
+      return "03";
+    else if(month == "april")
+      return "04";
+    else if(month == "may")
+      return "05";
+    else if(month == "june")
+      return "06";
+    else if(month == "july")
+      return "07";
+    else if(month == "august")
+      return "08";
+    else if(month == "september")
+      return "09";
+    else if(month == "october")
+      return "10";
+    else if(month == "november")
+      return "11";
+    else if(month == "december")
+      return "12";
+  }
+  getMonthWord(month){
+    if(month == 1)
+      return "january";
+    else if(month == 2)
+      return "february";
+    else if(month == 3)
+      return "march";
+    else if(month == 4)
+      return "april";
+    else if(month == 5)
+      return "may";
+    else if(month == 6)
+      return "june";
+    else if(month == 7)
+      return "july";
+    else if(month == 8)
+      return "august";
+    else if(month == 9)
+      return "september";
+    else if(month == 10)
+      return "october";
+    else if(month == 11)
+      return "november";
+      else if(month == 12)
+        return "december";
   }
 
   ionViewDidLoad() {
@@ -52,13 +107,32 @@ export class SettingsGeneralPage {
      this.remoteService.getUserData('country', this.userId).subscribe(res => {this.user.country = res});
      this.remoteService.getUserData('city', this.userId).subscribe(res => {this.user.city = res});
      this.remoteService.getUserData('bio', this.userId).subscribe(res => {this.user.bio = res});
-     this.remoteService.getUserData('birth_day', this.userId).subscribe(res => {this.user.birth_day = res});
-     this.remoteService.getUserData('birth_month', this.userId).subscribe(res => {this.user.birth_month = res});
-     this.remoteService.getUserData('birth_year', this.userId).subscribe(res => {this.user.birth_year = res});
+     this.remoteService.getUserData('birth_year', this.userId).subscribe(res => {this.user.birth_year = res;
+       this.myDate = res;
+       this.remoteService.getUserData('birth_month', this.userId).subscribe(res1 => {this.user.birth_month = res1;
+         this.myDate += ('-' + this.getMonth(res1));
+         this.remoteService.getUserData('birth_day', this.userId).subscribe(res2 => {this.user.birth_day = res2;
+           this.myDate += ('-' + res2)
+         });
+       });
+     });
+
+     //this.myDate = this.user.birth_year + '-' + this.getMonth(this.user.birth_month) + '-' + this.user.birth_day ;
+    //  = '2017-11-15';
+     console.log(this.myDate);
   }
-  saveSettings(first, last, email, username, gender, country, city, state, bio){
-    console.log(first, last, email, username, gender, country, city, state, bio);
-    this.remoteService.settingsGeneral(first, last, email, username, gender, country, city, state, bio, this.userId).subscribe(res => {
+
+  getDateToSave(date){
+
+  }
+
+  saveSettings(first, last, email, username, gender, country, city, state, bio, day, month, year, myDate){
+    // console.log(DOB);
+    year = (myDate.substring(0, 4));
+    month = (this.getMonthWord(parseInt(myDate.substring(5, 7))));
+    day = (myDate.substring(8, 10));
+    this.getDateToSave(myDate);
+    this.remoteService.settingsGeneral(first, last, email, username, gender, country, city, state, bio, this.userId, day, month, year).subscribe(res => {
       let toast = this.toastCtrl.create({
         message: 'Settings saved successfully',
         duration: 3000,

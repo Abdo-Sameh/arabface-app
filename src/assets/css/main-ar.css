@@ -1372,9 +1372,9 @@ top: -4px;
 		margin-right: -3px !important;
 		margin-left: 5px !important;
 	}
-	.feed-header .feed-title {
+	/*.feed-header .feed-title {
     width: calc(100% - 73px);
-}
+}*/
 	.feed-action a i {
 		margin-left: 3px;
 	}

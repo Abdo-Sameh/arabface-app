@@ -1236,6 +1236,11 @@ console.log(url)
           .map((res : Response ) => res.json());
 
       }
+
+      getBirthdays(userid){
+        return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/event/birthdays?userid=' + userid)
+        .map((res : Response ) => res.json());
+      }
         getEventCategories(){
           return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/event/get/categories')
           .map((res : Response ) => res.json());
@@ -1451,7 +1456,7 @@ console.log(url)
           return this.http.post(this.serverURL+'/arabface/api/'+this.KEY+'/settings/privacy', body, {headers: headers})
           .map((res : Response ) => res.json());
         }
-        settingsGeneral(first, last, email, username, gender, country, city, state, bio, userid){
+        settingsGeneral(first, last, email, username, gender, country, city, state, bio, userid, birth_day, birth_month, birth_year){
 
           let headers = new Headers();
           headers.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -1466,6 +1471,9 @@ console.log(url)
           urlSearchParams.append('city', city);
           urlSearchParams.append('bio', bio );
           urlSearchParams.append('userid', userid );
+          urlSearchParams.append('birth_day', birth_day );
+          urlSearchParams.append('birth_month', birth_month );
+          urlSearchParams.append('birth_year', birth_year );
           let body = urlSearchParams.toString()
           return this.http.post(this.serverURL+'/arabface/api/'+this.KEY+'/settings/general', body, {headers: headers})
           .map((res : Response ) => res.json());

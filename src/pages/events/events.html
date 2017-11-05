@@ -44,7 +44,7 @@
 				</ul>
 			</div>
 			<div class="container">
-				<form class="search-form search-filter mt-10 mb-30">
+				<form class="search-form search-filter mt-10 mb-30" *ngIf="type != 'birthdays'">
 					<div class="input-group">
 						<input type="text" class="form-control" [(ngModel)]="search" [ngModelOptions]="{ standalone :true}" placeholder="{{'search-here' | translate}}">
 						<select id="selectCat" class="form-control" [(ngModel)]="category" [ngModelOptions]="{ standalone :true}" (ngModelChange)="getEvents(this.type,this.category,  '', userId, 1)">
@@ -57,7 +57,7 @@
 						</div>
 					</div>
 				</form>
-				<div class="tab-content">
+				<div class="tab-content" *ngIf="type != 'birthdays'">
 					<div id="tab-content-1" class="tab-pane fade in active">
             <div id="noEvents" style="display: none;" class="box-content alert alert-danger">{{'no-event-display' | translate}}</div>
 						<div class="row thumbnails">
@@ -76,6 +76,53 @@
             <a id="more" (click)="getEvents(this.type ,this.category, this.search, userId, page + 1)" href="#" class="btn btn-default btn-block">{{'view-more' | translate}}</a>
 					</div>
 				</div>
+        <div *ngIf="type == 'birthdays'" >
+          <div *ngIf="birthdays.todays.length != 0">
+            <div class="btn btn-theme btn-block mt-30">{{'todays-birthdays' | translate}}</div>
+            <div class="panel panel-theme" >
+  						<div class="row">
+  							<div class="col-xs-6" *ngFor="let birth of birthdays.todays">
+  							    <div class="thumbnail">
+  							    	<a (click)="GoToProfile(birth.id)" href="#"><img src="{{birth.avatar}}" alt="" style="width: 75px; height: 75px;"></a>
+  								    <div class="caption">
+  								        <h3 (click)="GoToProfile(birth.id)" style="text-align: center;"><a href="#" style="font-size:12px;">{{birth.name}}</a></h3>
+  								    </div>
+  							    </div>
+  							</div>
+  						</div>
+  					</div>
+          </div>
+          <div *ngIf="birthdays.thismonth.length != 0">
+            <div class="btn btn-theme btn-block mt-30">{{'later-in-month' | translate}}</div>
+            <div class="panel panel-theme">
+  						<div class="row">
+  							<div class="col-xs-6" *ngFor="let birth of birthdays.thismonth">
+  							    <div class="thumbnail">
+  							    	<a (click)="GoToProfile(birth.id)" href="#"><img src="{{birth.avatar}}" alt="" style="width: 75px; height: 75px;"></a>
+  								    <div class="caption">
+  								        <h3 (click)="GoToProfile(birth.id)" style="text-align: center;"><a href="#" style="font-size:12px;">{{birth.name}}</a></h3>
+  								    </div>
+  							    </div>
+  							</div>
+  						</div>
+  					</div>
+          </div>
+          <div *ngFor="let birth of birthdays.months; let i = index;">
+            <div class="btn btn-theme btn-block mt-30">{{getMonth(birth.title | translate)}}</div>
+            <div class="panel panel-theme">
+  						<div class="row">
+  							<div class="col-xs-6" *ngFor="let user of birthdays.months[i].users">
+  							    <div class="thumbnail">
+  							    	<a (click)="GoToProfile(user.id)" href="#"><img src="{{user.avatar}}" alt="" style="width: 75px; height: 75px;"></a>
+  								    <div class="caption">
+  								        <h3 (click)="GoToProfile(user.id)" style="text-align: center;"><a href="#" style="font-size:12px;">{{user.name}}</a></h3>
+  								    </div>
+  							    </div>
+  							</div>
+  						</div>
+  					</div>
+          </div>
+        </div>
 			</div>
 			<div class="add-btn">
 				<a (click)="createEventPage()" href="#"><i class="fa fa-plus"></i></a>

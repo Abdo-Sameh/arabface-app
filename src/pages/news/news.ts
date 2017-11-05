@@ -402,17 +402,12 @@ GoToProfile(id,userId)
 
     this.remoteService.profileDetailsApiCall(id,userId).subscribe(res => {
         loading.dismiss();this.userData = res ;
-        console.log("---------------------------");
         res.id=id;
-        console.log(res);
-        console.log("----------------------------");
         if(id == userId){
           this.app.getRootNav().push(ProfilePage, {
             "userData" : res
           });
-          // this.navCtrl.push(ProfilePage,{
-          //   "userData" : res
-          // })
+
         }else{
             this.remoteService.isBlocked(res.id, this.userId).subscribe(res2 => {
               if(res2.status == 1){

@@ -319,6 +319,11 @@
 						<label for="city">{{'city' | translate}}:</label>
             <input type="text" class="form-control" id="city" [(ngModel)]="user.city" [ngModelOptions]="{ standalone :true}">
 					</div>
+          <div class="form-group">
+            <label>{{'date-of-birth' | translate}}</label>
+            <input type="date" class="form-control datetimepicker" [(ngModel)]="myDate" [ngModelOptions]="{ standalone :true}">
+            <!-- <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="myDate" [ngModelOptions]="{ standalone :true}"></ion-datetime> -->
+          </div>
 					<!-- <div class="form-group">
 						<label for="profile-upload">Change Profile Picture:</label>
 				        <div class="file-input">
@@ -329,7 +334,7 @@
 						</div>
 					</div> -->
 					<div class="form-group mt-30 mb-30">
-						<button (click)="saveSettings(user.first_name, user.last_name, user.email_address, user.username, user.gender, user.country, user.city, user.state, user.bio)" type="submit" class="btn btn-theme">{{'save' | translate}}</button>
+						<button (click)="saveSettings(user.first_name, user.last_name, user.email_address, user.username, user.gender, user.country, user.city, user.state, user.bio, '10', 'march', '2017', myDate)" type="submit" class="btn btn-theme">{{'save' | translate}}</button>
 					</div>
 	      	    </form>
       	    </div>
