@@ -6,8 +6,8 @@ import { MessagesPage} from '../messages/messages';
 import { NotificationsPage} from '../notifications/notifications';
 import { FriendsPage} from '../friends/friends';
 import { Nav,NavController,MenuController } from 'ionic-angular';
-import {LoginPage}  from '../login/login';
-import {MenuPage}  from '../menu/menu';
+import { LoginPage }  from '../login/login';
+import { MenuPage }  from '../menu/menu';
 import { OnlinePage } from '../online/online';
 import { SettingsPage } from '../settings/settings';
 import { PhotosPage } from '../photos/photos';
@@ -21,6 +21,8 @@ import { ForumsPage } from '../forums/forums';
 import { TrendingPage } from '../trending/trending';
 import { ContactUsPage } from "../contact-us/contact-us";
 import { GiftsPage } from "../gifts/gifts";
+import { SearchPage } from "../search/search";
+
 @Component({
   templateUrl: 'tabs.html',
 })
@@ -80,6 +82,9 @@ export class TabsPage {
       this.notifications = res;
       console.log(res);
     });
+  }
+  searchPage(){
+    this.navCtrl.push(SearchPage);
   }
 
 }

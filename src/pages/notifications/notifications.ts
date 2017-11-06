@@ -10,6 +10,7 @@ import { DisplayPostPage } from '../display-post/display-post';
 import { TranslateService } from '@ngx-translate/core';
 import { EventPage } from '../event/event';
 import { GroupPage } from '../group/group';
+import { FriendProfilePage } from '../friend-profile/friend-profile';
 
 /**
  * Generated class for the NotificationsPage page.
@@ -23,13 +24,14 @@ import { GroupPage } from '../group/group';
   templateUrl: 'notifications.html',
 })
 export class NotificationsPage {
-  public userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
+  userId
   notifications;
   unread;
   userData
   page
   pageNum
   constructor(public translate: TranslateService, private app: App, public navCtrl: NavController, public navParams: NavParams ,public loadingCtrl :LoadingController, public remoteService : RemoteServiceProvider , public loading: LoadingController) {
+    this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.pageNum = 1;
     this.getNotifications(1);
     this.getUnreadNotifications();
@@ -118,8 +120,8 @@ export class NotificationsPage {
     });
     loading.present()
 
-      this.remoteService.profileDetailsApiCall(this.userId,id).subscribe(res =>{loading.dismiss();this.userData = res ; res.id=id;
-       this.navCtrl.push(ProfilePage,{"userData" : res})
+      this.remoteService.profileDetailsApiCall(id, this.userId).subscribe(res =>{loading.dismiss();this.userData = res ; res.id=id;
+       this.app.getRootNav().push(FriendProfilePage,{"userData" : res})
     });
   }
   getPageDetails(id){
@@ -294,6 +296,11 @@ export class NotificationsPage {
          this.app.getRootNav().push(GroupPage,{
            group: notification.group[0]
          });
+         break;
+       }
+       case "relationship.follow" :{
+         console.log(notification.userid);
+         this.GoToProfile(notification.userid);
          break;
        }
        default: {

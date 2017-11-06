@@ -541,7 +541,7 @@ Start Main Navigation
 Start Header Title
 ===========================*/
 .header_title {
-	direction: ltr;
+
 	position: fixed;
     top: 0;
     right: 0;
@@ -561,9 +561,22 @@ Start Header Title
 	float: right;
 	width: 15%;
 }
+.header_title:not(.main_header_title) .back_btn {
+	padding-right: 10px;
+}
 .header_title .back_btn i {
 	width: 40px;
 	display: inline-block;
+}
+
+.header_title .back_btn i.fa-arrow-left:before {
+    content: "\f061";
+}
+.header_title .menu_btn,.main_header_title .back_btn{
+	text-align: left !important;
+}
+.header_title:not(.main_header_title) .menu_btn {
+	padding-left: 10px;
 }
 .header_title .page_title {
 	width: 70%;
@@ -1008,7 +1021,7 @@ Start Profile
 }
 .file-input-profile {
 	position: absolute;
-    bottom: 6px;
+    bottom: 0;
     right: 0px;
 }
 .file-input-profile i {
@@ -1199,7 +1212,7 @@ top: -4px;
 }
 .file-input-profile {
 	position: absolute;
-    bottom: 6px;
+    bottom: 0;
     right: 0px;
 }
 .file-input-profile i {
@@ -1415,3 +1428,35 @@ top: -4px;
 	/*.dir-text{
 		direction: rtl !important;
 	}*/
+		.main-search  .input-group {
+    direction: rtl;
+	}
+	.main-search .input-group .form-control {
+		  direction: rtl;
+	}
+	.main-search input {
+		color: #fff;
+	}
+	.main-search button {
+ background-color: transparent;
+		 border-color: transparent;
+		 margin-right: -35px;
+	 }
+	.main-search ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #fff;
+}
+.main-search ::-moz-placeholder { /* Firefox 19+ */
+  color: #fff;
+}
+.main-search :-ms-input-placeholder { /* IE 10+ */
+  color: #fff;
+}
+.main-search :-moz-placeholder { /* Firefox 18- */
+  color: #fff;
+}
+.searchbar-input{
+	background-color: #5c0632 !important;
+}
+.ion-app [no-padding] .scroll-content {
+    margin-left: 25px !important;
+}

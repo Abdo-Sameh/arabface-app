@@ -75,6 +75,7 @@ import { EditAlbumPage } from '../pages/edit-album/edit-album';
 import { YoutubePipe } from '../pipes/youtube/youtube';
 import { FilePath } from '@ionic-native/file-path';
 import { UploadImagePage } from '../pages/upload-image/upload-image';
+import { SearchPage } from '../pages/search/search';
 
 @NgModule({
   declarations: [
@@ -119,7 +120,7 @@ import { UploadImagePage } from '../pages/upload-image/upload-image';
     DisplayPostPage,
     MembersPage,
     InviteFriendPage,
-    SavedPage,
+    SavedPage, SearchPage,
     CreateAlbumPage, EditAlbumPage, ViewAlbumPage,
     PhotoselectionPage, CreateEventPage, EditEventPage, EventPage,
     NotFound_404Page, LatestVisitorsPage,UploadImagePage,
@@ -173,7 +174,7 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule, TranslateModule.forRoot(
     CreateGroupPage,
     EditGroupPage,
     EditPagePage,
-    SavedPage,
+    SavedPage, SearchPage,
     DisplayPostPage,
     MembersPage,
     CreateAlbumPage, EditAlbumPage, ViewAlbumPage,

@@ -418,22 +418,18 @@ user = new Observable(observer => {
   }
     ///////// Signup function End ////////
 
-  // getPhotos()
-  //  {
-  //
-  //         return  this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/page/browse')
-  //
-  //         .do((res : Response ) => console.log(res.json()))
-  //         .map((res : Response ) => res.json());
-  //
-  //  }
+
+  /////////search api////////////////////
+  search(term, type, userid){
+    return  this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/search?userid='+ userid + '&tpye=' + type + '&term=' + term)
+    .map((res : Response ) => res.json());
+  }
 
 
 
     ///////// Friends function Start ////////
    friendsListApiCall(the_userid, id, term)
    {
-
     return  this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/profile/friends?userid='+id + '&the_userid=' + the_userid + '&term=' + term)
 
     .map((res : Response ) => res.json());
@@ -495,9 +491,9 @@ user = new Observable(observer => {
 
    //////////  profile Api function start   ///////////
 
-   profileDetailsApiCall(theUserId, id)
+   profileDetailsApiCall(theUserId, userid)
    {
-     let url = this.serverURL+'/arabface/api/'+this.KEY+'/profile/details?userid='+id + '&the_userid=' + theUserId;
+     let url = this.serverURL+'/arabface/api/'+this.KEY+'/profile/details?userid='+ userid + '&the_userid=' + theUserId;
 
      return  this.http.get(url).map((res : Response ) => res.json());
 

@@ -83,9 +83,9 @@ export class MyApp {
   initializeApp() {
     this.platform.ready().then(() => {
       //running from browser
-      this.translate.setDefaultLang("ar");
-      this.platform.setDir('rtl', true);
-      this.document.getElementById('appstyle').setAttribute('href', 'assets/css/main-ar.css');
+      this.translate.setDefaultLang("en");
+      this.platform.setDir('ltr', true);
+      this.document.getElementById('appstyle').setAttribute('href', 'assets/css/main.css');
       // this.deviceLanguage = "ar";
       // this.translate.getDefaultLang()
       //running from app
