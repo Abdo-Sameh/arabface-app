@@ -421,7 +421,7 @@ user = new Observable(observer => {
 
   /////////search api////////////////////
   search(term, type, userid){
-    return  this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/search?userid='+ userid + '&tpye=' + type + '&term=' + term)
+    return  this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/search?userid='+ userid + '&type=' + type + '&term=' + term)
     .map((res : Response ) => res.json());
   }
 
@@ -690,7 +690,7 @@ user = new Observable(observer => {
 
   //////////// post in feed ///////////////////////
 
-  feedPosting(userID,post,feeling='none',postType='text',privacy='1',background='default',tag :any='no', type, type_id)
+  feedPosting(userID,post,feeling='none',postType='text',privacy='1',background='default',tag :any='no', type, type_id, to_user_id="")
   {
 
     let headers = new Headers();
@@ -738,6 +738,7 @@ user = new Observable(observer => {
     urlSearchParams.append('type', type );
     urlSearchParams.append('type_id', type_id );
     urlSearchParams.append('background', background );
+    urlSearchParams.append('to_user_id', to_user_id );
 
     let body = urlSearchParams.toString()
 

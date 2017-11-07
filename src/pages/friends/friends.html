@@ -7,7 +7,7 @@
 
 <ion-content>
 <section >
-  <div class="container" >
+  <div class="container" style="margin-bottom: 40px;">
       <div class="users-list friends_requests" *ngIf="FriendsRequest?.length != 0 ">
         <div *ngFor="let friend of FriendsRequest ; let i = index ">
 					<div class="nav_requests">
@@ -20,8 +20,8 @@
           </div><br>
 					<div class="user-item"   >
 						<div class="pull-left">
-							<div class="user-img">
-								<img (click)="GoToProfile(friend.userid, Id)" src={{friend.avatar}} alt="">
+							<div class="user-img" style="border-radius: 100px !important; border: 0px solid #5c0632 !important;">
+								<img (click)="GoToProfile(friend.userid, Id)" src={{friend.avatar}} alt="" style="border-radius: 100px !important;">
 							</div>
 							<div class="user-info pull-left">
                 <a (click)="GoToProfile(friend.userid, Id)"   style="cursor:pointer">{{friend.name}}
@@ -57,8 +57,8 @@
           </div><br>
           <br><br>
       <div class="user-item" *ngFor="let friend of FriendsSuggestion ; let i = index" >
-        <div class="user-img">
-          <img (click)="GoToProfile(friend.userid, Id)" src="{{friend.avatar}}" alt="Arabface" title="Arabface">
+        <div class="user-img" style="border-radius: 100px !important; border: 0px solid #5c0632 !important;">
+          <img (click)="GoToProfile(friend.userid, Id)" src="{{friend.avatar}}" alt="Arabface" title="Arabface" style="border-radius: 100px !important;">
         </div>
         <div class="user-info">
           <a (click)="GoToProfile(friend.userid, Id)" style="cursor:pointer;color:#333">{{friend.name}}</a>

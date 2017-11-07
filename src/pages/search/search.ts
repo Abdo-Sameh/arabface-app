@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
+import { FriendProfilePage } from '../friend-profile/friend-profile';
 /**
  * Generated class for the SearchPage page.
  *
@@ -17,7 +18,7 @@ export class SearchPage {
   searchRes
   userId
   type
-  constructor(public remoteService: RemoteServiceProvider, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public user: FriendProfilePage, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider, public navCtrl: NavController, public navParams: NavParams) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.searchRes = {}
   }
@@ -27,7 +28,15 @@ export class SearchPage {
   }
 
   search(term, type){
+    let loading = this.loadingCtrl.create({
+      content: "",
+      spinner: "bubbles",
+      showBackdrop: true,
+    });
+    loading.present()
+    console.log(type);
     this.remoteService.search(term, type, this.userId).subscribe(res => {
+      loading.dismiss();
       console.log(res);
       this.searchRes = res;
       this.type = type;

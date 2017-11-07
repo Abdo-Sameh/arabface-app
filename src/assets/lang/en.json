@@ -529,6 +529,18 @@
 
 	"share" : "Share",
 
+	"later-in-month" : "Later in this month",
+
+	"going" : "Going",
+
+	"might-be-going" : "might be going",
+
+	"is-going-to" : "is going to",
+
+	"not-going" : "Not going",
+
+	"add-you-as-admin" : "add you as admin",
+
 	"post-on-timeline" : "posted on your wall",
 
 	"write-comment" : "Write comment ...",
@@ -612,6 +624,8 @@
 	"update": "Update",
 
 	"by": "By",
+
+	"people-like-this" : "People like this",
 
 	"version": "Version",
 
@@ -813,6 +827,8 @@
 	"access-admin": "Access Admin",
 
 	"actions": "Actions",
+
+	"maybe" : "Maybe",
 
 	"add-new-role": "Add New Role",
 

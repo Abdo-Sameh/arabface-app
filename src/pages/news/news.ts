@@ -9,6 +9,7 @@ import { DisplayPostPage } from '../display-post/display-post'
 import { NotFound_404Page } from '../not-found-404/not-found-404';
 import { MyApp } from '../../app/app.component';
 import { TranslateService } from '@ngx-translate/core';
+import { TimeProvider } from './../../providers/time/time';
 //import $ from "jquery";
 
 /**
@@ -45,7 +46,7 @@ export class NewsPage {
     userId
     userAvatar
 
-  constructor(public translate: TranslateService, private app: App, public navCtrl: NavController,public popOver : PopoverController  ,public toast:ToastController, public navParams: NavParams ,public alert:AlertController,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
+  constructor(public time: TimeProvider, public translate: TranslateService, private app: App, public navCtrl: NavController,public popOver : PopoverController  ,public toast:ToastController, public navParams: NavParams ,public alert:AlertController,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
     if(localStorage.getItem('userDataID'))
     {
      this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "")
@@ -65,104 +66,6 @@ export class NewsPage {
     console.log('ionViewDidLoad NewsPage');
   }
 
-  getTime(time_ago){
-    setTimeout("", 10000);
-    var timeNow = new Date().getTime()/1000;
-    // console.log(timeNow);
-    // console.log(time_ago);
-    // setInterval(1000);
-    // console.log(timeNow-time_ago);
-    var time_elapsed 	= timeNow - time_ago;
-    var seconds 	= Math.round(time_elapsed) ;
-    var minutes 	= Math.round(time_elapsed / 60 );
-    var hours 		= Math.round(time_elapsed / 3600);
-    var days 		= Math.round(time_elapsed / 86400 );
-    var weeks 		= Math.round(time_elapsed / 604800);
-    var months 	= Math.round(time_elapsed / 2600640 );
-    var years 		= Math.round(time_elapsed / 31207680 );
-    // console.log(days);
-    var result = {
-        number : 0,
-        'format' : ''
-    };
-    if(seconds <= 60){
-        result.number = seconds;
-        result['format'] = "seconds";
-    }
-//Minutes
-    else if(minutes <=60){
-        if(minutes==1){
-            result['number'] = 1;
-            result['format'] = "minutes";
-
-        }
-        else{
-            result['number'] = minutes;
-            result['format'] = "minutes";
-        }
-    }
-//Hours
-    else if(hours <=24){
-        if(hours==1){
-            result['number'] = 1;
-            result['format'] = "hours";
-        }else{
-            result['number'] = hours;
-            result['format'] = "hours";
-        }
-    }
-//Days
-    else if(days <= 7){
-        if(days==1){
-            result['number'] = 1;
-            result['format'] = "days";
-        }else{
-            result['number'] = days;
-            result['format'] = "days";
-        }
-    }
-//Weeks
-    else if(weeks <= 4.3){
-        if(weeks==1){
-            result['number'] = 1;
-            result['format'] = "weeks";
-        }else{
-            result['number'] = weeks;
-            result['format'] = "weeks";
-        }
-    }
-//Months
-    else if(months <=12){
-        if(months==1){
-            result['number'] = 1;
-            result['format'] = "months";
-        }else{
-            result['number'] = months;
-            result['format'] = "months";
-        }
-    }
-//Years
-    else{
-        if(years==1){
-            result['number'] = 1;
-            result['format'] = "years";
-        }else{
-            result['number'] = years;
-            result['format'] = "years";
-        }
-    }
-    let format, ago
-    this.translate.get(result['format']).subscribe(value => { format = value; })
-    this.translate.get('ago').subscribe(value => { ago = value; })
-
-    var arabic = /[\u0600-\u06FF]/;
-    if(arabic.test(format)){
-      return ago + " " + result['number'] + " " + format;
-    }else{
-      return result['number'] + " " + format + " " + ago;
-    }
-  }
-
   editComment(id, text, feedIndex, commentIndex){
     this.remoteService.editComment(this.userId, id, text).subscribe(res => {
       if(res.status == 1){
@@ -174,6 +77,9 @@ export class NewsPage {
     })
   }
 
+  getTime(time){
+    return this.time.getTime(time);
+  }
 
 getFeedsList(id,more=false,GotPosts= 30)
 {
@@ -188,6 +94,7 @@ getFeedsList(id,more=false,GotPosts= 30)
         for(let i =0 ; i < res.length;i++)
         {
           //check if post is saved or not-going
+
 
             this.remoteService.isSaved('feed', res[i].id, this.userId).subscribe(data =>{
               if(data.status == 1){

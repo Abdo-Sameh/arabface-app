@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController, ActionSheetController, Loading, Platform} from 'ionic-angular';
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
+import { TimeProvider} from './../../providers/time/time';
 import { InviteFriendPage } from '../invite-friend/invite-friend';
 import { GroupsPage } from '../groups/groups';
 import { EditGroupPage } from '../edit-group/edit-group';
@@ -50,7 +51,7 @@ export class GroupPage {
   hiddenPost
   userAvatar
   lastImage: string = null;
-  constructor(public file: File, public filePath: FilePath, public platform: Platform, public camera: Camera, public actionSheetCtrl: ActionSheetController, public translate: TranslateService, private socialSharing: SocialSharing, public alert:AlertController, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
+  constructor(public time: TimeProvider, public file: File, public filePath: FilePath, public platform: Platform, public camera: Camera, public actionSheetCtrl: ActionSheetController, public translate: TranslateService, private socialSharing: SocialSharing, public alert:AlertController, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.userAvatar = "http://" + localStorage.getItem('userAvatar').slice(8,-1);
     this.group = navParams.get("group");
@@ -59,102 +60,9 @@ export class GroupPage {
     this.groupMembers(this.group.id, this.userId);
     console.log(this.group);
   }
-  getTime(time_ago){
-    setTimeout("", 10000);
-    var timeNow = new Date().getTime()/1000;
-    // console.log(timeNow);
-    // console.log(time_ago);
-    // setInterval(1000);
-    // console.log(timeNow-time_ago);
-    var time_elapsed 	= timeNow - time_ago;
-    var seconds 	= Math.round(time_elapsed) ;
-    var minutes 	= Math.round(time_elapsed / 60 );
-    var hours 		= Math.round(time_elapsed / 3600);
-    var days 		= Math.round(time_elapsed / 86400 );
-    var weeks 		= Math.round(time_elapsed / 604800);
-    var months 	= Math.round(time_elapsed / 2600640 );
-    var years 		= Math.round(time_elapsed / 31207680 );
-    // console.log(days);
-    var result = {
-        number : 0,
-        'format' : ''
-    };
-    if(seconds <= 60){
-        result.number = seconds;
-        result['format'] = "seconds";
-    }
-//Minutes
-    else if(minutes <=60){
-        if(minutes==1){
-            result['number'] = 1;
-            result['format'] = "minutes";
 
-        }
-        else{
-            result['number'] = minutes;
-            result['format'] = "minutes";
-        }
-    }
-//Hours
-    else if(hours <=24){
-        if(hours==1){
-            result['number'] = 1;
-            result['format'] = "hours";
-        }else{
-            result['number'] = hours;
-            result['format'] = "hours";
-        }
-    }
-//Days
-    else if(days <= 7){
-        if(days==1){
-            result['number'] = 1;
-            result['format'] = "days";
-        }else{
-            result['number'] = days;
-            result['format'] = "days";
-        }
-    }
-//Weeks
-    else if(weeks <= 4.3){
-        if(weeks==1){
-            result['number'] = 1;
-            result['format'] = "weeks";
-        }else{
-            result['number'] = weeks;
-            result['format'] = "weeks";
-        }
-    }
-//Months
-    else if(months <=12){
-        if(months==1){
-            result['number'] = 1;
-            result['format'] = "months";
-        }else{
-            result['number'] = months;
-            result['format'] = "months";
-        }
-    }
-//Years
-    else{
-        if(years==1){
-            result['number'] = 1;
-            result['format'] = "years";
-        }else{
-            result['number'] = years;
-            result['format'] = "years";
-        }
-    }
-    let format, ago
-    this.translate.get(result['format']).subscribe(value => { format = value; })
-    this.translate.get('ago').subscribe(value => { ago = value; })
-
-    var arabic = /[\u0600-\u06FF]/;
-    if(arabic.test(format)){
-      return ago + " " + result['number'] + " " + format;
-    }else{
-      return result['number'] + " " + format + " " + ago;
-    }
+  getTime(time){
+    return this.time.getTime(time);
   }
 
   public presentActionSheet(type) {
@@ -612,7 +520,8 @@ export class GroupPage {
   //   });
     this.navCtrl.push(PostFeatursPage,{
       type: 'group',
-      type_id: this.group.id
+      type_id: this.group.id,
+      callback: this.myCallbackFunction
     })
   }
 
@@ -755,6 +664,12 @@ export class GroupPage {
   }
   back() {
     this.navCtrl.pop();
+  }
+  myCallbackFunction = (post) => {
+   return new Promise((resolve, reject) => {
+       this.posts.unshift(post);
+       resolve();
+   });
   }
 
 }

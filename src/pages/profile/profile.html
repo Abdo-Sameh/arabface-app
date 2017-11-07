@@ -78,7 +78,7 @@
                 <img class="feed-img" src={{feed.avatar}} alt="">
                 <div class="feed-title">
                     <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{feed.name}} </a>  <span *ngIf="feed.tag_users != ''">  with  <span *ngFor="let tag of feed.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
-                    <span>{{feed.time}} </span>
+                    <span>{{getTime(feed.time)}} </span>
                     <span class="dropdown ml-5">
                         <a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
                         <a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
@@ -166,7 +166,7 @@
                                   <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
                                       <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
                                   <span class="mr-10">-</span>
-                                  <span>{{comments.time}}</span>
+                                  <span>{{getTime(comments.time)}}</span>
                                 </div>
                               </div>
                           <!-- <div class="pull-right">
@@ -246,7 +246,7 @@
                   <img class="feed-img" src={{feed.avatar}} alt="">
                   <div class="feed-title">
                       <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{feed.name}} at {{feed.location}}</a>  <span *ngIf="feed.tag_users != ''">  with  <span *ngFor="let tag of feed.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
-                      <span>{{feed.time}} </span>
+                      <span>{{getTime(feed.time)}} </span>
                       <span class="dropdown ml-5">
                           <a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
                           <a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
@@ -330,7 +330,7 @@
                                     <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
                                         <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
                                     <span class="mr-10">-</span>
-                                    <span>{{comments.time}}</span>
+                                    <span>{{getTime(comments.time)}}</span>
                                   </div>
                                 </div>
                             <!-- <div class="pull-right">
@@ -412,7 +412,7 @@
                   <img class="feed-img" src={{feed.avatar}} alt="">
                   <div class="feed-title">
                     <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{feed.name}} </a>  <span *ngIf="feed.tag_users != ''">  with  <span *ngFor="let tag of feed.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
-                    <span>{{feed.time}} </span>
+                    <span>{{getTime(feed.time)}} </span>
                     <span class="dropdown ml-5">
                         <a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
                         <a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
@@ -505,7 +505,7 @@
                                     <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
                                         <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
                                     <span class="mr-10">-</span>
-                                    <span>{{comments.time}}</span>
+                                    <span>{{getTime(comments.time)}}</span>
                                   </div>
                                 </div>
                             <!-- <div class="pull-right">
@@ -587,7 +587,7 @@
           <img class="feed-img" src={{feed.avatar}} alt="">
           <div class="feed-title">
             <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{feed.name}} </a>  <span *ngIf="feed.tag_users != ''">  with  <span *ngFor="let tag of feed.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
-            <span>{{feed.time}} </span>
+            <span>{{getTime(feed.time)}} </span>
             <span class="dropdown ml-5">
                 <a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
                 <a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
@@ -682,7 +682,7 @@
                             <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
                                 <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
                             <span class="mr-10">-</span>
-                            <span>{{comments.time}}</span>
+                            <span>{{getTime(comments.time)}}</span>
                           </div>
                         </div>
                     <!-- <div class="pull-right">
@@ -765,7 +765,7 @@
                     <img class="feed-img" src={{feed.avatar}} alt="">
                     <div class="feed-title">
                         <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{feed.name}} </a>  <span *ngIf="feed.tag_users != ''">  with  <span *ngFor="let tag of feed.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
-                        <span>{{feed.time}} </span>
+                        <span>{{getTime(feed.time)}} </span>
                         <span class="dropdown ml-5">
                             <a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
                             <a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
@@ -848,7 +848,7 @@
                                       <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
                                           <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
                                       <span class="mr-10">-</span>
-                                      <span>{{comments.time}}</span>
+                                      <span>{{getTime(comments.time)}}</span>
                                     </div>
                                   </div>
                               <!-- <div class="pull-right">
@@ -930,7 +930,7 @@
                     <img class="feed-img" src={{feed.avatar}} alt="">
                     <div class="feed-title">
                         <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{feed.name}} </a>  <span *ngIf="feed.tag_users != ''">  with  <span *ngFor="let tag of feed.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
-                        <span>{{feed.time}} </span>
+                        <span>{{getTime(feed.time)}} </span>
                         <span class="dropdown ml-5">
                             <a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
                             <a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
@@ -1013,7 +1013,7 @@
                                       <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
                                           <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
                                       <span class="mr-10">-</span>
-                                      <span>{{comments.time}}</span>
+                                      <span>{{getTime(comments.time)}}</span>
                                     </div>
                                   </div>
                               <!-- <div class="pull-right">
@@ -1093,7 +1093,7 @@
                       <img class="feed-img" src={{feed.avatar}} alt="">
                       <div class="feed-title">
                           <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{feed.name}} </a>  <span *ngIf="feed.tag_users != ''">  with  <span *ngFor="let tag of feed.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
-                          <span>{{feed.time}} </span>
+                          <span>{{getTime(feed.time)}} </span>
                           <span class="dropdown ml-5">
                               <a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
                               <a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
@@ -1177,7 +1177,7 @@
                                         <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
                                             <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
                                         <span class="mr-10">-</span>
-                                        <span>{{comments.time}}</span>
+                                        <span>{{getTime(comments.time)}}</span>
                                       </div>
                                     </div>
                                 <!-- <div class="pull-right">
@@ -1259,7 +1259,7 @@
                       <img class="feed-img" src={{feed.avatar}} alt="">
                       <div class="feed-title">
                           <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{feed.name}} </a>  <span *ngIf="feed.tag_users != ''">  with  <span *ngFor="let tag of feed.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
-                          <span>{{feed.time}} </span>
+                          <span>{{getTime(feed.time)}} </span>
                           <span class="dropdown ml-5">
                               <a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
                               <a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
@@ -1353,7 +1353,7 @@
                                         <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
                                             <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
                                         <span class="mr-10">-</span>
-                                        <span>{{comments.time}}</span>
+                                        <span>{{getTime(comments.time)}}</span>
                                       </div>
                                     </div>
                                 <!-- <div class="pull-right">
@@ -1435,7 +1435,7 @@
             <img class="feed-img" src={{feed.avatar}} alt="">
             <div class="feed-title">
                 <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{feed.name}} </a>  <span *ngIf="feed.tag_users != ''">  with  <span *ngFor="let tag of feed.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
-                <span>{{feed.time}} </span>
+                <span>{{getTime(feed.time)}} </span>
                 <span class="dropdown ml-5">
                     <a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
                     <a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
@@ -1529,7 +1529,7 @@
                               <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
                                   <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
                               <span class="mr-10">-</span>
-                              <span>{{comments.time}}</span>
+                              <span>{{getTime(comments.time)}}</span>
                             </div>
                           </div>
                       <!-- <div class="pull-right">
@@ -1612,7 +1612,7 @@
               <img class="feed-img" src={{feed.avatar}} alt="">
               <div class="feed-title">
                   <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{feed.name}} </a>  <span *ngIf="feed.tag_users != ''">  with  <span *ngFor="let tag of feed.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
-                  <span>{{feed.time}} </span>
+                  <span>{{getTime(feed.time)}} </span>
                   <span class="dropdown ml-5">
                       <a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
                       <a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
@@ -1694,7 +1694,7 @@
                                 <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
                                     <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
                                 <span class="mr-10">-</span>
-                                <span>{{comments.time}}</span>
+                                <span>{{getTime(comments.time)}}</span>
                               </div>
                             </div>
                         <!-- <div class="pull-right">
@@ -1775,7 +1775,7 @@
             <img class="feed-img" src={{feed.avatar}} alt="">
             <div class="feed-title">
                 <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{feed.name}} </a>  <span *ngIf="feed.tag_users != ''">  with  <span *ngFor="let tag of feed.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
-                <span>{{feed.time}} </span>
+                <span>{{getTime(feed.time)}} </span>
                 <span class="dropdown ml-5">
                     <a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
                     <a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
@@ -1857,7 +1857,7 @@
                               <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
                                   <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
                               <span class="mr-10">-</span>
-                              <span>{{comments.time}}</span>
+                              <span>{{getTime(comments.time)}}</span>
                             </div>
                           </div>
                       <!-- <div class="pull-right">
@@ -1939,7 +1939,7 @@
               <img class="feed-img" src={{feed.avatar}} alt="">
               <div class="feed-title">
                   <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{feed.name}} </a>  <span *ngIf="feed.tag_users != ''">  with  <span *ngFor="let tag of feed.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><br>
-                  <span>{{feed.time}} </span>
+                  <span>{{getTime(feed.time)}} </span>
                   <span class="dropdown ml-5">
                       <a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
                       <a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
@@ -2023,7 +2023,7 @@
                                 <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
                                     <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
                                 <span class="mr-10">-</span>
-                                <span>{{comments.time}}</span>
+                                <span>{{getTime(comments.time)}}</span>
                               </div>
                             </div>
                         <!-- <div class="pull-right">

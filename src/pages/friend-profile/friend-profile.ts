@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, IonicPage, NavController, NavParams ,LoadingController, ToastController, AlertController} from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
+import { TimeProvider } from './../../providers/time/time';
 import { ProfilePage } from '../profile/profile'
 import { TabsPage } from '../tabs/tabs';
 import { PhotosPage } from '../photos/photos'
@@ -46,7 +47,7 @@ export class FriendProfilePage {
   hiddenPost
   userAvatar
   feed = { 'feedid' :""}
-  constructor(public alert:AlertController, public navCtrl: NavController, public toastCtrl: ToastController,public navParams: NavParams,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider) {
+  constructor(public time: TimeProvider, public alert:AlertController, public navCtrl: NavController, public toastCtrl: ToastController,public navParams: NavParams,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider) {
     let data = navParams.get('userData');
     this.userAvatar ="http://" + localStorage.getItem('userAvatar').slice(8,-1);;
     this.blocked = navParams.get('blocked');
@@ -70,6 +71,11 @@ export class FriendProfilePage {
       this.getProfileData(this.userID, this.userId);
       this.getFeedsList(this.userID)
   }
+
+  getTime(time){
+    return this.time.getTime(time);
+  }
+
   getFollowing(userId){
     if(this.userID == null){
       userId = this.userId;
@@ -460,7 +466,18 @@ replyOnComment(postindex,commentindex,postOwner,commentID,whoCommented=this.user
     alert.present();
   }
   goToPost() {
-    this.navCtrl.push(PostFeatursPage)
+    this.navCtrl.push(PostFeatursPage,{
+      callback: this.myCallbackFunction,
+      to_user_id: this.userID,
+      type: 'feed',
+      type_id: ''
+    })
+  }
+  myCallbackFunction = (post) => {
+   return new Promise((resolve, reject) => {
+       this.posts.unshift(post);
+       resolve();
+   });
   }
 
 }

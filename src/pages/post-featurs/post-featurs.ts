@@ -23,9 +23,11 @@ export class PostFeatursPage {
   type
   typeId
   callback
+  to_user_id
   constructor(public translate: TranslateService, public navCtrl: NavController, public navParams: NavParams ,public alert:AlertController,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
       this.type = navParams.get('type');
       this.typeId = navParams.get('type_id');
+      this.to_user_id = navParams.get('to_user_id');
       console.log(this.type, this.typeId);
   }
 
@@ -68,19 +70,10 @@ export class PostFeatursPage {
       content: "Posting",
     });
     loading.present()
-
-      // let id=$('.postBody').attr('id')
-
-      // this.remoteService.feedPosting(userID,postText.text,'none','text',privacy,id).subscribe( res => {
-      //   // this.feeds.unshift(res.feed)
-      //    this.post.text= ""
-      //    //this.getFeedsList(this.userId);
-      //    loading.dismiss();
-      //  });
-      //  this.navCtrl.pop()
+//(userID,post,feeling='none',postType='text',privacy='1',background='default',tag :any='no', type, type_id, to_user_id="")
       if($('.feeling-div').attr('id') && this.post.text == "") {
       let selectedFeeling=$('.feeling-div').attr('id')
-        this.remoteService.feedPosting(userID,postText.feeling,selectedFeeling,'feeling',privacy,id, 'no' ,this.type, this.typeId).subscribe( res => {
+        this.remoteService.feedPosting(userID,postText.feeling,selectedFeeling,'feeling',privacy,id, 'no' ,this.type, this.typeId, this.to_user_id).subscribe( res => {
           // this.feeds.unshift(res.feed)
            this.post.text= ""
            //this.getFeedsList(this.userId);
@@ -94,7 +87,7 @@ export class PostFeatursPage {
        {
         let selectedFeeling=$('.feeling-div').attr('id')
 
-        this.remoteService.feedPosting(userID,postText,selectedFeeling,'feeling&text',privacy,id, 'no' ,this.type, this.typeId).subscribe( res => {
+        this.remoteService.feedPosting(userID,postText,selectedFeeling,'feeling&text',privacy,id, 'no' ,this.type, this.typeId, this.to_user_id).subscribe( res => {
           // this.feeds.unshift(res.feed)
            this.post.text= ""
            //this.getFeedsList(this.userId);
@@ -107,7 +100,7 @@ export class PostFeatursPage {
 
        }else if(Tagedusers.length > 0)
        {
-        this.remoteService.feedPosting(userID,postText.text,'none','text',privacy,id,Tagedusers ,this.type, this.typeId).subscribe( res => {
+        this.remoteService.feedPosting(userID,postText.text,'none','text',privacy,id,Tagedusers ,this.type, this.typeId, this.to_user_id).subscribe( res => {
 
           // this.feeds.unshift(res.feed)
            this.post.text= ""
@@ -125,7 +118,7 @@ export class PostFeatursPage {
        }
        else{
          console.log(userID,postText.text,'none','text',privacy,id, 'no' ,this.type, this.typeId);
-      this.remoteService.feedPosting(userID,postText.text,'none','text',privacy,id, 'no' ,this.type, this.typeId).subscribe( res => {
+      this.remoteService.feedPosting(userID,postText.text,'none','text',privacy,id, 'no' ,this.type, this.typeId, this.to_user_id).subscribe( res => {
 
          this.post.text= ""
          //this.getFeedsList(this.userId);

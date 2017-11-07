@@ -76,6 +76,7 @@ import { YoutubePipe } from '../pipes/youtube/youtube';
 import { FilePath } from '@ionic-native/file-path';
 import { UploadImagePage } from '../pages/upload-image/upload-image';
 import { SearchPage } from '../pages/search/search';
+import { TimeProvider } from '../providers/time/time';
 
 @NgModule({
   declarations: [
@@ -195,7 +196,8 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule, TranslateModule.forRoot(
     YoutubeVideoPlayer,
     Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    RemoteServiceProvider
+    RemoteServiceProvider,
+    TimeProvider
   ]
 })
 export class AppModule {}

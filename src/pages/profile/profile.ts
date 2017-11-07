@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController, Platform, ToastController, Loading  ,AlertController,LoadingController} from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
+import { TimeProvider } from './../../providers/time/time';
 import { NotFound_404Page } from '../not-found-404/not-found-404';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { TabsPage } from '../tabs/tabs';
@@ -71,7 +72,7 @@ export class ProfilePage {
     lastImage: string = null;
     loading: Loading;
     videoURL
-  constructor(private filePath: FilePath, private transfer: FileTransfer, private file: File, public camera: Camera, public navCtrl: NavController, public navParams: NavParams,public alert :AlertController,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider,  public toast: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
+  constructor(public time: TimeProvider, private filePath: FilePath, private transfer: FileTransfer, private file: File, public camera: Camera, public navCtrl: NavController, public navParams: NavParams,public alert :AlertController,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider,  public toast: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
     let data = navParams.get('userData');
     console.log()
     this.limit = 4;
@@ -83,6 +84,11 @@ export class ProfilePage {
         this.getFeedsList(this.userId)
         this.getPhotsFromProvider(this.userID);
   }
+
+  getTime(time){
+    return this.time.getTime(time);
+  }
+
   public presentActionSheet(type) {
     let actionSheet = this.actionSheetCtrl.create({
       // title: 'Select Image Source',
@@ -701,6 +707,14 @@ presentToast(msg) {
    }
 
   goToPost() {
-    this.navCtrl.push(PostFeatursPage)
+    this.navCtrl.push(PostFeatursPage,{
+      callback: this.myCallbackFunction
+    })
+  }
+  myCallbackFunction = (post) => {
+   return new Promise((resolve, reject) => {
+       this.feeds.unshift(post);
+       resolve();
+   });
   }
 }

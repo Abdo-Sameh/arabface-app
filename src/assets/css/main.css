@@ -132,6 +132,7 @@ body {
 }
 .container {
 	width: 94% !important;
+	margin-bottom: 40px;
 	margin: 0 auto;
 	padding: 0;
 }
@@ -561,10 +562,10 @@ Start Header Title
 	width: 15%;
 }
 .header_title .menu_btn,.main_header_title .back_btn{
-	text-align: left !important;
+	text-align: right !important;
 }
 .header_title:not(.main_header_title) .back_btn {
-	padding-left: 38px;
+	padding-left: 25px;
 }
 .header_title .back_btn i {
 	width: 33px;
@@ -575,10 +576,10 @@ Start Header Title
     font-size: 24px;
 }
 .header_title:not(.main_header_title) .menu_btn {
-	padding-right: 10px;
+	padding-right: 25px;
 }
 .header_title .container {
-		width: 94% !important;
+		width: 100% !important;
     display: flex;
     align-items: center;
 }

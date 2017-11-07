@@ -174,7 +174,7 @@
 											<span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
 												<span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
 											<span class="mr-10">-</span>
-											<span>{{comments.time}}</span>
+											<span>{{getTime(comments.time)}}</span>
 										  </div>
 										</div>
 									<!-- <div class="pull-right">
@@ -338,7 +338,7 @@
 											  <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
 												  <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
 											  <span class="mr-10">-</span>
-											  <span>{{comments.time}}</span>
+											  <span>{{getTime(comments.time)}}</span>
 											</div>
 										  </div>
 									  <!-- <div class="pull-right">
@@ -513,7 +513,7 @@
 											  <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
 												  <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
 											  <span class="mr-10">-</span>
-											  <span>{{comments.time}}</span>
+											  <span>{{getTime(comments.time)}}</span>
 											</div>
 										  </div>
 									  <!-- <div class="pull-right">
@@ -690,7 +690,7 @@
 									  <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
 										  <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
 									  <span class="mr-10">-</span>
-									  <span>{{comments.time}}</span>
+									  <span>{{getTime(comments.time)}}</span>
 									</div>
 								  </div>
 							  <!-- <div class="pull-right">
@@ -856,7 +856,7 @@
 												<span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
 													<span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
 												<span class="mr-10">-</span>
-												<span>{{comments.time}}</span>
+												<span>{{getTime(comments.time)}}</span>
 											  </div>
 											</div>
 										<!-- <div class="pull-right">
@@ -1020,7 +1020,7 @@
 												  <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
 													  <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
 												  <span class="mr-10">-</span>
-												  <span>{{comments.time}}</span>
+												  <span>{{getTime(comments.time)}}</span>
 												</div>
 											  </div>
 										  <!-- <div class="pull-right">
@@ -1196,7 +1196,7 @@
 												  <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
 													  <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
 												  <span class="mr-10">-</span>
-												  <span>{{comments.time}}</span>
+												  <span>{{getTime(comments.time)}}</span>
 												</div>
 											  </div>
 										  <!-- <div class="pull-right">
@@ -1372,7 +1372,7 @@
 										<span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
 											<span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
 										<span class="mr-10">-</span>
-										<span>{{comments.time}}</span>
+										<span>{{getTime(comments.time)}}</span>
 									  </div>
 									</div>
 								<!-- <div class="pull-right">
@@ -1537,7 +1537,7 @@
 										  <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
 											  <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
 										  <span class="mr-10">-</span>
-										  <span>{{comments.time}}</span>
+										  <span>{{getTime(comments.time)}}</span>
 										</div>
 									  </div>
 								  <!-- <div class="pull-right">
@@ -1700,7 +1700,7 @@
 										<span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
 											<span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
 										<span class="mr-10">-</span>
-										<span>{{comments.time}}</span>
+										<span>{{getTime(comments.time)}}</span>
 									  </div>
 									</div>
 								<!-- <div class="pull-right">
@@ -1866,7 +1866,7 @@
 										  <span class="mr-10"*ngIf="comments.has_like != false" style="color:#488aff"  (click)= "likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} Liked</span>
 											  <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
 										  <span class="mr-10">-</span>
-										  <span>{{comments.time}}</span>
+										  <span>{{getTime(comments.time)}}</span>
 										</div>
 									  </div>
 								  <!-- <div class="pull-right">
