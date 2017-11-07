@@ -186,9 +186,9 @@ export class SavedPage {
     })
   }
 
-  ConfirmEditPost(text,feedid) {
-      this.remoteService.editPost(text,feedid,this.userId).subscribe((data) => {console.log(data)})
-  }
+  // ConfirmEditPost(text,feedid) {
+  //     this.remoteService.editPost(text,feedid,this.userId).subscribe((data) => {console.log(data)})
+  // }
 
   donotLikePost(feedid,index,userID=this.userId) {
     this.remoteService.hidePost(feedid,userID).subscribe(res => {

@@ -10,6 +10,8 @@ import { NotFound_404Page } from '../not-found-404/not-found-404';
 import { MyApp } from '../../app/app.component';
 import { TranslateService } from '@ngx-translate/core';
 import { TimeProvider } from './../../providers/time/time';
+import { EditPostPage } from '../edit-post/edit-post';
+
 //import $ from "jquery";
 
 /**
@@ -367,6 +369,14 @@ reply()
       //  this.navCtrl.push(TabsPage);
  }
 
+ postSave(index, privacy){
+   console.log(index, privacy);
+   this.remoteService.editPost(this.feeds[index].full_message, this.feeds[index].id, this.userId, privacy).subscribe((data) => {
+     console.log(data);
+     this.feeds[index].privacy = privacy;
+   })
+ }
+
 
    /* feed options
     which contain
@@ -387,10 +397,10 @@ reply()
 
       })
     }
-    ConfirmEditPost(text,feedid)
-    {
-        this.remoteService.editPost(text,feedid,this.userId).subscribe((data) => {console.log(data)})
-    }
+    // ConfirmEditPost(text,feedid)
+    // {
+    //     this.remoteService.editPost(text,feedid,this.userId).subscribe((data) => {console.log(data)})
+    // }
 
     savePost(feedid, index) {
     // let toast = this.toast.create({
@@ -545,6 +555,13 @@ reply()
       callback: this.myCallbackFunction
     });
   }
+
+  editPostView(index){
+    this.app.getRootNav().push(EditPostPage, {
+      post: this.feeds[index]
+    });
+  }
+
   showComments(id){
     $('#' + id).show();
     console.log('#' + id);

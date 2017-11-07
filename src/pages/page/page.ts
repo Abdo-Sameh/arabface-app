@@ -487,10 +487,10 @@ export class Page {
 
         })
       }
-      ConfirmEditPost(text,feedid)
-      {
-          this.remoteService.editPost(text,feedid,this.userId).subscribe((data) => {console.log(data)})
-      }
+      // ConfirmEditPost(text,feedid)
+      // {
+      //     this.remoteService.editPost(text,feedid,this.userId).subscribe((data) => {console.log(data)})
+      // }
 
       savePost(feedid)
     {

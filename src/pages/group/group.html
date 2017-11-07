@@ -92,10 +92,10 @@
 								  <a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
 								  <a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
 
-								  <ul class="dropdown-menu">
-									<!-- <li><a href="#">Item-1</a></li>
-									<li><a href="#">Item-2</a></li>
-									<li><a href="#">Item-3</a></li> -->
+								  <ul *ngIf="feed.can_edit_post" class="dropdown-menu">
+									<li (click)="postSave(mainI, '1')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
+									<li (click)="postSave(mainI, '2')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
+									<li (click)="postSave(mainI, '3')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
 								  </ul>
 								</span>
 							  </div>
@@ -260,10 +260,10 @@
 									<a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
 									<a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
 
-									<ul class="dropdown-menu">
-									  <!-- <li><a href="#">Item-1</a></li>
-									  <li><a href="#">Item-2</a></li>
-									  <li><a href="#">Item-3</a></li> -->
+									<ul *ngIf="feed.can_edit_post" class="dropdown-menu">
+									  <li (click)="postSave(mainI, '1')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
+									  <li (click)="postSave(mainI, '2')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
+									  <li (click)="postSave(mainI, '3')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
 									</ul>
 								  </span>
 								</div>
@@ -426,10 +426,10 @@
 								  <a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
 								  <a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
 
-								  <ul class="dropdown-menu">
-									<!-- <li><a href="#">Item-1</a></li>
-									<li><a href="#">Item-2</a></li>
-									<li><a href="#">Item-3</a></li> -->
+								  <ul *ngIf="feed.can_edit_post" class="dropdown-menu">
+									<li (click)="postSave(mainI, '1')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
+									<li (click)="postSave(mainI, '2')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
+									<li (click)="postSave(mainI, '3')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
 								  </ul>
 								</span>
 							  </div>
@@ -601,10 +601,10 @@
 						  <a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
 						  <a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
 
-						  <ul class="dropdown-menu">
-							<!-- <li><a href="#">Item-1</a></li>
-							<li><a href="#">Item-2</a></li>
-							<li><a href="#">Item-3</a></li> -->
+						  <ul *ngIf="feed.can_edit_post" class="dropdown-menu">
+							<li (click)="postSave(mainI, '1')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
+							<li (click)="postSave(mainI, '2')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
+							<li (click)="postSave(mainI, '3')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
 						  </ul>
 						</span>
 					  </div>
@@ -779,10 +779,10 @@
 									  <a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
 									  <a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
 
-									  <ul class="dropdown-menu">
-										<!-- <li><a href="#">Item-1</a></li>
-										<li><a href="#">Item-2</a></li>
-										<li><a href="#">Item-3</a></li> -->
+									  <ul *ngIf="feed.can_edit_post" class="dropdown-menu">
+										<li (click)="postSave(mainI, '1')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
+										<li (click)="postSave(mainI, '2')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
+										<li (click)="postSave(mainI, '3')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
 									  </ul>
 									</span>
 								  </div>
@@ -942,10 +942,10 @@
 										<a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
 										<a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
 
-										<ul class="dropdown-menu">
-										  <!-- <li><a href="#">Item-1</a></li>
-										  <li><a href="#">Item-2</a></li>
-										  <li><a href="#">Item-3</a></li> -->
+										<ul *ngIf="feed.can_edit_post" class="dropdown-menu">
+										  <li (click)="postSave(mainI, '1')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
+										  <li (click)="postSave(mainI, '2')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
+										  <li (click)="postSave(mainI, '3')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
 										</ul>
 									  </span>
 									</div>
@@ -1108,10 +1108,10 @@
 										<a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
 										<a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
 
-										<ul class="dropdown-menu">
-										  <!-- <li><a href="#">Item-1</a></li>
-										  <li><a href="#">Item-2</a></li>
-										  <li><a href="#">Item-3</a></li> -->
+										<ul *ngIf="feed.can_edit_post" class="dropdown-menu">
+										  <li (click)="postSave(mainI, '1')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
+										  <li (click)="postSave(mainI, '2')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
+										  <li (click)="postSave(mainI, '3')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
 										</ul>
 									  </span>
 									</div>
@@ -1284,10 +1284,10 @@
 							  <a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
 							  <a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
 
-							  <ul class="dropdown-menu">
-								<!-- <li><a href="#">Item-1</a></li>
-								<li><a href="#">Item-2</a></li>
-								<li><a href="#">Item-3</a></li> -->
+							  <ul *ngIf="feed.can_edit_post" class="dropdown-menu">
+								<li (click)="postSave(mainI, '1')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
+								<li (click)="postSave(mainI, '2')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
+								<li (click)="postSave(mainI, '3')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
 							  </ul>
 							</span>
 						  </div>
@@ -1461,10 +1461,10 @@
 								<a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
 								<a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
 
-								<ul class="dropdown-menu">
-								  <!-- <li><a href="#">Item-1</a></li>
-								  <li><a href="#">Item-2</a></li>
-								  <li><a href="#">Item-3</a></li> -->
+								<ul *ngIf="feed.can_edit_post" class="dropdown-menu">
+								  <li (click)="postSave(mainI, '1')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
+								  <li (click)="postSave(mainI, '2')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
+								  <li (click)="postSave(mainI, '3')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
 								</ul>
 							  </span>
 							</div>
@@ -1624,10 +1624,10 @@
 							  <a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
 							  <a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
 
-							  <ul class="dropdown-menu">
-								<!-- <li><a href="#">Item-1</a></li>
-								<li><a href="#">Item-2</a></li>
-								<li><a href="#">Item-3</a></li> -->
+							  <ul *ngIf="feed.can_edit_post" class="dropdown-menu">
+								<li (click)="postSave(mainI, '1')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
+								<li (click)="postSave(mainI, '2')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
+								<li (click)="postSave(mainI, '3')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
 							  </ul>
 							</span>
 						  </div>
@@ -1788,10 +1788,10 @@
 								<a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
 								<a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
 
-								<ul class="dropdown-menu">
-								  <!-- <li><a href="#">Item-1</a></li>
-								  <li><a href="#">Item-2</a></li>
-								  <li><a href="#">Item-3</a></li> -->
+								<ul *ngIf="feed.can_edit_post" class="dropdown-menu">
+								  <li (click)="postSave(mainI, '1')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
+								  <li (click)="postSave(mainI, '2')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
+								  <li (click)="postSave(mainI, '3')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
 								</ul>
 							  </span>
 							</div>

@@ -35,14 +35,14 @@
                 <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{feed.name}} </a> <span *ngIf="feed.tag_users != ''">  with  <span *ngFor="let tag of feed.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span>                </span><br>
                 <span>{{getTime(feed.time)}} </span><span>-</span>
                 <span class="dropdown ml-5">
-                          <a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
-                          <a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
-                          <a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
+                          <a href="#" *ngIf="feed.privacy == '1'"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
+                          <a href="#" *ngIf="feed.privacy == '2'"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
+                          <a href="#" *ngIf="feed.privacy == '3'" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
 
                           <ul *ngIf="feed.can_edit_post" class="dropdown-menu">
-                            <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
-                            <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
-                            <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
+                            <li (click)="postSave(mainI, '1')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
+                            <li (click)="postSave(mainI, '2')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
+                            <li (click)="postSave(mainI, '3')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
                           </ul>
                         </span>
               </div>
@@ -66,7 +66,7 @@
                   <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)" href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>
                   <li><a (click)="savePost(feed.id, mainI)" *ngIf="feed.saved == false" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                   <li><a (click)="unsavePost(feed.id, mainI)" *ngIf="feed.saved == true" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'unsave-post' | translate}}</a></li>
-                  <li><a (click)="editPost()" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
+                  <li><a (click)="editPostView(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
                   <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> {{'delete-post' | translate}}</a></li>
                   <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i> {{'view-post' | translate}}</a></li>
                 </ul>
@@ -216,9 +216,9 @@
                             <a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
 
                             <ul *ngIf="feed.can_edit_post" class="dropdown-menu">
-                              <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
-                              <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
-                              <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
+                              <li (click)="postSave(mainI, '1')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
+                              <li (click)="postSave(mainI, '2')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
+                              <li (click)="postSave(mainI, '3')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
                             </ul>
                           </span>
               </div>
@@ -242,7 +242,7 @@
                   <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)" href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>
                   <li><a (click)="savePost(feed.id, mainI)" *ngIf="feed.saved == false" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                   <li><a (click)="unsavePost(feed.id, mainI)" *ngIf="feed.saved == true" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'unsave-post' | translate}}</a></li>
-                  <li><a (click)="editPost()" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
+                  <li><a (click)="editPostView(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
                   <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> {{'delete-post' | translate}}</a></li>
                   <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>{{'view-post' | translate}}</a></li>
                 </ul>
@@ -389,7 +389,7 @@
                     </span>
                   </span>
                   <span *ngFor="let user of feed.touser">
-                    <a style="color:#5c0632; font-size: 14px;" (click)="GoToProfile(user.id, userId)"> - {{user.name}} </a> 
+                    <a style="color:#5c0632; font-size: 14px;" (click)="GoToProfile(user.id, userId)"> - {{user.name}} </a>
                   </span>
                   <br>
                   <span>{{getTime(feed.time)}} </span><span>-</span>
@@ -398,9 +398,9 @@
                           <a href="#" *ngIf="feed.privacy == 2"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i></a>
                           <a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
                           <ul *ngIf="feed.can_edit_post" class="dropdown-menu">
-                            <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
-                            <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
-                            <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
+                            <li (click)="postSave(mainI, '1')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
+                            <li (click)="postSave(mainI, '2')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
+                            <li (click)="postSave(mainI, '3')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
                           </ul>
                         </span>
                 </div>
@@ -424,7 +424,7 @@
                     <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)" href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>
                     <li><a (click)="savePost(feed.id, mainI)" *ngIf="feed.saved == false" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                     <li><a (click)="unsavePost(feed.id, mainI)" *ngIf="feed.saved == true" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'unsave-post' | translate}}</a></li>
-                    <li><a (click)="editPost()" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
+                    <li><a (click)="editPostView(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
                     <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> {{'delete-post' | translate}}</a></li>
                     <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>{{'view-post' | translate}}</a></li>
                   </ul>
@@ -573,9 +573,9 @@
                   <a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
 
                   <ul *ngIf="feed.can_edit_post" class="dropdown-menu">
-                    <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
-                    <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
-                    <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
+                    <li (click)="postSave(mainI, '1')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
+                    <li (click)="postSave(mainI, '2')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
+                    <li (click)="postSave(mainI, '3')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
                   </ul>
                 </span>
                 </div>
@@ -598,7 +598,7 @@
                     <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)" href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>
                     <li><a (click)="savePost(feed.id, mainI)" *ngIf="feed.saved == false" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                     <li><a (click)="unsavePost(feed.id, mainI)" *ngIf="feed.saved == true" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'unsave-post' | translate}}</a></li>
-                    <li><a (click)="editPost()" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
+                    <li><a (click)="editPostView(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
                     <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> {{'delete-post' | translate}}</a></li>
                     <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>{{'view-post' | translate}}</a></li>
                   </ul>
@@ -760,9 +760,9 @@
                               <a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
 
                               <ul *ngIf="feed.can_edit_post" class="dropdown-menu">
-                                <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
-                                <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
-                                <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
+                                <li (click)="postSave(mainI, '1')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
+                                <li (click)="postSave(mainI, '2')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
+                                <li (click)="postSave(mainI, '3')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
                               </ul>
                             </span>
               </div>
@@ -785,7 +785,7 @@
                   <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)" href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>
                   <li><a (click)="savePost(feed.id, mainI)" *ngIf="feed.saved == false" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                   <li><a (click)="unsavePost(feed.id, mainI)" *ngIf="feed.saved == true" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'unsave-post' | translate}}</a></li>
-                  <li><a (click)="editPost()" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
+                  <li><a (click)="editPostView(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
                   <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> {{'delete-post' | translate}}</a></li>
                   <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>{{'view-post' | translate}}</a></li>
                 </ul>
@@ -933,9 +933,9 @@
                                         <a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
 
                                         <ul *ngIf="feed.can_edit_post" class="dropdown-menu">
-                                          <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
-                                          <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
-                                          <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
+                                          <li (click)="postSave(mainI, '1')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
+                                          <li (click)="postSave(mainI, '2')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
+                                          <li (click)="postSave(mainI, '3')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
                                         </ul>
                                       </span>
               </div>
@@ -958,7 +958,7 @@
                   <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)" href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>
                   <li><a (click)="savePost(feed.id, mainI)" *ngIf="feed.saved == false" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                   <li><a (click)="unsavePost(feed.id, mainI)" *ngIf="feed.saved == true" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'unsave-post' | translate}}</a></li>
-                  <li><a (click)="editPost()" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
+                  <li><a (click)="editPostView(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
                   <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> {{'delete-post' | translate}}</a></li>
                   <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>{{'view-post' | translate}}</a></li>
                 </ul>
@@ -1104,9 +1104,9 @@
                               <a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
 
                               <ul *ngIf="feed.can_edit_post" class="dropdown-menu">
-                                <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
-                                <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
-                                <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
+                                <li (click)="postSave(mainI, '1')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
+                                <li (click)="postSave(mainI, '2')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
+                                <li (click)="postSave(mainI, '3')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
                               </ul>
                             </span>
               </div>
@@ -1129,7 +1129,7 @@
                   <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)" href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>
                   <li><a (click)="savePost(feed.id, mainI)" *ngIf="feed.saved == false" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                   <li><a (click)="unsavePost(feed.id, mainI)" *ngIf="feed.saved == true" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'unsave-post' | translate}}</a></li>
-                  <li><a (click)="editPost()" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
+                  <li><a (click)="editPostView(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
                   <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> {{'delete-post' | translate}}</a></li>
                   <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>{{'view-post' | translate}}</a></li>
                 </ul>
@@ -1274,9 +1274,9 @@
                                 <a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
 
                                 <ul *ngIf="feed.can_edit_post" class="dropdown-menu">
-                                  <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
-                                  <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
-                                  <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
+                                  <li (click)="postSave(mainI, '1')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
+                                  <li (click)="postSave(mainI, '2')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
+                                  <li (click)="postSave(mainI, '3')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
                                 </ul>
                               </span>
               </div>
@@ -1299,7 +1299,7 @@
                   <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)" href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>
                   <li><a (click)="savePost(feed.id, mainI)" *ngIf="feed.saved == false" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                   <li><a (click)="unsavePost(feed.id, mainI)" *ngIf="feed.saved == true" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'unsave-post' | translate}}</a></li>
-                  <li><a (click)="editPost()" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
+                  <li><a (click)="editPostView(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
                   <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> {{'delete-post' | translate}}</a></li>
                   <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>{{'view-post' | translate}}</a></li>
                 </ul>
@@ -1447,9 +1447,9 @@
                                 <a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
 
                                 <ul *ngIf="feed.can_edit_post" class="dropdown-menu">
-                                  <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
-                                  <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
-                                  <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
+                                  <li (click)="postSave(mainI, '1')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
+                                  <li (click)="postSave(mainI, '2')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
+                                  <li (click)="postSave(mainI, '3')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
                                 </ul>
                               </span>
               </div>
@@ -1472,7 +1472,7 @@
                   <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)" href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>
                   <li><a (click)="savePost(feed.id, mainI)" *ngIf="feed.saved == false" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                   <li><a (click)="unsavePost(feed.id, mainI)" *ngIf="feed.saved == true" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'unsave-post' | translate}}</a></li>
-                  <li><a (click)="editPost()" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
+                  <li><a (click)="editPostView(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
                   <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> {{'delete-post' | translate}}</a></li>
                   <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>{{'view-post' | translate}}</a></li>
                 </ul>
@@ -1630,9 +1630,9 @@
                       <a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
 
                       <ul *ngIf="feed.can_edit_post" class="dropdown-menu">
-                        <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
-                        <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
-                        <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
+                        <li (click)="postSave(mainI, '1')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
+                        <li (click)="postSave(mainI, '2')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
+                        <li (click)="postSave(mainI, '3')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
                       </ul>
                     </span>
               </div>
@@ -1656,7 +1656,7 @@
                   <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)" href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>
                   <li><a (click)="savePost(feed.id, mainI)" *ngIf="feed.saved == false" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                   <li><a (click)="unsavePost(feed.id, mainI)" *ngIf="feed.saved == true" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'unsave-post' | translate}}</a></li>
-                  <li><a (click)="editPost()" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
+                  <li><a (click)="editPostView(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
                   <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> {{'delete-post' | translate}}</a></li>
                   <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>{{'view-post' | translate}}</a></li>
                 </ul>
@@ -1817,9 +1817,9 @@
                         <a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
 
                         <ul *ngIf="feed.can_edit_post" class="dropdown-menu">
-                          <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
-                          <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
-                          <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
+                          <li (click)="postSave(mainI, '1')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
+                          <li (click)="postSave(mainI, '2')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
+                          <li (click)="postSave(mainI, '3')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
                         </ul>
                       </span>
               </div>
@@ -1842,7 +1842,7 @@
                   <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)" href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>
                   <li><a (click)="savePost(feed.id, mainI)" *ngIf="feed.saved == false" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                   <li><a (click)="unsavePost(feed.id, mainI)" *ngIf="feed.saved == true" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'unsave-post' | translate}}</a></li>
-                  <li><a (click)="editPost()" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
+                  <li><a (click)="editPostView(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
                   <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> {{'delete-post' | translate}}</a></li>
                   <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>{{'view-post' | translate}}</a></li>
                 </ul>
@@ -1987,9 +1987,9 @@
                       <a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
 
                       <ul *ngIf="feed.can_edit_post" class="dropdown-menu">
-                        <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
-                        <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
-                        <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
+                        <li (click)="postSave(mainI, '1')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
+                        <li (click)="postSave(mainI, '2')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
+                        <li (click)="postSave(mainI, '3')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
                       </ul>
                     </span>
               </div>
@@ -2012,7 +2012,7 @@
                   <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)" href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>
                   <li><a (click)="savePost(feed.id, mainI)" *ngIf="feed.saved == false" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                   <li><a (click)="unsavePost(feed.id, mainI)" *ngIf="feed.saved == true" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'unsave-post' | translate}}</a></li>
-                  <li><a (click)="editPost()" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
+                  <li><a (click)="editPostView(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
                   <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> {{'delete-post' | translate}}</a></li>
                   <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>{{'view-post' | translate}}</a></li>
                 </ul>
@@ -2160,9 +2160,9 @@
                         <a href="#" *ngIf="feed.privacy == 3" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i></a>
 
                         <ul *ngIf="feed.can_edit_post" class="dropdown-menu">
-                          <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
-                          <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
-                          <li><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
+                          <li (click)="postSave(mainI, '1')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i> {{'public' | translate}}</a></li>
+                          <li (click)="postSave(mainI, '2')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-group"></i> {{'friends-only' | translate}}</a></li>
+                          <li (click)="postSave(mainI, '3')"><a href="#" data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-lock"></i> {{'only-me' | translate}}</a></li>
                         </ul>
                       </span>
               </div>
@@ -2185,7 +2185,7 @@
                   <li><a (click)="turnNotifications(feed.id,mainI,feed.has_subscribed)" href="#" *ngIf="feed.has_subscribed == false"> <i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bell-o"></i>{{'get-notifications' | translate}}</a></li>
                   <li><a (click)="savePost(feed.id, mainI)" *ngIf="feed.saved == false" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'save-post' | translate}}</a></li>
                   <li><a (click)="unsavePost(feed.id, mainI)" *ngIf="feed.saved == true" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-bookmark"></i> {{'unsave-post' | translate}}</a></li>
-                  <li><a (click)="editPost()" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
+                  <li><a (click)="editPostView(mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-pencil"></i> {{'edit-post' | translate}}</a></li>
                   <li><a (click)="deletePost(feed.id,mainI)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-trash-o"></i> {{'delete-post' | translate}}</a></li>
                   <li><a (click)="showPost(feed)" href="#"><i style="margin-right:5px;margin-left:-3px;color:#5c0632" class="fa fa-eye"></i>{{'view-post' | translate}}</a></li>
                 </ul>

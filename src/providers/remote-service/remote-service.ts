@@ -591,10 +591,10 @@ user = new Observable(observer => {
   }
 
 
-  editPost(text,feedID,userID):any
+  editPost(text,feedID,userID, privacy):any
   {
     console.log(feedID +userID)
-    return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/feed/action?action=edit&text='+text+'&feed_id='+feedID+'&userid='+userID)
+    return this.http.get(this.serverURL+'/arabface/api/'+this.KEY+'/feed/save?text='+text+'&id='+feedID+'&userid='+userID + "&privacy=" + privacy)
 
    .map((res : Response ) => res.json());
   }

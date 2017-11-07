@@ -140,10 +140,10 @@ export class VideoPage {
       })
   }
 
-  ConfirmEditPost(text,feedid)
-  {
-      this.remoteService.editPost(text,feedid,this.userId).subscribe((data) => {console.log(data)})
-  }
+  // ConfirmEditPost(text,feedid)
+  // {
+  //     this.remoteService.editPost(text,feedid,this.userId).subscribe((data) => {console.log(data)})
+  // }
 
   replyOnComment(postindex,commentindex,postOwner,commentID,whoCommented=this.userId,comment=this.comment.reply)
   {

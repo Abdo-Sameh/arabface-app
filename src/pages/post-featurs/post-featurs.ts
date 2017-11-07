@@ -1,251 +1,237 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams ,LoadingController ,AlertController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { TranslateService } from '@ngx-translate/core';
 import * as $ from "jquery"
 
-const Tagedusers= []
+const Tagedusers = []
 @Component({
   selector: 'page-post-featurs',
   templateUrl: 'post-featurs.html',
 })
 export class PostFeatursPage {
-  post ={ 'text' : "" ,
-            'feeling' : ''}
+  post = {
+    'text': "",
+    'feeling': ''
+  }
   bgshow = true
   tagedUsers
   searchedUsers
   chosenUsers
-  listeningShow=true
+  listeningShow = true
   userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
-  userAvatar = localStorage.getItem('userAvatar').slice(8,-1);
+  userAvatar = localStorage.getItem('userAvatar').slice(8, -1);
   users
   type
   typeId
   callback
   to_user_id
-  constructor(public translate: TranslateService, public navCtrl: NavController, public navParams: NavParams ,public alert:AlertController,public loadingCtrl: LoadingController, public remoteService : RemoteServiceProvider) {
-      this.type = navParams.get('type');
-      this.typeId = navParams.get('type_id');
-      this.to_user_id = navParams.get('to_user_id');
-      console.log(this.type, this.typeId);
+  constructor(public translate: TranslateService, public navCtrl: NavController, public navParams: NavParams, public alert: AlertController, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider) {
+    this.type = navParams.get('type');
+    this.typeId = navParams.get('type_id');
+    this.to_user_id = navParams.get('to_user_id');
+    console.log(this.type, this.typeId);
   }
 
   ionViewWillEnter() {
-      this.callback = this.navParams.get("callback")
+    this.callback = this.navParams.get("callback")
   }
 
-  selectPrivacy()
-  {
-    $(document).on('click','li',function(){
-      if($(this).text() == ' Public')
-      {
-        $('.privacy').attr('id','1')
+  selectPrivacy() {
+    $(document).on('click', 'li', function() {
+      if ($(this).text() == ' Public') {
+        $('.privacy').attr('id', '1')
         $('#privacy').removeClass('fa fa-group');
         $('#privacy').removeClass('fa fa-lock');
         $('#privacy').addClass('fa fa-globe');
 
-      }else if ($(this).text() == ' Friends only')
-      {
-        $('.privacy').attr('id','2')
+      } else if ($(this).text() == ' Friends only') {
+        $('.privacy').attr('id', '2')
         $('#privacy').removeClass('fa fa-globe');
         $('#privacy').removeClass('fa fa-lock');
         $('#privacy').addClass('fa fa-group');
       }
-      else{
-        $('.privacy').attr('id','3')
+      else {
+        $('.privacy').attr('id', '3')
         $('#privacy').removeClass('fa fa-globe');
         $('#privacy').removeClass('fa fa-group');
         $('#privacy').addClass('fa fa-lock');
       }
-     })
+    })
   }
 
-  postFeed(userID=this.userId,postText=this.post)
-  {
-    let privacy= $('.privacy').attr('id')
-    let id=$('.postBody').attr('id')
+  postFeed(userID = this.userId, postText = this.post) {
+    let privacy = $('.privacy').attr('id')
+    let id = $('.postBody').attr('id')
 
     let loading = this.loadingCtrl.create({
       content: "Posting",
     });
     loading.present()
-//(userID,post,feeling='none',postType='text',privacy='1',background='default',tag :any='no', type, type_id, to_user_id="")
-      if($('.feeling-div').attr('id') && this.post.text == "") {
-      let selectedFeeling=$('.feeling-div').attr('id')
-        this.remoteService.feedPosting(userID,postText.feeling,selectedFeeling,'feeling',privacy,id, 'no' ,this.type, this.typeId, this.to_user_id).subscribe( res => {
-          // this.feeds.unshift(res.feed)
-           this.post.text= ""
-           //this.getFeedsList(this.userId);
-           loading.dismiss();
-           this.callback(res.feed).then(()=>{
-               this.navCtrl.pop();
-           });
-         });
+    //(userID,post,feeling='none',postType='text',privacy='1',background='default',tag :any='no', type, type_id, to_user_id="")
+    if ($('.feeling-div').attr('id') && this.post.text == "") {
+      let selectedFeeling = $('.feeling-div').attr('id')
+      this.remoteService.feedPosting(userID, postText.feeling, selectedFeeling, 'feeling', privacy, id, 'no', this.type, this.typeId, this.to_user_id).subscribe(res => {
+        // this.feeds.unshift(res.feed)
+        this.post.text = ""
+        //this.getFeedsList(this.userId);
+        loading.dismiss();
+        this.callback(res.feed).then(() => {
+          this.navCtrl.pop();
+        });
+      });
 
-       }else if($('.feeling-div').attr('id') && this.post.text != "")
-       {
-        let selectedFeeling=$('.feeling-div').attr('id')
+    } else if ($('.feeling-div').attr('id') && this.post.text != "") {
+      let selectedFeeling = $('.feeling-div').attr('id')
 
-        this.remoteService.feedPosting(userID,postText,selectedFeeling,'feeling&text',privacy,id, 'no' ,this.type, this.typeId, this.to_user_id).subscribe( res => {
-          // this.feeds.unshift(res.feed)
-           this.post.text= ""
-           //this.getFeedsList(this.userId);
-           loading.dismiss();
-           this.callback(res.feed).then(()=>{
-               this.navCtrl.pop();
-           });
-         });
-
-
-       }else if(Tagedusers.length > 0)
-       {
-        this.remoteService.feedPosting(userID,postText.text,'none','text',privacy,id,Tagedusers ,this.type, this.typeId, this.to_user_id).subscribe( res => {
-
-          // this.feeds.unshift(res.feed)
-           this.post.text= ""
-           //this.getFeedsList(this.userId);
-           if(res.status == 1)  Tagedusers.splice(0,Tagedusers.length)
+      this.remoteService.feedPosting(userID, postText, selectedFeeling, 'feeling&text', privacy, id, 'no', this.type, this.typeId, this.to_user_id).subscribe(res => {
+        // this.feeds.unshift(res.feed)
+        this.post.text = ""
+        //this.getFeedsList(this.userId);
+        loading.dismiss();
+        this.callback(res.feed).then(() => {
+          this.navCtrl.pop();
+        });
+      });
 
 
-           console.log(Tagedusers)
-           loading.dismiss();
-           this.callback(res.feed).then(()=>{
-               this.navCtrl.pop();
-           });
-         });
+    } else if (Tagedusers.length > 0) {
+      this.remoteService.feedPosting(userID, postText.text, 'none', 'text', privacy, id, Tagedusers, this.type, this.typeId, this.to_user_id).subscribe(res => {
 
-       }
-       else{
-         console.log(userID,postText.text,'none','text',privacy,id, 'no' ,this.type, this.typeId);
-      this.remoteService.feedPosting(userID,postText.text,'none','text',privacy,id, 'no' ,this.type, this.typeId, this.to_user_id).subscribe( res => {
+        // this.feeds.unshift(res.feed)
+        this.post.text = ""
+        //this.getFeedsList(this.userId);
+        if (res.status == 1) Tagedusers.splice(0, Tagedusers.length)
 
-         this.post.text= ""
-         //this.getFeedsList(this.userId);
-         console.log(res);
-         loading.dismiss();
-         this.callback(res.feed).then(()=>{
-             this.navCtrl.pop();
-         });
-       });
+
+        console.log(Tagedusers)
+        loading.dismiss();
+        this.callback(res.feed).then(() => {
+          this.navCtrl.pop();
+        });
+      });
+
+    }
+    else {
+      console.log(userID, postText.text, 'none', 'text', privacy, id, 'no', this.type, this.typeId);
+      this.remoteService.feedPosting(userID, postText.text, 'none', 'text', privacy, id, 'no', this.type, this.typeId, this.to_user_id).subscribe(res => {
+
+        this.post.text = ""
+        //this.getFeedsList(this.userId);
+        console.log(res);
+        loading.dismiss();
+        this.callback(res.feed).then(() => {
+          this.navCtrl.pop();
+        });
+      });
 
     }
 
   }
-  locationPopUp()
-  {
+  locationPopUp() {
     let title, yourLocation, post, cancel, message;
     this.translate.get('location').subscribe(value => { title = value; })
     this.translate.get('your-location').subscribe(value => { yourLocation = value; })
     this.translate.get('post').subscribe(value => { post = value; })
     this.translate.get('cancel').subscribe(value => { cancel = value; })
     this.translate.get('location-message').subscribe(value => { message = value; })
-      let locationAlert = this.alert.create(
-        {
-          title : title,
-          message: message,
-          inputs : [{
-            name:'location',
-            placeholder : yourLocation
-          }],
-          buttons : [
-            {
-              text: post,
-              handler: data => {
-                // if (User.isValid(data.username, data.password)) {
-                //   // logged in!
-                // } else {
-                //   // invalid login
-                //   return false;
-                // }
-                this.remoteService.locationPosting(this.userId,data.location).subscribe(res =>
-                {
-                    console.log(res)
-                    this.callback(res.feed).then(()=>{
-                        this.navCtrl.pop();
-                    });
+    let locationAlert = this.alert.create(
+      {
+        title: title,
+        message: message,
+        inputs: [{
+          name: 'location',
+          placeholder: yourLocation
+        }],
+        buttons: [
+          {
+            text: post,
+            handler: data => {
+              // if (User.isValid(data.username, data.password)) {
+              //   // logged in!
+              // } else {
+              //   // invalid login
+              //   return false;
+              // }
+              this.remoteService.locationPosting(this.userId, data.location).subscribe(res => {
+                console.log(res)
+                this.callback(res.feed).then(() => {
+                  this.navCtrl.pop();
+                });
 
-                })
-              }
-
+              })
             }
-          ]
-        }
-      )
-     locationAlert.present()
+
+          }
+        ]
+      }
+    )
+    locationAlert.present()
   }
-  backgroundShow()
-  {
-    this.bgshow =!this.bgshow
+  backgroundShow() {
+    this.bgshow = !this.bgshow
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad PostFeatursPage');
   }
-  getColor()
-  {
-    $(document).on('click','li',function(){
-      $('.postBody').attr('id',this.id)
-      $('.p-0').attr('id',this.id)
+  getColor() {
+    $(document).on('click', 'li', function() {
+      $('.postBody').attr('id', this.id)
+      $('.p-0').attr('id', this.id)
 
     });
 
   }
-  feelingsShow()
-  {
-				$('.dropdown-feeling').toggleClass('open');
+  feelingsShow() {
+    $('.dropdown-feeling').toggleClass('open');
   }
-  selectFeeling()
-  {
-    $(document).on('click','.dropdown-menu li a',function(){
-    $('.feeling-div').attr('id',$(this).text())
-    $(".feeling-div").show()
-    $('.feelingText').text($(this).text())
-  })
+  selectFeeling() {
+    $(document).on('click', '.dropdown-menu li a', function() {
+      $('.feeling-div').attr('id', $(this).text())
+      $(".feeling-div").show()
+      $('.feelingText').text($(this).text())
+    })
 
   }
 
-  tagUsersDivShow()
-  {
+  tagUsersDivShow() {
     $('.tag-div').toggle();
 
   }
 
-  getFriendsListToTag(term)
-  {
-    if(term != ""){
-      this.remoteService.friendsListApiCall(this.userId,this.userId,term).subscribe(res =>{
-         this.searchedUsers = res
-          });
+  getFriendsListToTag(term) {
+    if (term != "") {
+      this.remoteService.friendsListApiCall(this.userId, this.userId, term).subscribe(res => {
+        this.searchedUsers = res
+      });
     }
   }
-  selectUserToTag()
-  {
+  selectUserToTag() {
     var users = []
 
-      $(document).one('click','.tagslist li',function(e){
-        e.preventDefault();
-       let userName = $(this).find('a').text()
-       let userID = $(this).find('p').text()
-       let userImage = $(this).find('img').attr('src')
-     users
+    $(document).one('click', '.tagslist li', function(e) {
+      e.preventDefault();
+      let userName = $(this).find('a').text()
+      let userID = $(this).find('p').text()
+      let userImage = $(this).find('img').attr('src')
+      users
 
       Tagedusers.push(userID)
-        $('.selectedUsersInTag').find("ul[class='chosenElments']").append('<li class="btn btn-theme btn-xs created-tag" style="margin:3px;">'+userName+'<p hidden>'+userID+'</p> <i class="fa fa-close"></i></li>')
+      $('.selectedUsersInTag').find("ul[class='chosenElments']").append('<li class="btn btn-theme btn-xs created-tag" style="margin:3px;">' + userName + '<p hidden>' + userID + '</p> <i class="fa fa-close"></i></li>')
 
-      })
-      $(document).on('click','.created-tag>i', function(){
-        let userid = $(this).parent().find('p').text()
-        let index = Tagedusers.findIndex(item => item.id == userid)
-        Tagedusers.splice(index,1)
-        $(this).parent().remove()
+    })
+    $(document).on('click', '.created-tag>i', function() {
+      let userid = $(this).parent().find('p').text()
+      let index = Tagedusers.findIndex(item => item.id == userid)
+      Tagedusers.splice(index, 1)
+      $(this).parent().remove()
 
-        console.log(index)
-      })
-      console.log(Tagedusers)
+      console.log(index)
+    })
+    console.log(Tagedusers)
 
-    }
-back()
-{
-  this.navCtrl.pop()
-}
   }
+  back() {
+    this.navCtrl.pop()
+  }
+}

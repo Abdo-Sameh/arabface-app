@@ -77,6 +77,7 @@ import { FilePath } from '@ionic-native/file-path';
 import { UploadImagePage } from '../pages/upload-image/upload-image';
 import { SearchPage } from '../pages/search/search';
 import { TimeProvider } from '../providers/time/time';
+import { EditPostPage } from '../pages/edit-post/edit-post';
 
 @NgModule({
   declarations: [
@@ -120,7 +121,7 @@ import { TimeProvider } from '../providers/time/time';
     PostFeatursPage,
     DisplayPostPage,
     MembersPage,
-    InviteFriendPage,
+    InviteFriendPage, EditPostPage,
     SavedPage, SearchPage,
     CreateAlbumPage, EditAlbumPage, ViewAlbumPage,
     PhotoselectionPage, CreateEventPage, EditEventPage, EventPage,
@@ -179,7 +180,7 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule, TranslateModule.forRoot(
     DisplayPostPage,
     MembersPage,
     CreateAlbumPage, EditAlbumPage, ViewAlbumPage,
-    InviteFriendPage,
+    InviteFriendPage, EditPostPage,
     PhotoselectionPage, CreateEventPage, EditEventPage, EventPage,
     NotFound_404Page, LatestVisitorsPage, UploadImagePage
   ],
