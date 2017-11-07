@@ -30,7 +30,7 @@
 
       <div class="share-post panel panel-theme postBody" style="margin-bottom:0px;min-height:150px" id="default">
         <form>
-          <textarea class="p-0" rows="6" [(ngModel)]="post.text" [ngModelOptions]="{ standalone :true}" placeholder="{{'whats-happening' | translate}}"></textarea>
+          <textarea  class="p-0" rows="6" [(ngModel)]="post.text" [ngModelOptions]="{ standalone :true}" placeholder="{{'whats-happening' | translate}}" (keyup)="check(post.text)"></textarea>
 
           <div class="feeling-div">
             <div class="feelingText btn btn-theme"></div>
@@ -135,7 +135,7 @@
           </div>
         </div>
         <div class="pull-right">
-          <a href="#" (click)="postFeed()" class="btn btn-theme">{{'post' | translate}}</a>
+          <a id="submit" href="#" (click)="postFeed()" class="btn btn-theme">{{'post' | translate}}</a>
         </div>
         <div class="clearfix"></div>
       </div>

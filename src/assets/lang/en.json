@@ -1062,6 +1062,12 @@
 
 	"friends-followers": "Friends or Followers",
 
+	"Followers" : "Followers",
+
+	"following" : "Followings",
+
+	"likes" : "Likes",
+
 	"default-profile-privacy": "Default User Profile Privacy",
 
 	"default-profile-privacy-desc": "Set the default profile privacy for your users",

@@ -65,7 +65,11 @@ export class EditPostPage {
       this.navCtrl.pop();
     })
   }
-
+check(text) {
+  if(text.length == 0){
+    $('#submit').prop('disabled', true);
+  }
+}
   locationPopUp() {
     let title, yourLocation, post, cancel, message;
     this.translate.get('location').subscribe(value => { title = value; })
