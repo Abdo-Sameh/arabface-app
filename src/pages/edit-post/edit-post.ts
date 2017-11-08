@@ -36,6 +36,9 @@ export class EditPostPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditPostPage');
   }
+
+
+
   selectPrivacy() {
     $(document).on('click', 'li', function() {
       if ($(this).text() == ' Public') {
@@ -65,11 +68,13 @@ export class EditPostPage {
       this.navCtrl.pop();
     })
   }
-check(text) {
-  if(text.length == 0){
-    $('#submit').prop('disabled', true);
+  check(text) {
+    if (text.length == 0)
+      return true;
+    else
+      return null;
   }
-}
+  
   locationPopUp() {
     let title, yourLocation, post, cancel, message;
     this.translate.get('location').subscribe(value => { title = value; })

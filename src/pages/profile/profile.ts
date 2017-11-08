@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController, Platform, ToastController, Loading, AlertController, LoadingController } from 'ionic-angular';
+import { IonicPage, App, NavController, NavParams, ActionSheetController, Platform, ToastController, Loading, AlertController, LoadingController } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { TimeProvider } from './../../providers/time/time';
 import { NotFound_404Page } from '../not-found-404/not-found-404';
@@ -13,6 +13,8 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
 import { UploadImagePage } from '../upload-image/upload-image';
+import { TranslateService } from '@ngx-translate/core';
+import { EditPostPage } from '../edit-post/edit-post';
 
 // import { Camera, CameraOptions } from '@ionic-native/camera';
 // import { FileTransfer, FileUploadOptions, FileTransferObject  } from '@ionic-native/file-transfer';
@@ -52,7 +54,7 @@ export class ProfilePage {
   likeNumbers;
   posts
   picture = { 'path': '' }
-  friendslist
+  friendslist = []
   followers
   following
   likedPages
@@ -72,7 +74,8 @@ export class ProfilePage {
   lastImage: string = null;
   loading: Loading;
   videoURL
-  constructor(public time: TimeProvider, private filePath: FilePath, private transfer: FileTransfer, private file: File, public camera: Camera, public navCtrl: NavController, public navParams: NavParams, public alert: AlertController, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider, public toast: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
+  text
+  constructor(private app: App, public translate: TranslateService, public time: TimeProvider, private filePath: FilePath, private transfer: FileTransfer, private file: File, public camera: Camera, public navCtrl: NavController, public navParams: NavParams, public alert: AlertController, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider, public toast: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
     let data = navParams.get('userData');
     console.log()
     this.limit = 4;
@@ -91,6 +94,12 @@ export class ProfilePage {
       console.log(data);
       this.feeds[index].privacy = privacy;
     })
+  }
+
+  editPostView(index) {
+    this.app.getRootNav().push(EditPostPage, {
+      post: this.feeds[index]
+    });
   }
 
   getTime(time) {
@@ -118,7 +127,6 @@ export class ProfilePage {
       ]
     });
     actionSheet.present();
-
   }
 
   public takePicture(sourceType, type) {
@@ -176,6 +184,47 @@ export class ProfilePage {
     console.log('ionViewDidLoad ProfilePage');
   }
 
+  editComment(id, text, feedIndex, commentIndex) {
+    this.remoteService.editComment(this.userId, id, text).subscribe(res => {
+      if (res.status == 1) {
+        this.feeds[feedIndex].answers[0][commentIndex].text = text;
+        $('.saveComment').parent().hide();
+      }
+    })
+  }
+
+  showComments(id) {
+    $('#pro' + id).show();
+    console.log('#' + id);
+  }
+
+  deleteFriend(id, index) {
+    let alert = this.alert.create({
+      title: 'Remove Friend',
+      message: 'Do you want to remove this friend?',
+      buttons: [
+        {
+          text: 'Yes',
+          handler: data => {
+            this.remoteService.deleteFriendRequest(id, this.userId).subscribe(res => {
+              console.log(res);
+              if (res.status == 1) {
+                this.friendslist.splice(index, 1);
+              }
+            })
+          }
+        },
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
   getFeedsList(id, more = false, GotPosts = 30) {
     let loading = this.loadingCtrl.create({
       content: "",
@@ -183,18 +232,33 @@ export class ProfilePage {
       showBackdrop: true,
     });
     loading.present()
-    this.remoteService.feedsListApiCall(id, id, 'timeline', 10).subscribe(res => {
-
+    this.remoteService.feedsListApiCall(id, '', 'feed', 10).subscribe(res => {
+      //////////////////// looping to get comments and their replis ////////////////////////////////
       for (let i = 0; i < res.length; i++) {
+        //check if post is saved or not-going
 
+
+        this.remoteService.isSaved('feed', res[i].id, this.userId).subscribe(data => {
+          if (data.status == 1) {
+            res[i].saved = true;
+          } else {
+            res[i].saved = false;
+          }
+        });
+        ///////////// video url handling ////////////////////////
         if (res[i].video_embed != '') {
           res[i].video_embed = res[i].video_embed.substring(res[i].video_embed.indexOf("src=") + 5);
           res[i].video_embed = res[i].video_embed.substring(0, res[i].video_embed.indexOf("\""));
           this.videoURL = res[i].video_embed;
         }
+        ///////////////// split time string to words/////////////////
+
+        // res[i].time = res[i].time.split(' ');
+
+        /////////////////////////////////////////////////////
         let newFeedID = res[i].id
         let newFeed = res[i].answers
-        this.remoteService.loadComments(newFeedID).subscribe(res2 => {
+        this.remoteService.loadComments(newFeedID, this.userId).subscribe(res2 => {
           newFeed.unshift(res2)
           for (let g = 0; g < newFeed[0].length; g++) {
             this.remoteService.loadReplies(newFeed[0][g].id).subscribe(res3 => {
@@ -214,7 +278,9 @@ export class ProfilePage {
       }
       loading.dismiss();
       console.log(this.feeds)
+
     });
+
   }
 
   loadMoreFeeds(feedlength) {
@@ -241,6 +307,7 @@ export class ProfilePage {
       }
     })
   }
+
   likeReply(userid = this.userId, replyID, postIndex, commentIndex, replyIndex) {
 
     this.remoteService.likeCommentApiCall(this.userId, replyID).subscribe(res => {
@@ -248,34 +315,12 @@ export class ProfilePage {
         if (this.feeds[postIndex].answers[0][commentIndex].repliesContent[i].id == replyID) {
           this.feeds[postIndex].answers[0][commentIndex].repliesContent[i].like_count = res.likes;
           this.feeds[postIndex].answers[0][commentIndex].repliesContent[i].has_like = res.has_like;
-
           break
         }
       }
-
-
     })
-
-
   }
-  // postFeed(userID=this.userId,postText=this.post.text)
-  // {
-  //   console.log(this.feeds)
 
-  //   let loading = this.loadingCtrl.create({
-  //     content: "",
-  //     spinner: "bubbles",
-
-  //   });
-  //   loading.present()
-  //   this.remoteService.feedPosting(userID,postText).subscribe( res => {
-  //     this.feeds.unshift(res.feed)
-  //     this.post.text= ""
-  //     //this.getFeedsList(this.userId);
-  //     loading.dismiss();
-  //   });
-
-  // }
   commentOnFeed(postOwner, postID, whoCommented = this.userId, comment = this.comment.comment) {
     let loading = this.loadingCtrl.create({
       content: "",
@@ -283,16 +328,15 @@ export class ProfilePage {
     });
 
     loading.present()
-    this.remoteService.commentOnFeeds(postOwner, postID, whoCommented, comment, 'feed').subscribe(res => {
-
-
+    this.remoteService.commentOnFeeds(this.userId, postID, whoCommented, comment, 'feed').subscribe(res => {
       res.postid = postID
+      res['repliesContent'] = []
       for (let x in this.feeds) {
         if (this.feeds[x].id == res.postid) {
           this.feeds[x].answers[0].push(res)
         }
       }
-      this.remoteService.loadComments(postID).subscribe(res2 => { });
+      // this.remoteService.loadComments(postID).subscribe(res2 => { });
 
       this.comment.comment = ''
       loading.dismiss()
@@ -431,7 +475,18 @@ export class ProfilePage {
       content: "Loading",
     });
     loading.present()
-    this.remoteService.friendsListApiCall(Id, id, term).subscribe(res => { loading.dismiss(); this.friendslist = res; console.log(res) });
+    this.remoteService.friendsListApiCall(Id, id, term).subscribe(res => {
+      this.friendslist = [];
+      for (let friend of res) {
+        this.remoteService.profileDetailsApiCall(friend.id, this.userId).subscribe(res2 => {
+          console.log(res2);
+          friend.friend_status = res2.friend_status;
+
+          this.friendslist.push(friend);
+        });
+      }
+      loading.dismiss();
+    });
   }
   goToPhotos() {
     this.navCtrl.push(PhotosPage)
@@ -448,52 +503,6 @@ export class ProfilePage {
     });
     this.remoteService.userPhotosAlbumOnProfile(userid).subscribe((res) => { loading.dismiss(); this.photos = res })
   }
-
-  // getProfilePosts(userid)
-  //   {
-  //     let loading = this.loadingCtrl.create({
-  //       content: "Loading",
-  //     });
-  //     loading.present()
-  //     this.remoteService.profilePosts(userid).subscribe((res) => {           loading.dismiss();
-
-  //       for(let i =0 ; i < res.length;i++)
-  //         {
-  //           let newFeedID=res[i].id
-  //           let newFeed =res[i].answers
-
-  //           this.remoteService.loadProfileComments(newFeedID).subscribe(res2 =>{newFeed.push(res2); })
-  //         }
-  //         this.posts=res
-  //         console.log(this.posts)
-
-
-  //     })
-
-  //   }
-  // likeFeed(userid =this.userId,feedid)
-  // {
-  // //   "use strict";
-  // //   $(".feed-box").on("click", function() {
-  // //     console.info($(this).index())
-  // // });
-  //   this.remoteService.likeFeedApiCall(this.userId,feedid).subscribe(res =>{
-  //     this.likes = res;
-  //     for(let i =0 ; i<this.posts.length ;i++)
-  //       {
-  //           if(this.posts[i].id == feedid)
-  //           {
-  //             this.posts[i].like_count=this.likes.likes;
-  //             break
-  //           }
-  //       }
-
-
-  //   })
-
-
-  // }
-
 
 
   count = 1;
@@ -525,17 +534,17 @@ export class ProfilePage {
     toast.present();
   }
 
-  edit() {
+  edit(text) {
+    this.text = text;
     $(document).on('click', '.comment-edit', function() {
       $(this).parent().prev().find('.input-group').show();
 
     })
     $(document).on('click', '.cancel-edit', function() {
       $(this).parent().hide();
-
     })
-
   }
+
   reply() {
     $(document).on('click', '.comment-reply', function() {
       $(this).closest('.comment').find('.reply-input').show();
@@ -638,29 +647,36 @@ export class ProfilePage {
     });
     alert.present();
   }
-  deleteComment(commentId) {
+  deleteComment(commentId, feedIndex, commentIndex) {
+
+    let title, reason, ok, cancel, message;
+    this.translate.get('delete-comment').subscribe(value => { title = value; })
+    this.translate.get('delete-comment-question').subscribe(value => { message = value; })
+    this.translate.get('ok').subscribe(value => { ok = value; })
+    this.translate.get('cancel').subscribe(value => { cancel = value; })
+
     let alert = this.alert.create({
-      title: 'Delete',
-      message: 'Do you want to delete comment?',
+      title: title,
+      message: message,
       buttons: [
         {
-          text: 'Ok',
+          text: ok,
           handler: () => {
             this.remoteService.removeComment(commentId, this.userId).subscribe(res => {
               if (res.status == 1) {
-
-                let toast = this.toast.create({
-                  message: 'You deleted this comment ',
-                  duration: 2000
-
-                });
-                toast.present();
+                this.feeds[feedIndex].answers[0].splice(commentIndex, 1);
+                // let toast = this.toast.create({
+                //   message: 'You deleted this comment ',
+                //   duration : 2000
+                //
+                // });
+                // toast.present();
               }
             })
           }
         },
         {
-          text: 'Cancel',
+          text: cancel,
           role: 'cancel',
           handler: () => {
           }
@@ -668,8 +684,6 @@ export class ProfilePage {
       ]
     });
     alert.present();
-
-
   }
   turnOffNotifications(feedid, userID = this.userId) {
     this.remoteService.unsubscribePost(feedid, userID).subscribe((data) => { console.log(data) })

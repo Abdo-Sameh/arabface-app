@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
-import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
+import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { PagesPage } from '../pages/pages';
 /**
  * Generated class for the CreatePagePage page.
@@ -15,14 +15,14 @@ import { PagesPage } from '../pages/pages';
   templateUrl: 'create-page.html',
 })
 export class CreatePagePage {
-  userId:any
+  userId: any
   categories
   title
   description
   category
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
-    this.userId=localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public remoteService: RemoteServiceProvider) {
+    this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.getCategories();
   }
 
@@ -30,14 +30,14 @@ export class CreatePagePage {
     console.log('ionViewDidLoad CreatePagePage');
   }
 
-  getCategories(){
-    this.remoteService.getPagesCategories().subscribe(res =>{
+  getCategories() {
+    this.remoteService.getPagesCategories().subscribe(res => {
       this.categories = res;
     });
   }
 
-  createPage(title, description, category, userId){
-    this.remoteService.createPage(title, description, category, userId).subscribe(res =>{
+  createPage(title, description, category, userId) {
+    this.remoteService.createPage(title, description, category, userId).subscribe(res => {
       let toast = this.toastCtrl.create({
         message: 'Page created successfully',
         duration: 3000,
@@ -45,12 +45,12 @@ export class CreatePagePage {
       });
 
       toast.present();
-      });
-      this.navCtrl.push(PagesPage);
+    });
+    this.navCtrl.push(PagesPage);
 
   }
 
-  back(){
+  back() {
     this.navCtrl.push(PagesPage);
   }
 

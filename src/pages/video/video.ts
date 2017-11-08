@@ -208,7 +208,7 @@ export class VideoPage {
       res.postid = postID
 
       this.comments.push(res)
-        this.remoteService.loadComments(postID).subscribe(res2 =>{ });
+        this.remoteService.loadComments(postID, this.userId).subscribe(res2 =>{ });
 
         this.comment.comment = ''
         loading.dismiss()

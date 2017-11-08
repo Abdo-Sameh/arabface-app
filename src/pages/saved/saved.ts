@@ -66,7 +66,7 @@ export class SavedPage {
         {
           let newFeedID = res[i].id
           let newFeed = res[i].answers
-          this.remoteService.loadComments(newFeedID).subscribe(res2 => {newFeed.unshift(res2)
+          this.remoteService.loadComments(newFeedID, this.userId).subscribe(res2 => {newFeed.unshift(res2)
             for(let g = 0 ;g < newFeed[0].length; g++)
               {
                 this.remoteService.loadReplies(newFeed[0][g].id).subscribe(res3 => {
@@ -135,7 +135,7 @@ export class SavedPage {
             this.posts[x].answers[0].push(res)
           }
         }
-        this.remoteService.loadComments(postID).subscribe(res2 =>{ });
+        this.remoteService.loadComments(postID, this.userId).subscribe(res2 =>{ });
         this.comment.comment = ''
         loading.dismiss()
     })

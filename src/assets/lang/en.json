@@ -1062,7 +1062,7 @@
 
 	"friends-followers": "Friends or Followers",
 
-	"Followers" : "Followers",
+	"followers" : "Followers",
 
 	"following" : "Followings",
 
@@ -1365,7 +1365,7 @@
 
 	"unsave" : "Unsave",
 
-
+	"successfully-uploaded" : "Successfully uploaded",
 
 	"save-post": "Save",
 
@@ -1376,6 +1376,10 @@
 	"successfully-unsaved": "Successfully removed",
 
 	"saved": "Saved",
+
+	"upload" : "Upload",
+
+	"uploading" : "Uploading ...",
 
 	"no-saved-content": "You don't have any content saved here",
 

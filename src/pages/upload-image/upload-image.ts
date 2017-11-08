@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Loading, ToastController, LoadingController } from 'ionic-angular';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
+import { TranslateService } from '@ngx-translate/core';
 /**
  * Generated class for the UploadImagePage page.
  *
@@ -19,7 +20,7 @@ export class UploadImagePage {
   loading: Loading;
   type
   id
-  constructor(public loadingCtrl: LoadingController, public toast: ToastController, private transfer: FileTransfer, private file: File, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public translate: TranslateService, public loadingCtrl: LoadingController, public toast: ToastController, private transfer: FileTransfer, private file: File, public navCtrl: NavController, public navParams: NavParams) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.type = navParams.get("type");
     this.lastImage = navParams.get("image");
@@ -54,6 +55,12 @@ export class UploadImagePage {
   }
 
   public uploadImage() {
+
+    let uploading, message;
+    this.translate.get('uploading').subscribe(value => { uploading = value; })
+    this.translate.get('successfully-uploaded').subscribe(value => { message = value; })
+
+
       var filename = this.lastImage;
       // File for Upload
       var targetPath = this.pathForImage(this.lastImage);
@@ -136,7 +143,7 @@ export class UploadImagePage {
     const fileTransfer: FileTransferObject = this.transfer.create();
 
     this.loading = this.loadingCtrl.create({
-      content: 'Uploading...',
+      content: uploading,
     });
     this.loading.present();
 
@@ -153,7 +160,7 @@ export class UploadImagePage {
       }else if(this.type == "profile.cover"){
           localStorage.setItem('userCover', JSON.stringify(data.response['data_one']))
     }
-      this.presentToast('Image succesful uploaded.');
+      this.presentToast(message);
     }, err => {
       this.loading.dismissAll()
       // alert(err.code);

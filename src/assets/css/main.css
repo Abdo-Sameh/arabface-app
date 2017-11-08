@@ -1405,3 +1405,7 @@ top: -4px;
 .ion-app [no-padding] .scroll-content {
     margin-left: 25px !important;
 }
+.fa-paper-plane{
+		color: #5c0632;
+	}
+}

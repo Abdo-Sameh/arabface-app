@@ -135,7 +135,7 @@
           </div>
         </div>
         <div class="pull-right">
-          <a id="submit" href="#" (click)="postFeed()" class="btn btn-theme">{{'post' | translate}}</a>
+          <a id="submit" href="#" (click)="postFeed()" class="btn btn-theme" [attr.disabled]="check(post.text)">{{'post' | translate}}</a>
         </div>
         <div class="clearfix"></div>
       </div>

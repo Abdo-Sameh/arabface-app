@@ -78,6 +78,7 @@ import { UploadImagePage } from '../pages/upload-image/upload-image';
 import { SearchPage } from '../pages/search/search';
 import { TimeProvider } from '../providers/time/time';
 import { EditPostPage } from '../pages/edit-post/edit-post';
+import { ImageUploadingProvider } from '../providers/image-uploading/image-uploading';
 
 @NgModule({
   declarations: [
@@ -198,7 +199,8 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule, TranslateModule.forRoot(
     Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RemoteServiceProvider,
-    TimeProvider
+    TimeProvider,
+    ImageUploadingProvider
   ]
 })
 export class AppModule {}

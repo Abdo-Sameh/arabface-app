@@ -31,9 +31,8 @@ export class PostFeatursPage {
     this.typeId = navParams.get('type_id');
     this.to_user_id = navParams.get('to_user_id');
     console.log(this.type, this.typeId);
-
-
-    }
+    console.log($("submit"));
+  }
 
   ionViewWillEnter() {
     this.callback = this.navParams.get("callback")
@@ -62,9 +61,10 @@ export class PostFeatursPage {
     })
   }
   check(text) {
-    if(text.length == 0){
-      $('#submit').prop('disabled', true);
-    }
+    if (text.length == 0)
+      return true;
+    else
+      return null;
   }
 
   postFeed(userID = this.userId, postText = this.post) {

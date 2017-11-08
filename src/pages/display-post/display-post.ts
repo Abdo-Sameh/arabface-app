@@ -35,6 +35,7 @@ export class DisplayPostPage {
   constructor(public time: TimeProvider, public translate: TranslateService, public navCtrl: NavController, public popOver: PopoverController, public toast: ToastController, public navParams: NavParams, public alert: AlertController, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider) {
     this.post = this.navParams.get('post')
     console.log(this.post)
+    this.loadComments();
   }
 
   getTime(time) {
@@ -56,41 +57,49 @@ export class DisplayPostPage {
     })
 
   }
+
+  showComments(id) {
+    $('#dis' + id).show();
+    console.log('#' + id);
+  }
+
   likeComment(userid = this.userId, commentID, postIndex, commentIndex) {
-
-
     this.remoteService.likeCommentApiCall(this.userId, commentID).subscribe(res => {
       this.likes = res;
       for (let i = 0; i < this.post.answers[0].length; i++) {
         if (this.post.answers[0][commentIndex].id == commentID) {
           this.post.answers[0][commentIndex].like_count = this.likes.likes;
           this.post.answers[0][commentIndex].has_like = this.likes.has_like;
-
           break
         }
       }
-
-
     })
-
-
   }
-  likeReply(userid = this.userId, replyID, postIndex, commentIndex, replyIndex) {
 
+  loadComments() {
+    let newFeedID = this.post.id
+    let newFeed = this.post.answers
+    this.remoteService.loadComments(newFeedID, this.userId).subscribe(res2 => {
+      newFeed.unshift(res2)
+      for (let g = 0; g < newFeed[0].length; g++) {
+        this.remoteService.loadReplies(newFeed[0][g].id).subscribe(res3 => {
+          newFeed[0][g]['repliesContent'] = res3
+        });
+      }
+    });
+    this.post.answers = newFeed;
+  }
+
+  likeReply(userid = this.userId, replyID, postIndex, commentIndex, replyIndex) {
     this.remoteService.likeCommentApiCall(this.userId, replyID).subscribe(res => {
       for (let i = 0; i < this.post.answers[0][commentIndex].repliesContent.length; i++) {
         if (this.post.answers[0][commentIndex].repliesContent[i].id == replyID) {
           this.post.answers[0][commentIndex].repliesContent[i].like_count = res.likes;
           this.post.answers[0][commentIndex].repliesContent[i].has_like = res.has_like;
-
           break
         }
       }
-
-
     })
-
-
   }
 
   commentOnFeed(postOwner, postID, whoCommented = this.userId, comment = this.comment.comment) {
@@ -98,21 +107,16 @@ export class DisplayPostPage {
       content: "",
       spinner: "bubbles",
     });
-
     loading.present()
     this.remoteService.commentOnFeeds(postOwner, postID, whoCommented, comment, 'feed').subscribe(res => {
-
+      console.log(res)
 
       this.post.answers[0].push(res)
-
-
-      this.remoteService.loadComments(postID).subscribe(res2 => { });
-
       this.comment.comment = ''
       loading.dismiss()
     })
-
   }
+
   replyOnComment(postindex, commentindex, postOwner, commentID, whoCommented = this.userId, comment = this.comment.reply) {
     let loading = this.loadingCtrl.create({
       content: "",
@@ -121,18 +125,12 @@ export class DisplayPostPage {
 
     loading.present()
     this.remoteService.ReplyOnComment(postOwner, commentID, whoCommented, comment).subscribe(res => {
-
-
       res.postid = commentID
 
       this.post.answers[0][commentindex].repliesContent.push(res)
-
-      this.remoteService.loadReplies(commentID).subscribe(res2 => { });
-
       this.comment.reply = ''
       loading.dismiss()
     })
-
   }
 
   sharePost(feedid, userID = this.userId) {
@@ -296,6 +294,15 @@ export class DisplayPostPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DisplayPostPage');
+  }
+
+  edit() {
+    $(document).on('click', '.comment-edit', function() {
+      $(this).parent().prev().find('.input-group').show();
+    })
+    $(document).on('click', '.cancel-edit', function() {
+      $(this).parent().hide();
+    })
   }
 
   back() {

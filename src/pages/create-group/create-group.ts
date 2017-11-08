@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
-import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
+import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { GroupsPage } from '../groups/groups';
 
 /**
@@ -17,13 +17,13 @@ import { GroupsPage } from '../groups/groups';
 })
 export class CreateGroupPage {
 
-  userId:any
+  userId: any
   title
   description
   privacy
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public remoteService: RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
   }
 
@@ -31,8 +31,8 @@ export class CreateGroupPage {
     console.log('ionViewDidLoad CreateGroupPage');
   }
 
-  createGroup(title, description, privacy, userId){
-    this.remoteService.createGroup(title, description, title, privacy, userId).subscribe(res =>{
+  createGroup(title, description, privacy, userId) {
+    this.remoteService.createGroup(title, description, title, privacy, userId).subscribe(res => {
       let toast = this.toastCtrl.create({
         message: 'Group created successfully',
         duration: 3000,
@@ -40,12 +40,12 @@ export class CreateGroupPage {
       });
 
       toast.present();
-      });
-      this.navCtrl.push(GroupsPage);
+    });
+    this.navCtrl.push(GroupsPage);
 
   }
 
-  back(){
+  back() {
     this.navCtrl.push(GroupsPage);
   }
 

@@ -31,37 +31,37 @@ declare var cordova: any;
 export class Page {
 
   id
-  page = {id: '', logo : '', has_like: false, title: '', page_url: ''}
+  page = { id: '', logo: '', has_like: false, title: '', page_url: '' }
   userId
   saved
   message
   likes = 0
-  show=true
+  show = true
   postToDisplay
   feedComments
-  havePosted =false
-  post ={ 'text' : ""}
-  comment={
-  'comment' : '',
-  'reply' :'',
-  'edited':'',
+  havePosted = false
+  post = { 'text': "" }
+  comment = {
+    'comment': '',
+    'reply': '',
+    'edited': '',
   }
   hiddenPost
   userAvatar
-  feed = { 'feedid' :""}
+  feed = { 'feedid': "" }
   feeds
   feedLikes
   userData
   lastImage: string = null;
-  constructor(public time: TimeProvider, public file: File, public filePath: FilePath, public platform: Platform, public camera: Camera, public actionSheetCtrl: ActionSheetController, public translate: TranslateService, public alert:AlertController, private socialSharing: SocialSharing, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
+  constructor(public time: TimeProvider, public file: File, public filePath: FilePath, public platform: Platform, public camera: Camera, public actionSheetCtrl: ActionSheetController, public translate: TranslateService, public alert: AlertController, private socialSharing: SocialSharing, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public remoteService: RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.page = navParams.get("page");
     let loading = this.loadingCtrl.create({
       content: "Loading",
     });
-    if(this.page == undefined){
+    if (this.page == undefined) {
       loading.present()
-    }else{
+    } else {
       loading.dismiss()
     }
     this.isSaved(this.page.id);
@@ -70,7 +70,7 @@ export class Page {
     console.log(this.page);
     this.getFeedsList(this.userId);
   }
-  getTime(time){
+  getTime(time) {
     this.time.getTime(time);
   }
   public presentActionSheet(type) {
@@ -128,15 +128,15 @@ export class Page {
 
   private createFileName() {
     var d = new Date(),
-    n = d.getTime(),
-    newFileName =  n + ".jpg";
+      n = d.getTime(),
+      newFileName = n + ".jpg";
     return newFileName;
   }
 
   private copyFileToLocalDir(namePath, currentName, newFileName, type) {
     this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
       this.lastImage = newFileName;
-      this.navCtrl.push(UploadImagePage,{
+      this.navCtrl.push(UploadImagePage, {
         type: type,
         image: this.lastImage,
         id: this.page.id
@@ -163,59 +163,59 @@ export class Page {
     console.log('ionViewDidLoad Page');
   }
 
-  editPage(){
-    this.navCtrl.push(EditPagePage,{
+  editPage() {
+    this.navCtrl.push(EditPagePage, {
       page: this.page
     });
   }
-  savePage(pageId){
-    this.remoteService.saveItem('page', pageId, this.userId).subscribe(res=>{
+  savePage(pageId) {
+    this.remoteService.saveItem('page', pageId, this.userId).subscribe(res => {
       this.saved = true;
     });
   }
-  unsavePage(pageId){
-    this.remoteService.unsaveItem('page', pageId, this.userId).subscribe(res=>{
-      this.saved  = false;
+  unsavePage(pageId) {
+    this.remoteService.unsaveItem('page', pageId, this.userId).subscribe(res => {
+      this.saved = false;
     });
   }
-  likePage(userId, pageId, type){
-    this.remoteService.likePage(userId, pageId, type).subscribe(res =>{
-      if(type == "like"){
+  likePage(userId, pageId, type) {
+    this.remoteService.likePage(userId, pageId, type).subscribe(res => {
+      if (type == "like") {
         this.page.has_like = true;
         this.likes = this.likes + 1;
 
-      }else{
+      } else {
         this.page.has_like = false;
         this.likes = this.likes - 1;
       }
 
     });
   }
-  pageLikes(typeId, likeType){
+  pageLikes(typeId, likeType) {
     this.remoteService.pageLikes(typeId, this.userId, likeType).subscribe(res => {
       console.log(res);
       this.likes = res;
     });
   }
-  isSaved(pageId){
-    this.remoteService.isSaved('page', pageId, this.userId).subscribe(res=>{
-      if(res.status == 1){
+  isSaved(pageId) {
+    this.remoteService.isSaved('page', pageId, this.userId).subscribe(res => {
+      if (res.status == 1) {
         this.saved = true;
-      }else{
+      } else {
         this.saved = false;
       }
     });
   }
-  inviteFriend(){
+  inviteFriend() {
     this.navCtrl.push(InviteFriendPage, {
       page: this.page
     });
   }
-  regularShare(){
+  regularShare() {
     this.socialSharing.share(this.page.title, "Arabface", "assets/images/logo.png", this.page.page_url);
   }
 
-  reportPage(){
+  reportPage() {
     let title, reason, send, cancel, message;
     this.translate.get('report').subscribe(value => { title = value; })
     this.translate.get('report-reason').subscribe(value => { reason = value; })
@@ -225,17 +225,17 @@ export class Page {
     let alert = this.alert.create({
       title: title,
       inputs: [
-      {
-        name: 'reason',
-        placeholder: reason
-      }
-    ],
+        {
+          name: 'reason',
+          placeholder: reason
+        }
+      ],
       buttons: [
         {
           text: send,
           handler: data => {
             this.remoteService.reportItem("page", this.page.page_url, data.reason, this.userId).subscribe(res => {
-              if(res.status == "1"){
+              if (res.status == "1") {
                 this.translate.get('report-success').subscribe(value => { message = value; })
                 let toast = this.toastCtrl.create({
                   message: message,
@@ -243,7 +243,7 @@ export class Page {
                   position: 'top'
                 });
                 toast.present();
-              }else{
+              } else {
                 this.translate.get('report-failure').subscribe(value => { message = value; })
                 let toast = this.toastCtrl.create({
                   message: message,
@@ -267,122 +267,119 @@ export class Page {
     alert.present();
 
   }
-  getFeedsList(id,more=false,GotPosts= 30)
-  {
+  getFeedsList(id, more = false, GotPosts = 30) {
     let loading = this.loadingCtrl.create({
       content: "",
       spinner: "bubbles",
       showBackdrop: true,
     });
     loading.present()
-        this.remoteService.feedsListApiCall(id,this.page.id,'page',10).subscribe(res =>{
-          for(let i = 0; i < res.length; i++) {
-            let newFeedID = res[i].id
-            let newFeed = res[i].answers
-            this.remoteService.loadComments(newFeedID).subscribe(res2 =>{newFeed.unshift(res2)
-              for(let g = 0; g < newFeed[0].length; g++) {
-                  this.remoteService.loadReplies(newFeed[0][g].id).subscribe(res3 => {
-                    newFeed[0][g]['repliesContent'] = res3
-                  });
-                }
-              });
+    this.remoteService.feedsListApiCall(id, this.page.id, 'page', 10).subscribe(res => {
+      for (let i = 0; i < res.length; i++) {
+        let newFeedID = res[i].id
+        let newFeed = res[i].answers
+        this.remoteService.loadComments(newFeedID, this.userId).subscribe(res2 => {
+          newFeed.unshift(res2)
+          for (let g = 0; g < newFeed[0].length; g++) {
+            this.remoteService.loadReplies(newFeed[0][g].id).subscribe(res3 => {
+              newFeed[0][g]['repliesContent'] = res3
+            });
           }
-          this.feeds=res
-
-          loading.dismiss();
-          console.log(this.feeds)
-
         });
+      }
+      this.feeds = res
+
+      loading.dismiss();
+      console.log(this.feeds)
+
+    });
   }
 
   loadMoreFeeds(feedlength) {
     console.log(feedlength)
-    this.getFeedsList(this.userId,true,feedlength)
+    this.getFeedsList(this.userId, true, feedlength)
   }
 
   ///////////////////// post feed //////////////
 
-  likeFeed(userid =this.userId,feedid,postIndex) {
-    this.remoteService.likeFeedApiCall(this.userId,feedid).subscribe(res =>{
-        this.feeds[postIndex].like_count = res.likes;
-        this.feeds[postIndex].has_like = res.has_like;
+  likeFeed(userid = this.userId, feedid, postIndex) {
+    this.remoteService.likeFeedApiCall(this.userId, feedid).subscribe(res => {
+      this.feeds[postIndex].like_count = res.likes;
+      this.feeds[postIndex].has_like = res.has_like;
     })
   }
 
-  likeComment(userid =this.userId,commentID,postIndex,commentIndex) {
-    this.remoteService.likeCommentApiCall(this.userId,commentID).subscribe(res =>{
+  likeComment(userid = this.userId, commentID, postIndex, commentIndex) {
+    this.remoteService.likeCommentApiCall(this.userId, commentID).subscribe(res => {
       this.likes = res;
-      for(let i = 0; i < this.feeds[postIndex].answers[0].length; i++) {
-          if(this.feeds[postIndex].answers[0][commentIndex].id == commentID) {
-            this.feeds[postIndex].answers[0][commentIndex].like_count = this.feedLikes.likes;
-            this.feeds[postIndex].answers[0][commentIndex].has_like = this.feedLikes.has_like;
-            break
-          }
+      for (let i = 0; i < this.feeds[postIndex].answers[0].length; i++) {
+        if (this.feeds[postIndex].answers[0][commentIndex].id == commentID) {
+          this.feeds[postIndex].answers[0][commentIndex].like_count = this.feedLikes.likes;
+          this.feeds[postIndex].answers[0][commentIndex].has_like = this.feedLikes.has_like;
+          break
         }
+      }
     })
   }
 
-  likeReply(userid =this.userId,replyID,postIndex,commentIndex,replyIndex) {
-    this.remoteService.likeCommentApiCall(this.userId,replyID).subscribe(res =>{
-      for(let i =0 ; i<this.feeds[postIndex].answers[0][commentIndex].repliesContent.length ;i++) {
-            if(this.feeds[postIndex].answers[0][commentIndex].repliesContent[i].id == replyID) {
-              this.feeds[postIndex].answers[0][commentIndex].repliesContent[i].like_count = res.likes;
-              this.feeds[postIndex].answers[0][commentIndex].repliesContent[i].has_like = res.has_like;
-              break
-            }
+  likeReply(userid = this.userId, replyID, postIndex, commentIndex, replyIndex) {
+    this.remoteService.likeCommentApiCall(this.userId, replyID).subscribe(res => {
+      for (let i = 0; i < this.feeds[postIndex].answers[0][commentIndex].repliesContent.length; i++) {
+        if (this.feeds[postIndex].answers[0][commentIndex].repliesContent[i].id == replyID) {
+          this.feeds[postIndex].answers[0][commentIndex].repliesContent[i].like_count = res.likes;
+          this.feeds[postIndex].answers[0][commentIndex].repliesContent[i].has_like = res.has_like;
+          break
         }
+      }
     })
   }
 
-  commentOnFeed(postOwner,postID,whoCommented=this.userId,comment=this.comment.comment)
-  {
+  commentOnFeed(postOwner, postID, whoCommented = this.userId, comment = this.comment.comment) {
     let loading = this.loadingCtrl.create({
       content: "",
-      spinner: "bubbles",  });
+      spinner: "bubbles",
+    });
 
     loading.present()
-    this.remoteService.commentOnFeeds(postOwner,postID,whoCommented,comment, 'feed').subscribe(res => {
+    this.remoteService.commentOnFeeds(postOwner, postID, whoCommented, comment, 'feed').subscribe(res => {
 
 
       res.postid = postID
-      for( let x in this.feeds)
-        {
-          if(this.feeds[x].id == res.postid)
-            {
-                  this.feeds[x].answers[0].push(res)
-                }
+      for (let x in this.feeds) {
+        if (this.feeds[x].id == res.postid) {
+          this.feeds[x].answers[0].push(res)
         }
-        this.remoteService.loadComments(postID).subscribe(res2 =>{ });
+      }
+      this.remoteService.loadComments(postID, this.userId).subscribe(res2 => { });
 
-        this.comment.comment = ''
-        loading.dismiss()
+      this.comment.comment = ''
+      loading.dismiss()
     })
 
   }
-  replyOnComment(postindex,commentindex,postOwner,commentID,whoCommented=this.userId,comment=this.comment.reply)
-  {
+  replyOnComment(postindex, commentindex, postOwner, commentID, whoCommented = this.userId, comment = this.comment.reply) {
     let loading = this.loadingCtrl.create({
       content: "",
-      spinner: "bubbles",  });
+      spinner: "bubbles",
+    });
 
     loading.present()
-    this.remoteService.ReplyOnComment(postOwner,commentID,whoCommented,comment).subscribe(res => {
+    this.remoteService.ReplyOnComment(postOwner, commentID, whoCommented, comment).subscribe(res => {
 
 
       res.postid = commentID
 
-                  this.feeds[postindex].answers[0][commentindex].repliesContent.push(res)
+      this.feeds[postindex].answers[0][commentindex].repliesContent.push(res)
 
-        this.remoteService.loadReplies(commentID).subscribe(res2 =>{ });
+      this.remoteService.loadReplies(commentID).subscribe(res2 => { });
 
-        this.comment.reply = ''
-        loading.dismiss()
+      this.comment.reply = ''
+      loading.dismiss()
     })
 
   }
 
-  sharePost(feedid,userID=this.userId)
-  {
+  sharePost(feedid, userID = this.userId) {
     let alert = this.alert.create({
       title: 'share',
       message: 'Do you want to share this post on your timeline ?',
@@ -390,7 +387,7 @@ export class Page {
         {
           text: 'Ok',
           handler: () => {
-            this.remoteService.sharePost(feedid,userID).subscribe(res => {
+            this.remoteService.sharePost(feedid, userID).subscribe(res => {
 
             })
           }
@@ -411,28 +408,28 @@ export class Page {
 
 
   /////////////////////////////////////////
-  GoToProfile(id,userId)
-  {
+  GoToProfile(id, userId) {
     let loading = this.loadingCtrl.create({
       content: "",
-      spinner: "bubbles",  });
+      spinner: "bubbles",
+    });
     loading.present()
 
-      this.remoteService.profileDetailsApiCall(id,userId).subscribe(res => {
-          loading.dismiss();this.userData = res ;
-          console.log("---------------------------");
-          res.id=id;
-          console.log(res);
-          console.log("----------------------------");
-          if(id == userId){
-            this.navCtrl.push(ProfilePage,{
-              "userData" : res
-            })
-          }else{
-            this.navCtrl.push(FriendProfilePage,{
-              "userData" : res
-            })
-          }
+    this.remoteService.profileDetailsApiCall(id, userId).subscribe(res => {
+      loading.dismiss(); this.userData = res;
+      console.log("---------------------------");
+      res.id = id;
+      console.log(res);
+      console.log("----------------------------");
+      if (id == userId) {
+        this.navCtrl.push(ProfilePage, {
+          "userData": res
+        })
+      } else {
+        this.navCtrl.push(FriendProfilePage, {
+          "userData": res
+        })
+      }
 
     });
 
@@ -440,180 +437,167 @@ export class Page {
 
 
   edit() {
-    $(document).on('click','.comment-edit',function(){
+    $(document).on('click', '.comment-edit', function() {
       $(this).parent().prev().find('.input-group').show();
 
     })
-    $(document).on('click','.cancel-edit',function(){
+    $(document).on('click', '.cancel-edit', function() {
       $(this).parent().hide();
 
     })
 
   }
-  reply()
-    {
-      $(document).on('click','.comment-reply',function(){
-        $(this).closest('.comment').find('.reply-input').show();
+  reply() {
+    $(document).on('click', '.comment-reply', function() {
+      $(this).closest('.comment').find('.reply-input').show();
 
-      })
-      $(document).on('click','.reply-close',function(){
-        $(this).closest('.reply-input').hide();
+    })
+    $(document).on('click', '.reply-close', function() {
+      $(this).closest('.reply-input').hide();
 
-      })
-
+    })
 
 
+
+  }
+  //////////////////////////////////////////////
+
+
+
+  /* feed options
+   which contain
+   -i don't like post
+   -edit post
+   -delete post
+   -view post
+  */
+
+  editPost() {
+    $(document).on('click', '.comment-edit', function() {
+      $(this).parent().prev().find('.input-group').show();
+
+    })
+    $(document).on('click', '.cancel-edit', function() {
+      $(this).parent().hide();
+
+    })
+  }
+  // ConfirmEditPost(text,feedid)
+  // {
+  //     this.remoteService.editPost(text,feedid,this.userId).subscribe((data) => {console.log(data)})
+  // }
+
+  savePost(feedid) {
+    let toast = this.toastCtrl.create({
+      message: 'this post has saved !',
+      duration: 2000,
+      cssClass: 'alert'
+    });
+    toast.present();
+    this.remoteService.saveItem('feed', feedid, this.userId).subscribe(res => {
+      console.log(res)
+    })
+  }
+  donotLikePost(feedid, index, userID = this.userId) {
+    this.remoteService.hidePost(feedid, userID).subscribe(res => {
+      this.hiddenPost = res.status
+      if (res.status == 1) {
+        this.feeds.splice(index, 1)
+
+        let toast = this.toastCtrl.create({
+          message: 'This post will no longer show to you',
+          duration: 2000
+        });
+        toast.present();
       }
-   //////////////////////////////////////////////
+    })
+  }
+  deletePost(feedid, index, userID = this.userId) {
+    let alert = this.alert.create({
+      title: 'Delete',
+      message: 'Do you want to delete this post?',
+
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+
+            this.remoteService.removePost(feedid, userID).subscribe(res => {
+              if (res.status == 1) {
+                this.feeds.splice(index, 1)
+                let toast = this.toastCtrl.create({
+                  message: 'You deleted this post ',
+                  duration: 2000
 
 
-
-     /* feed options
-      which contain
-      -i don't like post
-      -edit post
-      -delete post
-      -view post
-     */
-
-      editPost()
-      {
-        $(document).on('click','.comment-edit',function(){
-          $(this).parent().prev().find('.input-group').show();
-
-        })
-        $(document).on('click','.cancel-edit',function(){
-          $(this).parent().hide();
-
-        })
-      }
-      // ConfirmEditPost(text,feedid)
-      // {
-      //     this.remoteService.editPost(text,feedid,this.userId).subscribe((data) => {console.log(data)})
-      // }
-
-      savePost(feedid)
-    {
-      let toast = this.toastCtrl.create({
-        message: 'this post has saved !',
-        duration : 2000,
-        cssClass: 'alert'
-      });
-      toast.present();
-      this.remoteService.saveItem('feed',feedid,this.userId).subscribe(res => {
-        console.log(res)
-      })
-    }
-      donotLikePost(feedid,index,userID=this.userId)
-      {
-        this.remoteService.hidePost(feedid,userID).subscribe(res => {
-          this.hiddenPost = res.status
-          if(res.status == 1 )
-          {
-            this.feeds.splice(index,1)
-
-            let toast = this.toastCtrl.create({
-              message: 'This post will no longer show to you',
-              duration : 2000
-            });
-            toast.present();
+                });
+                toast.present();
+              }
+            })
           }
-        })
-      }
-      deletePost(feedid,index,userID=this.userId)
-      {
-        let alert = this.alert.create({
-          title: 'Delete',
-          message: 'Do you want to delete this post?',
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+  deleteComment(commentId) {
+    let alert = this.alert.create({
+      title: 'Delete',
+      message: 'Do you want to delete comment?',
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.remoteService.removeComment(commentId, this.userId).subscribe(res => {
+              if (res.status == 1) {
 
-          buttons: [
-            {
-              text: 'Ok',
-              handler: () => {
+                let toast = this.toastCtrl.create({
+                  message: 'You deleted this comment ',
+                  duration: 2000
 
-                this.remoteService.removePost(feedid,userID).subscribe(res => {
-                  if(res.status == 1 )
-                  {
-                    this.feeds.splice(index,1)
-                    let toast = this.toastCtrl.create({
-                      message: 'You deleted this post ',
-                      duration : 2000
-
-
-                    });
-                    toast.present();
-                  }
-                })
+                });
+                toast.present();
               }
-            },
-            {
-              text: 'Cancel',
-              role: 'cancel',
-              handler: () => {
-              }
-            }
-          ]
-        });
-        alert.present();
-      }
-      deleteComment(commentId)
-      {
-        let alert = this.alert.create({
-          title: 'Delete',
-          message: 'Do you want to delete comment?',
-          buttons: [
-            {
-              text: 'Ok',
-              handler: () => {
-                this.remoteService.removeComment(commentId,this.userId).subscribe(res => {
-                  if(res.status == 1 )
-                  {
-
-                    let toast = this.toastCtrl.create({
-                      message: 'You deleted this comment ',
-                      duration : 2000
-
-                    });
-                    toast.present();
-                  }
-                })
-              }
-            },
-            {
-              text: 'Cancel',
-              role: 'cancel',
-              handler: () => {
-              }
-            }
-          ]
-        });
-        alert.present();
+            })
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    alert.present();
 
 
-      }
-      turnOffNotifications(feedid,userID=this.userId)
-      {
-          this.remoteService.unsubscribePost(feedid,userID).subscribe((data) => { console.log(data)})
-      }
-      showPost(feed)
-      {
-        this.postToDisplay=feed
-        console.log(this.postToDisplay)
-        this.navCtrl.push(DisplayPostPage,{'post':this.postToDisplay})
-      }
-     //////////////////////////////////////////
-   effects()
-   {
-     $(this).css('background-color','grey')
-   }
+  }
+  turnOffNotifications(feedid, userID = this.userId) {
+    this.remoteService.unsubscribePost(feedid, userID).subscribe((data) => { console.log(data) })
+  }
+  showPost(feed) {
+    this.postToDisplay = feed
+    console.log(this.postToDisplay)
+    this.navCtrl.push(DisplayPostPage, { 'post': this.postToDisplay })
+  }
+  //////////////////////////////////////////
+  effects() {
+    $(this).css('background-color', 'grey')
+  }
 
-  goToPost()
-   {
-  //   let popover = this.popOver.create(PostFeatursPage, {}, {cssClass: 'contpopover'});
-  //   popover.present({
+  goToPost() {
+    //   let popover = this.popOver.create(PostFeatursPage, {}, {cssClass: 'contpopover'});
+    //   popover.present({
 
-  //   });
-    this.navCtrl.push(PostFeatursPage,{
+    //   });
+    this.navCtrl.push(PostFeatursPage, {
       type: 'page',
       type_id: this.page.id,
       callback: this.myCallbackFunction
@@ -623,10 +607,10 @@ export class Page {
     this.navCtrl.pop();
   }
   myCallbackFunction = (post) => {
-   return new Promise((resolve, reject) => {
-       this.feeds.unshift(post);
-       resolve();
-   });
+    return new Promise((resolve, reject) => {
+      this.feeds.unshift(post);
+      resolve();
+    });
   }
 
 }

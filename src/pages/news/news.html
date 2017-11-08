@@ -113,7 +113,7 @@
                       <a href="#" class="btn btn-danger cancel-edit">{{ 'cancel' | translate }}</a>
                     </div>
                   </div>
-                  <div class="pull-right" *ngIf="comments.can_edit == false">
+                  <div class="pull-right" *ngIf="comments.can_edit == true">
                     <a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a>
                     <a href="#" (click)="deleteComment(comments.id, mainI, commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a>
                   </div>
@@ -123,9 +123,9 @@
                       <div class="feed-title">
 
 
-                        <span class="mr-10" *ngIf="comments.has_like ==false" (click)="likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}}{{'like' | translate}}</span>
-                        <span class="mr-10" *ngIf="comments.has_like != false" style="color:#488aff" (click)="likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
-                        <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
+                        <span class="mr-10" *ngIf="comments.has_like ==false" (click)="likeComment(30,comments.id,mainI,commentIndex)"><span *ngIf="comments.like_count != 0">{{comments.like_count}}</span>{{'like' | translate}}</span>
+                        <span class="mr-10" *ngIf="comments.has_like != false" style="color:#488aff" (click)="likeComment(30,comments.id,mainI,commentIndex)"><span *ngIf="comments.like_count != 0">{{comments.like_count}}</span> {{'like' | translate}}</span>
+                        <span (click)="reply()" class="mr-10 comment-reply"> <span *ngIf="comments.replies != 0">{{comments.replies}}</span> {{'reply' | translate}}</span>
                         <span class="mr-10">-</span>
                         <span>{{getTime(comments.time)}}</span>
                       </div>
@@ -151,7 +151,7 @@
                               <div *ngIf="replies.like_count != 0">{{replies.like_count}}</div>{{'like' | translate}}</a>
                             <a href="#" class="mr-10" *ngIf="replies.has_like != false" style="color:#488aff" (click)="likeReply(30,replies.id,mainI,commentIndex,replyIndex)">
                               <div *ngIf="replies.like_count != 0">{{replies.like_count}}</div> {{'like' | translate}}</a> <span class="mr-10">-</span>
-                            <span>{{replies.time}}</span>
+                            <span>{{getTime(replies.time)}}</span>
 
                           </div>
 
@@ -162,9 +162,7 @@
                           <div class="clearfix"></div>
 
                         </div>
-
                       </div>
-
                     </div>
                     <div class="comment write-comment">
                       <div class="pull-left">
@@ -172,7 +170,7 @@
                       </div>
                       <form>
                         <div class="input-group" style="max-width:400px">
-                          <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="reply ...">
+                          <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="{{'reply' | translate}}">
                           <div class="input-group-btn">
                             <button type="submit" style="height:35px" class="btn btn-default" (click)="replyOnComment(mainI,commentIndex,comments.entity_id,comments.id)">
                                       <i class="fa fa-paper-plane"></i>
@@ -285,7 +283,7 @@
                       <a href="#" class="btn btn-danger cancel-edit">{{ 'cancel' | translate }}</a>
                     </div>
                   </div>
-                  <div class="pull-right" *ngIf="comments.can_edit == false">
+                  <div class="pull-right" *ngIf="comments.can_edit == true">
                     <a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a>
                     <a href="#" (click)="deleteComment(comments.id, mainI, commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a>
                   </div>
@@ -295,9 +293,9 @@
                       <div class="feed-title">
 
 
-                        <span class="mr-10" *ngIf="comments.has_like ==false" (click)="likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}}{{'like' | translate}}</span>
-                        <span class="mr-10" *ngIf="comments.has_like != false" style="color:#488aff" (click)="likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
-                        <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
+                        <span class="mr-10" *ngIf="comments.has_like ==false" (click)="likeComment(30,comments.id,mainI,commentIndex)"><span *ngIf="comments.like_count != 0">{{comments.like_count}}</span>{{'like' | translate}}</span>
+                        <span class="mr-10" *ngIf="comments.has_like != false" style="color:#488aff" (click)="likeComment(30,comments.id,mainI,commentIndex)"><span *ngIf="comments.like_count != 0">{{comments.like_count}}</span> {{'like' | translate}}</span>
+                        <span (click)="reply()" class="mr-10 comment-reply"> <span *ngIf="comments.replies != 0">{{comments.replies}}</span> {{'reply' | translate}}</span>
                         <span class="mr-10">-</span>
                         <span>{{getTime(comments.time)}}</span>
                       </div>
@@ -323,7 +321,7 @@
                               <div *ngIf="replies.like_count != 0">{{replies.like_count}}</div>{{'like' | translate}}</a>
                             <a href="#" class="mr-10" *ngIf="replies.has_like != false" style="color:#488aff" (click)="likeReply(30,replies.id,mainI,commentIndex,replyIndex)">
                               <div *ngIf="replies.like_count != 0">{{replies.like_count}}</div> {{'like' | translate}}</a> <span class="mr-10">-</span>
-                            <span>{{replies.time}}</span>
+                            <span>{{getTime(replies.time)}}</span>
 
                           </div>
 
@@ -344,7 +342,7 @@
                       </div>
                       <form>
                         <div class="input-group" style="max-width:400px">
-                          <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="reply ...">
+                          <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="{{'reply' | translate}}">
                           <div class="input-group-btn">
                             <button type="submit" style="height:35px" class="btn btn-default" (click)="replyOnComment(mainI,commentIndex,comments.entity_id,comments.id)">
                                         <i class="fa fa-paper-plane"></i>
@@ -462,14 +460,14 @@
                       <h3><a href="#">{{comments.name}}</a></h3>
                       <p style="margin-left:0 !important;">{{comments.text}}</p>
                       <div class="input-group">
-                        <textarea [(ngModel)]="comments.text" [ngModelOptions]="{ standalone :true}" class="form-control mb-5 "></textarea>
+                        <textarea [(ngModel)]="text" [ngModelOptions]="{ standalone :true}" class="form-control mb-5 "></textarea>
 
-                        <a href="#" (click)="editComment(comments.id, comments.text, mainI, commentIndex)" class="btn btn-theme saveComment">{{'save-post' | translate}}</a>
+                        <a href="#" (click)="editComment(comments.id, text, mainI, commentIndex)" class="btn btn-theme saveComment">{{'save-post' | translate}}</a>
                         <a href="#" class="btn btn-danger cancel-edit">{{ 'cancel' | translate }}</a>
                       </div>
                     </div>
-                    <div class="pull-right" *ngIf="comments.can_edit == false">
-                      <a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a>
+                    <div class="pull-right" *ngIf="comments.can_edit == true">
+                      <a href="#" (click)="edit(comments.text)" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a>
                       <a href="#" (click)="deleteComment(comments.id, mainI, commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a>
                     </div>
                     <div class="clearfix"></div>
@@ -478,9 +476,9 @@
                         <div class="feed-title">
 
 
-                          <span class="mr-10" *ngIf="comments.has_like ==false" (click)="likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}}{{'like' | translate}}</span>
-                          <span class="mr-10" *ngIf="comments.has_like != false" style="color:#488aff" (click)="likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
-                          <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
+                          <span class="mr-10" *ngIf="comments.has_like ==false" (click)="likeComment(30,comments.id,mainI,commentIndex)"><span *ngIf="comments.like_count != 0">{{comments.like_count}}</span>{{'like' | translate}}</span>
+                          <span class="mr-10" *ngIf="comments.has_like != false" style="color:#488aff" (click)="likeComment(30,comments.id,mainI,commentIndex)"><span *ngIf="comments.like_count != 0">{{comments.like_count}}</span> {{'like' | translate}}</span>
+                          <span (click)="reply()" class="mr-10 comment-reply"> <span *ngIf="comments.replies != 0">{{comments.replies}}</span> {{'reply' | translate}}</span>
                           <span class="mr-10">-</span>
                           <span>{{getTime(comments.time)}}</span>
                         </div>
@@ -506,7 +504,7 @@
                                 <div *ngIf="replies.like_count != 0">{{replies.like_count}}</div>{{'like' | translate}}</a>
                               <a href="#" class="mr-10" *ngIf="replies.has_like != false" style="color:#488aff" (click)="likeReply(30,replies.id,mainI,commentIndex,replyIndex)">
                                 <div *ngIf="replies.like_count != 0">{{replies.like_count}}</div> {{'like' | translate}}</a> <span class="mr-10">-</span>
-                              <span>{{replies.time}}</span>
+                              <span>{{getTime(replies.time)}}</span>
 
                             </div>
 
@@ -527,7 +525,7 @@
                         </div>
                         <form>
                           <div class="input-group" style="max-width:400px">
-                            <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="reply ...">
+                            <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="{{'reply' | translate}}">
                             <div class="input-group-btn">
                               <button type="submit" style="height:35px" class="btn btn-default" (click)="replyOnComment(mainI,commentIndex,comments.entity_id,comments.id)">
                                         <i class="fa fa-paper-plane"></i>
@@ -652,7 +650,7 @@
                         <a href="#" class="btn btn-danger cancel-edit">{{ 'cancel' | translate }}</a>
                       </div>
                     </div>
-                    <div class="pull-right" *ngIf="comments.can_edit == false">
+                    <div class="pull-right" *ngIf="comments.can_edit == true">
                       <a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a>
                       <a href="#" (click)="deleteComment(comments.id, mainI, commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a>
                     </div>
@@ -662,9 +660,9 @@
                         <div class="feed-title">
 
 
-                          <span class="mr-10" *ngIf="comments.has_like ==false" (click)="likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}}{{'like' | translate}}</span>
-                          <span class="mr-10" *ngIf="comments.has_like != false" style="color:#488aff" (click)="likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
-                          <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
+                          <span class="mr-10" *ngIf="comments.has_like ==false" (click)="likeComment(30,comments.id,mainI,commentIndex)"><span *ngIf="comments.like_count != 0">{{comments.like_count}}</span>{{'like' | translate}}</span>
+                          <span class="mr-10" *ngIf="comments.has_like != false" style="color:#488aff" (click)="likeComment(30,comments.id,mainI,commentIndex)"><span *ngIf="comments.like_count != 0">{{comments.like_count}}</span> {{'like' | translate}}</span>
+                          <span (click)="reply()" class="mr-10 comment-reply"> <span *ngIf="comments.replies != 0">{{comments.replies}}</span> {{'reply' | translate}}</span>
                           <span class="mr-10">-</span>
                           <span>{{getTime(comments.time)}}</span>
                         </div>
@@ -690,7 +688,7 @@
                                 <div *ngIf="replies.like_count != 0">{{replies.like_count}}</div>{{'like' | translate}}</a>
                               <a href="#" class="mr-10" *ngIf="replies.has_like != false" style="color:#488aff" (click)="likeReply(30,replies.id,mainI,commentIndex,replyIndex)">
                                 <div *ngIf="replies.like_count != 0">{{replies.like_count}}</div> {{'like' | translate}}</a> <span class="mr-10">-</span>
-                              <span>{{replies.time}}</span>
+                              <span>{{getTime(replies.time)}}</span>
 
                             </div>
 
@@ -711,7 +709,7 @@
                         </div>
                         <form>
                           <div class="input-group" style="max-width:400px">
-                            <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="reply ...">
+                            <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="{{'reply' | translate}}">
                             <div class="input-group-btn">
                               <button type="submit" style="height:35px" class="btn btn-default" (click)="replyOnComment(mainI,commentIndex,comments.entity_id,comments.id)">
                                 <i class="fa fa-paper-plane"></i>
@@ -742,8 +740,6 @@
         </div>
 
         <!-- ////////////////////////////////// group post  /////////////////////////////////////////////////////////////////// -->
-
-
 
         <div class="feed-box panel panel-theme mt-20" *ngSwitchCase=" feed.shared == false && feed.type == 'group'">
           <div class="feed-header">
@@ -827,7 +823,7 @@
                       <a href="#" class="btn btn-danger cancel-edit">{{ 'cancel' | translate }}</a>
                     </div>
                   </div>
-                  <div class="pull-right" *ngIf="comments.can_edit == false">
+                  <div class="pull-right" *ngIf="comments.can_edit == true">
                     <a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a>
                     <a href="#" (click)="deleteComment(comments.id, mainI, commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a>
                   </div>
@@ -837,9 +833,9 @@
                       <div class="feed-title">
 
 
-                        <span class="mr-10" *ngIf="comments.has_like ==false" (click)="likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}}{{'like' | translate}}</span>
-                        <span class="mr-10" *ngIf="comments.has_like != false" style="color:#488aff" (click)="likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
-                        <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
+                        <span class="mr-10" *ngIf="comments.has_like ==false" (click)="likeComment(30,comments.id,mainI,commentIndex)"><span *ngIf="comments.like_count != 0">{{comments.like_count}}</span>{{'like' | translate}}</span>
+                        <span class="mr-10" *ngIf="comments.has_like != false" style="color:#488aff" (click)="likeComment(30,comments.id,mainI,commentIndex)"><span *ngIf="comments.like_count != 0">{{comments.like_count}}</span> {{'like' | translate}}</span>
+                        <span (click)="reply()" class="mr-10 comment-reply"> <span *ngIf="comments.replies != 0">{{comments.replies}}</span> {{'reply' | translate}}</span>
                         <span class="mr-10">-</span>
                         <span>{{getTime(comments.time)}}</span>
                       </div>
@@ -865,7 +861,7 @@
                               <div *ngIf="replies.like_count != 0">{{replies.like_count}}</div>{{'like' | translate}}</a>
                             <a href="#" class="mr-10" *ngIf="replies.has_like != false" style="color:#488aff" (click)="likeReply(30,replies.id,mainI,commentIndex,replyIndex)">
                               <div *ngIf="replies.like_count != 0">{{replies.like_count}}</div> {{'like' | translate}}</a> <span class="mr-10">-</span>
-                            <span>{{replies.time}}</span>
+                            <span>{{getTime(replies.time)}}</span>
 
                           </div>
 
@@ -886,7 +882,7 @@
                       </div>
                       <form>
                         <div class="input-group" style="max-width:400px">
-                          <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="reply ...">
+                          <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="{{'reply' | translate}}">
                           <div class="input-group-btn">
                             <button type="submit" style="height:35px" class="btn btn-default" (click)="replyOnComment(mainI,commentIndex,comments.entity_id,comments.id)">
                                           <i class="fa fa-paper-plane"></i>
@@ -915,10 +911,7 @@
           </div>
         </div>
 
-
         <!-- ////////////////////////////////// page post  /////////////////////////////////////////////////////////////////// -->
-
-
 
         <div class="feed-box panel panel-theme mt-20" *ngSwitchCase=" feed.shared == false && feed.type == 'page'">
           <div class="feed-header">
@@ -1000,7 +993,7 @@
                       <a href="#" class="btn btn-danger cancel-edit">{{ 'cancel' | translate }}</a>
                     </div>
                   </div>
-                  <div class="pull-right" *ngIf="comments.can_edit == false">
+                  <div class="pull-right" *ngIf="comments.can_edit == true">
                     <a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a>
                     <a href="#" (click)="deleteComment(comments.id, mainI, commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a>
                   </div>
@@ -1010,9 +1003,9 @@
                       <div class="feed-title">
 
 
-                        <span class="mr-10" *ngIf="comments.has_like ==false" (click)="likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}}{{'like' | translate}}</span>
-                        <span class="mr-10" *ngIf="comments.has_like != false" style="color:#488aff" (click)="likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
-                        <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
+                        <span class="mr-10" *ngIf="comments.has_like ==false" (click)="likeComment(30,comments.id,mainI,commentIndex)"><span *ngIf="comments.like_count != 0">{{comments.like_count}}</span>{{'like' | translate}}</span>
+                        <span class="mr-10" *ngIf="comments.has_like != false" style="color:#488aff" (click)="likeComment(30,comments.id,mainI,commentIndex)"><span *ngIf="comments.like_count != 0">{{comments.like_count}}</span> {{'like' | translate}}</span>
+                        <span (click)="reply()" class="mr-10 comment-reply"> <span *ngIf="comments.replies != 0">{{comments.replies}}</span> {{'reply' | translate}}</span>
                         <span class="mr-10">-</span>
                         <span>{{getTime(comments.time)}}</span>
                       </div>
@@ -1038,7 +1031,7 @@
                               <div *ngIf="replies.like_count != 0">{{replies.like_count}}</div>{{'like' | translate}}</a>
                             <a href="#" class="mr-10" *ngIf="replies.has_like != false" style="color:#488aff" (click)="likeReply(30,replies.id,mainI,commentIndex,replyIndex)">
                               <div *ngIf="replies.like_count != 0">{{replies.like_count}}</div> {{'like' | translate}}</a> <span class="mr-10">-</span>
-                            <span>{{replies.time}}</span>
+                            <span>{{getTime(replies.time)}}</span>
 
                           </div>
 
@@ -1059,7 +1052,7 @@
                       </div>
                       <form>
                         <div class="input-group" style="max-width:400px">
-                          <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="reply ...">
+                          <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="{{'reply' | translate}}">
                           <div class="input-group-btn">
                             <button type="submit" style="height:35px" class="btn btn-default" (click)="replyOnComment(mainI,commentIndex,comments.entity_id,comments.id)">
                                                     <i class="fa fa-paper-plane"></i>
@@ -1089,7 +1082,6 @@
         </div>
 
         <!-- ////////////////////////////////// poll post  /////////////////////////////////////////////////////////////////// -->
-
 
         <div class="feed-box panel panel-theme mt-20" *ngSwitchCase="feed.type_id == '' && feed.shared == false && poll_type == '1'">
           <div class="feed-header">
@@ -1171,7 +1163,7 @@
                       <a href="#" class="btn btn-danger cancel-edit">{{ 'cancel' | translate }}</a>
                     </div>
                   </div>
-                  <div class="pull-right" *ngIf="comments.can_edit == false">
+                  <div class="pull-right" *ngIf="comments.can_edit == true">
                     <a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a>
                     <a href="#" (click)="deleteComment(comments.id, mainI, commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a>
                   </div>
@@ -1181,9 +1173,9 @@
                       <div class="feed-title">
 
 
-                        <span class="mr-10" *ngIf="comments.has_like ==false" (click)="likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}}{{'like' | translate}}</span>
-                        <span class="mr-10" *ngIf="comments.has_like != false" style="color:#488aff" (click)="likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
-                        <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
+                        <span class="mr-10" *ngIf="comments.has_like ==false" (click)="likeComment(30,comments.id,mainI,commentIndex)"><span *ngIf="comments.like_count != 0">{{comments.like_count}}</span>{{'like' | translate}}</span>
+                        <span class="mr-10" *ngIf="comments.has_like != false" style="color:#488aff" (click)="likeComment(30,comments.id,mainI,commentIndex)"><span *ngIf="comments.like_count != 0">{{comments.like_count}}</span> {{'like' | translate}}</span>
+                        <span (click)="reply()" class="mr-10 comment-reply"> <span *ngIf="comments.replies != 0">{{comments.replies}}</span> {{'reply' | translate}}</span>
                         <span class="mr-10">-</span>
                         <span>{{getTime(comments.time)}}</span>
                       </div>
@@ -1209,7 +1201,7 @@
                               <div *ngIf="replies.like_count != 0">{{replies.like_count}}</div>{{'like' | translate}}</a>
                             <a href="#" class="mr-10" *ngIf="replies.has_like != false" style="color:#488aff" (click)="likeReply(30,replies.id,mainI,commentIndex,replyIndex)">
                               <div *ngIf="replies.like_count != 0">{{replies.like_count}}</div> {{'like' | translate}}</a> <span class="mr-10">-</span>
-                            <span>{{replies.time}}</span>
+                            <span>{{getTime(replies.time)}}</span>
 
                           </div>
 
@@ -1230,7 +1222,7 @@
                       </div>
                       <form>
                         <div class="input-group" style="max-width:400px">
-                          <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="reply ...">
+                          <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="{{'reply' | translate}}">
                           <div class="input-group-btn">
                             <button type="submit" style="height:35px" class="btn btn-default" (click)="replyOnComment(mainI,commentIndex,comments.entity_id,comments.id)">
                                           <i class="fa fa-paper-plane"></i>
@@ -1259,7 +1251,6 @@
           </div>
         </div>
         <!-- ////////////////////////////////// feeling post  /////////////////////////////////////////////////////////////////// -->
-
 
         <div class="feed-box panel panel-theme mt-20" *ngSwitchCase="feed.feeling_type != '' && feed.shared == false && feed.type== 'feed' && feed.full_message == ''">
           <div class="feed-header">
@@ -1342,7 +1333,7 @@
                       <a href="#" class="btn btn-danger cancel-edit">{{ 'cancel' | translate }}</a>
                     </div>
                   </div>
-                  <div class="pull-right" *ngIf="comments.can_edit == false">
+                  <div class="pull-right" *ngIf="comments.can_edit == true">
                     <a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a>
                     <a href="#" (click)="deleteComment(comments.id, mainI, commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a>
                   </div>
@@ -1352,9 +1343,9 @@
                       <div class="feed-title">
 
 
-                        <span class="mr-10" *ngIf="comments.has_like ==false" (click)="likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}}{{'like' | translate}}</span>
-                        <span class="mr-10" *ngIf="comments.has_like != false" style="color:#488aff" (click)="likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
-                        <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
+                        <span class="mr-10" *ngIf="comments.has_like ==false" (click)="likeComment(30,comments.id,mainI,commentIndex)"><span *ngIf="comments.like_count != 0">{{comments.like_count}}</span>{{'like' | translate}}</span>
+                        <span class="mr-10" *ngIf="comments.has_like != false" style="color:#488aff" (click)="likeComment(30,comments.id,mainI,commentIndex)"><span *ngIf="comments.like_count != 0">{{comments.like_count}}</span> {{'like' | translate}}</span>
+                        <span (click)="reply()" class="mr-10 comment-reply"> <span *ngIf="comments.replies != 0">{{comments.replies}}</span> {{'reply' | translate}}</span>
                         <span class="mr-10">-</span>
                         <span>{{getTime(comments.time)}}</span>
                       </div>
@@ -1380,7 +1371,7 @@
                               <div *ngIf="replies.like_count != 0">{{replies.like_count}}</div>{{'like' | translate}}</a>
                             <a href="#" class="mr-10" *ngIf="replies.has_like != false" style="color:#488aff" (click)="likeReply(30,replies.id,mainI,commentIndex,replyIndex)">
                               <div *ngIf="replies.like_count != 0">{{replies.like_count}}</div> {{'like' | translate}}</a> <span class="mr-10">-</span>
-                            <span>{{replies.time}}</span>
+                            <span>{{getTime(replies.time)}}</span>
 
                           </div>
 
@@ -1401,7 +1392,7 @@
                       </div>
                       <form>
                         <div class="input-group" style="max-width:400px">
-                          <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="reply ...">
+                          <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="{{'reply' | translate}}">
                           <div class="input-group-btn">
                             <button type="submit" style="height:35px" class="btn btn-default" (click)="replyOnComment(mainI,commentIndex,comments.entity_id,comments.id)">
                                             <i class="fa fa-paper-plane"></i>
@@ -1430,9 +1421,7 @@
           </div>
         </div>
 
-
         <!-- ////////////////////////////////// shared watching post  /////////////////////////////////////////////////////////////////// -->
-
 
         <div class="feed-box panel panel-theme mt-20" *ngSwitchCase="feed.feeling_type != '' && feed.shared == true">
           <div class="feed-header">
@@ -1525,7 +1514,7 @@
                       <a href="#" class="btn btn-danger cancel-edit">{{ 'cancel' | translate }}</a>
                     </div>
                   </div>
-                  <div class="pull-right" *ngIf="comments.can_edit == false">
+                  <div class="pull-right" *ngIf="comments.can_edit == true">
                     <a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a>
                     <a href="#" (click)="deleteComment(comments.id, mainI, commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a>
                   </div>
@@ -1535,9 +1524,9 @@
                       <div class="feed-title">
 
 
-                        <span class="mr-10" *ngIf="comments.has_like ==false" (click)="likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}}{{'like' | translate}}</span>
-                        <span class="mr-10" *ngIf="comments.has_like != false" style="color:#488aff" (click)="likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
-                        <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
+                        <span class="mr-10" *ngIf="comments.has_like ==false" (click)="likeComment(30,comments.id,mainI,commentIndex)"><span *ngIf="comments.like_count != 0">{{comments.like_count}}</span>{{'like' | translate}}</span>
+                        <span class="mr-10" *ngIf="comments.has_like != false" style="color:#488aff" (click)="likeComment(30,comments.id,mainI,commentIndex)"><span *ngIf="comments.like_count != 0">{{comments.like_count}}</span> {{'like' | translate}}</span>
+                        <span (click)="reply()" class="mr-10 comment-reply"> <span *ngIf="comments.replies != 0">{{comments.replies}}</span> {{'reply' | translate}}</span>
                         <span class="mr-10">-</span>
                         <span>{{getTime(comments.time)}}</span>
                       </div>
@@ -1563,7 +1552,7 @@
                               <div *ngIf="replies.like_count != 0">{{replies.like_count}}</div>{{'like' | translate}}</a>
                             <a href="#" class="mr-10" *ngIf="replies.has_like != false" style="color:#488aff" (click)="likeReply(30,replies.id,mainI,commentIndex,replyIndex)">
                               <div *ngIf="replies.like_count != 0">{{replies.like_count}}</div> {{'like' | translate}}</a> <span class="mr-10">-</span>
-                            <span>{{replies.time}}</span>
+                            <span>{{getTime(replies.time)}}</span>
 
                           </div>
 
@@ -1584,7 +1573,7 @@
                       </div>
                       <form>
                         <div class="input-group" style="max-width:400px">
-                          <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="reply ...">
+                          <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="{{'reply' | translate}}">
                           <div class="input-group-btn">
                             <button type="submit" style="height:35px" class="btn btn-default" (click)="replyOnComment(mainI,commentIndex,comments.entity_id,comments.id)">
                                             <i class="fa fa-paper-plane"></i>
@@ -1615,7 +1604,6 @@
 
 
         <!-- ////////////////////////////////// shared post  /////////////////////////////////////////////////////////////////// -->
-
 
         <div class="feed-box panel panel-theme mt-20" *ngSwitchCase="feed.shared == true && feeling_type == ''">
           <div class="feed-header">
@@ -1709,7 +1697,7 @@
                       <a href="#" class="btn btn-danger cancel-edit">{{ 'cancel' | translate }}</a>
                     </div>
                   </div>
-                  <div class="pull-right" *ngIf="comments.can_edit == false">
+                  <div class="pull-right" *ngIf="comments.can_edit == true">
                     <a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a>
                     <a href="#" (click)="deleteComment(comments.id, mainI, commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a>
                   </div>
@@ -1719,9 +1707,9 @@
                       <div class="feed-title">
 
 
-                        <span class="mr-10" *ngIf="comments.has_like ==false" (click)="likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}}{{'like' | translate}}</span>
-                        <span class="mr-10" *ngIf="comments.has_like != false" style="color:#488aff" (click)="likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
-                        <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
+                        <span class="mr-10" *ngIf="comments.has_like ==false" (click)="likeComment(30,comments.id,mainI,commentIndex)"><span *ngIf="comments.like_count != 0">{{comments.like_count}}</span>{{'like' | translate}}</span>
+                        <span class="mr-10" *ngIf="comments.has_like != false" style="color:#488aff" (click)="likeComment(30,comments.id,mainI,commentIndex)"><span *ngIf="comments.like_count != 0">{{comments.like_count}}</span> {{'like' | translate}}</span>
+                        <span (click)="reply()" class="mr-10 comment-reply"> <span *ngIf="comments.replies != 0">{{comments.replies}}</span> {{'reply' | translate}}</span>
                         <span class="mr-10">-</span>
                         <span>{{getTime(comments.time)}}</span>
                       </div>
@@ -1747,7 +1735,7 @@
                               <div *ngIf="replies.like_count != 0">{{replies.like_count}}</div>{{'like' | translate}}</a>
                             <a href="#" class="mr-10" *ngIf="replies.has_like != false" style="color:#488aff" (click)="likeReply(30,replies.id,mainI,commentIndex,replyIndex)">
                               <div *ngIf="replies.like_count != 0">{{replies.like_count}}</div> {{'like' | translate}}</a> <span class="mr-10">-</span>
-                            <span>{{replies.time}}</span>
+                            <span>{{getTime(replies.time)}}</span>
 
                           </div>
 
@@ -1768,7 +1756,7 @@
                       </div>
                       <form>
                         <div class="input-group" style="max-width:400px">
-                          <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="reply ...">
+                          <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="{{'reply' | translate}}">
                           <div class="input-group-btn">
                             <button type="submit" style="height:35px" class="btn btn-default" (click)="replyOnComment(mainI,commentIndex,comments.entity_id,comments.id)">
                                   <i class="fa fa-paper-plane"></i>
@@ -1797,10 +1785,7 @@
           </div>
         </div>
 
-
-
         <!-- ////////////////////////////////// change avatar  post  /////////////////////////////////////////////////////////////////// -->
-
 
         <div class="feed-box panel panel-theme mt-20" *ngSwitchCase="feed.type_id =='change-avatar'">
           <div class="feed-header">
@@ -1883,7 +1868,7 @@
                       <a href="#" class="btn btn-danger cancel-edit">{{ 'cancel' | translate }}</a>
                     </div>
                   </div>
-                  <div class="pull-right" *ngIf="comments.can_edit == false">
+                  <div class="pull-right" *ngIf="comments.can_edit == true">
                     <a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a>
                     <a href="#" (click)="deleteComment(comments.id, mainI, commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a>
                   </div>
@@ -1893,9 +1878,9 @@
                       <div class="feed-title">
 
 
-                        <span class="mr-10" *ngIf="comments.has_like ==false" (click)="likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}}{{'like' | translate}}</span>
-                        <span class="mr-10" *ngIf="comments.has_like != false" style="color:#488aff" (click)="likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
-                        <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
+                        <span class="mr-10" *ngIf="comments.has_like ==false" (click)="likeComment(30,comments.id,mainI,commentIndex)"><span *ngIf="comments.like_count != 0">{{comments.like_count}}</span>{{'like' | translate}}</span>
+                        <span class="mr-10" *ngIf="comments.has_like != false" style="color:#488aff" (click)="likeComment(30,comments.id,mainI,commentIndex)"><span *ngIf="comments.like_count != 0">{{comments.like_count}}</span> {{'like' | translate}}</span>
+                        <span (click)="reply()" class="mr-10 comment-reply"> <span *ngIf="comments.replies != 0">{{comments.replies}}</span> {{'reply' | translate}}</span>
                         <span class="mr-10">-</span>
                         <span>{{getTime(comments.time)}}</span>
                       </div>
@@ -1921,7 +1906,7 @@
                               <div *ngIf="replies.like_count != 0">{{replies.like_count}}</div>{{'like' | translate}}</a>
                             <a href="#" class="mr-10" *ngIf="replies.has_like != false" style="color:#488aff" (click)="likeReply(30,replies.id,mainI,commentIndex,replyIndex)">
                               <div *ngIf="replies.like_count != 0">{{replies.like_count}}</div> {{'like' | translate}}</a> <span class="mr-10">-</span>
-                            <span>{{replies.time}}</span>
+                            <span>{{getTime(replies.time)}}</span>
 
                           </div>
 
@@ -1942,7 +1927,7 @@
                       </div>
                       <form>
                         <div class="input-group" style="max-width:400px">
-                          <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="reply ...">
+                          <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="{{'reply' | translate}}">
                           <div class="input-group-btn">
                             <button type="submit" style="height:35px" class="btn btn-default" (click)="replyOnComment(mainI,commentIndex,comments.entity_id,comments.id)">
                                     <i class="fa fa-paper-plane"></i>
@@ -2053,7 +2038,7 @@
                       <a href="#" class="btn btn-danger cancel-edit">{{ 'cancel' | translate }}</a>
                     </div>
                   </div>
-                  <div class="pull-right" *ngIf="comments.can_edit == false">
+                  <div class="pull-right" *ngIf="comments.can_edit == true">
                     <a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a>
                     <a href="#" (click)="deleteComment(comments.id, mainI, commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a>
                   </div>
@@ -2063,9 +2048,9 @@
                       <div class="feed-title">
 
 
-                        <span class="mr-10" *ngIf="comments.has_like ==false" (click)="likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}}{{'like' | translate}}</span>
-                        <span class="mr-10" *ngIf="comments.has_like != false" style="color:#488aff" (click)="likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
-                        <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
+                        <span class="mr-10" *ngIf="comments.has_like ==false" (click)="likeComment(30,comments.id,mainI,commentIndex)"><span *ngIf="comments.like_count != 0">{{comments.like_count}}</span>{{'like' | translate}}</span>
+                        <span class="mr-10" *ngIf="comments.has_like != false" style="color:#488aff" (click)="likeComment(30,comments.id,mainI,commentIndex)"><span *ngIf="comments.like_count != 0">{{comments.like_count}}</span> {{'like' | translate}}</span>
+                        <span (click)="reply()" class="mr-10 comment-reply"> <span *ngIf="comments.replies != 0">{{comments.replies}}</span> {{'reply' | translate}}</span>
                         <span class="mr-10">-</span>
                         <span>{{getTime(comments.time)}}</span>
                       </div>
@@ -2091,7 +2076,7 @@
                               <div *ngIf="replies.like_count != 0">{{replies.like_count}}</div>{{'like' | translate}}</a>
                             <a href="#" class="mr-10" *ngIf="replies.has_like != false" style="color:#488aff" (click)="likeReply(30,replies.id,mainI,commentIndex,replyIndex)">
                               <div *ngIf="replies.like_count != 0">{{replies.like_count}}</div> {{'like' | translate}}</a> <span class="mr-10">-</span>
-                            <span>{{replies.time}}</span>
+                            <span>{{getTime(replies.time)}}</span>
 
                           </div>
 
@@ -2112,7 +2097,7 @@
                       </div>
                       <form>
                         <div class="input-group" style="max-width:400px">
-                          <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="reply ...">
+                          <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="{{'reply' | translate}}">
                           <div class="input-group-btn">
                             <button type="submit" style="height:35px" class="btn btn-default" (click)="replyOnComment(mainI,commentIndex,comments.entity_id,comments.id)">
                                   <i class="fa fa-paper-plane"></i>
@@ -2228,7 +2213,7 @@
                       <a href="#" class="btn btn-danger cancel-edit">{{ 'cancel' | translate }}</a>
                     </div>
                   </div>
-                  <div class="pull-right" *ngIf="comments.can_edit == false">
+                  <div class="pull-right" *ngIf="comments.can_edit == true">
                     <a href="#" (click)="edit()" class="label label-success btn-xs comment-edit"><i class="fa fa-edit"></i></a>
                     <a href="#" (click)="deleteComment(comments.id, mainI, commentIndex)" class="label label-danger"><i class="fa fa-close mr-5"></i></a>
                   </div>
@@ -2238,9 +2223,9 @@
                       <div class="feed-title">
 
 
-                        <span class="mr-10" *ngIf="comments.has_like ==false" (click)="likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}}{{'like' | translate}}</span>
-                        <span class="mr-10" *ngIf="comments.has_like != false" style="color:#488aff" (click)="likeComment(30,comments.id,mainI,commentIndex)">{{comments.like_count}} {{'like' | translate}}</span>
-                        <span (click)="reply()" class="mr-10 comment-reply"> {{comments.replies}} Reply</span>
+                        <span class="mr-10" *ngIf="comments.has_like ==false" (click)="likeComment(30,comments.id,mainI,commentIndex)"><span *ngIf="comments.like_count != 0">{{comments.like_count}}</span>{{'like' | translate}}</span>
+                        <span class="mr-10" *ngIf="comments.has_like != false" style="color:#488aff" (click)="likeComment(30,comments.id,mainI,commentIndex)"><span *ngIf="comments.like_count != 0">{{comments.like_count}}</span> {{'like' | translate}}</span>
+                        <span (click)="reply()" class="mr-10 comment-reply"> <span *ngIf="comments.replies != 0">{{comments.replies}}</span> {{'reply' | translate}}</span>
                         <span class="mr-10">-</span>
                         <span>{{getTime(comments.time)}}</span>
                       </div>
@@ -2266,7 +2251,7 @@
                               <div *ngIf="replies.like_count != 0">{{replies.like_count}}</div>{{'like' | translate}}</a>
                             <a href="#" class="mr-10" *ngIf="replies.has_like != false" style="color:#488aff" (click)="likeReply(30,replies.id,mainI,commentIndex,replyIndex)">
                               <div *ngIf="replies.like_count != 0">{{replies.like_count}}</div> {{'like' | translate}}</a> <span class="mr-10">-</span>
-                            <span>{{replies.time}}</span>
+                            <span>{{getTime(replies.time)}}</span>
 
                           </div>
 
@@ -2287,7 +2272,7 @@
                       </div>
                       <form>
                         <div class="input-group" style="max-width:400px">
-                          <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="reply ...">
+                          <input type="text" style="height:35px" class="form-control" [(ngModel)]="comment.reply" [ngModelOptions]="{ standalone : true}" placeholder="{{'reply' | translate}}">
                           <div class="input-group-btn">
                             <button type="submit" style="height:35px" class="btn btn-default" (click)="replyOnComment(mainI,commentIndex,comments.entity_id,comments.id)">
                                     <i class="fa fa-paper-plane"></i>
