@@ -61,7 +61,7 @@ export class PostFeatursPage {
     })
   }
   check(text) {
-    if (text.length == 0)
+    if (text.length == 0 && !$('.feeling-div').attr('id'))
       return true;
     else
       return null;
@@ -79,6 +79,7 @@ export class PostFeatursPage {
     //(userID,post,feeling='none',postType='text',privacy='1',background='default',tag :any='no', type, type_id, to_user_id="")
     if ($('.feeling-div').attr('id') && this.post.text == "") {
       let selectedFeeling = $('.feeling-div').attr('id')
+
       this.remoteService.feedPosting(userID, postText.feeling, selectedFeeling, 'feeling', privacy, id, 'no', this.type, this.typeId, this.to_user_id).subscribe(res => {
         // this.feeds.unshift(res.feed)
         this.post.text = ""
@@ -91,7 +92,7 @@ export class PostFeatursPage {
 
     } else if ($('.feeling-div').attr('id') && this.post.text != "") {
       let selectedFeeling = $('.feeling-div').attr('id')
-
+      // $('.dropdown-feeling').toggleClass('open');
       this.remoteService.feedPosting(userID, postText, selectedFeeling, 'feeling&text', privacy, id, 'no', this.type, this.typeId, this.to_user_id).subscribe(res => {
         // this.feeds.unshift(res.feed)
         this.post.text = ""
@@ -155,12 +156,7 @@ export class PostFeatursPage {
           {
             text: post,
             handler: data => {
-              // if (User.isValid(data.username, data.password)) {
-              //   // logged in!
-              // } else {
-              //   // invalid login
-              //   return false;
-              // }
+              
               this.remoteService.locationPosting(this.userId, data.location).subscribe(res => {
                 console.log(res)
                 this.callback(res.feed).then(() => {
@@ -169,7 +165,6 @@ export class PostFeatursPage {
 
               })
             }
-
           }
         ]
       }
@@ -198,8 +193,9 @@ export class PostFeatursPage {
       $('.feeling-div').attr('id', $(this).text())
       $(".feeling-div").show()
       $('.feelingText').text($(this).text())
-    })
 
+    })
+    $('.dropdown-feeling').toggleClass('open');
   }
 
   tagUsersDivShow() {

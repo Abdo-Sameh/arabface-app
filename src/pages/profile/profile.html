@@ -14,9 +14,9 @@
       <div class="page_title text-center">
         <h3>{{'profile' | translate}}</h3>
       </div>
-      <div class="menu_btn text-right">
+      <!-- <div class="menu_btn text-right">
         <a href="#"><i class="fa fa-bars"  style="font-size: 19px; line-height: 43px;"></i></a>
-      </div>
+      </div> -->
     </div>
   </header>
 </ion-header>
@@ -25,10 +25,10 @@
 
 
   <section class="bg_grey full_vh  profile pt-70">
-    <div class="user_cover" [ngStyle]="{ 'background-image': 'url('  + cover + ')'}">
+    <div class="user_cover" (click)="viewPhoto(cover)" [ngStyle]="{ 'background-image': 'url('  + cover + ')'}">
       <div class="friend_profile_box">
         <form class="img-upload">
-          <img src={{userData.avatar}} alt="Arabface" title="Arabface">
+          <img (click)="viewPhoto(userData.avatar)" src={{userData.avatar}} alt="Arabface" title="Arabface">
           <div class="file-input file-input-profile">
             <label for="profile-upload">
             <i *ngIf="myProfile()" class="fa fa-camera"></i>
@@ -62,11 +62,11 @@
             <img src={{userData.avatar}} alt="">
             <form><textarea (click)="goToPost()" placeholder="{{'whats-happening' | translate}}"></textarea></form>
           </div>
-          <div class="panel panel-theme flex-space-around">
+          <!-- <div class="panel panel-theme flex-space-around">
             <a href="#">{{'status' | translate}}</a>
             <a href="#"><i class="fa fa-camera"></i> {{'photo' | translate}}</a>
             <a href="#">{{'location' | translate}}</a>
-          </div>
+          </div> -->
           <div *ngFor="let feed of feeds ; let mainI =index" [ngSwitch]="true">
 
 
@@ -77,7 +77,7 @@
                 <div class="pull-left">
                   <img class="feed-img" src={{feed.avatar}} alt="">
                   <div class="feed-title">
-                    <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{feed.name}} </a> <span *ngIf="feed.tag_users != ''">  with  <span *ngFor="let tag of feed.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span>                </span><br>
+                    <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer; font-size: 14px;">{{feed.name}} </a> <span *ngIf="feed.tag_users != ''">  with  <span *ngFor="let tag of feed.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span>                </span><br>
                     <span>{{getTime(feed.time)}} </span><span>-</span>
                     <span class="dropdown ml-5">
                               <a href="#" *ngIf="feed.privacy == '1'"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
@@ -149,7 +149,7 @@
                     <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
                     <div class="feed-title">
                       <div class="pull-left comment-edit-input">
-                        <h3><a href="#">{{comments.name}}</a></h3>
+                        <h3 (click)="GoToProfile(comments.entity_id, userId)"><a href="#">{{comments.name}}</a></h3>
                         <p style="margin-left:0 !important;">{{comments.text}}</p>
                         <div class="input-group">
                           <textarea [(ngModel)]="comments.text" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
@@ -319,7 +319,7 @@
                     <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
                     <div class="feed-title">
                       <div class="pull-left comment-edit-input">
-                        <h3><a href="#">{{comments.name}}</a></h3>
+                        <h3 (click)="GoToProfile(comments.entity_id, userId)"><a href="#">{{comments.name}}</a></h3>
                         <p style="margin-left:0 !important;">{{comments.text}}</p>
                         <div class="input-group">
                           <textarea [(ngModel)]="comments.text" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
@@ -502,7 +502,7 @@
                       <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
                       <div class="feed-title">
                         <div class="pull-left comment-edit-input">
-                          <h3><a href="#">{{comments.name}}</a></h3>
+                          <h3 (click)="GoToProfile(comments.entity_id, userId)"><a href="#">{{comments.name}}</a></h3>
                           <p style="margin-left:0 !important;">{{comments.text}}</p>
                           <div class="input-group">
                             <textarea [(ngModel)]="text" [ngModelOptions]="{ standalone :true}" class="form-control mb-5 "></textarea>
@@ -686,7 +686,7 @@
                       <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
                       <div class="feed-title">
                         <div class="pull-left comment-edit-input">
-                          <h3><a href="#">{{comments.name}}</a></h3>
+                          <h3 (click)="GoToProfile(comments.entity_id, userId)"><a href="#">{{comments.name}}</a></h3>
                           <p style="margin-left:0 !important;">{{comments.text}}</p>
                           <div class="input-group">
                             <textarea [(ngModel)]="comments.text" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
@@ -859,7 +859,7 @@
                     <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
                     <div class="feed-title">
                       <div class="pull-left comment-edit-input">
-                        <h3><a href="#">{{comments.name}}</a></h3>
+                        <h3 (click)="GoToProfile(comments.entity_id, userId)"><a href="#">{{comments.name}}</a></h3>
                         <p style="margin-left:0 !important;">{{comments.text}}</p>
                         <div class="input-group">
                           <textarea [(ngModel)]="comments.text" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
@@ -1029,7 +1029,7 @@
                     <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
                     <div class="feed-title">
                       <div class="pull-left comment-edit-input">
-                        <h3><a href="#">{{comments.name}}</a></h3>
+                        <h3 (click)="GoToProfile(comments.entity_id, userId)"><a href="#">{{comments.name}}</a></h3>
                         <p style="margin-left:0 !important;">{{comments.text}}</p>
                         <div class="input-group">
                           <textarea [(ngModel)]="comments.text" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
@@ -1199,7 +1199,7 @@
                     <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
                     <div class="feed-title">
                       <div class="pull-left comment-edit-input">
-                        <h3><a href="#">{{comments.name}}</a></h3>
+                        <h3 (click)="GoToProfile(comments.entity_id, userId)"><a href="#">{{comments.name}}</a></h3>
                         <p style="margin-left:0 !important;">{{comments.text}}</p>
                         <div class="input-group">
                           <textarea [(ngModel)]="comments.text" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
@@ -1369,7 +1369,7 @@
                     <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
                     <div class="feed-title">
                       <div class="pull-left comment-edit-input">
-                        <h3><a href="#">{{comments.name}}</a></h3>
+                        <h3 (click)="GoToProfile(comments.entity_id, userId)"><a href="#">{{comments.name}}</a></h3>
                         <p style="margin-left:0 !important;">{{comments.text}}</p>
                         <div class="input-group">
                           <textarea [(ngModel)]="comments.text" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
@@ -1473,7 +1473,17 @@
                 <div class="pull-left">
                   <img class="feed-img" src={{feed.avatar}} alt="">
                   <div class="feed-title">
-                    <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{feed.name}} </a> <span *ngIf="feed.tag_users != ''">  with  <span *ngFor="let tag of feed.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span>                </span><br>
+                    <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer; font-size: 14px;">{{feed.name}} </a>
+                    <span *ngIf="feed.tag_users != ''">  {{'with' | translate}}
+                      <span *ngFor="let tag of feed.tag_users">
+                        <a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a>
+                      </span>
+                    </span>
+                    <span>{{'shared' | translate}}
+                      <a (click)="GoToProfile(feed.shared_entity_id, userId)" style="color:#5c0632;cursor:pointer; font-size: 14px;">{{feed.shared_name}}</a>'s
+                      {{feed.shared_title}}
+                    </span>
+                    <br>
                     <span>{{getTime(feed.time)}} </span><span>-</span>
                     <span class="dropdown ml-5">
                                     <a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
@@ -1521,8 +1531,8 @@
                     <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer">{{feed.shared_name}} </a>
                     <div class="clearfix"></div>
                   </div>
-                </div>
-
+                </div><br>
+                <span>{{getTime(feed.shared_time)}} </span><span>-</span>
                 <br><br><br>
 
                 <div>
@@ -1550,7 +1560,7 @@
                     <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
                     <div class="feed-title">
                       <div class="pull-left comment-edit-input">
-                        <h3><a href="#">{{comments.name}}</a></h3>
+                        <h3 (click)="GoToProfile(comments.entity_id, userId)"><a href="#">{{comments.name}}</a></h3>
                         <p style="margin-left:0 !important;">{{comments.text}}</p>
                         <div class="input-group">
                           <textarea [(ngModel)]="comments.text" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
@@ -1650,12 +1660,22 @@
 
             <!-- ////////////////////////////////// shared post  /////////////////////////////////////////////////////////////////// -->
 
-            <div class="feed-box panel panel-theme mt-20" *ngSwitchCase="feed.shared == true && feeling_type == ''">
+            <div class="feed-box panel panel-theme mt-20" *ngSwitchCase="feed.shared == true && feed.feeling_type == ''">
               <div class="feed-header">
                 <div class="pull-left">
                   <img class="feed-img" src={{feed.avatar}} alt="">
                   <div class="feed-title">
-                    <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;                      ">{{feed.name}} </a> <span *ngIf="feed.tag_users != ''">  with  <span *ngFor="let tag of feed.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span>                </span><br>
+                    <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer; font-size: 14px;">{{feed.name}} </a>
+                    <span *ngIf="feed.tag_users != ''">  {{'with' | translate}}
+                      <span *ngFor="let tag of feed.tag_users">
+                        <a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a>
+                      </span>
+                    </span>
+                    <span>{{'shared' | translate}}
+                      <a (click)="GoToProfile(feed.shared_entity_id, userId)" style="color:#5c0632;cursor:pointer; font-size: 14px;">{{feed.shared_name}}</a>'s
+                      {{feed.shared_title}}
+                    </span>
+                    <br>
                     <span>{{getTime(feed.time)}} </span><span>-</span>
                     <span class="dropdown ml-5">
                           <a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>
@@ -1701,16 +1721,18 @@
                 <div class="feed-header">
                   <img class="feed-img" src="{{feed.shared_avatar}}" style="width:30px !important ;height:30px;">
                   <div class="feed-title">
-                    <h3>{{feed.shared_name}} </h3>
+                    <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer">{{feed.shared_name}} </a>
                     <div class="clearfix"></div>
                   </div>
-                </div>
-
+                </div><br>
+                <span>{{getTime(feed.shared_time)}} </span><span>-</span>
                 <br><br><br>
 
                 <div>
                   {{feed.full_message}}
+                  <img src="{{feed.images}}" alt="">
                 </div>
+
               </div><br>
               <div class="feed-footer">
                 <div class="action-result flex-space-between">
@@ -1733,7 +1755,7 @@
                     <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
                     <div class="feed-title">
                       <div class="pull-left comment-edit-input">
-                        <h3><a href="#">{{comments.name}}</a></h3>
+                        <h3 (click)="GoToProfile(comments.entity_id, userId)"><a href="#">{{comments.name}}</a></h3>
                         <p style="margin-left:0 !important;">{{comments.text}}</p>
                         <div class="input-group">
                           <textarea [(ngModel)]="comments.text" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
@@ -1904,7 +1926,7 @@
                     <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
                     <div class="feed-title">
                       <div class="pull-left comment-edit-input">
-                        <h3><a href="#">{{comments.name}}</a></h3>
+                        <h3 (click)="GoToProfile(comments.entity_id, userId)"><a href="#">{{comments.name}}</a></h3>
                         <p style="margin-left:0 !important;">{{comments.text}}</p>
                         <div class="input-group">
                           <textarea [(ngModel)]="comments.text" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
@@ -2074,7 +2096,7 @@
                     <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
                     <div class="feed-title">
                       <div class="pull-left comment-edit-input">
-                        <h3><a href="#">{{comments.name}}</a></h3>
+                        <h3 (click)="GoToProfile(comments.entity_id, userId)"><a href="#">{{comments.name}}</a></h3>
                         <p style="margin-left:0 !important;">{{comments.text}}</p>
                         <div class="input-group">
                           <textarea [(ngModel)]="comments.text" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
@@ -2249,7 +2271,7 @@
                     <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
                     <div class="feed-title">
                       <div class="pull-left comment-edit-input">
-                        <h3><a href="#">{{comments.name}}</a></h3>
+                        <h3 (click)="GoToProfile(comments.entity_id, userId)"><a href="#">{{comments.name}}</a></h3>
                         <p style="margin-left:0 !important;">{{comments.text}}</p>
                         <div class="input-group">
                           <textarea [(ngModel)]="comments.text" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
@@ -2350,12 +2372,11 @@
         <div id="tab-content-2{{this.userId}}" class="tab-pane fade mb-30">
           <div class="panel panel-theme">
             <ul class="profile-info">
-
               <li><i class="fa fa-circle fa-fw" style="color: green; font-size: 10px;"></i> {{ profileInfo.online_time }}</li>
-              <li><i class="fa fa-map-marker fa-fw"></i>{{ profileInfo.country }}</li>
+              <li><i class="fa fa-map-marker fa-fw"></i><b>{{'from' | translate}}</b>: {{profileInfo.state}}, {{profileInfo.city}}, {{ profileInfo.country }}</li>
               <li><i class="fa fa-user fa-fw"></i> {{ profileInfo.gender }}</li>
               <li><i class="fa fa-calendar fa-fw"></i> {{ profileInfo.birth }}</li>
-              <li><i class="fa fa-info-circle fa-fw"></i> {{ profileInfo.bio }}</li>
+              <li><i class="fa fa-info-circle fa-fw"></i><b>{{'bio' | translate}}</b>: {{ profileInfo.bio }}</li>
             </ul>
           </div>
           <div class="btn btn-theme btn-block">{{'likes' | translate}}</div>

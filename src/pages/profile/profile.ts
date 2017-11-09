@@ -15,7 +15,7 @@ import { FilePath } from '@ionic-native/file-path';
 import { UploadImagePage } from '../upload-image/upload-image';
 import { TranslateService } from '@ngx-translate/core';
 import { EditPostPage } from '../edit-post/edit-post';
-
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 // import { Camera, CameraOptions } from '@ionic-native/camera';
 // import { FileTransfer, FileUploadOptions, FileTransferObject  } from '@ionic-native/file-transfer';
 
@@ -75,7 +75,7 @@ export class ProfilePage {
   loading: Loading;
   videoURL
   text
-  constructor(private app: App, public translate: TranslateService, public time: TimeProvider, private filePath: FilePath, private transfer: FileTransfer, private file: File, public camera: Camera, public navCtrl: NavController, public navParams: NavParams, public alert: AlertController, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider, public toast: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
+  constructor(public photoViewer: PhotoViewer, private app: App, public translate: TranslateService, public time: TimeProvider, private filePath: FilePath, private transfer: FileTransfer, private file: File, public camera: Camera, public navCtrl: NavController, public navParams: NavParams, public alert: AlertController, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider, public toast: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
     let data = navParams.get('userData');
     console.log()
     this.limit = 4;
@@ -94,6 +94,10 @@ export class ProfilePage {
       console.log(data);
       this.feeds[index].privacy = privacy;
     })
+  }
+
+  viewPhoto(url){
+    this.photoViewer.show(url);
   }
 
   editPostView(index) {
@@ -195,7 +199,7 @@ export class ProfilePage {
 
   showComments(id) {
     $('#pro' + id).show();
-    console.log('#' + id);
+    console.log('#pro' + id);
   }
 
   deleteFriend(id, index) {
@@ -232,11 +236,10 @@ export class ProfilePage {
       showBackdrop: true,
     });
     loading.present()
-    this.remoteService.feedsListApiCall(id, '', 'feed', 10).subscribe(res => {
+    this.remoteService.feedsListApiCall(id, id, 'timeline', 10).subscribe(res => {
       //////////////////// looping to get comments and their replis ////////////////////////////////
       for (let i = 0; i < res.length; i++) {
         //check if post is saved or not-going
-
 
         this.remoteService.isSaved('feed', res[i].id, this.userId).subscribe(data => {
           if (data.status == 1) {
@@ -251,26 +254,19 @@ export class ProfilePage {
           res[i].video_embed = res[i].video_embed.substring(0, res[i].video_embed.indexOf("\""));
           this.videoURL = res[i].video_embed;
         }
-        ///////////////// split time string to words/////////////////
 
-        // res[i].time = res[i].time.split(' ');
-
-        /////////////////////////////////////////////////////
         let newFeedID = res[i].id
         let newFeed = res[i].answers
         this.remoteService.loadComments(newFeedID, this.userId).subscribe(res2 => {
           newFeed.unshift(res2)
           for (let g = 0; g < newFeed[0].length; g++) {
             this.remoteService.loadReplies(newFeed[0][g].id).subscribe(res3 => {
-
               newFeed[0][g]['repliesContent'] = res3
-
             });
-
           }
         });
-
       }
+
       this.feeds = res
       if (GotPosts > 30) {
         console.log()
@@ -561,7 +557,7 @@ export class ProfilePage {
   //////////////////////////////////////////////
   back() {
     //this.navCtrl.pop();
-    this.navCtrl.push(TabsPage);
+    this.app.getRootNav().push(TabsPage);
   }
 
 
@@ -665,12 +661,6 @@ export class ProfilePage {
             this.remoteService.removeComment(commentId, this.userId).subscribe(res => {
               if (res.status == 1) {
                 this.feeds[feedIndex].answers[0].splice(commentIndex, 1);
-                // let toast = this.toast.create({
-                //   message: 'You deleted this comment ',
-                //   duration : 2000
-                //
-                // });
-                // toast.present();
               }
             })
           }
@@ -685,6 +675,7 @@ export class ProfilePage {
     });
     alert.present();
   }
+
   turnOffNotifications(feedid, userID = this.userId) {
     this.remoteService.unsubscribePost(feedid, userID).subscribe((data) => { console.log(data) })
   }

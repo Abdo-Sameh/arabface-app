@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
+import { Nav, IonicPage, App, NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { TimeProvider } from './../../providers/time/time';
 import { ProfilePage } from '../profile/profile'
@@ -7,7 +7,9 @@ import { TabsPage } from '../tabs/tabs';
 import { PhotosPage } from '../photos/photos'
 import { NotFound_404Page } from '../not-found-404/not-found-404';
 import { PostFeatursPage } from '../post-featurs/post-featurs';
-
+import { EditPostPage } from '../edit-post/edit-post';
+import { TranslateService } from '@ngx-translate/core';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 /**
  * Generated class for the FriendProfilePage page.
  *
@@ -47,7 +49,9 @@ export class FriendProfilePage {
   hiddenPost
   userAvatar
   feed = { 'feedid': "" }
-  constructor(public time: TimeProvider, public alert: AlertController, public navCtrl: NavController, public toastCtrl: ToastController, public navParams: NavParams, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider) {
+  videoURL
+  text
+  constructor(public photoViewer: PhotoViewer, public translate: TranslateService, public app: App, public time: TimeProvider, public alert: AlertController, public navCtrl: NavController, public toastCtrl: ToastController, public navParams: NavParams, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider) {
     let data = navParams.get('userData');
     this.userAvatar = "http://" + localStorage.getItem('userAvatar').slice(8, -1);;
     this.blocked = navParams.get('blocked');
@@ -76,6 +80,21 @@ export class FriendProfilePage {
     return this.time.getTime(time);
   }
 
+  viewPhoto(url){
+    this.photoViewer.show(url);
+  }
+
+  edit(text) {
+    this.text = text;
+    $(document).on('click', '.comment-edit', function() {
+      $(this).parent().prev().find('.input-group').show();
+
+    })
+    $(document).on('click', '.cancel-edit', function() {
+      $(this).parent().hide();
+    })
+  }
+
   getFollowing(userId) {
     if (this.userID == null) {
       userId = this.userId;
@@ -97,6 +116,63 @@ export class FriendProfilePage {
     } else {
       return false;
     }
+  }
+
+  editComment(id, text, feedIndex, commentIndex) {
+    this.remoteService.editComment(this.userId, id, text).subscribe(res => {
+      if (res.status == 1) {
+        this.posts[feedIndex].answers[0][commentIndex].text = text;
+        $('.saveComment').parent().hide();
+      }
+    })
+  }
+
+  reply() {
+    $(document).on('click', '.comment-reply', function() {
+      $(this).closest('.comment').find('.reply-input').show();
+    })
+    $(document).on('click', '.reply-close', function() {
+      $(this).closest('.reply-input').hide();
+    })
+  }
+
+  deleteComment(commentId, feedIndex, commentIndex) {
+
+    let title, reason, ok, cancel, message;
+    this.translate.get('delete-comment').subscribe(value => { title = value; })
+    this.translate.get('delete-comment-question').subscribe(value => { message = value; })
+    this.translate.get('ok').subscribe(value => { ok = value; })
+    this.translate.get('cancel').subscribe(value => { cancel = value; })
+
+    let alert = this.alert.create({
+      title: title,
+      message: message,
+      buttons: [
+        {
+          text: ok,
+          handler: () => {
+            this.remoteService.removeComment(commentId, this.userId).subscribe(res => {
+              if (res.status == 1) {
+                this.posts[feedIndex].answers[0].splice(commentIndex, 1);
+              }
+            })
+          }
+        },
+        {
+          text: cancel,
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  editPostView(index) {
+    this.app.getRootNav().push(EditPostPage, {
+      post: this.posts[index]
+    });
   }
 
   getProfileData(id, theUserId) {
@@ -130,6 +206,12 @@ export class FriendProfilePage {
     });
 
   }
+
+  showComments(id) {
+    $('#fri' + id).show();
+    console.log('#fri' + id);
+  }
+
   GoToProfile(id, userId) {
     let loading = this.loadingCtrl.create({
       content: "Loading",
@@ -217,8 +299,24 @@ export class FriendProfilePage {
     });
     loading.present()
     this.remoteService.feedsListApiCall(id, id, 'timeline', 10).subscribe(res => {
-
+      //////////////////// looping to get comments and their replis ////////////////////////////////
       for (let i = 0; i < res.length; i++) {
+        //check if post is saved or not-going
+
+        this.remoteService.isSaved('feed', res[i].id, this.userId).subscribe(data => {
+          if (data.status == 1) {
+            res[i].saved = true;
+          } else {
+            res[i].saved = false;
+          }
+        });
+        ///////////// video url handling ////////////////////////
+        if (res[i].video_embed != '') {
+          res[i].video_embed = res[i].video_embed.substring(res[i].video_embed.indexOf("src=") + 5);
+          res[i].video_embed = res[i].video_embed.substring(0, res[i].video_embed.indexOf("\""));
+          this.videoURL = res[i].video_embed;
+        }
+
         let newFeedID = res[i].id
         let newFeed = res[i].answers
         this.remoteService.loadComments(newFeedID, this.userId).subscribe(res2 => {
@@ -226,18 +324,21 @@ export class FriendProfilePage {
           for (let g = 0; g < newFeed[0].length; g++) {
             this.remoteService.loadReplies(newFeed[0][g].id).subscribe(res3 => {
               newFeed[0][g]['repliesContent'] = res3
-
             });
-
           }
         });
-
       }
-      this.posts = res
 
+      this.posts = res
+      if (GotPosts > 30) {
+        console.log()
+        this.posts.push(res)
+      }
       loading.dismiss();
       console.log(this.posts)
+
     });
+
   }
 
   loadMoreFeeds(feedlength) {

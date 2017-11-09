@@ -251,20 +251,33 @@ export class NewsPage {
   }
 
   sharePost(feedid, userID = this.userId) {
+
+    let title, message, response, no, yes;
+    this.translate.get('share').subscribe(value => { title = value; })
+    this.translate.get('share-message').subscribe(value => { message = value; })
+    this.translate.get('yes').subscribe(value => { yes = value; })
+    this.translate.get('no').subscribe(value => { no = value; })
+    this.translate.get('response').subscribe(value => { response = value; })
+
     let alert = this.alert.create({
-      title: 'share',
-      message: 'Do you want to share this post on your timeline ?',
+      title: title,
+      message: message,
       buttons: [
         {
-          text: 'Ok',
+          text: yes,
           handler: () => {
             this.remoteService.sharePost(feedid, userID).subscribe(res => {
+              let toast = this.toast.create({
+                message: response,
+                duration: 2000
+              });
+              toast.present();
 
             })
           }
         },
         {
-          text: 'Cancel',
+          text: no,
           role: 'cancel',
           handler: () => {
           }
