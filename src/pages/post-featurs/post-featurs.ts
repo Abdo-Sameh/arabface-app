@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
+import { ImageUploadingProvider } from './../../providers/image-uploading/image-uploading';
 import { TranslateService } from '@ngx-translate/core';
 import * as $ from "jquery"
 
@@ -26,17 +27,27 @@ export class PostFeatursPage {
   typeId
   callback
   to_user_id
-  constructor(public translate: TranslateService, public navCtrl: NavController, public navParams: NavParams, public alert: AlertController, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider) {
+  imagePath
+  constructor(public imageUploading: ImageUploadingProvider, public translate: TranslateService, public navCtrl: NavController, public navParams: NavParams, public alert: AlertController, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider) {
     this.type = navParams.get('type');
     this.typeId = navParams.get('type_id');
     this.to_user_id = navParams.get('to_user_id');
     console.log(this.type, this.typeId);
-    console.log($("submit"));
   }
 
   ionViewWillEnter() {
     this.callback = this.navParams.get("callback")
   }
+
+  // selectImage() {
+  //   this.imagePath = this.imageUploading.presentActionSheet(this.type);
+  // }
+  //
+  // getImagePath(image){
+  //   return this.imageUploading.pathForImage(image);
+  // }
+
+
 
   selectPrivacy() {
     $(document).on('click', 'li', function() {
@@ -60,6 +71,7 @@ export class PostFeatursPage {
       }
     })
   }
+
   check(text) {
     if (text.length == 0 && !$('.feeling-div').attr('id'))
       return true;
@@ -133,8 +145,10 @@ export class PostFeatursPage {
           this.navCtrl.pop();
         });
       });
-
     }
+    // if(this.imagePath){
+    //   this.imageUploading.uploadImage('feed', this.userId, id)
+    // }
 
   }
   locationPopUp() {
@@ -156,7 +170,7 @@ export class PostFeatursPage {
           {
             text: post,
             handler: data => {
-              
+
               this.remoteService.locationPosting(this.userId, data.location).subscribe(res => {
                 console.log(res)
                 this.callback(res.feed).then(() => {

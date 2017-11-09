@@ -164,6 +164,12 @@ export class NotificationsPage {
         });
         break;
       }
+      case "page.invite": {
+        this.app.getRootNav().push(Page, {
+          page: notification.page[0]
+        });
+        break;
+      }
       case "feed.like": {
         this.app.getRootNav().push(DisplayPostPage, {
           post: notification.feed[0]
@@ -176,7 +182,31 @@ export class NotificationsPage {
         });
         break;
       }
+      case "feed.mention": {
+        this.app.getRootNav().push(DisplayPostPage, {
+          post: notification.feed[0]
+        });
+        break;
+      }
+      case "feed.tag": {
+        this.app.getRootNav().push(DisplayPostPage, {
+          post: notification.feed[0]
+        });
+        break;
+      }
       case "feed.comment": {
+        this.app.getRootNav().push(DisplayPostPage, {
+          post: notification.feed[0]
+        });
+        break;
+      }
+      case "feed.comment.reply": {
+        this.app.getRootNav().push(DisplayPostPage, {
+          post: notification.feed[0]
+        });
+        break;
+      }
+      case "feed.shared": {
         this.app.getRootNav().push(DisplayPostPage, {
           post: notification.feed[0]
         });

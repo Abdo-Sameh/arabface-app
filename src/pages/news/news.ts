@@ -257,7 +257,7 @@ export class NewsPage {
     this.translate.get('share-message').subscribe(value => { message = value; })
     this.translate.get('yes').subscribe(value => { yes = value; })
     this.translate.get('no').subscribe(value => { no = value; })
-    this.translate.get('response').subscribe(value => { response = value; })
+    this.translate.get('share-response').subscribe(value => { response = value; })
 
     let alert = this.alert.create({
       title: title,
