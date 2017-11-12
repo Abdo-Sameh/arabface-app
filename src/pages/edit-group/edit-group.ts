@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController} from 'ionic-angular';
-import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
-import {GroupPage} from '../group/group';
-import {GroupsPage} from '../groups/groups';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
+import { GroupPage } from '../group/group';
+import { GroupsPage } from '../groups/groups';
 
 /**
  * Generated class for the EditGroupPage page.
@@ -22,7 +22,7 @@ export class EditGroupPage {
   canAddMember
   privacy
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public remoteService: RemoteServiceProvider) {
     this.group = navParams.get("group");
   }
 
@@ -30,8 +30,8 @@ export class EditGroupPage {
     console.log('ionViewDidLoad EditGroupPage');
   }
 
-  editGroup(title, description, privacy, groupId, canPost, canAddMember){
-    this.remoteService.editGroup(title, description, privacy, groupId, canPost, canAddMember).subscribe(res =>{
+  editGroup(title, description, privacy, groupId, canPost, canAddMember) {
+    this.remoteService.editGroup(title, description, privacy, groupId, canPost, canAddMember).subscribe(res => {
       let toast = this.toastCtrl.create({
         message: 'Group updated successfully',
         duration: 3000,
@@ -39,13 +39,13 @@ export class EditGroupPage {
       });
 
       toast.present();
-      });
-      this.navCtrl.push(GroupPage, {
-        group: this.group
-      });
+    });
+    this.navCtrl.push(GroupPage, {
+      group: this.group
+    });
   }
-  deleteGroup(groupId){
-    this.remoteService.deleteGroup(groupId).subscribe(res =>{
+  deleteGroup(groupId) {
+    this.remoteService.deleteGroup(groupId).subscribe(res => {
       let toast = this.toastCtrl.create({
         message: 'Group deleted successfully',
         duration: 3000,
@@ -53,8 +53,8 @@ export class EditGroupPage {
       });
 
       toast.present();
-      });
-      this.navCtrl.push(GroupsPage);
+    });
+    this.navCtrl.push(GroupsPage);
   }
 
   back() {

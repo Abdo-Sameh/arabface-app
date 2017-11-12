@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController} from 'ionic-angular';
-import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { TabsPage } from '../tabs/tabs';
 import { VideoPage } from '../video/video';
 import { AddVideoPage } from '../add-video/add-video';
@@ -21,20 +21,20 @@ export class VideosPage {
 
   videos
   categories
-  userId :any;
+  userId: any;
   search
   category
   type
   filter
   page
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public remoteService: RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.type = "browse";
     this.filter = "all";
     this.category = "all";
     this.search = "";
     this.page = 1;
-    this.getVideos(this.category, this.search,this.type, this.filter, this.userId, 1);
+    this.getVideos(this.category, this.search, this.type, this.filter, this.userId, 1);
 
   }
 
@@ -43,7 +43,7 @@ export class VideosPage {
   }
 
 
-  getVideos(categoryId, term, type, filter, userId, page){
+  getVideos(categoryId, term, type, filter, userId, page) {
 
     this.type = type;
     this.category = categoryId;
@@ -53,59 +53,59 @@ export class VideosPage {
       content: "Loading",
     });
 
-    if(page > 1){
-      this.remoteService.getVideos(categoryId, term, type, filter, userId, page, 4).subscribe(res =>{
+    if (page > 1) {
+      this.remoteService.getVideos(categoryId, term, type, filter, userId, page, 4).subscribe(res => {
         console.log(res.videos.length, type);
-        if(res.videos.length == 0){
+        if (res.videos.length == 0) {
           // if(type == "browse")
-            $('#all').hide();
+          $('#all').hide();
           // else
-            $('#my').hide();
+          $('#my').hide();
         }
-        for(let x of res.videos){
+        for (let x of res.videos) {
           this.videos.push(x);
         }
       });
       this.page = page;
-    }else {
+    } else {
 
       this.page = page;
       loading.present()
-      this.remoteService.getVideos(categoryId, term, type, filter, userId, page, 4).subscribe(res =>{
-        if(res.videos.length > 0){
-          if(res.videos.length < 4){
+      this.remoteService.getVideos(categoryId, term, type, filter, userId, page, 4).subscribe(res => {
+        if (res.videos.length > 0) {
+          if (res.videos.length < 4) {
             $('#all').hide();
             $('#my').hide();
-          }else{
+          } else {
             // if(type == "browse")
-              $('#all').show();
+            $('#all').show();
             // else
-              $('#my').show();
-            }
-        }else{
+            $('#my').show();
+          }
+        } else {
           $('#noVideos1').show();
           $('#noVideos2').show();
         }
-          loading.dismiss();
-          console.log(this.type);
-          console.log(this.category);
-          console.log(this.filter);
-          console.log("----------------");
-          console.log(type);
-          console.log(categoryId);
-          console.log(filter);
-          this.videos = res.videos ;
-          this.categories = res.categories;
-          console.log(res);
-        });
-      }
+        loading.dismiss();
+        console.log(this.type);
+        console.log(this.category);
+        console.log(this.filter);
+        console.log("----------------");
+        console.log(type);
+        console.log(categoryId);
+        console.log(filter);
+        this.videos = res.videos;
+        this.categories = res.categories;
+        console.log(res);
+      });
+    }
   }
-  videoPage(video){
+  videoPage(video) {
     this.navCtrl.push(VideoPage, {
-      'video' : video
+      'video': video
     })
   }
-  addNewVideo(){
+  addNewVideo() {
     this.navCtrl.push(AddVideoPage);
   }
   back() {

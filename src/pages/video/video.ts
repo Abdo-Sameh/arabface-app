@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, AlertController, LoadingController } from 'ionic-angular';
-import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
+import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { VideosPage } from '../videos/videos';
 import { EditVideoPage } from '../edit-video/edit-video';
 import { SocialSharing } from '@ionic-native/social-sharing';
@@ -23,15 +23,15 @@ export class VideoPage {
   likes
   userAvatar
   comments
-  comment={
-  'comment' : '',
-  'reply' :'',
-  'edited':'',
+  comment = {
+    'comment': '',
+    'reply': '',
+    'edited': '',
   }
-  constructor(public loadingCtrl: LoadingController, private youtube: YoutubeVideoPlayer, public alert:AlertController, private socialSharing: SocialSharing, public navCtrl: NavController, public navParams: NavParams, public remoteService :RemoteServiceProvider, public toastCtrl :ToastController) {
+  constructor(public loadingCtrl: LoadingController, private youtube: YoutubeVideoPlayer, public alert: AlertController, private socialSharing: SocialSharing, public navCtrl: NavController, public navParams: NavParams, public remoteService: RemoteServiceProvider, public toastCtrl: ToastController) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
-    this.userAvatar = localStorage.getItem('userAvatar').slice(8,-1);
-    this.userAvatar ="http://"+this.userAvatar;
+    this.userAvatar = localStorage.getItem('userAvatar').slice(8, -1);
+    this.userAvatar = "http://" + this.userAvatar;
     this.video = this.navParams.get('video');
     this.video.code = this.video.code.substring(this.video.code.indexOf("src=") + 5);
     this.video.code = this.video.code.substring(0, this.video.code.indexOf("\""));
@@ -42,12 +42,12 @@ export class VideoPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad VideoPage');
   }
-  editVideoPage(){
+  editVideoPage() {
     this.navCtrl.push(EditVideoPage, {
-      'video' : this.video
+      'video': this.video
     });
   }
-  deleteVideo(videoId){
+  deleteVideo(videoId) {
     this.remoteService.deleteVideo(videoId, this.userId).subscribe(res => {
       let toast = this.toastCtrl.create({
         message: 'Video deleted successfully',
@@ -58,32 +58,32 @@ export class VideoPage {
       this.navCtrl.push(VideosPage);
     });
   }
-  regularShare(){
+  regularShare() {
     // share(message, subject, file, url)
     this.socialSharing.share(this.video.title, "Arabface", "assets/images/logo.png", this.video.video_url);
   }
-  reportVideo(){
+  reportVideo() {
     let alert = this.alert.create({
       title: 'Report',
       inputs: [
-      {
-        name: 'reason',
-        placeholder: 'Reason ...'
-      }
-    ],
+        {
+          name: 'reason',
+          placeholder: 'Reason ...'
+        }
+      ],
       buttons: [
         {
           text: 'Send',
           handler: data => {
             this.remoteService.reportItem("video", this.video.video_url, data.reason, this.userId).subscribe(res => {
-              if(res.status == "1"){
+              if (res.status == "1") {
                 let toast = this.toastCtrl.create({
                   message: 'Report sent successfully',
                   duration: 2000,
                   position: 'top'
                 });
                 toast.present();
-              }else{
+              } else {
                 let toast = this.toastCtrl.create({
                   message: 'You have reported this video before',
                   duration: 2000,
@@ -106,7 +106,7 @@ export class VideoPage {
     alert.present();
   }
 
-  getComments(type, type_id, limit, offset){
+  getComments(type, type_id, limit, offset) {
     this.remoteService.getComments(type, type_id, limit, offset, this.userId).subscribe(res => {
       this.comments = res;
       console.log(res);
@@ -114,30 +114,29 @@ export class VideoPage {
   }
 
   effects() {
-    $(this).css('background-color','grey')
+    $(this).css('background-color', 'grey')
   }
 
   edit() {
-    $(document).on('click','.comment-edit',function(){
+    $(document).on('click', '.comment-edit', function() {
       $(this).parent().prev().find('.input-group').show();
 
     })
-    $(document).on('click','.cancel-edit',function(){
+    $(document).on('click', '.cancel-edit', function() {
       $(this).parent().hide();
 
     })
 
   }
-  reply()
-    {
-      $(document).on('click','.comment-reply',function(){
-        $(this).closest('.comment').find('.reply-input').show();
+  reply() {
+    $(document).on('click', '.comment-reply', function() {
+      $(this).closest('.comment').find('.reply-input').show();
 
-      })
-      $(document).on('click','.reply-close',function(){
-        $(this).closest('.reply-input').hide();
+    })
+    $(document).on('click', '.reply-close', function() {
+      $(this).closest('.reply-input').hide();
 
-      })
+    })
   }
 
   // ConfirmEditPost(text,feedid)
@@ -145,27 +144,26 @@ export class VideoPage {
   //     this.remoteService.editPost(text,feedid,this.userId).subscribe((data) => {console.log(data)})
   // }
 
-  replyOnComment(postindex,commentindex,postOwner,commentID,whoCommented=this.userId,comment=this.comment.reply)
-  {
+  replyOnComment(postindex, commentindex, postOwner, commentID, whoCommented = this.userId, comment = this.comment.reply) {
     let loading = this.loadingCtrl.create({
       content: "",
-      spinner: "bubbles",  });
+      spinner: "bubbles",
+    });
 
     loading.present()
-    this.remoteService.ReplyOnComment(postOwner,commentID,whoCommented,comment).subscribe(res => {
+    this.remoteService.ReplyOnComment(postOwner, commentID, whoCommented, comment).subscribe(res => {
 
       res.postid = commentID
-                  this.comments[0][commentindex].repliesContent.push(res)
-        this.remoteService.loadReplies(commentID).subscribe(res2 =>{ });
+      this.comments[0][commentindex].repliesContent.push(res)
+      this.remoteService.loadReplies(commentID).subscribe(res2 => { });
 
-        this.comment.reply = ''
-        loading.dismiss()
+      this.comment.reply = ''
+      loading.dismiss()
     })
 
   }
 
-  deleteComment(commentId)
-  {
+  deleteComment(commentId) {
     let alert = this.alert.create({
       title: 'Delete',
       message: 'Do you want to delete comment?',
@@ -173,13 +171,12 @@ export class VideoPage {
         {
           text: 'Ok',
           handler: () => {
-            this.remoteService.removeComment(commentId,this.userId).subscribe(res => {
-              if(res.status == 1 )
-              {
+            this.remoteService.removeComment(commentId, this.userId).subscribe(res => {
+              if (res.status == 1) {
 
                 let toast = this.toastCtrl.create({
                   message: 'You deleted this comment ',
-                  duration : 2000
+                  duration: 2000
 
                 });
                 toast.present();
@@ -198,44 +195,42 @@ export class VideoPage {
     alert.present();
   }
 
-  commentOnFeed(postID,whoCommented=this.userId,comment=this.comment.comment)
-  {
+  commentOnFeed(postID, whoCommented = this.userId, comment = this.comment.comment) {
     let loading = this.loadingCtrl.create({
       content: "",
-      spinner: "bubbles",  });
+      spinner: "bubbles",
+    });
     loading.present()
-    this.remoteService.commentOnFeeds(this.video.owner.id, postID,whoCommented,comment, 'video').subscribe(res => {
+    this.remoteService.commentOnFeeds(this.video.owner.id, postID, whoCommented, comment, 'video').subscribe(res => {
       res.postid = postID
 
       this.comments.push(res)
-        this.remoteService.loadComments(postID, this.userId).subscribe(res2 =>{ });
+      this.remoteService.loadComments(postID, this.userId).subscribe(res2 => { });
 
-        this.comment.comment = ''
-        loading.dismiss()
+      this.comment.comment = ''
+      loading.dismiss()
     })
 
   }
 
 
   likeFeed(type) {
-    this.remoteService.likeVideo(this.userId, this.video.id, type).subscribe(res =>{
-        this.video.like_count = res.likes;
-        this.video.has_like = res.has_like;
+    this.remoteService.likeVideo(this.userId, this.video.id, type).subscribe(res => {
+      this.video.like_count = res.likes;
+      this.video.has_like = res.has_like;
     })
   }
 
   likeComment(userid = this.userId, commentID, postIndex, commentIndex) {
-    this.remoteService.likeCommentApiCall(this.userId, commentID).subscribe(res =>{
+    this.remoteService.likeCommentApiCall(this.userId, commentID).subscribe(res => {
       this.likes = res;
-      for(let i = 0 ; i < this.video.answers[0].length; i++)
-        {
-          if(this.video.answers[0][commentIndex].id == commentID)
-          {
-            this.video.answers[0][commentIndex].like_count = this.likes.likes;
-            this.video.answers[0][commentIndex].has_like = this.likes.has_like;
-            break
-          }
+      for (let i = 0; i < this.video.answers[0].length; i++) {
+        if (this.video.answers[0][commentIndex].id == commentID) {
+          this.video.answers[0][commentIndex].like_count = this.likes.likes;
+          this.video.answers[0][commentIndex].has_like = this.likes.has_like;
+          break
         }
+      }
     })
   }
 
@@ -247,7 +242,7 @@ export class VideoPage {
         {
           text: 'Ok',
           handler: () => {
-            this.remoteService.sharePost(feedid,userID).subscribe(res => {
+            this.remoteService.sharePost(feedid, userID).subscribe(res => {
             })
           }
         },
@@ -262,7 +257,7 @@ export class VideoPage {
     alert.present();
   }
 
-  back(){
+  back() {
     this.navCtrl.pop();
   }
 

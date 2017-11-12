@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
+import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 /**
  * Generated class for the EditAlbumPage page.
  *
@@ -24,7 +24,7 @@ export class EditAlbumPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditAlbumPage');
   }
-  editAlbum(){
+  editAlbum() {
     this.remoteService.editAlbum(this.album.title, this.album.description, this.album.privacy, this.album.id, this.userId).subscribe(res => {
       let toast = this.toastCtrl.create({
         message: 'Album updated successfully',
@@ -35,7 +35,7 @@ export class EditAlbumPage {
     });
     this.navCtrl.pop();
   }
-  back(){
+  back() {
     this.navCtrl.pop();
   }
 

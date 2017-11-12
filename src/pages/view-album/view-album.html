@@ -30,7 +30,7 @@
         <div class="pull-left">
           <form class="photo-upload ng-untouched ng-pristine ng-valid" novalidate="">
             <div class="file-input">
-            <label (click)="presentActionSheet()" for="photo-upload">
+              <label (click)="presentActionSheet()" for="photo-upload">
                 <i class="ion-android-add-circle mr-5"></i>
                 {{'add-new-photo' | translate}}
               </label>
@@ -46,13 +46,13 @@
     </div>
     <div class="container">
       <div class="panel panel-theme mb-30">
-          <div class="photos mt-5 mb-5 row thumbnails">
-            <div class="col-xs-6" *ngFor="let photo of photos">
-                <a (click)="viewPhoto(photo.path)" class="thumbnail" href="#"><img alt="" src="{{ photo.path }}"></a>
-            </div>
+        <div class="photos mt-5 mb-5 row thumbnails">
+          <div class="col-xs-6" *ngFor="let photo of photos">
+            <a (click)="viewPhoto(photo.path)" class="thumbnail" href="#"><img alt="" src="{{ photo.path }}"></a>
           </div>
-          <a class="btn btn-default btn-block" href="#">{{'view-more' | translate}}</a>
         </div>
+        <a class="btn btn-default btn-block" href="#">{{'view-more' | translate}}</a>
+      </div>
     </div>
   </section>
 </ion-content>

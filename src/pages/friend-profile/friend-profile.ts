@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, IonicPage, App, NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
+import { FriendProvider } from './../../providers/friend/friend';
 import { TimeProvider } from './../../providers/time/time';
 import { ProfilePage } from '../profile/profile'
 import { TabsPage } from '../tabs/tabs';
@@ -51,7 +52,7 @@ export class FriendProfilePage {
   feed = { 'feedid': "" }
   videoURL
   text
-  constructor(public photoViewer: PhotoViewer, public translate: TranslateService, public app: App, public time: TimeProvider, public alert: AlertController, public navCtrl: NavController, public toastCtrl: ToastController, public navParams: NavParams, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider) {
+  constructor(public friend: FriendProvider, public photoViewer: PhotoViewer, public translate: TranslateService, public app: App, public time: TimeProvider, public alert: AlertController, public navCtrl: NavController, public toastCtrl: ToastController, public navParams: NavParams, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider) {
     let data = navParams.get('userData');
     this.userAvatar = "http://" + localStorage.getItem('userAvatar').slice(8, -1);;
     this.blocked = navParams.get('blocked');

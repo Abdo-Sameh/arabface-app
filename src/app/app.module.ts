@@ -79,6 +79,7 @@ import { SearchPage } from '../pages/search/search';
 import { TimeProvider } from '../providers/time/time';
 import { EditPostPage } from '../pages/edit-post/edit-post';
 import { ImageUploadingProvider } from '../providers/image-uploading/image-uploading';
+import { FriendProvider } from '../providers/friend/friend';
 
 @NgModule({
   declarations: [
@@ -200,7 +201,8 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule, TranslateModule.forRoot(
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RemoteServiceProvider,
     TimeProvider,
-    ImageUploadingProvider
+    ImageUploadingProvider,
+    FriendProvider
   ]
 })
 export class AppModule {}

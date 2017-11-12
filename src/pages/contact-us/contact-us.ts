@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
-import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
-import {TabsPage} from '../tabs/tabs';
+import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
+import { TabsPage } from '../tabs/tabs';
 /**
  * Generated class for the ContactUsPage page.
  *
@@ -20,15 +20,15 @@ export class ContactUsPage {
   email
   subject
   message
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public remoteService: RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ContactUsPage');
   }
-  contactUs(name, email, subject, message){
-    this.remoteService.contactUs(name, email, subject, message, this.userId).subscribe(res=>{
+  contactUs(name, email, subject, message) {
+    this.remoteService.contactUs(name, email, subject, message, this.userId).subscribe(res => {
       let toast = this.toastCtrl.create({
         message: 'Thanks for contacting us',
         duration: 3000,
@@ -38,8 +38,7 @@ export class ContactUsPage {
     this.navCtrl.push(TabsPage);
 
   }
-  back()
-  {
+  back() {
     this.navCtrl.push(TabsPage);
   }
 

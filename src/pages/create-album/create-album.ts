@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
+import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 
 /**
  * Generated class for the CreateAlbumPage page.
@@ -19,14 +19,14 @@ export class CreateAlbumPage {
   description
   privacy
   userId
-  constructor(public navCtrl: NavController, public navParams: NavParams,public remoteService : RemoteServiceProvider, public toastCtrl :ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public remoteService: RemoteServiceProvider, public toastCtrl: ToastController) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CreateAlbumPage');
   }
-  createAlbum(title, desc, privacy){
+  createAlbum(title, desc, privacy) {
     this.remoteService.createAlbum(title, desc, privacy, this.userId).subscribe(res => {
       let toast = this.toastCtrl.create({
         message: 'Album created successfully',
@@ -37,7 +37,7 @@ export class CreateAlbumPage {
     });
     this.navCtrl.pop();
   }
-  back(){
+  back() {
     this.navCtrl.pop();
   }
 

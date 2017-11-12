@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
-import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
+import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 
 /**
  * Generated class for the AddVideoPage page.
@@ -21,7 +21,7 @@ export class AddVideoPage {
   privacy
   link
   category
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public remoteService :RemoteServiceProvider, public toastCtrl :ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider, public toastCtrl: ToastController) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.getCategories();
   }
@@ -29,12 +29,12 @@ export class AddVideoPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddVideoPage');
   }
-  getCategories(){
+  getCategories() {
     this.remoteService.getVideoCategories().subscribe(res => {
       this.categories = res;
     });
   }
-  addVideo(title, description, privacy, link, category){
+  addVideo(title, description, privacy, link, category) {
     let loading = this.loadingCtrl.create({
       content: "",
       spinner: "bubbles",
@@ -53,7 +53,7 @@ export class AddVideoPage {
       this.navCtrl.pop();
     });
   }
-  back(){
+  back() {
     this.navCtrl.pop();
   }
 

@@ -557,7 +557,7 @@ export class ProfilePage {
   //////////////////////////////////////////////
   back() {
     //this.navCtrl.pop();
-    this.app.getRootNav().push(TabsPage);
+    this.app.getRootNav().setRoot(TabsPage);
   }
 
 

@@ -69,6 +69,7 @@
             </div>
             <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'feed.comment.reply'">
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'replied-on-your-comment' | translate}} </span></h5>
+              <p>"{{notify.content}}"</p>
               <p>{{getTime(notify.time)}}</p>
             </div>
             <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'page.invite'">
@@ -197,6 +198,7 @@
             </div>
             <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'feed.comment.reply'">
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'replied-on-your-comment' | translate}} </span></h5>
+              <p>"{{notify.content}}"</p>
               <p>{{getTime(notify.time)}}</p>
             </div>
             <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'page.invite'">

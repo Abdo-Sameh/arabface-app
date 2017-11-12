@@ -7,7 +7,7 @@
 
 
 <ion-content>
-  <section class="bg_grey ">
+  <section class="bg_grey">
     <div class="container">
       <div class="share-post panel panel-theme mt-30">
         <img src={{userAvatar}} alt="">
@@ -22,12 +22,19 @@
         <a href="#"><i class="fa fa-camera"></i> {{'photo' | translate}}</a>
         <a href="#">{{'location' | translate }}</a>
       </div> -->
+      <div id="noFeeds" style="display:none;" class="feed-box panel panel-theme mt-20" *ngIf="feeds.length == 0">
+        <div class="box-content alert alert-danger" style="text-align: center;">{{'no-feeds-found' | translate}}</div>
+      </div>
       <div *ngFor="let feed of feeds ; let mainI =index" [ngSwitch]="true">
 
 
         <!-- ////////////////////////////////// upload photo  post  /////////////////////////////////////////////////////////////////// -->
 
         <div class="feed-box panel panel-theme mt-20" *ngSwitchCase="feed.type_id == 'upload-album-photos' && feed.shared == false">
+          <div class="feed-box panel panel-theme mt-20" style="display: none;">
+            This post will no longer show to you. <a href="">Undo</a>
+          </div>
+
           <div class="feed-header">
             <div class="pull-left">
               <img class="feed-img" src={{feed.avatar}} alt="">

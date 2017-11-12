@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
-import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
+import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { TabsPage } from '../tabs/tabs';
 /**
  * Generated class for the TrendingPage page.
@@ -17,7 +17,7 @@ import { TabsPage } from '../tabs/tabs';
 export class TrendingPage {
   userId
   hashtags
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public remoteService: RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.getHashtag()
   }
@@ -27,7 +27,7 @@ export class TrendingPage {
   }
   getHashtag() {
     this.remoteService.getHashtag(this.userId).subscribe(res => {
-    this.hashtags = res.hashtags;
+      this.hashtags = res.hashtags;
     });
   }
 

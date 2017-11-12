@@ -29,7 +29,7 @@ declare var google;
 export class NewsPage {
   // @ViewChild(Nav) nav: any;
   videoURL
-  feeds;
+  feeds = [];
   likes;
   likeNumbers;
   userData;
@@ -84,6 +84,10 @@ export class NewsPage {
     });
     loading.present()
     this.remoteService.feedsListApiCall(id, '', 'feed', 10).subscribe(res => {
+      if(res.length == 0)
+        $('#noFeeds').show();
+      else
+        $('#noFeeds').hide();
       //////////////////// looping to get comments and their replis ////////////////////////////////
       for (let i = 0; i < res.length; i++) {
         //check if post is saved or not-going
@@ -410,6 +414,7 @@ export class NewsPage {
       }
     })
   }
+
   donotLikePost(feedid, index, userID = this.userId) {
     this.remoteService.hidePost(feedid, userID).subscribe(res => {
       this.hiddenPost = res.status
@@ -424,6 +429,22 @@ export class NewsPage {
       }
     })
   }
+
+  unHidePost(feedid, index, userID = this.userId) {
+    this.remoteService.unHidePost(feedid, userID).subscribe(res => {
+      this.hiddenPost = res.status
+      if (res.status == 1) {
+        this.feeds.splice(index, 0, )
+
+        let toast = this.toast.create({
+          message: 'This post will no longer show to you',
+          duration: 2000
+        });
+        toast.present();
+      }
+    })
+  }
+
   deletePost(feedid, index, userID = this.userId) {
     let alert = this.alert.create({
       title: 'Delete',

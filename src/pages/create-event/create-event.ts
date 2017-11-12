@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
-import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
+import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { EventsPage } from '../events/events';
 
 /**
@@ -26,20 +26,20 @@ export class CreateEventPage {
   }
   categories
   userId
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
-    this.userId=localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public remoteService: RemoteServiceProvider) {
+    this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.getCategories();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CreateEventPage');
   }
-  getCategories(){
-    this.remoteService.getEventCategories().subscribe(res =>{
+  getCategories() {
+    this.remoteService.getEventCategories().subscribe(res => {
       this.categories = res;
     });
   }
-  getDate(date){
+  getDate(date) {
     console.log(date);
     var y = date.substring(0, 4);
     var m = date.substring(5, 7);
@@ -49,25 +49,25 @@ export class CreateEventPage {
     var min = date.substring(14, 16);
     var type
 
-    if(parseInt(h) >=  12){
+    if (parseInt(h) >= 12) {
       type = "pm";
-      if(parseInt(h) >  12){
+      if (parseInt(h) > 12) {
         h = (parseInt(h) - 12).toString();
       }
-    }else{
+    } else {
       type = "am";
-      if(parseInt(h) == 0){
+      if (parseInt(h) == 0) {
         h = "12";
-      }else{
+      } else {
         h = (parseInt(h)).toString();
       }
     }
     return [y, m, d, h, min, type];
   }
-  createEvent(title, description, category_id, location, start, end, privacy){
+  createEvent(title, description, category_id, location, start, end, privacy) {
     var s = this.getDate(start);
     var e = this.getDate(end);
-    this.remoteService.createEvent(title,description,category_id,location,location,s[2],s[1],s[0],s[3],s[4],s[5],privacy,e[2],e[1],e[0],e[3],e[4],e[5],this.userId).subscribe(res =>{
+    this.remoteService.createEvent(title, description, category_id, location, location, s[2], s[1], s[0], s[3], s[4], s[5], privacy, e[2], e[1], e[0], e[3], e[4], e[5], this.userId).subscribe(res => {
       let toast = this.toastCtrl.create({
         message: 'Event created successfully',
         duration: 3000,
@@ -75,10 +75,10 @@ export class CreateEventPage {
       });
 
       toast.present();
-      });
-      this.navCtrl.push(EventsPage);
+    });
+    this.navCtrl.push(EventsPage);
   }
-  back(){
+  back() {
     this.navCtrl.pop();
   }
 

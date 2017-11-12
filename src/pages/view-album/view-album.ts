@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, Loading, LoadingController, ActionSheetController, AlertController, Platform } from 'ionic-angular';
-import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
-import { EditAlbumPage} from '../edit-album/edit-album';
+import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
+import { EditAlbumPage } from '../edit-album/edit-album';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
@@ -24,7 +24,7 @@ export class ViewAlbumPage {
   album
   photos
   lastImage: string = null;
-  constructor(public photoViewer: PhotoViewer, public filePath: FilePath, private transfer: FileTransfer, private file: File, public camera: Camera, public navCtrl: NavController, public navParams: NavParams,public alert :AlertController,public loadingCtrl :LoadingController ,public remoteService : RemoteServiceProvider,  public toast: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
+  constructor(public photoViewer: PhotoViewer, public filePath: FilePath, private transfer: FileTransfer, private file: File, public camera: Camera, public navCtrl: NavController, public navParams: NavParams, public alert: AlertController, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider, public toast: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "")
     this.album = navParams.get("album");
     // this.albumDetails(this.album.id)
@@ -90,15 +90,15 @@ export class ViewAlbumPage {
 
   private createFileName() {
     var d = new Date(),
-    n = d.getTime(),
-    newFileName =  n + ".jpg";
+      n = d.getTime(),
+      newFileName = n + ".jpg";
     return newFileName;
   }
 
   private copyFileToLocalDir(namePath, currentName, newFileName) {
     this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
       this.lastImage = newFileName;
-      this.navCtrl.push(UploadImagePage,{
+      this.navCtrl.push(UploadImagePage, {
         type: 'album',
         id: this.album.id,
         image: this.lastImage
@@ -125,42 +125,42 @@ export class ViewAlbumPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ViewAlbumPage');
   }
-  viewPhoto(url){
+  viewPhoto(url) {
     this.photoViewer.show(url);
   }
-  albumPhotos(id, limit, offset){
+  albumPhotos(id, limit, offset) {
     this.remoteService.albumPhotos(id, limit, offset, this.userId).subscribe(res => {
       console.log(res);
       this.photos = res;
     })
   }
-  albumDetails(album_id){
+  albumDetails(album_id) {
     this.remoteService.albumDetails(album_id, this.userId).subscribe(res => {
       this.album = res;
     });
   }
 
-  editPage(){
+  editPage() {
     this.albumDetails(this.album.id)
     this.navCtrl.push(EditAlbumPage, {
       album: this.album
     })
   }
 
-  deleteAlbum(){
+  deleteAlbum() {
     this.remoteService.deleteAlbum(this.album.id, this.userId).subscribe(res => {
-      if(res.status == 1){
+      if (res.status == 1) {
         let toast = this.toast.create({
           message: 'Album deleted successfully',
           duration: 2000,
           position: 'top'
         });
         toast.present();
-      this.navCtrl.pop();
+        this.navCtrl.pop();
       }
     })
   }
-  back(){
+  back() {
     this.navCtrl.pop();
   }
 }

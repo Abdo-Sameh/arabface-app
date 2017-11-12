@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
-import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
+import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { TabsPage } from '../tabs/tabs';
 import { SettingsPage } from '../settings/settings';
 
@@ -20,7 +20,7 @@ export class SettingsBlockingPage {
 
   userId
   blocked
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public remoteService: RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.getAllBlocked();
   }
@@ -29,10 +29,10 @@ export class SettingsBlockingPage {
     console.log('ionViewDidLoad SettingsBlockingPage');
 
   }
-  unblockUser(id, index){
+  unblockUser(id, index) {
     this.remoteService.unblockUser(id, this.userId).subscribe(res => {
       // console.log(res);
-      if(res.status == 1){
+      if (res.status == 1) {
         let toast = this.toastCtrl.create({
           message: 'User unblocked successfully',
           duration: 3000,
@@ -43,13 +43,13 @@ export class SettingsBlockingPage {
       }
     });
   }
-  getAllBlocked(){
+  getAllBlocked() {
     this.remoteService.getAllBlocked(this.userId).subscribe(res => {
       console.log(res);
       this.blocked = res;
     });
   }
-  back(){
+  back() {
     this.navCtrl.pop();
   }
 

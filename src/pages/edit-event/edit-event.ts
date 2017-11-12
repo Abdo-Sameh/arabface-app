@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
-import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
+import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { EventPage } from '../event/event';
 import { EventsPage } from '../events/events';
 
@@ -21,7 +21,7 @@ export class EditEventPage {
   start
   end
   categories
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public remoteService: RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.event = navParams.get("event");
     console.log(this.event);
@@ -31,12 +31,12 @@ export class EditEventPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditEventPage');
   }
-  getCategories(){
-    this.remoteService.getEventCategories().subscribe(res =>{
+  getCategories() {
+    this.remoteService.getEventCategories().subscribe(res => {
       this.categories = res;
     });
   }
-  getDate(date){
+  getDate(date) {
     console.log(date);
     var y = date.substring(0, 4);
     var m = date.substring(5, 7);
@@ -46,27 +46,27 @@ export class EditEventPage {
     var min = date.substring(14, 16);
     var type
 
-    if(parseInt(h) >=  12){
+    if (parseInt(h) >= 12) {
       type = "pm";
-      if(parseInt(h) >  12){
+      if (parseInt(h) > 12) {
         h = (parseInt(h) - 12).toString();
       }
-    }else{
+    } else {
       type = "am";
-      if(parseInt(h) == 0){
+      if (parseInt(h) == 0) {
         h = "12";
-      }else{
+      } else {
         h = (parseInt(h)).toString();
       }
     }
     return [y, m, d, h, min, type];
   }
-  editEvent(title, description, category_id, location, start, end, privacy){
+  editEvent(title, description, category_id, location, start, end, privacy) {
     var s = this.getDate(start);
     var e = this.getDate(end);
     // console.log(this.event);
-    console.log(title,description,category_id,location,location,s[2],s[1],s[0],s[3],s[4],s[5],privacy,e[2],e[1],e[0],e[3],e[4],e[5],this.userId, this.event.id);
-    this.remoteService.editEvent(title,description,category_id,location,location,s[2],s[1],s[0],s[3],s[4],s[5],privacy,e[2],e[1],e[0],e[3],e[4],e[5],this.userId, this.event.id).subscribe(res =>{
+    console.log(title, description, category_id, location, location, s[2], s[1], s[0], s[3], s[4], s[5], privacy, e[2], e[1], e[0], e[3], e[4], e[5], this.userId, this.event.id);
+    this.remoteService.editEvent(title, description, category_id, location, location, s[2], s[1], s[0], s[3], s[4], s[5], privacy, e[2], e[1], e[0], e[3], e[4], e[5], this.userId, this.event.id).subscribe(res => {
       let toast = this.toastCtrl.create({
         message: 'Event updated successfully',
         duration: 3000,
@@ -74,13 +74,13 @@ export class EditEventPage {
       });
 
       toast.present();
-      });
-      this.navCtrl.push(EventPage, {
-        'event' : this.event
-      });
+    });
+    this.navCtrl.push(EventPage, {
+      'event': this.event
+    });
   }
-  deleteEvent(event_id){
-    this.remoteService.deleteEvent(event_id, this.userId).subscribe(res =>{
+  deleteEvent(event_id) {
+    this.remoteService.deleteEvent(event_id, this.userId).subscribe(res => {
       let toast = this.toastCtrl.create({
         message: 'Event deleted successfully',
         duration: 3000,
@@ -91,7 +91,7 @@ export class EditEventPage {
     });
 
   }
-  back(){
+  back() {
     this.navCtrl.pop();
   }
 

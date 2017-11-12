@@ -61,82 +61,82 @@ export class UploadImagePage {
     this.translate.get('successfully-uploaded').subscribe(value => { message = value; })
 
 
-      var filename = this.lastImage;
-      // File for Upload
-      var targetPath = this.pathForImage(this.lastImage);
+    var filename = this.lastImage;
+    // File for Upload
+    var targetPath = this.pathForImage(this.lastImage);
     // Destination URL
     var url, options;
-    if(this.type == "album"){
+    if (this.type == "album") {
       url = "http://192.168.1.252/arabface/api/14789632/photo/album/upload";
       options = {
         fileKey: "photo",
         fileName: filename,
         chunkedMode: false,
         mimeType: "multipart/form-data",
-        params : {'album_id': this.id, 'photo': filename, 'userid' : this.userId}
+        params: { 'album_id': this.id, 'photo': filename, 'userid': this.userId }
       };
-    }else if(this.type == "profile.avatar") {
+    } else if (this.type == "profile.avatar") {
       url = "http://192.168.1.252/arabface/api/14789632/profile/change/avatar";
       options = {
         fileKey: "avatar",
         fileName: filename,
         chunkedMode: false,
         mimeType: "multipart/form-data",
-        params : {'avatar': filename, 'userid' : this.userId}
+        params: { 'avatar': filename, 'userid': this.userId }
       };
-    }else if(this.type == "profile.cover"){
+    } else if (this.type == "profile.cover") {
       url = "http://192.168.1.252/arabface/api/14789632/profile/change/cover";
       options = {
         fileKey: "cover",
         fileName: filename,
         chunkedMode: false,
         mimeType: "multipart/form-data",
-        params : {'cover': filename, 'userid' : this.userId}
+        params: { 'cover': filename, 'userid': this.userId }
       };
-    }else if(this.type == "page.logo"){
+    } else if (this.type == "page.logo") {
       url = "http://192.168.1.252/arabface/api/14789632/page/logo";
       options = {
         fileKey: "image",
         fileName: filename,
         chunkedMode: false,
         mimeType: "multipart/form-data",
-        params : {'image': filename, 'userid' : this.userId, 'page_id' : this.id}
+        params: { 'image': filename, 'userid': this.userId, 'page_id': this.id }
       };
-    }else if(this.type == "page.cover"){
+    } else if (this.type == "page.cover") {
       url = "http://192.168.1.252/arabface/api/14789632/page/cover";
       options = {
         fileKey: "image",
         fileName: filename,
         chunkedMode: false,
         mimeType: "multipart/form-data",
-        params : {'image': filename, 'userid' : this.userId, 'page_id': this.id}
+        params: { 'image': filename, 'userid': this.userId, 'page_id': this.id }
       };
-    }else if(this.type == "group.logo"){
+    } else if (this.type == "group.logo") {
       url = "http://192.168.1.252/arabface/api/14789632/group/logo";
       options = {
         fileKey: "image",
         fileName: filename,
         chunkedMode: false,
         mimeType: "multipart/form-data",
-        params : {'image': filename, 'userid' : this.userId, 'group_id' : this.id}
+        params: { 'image': filename, 'userid': this.userId, 'group_id': this.id }
       };
-    }else if(this.type == "group.cover"){
+    } else if (this.type == "group.cover") {
       url = "http://192.168.1.252/arabface/api/14789632/group/cover";
       options = {
         fileKey: "image",
         fileName: filename,
         chunkedMode: false,
         mimeType: "multipart/form-data",
-        params : {'image': filename, 'userid' : this.userId, 'group_id': this.id}
+        params: { 'image': filename, 'userid': this.userId, 'group_id': this.id }
       };
-    }else if(this.type == "event.cover"){
+    } else if (this.type == "event.cover") {
       url = "http://192.168.1.252/arabface/api/14789632/event/cover";
       options = {
         fileKey: "image",
         fileName: filename,
         chunkedMode: false,
         mimeType: "multipart/form-data",
-        params : {'image': filename, 'userid' : this.userId, 'event_id': this.id}
+        params: { 'image': filename, 'userid': this.userId, 'event_id': this.id }
       };
     }
 
@@ -155,11 +155,11 @@ export class UploadImagePage {
       // alert(data.headers);
       // alert(targetPath);
       // alert(url);
-       if(this.type == "profile.avatar") {
+      if (this.type == "profile.avatar") {
         localStorage.setItem('userAvatar', JSON.stringify(data.response['data_one']))
-      }else if(this.type == "profile.cover"){
-          localStorage.setItem('userCover', JSON.stringify(data.response['data_one']))
-    }
+      } else if (this.type == "profile.cover") {
+        localStorage.setItem('userCover', JSON.stringify(data.response['data_one']))
+      }
       this.presentToast(message);
     }, err => {
       this.loading.dismissAll()

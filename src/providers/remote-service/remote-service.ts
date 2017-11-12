@@ -30,14 +30,14 @@ let user;
   for more info on providers and Angular DI.
 */
 
-let apiURL = 'http://192.168.1.252/arabface/api/14789632/';
+let apiURL = 'http://udsolutions.co.uk/Arabface/arabface/api/14789632/';
 
 @Injectable()
 export class RemoteServiceProvider {
   public Id: number;
   deviceLanguage
   response;
-  serverURL = 'http://192.168.1.252'
+  serverURL = 'http://udsolutions.co.uk/Arabface'
   KEY = '14789632'
 
 
@@ -602,12 +602,16 @@ export class RemoteServiceProvider {
 
       .map((res: Response) => res.json());
   }
-  ///////////// chat messages Api call function end  ////////////////////
 
   hidePost(feedID, userID): any {
     console.log(feedID + userID)
     return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/feed/action?action=hide&feed_id=' + feedID + '&userid=' + userID)
+      .map((res: Response) => res.json());
+  }
 
+  unHidePost(feedID, userID): any {
+    console.log(feedID + userID)
+    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/feed/action?action=unhide&feed_id=' + feedID + '&userid=' + userID)
       .map((res: Response) => res.json());
   }
 

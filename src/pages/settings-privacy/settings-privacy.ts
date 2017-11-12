@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
-import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
-import {TabsPage} from '../tabs/tabs';
+import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
+import { TabsPage } from '../tabs/tabs';
 import { SettingsPage } from '../settings/settings';
 
 /**
@@ -18,12 +18,12 @@ import { SettingsPage } from '../settings/settings';
 export class SettingsPrivacyPage {
   settings
   userId
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public remoteService: RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.settings = navParams.get('settings');
-    if(this.settings["email-notification"] == "1"){
+    if (this.settings["email-notification"] == "1") {
       this.settings["email-notification"] = true
-    }else{
+    } else {
       this.settings["email-notification"] = false
     }
     console.log(this.settings);
@@ -39,11 +39,11 @@ export class SettingsPrivacyPage {
     console.log('ionViewDidLoad SettingsPrivacyPage');
   }
 
-  settingsPrivacy(wcvp, wcpp, wcsb, wcsm, wcsv, en){
+  settingsPrivacy(wcvp, wcpp, wcsb, wcsm, wcsv, en) {
     console.log();
-    if(this.settings["email-notification"] == true){
+    if (this.settings["email-notification"] == true) {
       en = "1"
-    }else{
+    } else {
       en = "0"
     }
     this.remoteService.settingsPrivacy(wcvp, wcpp, wcsb, wcsm, wcsv, en, this.userId).subscribe(res => {
@@ -57,7 +57,7 @@ export class SettingsPrivacyPage {
     });
     this.navCtrl.pop();
   }
-  back(){
+  back() {
     this.navCtrl.pop();
   }
 

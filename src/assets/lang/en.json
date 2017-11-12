@@ -232,6 +232,8 @@
 
   "external-link": "External link",
 
+  "no-feeds-found" : "No feeds found",
+
   "add": "Add",
 
   "add-video": "Add Video",
@@ -278,7 +280,7 @@
 
   "add-member-to-group": "Add members",
 
-  "reply-your-comment": "Replied your comment",
+  "replied-on-your-comment": "Replied on your comment",
 
   "like-your-item": "Like your posts,photos e.t.c",
 
@@ -288,7 +290,13 @@
 
   "all-events": "All",
 
+  "request-sent" : "Request sent",
+
   "invites": "Invites",
+
+  "invited-you-to-event" : "invited you to event",
+
+  "started-following-you" : "started following you",
 
   "yours": "Yours",
 

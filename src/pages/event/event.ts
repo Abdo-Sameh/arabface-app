@@ -63,7 +63,7 @@ export class EventPage {
     return this.time.getTime(time);
   }
 
-  postSave(index, privacy){
+  postSave(index, privacy) {
     console.log(index, privacy);
     this.remoteService.editPost(this.feeds[index].full_message, this.feeds[index].id, this.userId, privacy).subscribe((data) => {
       console.log(data);

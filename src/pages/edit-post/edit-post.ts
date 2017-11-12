@@ -62,7 +62,7 @@ export class EditPostPage {
     })
   }
 
-  postSave(){
+  postSave() {
     this.remoteService.editPost(this.post.full_message, this.post.id, this.userId, this.post.privacy).subscribe((data) => {
       console.log(data);
       this.navCtrl.pop();
@@ -74,7 +74,7 @@ export class EditPostPage {
     else
       return null;
   }
-  
+
   locationPopUp() {
     let title, yourLocation, post, cancel, message;
     this.translate.get('location').subscribe(value => { title = value; })

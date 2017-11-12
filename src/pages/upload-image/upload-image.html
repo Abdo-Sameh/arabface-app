@@ -15,18 +15,18 @@
 
 <ion-content padding>
   <section class="bg_grey full_vh pt-70">
-			<div class="container">
-				<div class="feed-box post panel panel-theme mt-30">
-					<div class="feed-body">
-						<img src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
-						<p class="mt-5"></p>
-					</div>
-				</div>
-			</div>
-      <button ion-button (click)="uploadImage()" [disabled]="lastImage === null">
+    <div class="container">
+      <div class="feed-box post panel panel-theme mt-30">
+        <div class="feed-body">
+          <img src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
+          <p class="mt-5"></p>
+        </div>
+      </div>
+    </div>
+    <button ion-button (click)="uploadImage()" [disabled]="lastImage === null">
         <ion-icon name="cloud-upload"></ion-icon>{{'upload' | translate}}
       </button>
-		</section>
+  </section>
 
 </ion-content>
 
