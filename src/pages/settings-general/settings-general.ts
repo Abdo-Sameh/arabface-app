@@ -125,8 +125,9 @@ export class SettingsGeneralPage {
     console.log(this.myDate);
   }
 
-  getDateToSave(date) {
-
+  validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
   }
 
   saveSettings(first, last, email, username, gender, country, city, state, bio, day, month, year, myDate) {
@@ -134,16 +135,23 @@ export class SettingsGeneralPage {
     year = (myDate.substring(0, 4));
     month = (this.getMonthWord(parseInt(myDate.substring(5, 7))));
     day = (myDate.substring(8, 10));
-    this.getDateToSave(myDate);
-    this.remoteService.settingsGeneral(first, last, email, username, gender, country, city, state, bio, this.userId, day, month, year).subscribe(res => {
-      let toast = this.toastCtrl.create({
-        message: 'Settings saved successfully',
-        duration: 3000,
-        position: 'top'
+    if (this.validateEmail(email)) {
+      $('#email').removeClass("alert alert-danger");
+      $('#wrongEmail').hide();
+      this.remoteService.settingsGeneral(first, last, email, username, gender, country, city, state, bio, this.userId, day, month, year).subscribe(res => {
+        let toast = this.toastCtrl.create({
+          message: 'Settings saved successfully',
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present();
+        this.navCtrl.pop();
       });
-      toast.present();
-      this.navCtrl.pop();
-    });
+    }else{
+      $('#email').addClass("alert alert-danger");
+      $('#wrongEmail').show();
+
+    }
   }
 
   back() {

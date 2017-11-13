@@ -384,7 +384,7 @@ export class FriendProfilePage {
       spinner: "bubbles"
     });
     loading.present()
-    this.remoteService.commentOnFeeds(postOwner, postID, whoCommented, comment, 'feed').subscribe(res => {
+    this.remoteService.commentOnFeeds(this.userId, postID, whoCommented, comment, 'feed').subscribe(res => {
       res.postid = postID
       for (let x in this.posts) {
         if (this.posts[x].id == res.postid) {

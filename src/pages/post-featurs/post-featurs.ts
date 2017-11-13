@@ -17,7 +17,7 @@ export class PostFeatursPage {
   }
   bgshow = true
   tagedUsers
-  searchedUsers
+  searchedUsers = []
   chosenUsers
   listeningShow = true
   userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
@@ -38,16 +38,6 @@ export class PostFeatursPage {
   ionViewWillEnter() {
     this.callback = this.navParams.get("callback")
   }
-
-  // selectImage() {
-  //   this.imagePath = this.imageUploading.presentActionSheet(this.type);
-  // }
-  //
-  // getImagePath(image){
-  //   return this.imageUploading.pathForImage(image);
-  // }
-
-
 
   selectPrivacy() {
     $(document).on('click', 'li', function() {
@@ -74,6 +64,8 @@ export class PostFeatursPage {
 
   check(text) {
     if (text.length == 0 && !$('.feeling-div').attr('id'))
+      return true;
+    else if (this.post.feeling == "" && $('.feeling-div').attr('id'))
       return true;
     else
       return null;
@@ -220,28 +212,49 @@ export class PostFeatursPage {
   getFriendsListToTag(term) {
     if (term != "") {
       this.remoteService.friendsListApiCall(this.userId, this.userId, term).subscribe(res => {
-        this.searchedUsers = res
+        this.searchedUsers = [];
+        for(let i = 0; i < res.length; ++i){
+          console.log(Tagedusers.indexOf(res[i].id));
+          if(Tagedusers.indexOf(res[i].id) == -1){
+            this.searchedUsers.push(res[i]);
+          }
+        }
+        document.getElementById("myDropdown").classList.toggle("show");
+        console.log(res);
       });
     }
   }
-  selectUserToTag() {
+  selectUserToTag(userName, userID, userImage, index, searchedUsers) {
     var users = []
-
-    $(document).one('click', '.tagslist li', function(e) {
+    this.tagedUsers = ''
+    $(document).one('click', '.dropdown-content a', function(e) {
       e.preventDefault();
-      let userName = $(this).find('a').text()
-      let userID = $(this).find('p').text()
-      let userImage = $(this).find('img').attr('src')
-      users
-
+      // let userName = $(this).find('a').text()
+      // let userID = $(this).find('p').text()
+      // let userImage = $(this).find('img').attr('src')
+      searchedUsers.splice(index, 1);
+      console.log(userName, userID, userImage);
       Tagedusers.push(userID)
       $('.selectedUsersInTag').find("ul[class='chosenElments']").append('<li class="btn btn-theme btn-xs created-tag" style="margin:3px;">' + userName + '<p hidden>' + userID + '</p> <i class="fa fa-close"></i></li>')
-
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
     })
     $(document).on('click', '.created-tag>i', function() {
       let userid = $(this).parent().find('p').text()
       let index = Tagedusers.findIndex(item => item.id == userid)
-      Tagedusers.splice(index, 1)
+
+      searchedUsers.splice(index, 0, {
+        name: userName,
+        id: userID,
+        avatar: userImage
+      });
+      Tagedusers.splice(index, 1);
       $(this).parent().remove()
 
       console.log(index)

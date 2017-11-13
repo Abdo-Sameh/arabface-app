@@ -307,7 +307,6 @@ export class GroupPage {
       ]
     });
     alert.present();
-
   }
 
 

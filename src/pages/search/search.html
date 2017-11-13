@@ -32,9 +32,9 @@
           <ion-slide (click)="search(searchQuery, 'user')">
             <a>{{ 'people' | translate }}</a>
           </ion-slide>
-          <ion-slide (click)="search(searchQuery, 'post')">
+          <!-- <ion-slide (click)="search(searchQuery, 'post')">
             <a>{{ 'posts' | translate }}</a>
-          </ion-slide>
+          </ion-slide> -->
           <ion-slide (click)="search(searchQuery, 'page')">
             <a>{{ 'pages' | translate }}</a>
           </ion-slide>
@@ -60,10 +60,10 @@
       <div class="tab-content" *ngIf="type == 'user'">
         <div class="user-suggestion-list box">
           <div class="user-item" *ngFor="let user of searchRes.users; let i = index;">
-            <div (click)="viewProfile(user.id)" class="user-img" style="border-radius: 100px; border: 0px solid #5c0632;">
+            <div (click)="GoToProfile(user.id)" class="user-img" style="border-radius: 100px; border: 0px solid #5c0632;">
               <a href="#"><img src="{{ user.avatar }}" style="border-radius: 100px;" alt=""></a>
             </div>
-            <div class="user-info">
+            <div (click)="GoToProfile(user.id)" class="user-info">
               <h3 class="mt-15"><a href="#">{{ user.name }}</a></h3>
             </div>
           </div>

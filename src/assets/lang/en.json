@@ -312,7 +312,7 @@
 
   "go": "Go",
 
-
+  "tag-people-in-your-post" : "Tag people in your post",
 
   "manage-ban-filters": "Manage ban filters",
 
@@ -385,6 +385,8 @@
   "include-in-registration-description": "Set if you want this custom field to be included in the registration form",
 
   "required": "Required",
+
+  "invalid-email" : "Invalid email",
 
   "custom-field-required-description": "Set if you want this custom field to be required in the form",
 

@@ -28,38 +28,49 @@ export class SettingsDeletePage {
     console.log('ionViewDidLoad SettingsDeletePage');
   }
   deleteAccount(password) {
-    this.remoteService.deleteAccount(this.userId, password).subscribe(res1 => {
-      this.remoteService.getUserData('password', this.userId).subscribe(res2 => {
-        console.log(res2);
-        if (res2 == password) {
-          if (res1.status == "1") {
-            localStorage.setItem('loggedIn', "0");
-            localStorage.setItem('userName', "");
-            localStorage.setItem('userAvatar', "");
-            localStorage.setItem('userData', "");
-            localStorage.setItem('userDataID', "");
-            localStorage.setItem('userCover', "");
-            this.navCtrl.setRoot(LoginPage);
-
-          }
-        } else {
-          let alert = this.alert.create({
-            title: 'Error',
-            message: 'Wrong Password',
-            buttons: [
-              {
-                text: 'Ok',
-                role: 'cancel',
-                handler: () => {
-                }
+    let alert = this.alert.create({
+      title: 'Delete Account',
+      message: 'Are you sure you want to delete this account ?',
+      buttons: [
+        {
+          text: 'Yes',
+          handler: () => {
+            this.remoteService.deleteAccount(this.userId, password).subscribe(res => {
+              if (res.status == 1) {
+                localStorage.setItem('loggedIn', "0");
+                localStorage.setItem('userName', "");
+                localStorage.setItem('userAvatar', "");
+                localStorage.setItem('userData', "");
+                localStorage.setItem('userDataID', "");
+                localStorage.setItem('userCover', "");
+                this.navCtrl.setRoot(LoginPage);
+              }else{
+                let alert = this.alert.create({
+                  title: 'Error',
+                  message: 'Wrong Password',
+                  buttons: [
+                    {
+                      text: 'no',
+                      role: 'cancel',
+                      handler: () => {
+                      }
+                    }
+                  ]
+                });
+                alert.present();
               }
-            ]
-          });
-          alert.present();
+            })
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+          }
         }
-      });
-
+      ]
     });
+    alert.present();
   }
   back() {
     this.navCtrl.pop();

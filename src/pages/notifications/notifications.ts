@@ -212,6 +212,12 @@ export class NotificationsPage {
         });
         break;
       }
+      case "feed.like.comment": {
+        this.app.getRootNav().push(DisplayPostPage, {
+          post: notification.feed[0]
+        });
+        break;
+      }
       case "video.comment": {
         this.app.getRootNav().push(VideoPage, {
           video: notification.video[0]
@@ -230,6 +236,12 @@ export class NotificationsPage {
         });
         break;
       }
+      case "event.invite": {
+        this.app.getRootNav().push(EventPage, {
+          event: notification.event[0]
+        });
+        break;
+      }
       case "group.post": {
         this.app.getRootNav().push(GroupPage, {
           group: notification.group[0]
@@ -243,6 +255,16 @@ export class NotificationsPage {
         break;
       }
       case "relationship.follow": {
+        console.log(notification.userid);
+        this.GoToProfile(notification.userid);
+        break;
+      }
+      case "relationship.confirm": {
+        console.log(notification.userid);
+        this.GoToProfile(notification.userid);
+        break;
+      }
+      case "relationship.add": {
         console.log(notification.userid);
         this.GoToProfile(notification.userid);
         break;

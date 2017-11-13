@@ -49,13 +49,14 @@
               <input type='text' [(ngModel)]="tagedUsers" [ngModelOptions]="{ standalone :true}" (keyup)="getFriendsListToTag(tagedUsers)" style="width: 100%;margin-top: 10px;border: 1px solid #ccc;padding: 7px;" placeholder="{{'tag-people-in-your-post' | translate}}"
               />
             </div>
-            <div *ngIf="searchedUsers">
-              <ul (click)="selectUserToTag()" class="tagslist  " style="width:100%" *ngFor="let taged of searchedUsers">
+            <div id="myDropdown" class="dropdown-content">
+              <a (click)="selectUserToTag(taged.name, taged.id, taged.avatar, i, searchedUsers)" href="#" *ngFor="let taged of searchedUsers; let i = index;">{{taged.name}}</a>
+              <!-- <ul (click)="selectUserToTag()" class="tagslist  " style="width:100%" *ngFor="let taged of searchedUsers">
                 <li style="overflow:hidden">
                   <div style="float:left;"><img style=" width:25px;height:25px;border-radius:2px;margin:7px" src={{taged.avatar}} /> </div> <a style="float: left;margin: 10px 0 0 40px;" class="userName">{{taged.name}} </a>
                   <p class="userID" hidden>{{taged.id}}</p>
                 </li>
-              </ul>
+              </ul> -->
             </div>
           </div>
         </form>

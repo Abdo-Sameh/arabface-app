@@ -59,7 +59,7 @@
               <p>{{getTime(notify.time)}}</p>
             </div>
             <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'event.invite'">
-              <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'invited-you-to-event' | translate}} <a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a></span></h5>
+              <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'invited-you-to-event' | translate}} <a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.data_one}} </a>{{'event' | translate}}</span></h5>
               <p>{{getTime(notify.time)}}</p>
             </div>
 
@@ -188,7 +188,7 @@
               <p>{{getTime(notify.time)}}</p>
             </div>
             <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'event.invite'">
-              <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'invited-you-to-event' | translate}} <a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} {{'event' | translate}}</a></span></h5>
+              <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'invited-you-to-event' | translate}} <a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.data_one}} </a>{{'event' | translate}}</span></h5>
               <p>{{getTime(notify.time)}}</p>
             </div>
 

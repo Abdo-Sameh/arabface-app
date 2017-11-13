@@ -697,7 +697,6 @@ Start News
 .feed-title h3 {
 	font-size: 14px;
 	font-weight: 600;
-	text-transform: uppercase;
 	margin: 5px 0 -2px;
 }
 .feed-body h3 {
@@ -948,7 +947,6 @@ Start Friend List
 .user-info h3 {
     font-size: 13px;
     font-weight: 600;
-    text-transform: uppercase;
     margin-top: 5px;
 }
 .notifications .user-info h3 span {
@@ -1144,7 +1142,6 @@ Start Profile
 }
 .thumbnails .thumbnail h3 {
     font-weight: 600;
-    text-transform: uppercase;
     margin-top: 5px;
 		font-size: 12px;
 		height: 18px;
@@ -1247,7 +1244,6 @@ top: -4px;
 }
 .thumbnails .thumbnail h3 {
     font-weight: 600;
-    text-transform: uppercase;
     margin-top: 5px;
 }
 /*====================================

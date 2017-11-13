@@ -693,7 +693,6 @@ Start News
 .feed-title h3 {
 	font-size: 14px;
 	font-weight: 600;
-	text-transform: uppercase;
 	margin: 5px 0 -2px;
 }
 .feed-body h3 {
@@ -934,17 +933,18 @@ Start Friend List
 	float: left;
 	width: 60px;
 	height: 60px;
-	border: 3px solid #5c0632;
+	border: 0px solid #5c0632;
 	margin-right: 20px;
+	border-radius: 100px;
 }
 .user-item img {
 	width: 100%;
 	height: 100%;
+	border-radius: 100px;
 }
 .user-info h3 {
     font-size: 13px;
     font-weight: 600;
-    text-transform: uppercase;
     margin-top: 5px;
 }
 .notifications .user-info h3 span {
@@ -1140,7 +1140,6 @@ Start Profile
 }
 .thumbnails .thumbnail h3 {
     font-weight: 600;
-    text-transform: uppercase;
     margin-top: 5px;
 		font-size: 12px;
 		height: 18px;
@@ -1243,7 +1242,6 @@ top: -4px;
 }
 .thumbnails .thumbnail h3 {
     font-weight: 600;
-    text-transform: uppercase;
     margin-top: 5px;
 }
 /*====================================
@@ -1408,4 +1406,3 @@ top: -4px;
 .fa-paper-plane{
 		color: #5c0632;
 	}
-	
