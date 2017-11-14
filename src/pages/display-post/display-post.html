@@ -91,7 +91,7 @@
           <div class="feed-action flex-space-around">
             <a href="#" *ngIf="post.has_like ==false" (click)="likeFeed(30,post.id,mainI)"><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
             <a href="#" *ngIf="post.has_like" style="color:#488aff" (click)="likeFeed(30,post.id,mainI)"><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
-            <a href="#" (click)="showComments(post.id)"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
+            <a href="#" ><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
             <a href="#" (click)="sharePost(post.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
           </div>
 
@@ -99,7 +99,7 @@
 
 
           <div class="clearfix"></div>
-          <div id="dis{{post.id}}" class="comment-list" style="display:none;">
+          <div  class="comment-list">
             <div class="comment" *ngFor="let comments of post.answers[0];let commentIndex=index">
               <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
               <div class="feed-title">
@@ -267,11 +267,11 @@
           <div class="feed-action flex-space-around">
             <a href="#" *ngIf="post.has_like ==false" (click)="likeFeed(30,post.id,mainI)"><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
             <a href="#" *ngIf="post.has_like" style="color:#488aff" (click)="likeFeed(30,post.id,mainI)"><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
-            <a href="#" (click)="showComments(post.id)"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
+            <a href="#" ><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
             <a href="#" (click)="sharePost(post.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
           </div>
           <div class="clearfix"></div>
-          <div id="dis{{post.id}}" class="comment-list" style="display:none;">
+          <div  class="comment-list">
             <div class="comment" *ngFor="let comments of post.answers[0];let commentIndex=index">
               <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
               <div class="feed-title">
@@ -450,17 +450,17 @@
             <div class="feed-action flex-space-around">
               <a href="#" *ngIf="post.has_like ==false" (click)="likeFeed(30,post.id,mainI)"><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
               <a href="#" *ngIf="post.has_like" style="color:#488aff" (click)="likeFeed(30,post.id,mainI)"><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
-              <a href="#" (click)="showComments(post.id)"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
+              <a href="#" ><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
               <a href="#" (click)="sharePost(post.id)"><i class="fa fa-share" ></i> {{'share' | translate}}</a>
             </div>
             <div class="clearfix"></div>
-            <div id="dis{{post.id}}" class="comment-list" style="display:none;">
+            <div  class="comment-list">
               <div class="comment" *ngFor="let comments of post.answers[0];let commentIndex=index">
                 <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
                 <div class="feed-title">
                   <div class="pull-left comment-edit-input">
                     <h3><a href="#">{{comments.name}}</a></h3>
-                    <p style="margin-left:0 !important;">{{comments.text}}</p>
+                    <p style="margin-left:0 !important;" [innerHTML]="comments.text"></p>
                     <div class="input-group">
                       <textarea [(ngModel)]="comments.text" [ngModelOptions]="{ standalone :true}" class="form-control mb-5 "></textarea>
 
@@ -634,11 +634,11 @@
             <div class="feed-action flex-space-around">
               <a href="#" *ngIf="post.has_like ==false" (click)="likeFeed(30,post.id,mainI)"><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
               <a href="#" *ngIf="post.has_like" style="color:#488aff" (click)="likeFeed(30,post.id,mainI)"><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
-              <a href="#" (click)="showComments(post.id)"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
+              <a href="#" ><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
               <a href="#" (click)="sharePost(post.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
             </div>
             <div class="clearfix"></div>
-            <div id="dis{{post.id}}" class="comment-list" style="display:none;">
+            <div  class="comment-list">
               <div class="comment" *ngFor="let comments of post.answers[0];let commentIndex=index">
                 <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
                 <div class="feed-title">
@@ -807,11 +807,11 @@
           <div class="feed-action flex-space-around">
             <a href="#" *ngIf="post.has_like ==false" (click)="likeFeed(30,post.id,mainI)"><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
             <a href="#" *ngIf="post.has_like" style="color:#488aff" (click)="likeFeed(30,post.id,mainI)"><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
-            <a href="#" (click)="showComments(post.id)"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
+            <a href="#" ><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
             <a href="#" (click)="sharePost(post.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
           </div>
           <div class="clearfix"></div>
-          <div id="dis{{post.id}}" class="comment-list" style="display:none;">
+          <div  class="comment-list">
             <div class="comment" *ngFor="let comments of post.answers[0];let commentIndex=index">
               <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
               <div class="feed-title">
@@ -977,11 +977,11 @@
           <div class="feed-action flex-space-around">
             <a href="#" *ngIf="post.has_like ==false" (click)="likeFeed(30,post.id,mainI)"><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
             <a href="#" *ngIf="post.has_like" style="color:#488aff" (click)="likeFeed(30,post.id,mainI)"><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
-            <a href="#" (click)="showComments(post.id)"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
+            <a href="#" ><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
             <a href="#" (click)="sharePost(post.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
           </div>
           <div class="clearfix"></div>
-          <div id="dis{{post.id}}" class="comment-list" style="display:none;">
+          <div  class="comment-list">
             <div class="comment" *ngFor="let comments of post.answers[0];let commentIndex=index">
               <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
               <div class="feed-title">
@@ -1147,11 +1147,11 @@
           <div class="feed-action flex-space-around">
             <a href="#" *ngIf="post.has_like ==false" (click)="likeFeed(30,post.id,mainI)"><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
             <a href="#" *ngIf="post.has_like" style="color:#488aff" (click)="likeFeed(30,post.id,mainI)"><i class="fa fa-thumbs-o-up" ></i> {{'like' | translate}}</a>
-            <a href="#" (click)="showComments(post.id)"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
+            <a href="#" ><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
             <a href="#" (click)="sharePost(post.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
           </div>
           <div class="clearfix"></div>
-          <div id="dis{{post.id}}" class="comment-list" style="display:none;">
+          <div  class="comment-list">
             <div class="comment" *ngFor="let comments of post.answers[0];let commentIndex=index">
               <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
               <div class="feed-title">
@@ -1317,11 +1317,11 @@
           <div class="feed-action flex-space-around">
             <a href="#" *ngIf="post.has_like ==false" (click)="likeFeed(30,post.id,mainI)"><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
             <a href="#" *ngIf="post.has_like" style="color:#488aff" (click)="likeFeed(30,post.id,mainI)"><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
-            <a href="#" (click)="showComments(post.id)"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
+            <a href="#" ><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
             <a href="#" (click)="sharePost(post.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
           </div>
           <div class="clearfix"></div>
-          <div id="dis{{post.id}}" class="comment-list" style="display:none;">
+          <div  class="comment-list">
             <div class="comment" *ngFor="let comments of post.answers[0];let commentIndex=index">
               <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
               <div class="feed-title">
@@ -1498,11 +1498,11 @@
           <div class="feed-action flex-space-around">
             <a href="#" *ngIf="post.has_like ==false" (click)="likeFeed(30,post.id,mainI)"><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
             <a href="#" *ngIf="post.has_like" style="color:#488aff" (click)="likeFeed(30,post.id,mainI)"><i class="fa fa-thumbs-o-up" ></i> {{'like' | translate}}</a>
-            <a href="#" (click)="showComments(post.id)"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
+            <a href="#" ><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
             <a href="#" (click)="sharePost(post.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
           </div>
           <div class="clearfix"></div>
-          <div id="dis{{post.id}}" class="comment-list" style="display:none;">
+          <div  class="comment-list">
             <div class="comment" *ngFor="let comments of post.answers[0];let commentIndex=index">
               <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
               <div class="feed-title">
@@ -1681,11 +1681,11 @@
           <div class="feed-action flex-space-around">
             <a href="#" *ngIf="post.has_like ==false" (click)="likeFeed(30,post.id,mainI)"><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
             <a href="#" *ngIf="post.has_like" style="color:#488aff" (click)="likeFeed(30,post.id,mainI)"><i class="fa fa-thumbs-o-up"   ></i> {{'like' | translate}}</a>
-            <a href="#" (click)="showComments(post.id)"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
+            <a href="#" ><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
             <a href="#" (click)="sharePost(post.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
           </div>
           <div class="clearfix"></div>
-          <div id="dis{{post.id}}" class="comment-list" style="display:none;">
+          <div  class="comment-list">
             <div class="comment" *ngFor="let comments of post.answers[0];let commentIndex=index">
               <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
               <div class="feed-title">
@@ -1852,11 +1852,11 @@
           <div class="feed-action flex-space-around">
             <a href="#" *ngIf="post.has_like ==false" (click)="likeFeed(30,post.id,mainI)"><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
             <a href="#" *ngIf="post.has_like" style="color:#488aff" (click)="likeFeed(30,post.id,mainI)"><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
-            <a href="#" (click)="showComments(post.id)"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
+            <a href="#" ><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
             <a href="#" (click)="sharePost(post.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
           </div>
           <div class="clearfix"></div>
-          <div id="dis{{post.id}}" class="comment-list" style="display:none;">
+          <div  class="comment-list">
             <div class="comment" *ngFor="let comments of post.answers[0];let commentIndex=index">
               <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
               <div class="feed-title">
@@ -2022,11 +2022,11 @@
           <div class="feed-action flex-space-around">
             <a href="#" *ngIf="post.has_like ==false" (click)="likeFeed(30,post.id,mainI)"><i class="fa fa-thumbs-o-up"  ></i>{{'like' | translate}}</a>
             <a href="#" *ngIf="post.has_like" style="color:#488aff" (click)="likeFeed(30,post.id,mainI)"><i class="fa fa-thumbs-o-up"   ></i> {{'like' | translate}}</a>
-            <a href="#" (click)="showComments(post.id)"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
+            <a href="#" ><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
             <a href="#" (click)="sharePost(post.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
           </div>
           <div class="clearfix"></div>
-          <div id="dis{{post.id}}" class="comment-list" style="display:none;">
+          <div  class="comment-list">
             <div class="comment" *ngFor="let comments of post.answers[0];let commentIndex=index">
               <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
               <div class="feed-title">
@@ -2197,11 +2197,11 @@
             <a href="#" *ngIf="post.has_like" style="color:#488aff" (click)="likeFeed(30,post.id,mainI)"><i class="fa fa-thumbs-o-up"  ></i> {{'like' | translate}}</a>
 
 
-            <a href="#" (click)="showComments(post.id)"><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
+            <a href="#" ><i class="fa fa-commenting"></i> {{'comment' | translate}}</a>
             <a href="#" (click)="sharePost(post.id)"><i class="fa fa-share" ></i>{{'share' | translate}}</a>
           </div>
           <div class="clearfix"></div>
-          <div id="dis{{post.id}}" class="comment-list" style="display:none;">
+          <div  class="comment-list">
             <div class="comment" *ngFor="let comments of post.answers[0];let commentIndex=index">
               <a href="#"><img class="feed-img" src={{comments.avatar}} alt=""></a>
               <div class="feed-title">

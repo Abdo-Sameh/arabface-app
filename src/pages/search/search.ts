@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Platform } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { NotFound_404Page } from '../not-found-404/not-found-404';
 import { FriendProfilePage } from '../friend-profile/friend-profile';
 import { ProfilePage } from '../profile/profile';
+import { GroupPage } from '../group/group';
+import { EventPage } from '../event/event';
+import { VideoPage } from '../video/video';
+import { Page } from '../page/page';
 /**
  * Generated class for the SearchPage page.
  *
@@ -21,9 +25,12 @@ export class SearchPage {
   userId
   userData
   type
-  constructor(public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider, public navCtrl: NavController, public navParams: NavParams) {
+  dir = "ltr"
+  constructor(public paltform: Platform, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider, public navCtrl: NavController, public navParams: NavParams) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.searchRes = {}
+    if (this.paltform.dir() == "rtl")
+      this.dir = "rtl";
   }
 
   ionViewDidLoad() {
@@ -48,6 +55,38 @@ export class SearchPage {
 
   back() {
     this.navCtrl.pop();
+  }
+
+  viewGroup(id) {
+    this.remoteService.groupDetails(id, this.userId).subscribe(res => {
+      this.navCtrl.push(GroupPage, {
+        group: res
+      })
+    })
+  }
+
+  viewEvent(id) {
+    this.remoteService.eventDetails(id, this.userId).subscribe(res => {
+      this.navCtrl.push(EventPage, {
+        event: res
+      })
+    })
+  }
+
+  viewVideo(id) {
+    this.remoteService.videoDetails(id, this.userId).subscribe(res => {
+      this.navCtrl.push(VideoPage, {
+        video: res
+      })
+    })
+  }
+
+  viewPage(id) {
+    this.remoteService.getPageDetails(this.userId, id).subscribe(res => {
+      this.navCtrl.push(Page, {
+        page: res
+      })
+    })
   }
 
   GoToProfile(id) {

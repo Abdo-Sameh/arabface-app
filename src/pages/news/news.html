@@ -755,7 +755,7 @@
               <div class="feed-title">
                 <a (click)="GoToProfile(feed.entity_id, userId)" style="color:#5c0632;cursor:pointer;    font-size: 14px;">{{feed.name}} </a>
                 <span *ngIf="feed.tag_users != ''">  with  <span *ngFor="let tag of feed.tag_users"><a style="color:#5c0632;  font-size: 14px;" (click)="GoToProfile(tag.id, userId)"> {{tag.name}} ,</a> </span> </span><i class="fa fa-arrow-right"></i>
-                <a style="color:#5c0632;cursor:pointer;font-size:14px;">{{feed.group_name}} </a><br>
+                <a (click)="viewGroup(feed.type_id)" style="color:#5c0632;cursor:pointer;font-size:14px;">{{feed.group_name}} </a><br>
                 <span>{{getTime(feed.time)}} </span><span>-</span>
                 <span class="dropdown ml-5">
                               <a href="#" *ngIf="feed.privacy == 1"  data-toggle="dropdown"><i style="color:#5c0632" class="fa fa-globe"></i></a>

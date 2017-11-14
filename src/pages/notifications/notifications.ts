@@ -43,6 +43,13 @@ export class NotificationsPage {
     console.log('ionViewDidLoad NotificationsPage');
   }
 
+  doRefresh(refresher) {
+    this.getNotifications(1);
+    this.getUnreadNotifications();
+    if (refresher != 0)
+      refresher.complete();
+  }
+
   getNotifications(page) {
     let loading = this.loading.create({
       content: "Loading",
@@ -144,7 +151,6 @@ export class NotificationsPage {
   getTime(time) {
     return this.time.getTime(time);
   }
-
 
   gotoNotification(type, notification, index) {
 
@@ -249,6 +255,12 @@ export class NotificationsPage {
         break;
       }
       case "group.add.member": {
+        this.app.getRootNav().push(GroupPage, {
+          group: notification.group[0]
+        });
+        break;
+      }
+      case "group.role": {
         this.app.getRootNav().push(GroupPage, {
           group: notification.group[0]
         });

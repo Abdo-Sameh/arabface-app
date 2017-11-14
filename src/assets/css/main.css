@@ -1191,7 +1191,7 @@ Start Profile
 	color: #fff;
 font-size: 17px;
 position: relative;
-top: -4px;
+top: -10px;
 }
 .profile .friend_profile_box {
 	bottom: -40px;
@@ -1405,4 +1405,13 @@ top: -4px;
 }
 .fa-paper-plane{
 		color: #5c0632;
+	}
+	.filters {
+		margin-left: 0;
+	}
+	.swiper-slide {
+		width: auto !important;
+	}
+	.last-slide .slide-zoom {
+		display: none;
 	}

@@ -11,6 +11,7 @@ import { MyApp } from '../../app/app.component';
 import { TranslateService } from '@ngx-translate/core';
 import { TimeProvider } from './../../providers/time/time';
 import { EditPostPage } from '../edit-post/edit-post';
+import { GroupPage } from '../group/group';
 
 //import $ from "jquery";
 
@@ -69,6 +70,14 @@ export class NewsPage {
         this.feeds[feedIndex].answers[0][commentIndex].text = text;
         $('.saveComment').parent().hide();
       }
+    })
+  }
+
+  viewGroup(id){
+    this.remoteService.groupDetails(id, this.userId).subscribe(res => {
+      this.app.getRootNav().push(GroupPage,{
+        group: res
+      })
     })
   }
 

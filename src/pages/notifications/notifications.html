@@ -13,6 +13,10 @@
 <ion-content>
   <section class="">
     <div class="container">
+      <ion-refresher (ionRefresh)="doRefresh($event);">
+        <ion-refresher-content refreshingSpinner="circles">
+        </ion-refresher-content>
+      </ion-refresher>
       <div id="noNoti" style="display: none; margin-top: 10px; text-align: center;" class="box-content alert alert-danger">{{'no-new-notifications' | translate}}</div>
       <div class="users-list notifications" *ngFor="let notify of notifications; let i = index;">
 
@@ -42,7 +46,12 @@
               <p>{{getTime(notify.time)}}</p>
             </div>
             <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'page.new.role'">
-              <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'add-you-as-admin' | translate}} {{'in' | translate}} <a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.page[0].title}} {{'event' | translate}}</a></span></h5>
+              <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'add-you-as' | translate}} </span>
+                <span>
+                  <span *ngIf="notify.data_one == 1">{{'admin' | translate}}</span>
+                  <span *ngIf="notify.data_one == 2">{{'moderator' | translate}}</span>
+                  <span *ngIf="notify.data_one == 3">{{'editor' | translate}}</span>
+                {{'in' | translate}} <a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.page[0].title}}</a></span></h5>
               <p>{{getTime(notify.time)}}</p>
             </div>
             <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'page.like'">
@@ -51,7 +60,10 @@
             </div>
             <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'group.post'">
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'posted-in-group' | translate}} <a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.group_name}} </a></span></h5>
-
+              <p>{{getTime(notify.time)}}</p>
+            </div>
+            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'group.role'">
+              <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'made-you-moderator' | translate}} <a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.group_name}} </a></span></h5>
               <p>{{getTime(notify.time)}}</p>
             </div>
             <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'relationship.follow'">
@@ -160,7 +172,12 @@
               <p>{{getTime(notify.time)}}</p>
             </div>
             <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'page.new.role'">
-              <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'add-you-as-admin' | translate}} {{'in' | translate}} <a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.page[0].title}}</a></span></h5>
+              <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'add-you-as' | translate}} </span>
+                <span>
+                  <span *ngIf="notify.data_one == 1">{{'admin' | translate}}</span>
+                  <span *ngIf="notify.data_one == 2">{{'moderator' | translate}}</span>
+                  <span *ngIf="notify.data_one == 3">{{'editor' | translate}}</span>
+                {{'in' | translate}} <a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.page[0].title}}</a></span></h5>
               <p>{{getTime(notify.time)}}</p>
             </div>
             <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'page.like'">
@@ -170,6 +187,10 @@
             <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'group.post'">
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'posted-in-group' | translate}} <a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.group_name}} </a></span></h5>
 
+              <p>{{getTime(notify.time)}}</p>
+            </div>
+            <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'group.role'">
+              <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'made-you-moderator' | translate}} <a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.group_name}} </a></span></h5>
               <p>{{getTime(notify.time)}}</p>
             </div>
             <div (click)="gotoNotification(notify.type, notify, i)" class="user-info" *ngSwitchCase="notify.type == 'event.rsvp'">

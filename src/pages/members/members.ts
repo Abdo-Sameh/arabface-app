@@ -17,13 +17,14 @@ export class MembersPage {
   members
   constructor(public alert:AlertController, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
     this.members = navParams.get("members");
+    console.log(this.members);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MembersPage');
   }
   back() {
-    this.navCtrl.pop();    
+    this.navCtrl.pop();
   }
 
 }

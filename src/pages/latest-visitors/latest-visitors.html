@@ -33,7 +33,7 @@
 							<div class="user-img">
 								<a (click)="GoToProfile(visitor.id)" href="#"><img src="{{visitor.avatar}}" alt=""></a>
 							</div>
-							<div (tab)="GoToProfile(visitor.id)" class="user-info pull-left">
+							<div (click)="GoToProfile(visitor.id)" class="user-info pull-left">
 								<h3 style="margin-top:-4px"><a href="#">{{visitor.name}}</a></h3>
 								<!-- <p><i class="ion-android-people"></i> 2 friends</p>
 								<p><i class="ion-ios-location"></i> Argentina</p> -->

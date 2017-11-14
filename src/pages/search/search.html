@@ -24,8 +24,7 @@
       </div>
     </div>
     <ion-row class="filters">
-      <ion-col no-padding col-10>
-        <ion-slides slidesPerView="5">
+        <ion-slides slidesPerView="5" dir="{{dir}}">
           <ion-slide (click)="search(searchQuery, 'all')">
             <a>{{ 'All' | translate }}</a>
           </ion-slide>
@@ -47,8 +46,9 @@
           <ion-slide (click)="search(searchQuery, 'video')">
             <a>{{ 'videos' | translate }}</a>
           </ion-slide>
+          <ion-slide class="last-slide">
+          </ion-slide>
         </ion-slides>
-      </ion-col>
     </ion-row>
   </header>
 </ion-header>
@@ -72,10 +72,10 @@
       <div class="tab-content" *ngIf="type == 'page'">
         <div class="user-suggestion-list box" >
           <div class="user-item" *ngFor="let page of searchRes.pages; let i = index;">
-            <div class="user-img">
+            <div (click)="viewPage(page.id)" class="user-img">
               <a href="#"><img src="{{ page.logo }}" alt=""></a>
             </div>
-            <div class="user-info">
+            <div (click)="viewPage(page.id)" class="user-info">
               <h3 class="mt-15"><a href="#">{{ page.title }}</a></h3>
             </div>
           </div>
@@ -84,10 +84,10 @@
       <div class="tab-content" *ngIf="type == 'group'">
         <div class="user-suggestion-list box">
           <div class="user-item" *ngFor="let group of searchRes.groups; let i = index;">
-            <div class="user-img">
+            <div (click)="viewGroup(group.id)" class="user-img">
               <a href="#"><img src="{{ group.logo }}" alt=""></a>
             </div>
-            <div class="user-info">
+            <div (click)="viewGroup(group.id)" class="user-info">
               <h3 class="mt-15"><a href="#">{{ group.title }}</a></h3>
             </div>
           </div>
@@ -96,10 +96,10 @@
       <div class="tab-content" *ngIf="type == 'event'">
         <div class="user-suggestion-list box">
           <div class="user-item" *ngFor="let event of searchRes.events; let i = index;">
-            <div class="user-img">
+            <div (click)="viewEvent(event.id)" class="user-img">
               <a href="#"><img src="{{ event.image }}" alt=""></a>
             </div>
-            <div class="user-info">
+            <div (click)="viewEvent(event.id)" class="user-info">
               <h3 class="mt-15"><a href="#">{{ event.title }}</a></h3>
             </div>
           </div>
@@ -108,10 +108,10 @@
       <div class="tab-content" *ngIf="type == 'video'">
         <div class="user-suggestion-list box">
           <div class="user-item" *ngFor="let video of searchRes.videos; let i = index;">
-            <div class="user-img">
+            <div (click)="viewVideo(video.id)" class="user-img">
               <a href="#"><img src="{{ video.photo }}" alt=""></a>
             </div>
-            <div class="user-info">
+            <div (click)="viewVideo(video.id)" class="user-info">
               <h3 class="mt-15"><a href="#">{{ video.title }}</a></h3>
             </div>
           </div>

@@ -1574,7 +1574,7 @@
 
 	"invited-you-to-event" : "دعاك الي الحدث",
 
-	"added-you-to-group": "إضافتك إلى هذه المجموعة: ",
+	"added-you-to-group": "اضافك الى هذه المجموعة",
 
 	"added" : "تمت الاضافة",
 
@@ -1628,7 +1628,7 @@
 
 	"enable-dislike-notification-desc": "مع هذا الخيار يمكنك تعيين إذا كنت تريد أعضاء الخاص بك لتلقي الإخطارات كراهية وعندما تمكن عضو لديك الخيار في إعدادات الخصوصية لتعطيله",
 
-	"mention-you-in-post": "أذكر لكم في هذا المنصب",
+	"mention-you-in-post": "قام بذكرك فى تعليق",
 
 	"see-all-notifications": "رؤية جميع الإشعارات",
 
@@ -1636,13 +1636,17 @@
 
 	"read": "اقرأ",
 
+	"made-you-moderator" : "جعلك مشرف",
+
+	"add-you-as" : "جعلك",
+
 	"send-site-notification-when": "أرسل لي الإخطارات الموقع عندما",
 
 	"someone-started-following-you": "قام شخص بمتابعتك",
 
 	"you-are-mentioned": "تمت الإشارة إليك فى المنشور",
 
-	"you-are-tagged": "ذكرك شخص ما فى تعليق",
+	"you-are-tagged": "اشار اليك فى منشور",
 
 	"comment-on-your-post": "قام شخص بالتعليق على مشاركتك",
 
@@ -1978,7 +1982,7 @@
 
 	"invited": "دعوة",
 
-	"going": "الذهاب",
+	"going": "ذاهب الى الحدث",
 
 	"not-going": "لن",
 
@@ -3621,7 +3625,7 @@
 
 	"withavatar-value": "1",
 
-	"view-your-profile": "قام بالاطلاع على الملف الخاص بك",
+	"view-your-profile": "قام بالاطلاع على صفحتك الشخصية",
 
 	"view-your-profile-again": "ينظر التعريف الخاص بك مرة أخرى",
 
@@ -4287,7 +4291,7 @@
 
 	"default-page-list-type-desc": "مع هذا الخيار يمكنك تعيين نوع القائمة الصفحة",
 
-	"like-your-page": "أحب الصفحة الخاصة بك",
+	"like-your-page": "اعجب بالصفحة الخاصة بك",
 
 	"reacted-to-page": "كان رد فعل على صفحتك",
 

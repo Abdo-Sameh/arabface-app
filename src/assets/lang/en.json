@@ -190,7 +190,7 @@
 
   "search-phrase-placeholder": "Search for phrases in this language",
 
-
+  "shared-your-post" : "shared your post",
 
   "country-manager": "Country Manager",
 
@@ -280,13 +280,17 @@
 
   "add-member-to-group": "Add members",
 
-  "replied-on-your-comment": "Replied on your comment",
+  "replied-on-your-comment": "replied on your comment",
 
-  "like-your-item": "Like your posts,photos e.t.c",
+  "mentioned-you-in-post" : "mentioned you in this post",
 
-  "share-your-item": "Shared your posts",
+  "like-your-item": "like your posts,photos e.t.c",
+
+  "share-your-item": "shared your posts",
 
   "posts": "Posts",
+
+  "add-you-as" : "add you as",
 
   "all-events": "All",
 
@@ -555,9 +559,13 @@
 
   "add-you-as-admin": "add you as admin",
 
+  "added-you-to-group" : "added you to group",
+
   "post-on-timeline": "posted on your wall",
 
   "write-comment": "Write comment ...",
+
+  "made-you-moderator" : "made you moderator of",
 
   "user-settings-description": "Manage user settings, control who can register,manage welcome signup step, account activation e.t.c",
 

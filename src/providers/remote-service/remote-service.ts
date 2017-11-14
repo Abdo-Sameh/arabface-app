@@ -1186,6 +1186,11 @@ export class RemoteServiceProvider {
     return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/group/add/member?group_id=' + group_id + '&user_id=' + id + '&userid=' + userid)
       .map((res: Response) => res.json());
   }
+
+  groupDetails(group_id, userid){
+    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/group/get/details?id=' + group_id + '&userid=' + userid)
+      .map((res: Response) => res.json());
+  }
   /////////////////// Events /////////////////////////
 
   getEvents(type, categoryId, term, userId, page, limit) {
@@ -1295,6 +1300,11 @@ export class RemoteServiceProvider {
     return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/event/invited?userid=' + userid + '&event_id=' + event_id + '&user=' + user)
       .map((res: Response) => res.json());
   }
+
+  eventDetails(event_id, userid){
+    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/event/get/details?id=' + event_id + '&userid=' + userid)
+      .map((res: Response) => res.json());
+  }
   ////////////////////////////////////////////////////
 
   /////////////////// Videos ////////////////////////
@@ -1360,9 +1370,12 @@ export class RemoteServiceProvider {
         .map((res: Response) => res.json());
     else
       return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/dislike/item', body, { headers: headers })
-
-        //do((res : Response ) => console.log(res.json()))
         .map((res: Response) => res.json());
+  }
+
+  videoDetails(video_id, userid){
+    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/video/get/details?id=' + video_id + '&userid=' + userid)
+      .map((res: Response) => res.json());
   }
 
   ///////////////////////////////////////////////////

@@ -36,6 +36,7 @@ export class DisplayPostPage {
     this.post = this.navParams.get('post')
     console.log(this.post)
     this.loadComments();
+
   }
 
   getTime(time) {
@@ -58,9 +59,15 @@ export class DisplayPostPage {
 
   }
 
-  showComments(id) {
-    $('#dis' + id).show();
-    console.log('#' + id);
+  reply() {
+    $(document).on('click', '.comment-reply', function() {
+      $(this).closest('.comment').find('.reply-input').show();
+
+    })
+    $(document).on('click', '.reply-close', function() {
+      $(this).closest('.reply-input').hide();
+
+    })
   }
 
   likeComment(userid = this.userId, commentID, postIndex, commentIndex) {

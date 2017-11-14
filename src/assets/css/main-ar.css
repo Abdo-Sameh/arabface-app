@@ -1193,7 +1193,7 @@ Start Profile
 	color: #fff;
 font-size: 17px;
 position: relative;
-top: -4px;
+top: -10px;
 }
 .profile .friend_profile_box {
 	bottom: -40px;
@@ -1455,4 +1455,14 @@ top: -4px;
 }
 .ion-app [no-padding] .scroll-content {
     margin-left: 25px !important;
+}
+.filters {
+	margin-left: 0;
+	margin-right: 15px;
+}
+.swiper-slide {
+	width: auto !important;
+}
+.last-slide {
+	display: none;
 }

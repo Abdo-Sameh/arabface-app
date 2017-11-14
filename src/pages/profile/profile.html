@@ -25,8 +25,8 @@
 
 
   <section class="bg_grey full_vh  profile pt-70">
-    <div class="user_cover" (click)="viewPhoto(cover)" [ngStyle]="{ 'background-image': 'url('  + cover + ')'}">
-      <div class="friend_profile_box">
+    <div class="user_cover" (click)="viewPhoto(cover)" [ngStyle]="{ 'background-image': 'url('  + cover + ')'}" style="position:relative;z-index:1;">
+      <div class="friend_profile_box"  style="z-index:10;">
         <form class="img-upload">
           <img (click)="viewPhoto(userData.avatar)" src={{userData.avatar}} alt="Arabface" title="Arabface">
           <div class="file-input file-input-profile">
