@@ -139,14 +139,25 @@ export class SettingsGeneralPage {
       $('#email').removeClass("alert alert-danger");
       $('#wrongEmail').hide();
       this.remoteService.settingsGeneral(first, last, email, username, gender, country, city, state, bio, this.userId, day, month, year).subscribe(res => {
-        let toast = this.toastCtrl.create({
-          message: 'Settings saved successfully',
-          duration: 3000,
-          position: 'top'
+        console.log(res);
+        if(res.status == 1){
+          let toast = this.toastCtrl.create({
+            message: 'Settings saved successfully',
+            duration: 3000,
+            position: 'top'
+          });
+          toast.present();
+          this.navCtrl.pop();
+        }else{
+          let toast = this.toastCtrl.create({
+            message: res.message,
+            duration: 3000,
+            position: 'top'
+          });
+          toast.present();
+        }
         });
-        toast.present();
-        this.navCtrl.pop();
-      });
+
     }else{
       $('#email').addClass("alert alert-danger");
       $('#wrongEmail').show();

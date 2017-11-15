@@ -150,26 +150,24 @@ export class UploadImagePage {
     // Use the FileTransfer to upload the image
     fileTransfer.upload(targetPath, url, options, true).then(data => {
       this.loading.dismissAll()
-      // alert(data.response['data_one']);
+      let response = JSON.parse(data.response);
+      // alert(response['data_one']);
+      // alert(data.response);
       // alert(data.bytesSent);
-      // alert(data.headers);
       // alert(targetPath);
       // alert(url);
-      if (this.type == "profile.avatar") {
-        localStorage.setItem('userAvatar', JSON.stringify(data.response['data_one']))
-      } else if (this.type == "profile.cover") {
-        localStorage.setItem('userCover', JSON.stringify(data.response['data_one']))
+      if (response['status'] == 0) {
+        this.presentToast('Error while uploading file.');
+      } else {
+        if (this.type == "profile.avatar") {
+          localStorage.setItem('userAvatar', JSON.parse(data.response['data_one']))
+        } else if (this.type == "profile.cover") {
+          localStorage.setItem('userCover', JSON.parse(data.response['data_one']))
+        }
+        this.presentToast(message);
       }
-      this.presentToast(message);
     }, err => {
       this.loading.dismissAll()
-      // alert(err.code);
-      // alert(err.source);
-      // alert(err.target);
-      // alert(err.http_status);
-      // alert(err.body);
-      // alert(err.exception);
-
       this.presentToast('Error while uploading file.');
     });
 

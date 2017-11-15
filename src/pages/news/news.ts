@@ -53,11 +53,11 @@ export class NewsPage {
     if (localStorage.getItem('userDataID')) {
       this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "")
     }
-    if (localStorage.getItem('userAvatar')) {
-      this.userAvatar = localStorage.getItem('userAvatar').slice(8, -1);
-    }
+    // if (localStorage.getItem('userAvatar')) {
+      this.userAvatar = localStorage.getItem('userAvatar');
+    // }
     this.getFeedsList(this.userId);
-    this.userAvatar = "http://" + this.userAvatar;
+    // this.userAvatar = "http://" + this.userAvatar;
   }
 
   ionViewDidLoad() {

@@ -10,7 +10,7 @@
   <section class="bg_grey">
     <div class="container">
       <div class="share-post panel panel-theme mt-30">
-        <img src={{userAvatar}} alt="">
+        <img [src]="userAvatar | sanitizer" alt="">
         <form><textarea (click)="goToPost()" placeholder="{{'whats-happening' | translate}}"></textarea></form>
       </div>
       <ion-refresher (ionRefresh)="doRefresh($event);">
