@@ -101,7 +101,7 @@ export class NewsPage {
       for (let i = 0; i < res.length; i++) {
         //check if post is saved or not-going
 
-
+        res[i].hidden = false;
         this.remoteService.isSaved('feed', res[i].id, this.userId).subscribe(data => {
           if (data.status == 1) {
             res[i].saved = true;
@@ -426,9 +426,10 @@ export class NewsPage {
 
   donotLikePost(feedid, index, userID = this.userId) {
     this.remoteService.hidePost(feedid, userID).subscribe(res => {
-      this.hiddenPost = res.status
+      // this.hiddenPost = res.status
       if (res.status == 1) {
-        this.feeds.splice(index, 1)
+        this.feeds[index].hidden = true;
+        // this.feeds.splice(index, 1)
 
         let toast = this.toast.create({
           message: 'This post will no longer show to you',
@@ -441,15 +442,10 @@ export class NewsPage {
 
   unHidePost(feedid, index, userID = this.userId) {
     this.remoteService.unHidePost(feedid, userID).subscribe(res => {
-      this.hiddenPost = res.status
-      if (res.status == 1) {
-        this.feeds.splice(index, 0, )
 
-        let toast = this.toast.create({
-          message: 'This post will no longer show to you',
-          duration: 2000
-        });
-        toast.present();
+      if (res.status == 1) {
+        // this.feeds.splice(index, 0, )
+        this.feeds[index].hidden = false;
       }
     })
   }

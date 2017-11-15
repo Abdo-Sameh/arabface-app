@@ -89,6 +89,7 @@ export class PostFeatursPage {
         this.post.text = ""
         //this.getFeedsList(this.userId);
         loading.dismiss();
+        res.feed.hidden = false;
         this.callback(res.feed).then(() => {
           this.navCtrl.pop();
         });
@@ -101,6 +102,7 @@ export class PostFeatursPage {
         // this.feeds.unshift(res.feed)
         this.post.text = ""
         //this.getFeedsList(this.userId);
+        res.feed.hidden = false;
         loading.dismiss();
         this.callback(res.feed).then(() => {
           this.navCtrl.pop();
@@ -119,6 +121,7 @@ export class PostFeatursPage {
 
         console.log(Tagedusers)
         loading.dismiss();
+        res.feed.hidden = false;
         this.callback(res.feed).then(() => {
           this.navCtrl.pop();
         });
@@ -133,6 +136,7 @@ export class PostFeatursPage {
         //this.getFeedsList(this.userId);
         console.log(res);
         loading.dismiss();
+        res.feed.hidden = false;
         this.callback(res.feed).then(() => {
           this.navCtrl.pop();
         });
