@@ -2415,8 +2415,8 @@
             <div class="row thumbnails">
               <div class="col-xs-6" *ngFor="let person of followers">
                 <div class="thumbnail">
-                  <a href="#"><img src="{{person.avatar}}" alt=""></a>
-                  <div class="caption">
+                  <a (click)="GoToProfile(person.id, userId)" href="#"><img src="{{person.avatar}}" alt=""></a>
+                  <div (click)="GoToProfile(person.id, userId)" class="caption">
                     <h3><a href="#">{{person.name}}</a></h3>
                   </div>
                 </div>
@@ -2430,8 +2430,8 @@
             <div class="row thumbnails">
               <div class="col-xs-6" *ngFor="let person of following">
                 <div class="thumbnail">
-                  <a href="#"><img src="{{person.avatar}}" alt=""></a>
-                  <div class="caption">
+                  <a (click)="GoToProfile(person.id, userId)" href="#"><img src="{{person.avatar}}" alt=""></a>
+                  <div (click)="GoToProfile(person.id, userId)" class="caption">
                     <h3><a href="#">{{person.name}}</a></h3>
                   </div>
                 </div>
@@ -2441,10 +2441,10 @@
             <a href="#" class="btn btn-default btn-block">{{'view-more' | translate}}</a>
           </div>
         </div>
-        <div id="tab-content-3{{this.userID}}" class="tab-pane fade photos mb-30">
+        <div id="tab-content-3{{this.userId}}" class="tab-pane fade photos mb-30">
           <div class="row thumbnails">
             <div class="col-xs-6" *ngFor="let photo of photos">
-              <a class="thumbnail" href="#"><img src="{{ photo.path }}" style="width:100%" alt=""></a>
+              <a (click)="viewPhoto(photo.path)" class="thumbnail" href="#"><img src="{{ photo.path }}" style="width:100%" alt=""></a>
             </div>
           </div>
         </div>

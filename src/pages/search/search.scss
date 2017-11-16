@@ -1,8 +1,9 @@
 page-search {
   .col {
-      margin: auto !important;
+    margin: auto !important;
   }
-  .slide-zoom{
+
+  .slide-zoom {
     background-color: #79023d;
     border-radius: 5px;
     margin-left: 10px;
@@ -10,11 +11,13 @@ page-search {
     text-transform: uppercase;
     padding: 4px;
   }
+
   .user-img {
     border: 1px solid #5c0632;
   }
-  .header_title .menu_btn, .main_header_title .back_btn {
-    text-align: right !important;
-}
 
+  .header_title .menu_btn,
+  .main_header_title .back_btn {
+    text-align: right !important;
+  }
 }

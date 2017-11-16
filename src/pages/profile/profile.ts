@@ -16,8 +16,7 @@ import { UploadImagePage } from '../upload-image/upload-image';
 import { TranslateService } from '@ngx-translate/core';
 import { EditPostPage } from '../edit-post/edit-post';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
-// import { Camera, CameraOptions } from '@ionic-native/camera';
-// import { FileTransfer, FileUploadOptions, FileTransferObject  } from '@ionic-native/file-transfer';
+import { Page } from '../page/page';
 
 /**
  * Generated class for the ProfilePage page.
@@ -98,6 +97,14 @@ export class ProfilePage {
 
   viewPhoto(url){
     this.photoViewer.show(url);
+  }
+
+  viewPage(id) {
+    this.remoteService.getPageDetails(this.userId, id).subscribe(res => {
+      this.navCtrl.push(Page, {
+        page: res
+      })
+    })
   }
 
   editPostView(index) {
