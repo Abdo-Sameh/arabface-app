@@ -83,25 +83,25 @@ export class MyApp {
   initializeApp() {
     this.platform.ready().then(() => {
       //running from browser
-      this.translate.setDefaultLang("ar");
-      this.platform.setDir('rtl', true);
-      this.document.getElementById('appstyle').setAttribute('href', 'assets/css/main-ar.css');
+      // this.translate.setDefaultLang("ar");
+      // this.platform.setDir('rtl', true);
+      // this.document.getElementById('appstyle').setAttribute('href', 'assets/css/main-ar.css');
       // this.deviceLanguage = "ar";
       // this.translate.getDefaultLang()
       //running from app
 
-      // this.globalization.getPreferredLanguage()
-      //   .then(res => {
-      //     this.translate.use((res.value).split("-")[0]);
-      //     this.translate.setDefaultLang((res.value).split("-")[0]);
-      //     if (this.translate.getDefaultLang() == "ar") {
-      //       this.platform.setDir('rtl', true);
-      //       this.document.getElementById('appstyle').setAttribute('href', 'assets/css/main-ar.css');
-      //     } else {
-      //       this.platform.setDir('ltr', true);
-      //       this.document.getElementById('appstyle').setAttribute('href', 'assets/css/main.css');
-      //     }
-      //   });
+      this.globalization.getPreferredLanguage()
+        .then(res => {
+          this.translate.use((res.value).split("-")[0]);
+          this.translate.setDefaultLang((res.value).split("-")[0]);
+          if (this.translate.getDefaultLang() == "ar") {
+            this.platform.setDir('rtl', true);
+            this.document.getElementById('appstyle').setAttribute('href', 'assets/css/main-ar.css');
+          } else {
+            this.platform.setDir('ltr', true);
+            this.document.getElementById('appstyle').setAttribute('href', 'assets/css/main.css');
+          }
+        });
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
