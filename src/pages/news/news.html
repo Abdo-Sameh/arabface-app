@@ -109,7 +109,7 @@
                   <div class="feed-title">
                     <div class="pull-left comment-edit-input">
                       <h3 (click)="GoToProfile(comments.entity_id, userId)"><a href="#">{{comments.name}}</a></h3>
-                      <p style="margin-left:0 !important;">{{comments.text}}</p>
+                      <p [innerHTML]="comments.text" style="margin-left:0 !important;"></p>
                       <div class="input-group">
                         <textarea [(ngModel)]="comments.text" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
 
@@ -194,8 +194,11 @@
                   </div>
                   <form>
                     <div class="input-group">
-                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}">
+                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}" (keyup)="getFriendsList(comment.comment)">
                       <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
+                    </div>
+                    <div id="mention" class="dropdown-content" style="position: static; margin-left: 40px;">
+                      <a (click)="selectedMention(friend.username)" href="#" *ngFor="let friend of friendsMention; let i = index;">{{friend.name}}</a>
                     </div>
                   </form>
                 </div>
@@ -284,7 +287,7 @@
                   <div class="feed-title">
                     <div class="pull-left comment-edit-input">
                       <h3 (click)="GoToProfile(comments.entity_id, userId)"><a href="#">{{comments.name}}</a></h3>
-                      <p style="margin-left:0 !important;">{{comments.text}}</p>
+                      <p [innerHTML]="comments.text" style="margin-left:0 !important;"></p>
                       <div class="input-group">
                         <textarea [(ngModel)]="comments.text" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
 
@@ -371,8 +374,11 @@
                   </div>
                   <form>
                     <div class="input-group">
-                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}">
+                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}" (keyup)="getFriendsList(comment.comment)">
                       <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
+                    </div>
+                    <div id="mention" class="dropdown-content" style="position: static; margin-left: 40px;">
+                      <a (click)="selectedMention(friend.username)" href="#" *ngFor="let friend of friendsMention; let i = index;">{{friend.name}}</a>
                     </div>
                   </form>
                 </div>
@@ -472,7 +478,7 @@
                   <div class="feed-title">
                     <div class="pull-left comment-edit-input">
                       <h3 (click)="GoToProfile(comments.entity_id, userId)"><a href="#">{{comments.name}}</a></h3>
-                      <p style="margin-left:0 !important;">{{comments.text}}</p>
+                      <p [innerHTML]="comments.text" style="margin-left:0 !important;"></p>
                       <div class="input-group">
                         <textarea [(ngModel)]="text" [ngModelOptions]="{ standalone :true}" class="form-control mb-5 "></textarea>
 
@@ -559,8 +565,11 @@
                   </div>
                   <form>
                     <div class="input-group">
-                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}">
+                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}" (keyup)="getFriendsList(comment.comment)">
                       <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
+                    </div>
+                    <div id="mention" class="dropdown-content" style="position: static; margin-left: 40px;">
+                      <a (click)="selectedMention(friend.username)" href="#" *ngFor="let friend of friendsMention; let i = index;">{{friend.name}}</a>
                     </div>
                   </form>
                 </div>
@@ -659,7 +668,7 @@
                   <div class="feed-title">
                     <div class="pull-left comment-edit-input">
                       <h3 (click)="GoToProfile(comments.entity_id, userId)"><a href="#">{{comments.name}}</a></h3>
-                      <p style="margin-left:0 !important;">{{comments.text}}</p>
+                      <p [innerHTML]="comments.text" style="margin-left:0 !important;"></p>
                       <div class="input-group">
                         <textarea [(ngModel)]="comments.text" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
 
@@ -746,8 +755,11 @@
                   </div>
                   <form>
                     <div class="input-group">
-                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}">
+                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}" (keyup)="getFriendsList(comment.comment)">
                       <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
+                    </div>
+                    <div id="mention" class="dropdown-content" style="position: static; margin-left: 40px;">
+                      <a (click)="selectedMention(friend.username)" href="#" *ngFor="let friend of friendsMention; let i = index;">{{friend.name}}</a>
                     </div>
                   </form>
                 </div>
@@ -836,7 +848,7 @@
                   <div class="feed-title">
                     <div class="pull-left comment-edit-input">
                       <h3 (click)="GoToProfile(comments.entity_id, userId)"><a href="#">{{comments.name}}</a></h3>
-                      <p style="margin-left:0 !important;">{{comments.text}}</p>
+                      <p [innerHTML]="comments.text" style="margin-left:0 !important;"></p>
                       <div class="input-group">
                         <textarea [(ngModel)]="comments.text" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
 
@@ -923,8 +935,11 @@
                   </div>
                   <form>
                     <div class="input-group">
-                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}">
+                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}" (keyup)="getFriendsList(comment.comment)">
                       <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
+                    </div>
+                    <div id="mention" class="dropdown-content" style="position: static; margin-left: 40px;">
+                      <a (click)="selectedMention(friend.username)" href="#" *ngFor="let friend of friendsMention; let i = index;">{{friend.name}}</a>
                     </div>
                   </form>
                 </div>
@@ -1011,7 +1026,7 @@
                   <div class="feed-title">
                     <div class="pull-left comment-edit-input">
                       <h3 (click)="GoToProfile(comments.entity_id, userId)"><a href="#">{{comments.name}}</a></h3>
-                      <p style="margin-left:0 !important;">{{comments.text}}</p>
+                      <p [innerHTML]="comments.text" style="margin-left:0 !important;"></p>
                       <div class="input-group">
                         <textarea [(ngModel)]="comments.text" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
 
@@ -1098,8 +1113,11 @@
                   </div>
                   <form>
                     <div class="input-group">
-                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}">
+                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}" (keyup)="getFriendsList(comment.comment)">
                       <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
+                    </div>
+                    <div id="mention" class="dropdown-content" style="position: static; margin-left: 40px;">
+                      <a (click)="selectedMention(friend.username)" href="#" *ngFor="let friend of friendsMention; let i = index;">{{friend.name}}</a>
                     </div>
                   </form>
                 </div>
@@ -1186,7 +1204,7 @@
                   <div class="feed-title">
                     <div class="pull-left comment-edit-input">
                       <h3 (click)="GoToProfile(comments.entity_id, userId)"><a href="#">{{comments.name}}</a></h3>
-                      <p style="margin-left:0 !important;">{{comments.text}}</p>
+                      <p [innerHTML]="comments.text" style="margin-left:0 !important;"></p>
                       <div class="input-group">
                         <textarea [(ngModel)]="comments.text" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
 
@@ -1273,8 +1291,11 @@
                   </div>
                   <form>
                     <div class="input-group">
-                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}">
+                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}" (keyup)="getFriendsList(comment.comment)">
                       <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
+                    </div>
+                    <div id="mention" class="dropdown-content" style="position: static; margin-left: 40px;">
+                      <a (click)="selectedMention(friend.username)" href="#" *ngFor="let friend of friendsMention; let i = index;">{{friend.name}}</a>
                     </div>
                   </form>
                 </div>
@@ -1361,7 +1382,7 @@
                   <div class="feed-title">
                     <div class="pull-left comment-edit-input">
                       <h3 (click)="GoToProfile(comments.entity_id, userId)"><a href="#">{{comments.name}}</a></h3>
-                      <p style="margin-left:0 !important;">{{comments.text}}</p>
+                      <p [innerHTML]="comments.text" style="margin-left:0 !important;"></p>
                       <div class="input-group">
                         <textarea [(ngModel)]="comments.text" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
 
@@ -1448,8 +1469,11 @@
                   </div>
                   <form>
                     <div class="input-group">
-                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}">
+                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}" (keyup)="getFriendsList(comment.comment)">
                       <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
+                    </div>
+                    <div id="mention" class="dropdown-content" style="position: static; margin-left: 40px;">
+                      <a (click)="selectedMention(friend.username)" href="#" *ngFor="let friend of friendsMention; let i = index;">{{friend.name}}</a>
                     </div>
                   </form>
                 </div>
@@ -1557,7 +1581,7 @@
                   <div class="feed-title">
                     <div class="pull-left comment-edit-input">
                       <h3 (click)="GoToProfile(comments.entity_id, userId)"><a href="#">{{comments.name}}</a></h3>
-                      <p style="margin-left:0 !important;">{{comments.text}}</p>
+                      <p [innerHTML]="comments.text" style="margin-left:0 !important;"></p>
                       <div class="input-group">
                         <textarea [(ngModel)]="comments.text" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
 
@@ -1644,8 +1668,11 @@
                   </div>
                   <form>
                     <div class="input-group">
-                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}">
+                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}" (keyup)="getFriendsList(comment.comment)">
                       <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
+                    </div>
+                    <div id="mention" class="dropdown-content" style="position: static; margin-left: 40px;">
+                      <a (click)="selectedMention(friend.username)" href="#" *ngFor="let friend of friendsMention; let i = index;">{{friend.name}}</a>
                     </div>
                   </form>
                 </div>
@@ -1757,7 +1784,7 @@
                   <div class="feed-title">
                     <div class="pull-left comment-edit-input">
                       <h3 (click)="GoToProfile(comments.entity_id, userId)"><a href="#">{{comments.name}}</a></h3>
-                      <p style="margin-left:0 !important;">{{comments.text}}</p>
+                      <p [innerHTML]="comments.text" style="margin-left:0 !important;"></p>
                       <div class="input-group">
                         <textarea [(ngModel)]="comments.text" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
 
@@ -1844,8 +1871,11 @@
                   </div>
                   <form>
                     <div class="input-group">
-                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}">
+                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}" (keyup)="getFriendsList(comment.comment)">
                       <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
+                    </div>
+                    <div id="mention" class="dropdown-content" style="position: static; margin-left: 40px;">
+                      <a (click)="selectedMention(friend.username)" href="#" *ngFor="let friend of friendsMention; let i = index;">{{friend.name}}</a>
                     </div>
                   </form>
                 </div>
@@ -1933,7 +1963,7 @@
                   <div class="feed-title">
                     <div class="pull-left comment-edit-input">
                       <h3 (click)="GoToProfile(comments.entity_id, userId)"><a href="#">{{comments.name}}</a></h3>
-                      <p style="margin-left:0 !important;">{{comments.text}}</p>
+                      <p [innerHTML]="comments.text" style="margin-left:0 !important;"></p>
                       <div class="input-group">
                         <textarea [(ngModel)]="comments.text" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
 
@@ -2020,8 +2050,11 @@
                   </div>
                   <form>
                     <div class="input-group">
-                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}">
+                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}" (keyup)="getFriendsList(comment.comment)">
                       <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
+                    </div>
+                    <div id="mention" class="dropdown-content" style="position: static; margin-left: 40px;">
+                      <a (click)="selectedMention(friend.username)" href="#" *ngFor="let friend of friendsMention; let i = index;">{{friend.name}}</a>
                     </div>
                   </form>
                 </div>
@@ -2108,7 +2141,7 @@
                   <div class="feed-title">
                     <div class="pull-left comment-edit-input">
                       <h3 (click)="GoToProfile(comments.entity_id, userId)"><a href="#">{{comments.name}}</a></h3>
-                      <p style="margin-left:0 !important;">{{comments.text}}</p>
+                      <p [innerHTML]="comments.text" style="margin-left:0 !important;"></p>
                       <div class="input-group">
                         <textarea [(ngModel)]="comments.text" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
 
@@ -2195,8 +2228,11 @@
                   </div>
                   <form>
                     <div class="input-group">
-                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}">
+                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}" (keyup)="getFriendsList(comment.comment)">
                       <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
+                    </div>
+                    <div id="mention" class="dropdown-content" style="position: static; margin-left: 40px;">
+                      <a (click)="selectedMention(friend.username)" href="#" *ngFor="let friend of friendsMention; let i = index;">{{friend.name}}</a>
                     </div>
                   </form>
                 </div>
@@ -2288,7 +2324,7 @@
                   <div class="feed-title">
                     <div class="pull-left comment-edit-input">
                       <h3 (click)="GoToProfile(comments.entity_id, userId)"><a href="#">{{comments.name}}</a></h3>
-                      <p style="margin-left:0 !important;">{{comments.text}}</p>
+                      <p [innerHTML]="comments.text" style="margin-left:0 !important;"></p>
                       <div class="input-group">
                         <textarea [(ngModel)]="comments.text" [ngModelOptions]="{ standalone :true}" class="form-control mb-5"></textarea>
 
@@ -2375,8 +2411,11 @@
                   </div>
                   <form>
                     <div class="input-group">
-                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}">
+                      <input type="text" class="form-control" [(ngModel)]="comment.comment" [ngModelOptions]="{ standalone : true}" placeholder="{{'write-comment' | translate}}" (keyup)="getFriendsList(comment.comment)">
                       <span class="input-group-addon" (click)="commentOnFeed(feed.entity_id,feed.id)"><i class="fa fa-paper-plane"></i></span>
+                    </div>
+                    <div id="mention" class="dropdown-content" style="position: static; margin-left: 40px;">
+                      <a (click)="selectedMention(friend.username)" href="#" *ngFor="let friend of friendsMention; let i = index;">{{friend.name}}</a>
                     </div>
                   </form>
                 </div>

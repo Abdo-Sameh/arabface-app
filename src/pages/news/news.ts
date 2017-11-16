@@ -49,12 +49,13 @@ export class NewsPage {
   userId
   userAvatar
   text
+  friendsMention
   constructor(public time: TimeProvider, public translate: TranslateService, private app: App, public navCtrl: NavController, public popOver: PopoverController, public toast: ToastController, public navParams: NavParams, public alert: AlertController, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider) {
     if (localStorage.getItem('userDataID')) {
       this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "")
     }
     // if (localStorage.getItem('userAvatar')) {
-      this.userAvatar = localStorage.getItem('userAvatar');
+    this.userAvatar = localStorage.getItem('userAvatar');
     // }
     this.getFeedsList(this.userId);
     // this.userAvatar = "http://" + this.userAvatar;
@@ -73,9 +74,9 @@ export class NewsPage {
     })
   }
 
-  viewGroup(id){
+  viewGroup(id) {
     this.remoteService.groupDetails(id, this.userId).subscribe(res => {
-      this.app.getRootNav().push(GroupPage,{
+      this.app.getRootNav().push(GroupPage, {
         group: res
       })
     })
@@ -93,7 +94,7 @@ export class NewsPage {
     });
     loading.present()
     this.remoteService.feedsListApiCall(id, '', 'feed', 10).subscribe(res => {
-      if(res.length == 0)
+      if (res.length == 0)
         $('#noFeeds').show();
       else
         $('#noFeeds').hide();
@@ -301,7 +302,30 @@ export class NewsPage {
 
   }
 
+  getFriendsList(term = "", id) {
+    console.log(term.charAt(1));
+    if (term.charAt(0) == '@' && term.length > 1) {
+      $('.dropdown-content').show();
+      this.remoteService.friendsListApiCall(this.userId, this.userId, term.substr(1)).subscribe(res => {
+        this.friendsMention = res;
+        console.log(res);
+        // document.getElementById("mention").classList.toggle("show");
+      });
+    }
+  }
 
+  selectedMention(username){
+    this.comment.comment = "@" + username;
+    $('.dropdown-content').hide();
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      // if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      // }
+    }
+  }
 
 
   /////////////////////////////////////////
