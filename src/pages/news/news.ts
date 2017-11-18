@@ -235,13 +235,12 @@ export class NewsPage {
           this.feeds[x].answers[0].push(res)
         }
       }
-      // this.remoteService.loadComments(postID).subscribe(res2 => { });
-
       this.comment.comment = ''
       loading.dismiss()
     })
 
   }
+
   replyOnComment(postindex, commentindex, postOwner, commentID, whoCommented = this.userId, comment = this.comment.reply) {
     let loading = this.loadingCtrl.create({
       content: "",
@@ -250,18 +249,12 @@ export class NewsPage {
 
     loading.present()
     this.remoteService.ReplyOnComment(postOwner, commentID, whoCommented, comment).subscribe(res => {
-
-
       res.postid = commentID
-
       this.feeds[postindex].answers[0][commentindex].repliesContent.push(res)
-
       this.remoteService.loadReplies(commentID).subscribe(res2 => { });
-
       this.comment.reply = ''
       loading.dismiss()
     })
-
   }
 
   sharePost(feedid, userID = this.userId) {
@@ -526,12 +519,6 @@ export class NewsPage {
             this.remoteService.removeComment(commentId, this.userId).subscribe(res => {
               if (res.status == 1) {
                 this.feeds[feedIndex].answers[0].splice(commentIndex, 1);
-                // let toast = this.toast.create({
-                //   message: 'You deleted this comment ',
-                //   duration : 2000
-                //
-                // });
-                // toast.present();
               }
             })
           }
@@ -546,6 +533,7 @@ export class NewsPage {
     });
     alert.present();
   }
+
   turnNotifications(feedid, index, feedType, userID = this.userId) {
     if (feedType == true) {
       this.remoteService.unsubscribePost(feedid, userID).subscribe((data) => {

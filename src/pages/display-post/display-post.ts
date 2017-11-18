@@ -30,7 +30,8 @@ export class DisplayPostPage {
   havePosted = false
   public userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
   userAvatar = localStorage.getItem('userAvatar').slice(8, -1);
-
+  friendsMention
+  text
   feed = { 'feedid': "" }
   constructor(public time: TimeProvider, public translate: TranslateService, public navCtrl: NavController, public popOver: PopoverController, public toast: ToastController, public navParams: NavParams, public alert: AlertController, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider) {
     this.post = this.navParams.get('post')
@@ -83,6 +84,15 @@ export class DisplayPostPage {
     })
   }
 
+  editComment(id, text, feedIndex, commentIndex) {
+    this.remoteService.editComment(this.userId, id, text).subscribe(res => {
+      if (res.status == 1) {
+        this.post.answers[0][commentIndex].text = text;
+        $('.saveComment').parent().hide();
+      }
+    })
+  }
+
   loadComments() {
     let newFeedID = this.post.id
     let newFeed = this.post.answers
@@ -115,7 +125,7 @@ export class DisplayPostPage {
       spinner: "bubbles",
     });
     loading.present()
-    this.remoteService.commentOnFeeds(postOwner, postID, whoCommented, comment, 'feed').subscribe(res => {
+    this.remoteService.commentOnFeeds(this.userId, postID, whoCommented, comment, 'feed').subscribe(res => {
       console.log(res)
 
       this.post.answers[0].push(res)
@@ -133,11 +143,33 @@ export class DisplayPostPage {
     loading.present()
     this.remoteService.ReplyOnComment(postOwner, commentID, whoCommented, comment).subscribe(res => {
       res.postid = commentID
-
       this.post.answers[0][commentindex].repliesContent.push(res)
+      this.remoteService.loadReplies(commentID).subscribe(res2 => { });
       this.comment.reply = ''
       loading.dismiss()
     })
+  }
+
+  getFriendsList(term = "", id) {
+    console.log(term.charAt(1));
+    if (term.charAt(0) == '@' && term.length > 1) {
+      $('.dropdown-content').show();
+      this.remoteService.friendsListApiCall(this.userId, this.userId, term.substr(1)).subscribe(res => {
+        this.friendsMention = res;
+        console.log(res);
+      });
+    }
+  }
+
+  selectedMention(username){
+    this.comment.comment = "@" + username;
+    $('.dropdown-content').hide();
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+        openDropdown.classList.remove('show');
+    }
   }
 
   sharePost(feedid, userID = this.userId) {
@@ -237,29 +269,30 @@ export class DisplayPostPage {
     });
     alert.present();
   }
-  deleteComment(commentId) {
+  deleteComment(commentId, feedIndex, commentIndex) {
+
+    let title, reason, ok, cancel, message;
+    this.translate.get('delete-comment').subscribe(value => { title = value; })
+    this.translate.get('delete-comment-question').subscribe(value => { message = value; })
+    this.translate.get('ok').subscribe(value => { ok = value; })
+    this.translate.get('cancel').subscribe(value => { cancel = value; })
+
     let alert = this.alert.create({
-      title: 'Delete',
-      message: 'Do you want to delete comment?',
+      title: title,
+      message: message,
       buttons: [
         {
-          text: 'Ok',
+          text: ok,
           handler: () => {
             this.remoteService.removeComment(commentId, this.userId).subscribe(res => {
               if (res.status == 1) {
-
-                let toast = this.toast.create({
-                  message: 'You deleted this comment ',
-                  duration: 2000
-
-                });
-                toast.present();
+                this.post.answers[0].splice(commentIndex, 1);
               }
             })
           }
         },
         {
-          text: 'Cancel',
+          text: cancel,
           role: 'cancel',
           handler: () => {
           }
@@ -267,9 +300,8 @@ export class DisplayPostPage {
       ]
     });
     alert.present();
-
-
   }
+
   turnNotifications(feedid, index, feedType, userID = this.userId) {
     if (feedType == true) {
       this.remoteService.unsubscribePost(feedid, userID).subscribe((data) => {
@@ -303,9 +335,11 @@ export class DisplayPostPage {
     console.log('ionViewDidLoad DisplayPostPage');
   }
 
-  edit() {
+  edit(text) {
+    this.text = text;
     $(document).on('click', '.comment-edit', function() {
       $(this).parent().prev().find('.input-group').show();
+
     })
     $(document).on('click', '.cancel-edit', function() {
       $(this).parent().hide();

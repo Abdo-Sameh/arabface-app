@@ -1,11 +1,17 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, Platform, ActionSheetController, ToastController, Loading } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { ImageUploadingProvider } from './../../providers/image-uploading/image-uploading';
 import { TranslateService } from '@ngx-translate/core';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+import { FilePath } from '@ionic-native/file-path';
 import * as $ from "jquery"
 
 const Tagedusers = []
+declare var cordova: any;
+
 @Component({
   selector: 'page-post-featurs',
   templateUrl: 'post-featurs.html',
@@ -28,7 +34,9 @@ export class PostFeatursPage {
   callback
   to_user_id
   imagePath
-  constructor(public imageUploading: ImageUploadingProvider, public translate: TranslateService, public navCtrl: NavController, public navParams: NavParams, public alert: AlertController, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider) {
+  lastImage: string = null;
+  loading: Loading;
+  constructor(public toast: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform, private filePath: FilePath, private transfer: FileTransfer, private file: File, public camera: Camera, public imageUploading: ImageUploadingProvider, public translate: TranslateService, public navCtrl: NavController, public navParams: NavParams, public alert: AlertController, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider) {
     this.type = navParams.get('type');
     this.typeId = navParams.get('type_id');
     this.to_user_id = navParams.get('to_user_id');
@@ -69,6 +77,141 @@ export class PostFeatursPage {
       return true;
     else
       return null;
+  }
+
+  presentToast(msg) {
+    let toast = this.toast.create({
+      message: msg,
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+    toast.present();
+  }
+
+  public presentActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      // title: 'Select Image Source',
+      buttons: [
+        {
+          text: 'Library',
+          handler: () => {
+            this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
+          }
+        },
+        {
+          text: 'Camera',
+          handler: () => {
+            this.takePicture(this.camera.PictureSourceType.CAMERA);
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  public takePicture(sourceType) {
+    // Create options for the Camera Dialog
+    var options = {
+      quality: 100,
+      sourceType: sourceType,
+      saveToPhotoAlbum: false,
+      correctOrientation: true
+    };
+
+    // Get the data of an image
+    this.camera.getPicture(options).then((imagePath) => {
+      // Special handling for Android library
+      if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
+        this.filePath.resolveNativePath(imagePath)
+          .then(filePath => {
+            let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
+            let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
+            this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+
+          });
+      } else {
+        var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
+        var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
+        this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+
+      }
+    }, (err) => {
+      this.presentToast('Error while selecting image.');
+    });
+  }
+
+  private createFileName() {
+    var d = new Date(),
+      n = d.getTime(),
+      newFileName = n + ".jpg";
+    return newFileName;
+  }
+
+  private copyFileToLocalDir(namePath, currentName, newFileName) {
+    this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
+      this.lastImage = newFileName;
+      // this.navCtrl.push(UploadImagePage, {
+      //   type: type,
+      //   image: this.lastImage
+      // })
+    }, error => {
+      this.presentToast('Error while storing file.');
+    });
+  }
+
+  public pathForImage(img) {
+    if (img === null) {
+      return '';
+    } else {
+      return cordova.file.dataDirectory + img;
+    }
+  }
+
+  public uploadImage() {
+    let uploading, message;
+    this.translate.get('uploading').subscribe(value => { uploading = value; })
+    this.translate.get('successfully-uploaded').subscribe(value => { message = value; })
+    var filename = this.lastImage;
+    // File for Upload
+    var targetPath = this.pathForImage(this.lastImage);
+    // Destination URL
+    var url, options;
+      url = "http://192.168.1.252/arabface/api/14789632/photo/album/upload";
+      options = {
+        fileKey: "image1",
+        fileName: filename,
+        chunkedMode: false,
+        mimeType: "multipart/form-data",
+        params: {
+          'image1': filename
+        }
+      };
+
+    const fileTransfer: FileTransferObject = this.transfer.create();
+    this.loading = this.loadingCtrl.create({
+      content: uploading,
+    });
+    this.loading.present();
+    // Use the FileTransfer to upload the image
+    fileTransfer.upload(targetPath, url, options, true).then(data => {
+      this.loading.dismissAll()
+      let response = JSON.parse(data.response);
+
+      if (response['status'] == 0) {
+        this.presentToast('Error while uploading file.');
+      }
+      else {
+        this.presentToast(message);
+      }
+    }, err => {
+      this.loading.dismissAll()
+      this.presentToast('Error while uploading file.');
+    });
+
+    this.navCtrl.pop();
   }
 
   postFeed(userID = this.userId, postText = this.post) {

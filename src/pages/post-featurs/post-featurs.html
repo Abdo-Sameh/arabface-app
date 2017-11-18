@@ -61,8 +61,9 @@
           </div>
         </form>
       </div>
+
       <div class="feed-body">
-        <!-- <img src="{{getImagePath(imagePath)}}" alt="" > -->
+        <img src="{{pathForImage(lastImage)}}" alt="" >
         <p class="mt-5"></p>
       </div>
 
@@ -101,7 +102,7 @@
 
       <div class="feed-editors panel panel-theme flex-space-around m-0">
         <a href="#" (click)="tagUsersDivShow()"><i class="fa fa-user-plus"></i></a>
-        <a href="#"><i class="fa fa-camera"></i></a>
+        <a href="#" (click)="presentActionSheet()"><i class="fa fa-camera"></i></a>
         <a href="#"><i class="fa fa-video-camera"></i></a>
         <a (click)="locationPopUp()"><i class="fa fa-map-marker"></i></a>
         <a href="#" (click)="backgroundShow()"><i class="ion-android-color-palette"></i></a>
