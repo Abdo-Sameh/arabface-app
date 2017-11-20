@@ -31,7 +31,7 @@ declare var cordova: any;
 export class GroupPage {
 
   group: any
-  posts
+  posts = []
   saved
   members = {}
   userId: any;
@@ -50,10 +50,13 @@ export class GroupPage {
   }
   hiddenPost
   userAvatar
+  videoURL
+  friendsMention
+  text
   lastImage: string = null;
   constructor(public time: TimeProvider, public file: File, public filePath: FilePath, public platform: Platform, public camera: Camera, public actionSheetCtrl: ActionSheetController, public translate: TranslateService, private socialSharing: SocialSharing, public alert: AlertController, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public remoteService: RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
-    this.userAvatar = "http://" + localStorage.getItem('userAvatar').slice(8, -1);
+    this.userAvatar = localStorage.getItem('userAvatar');
     this.group = navParams.get("group");
     this.isSaved(this.group.id);
     this.getpostsList(this.userId);
@@ -162,6 +165,17 @@ export class GroupPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad GroupPage');
   }
+
+
+  editComment(id, text, feedIndex, commentIndex) {
+    this.remoteService.editComment(this.userId, id, text).subscribe(res => {
+      if (res.status == 1) {
+        this.posts[feedIndex].answers[0][commentIndex].text = text;
+        $('.saveComment').parent().hide();
+      }
+    })
+  }
+
   getpostsList(id, more = false, GotPosts = 30) {
     let loading = this.loadingCtrl.create({
       content: "",
@@ -172,29 +186,65 @@ export class GroupPage {
     this.remoteService.feedsListApiCall(id, this.group.id, 'group', 10).subscribe(res => {
 
       for (let i = 0; i < res.length; i++) {
+        //check if post is saved or not-going
+
+        res[i].hidden = false;
+        this.remoteService.isSaved('feed', res[i].id, this.userId).subscribe(data => {
+          if (data.status == 1) {
+            res[i].saved = true;
+          } else {
+            res[i].saved = false;
+          }
+        });
+        ///////////// video url handling ////////////////////////
+        if (res[i].video_embed != '') {
+          res[i].video_embed = res[i].video_embed.substring(res[i].video_embed.indexOf("src=") + 5);
+          res[i].video_embed = res[i].video_embed.substring(0, res[i].video_embed.indexOf("\""));
+          this.videoURL = res[i].video_embed;
+        }
+        /////////////////////////////////////////////////////
         let newFeedID = res[i].id
         let newFeed = res[i].answers
         this.remoteService.loadComments(newFeedID, this.userId).subscribe(res2 => {
           newFeed.unshift(res2)
           for (let g = 0; g < newFeed[0].length; g++) {
             this.remoteService.loadReplies(newFeed[0][g].id).subscribe(res3 => {
-
               newFeed[0][g]['repliesContent'] = res3
-
             });
-
           }
         });
-
       }
       this.posts = res
-
       loading.dismiss();
       console.log(this.posts)
-
     });
-
   }
+
+  getFriendsList(term = "", id) {
+    console.log(term.charAt(1));
+    if (term.charAt(0) == '@' && term.length > 1) {
+      $('.dropdown-content').show();
+      this.remoteService.friendsListApiCall(this.userId, this.userId, term.substr(1)).subscribe(res => {
+        this.friendsMention = res;
+        console.log(res);
+        // document.getElementById("mention").classList.toggle("show");
+      });
+    }
+  }
+
+  selectedMention(username){
+    this.comment.comment = "@" + username;
+    $('.dropdown-content').hide();
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      // if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      // }
+    }
+  }
+
 
   loadMoreposts(feedlength) {
     console.log(feedlength)
@@ -204,35 +254,25 @@ export class GroupPage {
   ///////////////////// post feed //////////////
 
   likeFeed(userid = this.userId, feedid, postIndex) {
-
     this.remoteService.likeFeedApiCall(this.userId, feedid).subscribe(res => {
-
       this.posts[postIndex].like_count = res.likes;
       this.posts[postIndex].has_like = res.has_like;
     })
-
-
   }
 
   likeComment(userid = this.userId, commentID, postIndex, commentIndex) {
-
-
     this.remoteService.likeCommentApiCall(this.userId, commentID).subscribe(res => {
       this.likes = res;
       for (let i = 0; i < this.posts[postIndex].answers[0].length; i++) {
         if (this.posts[postIndex].answers[0][commentIndex].id == commentID) {
           this.posts[postIndex].answers[0][commentIndex].like_count = this.likes.likes;
           this.posts[postIndex].answers[0][commentIndex].has_like = this.likes.has_like;
-
           break
         }
       }
-
-
     })
-
-
   }
+
   likeReply(userid = this.userId, replyID, postIndex, commentIndex, replyIndex) {
     this.remoteService.likeCommentApiCall(this.userId, replyID).subscribe(res => {
       for (let i = 0; i < this.posts[postIndex].answers[0][commentIndex].repliesContent.length; i++) {
@@ -253,8 +293,6 @@ export class GroupPage {
 
     loading.present()
     this.remoteService.commentOnFeeds(postOwner, postID, whoCommented, comment, 'feed').subscribe(res => {
-
-
       res.postid = postID
       for (let x in this.posts) {
         if (this.posts[x].id == res.postid) {
@@ -309,8 +347,10 @@ export class GroupPage {
     alert.present();
   }
 
-
-
+  showComments(id) {
+    $('#' + id).show();
+    console.log('#' + id);
+  }
 
   /////////////////////////////////////////
   GoToProfile(id, userId) {
@@ -341,17 +381,17 @@ export class GroupPage {
   }
 
 
-  edit() {
+  edit(text) {
+    this.text = text;
     $(document).on('click', '.comment-edit', function() {
       $(this).parent().prev().find('.input-group').show();
 
     })
     $(document).on('click', '.cancel-edit', function() {
       $(this).parent().hide();
-
     })
-
   }
+
   reply() {
     $(document).on('click', '.comment-reply', function() {
       $(this).closest('.comment').find('.reply-input').show();
@@ -450,29 +490,30 @@ export class GroupPage {
     });
     alert.present();
   }
-  deleteComment(commentId) {
+
+  deleteComment(commentId, feedIndex, commentIndex) {
+    let title, reason, ok, cancel, message;
+    this.translate.get('delete-comment').subscribe(value => { title = value; })
+    this.translate.get('delete-comment-question').subscribe(value => { message = value; })
+    this.translate.get('ok').subscribe(value => { ok = value; })
+    this.translate.get('cancel').subscribe(value => { cancel = value; })
+
     let alert = this.alert.create({
-      title: 'Delete',
-      message: 'Do you want to delete comment?',
+      title: title,
+      message: message,
       buttons: [
         {
-          text: 'Ok',
+          text: ok,
           handler: () => {
             this.remoteService.removeComment(commentId, this.userId).subscribe(res => {
               if (res.status == 1) {
-
-                let toast = this.toastCtrl.create({
-                  message: 'You deleted this comment ',
-                  duration: 2000
-
-                });
-                toast.present();
+                this.posts[feedIndex].answers[0].splice(commentIndex, 1);
               }
             })
           }
         },
         {
-          text: 'Cancel',
+          text: cancel,
           role: 'cancel',
           handler: () => {
           }
@@ -480,9 +521,8 @@ export class GroupPage {
       ]
     });
     alert.present();
-
-
   }
+
   turnOffNotifications(feedid, userID = this.userId) {
     this.remoteService.unsubscribePost(feedid, userID).subscribe((data) => { console.log(data) })
   }

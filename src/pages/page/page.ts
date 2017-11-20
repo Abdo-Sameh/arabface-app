@@ -31,7 +31,7 @@ declare var cordova: any;
 export class Page {
 
   id
-  page = { id: '', logo: '', has_like: false, title: '', page_url: '' }
+  page = { id: '', logo: '', has_like: false, title: '', page_url: '', owner:0 }
   userId
   saved
   message
@@ -49,10 +49,13 @@ export class Page {
   hiddenPost
   userAvatar
   feed = { 'feedid': "" }
-  feeds
+  feeds = []
   feedLikes
   userData
+  videoURL
   lastImage: string = null;
+  friendsMention
+  text
   constructor(public time: TimeProvider, public file: File, public filePath: FilePath, public platform: Platform, public camera: Camera, public actionSheetCtrl: ActionSheetController, public translate: TranslateService, public alert: AlertController, private socialSharing: SocialSharing, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public remoteService: RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.page = navParams.get("page");
@@ -71,8 +74,48 @@ export class Page {
     this.getFeedsList(this.userId);
   }
   getTime(time) {
-    this.time.getTime(time);
+    return this.time.getTime(time);
   }
+
+  showComments(id) {
+    $('#' + id).show();
+    console.log('#' + id);
+  }
+
+  getFriendsList(term = "", id) {
+    console.log(term.charAt(1));
+    if (term.charAt(0) == '@' && term.length > 1) {
+      $('.dropdown-content').show();
+      this.remoteService.friendsListApiCall(this.userId, this.userId, term.substr(1)).subscribe(res => {
+        this.friendsMention = res;
+        console.log(res);
+        // document.getElementById("mention").classList.toggle("show");
+      });
+    }
+  }
+
+  selectedMention(username){
+    this.comment.comment = "@" + username;
+    $('.dropdown-content').hide();
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      // if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      // }
+    }
+  }
+
+  editComment(id, text, feedIndex, commentIndex) {
+    this.remoteService.editComment(this.userId, id, text).subscribe(res => {
+      if (res.status == 1) {
+        this.feeds[feedIndex].answers[0][commentIndex].text = text;
+        $('.saveComment').parent().hide();
+      }
+    })
+  }
+
   public presentActionSheet(type) {
     let actionSheet = this.actionSheetCtrl.create({
       // title: 'Select Image Source',
@@ -215,6 +258,12 @@ export class Page {
     this.socialSharing.share(this.page.title, "Arabface", "assets/images/logo.png", this.page.page_url);
   }
 
+  doRefresh(refresher) {
+    this.getFeedsList(this.userId);
+    if (refresher != 0)
+      refresher.complete();
+  }
+
   reportPage() {
     let title, reason, send, cancel, message;
     this.translate.get('report').subscribe(value => { title = value; })
@@ -267,6 +316,8 @@ export class Page {
     alert.present();
 
   }
+
+
   getFeedsList(id, more = false, GotPosts = 30) {
     let loading = this.loadingCtrl.create({
       content: "",
@@ -275,7 +326,33 @@ export class Page {
     });
     loading.present()
     this.remoteService.feedsListApiCall(id, this.page.id, 'page', 10).subscribe(res => {
+      if (res.length == 0)
+        $('#noFeeds').show();
+      else
+        $('#noFeeds').hide();
+      //////////////////// looping to get comments and their replis ////////////////////////////////
       for (let i = 0; i < res.length; i++) {
+        //check if post is saved or not-going
+
+        res[i].hidden = false;
+        this.remoteService.isSaved('feed', res[i].id, this.userId).subscribe(data => {
+          if (data.status == 1) {
+            res[i].saved = true;
+          } else {
+            res[i].saved = false;
+          }
+        });
+        ///////////// video url handling ////////////////////////
+        if (res[i].video_embed != '') {
+          res[i].video_embed = res[i].video_embed.substring(res[i].video_embed.indexOf("src=") + 5);
+          res[i].video_embed = res[i].video_embed.substring(0, res[i].video_embed.indexOf("\""));
+          this.videoURL = res[i].video_embed;
+        }
+        ///////////////// split time string to words/////////////////
+
+        // res[i].time = res[i].time.split(' ');
+
+        /////////////////////////////////////////////////////
         let newFeedID = res[i].id
         let newFeed = res[i].answers
         this.remoteService.loadComments(newFeedID, this.userId).subscribe(res2 => {
@@ -288,11 +365,15 @@ export class Page {
         });
       }
       this.feeds = res
-
+      if (GotPosts > 30) {
+        console.log()
+        this.feeds.push(res)
+      }
       loading.dismiss();
       console.log(this.feeds)
 
     });
+
   }
 
   loadMoreFeeds(feedlength) {
@@ -311,7 +392,7 @@ export class Page {
 
   likeComment(userid = this.userId, commentID, postIndex, commentIndex) {
     this.remoteService.likeCommentApiCall(this.userId, commentID).subscribe(res => {
-      this.likes = res;
+      this.feedLikes = res;
       for (let i = 0; i < this.feeds[postIndex].answers[0].length; i++) {
         if (this.feeds[postIndex].answers[0][commentIndex].id == commentID) {
           this.feeds[postIndex].answers[0][commentIndex].like_count = this.feedLikes.likes;
@@ -339,19 +420,21 @@ export class Page {
       content: "",
       spinner: "bubbles",
     });
-
+    let entity_type = 'user';
     loading.present()
-    this.remoteService.commentOnFeeds(postOwner, postID, whoCommented, comment, 'feed').subscribe(res => {
-
-
+    if(this.page.owner == this.userId){
+      postOwner = this.page.id;
+      entity_type = 'page'
+    }
+    // commentOnFeeds(entity_id, type_id, userid, comment, type, entity_type = 'user')
+    this.remoteService.commentOnFeeds(postOwner, postID, whoCommented, comment, 'feed', entity_type).subscribe(res => {
       res.postid = postID
+      res['repliesContent'] = []
       for (let x in this.feeds) {
         if (this.feeds[x].id == res.postid) {
           this.feeds[x].answers[0].push(res)
         }
       }
-      this.remoteService.loadComments(postID, this.userId).subscribe(res2 => { });
-
       this.comment.comment = ''
       loading.dismiss()
     })
@@ -362,17 +445,16 @@ export class Page {
       content: "",
       spinner: "bubbles",
     });
-
+    let entity_type = 'user';
     loading.present()
-    this.remoteService.ReplyOnComment(postOwner, commentID, whoCommented, comment).subscribe(res => {
-
-
+    if(this.page.owner == this.userId){
+      postOwner = this.page.id;
+      entity_type = 'page'
+    }
+    console.log(postOwner, commentID, whoCommented, comment, entity_type)
+    this.remoteService.ReplyOnComment(postOwner, commentID, whoCommented, comment, entity_type).subscribe(res => {
       res.postid = commentID
-
       this.feeds[postindex].answers[0][commentindex].repliesContent.push(res)
-
-      this.remoteService.loadReplies(commentID).subscribe(res2 => { });
-
       this.comment.reply = ''
       loading.dismiss()
     })
@@ -436,17 +518,17 @@ export class Page {
   }
 
 
-  edit() {
+  edit(text) {
+    this.text = text;
     $(document).on('click', '.comment-edit', function() {
       $(this).parent().prev().find('.input-group').show();
 
     })
     $(document).on('click', '.cancel-edit', function() {
       $(this).parent().hide();
-
     })
-
   }
+
   reply() {
     $(document).on('click', '.comment-reply', function() {
       $(this).closest('.comment').find('.reply-input').show();
@@ -546,29 +628,30 @@ export class Page {
     });
     alert.present();
   }
-  deleteComment(commentId) {
+
+  deleteComment(commentId, feedIndex, commentIndex) {
+    let title, reason, ok, cancel, message;
+    this.translate.get('delete-comment').subscribe(value => { title = value; })
+    this.translate.get('delete-comment-question').subscribe(value => { message = value; })
+    this.translate.get('ok').subscribe(value => { ok = value; })
+    this.translate.get('cancel').subscribe(value => { cancel = value; })
+
     let alert = this.alert.create({
-      title: 'Delete',
-      message: 'Do you want to delete comment?',
+      title: title,
+      message: message,
       buttons: [
         {
-          text: 'Ok',
+          text: ok,
           handler: () => {
             this.remoteService.removeComment(commentId, this.userId).subscribe(res => {
               if (res.status == 1) {
-
-                let toast = this.toastCtrl.create({
-                  message: 'You deleted this comment ',
-                  duration: 2000
-
-                });
-                toast.present();
+                this.feeds[feedIndex].answers[0].splice(commentIndex, 1);
               }
             })
           }
         },
         {
-          text: 'Cancel',
+          text: cancel,
           role: 'cancel',
           handler: () => {
           }
@@ -576,12 +659,12 @@ export class Page {
       ]
     });
     alert.present();
-
-
   }
+
   turnOffNotifications(feedid, userID = this.userId) {
     this.remoteService.unsubscribePost(feedid, userID).subscribe((data) => { console.log(data) })
   }
+
   showPost(feed) {
     this.postToDisplay = feed
     console.log(this.postToDisplay)

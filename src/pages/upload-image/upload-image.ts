@@ -67,7 +67,7 @@ export class UploadImagePage {
     // Destination URL
     var url, options;
     if (this.type == "album") {
-      url = "http://192.168.1.252/arabface/api/14789632/photo/album/upload";
+      url = "https://arabface.online/demo/api/147896325/photo/album/upload";
       options = {
         fileKey: "photo",
         fileName: filename,
@@ -76,7 +76,7 @@ export class UploadImagePage {
         params: { 'album_id': this.id, 'photo': filename, 'userid': this.userId }
       };
     } else if (this.type == "profile.avatar") {
-      url = "http://192.168.1.252/arabface/api/14789632/profile/change/avatar";
+      url = "https://arabface.online/demo/api/147896325/profile/change/avatar";
       options = {
         fileKey: "avatar",
         fileName: filename,
@@ -85,7 +85,7 @@ export class UploadImagePage {
         params: { 'avatar': filename, 'userid': this.userId }
       };
     } else if (this.type == "profile.cover") {
-      url = "http://192.168.1.252/arabface/api/14789632/profile/change/cover";
+      url = "https://arabface.online/demo/api/147896325/profile/change/cover";
       options = {
         fileKey: "cover",
         fileName: filename,
@@ -94,7 +94,7 @@ export class UploadImagePage {
         params: { 'cover': filename, 'userid': this.userId }
       };
     } else if (this.type == "page.logo") {
-      url = "http://192.168.1.252/arabface/api/14789632/page/logo";
+      url = "https://arabface.online/demo/api/147896325/page/logo";
       options = {
         fileKey: "image",
         fileName: filename,
@@ -103,7 +103,7 @@ export class UploadImagePage {
         params: { 'image': filename, 'userid': this.userId, 'page_id': this.id }
       };
     } else if (this.type == "page.cover") {
-      url = "http://192.168.1.252/arabface/api/14789632/page/cover";
+      url = "https://arabface.online/demo/api/147896325/page/cover";
       options = {
         fileKey: "image",
         fileName: filename,
@@ -112,7 +112,7 @@ export class UploadImagePage {
         params: { 'image': filename, 'userid': this.userId, 'page_id': this.id }
       };
     } else if (this.type == "group.logo") {
-      url = "http://192.168.1.252/arabface/api/14789632/group/logo";
+      url = "https://arabface.online/demo/api/147896325/group/logo";
       options = {
         fileKey: "image",
         fileName: filename,
@@ -121,7 +121,7 @@ export class UploadImagePage {
         params: { 'image': filename, 'userid': this.userId, 'group_id': this.id }
       };
     } else if (this.type == "group.cover") {
-      url = "http://192.168.1.252/arabface/api/14789632/group/cover";
+      url = "https://arabface.online/demo/api/147896325/group/cover";
       options = {
         fileKey: "image",
         fileName: filename,
@@ -130,7 +130,7 @@ export class UploadImagePage {
         params: { 'image': filename, 'userid': this.userId, 'group_id': this.id }
       };
     } else if (this.type == "event.cover") {
-      url = "http://192.168.1.252/arabface/api/14789632/event/cover";
+      url = "https://arabface.online/demo/api/147896325/event/cover";
       options = {
         fileKey: "image",
         fileName: filename,

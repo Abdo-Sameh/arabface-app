@@ -533,6 +533,8 @@
 
   "captcha": "Captcha",
 
+  "send-invite": "Invite",
+
   "enable-session-timeout": "Enable Session Timeout",
 
   "enable-session-timeout-desc": "Option to enable or disable session timeout, this also give members security over there account",

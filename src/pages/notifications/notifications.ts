@@ -177,48 +177,56 @@ export class NotificationsPage {
         break;
       }
       case "feed.like": {
+        notification.feed[0].hidden = false;
         this.app.getRootNav().push(DisplayPostPage, {
           post: notification.feed[0]
         });
         break;
       }
       case "post-on-timeline": {
+        notification.feed[0].hidden = false;
         this.app.getRootNav().push(DisplayPostPage, {
           post: notification.feed[0]
         });
         break;
       }
       case "feed.mention": {
+        notification.feed[0].hidden = false;
         this.app.getRootNav().push(DisplayPostPage, {
           post: notification.feed[0]
         });
         break;
       }
       case "feed.tag": {
+        notification.feed[0].hidden = false;
         this.app.getRootNav().push(DisplayPostPage, {
           post: notification.feed[0]
         });
         break;
       }
       case "feed.comment": {
+        notification.feed[0].hidden = false;
         this.app.getRootNav().push(DisplayPostPage, {
           post: notification.feed[0]
         });
         break;
       }
       case "feed.comment.reply": {
+        notification.feed[0].hidden = false;
         this.app.getRootNav().push(DisplayPostPage, {
           post: notification.feed[0]
         });
         break;
       }
       case "feed.shared": {
+        notification.feed[0].hidden = false;
         this.app.getRootNav().push(DisplayPostPage, {
           post: notification.feed[0]
         });
         break;
       }
       case "feed.like.comment": {
+        notification.feed[0].hidden = false;
         this.app.getRootNav().push(DisplayPostPage, {
           post: notification.feed[0]
         });

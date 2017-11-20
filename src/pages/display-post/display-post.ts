@@ -29,7 +29,7 @@ export class DisplayPostPage {
   feedComments
   havePosted = false
   public userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
-  userAvatar = localStorage.getItem('userAvatar').slice(8, -1);
+  userAvatar = localStorage.getItem('userAvatar');
   friendsMention
   text
   feed = { 'feedid': "" }
@@ -126,8 +126,9 @@ export class DisplayPostPage {
     });
     loading.present()
     this.remoteService.commentOnFeeds(this.userId, postID, whoCommented, comment, 'feed').subscribe(res => {
+      res.postid = postID
+      res['repliesContent'] = []
       console.log(res)
-
       this.post.answers[0].push(res)
       this.comment.comment = ''
       loading.dismiss()

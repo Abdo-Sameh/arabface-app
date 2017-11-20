@@ -30,15 +30,15 @@ let user;
   for more info on providers and Angular DI.
 */
 
-let apiURL = 'http://arabface.online/demo/api/89129812/';
+let apiURL = 'https://arabface.online/demo/api/147896325/';
 
 @Injectable()
 export class RemoteServiceProvider {
   public Id: number;
   deviceLanguage
   response;
-  serverURL = 'http://arabface.online'
-  KEY = '89129812'
+  serverURL = 'https://arabface.online'
+  KEY = '147896325'
 
 
   public xmlLang: any;
@@ -759,20 +759,14 @@ export class RemoteServiceProvider {
       .map((res: Response) => res.json());
   }
   ////////////////////////////////////////////////
-  commentOnFeeds(postOwner, postID, whoCommented, comment, type) {
-    return this.http.get(this.serverURL + '/demo/api/' + this.KEY + '/comment/add?userid=' + whoCommented + '&entity_id=' + postOwner + '&entity_type=user&text=' + comment + '&type=' + type + '&type_id=' + postID)
-
-      //do((res : Response ) => console.log(res.json()))
+  commentOnFeeds(postOwner, postID, whoCommented, comment, type, entity_type = 'user') {
+    return this.http.get(this.serverURL + '/demo/api/' + this.KEY + '/comment/add?userid=' + whoCommented + '&entity_id=' + postOwner + '&entity_type=' + entity_type + '&text=' + comment + '&type=' + type + '&type_id=' + postID)
       .map((res: Response) => res.json());
   }
 
-
-
   //////////// post in feed ///////////////////////
-  ReplyOnComment(postOwner, commentID, whoCommented, reply) {
-    return this.http.get(this.serverURL + '/demo/api/' + this.KEY + '/comment/add?userid=' + whoCommented + '&entity_id=' + postOwner + '&entity_type=user&text=' + reply + '&type=comment&type_id=' + commentID)
-
-      //do((res : Response ) => console.log(res.json()))
+  ReplyOnComment(postOwner, commentID, whoCommented, reply, entity_type = 'user') {
+    return this.http.get(this.serverURL + '/demo/api/' + this.KEY + '/comment/add?userid=' + whoCommented + '&entity_id=' + postOwner + '&entity_type=' + entity_type + '&text=' + reply + '&type=comment&type_id=' + commentID)
       .map((res: Response) => res.json());
   }
 

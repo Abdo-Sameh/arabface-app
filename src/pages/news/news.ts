@@ -167,24 +167,18 @@ export class NewsPage {
   }
 
   likeComment(userid = this.userId, commentID, postIndex, commentIndex) {
-
-
     this.remoteService.likeCommentApiCall(this.userId, commentID).subscribe(res => {
       this.likes = res;
       for (let i = 0; i < this.feeds[postIndex].answers[0].length; i++) {
         if (this.feeds[postIndex].answers[0][commentIndex].id == commentID) {
           this.feeds[postIndex].answers[0][commentIndex].like_count = this.likes.likes;
           this.feeds[postIndex].answers[0][commentIndex].has_like = this.likes.has_like;
-
           break
         }
       }
-
-
     })
-
-
   }
+
   likeReply(userid = this.userId, replyID, postIndex, commentIndex, replyIndex) {
 
     this.remoteService.likeCommentApiCall(this.userId, replyID).subscribe(res => {
@@ -502,7 +496,6 @@ export class NewsPage {
     alert.present();
   }
   deleteComment(commentId, feedIndex, commentIndex) {
-
     let title, reason, ok, cancel, message;
     this.translate.get('delete-comment').subscribe(value => { title = value; })
     this.translate.get('delete-comment-question').subscribe(value => { message = value; })
