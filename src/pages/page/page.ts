@@ -16,6 +16,7 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
 import { UploadImagePage } from '../upload-image/upload-image';
+import { EditPostPage } from '../edit-post/edit-post';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 /**
  * Generated class for the Page page.
@@ -569,22 +570,20 @@ export class Page {
   //     this.remoteService.editPost(text,feedid,this.userId).subscribe((data) => {console.log(data)})
   // }
 
-  savePost(feedid) {
-    let toast = this.toastCtrl.create({
-      message: 'this post has saved !',
-      duration: 2000,
-      cssClass: 'alert'
-    });
-    toast.present();
+  savePost(feedid, index) {
     this.remoteService.saveItem('feed', feedid, this.userId).subscribe(res => {
-      console.log(res)
+      if (res.status == 1) {
+        this.feeds[index].saved = true;
+      }
     })
   }
+
   donotLikePost(feedid, index, userID = this.userId) {
     this.remoteService.hidePost(feedid, userID).subscribe(res => {
-      this.hiddenPost = res.status
+      // this.hiddenPost = res.status
       if (res.status == 1) {
-        this.feeds.splice(index, 1)
+        this.feeds[index].hidden = true;
+        // this.feeds.splice(index, 1)
 
         let toast = this.toastCtrl.create({
           message: 'This post will no longer show to you',
@@ -594,6 +593,33 @@ export class Page {
       }
     })
   }
+
+  turnNotifications(feedid, index, feedType, userID = this.userId) {
+    if (feedType == true) {
+      this.remoteService.unsubscribePost(feedid, userID).subscribe((data) => {
+        console.log(data)
+        if (data.status == 1) {
+          this.feeds[index].has_subscribed = !feedType
+        }
+      })
+
+    } else {
+      this.remoteService.subscribePost(feedid, userID).subscribe((data) => {
+        console.log(data)
+        if (data.status == 1) {
+          this.feeds[index].has_subscribed = !feedType
+        }
+      })
+
+    }
+  }
+
+  editPostView(index) {
+    this.navCtrl.push(EditPostPage, {
+      post: this.feeds[index]
+    });
+  }
+
   deletePost(feedid, index, userID = this.userId) {
     let alert = this.alert.create({
       title: 'Delete',
@@ -675,6 +701,16 @@ export class Page {
     $(this).css('background-color', 'grey')
   }
 
+  unHidePost(feedid, index, userID = this.userId) {
+    this.remoteService.unHidePost(feedid, userID).subscribe(res => {
+
+      if (res.status == 1) {
+        // this.feeds.splice(index, 0, )
+        this.feeds[index].hidden = false;
+      }
+    })
+  }
+
   goToPost() {
     //   let popover = this.popOver.create(PostFeatursPage, {}, {cssClass: 'contpopover'});
     //   popover.present({
@@ -691,9 +727,71 @@ export class Page {
   }
   myCallbackFunction = (post) => {
     return new Promise((resolve, reject) => {
+      post.answers[0] = []
       this.feeds.unshift(post);
       resolve();
     });
+  }
+
+  unsavePost(feedid, index) {
+    this.remoteService.saveItem('feed', feedid, this.userId).subscribe(res => {
+      if (res.status == 1) {
+        this.feeds[index].saved = false;
+      }
+    })
+  }
+
+  report(index) {
+    let title, reason, send, cancel, message;
+    this.translate.get('report').subscribe(value => { title = value; })
+    this.translate.get('report-reason').subscribe(value => { reason = value; })
+    this.translate.get('send').subscribe(value => { send = value; })
+    this.translate.get('cancel').subscribe(value => { cancel = value; })
+
+    let alert = this.alert.create({
+      title: title,
+      inputs: [
+        {
+          name: 'reason',
+          placeholder: reason
+        }
+      ],
+      buttons: [
+        {
+          text: send,
+          handler: data => {
+            this.remoteService.reportItem("post", this.feeds[index].feed_url, data.reason, this.userId).subscribe(res => {
+              if (res.status == "1") {
+                this.translate.get('report-success').subscribe(value => { message = value; })
+                let toast = this.toastCtrl.create({
+                  message: message,
+                  duration: 2000,
+                  position: 'top'
+                });
+                toast.present();
+              } else {
+                this.translate.get('report-failure').subscribe(value => { message = value; })
+                let toast = this.toastCtrl.create({
+                  message: message,
+                  duration: 2000,
+                  position: 'top'
+                });
+                toast.present();
+              }
+            });
+
+          }
+        },
+        {
+          text: cancel,
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    alert.present();
+
   }
 
 }

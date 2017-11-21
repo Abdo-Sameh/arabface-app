@@ -16,6 +16,7 @@ import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
 import { UploadImagePage } from '../upload-image/upload-image';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { EditPostPage } from '../edit-post/edit-post';
 import { TranslateService } from '@ngx-translate/core';
 /**
  * Generated class for the EventPage page.
@@ -32,7 +33,7 @@ export class EventPage {
   userId
   event
   saved
-  feeds;
+  feeds = [];
   likes;
   likeNumbers;
   userData;
@@ -47,12 +48,15 @@ export class EventPage {
     'edited': '',
   }
   hiddenPost
+  friendsMention
   userAvatar
+  videoURL
+  text
   feed = { 'feedid': "" }
   lastImage: string = null;
   constructor(public time: TimeProvider, public translate: TranslateService, public file: File, public filePath: FilePath, public platform: Platform, public camera: Camera, public actionSheetCtrl: ActionSheetController, private socialSharing: SocialSharing, public navCtrl: NavController, public popOver: PopoverController, public toast: ToastController, public navParams: NavParams, public alert: AlertController, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
-    this.userAvatar = "http://" + localStorage.getItem('userAvatar').slice(8, -1);
+    this.userAvatar = localStorage.getItem('userAvatar');
 
     this.event = navParams.get("event");
     this.isSaved(this.event.id);
@@ -68,6 +72,32 @@ export class EventPage {
     this.remoteService.editPost(this.feeds[index].full_message, this.feeds[index].id, this.userId, privacy).subscribe((data) => {
       console.log(data);
       this.feeds[index].privacy = privacy;
+    })
+  }
+
+  showComments(id) {
+    $('#' + id).show();
+    console.log('#' + id);
+  }
+
+
+
+  unHidePost(feedid, index, userID = this.userId) {
+    this.remoteService.unHidePost(feedid, userID).subscribe(res => {
+
+      if (res.status == 1) {
+        // this.feeds.splice(index, 0, )
+        this.feeds[index].hidden = false;
+      }
+    })
+  }
+
+  editComment(id, text, feedIndex, commentIndex) {
+    this.remoteService.editComment(this.userId, id, text).subscribe(res => {
+      if (res.status == 1) {
+        this.feeds[feedIndex].answers[0][commentIndex].text = text;
+        $('.saveComment').parent().hide();
+      }
     })
   }
 
@@ -158,6 +188,43 @@ export class EventPage {
   }
 
 
+  // getFeedsList(id, more = false, GotPosts = 30) {
+  //   let loading = this.loadingCtrl.create({
+  //     content: "",
+  //     spinner: "bubbles",
+  //     showBackdrop: true,
+  //   });
+  //   loading.present()
+  //   this.remoteService.feedsListApiCall(id, this.event.id, 'event', 10).subscribe(res => {
+  //
+  //     for (let i = 0; i < res.length; i++) {
+  //       let newFeedID = res[i].id
+  //       let newFeed = res[i].answers
+  //       this.remoteService.loadComments(newFeedID, this.userId).subscribe(res2 => {
+  //         newFeed.unshift(res2)
+  //         for (let g = 0; g < newFeed[0].length; g++) {
+  //           this.remoteService.loadReplies(newFeed[0][g].id).subscribe(res3 => {
+  //
+  //             newFeed[0][g]['repliesContent'] = res3
+  //
+  //           });
+  //
+  //         }
+  //       });
+  //
+  //     }
+  //     this.feeds = res
+  //     if (GotPosts > 30) {
+  //       console.log()
+  //       this.feeds.push(res)
+  //     }
+  //     loading.dismiss();
+  //     console.log(this.feeds)
+  //
+  //   });
+  //
+  // }
+
   getFeedsList(id, more = false, GotPosts = 30) {
     let loading = this.loadingCtrl.create({
       content: "",
@@ -166,8 +233,33 @@ export class EventPage {
     });
     loading.present()
     this.remoteService.feedsListApiCall(id, this.event.id, 'event', 10).subscribe(res => {
-
+      if (res.length == 0)
+        $('#noFeeds').show();
+      else
+        $('#noFeeds').hide();
+      //////////////////// looping to get comments and their replis ////////////////////////////////
       for (let i = 0; i < res.length; i++) {
+        //check if post is saved or not-going
+
+        res[i].hidden = false;
+        this.remoteService.isSaved('feed', res[i].id, this.userId).subscribe(data => {
+          if (data.status == 1) {
+            res[i].saved = true;
+          } else {
+            res[i].saved = false;
+          }
+        });
+        ///////////// video url handling ////////////////////////
+        if (res[i].video_embed != '') {
+          res[i].video_embed = res[i].video_embed.substring(res[i].video_embed.indexOf("src=") + 5);
+          res[i].video_embed = res[i].video_embed.substring(0, res[i].video_embed.indexOf("\""));
+          this.videoURL = res[i].video_embed;
+        }
+        ///////////////// split time string to words/////////////////
+
+        // res[i].time = res[i].time.split(' ');
+
+        /////////////////////////////////////////////////////
         let newFeedID = res[i].id
         let newFeed = res[i].answers
         this.remoteService.loadComments(newFeedID, this.userId).subscribe(res2 => {
@@ -198,6 +290,31 @@ export class EventPage {
   loadMoreFeeds(feedlength) {
     console.log(feedlength)
     this.getFeedsList(this.userId, true, feedlength)
+  }
+
+  getFriendsList(term = "", id) {
+    console.log(term.charAt(1));
+    if (term.charAt(0) == '@' && term.length > 1) {
+      $('.dropdown-content').show();
+      this.remoteService.friendsListApiCall(this.userId, this.userId, term.substr(1)).subscribe(res => {
+        this.friendsMention = res;
+        console.log(res);
+        // document.getElementById("mention").classList.toggle("show");
+      });
+    }
+  }
+
+  selectedMention(username){
+    this.comment.comment = "@" + username;
+    $('.dropdown-content').hide();
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      // if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      // }
+    }
   }
 
   ///////////////////// post feed //////////////
@@ -274,22 +391,19 @@ export class EventPage {
     });
 
     loading.present()
-    this.remoteService.commentOnFeeds(postOwner, postID, whoCommented, comment, 'feed').subscribe(res => {
-
-
+    this.remoteService.commentOnFeeds(this.userId, postID, whoCommented, comment, 'feed').subscribe(res => {
       res.postid = postID
+      res['repliesContent'] = []
       for (let x in this.feeds) {
         if (this.feeds[x].id == res.postid) {
           this.feeds[x].answers[0].push(res)
         }
       }
-      this.remoteService.loadComments(postID, this.userId).subscribe(res2 => { });
-
       this.comment.comment = ''
       loading.dismiss()
     })
-
   }
+
   replyOnComment(postindex, commentindex, postOwner, commentID, whoCommented = this.userId, comment = this.comment.reply) {
     let loading = this.loadingCtrl.create({
       content: "",
@@ -369,17 +483,17 @@ export class EventPage {
   }
 
 
-  edit() {
+  edit(text) {
+    this.text = text;
     $(document).on('click', '.comment-edit', function() {
       $(this).parent().prev().find('.input-group').show();
 
     })
     $(document).on('click', '.cancel-edit', function() {
       $(this).parent().hide();
-
     })
-
   }
+
   reply() {
     $(document).on('click', '.comment-reply', function() {
       $(this).closest('.comment').find('.reply-input').show();
@@ -423,7 +537,7 @@ export class EventPage {
   //     this.remoteService.editPost(text,feedid,this.userId).subscribe((data) => {console.log(data)})
   // }
 
-  savePost(feedid) {
+  savePost(feedid, index) {
     let toast = this.toast.create({
       message: 'this post has saved !',
       duration: 2000,
@@ -431,14 +545,26 @@ export class EventPage {
     });
     toast.present();
     this.remoteService.saveItem('feed', feedid, this.userId).subscribe(res => {
-      console.log(res)
+      if (res.status == 1) {
+        this.feeds[index].saved = true;
+      }
     })
   }
+
+  unsavePost(feedid, index) {
+    this.remoteService.saveItem('feed', feedid, this.userId).subscribe(res => {
+      if (res.status == 1) {
+        this.feeds[index].saved = false;
+      }
+    })
+  }
+
   donotLikePost(feedid, index, userID = this.userId) {
     this.remoteService.hidePost(feedid, userID).subscribe(res => {
-      this.hiddenPost = res.status
+      // this.hiddenPost = res.status
       if (res.status == 1) {
-        this.feeds.splice(index, 1)
+        this.feeds[index].hidden = true;
+        // this.feeds.splice(index, 1)
 
         let toast = this.toast.create({
           message: 'This post will no longer show to you',
@@ -448,6 +574,7 @@ export class EventPage {
       }
     })
   }
+
   deletePost(feedid, index, userID = this.userId) {
     let alert = this.alert.create({
       title: 'Delete',
@@ -482,29 +609,30 @@ export class EventPage {
     });
     alert.present();
   }
-  deleteComment(commentId) {
+
+  deleteComment(commentId, feedIndex, commentIndex) {
+    let title, reason, ok, cancel, message;
+    this.translate.get('delete-comment').subscribe(value => { title = value; })
+    this.translate.get('delete-comment-question').subscribe(value => { message = value; })
+    this.translate.get('ok').subscribe(value => { ok = value; })
+    this.translate.get('cancel').subscribe(value => { cancel = value; })
+
     let alert = this.alert.create({
-      title: 'Delete',
-      message: 'Do you want to delete comment?',
+      title: title,
+      message: message,
       buttons: [
         {
-          text: 'Ok',
+          text: ok,
           handler: () => {
             this.remoteService.removeComment(commentId, this.userId).subscribe(res => {
               if (res.status == 1) {
-
-                let toast = this.toast.create({
-                  message: 'You deleted this comment ',
-                  duration: 2000
-
-                });
-                toast.present();
+                this.feeds[feedIndex].answers[0].splice(commentIndex, 1);
               }
             })
           }
         },
         {
-          text: 'Cancel',
+          text: cancel,
           role: 'cancel',
           handler: () => {
           }
@@ -512,9 +640,8 @@ export class EventPage {
       ]
     });
     alert.present();
-
-
   }
+
   turnOffNotifications(feedid, userID = this.userId) {
     this.remoteService.unsubscribePost(feedid, userID).subscribe((data) => { console.log(data) })
   }
@@ -573,6 +700,60 @@ export class EventPage {
       console.log(res);
     });
   }
+
+  report(index) {
+    let title, reason, send, cancel, message;
+    this.translate.get('report').subscribe(value => { title = value; })
+    this.translate.get('report-reason').subscribe(value => { reason = value; })
+    this.translate.get('send').subscribe(value => { send = value; })
+    this.translate.get('cancel').subscribe(value => { cancel = value; })
+
+    let alert = this.alert.create({
+      title: title,
+      inputs: [
+        {
+          name: 'reason',
+          placeholder: reason
+        }
+      ],
+      buttons: [
+        {
+          text: send,
+          handler: data => {
+            this.remoteService.reportItem("post", this.feeds[index].feed_url, data.reason, this.userId).subscribe(res => {
+              if (res.status == "1") {
+                this.translate.get('report-success').subscribe(value => { message = value; })
+                let toast = this.toast.create({
+                  message: message,
+                  duration: 2000,
+                  position: 'top'
+                });
+                toast.present();
+              } else {
+                this.translate.get('report-failure').subscribe(value => { message = value; })
+                let toast = this.toast.create({
+                  message: message,
+                  duration: 2000,
+                  position: 'top'
+                });
+                toast.present();
+              }
+            });
+
+          }
+        },
+        {
+          text: cancel,
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    alert.present();
+
+  }
+
   reportEvent() {
     let alert = this.alert.create({
       title: 'Report',
@@ -626,8 +807,36 @@ export class EventPage {
       event: this.event
     });
   }
+
+  turnNotifications(feedid, index, feedType, userID = this.userId) {
+    if (feedType == true) {
+      this.remoteService.unsubscribePost(feedid, userID).subscribe((data) => {
+        console.log(data)
+        if (data.status == 1) {
+          this.feeds[index].has_subscribed = !feedType
+        }
+      })
+
+    } else {
+      this.remoteService.subscribePost(feedid, userID).subscribe((data) => {
+        console.log(data)
+        if (data.status == 1) {
+          this.feeds[index].has_subscribed = !feedType
+        }
+      })
+
+    }
+  }
+
+  editPostView(index) {
+    this.navCtrl.push(EditPostPage, {
+      post: this.feeds[index]
+    });
+  }
+
   myCallbackFunction = (post) => {
     return new Promise((resolve, reject) => {
+      post.answers[0] = [];
       this.feeds.unshift(post);
       resolve();
     });

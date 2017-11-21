@@ -34,7 +34,8 @@ export class DisplayPostPage {
   text
   feed = { 'feedid': "" }
   constructor(public time: TimeProvider, public translate: TranslateService, public navCtrl: NavController, public popOver: PopoverController, public toast: ToastController, public navParams: NavParams, public alert: AlertController, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider) {
-    this.post = this.navParams.get('post')
+    this.post = this.navParams.get('post');
+    this.post.hidden = false;
     console.log(this.post)
     this.loadComments();
 

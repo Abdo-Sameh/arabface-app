@@ -232,7 +232,6 @@ export class NewsPage {
       this.comment.comment = ''
       loading.dismiss()
     })
-
   }
 
   replyOnComment(postindex, commentindex, postOwner, commentID, whoCommented = this.userId, comment = this.comment.reply) {
@@ -546,6 +545,7 @@ export class NewsPage {
 
     }
   }
+
   showPost(feed) {
     this.postToDisplay = feed
     console.log(this.postToDisplay)
