@@ -49,6 +49,7 @@ export class FriendProfilePage {
     'reply': '',
     'edited': '',
   }
+  emptyFeeds=true;
   hiddenPost
   userAvatar
   feed = { 'feedid': "" }
@@ -458,9 +459,7 @@ export class FriendProfilePage {
     loading.present()
     this.remoteService.feedsListApiCall(this.userId, id, 'timeline', 10).subscribe(res => {
       if (res.length == 0)
-        $('#noFeeds').show();
-      else
-        $('#noFeeds').hide();
+          this.emptyFeeds = false;
       //////////////////// looping to get comments and their replis ////////////////////////////////
       for (let i = 0; i < res.length; i++) {
         //check if post is saved or not-going

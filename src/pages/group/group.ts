@@ -53,6 +53,7 @@ export class GroupPage {
   videoURL
   friendsMention
   text
+  emptyFeeds=true;
   lastImage: string = null;
   constructor(public time: TimeProvider, public file: File, public filePath: FilePath, public platform: Platform, public camera: Camera, public actionSheetCtrl: ActionSheetController, public translate: TranslateService, private socialSharing: SocialSharing, public alert: AlertController, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public remoteService: RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
@@ -184,7 +185,8 @@ export class GroupPage {
     });
     loading.present()
     this.remoteService.feedsListApiCall(id, this.group.id, 'group', 10).subscribe(res => {
-
+      if(res.length == 0)
+        this.emptyFeeds = false;
       for (let i = 0; i < res.length; i++) {
         //check if post is saved or not-going
 

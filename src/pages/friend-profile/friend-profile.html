@@ -82,8 +82,8 @@
             <a href="#">{{'location' | translate}}</a>
           </div> -->
 
-          <div *ngIf="posts.length == 0" style="text-align: center;">
-            <ion-icon class="ion-android-bicycle" style="font-size: 100px;"></ion-icon>
+          <div [hidden]="emptyFeeds" *ngIf="posts.length == 0" style="text-align: center;">
+            <img src="./assets/images/man-cycling.svg" style="font-size: 100px; max-width: 50%;">
             <h3>{{'no-feeds-found' | translate}}</h3>
           </div>
           <div *ngFor="let feed of posts ; let mainI =index" [ngSwitch]="true">
@@ -2541,7 +2541,7 @@
             <a href="#" class="btn btn-default btn-block">{{'view-more' | translate}}</a>
           </div>
         </div>
-        <div id="tab-content-3{{this.userId}}" class="tab-pane fade photos mb-30">
+        <div id="tab-content-3{{this.userID}}" class="tab-pane fade photos mb-30">
           <div class="row thumbnails">
             <div class="col-xs-6" *ngFor="let photo of photos">
               <a (click)="viewPhoto(photo.path)" class="thumbnail" href="#"><img src="{{ photo.path }}" style="width:100%" alt=""></a>

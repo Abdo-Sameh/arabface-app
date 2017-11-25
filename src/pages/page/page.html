@@ -2479,8 +2479,8 @@
         </div>
       </div>
 
-      <div *ngIf="feeds.length == 0" style="text-align: center;">
-        <ion-icon class="ion-android-bicycle" style="font-size: 100px;"></ion-icon>
+      <div [hidden]="emptyFeeds" *ngIf="feeds.length == 0" style="text-align: center;">
+        <img src="./assets/images/man-cycling.svg" style="font-size: 100px; max-width: 50%;">
         <h3>{{'no-feeds-found' | translate}}</h3>
       </div>
 

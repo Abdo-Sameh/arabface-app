@@ -54,6 +54,7 @@ export class EventPage {
   text
   feed = { 'feedid': "" }
   lastImage: string = null;
+  emptyFeeds = true;
   constructor(public time: TimeProvider, public translate: TranslateService, public file: File, public filePath: FilePath, public platform: Platform, public camera: Camera, public actionSheetCtrl: ActionSheetController, private socialSharing: SocialSharing, public navCtrl: NavController, public popOver: PopoverController, public toast: ToastController, public navParams: NavParams, public alert: AlertController, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.userAvatar = localStorage.getItem('userAvatar');
@@ -234,9 +235,7 @@ export class EventPage {
     loading.present()
     this.remoteService.feedsListApiCall(id, this.event.id, 'event', 10).subscribe(res => {
       if (res.length == 0)
-        $('#noFeeds').show();
-      else
-        $('#noFeeds').hide();
+        this.emptyFeeds = false;
       //////////////////// looping to get comments and their replis ////////////////////////////////
       for (let i = 0; i < res.length; i++) {
         //check if post is saved or not-going

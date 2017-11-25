@@ -73,6 +73,7 @@ export class ProfilePage {
   loading: Loading;
   videoURL
   text
+  emptyFeeds=true;
   constructor(public photoViewer: PhotoViewer, private app: App, public translate: TranslateService, public time: TimeProvider, private filePath: FilePath, private transfer: FileTransfer, private file: File, public camera: Camera, public navCtrl: NavController, public navParams: NavParams, public alert: AlertController, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider, public toast: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
     let data = navParams.get('userData');
     console.log()
@@ -94,7 +95,7 @@ export class ProfilePage {
     })
   }
 
-  viewPhoto(url){
+  viewPhoto(url) {
     this.photoViewer.show(url);
   }
 
@@ -430,7 +431,7 @@ export class ProfilePage {
     });
   }
 
-  selectedMention(username){
+  selectedMention(username) {
     this.comment.comment = "@" + username;
     $('.dropdown-content').hide();
     var dropdowns = document.getElementsByClassName("dropdown-content");
@@ -438,7 +439,7 @@ export class ProfilePage {
     for (i = 0; i < dropdowns.length; i++) {
       var openDropdown = dropdowns[i];
       // if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
+      openDropdown.classList.remove('show');
       // }
     }
   }
@@ -596,9 +597,7 @@ export class ProfilePage {
     loading.present()
     this.remoteService.feedsListApiCall(this.userId, this.userId, 'timeline', 10).subscribe(res => {
       if (res.length == 0)
-        $('#noFeeds').show();
-      else
-        $('#noFeeds').hide();
+          this.emptyFeeds = false;
       //////////////////// looping to get comments and their replis ////////////////////////////////
       for (let i = 0; i < res.length; i++) {
         //check if post is saved or not-going
@@ -845,6 +844,7 @@ export class ProfilePage {
   }
   myCallbackFunction = (post) => {
     return new Promise((resolve, reject) => {
+      post.answers[0] = [];
       this.feeds.unshift(post);
       resolve();
     });

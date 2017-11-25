@@ -6,7 +6,7 @@
       </a>
     </div>
     <div class="page_title text-center">
-      <h3>Arabface</h3>
+      <h3><img src="assets/images/logo.png" style="width: 125px; margin-top:8px;"></h3>
     </div>
     <div (click)="searchPage()" class="menu_btn text-right">
       <a href="#"><i class="fa fa-search" style="color:#fff;font-size:18px"></i></a>
@@ -18,7 +18,7 @@
   <!-- <i class="ion-ios-search-strong"></i> -->
   <ion-tab [root]="tab2Root" tabIcon="ios-list-box"></ion-tab>
   <ion-tab [root]="tab5Root" tabIcon="ios-people" tabBadge="{{FriendsRequest.length > 0 ? FriendsRequest.length : null}}" tabBadgeStyle="danger"></ion-tab>
-  <ion-tab [root]="tab4Root" tabIcon="ios-chatbubbles-outline" tabBadge="2" tabBadgeStyle="danger"></ion-tab>
+  <ion-tab [root]="tab4Root" tabIcon="ios-chatbubbles-outline"></ion-tab>
   <ion-tab [root]="tab3Root" tabIcon="ios-notifications-outline" tabBadge="{{notifications.length>0 ? notifications.length : null}}" tabBadgeStyle="danger"></ion-tab>
   <!-- <ion-tab (ionSelect)="openMenu()" tabIcon="ios-menu"></ion-tab> -->
 

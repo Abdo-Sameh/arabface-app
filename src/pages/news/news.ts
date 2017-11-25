@@ -49,7 +49,8 @@ export class NewsPage {
   userId
   userAvatar
   text
-  friendsMention
+  friendsMention;
+  emptyFeeds=true;
   constructor(public time: TimeProvider, public translate: TranslateService, private app: App, public navCtrl: NavController, public popOver: PopoverController, public toast: ToastController, public navParams: NavParams, public alert: AlertController, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider) {
     if (localStorage.getItem('userDataID')) {
       this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "")
@@ -59,6 +60,8 @@ export class NewsPage {
     // }
     this.getFeedsList(this.userId);
     // this.userAvatar = "http://" + this.userAvatar;
+
+
   }
 
   ionViewDidLoad() {
@@ -94,10 +97,10 @@ export class NewsPage {
     });
     loading.present()
     this.remoteService.feedsListApiCall(id, '', 'feed', 10).subscribe(res => {
+
       if (res.length == 0)
-        $('#noFeeds').show();
-      else
-        $('#noFeeds').hide();
+        this.emptyFeeds = false;
+
       //////////////////// looping to get comments and their replis ////////////////////////////////
       for (let i = 0; i < res.length; i++) {
         //check if post is saved or not-going

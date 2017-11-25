@@ -57,6 +57,7 @@ export class Page {
   lastImage: string = null;
   friendsMention
   text
+  emptyFeeds = true;
   constructor(public time: TimeProvider, public file: File, public filePath: FilePath, public platform: Platform, public camera: Camera, public actionSheetCtrl: ActionSheetController, public translate: TranslateService, public alert: AlertController, private socialSharing: SocialSharing, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public remoteService: RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.page = navParams.get("page");
@@ -327,10 +328,8 @@ export class Page {
     });
     loading.present()
     this.remoteService.feedsListApiCall(id, this.page.id, 'page', 10).subscribe(res => {
-      if (res.length == 0)
-        $('#noFeeds').show();
-      else
-        $('#noFeeds').hide();
+      if(res.length == 0)
+        this.emptyFeeds = false;
       //////////////////// looping to get comments and their replis ////////////////////////////////
       for (let i = 0; i < res.length; i++) {
         //check if post is saved or not-going
