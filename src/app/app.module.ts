@@ -1,6 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
@@ -80,6 +81,7 @@ import { TimeProvider } from '../providers/time/time';
 import { EditPostPage } from '../pages/edit-post/edit-post';
 import { ImageUploadingProvider } from '../providers/image-uploading/image-uploading';
 import { FriendProvider } from '../providers/friend/friend';
+import { LongPressModule } from 'ionic-long-press';
 
 @NgModule({
   declarations: [
@@ -131,7 +133,7 @@ import { FriendProvider } from '../providers/friend/friend';
     YoutubePipe
   ],
   imports: [
-BrowserModule , IonicModule.forRoot(MyApp), HttpModule, TranslateModule.forRoot({
+BrowserModule , LongPressModule, IonicModule.forRoot(MyApp), HttpModule, TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: (createTranslateLoader),
@@ -196,6 +198,7 @@ BrowserModule , IonicModule.forRoot(MyApp), HttpModule, TranslateModule.forRoot(
     Globalization,
     FilePath,
     File,
+    Push,
     YoutubeVideoPlayer,
     Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
