@@ -113,4 +113,7 @@
     <plugin name="cordova-plugin-youtube-video-player" spec="^1.0.6" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" spec="^4.0.7" />
+    <plugin name="phonegap-plugin-push" spec="^2.0.0">
+        <variable name="SENDER_ID" value="826683338673" />
+    </plugin>
 </widget>

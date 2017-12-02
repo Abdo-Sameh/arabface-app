@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, App } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, App } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { TimeProvider } from './../../providers/time/time';
-import { PostPage } from '../post/post'
-import { ProfilePage } from '../profile/profile'
 import { Page } from '../page/page';
 import { LatestVisitorsPage } from '../latest-visitors/latest-visitors';
 import { VideoPage } from '../video/video';
@@ -41,6 +39,18 @@ export class NotificationsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NotificationsPage');
+  }
+
+  pressed(){
+    console.log("pressed");
+  }
+  longPress(id){
+    console.log("active");
+    console.log("myDropdown" + id);
+    document.getElementById("myDropdown" + id).classList.toggle("show");
+  }
+  released(){
+    console.log("released");
   }
 
   doRefresh(refresher) {
@@ -96,14 +106,35 @@ export class NotificationsPage {
       console.log(res);
     });
   }
+
   deleteNotification(id, index) {
     this.remoteService.deleteNotification(this.userId, id).subscribe(res => {
       console.log(res);
+
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
       this.notifications.splice(index, 1);
       if (this.notifications.length == 0) {
         $('#noNoti').show();
       }
     });
+  }
+
+  cancel(){
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
   }
 
   markReadNotification(id, type, index) {
