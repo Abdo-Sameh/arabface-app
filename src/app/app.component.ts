@@ -3,7 +3,7 @@ import { Nav, Platform } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { DOCUMENT } from '@angular/platform-browser';
 import { RemoteServiceProvider } from '../providers/remote-service/remote-service';
-import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import 'rxjs/add/operator/map';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -27,8 +27,7 @@ import { Globalization } from '@ionic-native/globalization';
 //import { TabsPage } from '../pages/tabs/tabs';
 
 import xml2js from 'xml2js';
-let firebaseauth
-let firebase, candidate;
+let firebase;
 
 @Component({
   templateUrl: 'app.html'
@@ -83,25 +82,25 @@ export class MyApp {
   initializeApp() {
     this.platform.ready().then(() => {
       //running from browser
-      // this.translate.setDefaultLang("en");
-      // this.platform.setDir('ltr', true);
-      // this.document.getElementById('appstyle').setAttribute('href', 'assets/css/main.css');
+      this.translate.setDefaultLang("ar");
+      this.platform.setDir('rtl', true);
+      this.document.getElementById('appstyle').setAttribute('href', 'assets/css/main-ar.css');
       // this.deviceLanguage = "ar";
       // this.translate.getDefaultLang()
       //running from app
 
-      this.globalization.getPreferredLanguage()
-        .then(res => {
-          this.translate.use((res.value).split("-")[0]);
-          this.translate.setDefaultLang((res.value).split("-")[0]);
-          if (this.translate.getDefaultLang() == "ar") {
-            this.platform.setDir('rtl', true);
-            this.document.getElementById('appstyle').setAttribute('href', 'assets/css/main-ar.css');
-          } else {
-            this.platform.setDir('ltr', true);
-            this.document.getElementById('appstyle').setAttribute('href', 'assets/css/main.css');
-          }
-        });
+      // this.globalization.getPreferredLanguage()
+      //   .then(res => {
+      //     this.translate.use((res.value).split("-")[0]);
+      //     this.translate.setDefaultLang((res.value).split("-")[0]);
+      //     if (this.translate.getDefaultLang() == "ar") {
+      //       this.platform.setDir('rtl', true);
+      //       this.document.getElementById('appstyle').setAttribute('href', 'assets/css/main-ar.css');
+      //     } else {
+      //       this.platform.setDir('ltr', true);
+      //       this.document.getElementById('appstyle').setAttribute('href', 'assets/css/main.css');
+      //     }
+      //   });
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });

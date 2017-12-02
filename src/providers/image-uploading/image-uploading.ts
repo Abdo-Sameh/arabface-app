@@ -127,7 +127,7 @@ export class ImageUploadingProvider {
     // Destination URL
     var url, options;
     if (type == "album") {
-      url = "http://192.168.1.252/arabface/api/14789632/photo/album/upload";
+      url = "http://udsolutions.co.uk/Arabface/arabface/api/89129812/photo/album/upload";
       options = {
         fileKey: "photo",
         fileName: filename,
@@ -136,7 +136,7 @@ export class ImageUploadingProvider {
         params: { 'album_id': id, 'photo': filename, 'userid': userId }
       };
     } else if (type == "profile.avatar") {
-      url = "http://192.168.1.252/arabface/api/14789632/profile/change/avatar";
+      url = "http://udsolutions.co.uk/Arabface/arabface/api/89129812/profile/change/avatar";
       options = {
         fileKey: "avatar",
         fileName: filename,
@@ -145,7 +145,7 @@ export class ImageUploadingProvider {
         params: { 'avatar': filename, 'userid': userId }
       };
     } else if (type == "profile.cover") {
-      url = "http://192.168.1.252/arabface/api/14789632/profile/change/cover";
+      url = "http://udsolutions.co.uk/Arabface/arabface/api/89129812/profile/change/cover";
       options = {
         fileKey: "cover",
         fileName: filename,
@@ -154,7 +154,7 @@ export class ImageUploadingProvider {
         params: { 'cover': filename, 'userid': userId }
       };
     } else if (type == "page.logo") {
-      url = "http://192.168.1.252/arabface/api/14789632/page/logo";
+      url = "http://udsolutions.co.uk/Arabface/arabface/api/89129812/page/logo";
       options = {
         fileKey: "image",
         fileName: filename,
@@ -163,7 +163,7 @@ export class ImageUploadingProvider {
         params: { 'image': filename, 'userid': userId, 'page_id': id }
       };
     } else if (type == "page.cover") {
-      url = "http://192.168.1.252/arabface/api/14789632/page/cover";
+      url = "http://udsolutions.co.uk/Arabface/arabface/api/89129812/page/cover";
       options = {
         fileKey: "image",
         fileName: filename,
@@ -172,7 +172,7 @@ export class ImageUploadingProvider {
         params: { 'image': filename, 'userid': userId, 'page_id': id }
       };
     } else if (type == "group.logo") {
-      url = "http://192.168.1.252/arabface/api/14789632/group/logo";
+      url = "http://udsolutions.co.uk/Arabface/arabface/api/89129812/group/logo";
       options = {
         fileKey: "image",
         fileName: filename,
@@ -181,7 +181,7 @@ export class ImageUploadingProvider {
         params: { 'image': filename, 'userid': userId, 'group_id': id }
       };
     } else if (type == "group.cover") {
-      url = "http://192.168.1.252/arabface/api/14789632/group/cover";
+      url = "http://udsolutions.co.uk/Arabface/arabface/api/89129812/group/cover";
       options = {
         fileKey: "image",
         fileName: filename,
@@ -190,7 +190,7 @@ export class ImageUploadingProvider {
         params: { 'image': filename, 'userid': userId, 'group_id': id }
       };
     } else if (type == "event.cover") {
-      url = "http://192.168.1.252/arabface/api/14789632/event/cover";
+      url = "http://udsolutions.co.uk/Arabface/arabface/api/89129812/event/cover";
       options = {
         fileKey: "image",
         fileName: filename,
