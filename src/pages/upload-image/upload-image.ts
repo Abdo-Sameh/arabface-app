@@ -67,7 +67,7 @@ export class UploadImagePage {
     // Destination URL
     var url, options;
     if (this.type == "album") {
-      url = "https://arabface.online/demo/api/147896325/photo/album/upload";
+      url = "http://udsolutions.co.uk/Arabface/arabface/api/89129812/photo/album/upload";
       options = {
         fileKey: "photo",
         fileName: filename,
@@ -76,7 +76,7 @@ export class UploadImagePage {
         params: { 'album_id': this.id, 'photo': filename, 'userid': this.userId }
       };
     } else if (this.type == "profile.avatar") {
-      url = "https://arabface.online/demo/api/147896325/profile/change/avatar";
+      url = "http://udsolutions.co.uk/Arabface/arabface/api/89129812/profile/change/avatar";
       options = {
         fileKey: "avatar",
         fileName: filename,
@@ -85,7 +85,7 @@ export class UploadImagePage {
         params: { 'avatar': filename, 'userid': this.userId }
       };
     } else if (this.type == "profile.cover") {
-      url = "https://arabface.online/demo/api/147896325/profile/change/cover";
+      url = "http://udsolutions.co.uk/Arabface/arabface/api/89129812/profile/change/cover";
       options = {
         fileKey: "cover",
         fileName: filename,
@@ -94,7 +94,7 @@ export class UploadImagePage {
         params: { 'cover': filename, 'userid': this.userId }
       };
     } else if (this.type == "page.logo") {
-      url = "https://arabface.online/demo/api/147896325/page/logo";
+      url = "http://udsolutions.co.uk/Arabface/arabface/api/89129812/page/logo";
       options = {
         fileKey: "image",
         fileName: filename,
@@ -103,7 +103,7 @@ export class UploadImagePage {
         params: { 'image': filename, 'userid': this.userId, 'page_id': this.id }
       };
     } else if (this.type == "page.cover") {
-      url = "https://arabface.online/demo/api/147896325/page/cover";
+      url = "http://udsolutions.co.uk/Arabface/arabface/api/89129812/page/cover";
       options = {
         fileKey: "image",
         fileName: filename,
@@ -112,7 +112,7 @@ export class UploadImagePage {
         params: { 'image': filename, 'userid': this.userId, 'page_id': this.id }
       };
     } else if (this.type == "group.logo") {
-      url = "https://arabface.online/demo/api/147896325/group/logo";
+      url = "http://udsolutions.co.uk/Arabface/arabface/api/89129812/group/logo";
       options = {
         fileKey: "image",
         fileName: filename,
@@ -121,7 +121,7 @@ export class UploadImagePage {
         params: { 'image': filename, 'userid': this.userId, 'group_id': this.id }
       };
     } else if (this.type == "group.cover") {
-      url = "https://arabface.online/demo/api/147896325/group/cover";
+      url = "http://udsolutions.co.uk/Arabface/arabface/api/89129812/group/cover";
       options = {
         fileKey: "image",
         fileName: filename,
@@ -130,7 +130,7 @@ export class UploadImagePage {
         params: { 'image': filename, 'userid': this.userId, 'group_id': this.id }
       };
     } else if (this.type == "event.cover") {
-      url = "https://arabface.online/demo/api/147896325/event/cover";
+      url = "http://udsolutions.co.uk/Arabface/arabface/api/89129812/event/cover";
       options = {
         fileKey: "image",
         fileName: filename,
@@ -154,7 +154,7 @@ export class UploadImagePage {
       // alert(response['data_one']);
       // alert(data.response);
       // alert(data.bytesSent);
-      // alert(targetPath);
+      // alert(targetPath);   
       // alert(url);
       if (response['status'] == 0) {
         this.presentToast('Error while uploading file.');

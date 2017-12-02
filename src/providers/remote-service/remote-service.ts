@@ -11,14 +11,14 @@ import 'rxjs/add/operator/map';
 declare var firebase;
 let alert1, downloadURL, avatar, name; let signupres; let signupresult;
 let userID = '25';
-let config = {
-  apiKey: 'AIzaSyBvXvFFmIM--9WbD07aemNah3ONCY22Ml4',
-  authDomain: 'aracall-3cda0.firebaseapp.com',
-  databaseURL: 'https://aracall-3cda0.firebaseio.com',
-  projectId: 'aracall-3cda0',
-  storageBucket: 'aracall-3cda0.appspot.com',
-  messagingSenderId: '712599379890'
-};
+var config = {
+    apiKey: "AIzaSyBECrQse7tXt8QiqiV_TJCxwLYOIwKWIW0",
+    authDomain: "arabface-ca807.firebaseapp.com",
+    databaseURL: "https://arabface-ca807.firebaseio.com",
+    projectId: "arabface-ca807",
+    storageBucket: "",
+    messagingSenderId: "826683338673"
+  };
 let user;
 /*
   Generated class for the RemoteServiceProvider provider.

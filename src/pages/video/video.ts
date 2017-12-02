@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, AlertController, LoadingController } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
+import { TimeProvider } from './../../providers/time/time';
 import { VideosPage } from '../videos/videos';
 import { EditVideoPage } from '../edit-video/edit-video';
 import { SocialSharing } from '@ionic-native/social-sharing';
@@ -28,7 +29,7 @@ export class VideoPage {
     'reply': '',
     'edited': '',
   }
-  constructor(public loadingCtrl: LoadingController, private youtube: YoutubeVideoPlayer, public alert: AlertController, private socialSharing: SocialSharing, public navCtrl: NavController, public navParams: NavParams, public remoteService: RemoteServiceProvider, public toastCtrl: ToastController) {
+  constructor(public time: TimeProvider, public loadingCtrl: LoadingController, private youtube: YoutubeVideoPlayer, public alert: AlertController, private socialSharing: SocialSharing, public navCtrl: NavController, public navParams: NavParams, public remoteService: RemoteServiceProvider, public toastCtrl: ToastController) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.userAvatar = localStorage.getItem('userAvatar').slice(8, -1);
     this.userAvatar = "http://" + this.userAvatar;
@@ -42,6 +43,11 @@ export class VideoPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad VideoPage');
   }
+
+  getTime(time) {
+    return this.time.getTime(time);
+  }
+
   editVideoPage() {
     this.navCtrl.push(EditVideoPage, {
       'video': this.video

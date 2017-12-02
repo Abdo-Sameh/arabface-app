@@ -1,5 +1,5 @@
 import { Component, ViewChild, Inject } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, AlertController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { DOCUMENT } from '@angular/platform-browser';
 import { RemoteServiceProvider } from '../providers/remote-service/remote-service';
@@ -24,6 +24,8 @@ import { TrendingPage } from '../pages/trending/trending';
 import { ContactUsPage } from "../pages/contact-us/contact-us";
 import { GiftsPage } from "../pages/gifts/gifts";
 import { Globalization } from '@ionic-native/globalization';
+import { Push, PushObject, PushOptions } from '@ionic-native/push';
+
 //import { TabsPage } from '../pages/tabs/tabs';
 
 import xml2js from 'xml2js';
@@ -46,7 +48,7 @@ export class MyApp {
   pages: Array<{ title: string, component: any, icon: string }>;
 
 
-  constructor( @Inject(DOCUMENT) private document, public globalization: Globalization, public launchNavigator: LaunchNavigator, public translate: TranslateService, public database: RemoteServiceProvider, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public http: Http) {
+  constructor( @Inject(DOCUMENT) private document, public alertCtrl: AlertController, public push: Push, public globalization: Globalization, public launchNavigator: LaunchNavigator, public translate: TranslateService, public database: RemoteServiceProvider, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public http: Http) {
     // translate.setDefaultLang('ar');
 
     this.splashScreen.show();
@@ -103,7 +105,38 @@ export class MyApp {
       //   });
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.pushsetup();
     });
+  }
+
+  pushsetup() {
+    const options: PushOptions = {
+     android: {},
+     ios: {
+         alert: 'true',
+         badge: true,
+         sound: 'false'
+     },
+     windows: {}
+  };
+
+  const pushObject: PushObject = this.push.init(options);
+
+  pushObject.on('notification').subscribe((notification: any) => {
+    if (notification.additionalData.foreground) {
+      let youralert = this.alertCtrl.create({
+        title: 'New Push notification',
+        message: notification.message
+      });
+      youralert.present();
+    }
+  });
+
+  pushObject.on('registration').subscribe((registration: any) => {
+     //do whatever you want with the registration ID
+  });
+
+  pushObject.on('error').subscribe(error => alert('Error with Push plugin' + error));
   }
 
   openPage(page) {
@@ -111,48 +144,8 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
-  public loadXML(lang): any {
-    this.http.get('/assets/lang/' + lang + '.xml')
-      .map(res => res.text())
-      .subscribe((data) => {
-        this.parseXML(data)
-          .then((data) => {
-            this.xmlLang = localStorage.setItem('lang', JSON.stringify(data))
-          });
 
-      });
 
-  }
-  public parseXML(data) {
-    return new Promise(resolve => {
-      let
-        arr = [],
-        obj,
-        parser = new xml2js.Parser(
-          {
-
-            trim: true,
-            explicitArray: true
-          });
-
-      parser.parseString(data, function(err, result) {
-        obj = result.resources.string;
-        for (let i = 0; i < obj.length; i++) {
-          var key = obj[i].$.name;
-          var value = obj[i]._;
-          key = key.replace(/_{1,}/g, ' ').replace(/(\s{1,}|\b)(\w)/g, function(m, space, letter) {
-            return letter.toUpperCase();
-          })
-
-          let ob = {}
-
-          ob[key] = value
-          arr.push(ob);
-        }
-        resolve(arr);
-      });
-    });
-  }
 
   ngOnInit() {
     console.log('app' + this.checkLogin)
