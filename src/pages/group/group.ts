@@ -231,6 +231,8 @@ export class GroupPage {
         console.log(res);
         // document.getElementById("mention").classList.toggle("show");
       });
+    }else{
+      $('.dropdown-content').hide();
     }
   }
 

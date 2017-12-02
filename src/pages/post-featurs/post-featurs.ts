@@ -217,7 +217,7 @@ export class PostFeatursPage {
   postFeed(userID = this.userId, postText = this.post) {
 
     let privacy = $('.privacy').attr('id')
-    let id = $('.postBody').attr('id')
+    let id = $('.postBody').attr('id') 
 
     let loading = this.loadingCtrl.create({
       content: "Posting",

@@ -240,6 +240,8 @@ export class SavedPage {
         console.log(res);
         // document.getElementById("mention").classList.toggle("show");
       });
+    }else{
+      $('.dropdown-content').hide();
     }
   }
 

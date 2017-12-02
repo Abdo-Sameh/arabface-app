@@ -93,6 +93,8 @@ export class Page {
         console.log(res);
         // document.getElementById("mention").classList.toggle("show");
       });
+    }else{
+      $('.dropdown-content').hide();
     }
   }
 

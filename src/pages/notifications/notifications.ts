@@ -98,8 +98,8 @@ export class NotificationsPage {
         console.log(res);
       });
     }
-
   }
+
   getUnreadNotifications() {
     this.remoteService.getUnreadNotifications(this.userId, 10, 1).subscribe(res => {
       this.unread = res;
@@ -139,6 +139,14 @@ export class NotificationsPage {
 
   markReadNotification(id, type, index) {
     this.remoteService.markReadNotification(this.userId, id, type).subscribe(res => {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
       if (type == '1') {
         console.log("green");
         console.log('#check' + id);
@@ -270,6 +278,12 @@ export class NotificationsPage {
         break;
       }
       case "video.like": {
+        this.app.getRootNav().push(VideoPage, {
+          video: notification.video[0]
+        });
+        break;
+      }
+      case "video.comment.reply": {
         this.app.getRootNav().push(VideoPage, {
           video: notification.video[0]
         });

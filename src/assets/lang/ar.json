@@ -128,6 +128,10 @@
 
 	"create-from": "خلق من",
 
+	"make-read" : "تحديد ك مقروءة",
+
+	"make-unread" : "تحديد ك غير مقروءة",
+
 	"language-id": "ID اللغة",
 
 	"edit-language": "تحرير اللغة",
@@ -1184,7 +1188,7 @@
 
 	"successfully-uploaded" : "تم الرفع بنجاح",
 
-	"people": "الناس",
+	"people": "اشخاص",
 
 	"see-all": "رؤية جميع",
 

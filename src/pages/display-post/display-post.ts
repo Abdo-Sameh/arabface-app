@@ -163,7 +163,10 @@ export class DisplayPostPage {
       this.remoteService.friendsListApiCall(this.userId, this.userId, term.substr(1)).subscribe(res => {
         this.friendsMention = res;
         console.log(res);
+        // document.getElementById("mention").classList.toggle("show");
       });
+    }else{
+      $('.dropdown-content').hide();
     }
   }
 
