@@ -27,14 +27,14 @@ let user;
   for more info on providers and Angular DI.
 */
 // /serverURL = 'http://udsolutions.co.uk/Arabface/arabface/api/'
-let apiURL = 'http://udsolutions.co.uk/Arabface/arabface/api/89129812/';
+let apiURL = 'http://192.168.1.252/arabface/api/89129812/';
 
 @Injectable()
 export class RemoteServiceProvider {
   public Id: number;
   deviceLanguage
   response;
-  serverURL = 'http://udsolutions.co.uk/Arabface'
+  serverURL = 'http://192.168.1.252'
   KEY = '89129812'
 
 
