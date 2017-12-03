@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController, Platform, ActionSheetController, ToastController, Loading } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController, Platform, ActionSheetController, ToastController, Loading } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { ImageUploadingProvider } from './../../providers/image-uploading/image-uploading';
 import { TranslateService } from '@ngx-translate/core';
-import { Camera, CameraOptions } from '@ionic-native/camera';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { Camera } from '@ionic-native/camera';
+import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
 import * as $ from "jquery"
@@ -179,16 +179,16 @@ export class PostFeatursPage {
     var targetPath = this.pathForImage(this.lastImage);
     // Destination URL
     var url, options;
-      url = "http://192.168.1.252/arabface/api/14789632/photo/album/upload";
-      options = {
-        fileKey: "image1",
-        fileName: filename,
-        chunkedMode: false,
-        mimeType: "multipart/form-data",
-        params: {
-          'image1': filename
-        }
-      };
+    url = "http://192.168.1.252/arabface/api/14789632/photo/album/upload";
+    options = {
+      fileKey: "image1",
+      fileName: filename,
+      chunkedMode: false,
+      mimeType: "multipart/form-data",
+      params: {
+        'image1': filename
+      }
+    };
 
     const fileTransfer: FileTransferObject = this.transfer.create();
     this.loading = this.loadingCtrl.create({
@@ -217,7 +217,7 @@ export class PostFeatursPage {
   postFeed(userID = this.userId, postText = this.post) {
 
     let privacy = $('.privacy').attr('id')
-    let id = $('.postBody').attr('id')
+    let id = $('.postBody').attr('id') 
 
     let loading = this.loadingCtrl.create({
       content: "Posting",
@@ -290,6 +290,7 @@ export class PostFeatursPage {
     // }
 
   }
+
   locationPopUp() {
     let title, yourLocation, post, cancel, message;
     this.translate.get('location').subscribe(value => { title = value; })
@@ -360,9 +361,9 @@ export class PostFeatursPage {
     if (term != "") {
       this.remoteService.friendsListApiCall(this.userId, this.userId, term).subscribe(res => {
         this.searchedUsers = [];
-        for(let i = 0; i < res.length; ++i){
+        for (let i = 0; i < res.length; ++i) {
           console.log(Tagedusers.indexOf(res[i].id));
-          if(Tagedusers.indexOf(res[i].id) == -1){
+          if (Tagedusers.indexOf(res[i].id) == -1) {
             this.searchedUsers.push(res[i]);
           }
         }
@@ -372,7 +373,6 @@ export class PostFeatursPage {
     }
   }
   selectUserToTag(userName, userID, userImage, index, searchedUsers) {
-    var users = []
     this.tagedUsers = ''
     $(document).one('click', '.dropdown-content a', function(e) {
       e.preventDefault();

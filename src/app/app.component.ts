@@ -3,7 +3,7 @@ import { Nav, Platform, AlertController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { DOCUMENT } from '@angular/platform-browser';
 import { RemoteServiceProvider } from '../providers/remote-service/remote-service';
-import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import 'rxjs/add/operator/map';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -29,8 +29,7 @@ import { Push, PushObject, PushOptions } from '@ionic-native/push';
 //import { TabsPage } from '../pages/tabs/tabs';
 
 import xml2js from 'xml2js';
-let firebaseauth
-let firebase, candidate;
+let firebase;
 
 @Component({
   templateUrl: 'app.html'

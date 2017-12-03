@@ -1,17 +1,16 @@
-import { Component, ViewChild } from '@angular/core';
-import { IonicPage, App, NavController, PopoverController, ToastController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { App, NavController, PopoverController, ToastController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
-import { TabsPage } from '../tabs/tabs';
 import { ProfilePage } from '../profile/profile';
 import { PostFeatursPage } from '../post-featurs/post-featurs'
 import { FriendProfilePage } from '../friend-profile/friend-profile'
 import { DisplayPostPage } from '../display-post/display-post'
 import { NotFound_404Page } from '../not-found-404/not-found-404';
-import { MyApp } from '../../app/app.component';
 import { TranslateService } from '@ngx-translate/core';
 import { TimeProvider } from './../../providers/time/time';
 import { EditPostPage } from '../edit-post/edit-post';
 import { GroupPage } from '../group/group';
+import { Page } from '../page/page';
 
 //import $ from "jquery";
 
@@ -21,7 +20,6 @@ import { GroupPage } from '../group/group';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-declare var google;
 
 @Component({
   selector: 'page-news',
@@ -50,7 +48,7 @@ export class NewsPage {
   userAvatar
   text
   friendsMention;
-  emptyFeeds=true;
+  emptyFeeds = true;
   constructor(public time: TimeProvider, public translate: TranslateService, private app: App, public navCtrl: NavController, public popOver: PopoverController, public toast: ToastController, public navParams: NavParams, public alert: AlertController, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider) {
     if (localStorage.getItem('userDataID')) {
       this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "")
@@ -66,6 +64,14 @@ export class NewsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NewsPage');
+  }
+
+  viewPage(id) {
+    this.remoteService.getPageDetails(this.userId, id).subscribe(res => {
+      this.app.getRootNav().push(Page, {
+        page: res
+      })
+    })
   }
 
   editComment(id, text, feedIndex, commentIndex) {
@@ -199,24 +205,7 @@ export class NewsPage {
 
 
   }
-  // postFeed(userID=this.userId,postText=this.post.text)
-  // {
-  //   console.log(this.feeds)
 
-  //   let loading = this.loadingCtrl.create({
-  //     content: "",
-  //     spinner: "bubbles",
-
-  //   });
-  //   loading.present()
-  //   this.remoteService.feedPosting(userID,postText).subscribe( res => {
-  //     this.feeds.unshift(res.feed)
-  //     this.post.text= ""
-  //     //this.getFeedsList(this.userId);
-  //     loading.dismiss();
-  //   });
-
-  // }
   commentOnFeed(postOwner, postID, whoCommented = this.userId, comment = this.comment.comment) {
     let loading = this.loadingCtrl.create({
       content: "",
@@ -300,10 +289,12 @@ export class NewsPage {
         console.log(res);
         // document.getElementById("mention").classList.toggle("show");
       });
+    }else{
+      $('.dropdown-content').hide();
     }
   }
 
-  selectedMention(username){
+  selectedMention(username) {
     this.comment.comment = "@" + username;
     $('.dropdown-content').hide();
     var dropdowns = document.getElementsByClassName("dropdown-content");
@@ -311,7 +302,7 @@ export class NewsPage {
     for (i = 0; i < dropdowns.length; i++) {
       var openDropdown = dropdowns[i];
       // if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
+      openDropdown.classList.remove('show');
       // }
     }
   }
@@ -430,7 +421,7 @@ export class NewsPage {
   }
 
   unsavePost(feedid, index) {
-    this.remoteService.saveItem('feed', feedid, this.userId).subscribe(res => {
+    this.remoteService.unsaveItem('feed', feedid, this.userId).subscribe(res => {
       if (res.status == 1) {
         this.feeds[index].saved = false;
       }
@@ -497,8 +488,9 @@ export class NewsPage {
     });
     alert.present();
   }
+
   deleteComment(commentId, feedIndex, commentIndex) {
-    let title, reason, ok, cancel, message;
+    let title, ok, cancel, message;
     this.translate.get('delete-comment').subscribe(value => { title = value; })
     this.translate.get('delete-comment-question').subscribe(value => { message = value; })
     this.translate.get('ok').subscribe(value => { ok = value; })

@@ -160,15 +160,40 @@ page-profile {
   .alert {
     background: white;
   }
-  .btn-block{
-      margin-top: 10px;
+
+  .btn-block {
+    margin-top: 10px;
   }
+
   .user-item img {
     border-radius: 100px;
   }
 
   .user-img {
     border-radius: 100px;
-    border: 0px solid #5c0632;
+    border: 0 solid #5c0632;
+  }
+
+  .dropdown-content {
+    display: block;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    width: 100% !important;
+    color: #5c0632 !important;
+    z-index: 100;
+  }
+
+  .show {
+    display: block;
   }
 }

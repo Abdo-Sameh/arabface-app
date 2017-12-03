@@ -115,6 +115,11 @@
               <p>"{{notify.content}}"</p>
               <p>{{getTime(notify.time)}}</p>
             </div>
+            <div ion-long-press [interval]="500" (click)="gotoNotification(notify.type, notify, i)" (onPressing)="longPress(notify.id)" class="user-info dropbtn" *ngSwitchCase="notify.type == 'video.comment.reply'">
+              <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'replied-on-your-comment' | translate}} </span></h5>
+              <p>"{{notify.content}}"</p>
+              <p>{{getTime(notify.time)}}</p>
+            </div>
             <div ion-long-press [interval]="500" (click)="gotoNotification(notify.type, notify, i)" (onPressing)="longPress(notify.id)" class="user-info dropbtn" *ngSwitchCase="notify.type == 'video.like'">
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'liked-your-video' | translate}}</span></h5>
               <p>{{getTime(notify.time)}}</p>
@@ -254,6 +259,11 @@
               <p>"{{notify.content}}"</p>
               <p>{{getTime(notify.time)}}</p>
             </div>
+            <div ion-long-press [interval]="500" (click)="gotoNotification(notify.type, notify, i)" (onPressing)="longPress(notify.id)" class="user-info dropbtn" *ngSwitchCase="notify.type == 'video.comment.reply'">
+              <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'replied-on-your-comment' | translate}} </span></h5>
+              <p>"{{notify.content}}"</p>
+              <p>{{getTime(notify.time)}}</p>
+            </div>
             <div ion-long-press [interval]="500" (click)="gotoNotification(notify.type, notify, i)" (onPressing)="longPress(notify.id)" class="user-info dropbtn" *ngSwitchCase="notify.type == 'video.like'">
               <h5><a style="color:#5c0632;cursor:pointer;font-size:14px;">{{notify.name}} </a> <span>{{'liked-your-video' | translate}}</span></h5>
               <p>{{getTime(notify.time)}}</p>
@@ -275,8 +285,10 @@
         <!-- //user-item -->
 
         <div id="myDropdown{{notify.id}}" class="dropdown-content">
-          <a href="#home">{{'edit' | translate}}</a>
-          <a (click)="deleteNotification(notify.id, i)" href="#about">{{'delete' | translate}}</a>
+          <a *ngIf="notify.mark_read == '1'" (click)="markReadNotification(notify.id, '0', i)">{{'make-unread' | translate}}</a>
+          <a *ngIf="notify.mark_read == '0'" (click)="markReadNotification(notify.id, '1', i)">{{'make-read' | translate}}</a>
+          <a (click)="deleteNotification(notify.id, i)" >{{'delete' | translate}}</a>
+          <a (click)="cancel()">{{'cancel' | translate}}</a>
           <!-- <a href="#contact">Contact</a> -->
         </div>
 

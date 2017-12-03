@@ -102,7 +102,9 @@
 
   "category-updated": "Category topic successfully updated",
 
+  "make-read" : "Mark as read",
 
+	"make-unread" : "Mark as unread",
 
   "general-image-error": "Failed to process your image",
 
@@ -313,6 +315,10 @@
   "page-blocks": " page blocks",
 
   "edit": "Edit",
+
+  "group-who-can-post" : "Who can post in group",
+
+  "group-who-can-add-member" : "Who can add members in group",
 
   "go": "Go",
 

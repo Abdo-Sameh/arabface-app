@@ -29,6 +29,7 @@ export class VideoPage {
     'reply': '',
     'edited': '',
   }
+  friendsMention
   constructor(public time: TimeProvider, public loadingCtrl: LoadingController, private youtube: YoutubeVideoPlayer, public alert: AlertController, private socialSharing: SocialSharing, public navCtrl: NavController, public navParams: NavParams, public remoteService: RemoteServiceProvider, public toastCtrl: ToastController) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.userAvatar = localStorage.getItem('userAvatar').slice(8, -1);
@@ -53,6 +54,20 @@ export class VideoPage {
       'video': this.video
     });
   }
+
+  selectedMention(username) {
+    this.comment.comment = "@" + username;
+    $('.dropdown-content').hide();
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      // if (openDropdown.classList.contains('show')) {
+      openDropdown.classList.remove('show');
+      // }
+    }
+  }
+
   deleteVideo(videoId) {
     this.remoteService.deleteVideo(videoId, this.userId).subscribe(res => {
       let toast = this.toastCtrl.create({
@@ -68,6 +83,21 @@ export class VideoPage {
     // share(message, subject, file, url)
     this.socialSharing.share(this.video.title, "Arabface", "assets/images/logo.png", this.video.video_url);
   }
+
+  getFriendsList(term = "", id) {
+    console.log(term.charAt(1));
+    if (term.charAt(0) == '@' && term.length > 1) {
+      $('.dropdown-content').show();
+      this.remoteService.friendsListApiCall(this.userId, this.userId, term.substr(1)).subscribe(res => {
+        this.friendsMention = res;
+        console.log(res);
+        // document.getElementById("mention").classList.toggle("show");
+      });
+    }else{
+      $('.dropdown-content').hide();
+    }
+  }
+
   reportVideo() {
     let alert = this.alert.create({
       title: 'Report',

@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
-import { IonicPage, App, NavController, NavParams, ActionSheetController, Platform, ToastController, Loading, AlertController, LoadingController } from 'ionic-angular';
+import { App, NavController, NavParams, ActionSheetController, Platform, ToastController, Loading, AlertController, LoadingController } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { TimeProvider } from './../../providers/time/time';
 import { NotFound_404Page } from '../not-found-404/not-found-404';
-import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Camera } from '@ionic-native/camera';
 import { TabsPage } from '../tabs/tabs';
 import { PhotosPage } from '../photos/photos'
 import { FriendProfilePage } from '../friend-profile/friend-profile'
 import { DisplayPostPage } from '../display-post/display-post'
 import { PostFeatursPage } from '../post-featurs/post-featurs'
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
 import { UploadImagePage } from '../upload-image/upload-image';
@@ -74,8 +73,7 @@ export class ProfilePage {
   videoURL
   text
   emptyFeeds=true;
-  constructor(public photoViewer: PhotoViewer, private app: App, public translate: TranslateService, public time: TimeProvider, private filePath: FilePath, private transfer: FileTransfer, private file: File, public camera: Camera, public navCtrl: NavController, public navParams: NavParams, public alert: AlertController, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider, public toast: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
-    let data = navParams.get('userData');
+  constructor(public photoViewer: PhotoViewer, private app: App, public translate: TranslateService, public time: TimeProvider, private filePath: FilePath, private file: File, public camera: Camera, public navCtrl: NavController, public navParams: NavParams, public alert: AlertController, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider, public toast: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform) {
     console.log()
     this.limit = 4;
     this.offset = 1;
@@ -400,6 +398,8 @@ export class ProfilePage {
         console.log(res);
         // document.getElementById("mention").classList.toggle("show");
       });
+    }else{
+      $('.dropdown-content').hide();
     }
   }
 
@@ -720,7 +720,10 @@ export class ProfilePage {
   //////////////////////////////////////////////
   back() {
     //this.navCtrl.pop();
-    this.app.getRootNav().setRoot(TabsPage);
+    if(this.navCtrl.length() >= 2)
+      this.navCtrl.pop();
+    else
+      this.app.getRootNav().setRoot(TabsPage);
   }
 
 
@@ -797,7 +800,7 @@ export class ProfilePage {
   }
   deleteComment(commentId, feedIndex, commentIndex) {
 
-    let title, reason, ok, cancel, message;
+    let title, ok, cancel, message;
     this.translate.get('delete-comment').subscribe(value => { title = value; })
     this.translate.get('delete-comment-question').subscribe(value => { message = value; })
     this.translate.get('ok').subscribe(value => { ok = value; })

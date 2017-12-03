@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, URLSearchParams } from '@angular/http';
-import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
-import xml2js from 'xml2js';
+import { Platform } from 'ionic-angular';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -9,11 +8,9 @@ import { AlertController, LoadingController } from 'ionic-angular'
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import * as $ from 'jquery'
 declare var firebase;
 let alert1, downloadURL, avatar, name; let signupres; let signupresult;
-let userID = '25'; let cids; let result = []; let friends; let result5 = []; let msgs; let chatid = []; let insideget;
-let friends2; let addchat; let getremote; let remoteid; let result34; let apichat; let firebasemsgs; let apimsgs;
+let userID = '25';
 var config = {
     apiKey: "AIzaSyBECrQse7tXt8QiqiV_TJCxwLYOIwKWIW0",
     authDomain: "arabface-ca807.firebaseapp.com",
@@ -29,16 +26,15 @@ let user;
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
   for more info on providers and Angular DI.
 */
-
-let apiURL = 'http://udsolutions.co.uk/Arabface/arabface/api/89129812/';
-//http://udsolutions.co.uk/Arabface/arabface/
+// /serverURL = 'http://udsolutions.co.uk/Arabface/arabface/api/'
+let apiURL = 'http://192.168.1.252/arabface/api/89129812/';
 
 @Injectable()
 export class RemoteServiceProvider {
   public Id: number;
   deviceLanguage
   response;
-  serverURL = 'http://udsolutions.co.uk/Arabface'
+  serverURL = 'http://192.168.1.252'
   KEY = '89129812'
 
 

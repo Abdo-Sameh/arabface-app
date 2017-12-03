@@ -1,7 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { Push, PushObject, PushOptions } from '@ionic-native/push';
+import { Push } from '@ionic-native/push';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
@@ -39,7 +39,6 @@ import { FriendListPage }  from '../pages/friend-list/friend-list'
 import { FriendRequestsPage }  from '../pages/friend-requests/friend-requests'
 import { GiftsPage }  from '../pages/gifts/gifts'
 import { FriendProfilePage }  from '../pages/friend-profile/friend-profile'
-import { PostPage }  from '../pages/post/post'
 import { TrendingPage }  from '../pages/trending/trending'
 import { CreatePagePage }  from '../pages/create-page/create-page'
 import { CreateGroupPage }  from '../pages/create-group/create-group'
@@ -57,16 +56,16 @@ import { VideoPage } from '../pages/video/video';
 import { AddVideoPage } from '../pages/add-video/add-video';
 import { EditVideoPage } from '../pages/edit-video/edit-video';
 import { InviteFriendPage } from '../pages/invite-friend/invite-friend';
-import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Camera } from '@ionic-native/camera';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { MembersPage } from '../pages/members/members';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpModule, Http } from '@angular/http';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { FileTransfer } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
-import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { Globalization } from '@ionic-native/globalization';
 import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
 import { NotFound_404Page } from '../pages/not-found-404/not-found-404';
@@ -82,6 +81,7 @@ import { EditPostPage } from '../pages/edit-post/edit-post';
 import { ImageUploadingProvider } from '../providers/image-uploading/image-uploading';
 import { FriendProvider } from '../providers/friend/friend';
 import { LongPressModule } from 'ionic-long-press';
+import { EmojiPickerModule } from '@ionic-tools/emoji-picker';
 
 @NgModule({
   declarations: [
@@ -115,7 +115,6 @@ import { LongPressModule } from 'ionic-long-press';
     FindFriendsPage,
     GiftsPage,
     FriendProfilePage,
-    PostPage,
     TrendingPage,
     CreatePagePage,
     CreateGroupPage,
@@ -133,7 +132,7 @@ import { LongPressModule } from 'ionic-long-press';
     YoutubePipe
   ],
   imports: [
-BrowserModule , LongPressModule, IonicModule.forRoot(MyApp), HttpModule, TranslateModule.forRoot({
+BrowserModule , LongPressModule, IonicModule.forRoot(MyApp), HttpModule, EmojiPickerModule.forRoot(), TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: (createTranslateLoader),
@@ -173,7 +172,6 @@ BrowserModule , LongPressModule, IonicModule.forRoot(MyApp), HttpModule, Transla
     FindFriendsPage,
     GiftsPage,
     FriendProfilePage,
-    PostPage,
     PostFeatursPage,
     TrendingPage,
     CreatePagePage,
