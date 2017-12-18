@@ -52,7 +52,7 @@ export class MyApp {
     // translate.setDefaultLang('ar');
 
     this.splashScreen.show();
-    firebase = this.database;
+    // firebase = this.database;
     //this.loadXML('ar')
     this.initializeApp();
     // this.userAvatar ="http://"+this.userAvatar;
@@ -105,39 +105,39 @@ export class MyApp {
         });
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.pushsetup();
+      // this.pushsetup();
     });
   }
 
-  pushsetup() {
-    const options: PushOptions = {
-     android: {},
-     ios: {
-         alert: 'true',
-         badge: true,
-         sound: 'false'
-     },
-     windows: {}
-  };
-
-  const pushObject: PushObject = this.push.init(options);
-
-  pushObject.on('notification').subscribe((notification: any) => {
-    if (notification.additionalData.foreground) {
-      let youralert = this.alertCtrl.create({
-        title: 'New Push notification',
-        message: notification.message
-      });
-      youralert.present();
-    }
-  });
-
-  pushObject.on('registration').subscribe((registration: any) => {
-     //do whatever you want with the registration ID
-  });
-
-  pushObject.on('error').subscribe(error => alert('Error with Push plugin' + error));
-  }
+  // pushsetup() {
+  //   const options: PushOptions = {
+  //    android: {},
+  //    ios: {
+  //        alert: 'true',
+  //        badge: true,
+  //        sound: 'false'
+  //    },
+  //    windows: {}
+  // };
+  //
+  // const pushObject: PushObject = this.push.init(options);
+  //
+  // pushObject.on('notification').subscribe((notification: any) => {
+  //   if (notification.additionalData.foreground) {
+  //     let youralert = this.alertCtrl.create({
+  //       title: 'New Push notification',
+  //       message: notification.message
+  //     });
+  //     youralert.present();
+  //   }
+  // });
+  //
+  // pushObject.on('registration').subscribe((registration: any) => {
+  //    //do whatever you want with the registration ID
+  // });
+  //
+  // pushObject.on('error').subscribe(error => alert('Error with Push plugin' + error));
+  // }
 
   openPage(page) {
     // Reset the content nav to have just this page

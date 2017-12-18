@@ -11,14 +11,14 @@ import 'rxjs/add/operator/map';
 declare var firebase;
 let alert1, downloadURL, avatar, name; let signupres; let signupresult;
 let userID = '25';
-var config = {
-    apiKey: "AIzaSyBECrQse7tXt8QiqiV_TJCxwLYOIwKWIW0",
-    authDomain: "arabface-ca807.firebaseapp.com",
-    databaseURL: "https://arabface-ca807.firebaseio.com",
-    projectId: "arabface-ca807",
-    storageBucket: "",
-    messagingSenderId: "826683338673"
-  };
+// var config = {
+//     apiKey: "AIzaSyBECrQse7tXt8QiqiV_TJCxwLYOIwKWIW0",
+//     authDomain: "arabface-ca807.firebaseapp.com",
+//     databaseURL: "https://arabface-ca807.firebaseio.com",
+//     projectId: "arabface-ca807",
+//     storageBucket: "",
+//     messagingSenderId: "826683338673"
+//   };
 let user;
 /*
   Generated class for the RemoteServiceProvider provider.
@@ -26,15 +26,15 @@ let user;
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
   for more info on providers and Angular DI.
 */
-// /serverURL = 'http://udsolutions.co.uk/Arabface/arabface/api/'
-let apiURL = 'http://192.168.1.252/arabface/api/89129812/';
+// /serverURL = 'http://udsolutions.co.uk/Arabface/api/'
+let apiURL = 'https://arabface.online/api/89129812/';
 
 @Injectable()
 export class RemoteServiceProvider {
   public Id: number;
   deviceLanguage
   response;
-  serverURL = 'http://192.168.1.252'
+  serverURL = 'https://arabface.online'
   KEY = '89129812'
 
 
@@ -43,136 +43,136 @@ export class RemoteServiceProvider {
 
     this.init();
     //getremote = this.remoteid
-    firebase.initializeApp(config)
+    // firebase.initializeApp(config)
     alert1 = this.alertctrl;
   }
-  login = (data) => {
-    let loader = this.loadingctr.create({
-
-      showBackdrop: false
-    });
-    loader.present();
-    const url = this.serverURL + '/arabface/api/' + this.KEY + '/login?' + 'username=' + data.username + '&password=' + data.password;
-    console.log(url)
-
-    var headers = new Headers();
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    this.http.post(url, headers).subscribe(data3 => {
-      this.response = data3.text();
-
-      this.response = JSON.parse(this.response);
-
-
-      if (this.response.status == 1) {
-        localStorage.setItem('userid', this.response.id)
-
-        avatar = this.response.avatar;
-        name = this.response.name;
-        userID = this.response.id;
-        firebase.auth().signInWithEmailAndPassword(data.username, data.password).then(() => {
-
-          loader.dismiss();
-
-        }).catch(function(error) {
-          loader.dismiss();
-
-          // Handle Errors here.
-          var errorCode = error.code;
-
-
-
-          if (errorCode == 'auth/user-not-found') {
-
-
-            var storageRef = firebase.storage().ref();
-
-            // Create a reference to 'mountains.jpg'
-
-
-
-            var getFileBlob = function(url, cb) {
-              var xhr = new XMLHttpRequest();
-              xhr.open('GET', url);
-              xhr.responseType = 'blob';
-              xhr.addEventListener('load', function() {
-                cb(xhr.response);
-              });
-              xhr.send();
-            };
-
-            var blobToFile = function(blob, name) {
-              blob.lastModifiedDate = new Date();
-              blob.name = name;
-              return blob;
-            };
-
-            var getFileObject = function(filePathOrUrl, cb) {
-              getFileBlob(filePathOrUrl, function(blob) {
-                cb(blobToFile(blob, 'test.jpg'));
-              });
-            };
-
-            getFileObject(avatar, function(fileObject) {
-              var uploadTask = storageRef.child('images/test.jpg').put(fileObject);
-
-              uploadTask.on('state_changed', function(snapshot) {
-
-              }, function(error) {
-
-              }, function() {
-                downloadURL = uploadTask.snapshot.downloadURL;
-
-
-                firebase.auth().createUserWithEmailAndPassword(data.username, data.password).then(() => {
-                  loader.dismiss();
-                  var user = firebase.auth().currentUser;
-                  user.updateProfile({
-
-                    displayName: name,
-                    photoURL: downloadURL,
-                  }).then(function() {
-
-                  }).catch(function(error) {
-                    // An error happened.
-                  });
-                }).catch(function(error) {
-                  // Handle Errors here.
-                  var errorCode = error.code;
-                  var errorMessage = error.message;
-                  let alert = alert1.create({
-                    title: 'Error',
-                    subTitle: errorMessage,
-                    buttons: ['OK']
-                  });
-                  alert.present();
-                });
-
-
-
-
-              });
-            });
-
-
-            firebase.database().ref(userID + '/chats').set({ 0: 'undefined' });
-            firebase.database().ref(userID + '/incoming').set({ 0: 'undefined' });
-
-          }
-
-        });
-      } else {
-        loader.dismiss();
-        let alert = alert1.create({
-          title: 'Error',
-          subTitle: 'User Not Found',
-          buttons: ['OK']
-        });
-        alert.present();
-      }
-    })
-
-
-  }
+  // login = (data) => {
+  //   let loader = this.loadingctr.create({
+  //
+  //     showBackdrop: false
+  //   });
+  //   loader.present();
+  //   const url = this.serverURL + '/api/' + this.KEY + '/login?' + 'username=' + data.username + '&password=' + data.password;
+  //   console.log(url)
+  //
+  //   var headers = new Headers();
+  //   headers.append('Content-Type', 'application/x-www-form-urlencoded');
+  //   this.http.post(url, headers).subscribe(data3 => {
+  //     this.response = data3.text();
+  //
+  //     this.response = JSON.parse(this.response);
+  //
+  //
+  //     if (this.response.status == 1) {
+  //       localStorage.setItem('userid', this.response.id)
+  //
+  //       avatar = this.response.avatar;
+  //       name = this.response.name;
+  //       userID = this.response.id;
+  //       firebase.auth().signInWithEmailAndPassword(data.username, data.password).then(() => {
+  //
+  //         loader.dismiss();
+  //
+  //       }).catch(function(error) {
+  //         loader.dismiss();
+  //
+  //         // Handle Errors here.
+  //         var errorCode = error.code;
+  //
+  //
+  //
+  //         if (errorCode == 'auth/user-not-found') {
+  //
+  //
+  //           var storageRef = firebase.storage().ref();
+  //
+  //           // Create a reference to 'mountains.jpg'
+  //
+  //
+  //
+  //           var getFileBlob = function(url, cb) {
+  //             var xhr = new XMLHttpRequest();
+  //             xhr.open('GET', url);
+  //             xhr.responseType = 'blob';
+  //             xhr.addEventListener('load', function() {
+  //               cb(xhr.response);
+  //             });
+  //             xhr.send();
+  //           };
+  //
+  //           var blobToFile = function(blob, name) {
+  //             blob.lastModifiedDate = new Date();
+  //             blob.name = name;
+  //             return blob;
+  //           };
+  //
+  //           var getFileObject = function(filePathOrUrl, cb) {
+  //             getFileBlob(filePathOrUrl, function(blob) {
+  //               cb(blobToFile(blob, 'test.jpg'));
+  //             });
+  //           };
+  //
+  //           getFileObject(avatar, function(fileObject) {
+  //             var uploadTask = storageRef.child('images/test.jpg').put(fileObject);
+  //
+  //             uploadTask.on('state_changed', function(snapshot) {
+  //
+  //             }, function(error) {
+  //
+  //             }, function() {
+  //               downloadURL = uploadTask.snapshot.downloadURL;
+  //
+  //
+  //               firebase.auth().createUserWithEmailAndPassword(data.username, data.password).then(() => {
+  //                 loader.dismiss();
+  //                 var user = firebase.auth().currentUser;
+  //                 user.updateProfile({
+  //
+  //                   displayName: name,
+  //                   photoURL: downloadURL,
+  //                 }).then(function() {
+  //
+  //                 }).catch(function(error) {
+  //                   // An error happened.
+  //                 });
+  //               }).catch(function(error) {
+  //                 // Handle Errors here.
+  //                 var errorCode = error.code;
+  //                 var errorMessage = error.message;
+  //                 let alert = alert1.create({
+  //                   title: 'Error',
+  //                   subTitle: errorMessage,
+  //                   buttons: ['OK']
+  //                 });
+  //                 alert.present();
+  //               });
+  //
+  //
+  //
+  //
+  //             });
+  //           });
+  //
+  //
+  //           firebase.database().ref(userID + '/chats').set({ 0: 'undefined' });
+  //           firebase.database().ref(userID + '/incoming').set({ 0: 'undefined' });
+  //
+  //         }
+  //
+  //       });
+  //     } else {
+  //       loader.dismiss();
+  //       let alert = alert1.create({
+  //         title: 'Error',
+  //         subTitle: 'User Not Found',
+  //         buttons: ['OK']
+  //       });
+  //       alert.present();
+  //     }
+  //   })
+  //
+  //
+  // }
 
 
   set_userid(id) {
@@ -180,159 +180,159 @@ export class RemoteServiceProvider {
     console.log('userid is set to' + userID)
   }
 
-  creat1(email, password, name, data) {
-    let loader = this.loadingctr.create({
-
-      showBackdrop: false
-    });
-    loader.present();
-    let body = new URLSearchParams();
-    body.append('firstname', data.firstname);
-    body.append('lastname', data.lastname);
-    body.append('username', name);
-    body.append('email_address', data.email_address);
-    body.append('password', password);
-    let body1 = body.toString();
-
-
-
-    let url = this.serverURL + '/arabface/api/' + this.KEY + '/signup?' + 'firstname=' + data.firstname + '&lastname=' + data.lastname + '&username=' + name + '&email_address=' + data.email_address + '&password=' + password;
-    let url2 = this.serverURL + '/arabface/api/' + this.KEY + '/signup';
-
-
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    this.http.post(url2, body1, { headers: headers }).subscribe(data => {
-
-      let data1 = data.text();
-      data = JSON.parse(data1);
-      signupresult = data;
-      localStorage.setItem('userid', signupresult.userid)
-
-      if (data.status == 1) {
-
-        done();
-
-      }
-    });
-    function done() {
-
-      firebase.auth().createUserWithEmailAndPassword(data.email_address, password).then(() => {
-        loader.dismiss()
-        user = firebase.auth().currentUser;
-        user.updateProfile({
-          displayName: data.username
-        }).then(function() {
-
-
-
-
-        }).catch(function(error) {
-          // An error happened.
-        });
-      }).catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        let alert = alert1.create({
-          title: 'Error',
-          subTitle: errorMessage,
-          buttons: ['OK']
-        });
-        alert.present();
-      });
-
-
-    }
-
-  }
+  // creat1(email, password, name, data) {
+  //   let loader = this.loadingctr.create({
+  //
+  //     showBackdrop: false
+  //   });
+  //   loader.present();
+  //   let body = new URLSearchParams();
+  //   body.append('firstname', data.firstname);
+  //   body.append('lastname', data.lastname);
+  //   body.append('username', name);
+  //   body.append('email_address', data.email_address);
+  //   body.append('password', password);
+  //   let body1 = body.toString();
+  //
+  //
+  //
+  //   let url = this.serverURL + '/api/' + this.KEY + '/signup?' + 'firstname=' + data.firstname + '&lastname=' + data.lastname + '&username=' + name + '&email_address=' + data.email_address + '&password=' + password;
+  //   let url2 = this.serverURL + '/api/' + this.KEY + '/signup';
+  //
+  //
+  //   let headers = new Headers();
+  //   headers.append('Content-Type', 'application/x-www-form-urlencoded');
+  //   this.http.post(url2, body1, { headers: headers }).subscribe(data => {
+  //
+  //     let data1 = data.text();
+  //     data = JSON.parse(data1);
+  //     signupresult = data;
+  //     localStorage.setItem('userid', signupresult.userid)
+  //
+  //     if (data.status == 1) {
+  //
+  //       done();
+  //
+  //     }
+  //   });
+  //   function done() {
+  //
+  //     firebase.auth().createUserWithEmailAndPassword(data.email_address, password).then(() => {
+  //       loader.dismiss()
+  //       user = firebase.auth().currentUser;
+  //       user.updateProfile({
+  //         displayName: data.username
+  //       }).then(function() {
+  //
+  //
+  //
+  //
+  //       }).catch(function(error) {
+  //         // An error happened.
+  //       });
+  //     }).catch(function(error) {
+  //       // Handle Errors here.
+  //       var errorCode = error.code;
+  //       var errorMessage = error.message;
+  //       let alert = alert1.create({
+  //         title: 'Error',
+  //         subTitle: errorMessage,
+  //         buttons: ['OK']
+  //       });
+  //       alert.present();
+  //     });
+  //
+  //
+  //   }
+  //
+  // }
 
   _handleReaderLoaded(readerEvt) {
     var binaryString = readerEvt.target.result;
 
 
   }
-  public creat2(email, password, name, photo, firstname, lastname) {
-    let url = this.serverURL + '/arabface/api/' + this.KEY + '/signup?' + 'firstname=' + firstname + 'lastname=' + lastname + 'username=' + name + 'email_address=' + email + 'password=' + password;
-
-    var headers = new Headers();
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    this.http.post(url, headers).subscribe(data => {
-
-      signupres = data;
-      userID = signupres.id;
-    });
-    var storageRef = firebase.storage().ref();
-
-    // Create a reference to 'mountains.jpg'
-
-
-
-    var getFileBlob = function(url, cb) {
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', url);
-      xhr.responseType = 'blob';
-      xhr.addEventListener('load', function() {
-        cb(xhr.response);
-      });
-      xhr.send();
-    };
-
-    var blobToFile = function(blob, name) {
-      blob.lastModifiedDate = new Date();
-      blob.name = name;
-      return blob;
-    };
-
-    var getFileObject = function(filePathOrUrl, cb) {
-      getFileBlob(filePathOrUrl, function(blob) {
-        cb(blobToFile(blob, 'test.jpg'));
-      });
-    };
-
-    getFileObject(photo, function(fileObject) {
-      var uploadTask = storageRef.child('images/test.jpg').put(fileObject);
-
-      uploadTask.on('state_changed', function(snapshot) {
-
-      }, function(error) {
-
-      }, function() {
-        var downloadURL = uploadTask.snapshot.downloadURL;
-
-        // handle image here
-      });
-    });
-
-
-    firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
-
-      user = firebase.auth().currentUser;
-      user.updateProfile({
-        displayName: name,
-        photoURL: photo,
-      }).then(function() {
-
-        firebase.database().ref(userID + '/chats').set({ 0: 'undefined' });
-        firebase.database().ref(userID + '/incoming').set({ 0: 'undefined' });
-
-
-      }).catch(function(error) {
-        // An error happened.
-      });
-    }).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      let alert = alert1.create({
-        title: 'Error',
-        subTitle: errorMessage,
-        buttons: ['OK']
-      });
-      alert.present();
-    });
-
-  }
+  // public creat2(email, password, name, photo, firstname, lastname) {
+  //   let url = this.serverURL + '/api/' + this.KEY + '/signup?' + 'firstname=' + firstname + 'lastname=' + lastname + 'username=' + name + 'email_address=' + email + 'password=' + password;
+  //
+  //   var headers = new Headers();
+  //   headers.append('Content-Type', 'application/x-www-form-urlencoded');
+  //   this.http.post(url, headers).subscribe(data => {
+  //
+  //     signupres = data;
+  //     userID = signupres.id;
+  //   });
+  //   var storageRef = firebase.storage().ref();
+  //
+  //   // Create a reference to 'mountains.jpg'
+  //
+  //
+  //
+  //   var getFileBlob = function(url, cb) {
+  //     var xhr = new XMLHttpRequest();
+  //     xhr.open('GET', url);
+  //     xhr.responseType = 'blob';
+  //     xhr.addEventListener('load', function() {
+  //       cb(xhr.response);
+  //     });
+  //     xhr.send();
+  //   };
+  //
+  //   var blobToFile = function(blob, name) {
+  //     blob.lastModifiedDate = new Date();
+  //     blob.name = name;
+  //     return blob;
+  //   };
+  //
+  //   var getFileObject = function(filePathOrUrl, cb) {
+  //     getFileBlob(filePathOrUrl, function(blob) {
+  //       cb(blobToFile(blob, 'test.jpg'));
+  //     });
+  //   };
+  //
+  //   getFileObject(photo, function(fileObject) {
+  //     var uploadTask = storageRef.child('images/test.jpg').put(fileObject);
+  //
+  //     uploadTask.on('state_changed', function(snapshot) {
+  //
+  //     }, function(error) {
+  //
+  //     }, function() {
+  //       var downloadURL = uploadTask.snapshot.downloadURL;
+  //
+  //       // handle image here
+  //     });
+  //   });
+  //
+  //
+  //   firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
+  //
+  //     user = firebase.auth().currentUser;
+  //     user.updateProfile({
+  //       displayName: name,
+  //       photoURL: photo,
+  //     }).then(function() {
+  //
+  //       firebase.database().ref(userID + '/chats').set({ 0: 'undefined' });
+  //       firebase.database().ref(userID + '/incoming').set({ 0: 'undefined' });
+  //
+  //
+  //     }).catch(function(error) {
+  //       // An error happened.
+  //     });
+  //   }).catch(function(error) {
+  //     // Handle Errors here.
+  //     var errorCode = error.code;
+  //     var errorMessage = error.message;
+  //     let alert = alert1.create({
+  //       title: 'Error',
+  //       subTitle: errorMessage,
+  //       buttons: ['OK']
+  //     });
+  //     alert.present();
+  //   });
+  //
+  // }
   user = new Observable(observer => {
     // firebase.auth().onAuthStateChanged(function(user) {
     //
@@ -417,7 +417,7 @@ export class RemoteServiceProvider {
 
   /////////search api////////////////////
   search(term, type, userid) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/search?userid=' + userid + '&type=' + type + '&term=' + term)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/search?userid=' + userid + '&type=' + type + '&term=' + term)
       .map((res: Response) => res.json());
   }
 
@@ -425,30 +425,30 @@ export class RemoteServiceProvider {
 
   ///////// Friends function Start ////////
   friendsListApiCall(the_userid, id, term) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/profile/friends?userid=' + id + '&the_userid=' + the_userid + '&term=' + term)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/profile/friends?userid=' + id + '&the_userid=' + the_userid + '&term=' + term)
 
       .map((res: Response) => res.json());
   }
   ///////// Friends function End ////////
 
   followers(userid) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/profile/getfollowers?userid=' + userid)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/profile/getfollowers?userid=' + userid)
       .map((res: Response) => res.json());
   }
   following(userid) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/profile/getfollowing?userid=' + userid)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/profile/getfollowing?userid=' + userid)
       .map((res: Response) => res.json());
   }
 
   follow(userid, to_userid, type) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/friend/follow?userid=' + userid + "&to_userid=" + to_userid + "&type=" + type)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/friend/follow?userid=' + userid + "&to_userid=" + to_userid + "&type=" + type)
       .map((res: Response) => res.json());
   }
 
   ///////// Friends Request function Start ////////
   friendsRequestListApiCall(id) {
 
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/friend/requests?userid=' + id)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/friend/requests?userid=' + id)
       .map((res: Response) => res.json());
   }
   ///////// Friends Request function End ////////
@@ -458,7 +458,7 @@ export class RemoteServiceProvider {
   ///////// Friends Request function Start ////////
   friendsSuggestionListApiCall(id) {
 
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/friend/suggestions?limit=10&userid=' + id)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/friend/suggestions?limit=10&userid=' + id)
       .map((res: Response) => res.json());
   }
   ///////// Friends Request function End ////////
@@ -466,7 +466,7 @@ export class RemoteServiceProvider {
   ////////// Feeds function Start ///////////
 
   feedsListApiCall(id, type_id, type, limit) {
-    let url = this.serverURL + '/arabface/api/' + this.KEY + '/feeds?type=' + type + '&type_id=' + type_id + '&limit=' + limit + '&userid=' + id;
+    let url = this.serverURL + '/api/' + this.KEY + '/feeds?type=' + type + '&type_id=' + type_id + '&limit=' + limit + '&userid=' + id;
 
     return this.http.get(url).map((res: Response) => res.json());
 
@@ -474,7 +474,7 @@ export class RemoteServiceProvider {
   ////////// Feeds function End             ///////////
 
   savedFeeds(id) {
-    let url = this.serverURL + '/arabface/api/' + this.KEY + '/feeds?type=saved&userid=' + id;
+    let url = this.serverURL + '/api/' + this.KEY + '/feeds?type=saved&userid=' + id;
     console.log(url);
     return this.http.get(url).map((res: Response) => res.json());
   }
@@ -482,7 +482,7 @@ export class RemoteServiceProvider {
   //////////  profile Api function start   ///////////
 
   profileDetailsApiCall(theUserId, userid) {
-    let url = this.serverURL + '/arabface/api/' + this.KEY + '/profile/details?userid=' + userid + '&the_userid=' + theUserId;
+    let url = this.serverURL + '/api/' + this.KEY + '/profile/details?userid=' + userid + '&the_userid=' + theUserId;
 
     return this.http.get(url).map((res: Response) => res.json());
 
@@ -490,7 +490,7 @@ export class RemoteServiceProvider {
 
   //////////  profile api  function End ///////////////
   profilePosts(id) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/feeds?type=timeline&type_id=' + id)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/feeds?type=timeline&type_id=' + id)
 
       .map((res: Response) => res.json());
   }
@@ -498,7 +498,7 @@ export class RemoteServiceProvider {
   //////////  messages api  function End ///////////////
 
   messagesApiCall(id) {
-    let url = this.serverURL + '/arabface/api/' + this.KEY + '/chat/conversations?userid=' + id;
+    let url = this.serverURL + '/api/' + this.KEY + '/chat/conversations?userid=' + id;
 
     return this.http.get(url)
       //.do((res : Response ) => console.log(res.json()))
@@ -524,7 +524,7 @@ export class RemoteServiceProvider {
 
 
     let body = urlSearchParams.toString()
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/like/item', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/like/item', body, { headers: headers })
 
       //do((res : Response ) => console.log(res.json()))
       .map((res: Response) => res.json());
@@ -545,7 +545,7 @@ export class RemoteServiceProvider {
 
 
     let body = urlSearchParams.toString()
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/like/item', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/like/item', body, { headers: headers })
 
       //do((res : Response ) => console.log(res.json()))
       .map((res: Response) => res.json());
@@ -557,7 +557,7 @@ export class RemoteServiceProvider {
   ///////////// chat messages Api call function start  ////////////////////
 
   usersCoversation(cID, userID): any {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/chat/get/messages?cid=' + cID + '&userid=' + userID).
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/chat/get/messages?cid=' + cID + '&userid=' + userID).
 
       do((res: Response) => console.log(res.json()))
       .map((res: Response) => res.json());
@@ -568,7 +568,7 @@ export class RemoteServiceProvider {
 
   sharePost(feedID, userID): any {
     console.log(feedID + userID)
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/feed/action?action=share&feed_id=' + feedID + '&userid=' + userID)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/feed/action?action=share&feed_id=' + feedID + '&userid=' + userID)
 
       .map((res: Response) => res.json());
   }
@@ -576,39 +576,39 @@ export class RemoteServiceProvider {
 
   editPost(text, feedID, userID, privacy): any {
     console.log(feedID + userID)
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/feed/save?text=' + text + '&id=' + feedID + '&userid=' + userID + "&privacy=" + privacy)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/feed/save?text=' + text + '&id=' + feedID + '&userid=' + userID + "&privacy=" + privacy)
 
       .map((res: Response) => res.json());
   }
   unsubscribePost(feedID, userID): any {
     console.log(feedID + userID)
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/feed/action?action=unsubscribe&feed_id=' + feedID + '&userid=' + userID)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/feed/action?action=unsubscribe&feed_id=' + feedID + '&userid=' + userID)
 
       .map((res: Response) => res.json());
   }
   subscribePost(feedID, userID): any {
     console.log(feedID + userID)
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/feed/action?action=subscribe&feed_id=' + feedID + '&userid=' + userID)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/feed/action?action=subscribe&feed_id=' + feedID + '&userid=' + userID)
 
       .map((res: Response) => res.json());
   }
 
   removeComment(commentid, userID): any {
     console.log(commentid + userID)
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/comment/remove?&id=' + commentid + '&userid=' + userID)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/comment/remove?&id=' + commentid + '&userid=' + userID)
 
       .map((res: Response) => res.json());
   }
 
   hidePost(feedID, userID): any {
     console.log(feedID + userID)
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/feed/action?action=hide&feed_id=' + feedID + '&userid=' + userID)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/feed/action?action=hide&feed_id=' + feedID + '&userid=' + userID)
       .map((res: Response) => res.json());
   }
 
   unHidePost(feedID, userID): any {
     console.log(feedID + userID)
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/feed/action?action=unhide&feed_id=' + feedID + '&userid=' + userID)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/feed/action?action=unhide&feed_id=' + feedID + '&userid=' + userID)
       .map((res: Response) => res.json());
   }
 
@@ -616,7 +616,7 @@ export class RemoteServiceProvider {
 
   removePost(feedID, userID): any {
     console.log(feedID + userID)
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/feed/action?action=remove&feed_id=' + feedID + '&userid=' + userID)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/feed/action?action=remove&feed_id=' + feedID + '&userid=' + userID)
 
       .map((res: Response) => res.json());
   }
@@ -624,7 +624,7 @@ export class RemoteServiceProvider {
 
 
   ChatMessagesSend(cID, userID, msg): any {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/chat/send/message?text=' + msg + '&cid=' + cID + '&userid=' + userID).
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/chat/send/message?text=' + msg + '&cid=' + cID + '&userid=' + userID).
 
       do((res: Response) => console.log(res.json()))
       .map((res: Response) => res.json());
@@ -635,7 +635,7 @@ export class RemoteServiceProvider {
   ///////////// user photos Api call function start  ////////////////////
 
   userPhotosAlbumOnProfile(userID: number): any {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/profile/photos?the_userid=' + userID).
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/profile/photos?the_userid=' + userID).
 
       do((res: Response) => console.log(res.json()))
       .map((res: Response) => res.json());
@@ -656,7 +656,7 @@ export class RemoteServiceProvider {
     urlSearchParams.append('avatar', avatar);
     urlSearchParams.append('userid', userid);
     let body = urlSearchParams.toString()
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/profile/change/avatar', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/profile/change/avatar', body, { headers: headers })
 
     //  do((res : Response ) => console.log(res.json()))
     // .map((res : Response ) => res.json());
@@ -715,7 +715,7 @@ export class RemoteServiceProvider {
 
     let body = urlSearchParams.toString()
 
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/feed/add', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/feed/add', body, { headers: headers })
 
       //do((res : Response ) => console.log(res.json()))
       .map((res: Response) => res.json());
@@ -734,7 +734,7 @@ export class RemoteServiceProvider {
 
     let body = urlSearchParams.toString()
 
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/feed/add', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/feed/add', body, { headers: headers })
       //do((res : Response ) => console.log(res.json()))
       .map((res: Response) => res.json());
   }
@@ -751,26 +751,26 @@ export class RemoteServiceProvider {
 
     let body = urlSearchParams.toString()
 
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/feed/add', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/feed/add', body, { headers: headers })
       //do((res : Response ) => console.log(res.json()))
       .map((res: Response) => res.json());
   }
   ////////////////////////////////////////////////
   commentOnFeeds(postOwner, postID, whoCommented, comment, type, entity_type = 'user') {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/comment/add?userid=' + whoCommented + '&entity_id=' + postOwner + '&entity_type=' + entity_type + '&text=' + comment + '&type=' + type + '&type_id=' + postID)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/comment/add?userid=' + whoCommented + '&entity_id=' + postOwner + '&entity_type=' + entity_type + '&text=' + comment + '&type=' + type + '&type_id=' + postID)
       .map((res: Response) => res.json());
   }
 
   //////////// post in feed ///////////////////////
   ReplyOnComment(postOwner, commentID, whoCommented, reply, entity_type = 'user') {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/comment/add?userid=' + whoCommented + '&entity_id=' + postOwner + '&entity_type=' + entity_type + '&text=' + reply + '&type=comment&type_id=' + commentID)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/comment/add?userid=' + whoCommented + '&entity_id=' + postOwner + '&entity_type=' + entity_type + '&text=' + reply + '&type=comment&type_id=' + commentID)
       .map((res: Response) => res.json());
   }
 
   ////////////////////////////////////////////////
 
   getUserData(attr, userid) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/get/user/data?userid=' + userid + '&attr=' + attr)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/get/user/data?userid=' + userid + '&attr=' + attr)
       //do((res : Response ) => console.log(res.json()))
       .map((res: Response) => res.json());
   }
@@ -781,9 +781,9 @@ export class RemoteServiceProvider {
   profilePost(userID, post) {
 
     console.log(userID, post)
-    let url = this.serverURL + '/arabface/api/' + this.KEY + '/feed/add?type=feed&entity_type=user&text=' + post + '&entity_id=' + userID;
+    let url = this.serverURL + '/api/' + this.KEY + '/feed/add?type=feed&entity_type=user&text=' + post + '&entity_id=' + userID;
     console.log(url)
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/feed/add?type=feed&entity_type=user&text=ppppp&entity_id=25')
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/feed/add?type=feed&entity_type=user&text=ppppp&entity_id=25')
 
       .map((res: Response) => res.json());
   }
@@ -792,22 +792,22 @@ export class RemoteServiceProvider {
 
   ////////////// get notifications /////////////////
   getNotifications(userid, limit, page) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/notifications?userid=' + userid + "&limit=" + limit + "&page=" + page)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/notifications?userid=' + userid + "&limit=" + limit + "&page=" + page)
       .map((res: Response) => res.json());
   }
 
   getUnreadNotifications(userid, limit, page) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/notifications/unread?userid=' + userid + "&limit=" + limit + "&page=" + page)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/notifications/unread?userid=' + userid + "&limit=" + limit + "&page=" + page)
       .map((res: Response) => res.json());
   }
 
   deleteNotification(userid, id) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/notification/delete?userid=' + userid + "&id=" + id)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/notification/delete?userid=' + userid + "&id=" + id)
       .map((res: Response) => res.json());
   }
 
   markReadNotification(userid, id, type) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/notification/mark/read?userid=' + userid + "&id=" + id + "&type=" + type)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/notification/mark/read?userid=' + userid + "&id=" + id + "&type=" + type)
       .map((res: Response) => res.json());
   }
 
@@ -815,33 +815,33 @@ export class RemoteServiceProvider {
 
 
   searchUsers(term) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/search/users?term=' + term)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/search/users?term=' + term)
       .map((res: Response) => res.json());
   }
 
   //////////////////// load comments ////////////////////
 
   loadComments(feedid, userid) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/comment/load?type=feed&limit=10&type_id=' + feedid + "&userid=" + userid)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/comment/load?type=feed&limit=10&type_id=' + feedid + "&userid=" + userid)
       .map((res: Response) => res.json());
   }
   getComments(type, type_id, limit, offset, userid) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/comment/load?userid=' + userid + '&limit=' + limit + '&type_id=' + type_id + '&offset=' + offset + '&type=' + type)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/comment/load?userid=' + userid + '&limit=' + limit + '&type_id=' + type_id + '&offset=' + offset + '&type=' + type)
       .map((res: Response) => res.json());
   }
 
   loadReplies(commentID) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/comment/load?type=comment&limit=10&type_id=' + commentID)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/comment/load?type=comment&limit=10&type_id=' + commentID)
       .map((res: Response) => res.json());
   }
 
   loadProfileComments(feedid) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/comment/load?type=feed&limit=5&type_id=' + feedid)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/comment/load?type=feed&limit=5&type_id=' + feedid)
       .map((res: Response) => res.json());
   }
 
   getProfileVisitors(userid, limit) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/get/lastvisitors?userid=' + userid + "&limit=" + limit)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/get/lastvisitors?userid=' + userid + "&limit=" + limit)
       .map((res: Response) => res.json());
   }
 
@@ -850,7 +850,7 @@ export class RemoteServiceProvider {
   //       var settings = {
   //         'async': true,
   //         'crossDomain': true,
-  //         'url': this.serverURL+'/arabface/api/'+this.KEY+'/feed/add?type=feed&entity_type=user&text='+post+'&entity_id='+userID,
+  //         'url': this.serverURL+'/api/'+this.KEY+'/feed/add?type=feed&entity_type=user&text='+post+'&entity_id='+userID,
   //         'method': 'GET',
   //         'headers': {
   //           'x-devtools-emulate-network-conditions-client-id': '964b73d8-9467-4f26-bff0-ddb7029125a0',
@@ -873,14 +873,14 @@ export class RemoteServiceProvider {
 
 
   feedsComment(postOwner, postID, whoCommented, comment) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/comment/add?userid=' + whoCommented + '&entity_id=' + postOwner + '&entity_type=user&text=' + comment + '&type=feed&type_id=' + postID)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/comment/add?userid=' + whoCommented + '&entity_id=' + postOwner + '&entity_type=user&text=' + comment + '&type=feed&type_id=' + postID)
 
       //do((res : Response ) => console.log(res.json()))
       .map((res: Response) => res.json());
   }
 
   editComment(userid, id, text) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/comment/edit?userid=' + userid + '&id=' + id + "&text=" + text)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/comment/edit?userid=' + userid + '&id=' + id + "&text=" + text)
       .map((res: Response) => res.json());
   }
 
@@ -889,7 +889,7 @@ export class RemoteServiceProvider {
   //////////////////// add friend ////////////////////
 
   addFriend(userid, friendID) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/friend/add?userid=' + userid + '&to_userid=' + friendID)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/friend/add?userid=' + userid + '&to_userid=' + friendID)
 
       //do((res : Response ) => console.log(res.json()))
       .map((res: Response) => res.json());
@@ -901,7 +901,7 @@ export class RemoteServiceProvider {
   //////////////////// load comments ////////////////////
 
   ConfirmFriendRequest(userid, friendID) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/friend/confirm?userid=' + userid + '&to_userid=' + friendID)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/friend/confirm?userid=' + userid + '&to_userid=' + friendID)
 
       //do((res : Response ) => console.log(res.json()))
       .map((res: Response) => res.json());
@@ -913,7 +913,7 @@ export class RemoteServiceProvider {
   //////////////////// load comments ////////////////////
 
   deleteFriendRequest(userid, friendID) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/friend/remove?userid=' + userid + '&to_userid=' + friendID)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/friend/remove?userid=' + userid + '&to_userid=' + friendID)
 
       //do((res : Response ) => console.log(res.json()))
       .map((res: Response) => res.json());
@@ -923,13 +923,13 @@ export class RemoteServiceProvider {
 
   /////////////////////////////////////////////////////
   onlineFriends(userid) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/friend/online?userid=' + userid)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/friend/online?userid=' + userid)
       //do((res : Response ) => console.log(res.json()))
       .map((res: Response) => res.json());
 
   }
   deleteAccount(userid, password) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/delete/account?userid=' + userid + "&password=" + password)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/delete/account?userid=' + userid + "&password=" + password)
       .map((res: Response) => res.json());
   }
 
@@ -942,7 +942,7 @@ export class RemoteServiceProvider {
     urlSearchParams.append('userid', userid);
     let body = urlSearchParams.toString()
 
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/save/item', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/save/item', body, { headers: headers })
       .map((res: Response) => res.json());
   }
   unsaveItem(type, typeId, userid) {
@@ -954,7 +954,7 @@ export class RemoteServiceProvider {
     urlSearchParams.append('userid', userid);
     let body = urlSearchParams.toString()
 
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/unsave/item', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/unsave/item', body, { headers: headers })
       .map((res: Response) => res.json());
   }
   isSaved(type, typeId, userid) {
@@ -966,27 +966,27 @@ export class RemoteServiceProvider {
     urlSearchParams.append('userid', userid);
     let body = urlSearchParams.toString()
 
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/saved/item', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/saved/item', body, { headers: headers })
       .map((res: Response) => res.json());
   }
   reportItem(type, link, reason, userId) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/report?type=' + type + '&type=' + type + '&link=' + link + '&reason=' + reason + '&userid=' + userId)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/report?type=' + type + '&type=' + type + '&link=' + link + '&reason=' + reason + '&userid=' + userId)
       .map((res: Response) => res.json());
   }
 
   /////////////// get  pages /////////////////////////
   getPages(type, term, categoryId, userId, page, limit) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/page/browse?type=' + type + '&term=' + term + '&category_id=' + categoryId + '&page=' + page + '&limit=' + limit + '&userid=' + userId)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/page/browse?type=' + type + '&term=' + term + '&category_id=' + categoryId + '&page=' + page + '&limit=' + limit + '&userid=' + userId)
       .map((res: Response) => res.json());
   }
 
   getPageDetails(userid, id) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/page/get/details?userid=' + userid + '&id=' + id)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/page/get/details?userid=' + userid + '&id=' + id)
       .map((res: Response) => res.json());
   }
 
   getPagesCategories() {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/page/get/categories')
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/page/get/categories')
       .map((res: Response) => res.json());
   }
 
@@ -1001,7 +1001,7 @@ export class RemoteServiceProvider {
     urlSearchParams.append('category', category);
     let body = urlSearchParams.toString()
 
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/page/create', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/page/create', body, { headers: headers })
       //do((res : Response ) => console.log(res.json()))
       .map((res: Response) => res.json());
   }
@@ -1017,7 +1017,7 @@ export class RemoteServiceProvider {
     urlSearchParams.append('category', category);
     let body = urlSearchParams.toString()
 
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/page/edit', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/page/edit', body, { headers: headers })
       //do((res : Response ) => console.log(res.json()))
       .map((res: Response) => res.json());
   }
@@ -1031,11 +1031,11 @@ export class RemoteServiceProvider {
     urlSearchParams.append('type_id', pageId);
     let body = urlSearchParams.toString()
     if (type == 'like')
-      return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/like/item', body, { headers: headers })
+      return this.http.post(this.serverURL + '/api/' + this.KEY + '/like/item', body, { headers: headers })
         //do((res : Response ) => console.log(res.json()))
         .map((res: Response) => res.json());
     else
-      return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/dislike/item', body, { headers: headers })
+      return this.http.post(this.serverURL + '/api/' + this.KEY + '/dislike/item', body, { headers: headers })
 
         //do((res : Response ) => console.log(res.json()))
         .map((res: Response) => res.json());
@@ -1049,17 +1049,17 @@ export class RemoteServiceProvider {
     urlSearchParams.append('page_id', pageId);
     urlSearchParams.append('userid', userId);
     let body = urlSearchParams.toString()
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/page/delete', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/page/delete', body, { headers: headers })
       //do((res : Response ) => console.log(res.json()))
       .map((res: Response) => res.json());
   }
   pageLikes(typeId, userId, likeType) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/count/likes?type=page&type_id=' + typeId + '&userid=' + userId + '&like_type=' + likeType)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/count/likes?type=page&type_id=' + typeId + '&userid=' + userId + '&like_type=' + likeType)
       .map((res: Response) => res.json());
   }
 
   getPageRoles(id, userid) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/page/get/roles?userid=' + userid + '&id=' + id)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/page/get/roles?userid=' + userid + '&id=' + id)
       .map((res: Response) => res.json());
   }
   savePageRoles(pageId, roles, userid) {
@@ -1074,26 +1074,26 @@ export class RemoteServiceProvider {
     urlSearchParams.append('userid', userid);
     let body = urlSearchParams.toString();
     console.log(urlSearchParams);
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/page/save/roles', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/page/save/roles', body, { headers: headers })
       .map((res: Response) => res.json());
   }
 
   removePageRole(user, page_id, userid) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/page/remove/role?userid=' + userid + '&user=' + user + '&page_id=' + page_id)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/page/remove/role?userid=' + userid + '&user=' + user + '&page_id=' + page_id)
       .map((res: Response) => res.json());
   }
   inviteFriendTolikepage(userid, page_id, invited_id) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/page/invite/friend?userid=' + userid + '&user=' + user + '&page_id=' + page_id + '&invited_id=' + invited_id)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/page/invite/friend?userid=' + userid + '&user=' + user + '&page_id=' + page_id + '&invited_id=' + invited_id)
       .map((res: Response) => res.json());
   }
   isInvitedPage(page, user, userid) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/page/invited?userid=' + userid + '&page=' + page + '&user=' + user)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/page/invited?userid=' + userid + '&page=' + page + '&user=' + user)
       .map((res: Response) => res.json());
   }
 
 
   getGroups(type, term, filter, userId, page, limit) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/group/browse?type=' + type + '&term=' + term + '&filter=' + filter + '&page=' + page + '&limit=' + limit + '&userid=' + userId)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/group/browse?type=' + type + '&term=' + term + '&filter=' + filter + '&page=' + page + '&limit=' + limit + '&userid=' + userId)
       .map((res: Response) => res.json());
 
   }
@@ -1109,7 +1109,7 @@ export class RemoteServiceProvider {
     urlSearchParams.append('privacy', privacy);
     let body = urlSearchParams.toString()
 
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/group/create', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/group/create', body, { headers: headers })
 
       //do((res : Response ) => console.log(res.json()))
       .map((res: Response) => res.json());
@@ -1127,7 +1127,7 @@ export class RemoteServiceProvider {
     urlSearchParams.append('who_can_add_member', canAddMember);
     let body = urlSearchParams.toString()
 
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/group/edit', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/group/edit', body, { headers: headers })
 
       //do((res : Response ) => console.log(res.json()))
       .map((res: Response) => res.json());
@@ -1139,7 +1139,7 @@ export class RemoteServiceProvider {
     let urlSearchParams = new URLSearchParams();
     urlSearchParams.append('group_id', groupId);
     let body = urlSearchParams.toString()
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/group/delete', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/group/delete', body, { headers: headers })
       //do((res : Response ) => console.log(res.json()))
       .map((res: Response) => res.json());
   }
@@ -1153,53 +1153,53 @@ export class RemoteServiceProvider {
     urlSearchParams.append('group_id', group_id);
     let body = urlSearchParams.toString()
 
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/group/join', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/group/join', body, { headers: headers })
       //do((res : Response ) => console.log(res.json()))
       .map((res: Response) => res.json());
   }
 
 
   groupFeeding(id) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/feeds?type=group&type_id=' + id)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/feeds?type=group&type_id=' + id)
       .map((res: Response) => res.json());
   }
 
   groupMembers(group_id, userid) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/group/members?group_id=' + group_id + '&userid=' + userid)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/group/members?group_id=' + group_id + '&userid=' + userid)
       .map((res: Response) => res.json());
   }
 
   isMember(group_id, id, userid) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/group/member?group_id=' + group_id + '&id=' + id + '&userid=' + userid)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/group/member?group_id=' + group_id + '&id=' + id + '&userid=' + userid)
       .map((res: Response) => res.json());
   }
   addMember(group_id, id, userid) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/group/add/member?group_id=' + group_id + '&user_id=' + id + '&userid=' + userid)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/group/add/member?group_id=' + group_id + '&user_id=' + id + '&userid=' + userid)
       .map((res: Response) => res.json());
   }
 
   groupDetails(group_id, userid){
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/group/get/details?id=' + group_id + '&userid=' + userid)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/group/get/details?id=' + group_id + '&userid=' + userid)
       .map((res: Response) => res.json());
   }
   /////////////////// Events /////////////////////////
 
   getEvents(type, categoryId, term, userId, page, limit) {
     if (type == '') {
-      return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/event/browse?userid=' + userId + '&term=' + term + '&category_id=' + categoryId + '&page=' + page + '&limit=' + limit)
+      return this.http.get(this.serverURL + '/api/' + this.KEY + '/event/browse?userid=' + userId + '&term=' + term + '&category_id=' + categoryId + '&page=' + page + '&limit=' + limit)
         .map((res: Response) => res.json());
     }
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/event/browse?userid=' + userId + '&term=' + term + '&category_id=' + categoryId + '&type=' + type + '&page=' + page + '&limit=' + limit)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/event/browse?userid=' + userId + '&term=' + term + '&category_id=' + categoryId + '&type=' + type + '&page=' + page + '&limit=' + limit)
       .map((res: Response) => res.json());
 
   }
 
   getBirthdays(userid) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/event/birthdays?userid=' + userid)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/event/birthdays?userid=' + userid)
       .map((res: Response) => res.json());
   }
   getEventCategories() {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/event/get/categories')
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/event/get/categories')
       .map((res: Response) => res.json());
   }
 
@@ -1228,7 +1228,7 @@ export class RemoteServiceProvider {
     urlSearchParams.append('userid', userid);
     let body = urlSearchParams.toString()
 
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/event/create', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/event/create', body, { headers: headers })
       .map((res: Response) => res.json());
   }
   editEvent(title, description, category_id, location, address, start_day, start_month, start_year, start_hour, start_minute, start_time_type, privacy, end_day, end_month, end_year, end_hour, end_minute, end_time_type, userid, eventId) {
@@ -1257,7 +1257,7 @@ export class RemoteServiceProvider {
     urlSearchParams.append('event_id', eventId);
     let body = urlSearchParams.toString()
 
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/event/edit', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/event/edit', body, { headers: headers })
       .map((res: Response) => res.json());
   }
 
@@ -1268,7 +1268,7 @@ export class RemoteServiceProvider {
     urlSearchParams.append('event_id', event_id);
     urlSearchParams.append('userid', userid);
     let body = urlSearchParams.toString()
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/event/delete', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/event/delete', body, { headers: headers })
       .map((res: Response) => res.json());
 
   }
@@ -1280,20 +1280,20 @@ export class RemoteServiceProvider {
     urlSearchParams.append('rsvp', rsvp);
     urlSearchParams.append('userid', userid);
     let body = urlSearchParams.toString()
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/event/rsvp', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/event/rsvp', body, { headers: headers })
       .map((res: Response) => res.json());
   }
   inviteFriendToEvent(event_id, invited_id, userid) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/event/invite/friend?userid=' + userid + '&event_id=' + event_id + '&invited_id=' + invited_id)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/event/invite/friend?userid=' + userid + '&event_id=' + event_id + '&invited_id=' + invited_id)
       .map((res: Response) => res.json());
   }
   isInvitedEvent(event_id, user, userid) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/event/invited?userid=' + userid + '&event_id=' + event_id + '&user=' + user)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/event/invited?userid=' + userid + '&event_id=' + event_id + '&user=' + user)
       .map((res: Response) => res.json());
   }
 
   eventDetails(event_id, userid){
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/event/get/details?id=' + event_id + '&userid=' + userid)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/event/get/details?id=' + event_id + '&userid=' + userid)
       .map((res: Response) => res.json());
   }
   ////////////////////////////////////////////////////
@@ -1301,11 +1301,11 @@ export class RemoteServiceProvider {
   /////////////////// Videos ////////////////////////
 
   getVideos(categoryId, term, type, filter, userId, page, limit) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/videos/browse?userid=' + userId + '&term=' + term + '&category_id=' + categoryId + '&type=' + type + '&filter=' + filter + '&page=' + page + '&limit=' + limit)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/videos/browse?userid=' + userId + '&term=' + term + '&category_id=' + categoryId + '&type=' + type + '&filter=' + filter + '&page=' + page + '&limit=' + limit)
       .map((res: Response) => res.json());
   }
   getVideoCategories() {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/videos/get/categories')
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/videos/get/categories')
       .map((res: Response) => res.json());
   }
   addNewVideo(title, description, privacy, link, category, userid) {
@@ -1319,7 +1319,7 @@ export class RemoteServiceProvider {
     urlSearchParams.append('category', category);
     urlSearchParams.append('userid', userid);
     let body = urlSearchParams.toString()
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/video/create', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/video/create', body, { headers: headers })
       .map((res: Response) => res.json());
   }
   deleteVideo(video_id, userid) {
@@ -1329,7 +1329,7 @@ export class RemoteServiceProvider {
     urlSearchParams.append('video_id', video_id);
     urlSearchParams.append('userid', userid);
     let body = urlSearchParams.toString()
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/video/delete', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/video/delete', body, { headers: headers })
       .map((res: Response) => res.json());
   }
   editVideo(title, desc, privacy, category_id, video_id, userid) {
@@ -1343,7 +1343,7 @@ export class RemoteServiceProvider {
     urlSearchParams.append('video_id', video_id);
     urlSearchParams.append('userid', userid);
     let body = urlSearchParams.toString()
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/video/edit', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/video/edit', body, { headers: headers })
       .map((res: Response) => res.json());
   }
 
@@ -1356,16 +1356,16 @@ export class RemoteServiceProvider {
     urlSearchParams.append('type_id', videoId);
     let body = urlSearchParams.toString()
     if (type == 'like')
-      return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/like/item', body, { headers: headers })
+      return this.http.post(this.serverURL + '/api/' + this.KEY + '/like/item', body, { headers: headers })
         //do((res : Response ) => console.log(res.json()))
         .map((res: Response) => res.json());
     else
-      return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/dislike/item', body, { headers: headers })
+      return this.http.post(this.serverURL + '/api/' + this.KEY + '/dislike/item', body, { headers: headers })
         .map((res: Response) => res.json());
   }
 
   videoDetails(video_id, userid){
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/video/get/details?id=' + video_id + '&userid=' + userid)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/video/get/details?id=' + video_id + '&userid=' + userid)
       .map((res: Response) => res.json());
   }
 
@@ -1374,7 +1374,7 @@ export class RemoteServiceProvider {
 
   //////////////////// Settings /////////////////////
   getSettingsNotifications(userid) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/settings/get/notifications?userid=' + userid)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/settings/get/notifications?userid=' + userid)
       .map((res: Response) => res.json());
   }
 
@@ -1392,7 +1392,7 @@ export class RemoteServiceProvider {
     urlSearchParams.append('notify-site-store', site_store);
     urlSearchParams.append('userid', userid);
     let body = urlSearchParams.toString()
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/settings/notifications', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/settings/notifications', body, { headers: headers })
       .map((res: Response) => res.json());
   }
   changePassword(current_password, new_password, userid) {
@@ -1403,7 +1403,7 @@ export class RemoteServiceProvider {
     urlSearchParams.append('new_password', new_password);
     urlSearchParams.append('userid', userid);
     let body = urlSearchParams.toString()
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/settings/password', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/settings/password', body, { headers: headers })
       .map((res: Response) => res.json());
   }
   settingsPrivacy(wcvp, wcpp, wcsb, wcsm, wcsv, en, userid) {
@@ -1418,7 +1418,7 @@ export class RemoteServiceProvider {
     urlSearchParams.append('email-notification', en)
     urlSearchParams.append('userid', userid);
     let body = urlSearchParams.toString()
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/settings/privacy', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/settings/privacy', body, { headers: headers })
       .map((res: Response) => res.json());
   }
   settingsGeneral(first, last, email, username, gender, country, city, state, bio, userid, birth_day, birth_month, birth_year) {
@@ -1440,7 +1440,7 @@ export class RemoteServiceProvider {
     urlSearchParams.append('birth_month', birth_month);
     urlSearchParams.append('birth_year', birth_year);
     let body = urlSearchParams.toString()
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/settings/general', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/settings/general', body, { headers: headers })
       .map((res: Response) => res.json());
   }
 
@@ -1455,7 +1455,7 @@ export class RemoteServiceProvider {
     urlSearchParams.append('message', message);
     urlSearchParams.append('userid', userid);
     let body = urlSearchParams.toString()
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/contact', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/contact', body, { headers: headers })
       .map((res: Response) => res.json());
   }
   /////////////////////////////////////////////////////
@@ -1467,7 +1467,7 @@ export class RemoteServiceProvider {
     let urlSearchParams = new URLSearchParams();
     urlSearchParams.append('userid', userid);
     let body = urlSearchParams.toString()
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/hashtag/get', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/hashtag/get', body, { headers: headers })
       .map((res: Response) => res.json());
   }
   ////////////////////////////////////////////////////////
@@ -1480,7 +1480,7 @@ export class RemoteServiceProvider {
     urlSearchParams.append('id', id);
     urlSearchParams.append('userid', userid);
     let body = urlSearchParams.toString()
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/block/user', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/block/user', body, { headers: headers })
       .map((res: Response) => res.json());
   }
   unblockUser(id, userid) {
@@ -1490,26 +1490,26 @@ export class RemoteServiceProvider {
     urlSearchParams.append('id', id);
     urlSearchParams.append('userid', userid);
     let body = urlSearchParams.toString()
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/unblock/user', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/unblock/user', body, { headers: headers })
       .map((res: Response) => res.json());
   }
   isBlocked(id, userid) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/blocked?id=' + id + '&userid=' + userid)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/blocked?id=' + id + '&userid=' + userid)
       .map((res: Response) => res.json());
   }
   getAllBlocked(userid) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/all/blocked?userid=' + userid)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/all/blocked?userid=' + userid)
       .map((res: Response) => res.json());
   }
   ////////////////////////////////////////////////////
 
   getPhotos(userid, album_id, limit, offset, the_userid) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/photo/album/photos?userid=' + userid + '&album_id=' + album_id + '&limit=' + limit + '&offset=' + offset + '&the_userid=' + the_userid)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/photo/album/photos?userid=' + userid + '&album_id=' + album_id + '&limit=' + limit + '&offset=' + offset + '&the_userid=' + the_userid)
       .map((res: Response) => res.json());
   }
 
   getAlbums(userid, limit, offset, type) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/photo/albums?userid=' + userid + '&limit=' + limit + '&offset=' + offset + '&type=' + type)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/photo/albums?userid=' + userid + '&limit=' + limit + '&offset=' + offset + '&type=' + type)
       .map((res: Response) => res.json());
   }
 
@@ -1522,7 +1522,7 @@ export class RemoteServiceProvider {
     urlSearchParams.append('privacy', privacy);
     urlSearchParams.append('userid', userid);
     let body = urlSearchParams.toString()
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/photo/album/add', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/photo/album/add', body, { headers: headers })
       .map((res: Response) => res.json());
   }
 
@@ -1536,16 +1536,16 @@ export class RemoteServiceProvider {
     urlSearchParams.append('album_id', album_id);
     urlSearchParams.append('userid', userid);
     let body = urlSearchParams.toString()
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/photo/album/edit', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/photo/album/edit', body, { headers: headers })
       .map((res: Response) => res.json());
   }
 
   albumDetails(album_id, userid) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/photo/album/details?userid=' + userid + '&album_id=' + album_id)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/photo/album/details?userid=' + userid + '&album_id=' + album_id)
       .map((res: Response) => res.json());
   }
   albumPhotos(id, limit, offset, userid) {
-    return this.http.get(this.serverURL + '/arabface/api/' + this.KEY + '/photo/album/get/photos?userid=' + userid + '&id=' + id + "&limit=" + limit + "&offset=" + offset)
+    return this.http.get(this.serverURL + '/api/' + this.KEY + '/photo/album/get/photos?userid=' + userid + '&id=' + id + "&limit=" + limit + "&offset=" + offset)
       .map((res: Response) => res.json());
   }
 
@@ -1556,7 +1556,7 @@ export class RemoteServiceProvider {
     urlSearchParams.append('id', id);
     urlSearchParams.append('userid', userid);
     let body = urlSearchParams.toString()
-    return this.http.post(this.serverURL + '/arabface/api/' + this.KEY + '/photo/album/delete', body, { headers: headers })
+    return this.http.post(this.serverURL + '/api/' + this.KEY + '/photo/album/delete', body, { headers: headers })
       .map((res: Response) => res.json());
   }
 }
