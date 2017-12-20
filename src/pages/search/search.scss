@@ -22,4 +22,6 @@ page-search {
   .main_header_title .back_btn {
     text-align: right !important;
   }
+.back_btn {  position: relative;
+    left: -20px; }
 }

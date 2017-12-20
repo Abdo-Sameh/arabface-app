@@ -1417,7 +1417,13 @@ top: -10px;
 	.last-slide .slide-zoom {
 		display: none;
 	}
-
+.back_btn .fa-arrow-left {
+	position: relative;
+	top: -5px;
+}
+.scroll-content {
+	margin-bottom: 20px;
+}
 	/*****************************************************************
 		IOS STYLE
 	*****************************************************************/
@@ -1468,4 +1474,7 @@ top: -10px;
 .toggle-ios .toggle-inner {
 		width: 19px !important;
     height: 19px !important;
+}
+#iphone-frame .statusbar {
+    background-color: #fff;
 }

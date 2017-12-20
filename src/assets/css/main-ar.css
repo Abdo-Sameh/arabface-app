@@ -1468,3 +1468,64 @@ top: -10px;
 .last-slide {
 	display: none;
 }
+.back_btn .fa-arrow-left {
+	position: relative;
+	top: -5px;
+}
+.scroll-content {
+	margin-bottom: 20px;
+}
+	/*****************************************************************
+		IOS STYLE
+	*****************************************************************/
+	.item-ios {
+		background-color: transparent !important;
+	}
+	.list-ios .item-block .item-inner{
+		border-bottom: 0.55px solid #c8c7cc75 !important;
+	}
+	.list-ios > .item-block:first-child
+	 {
+    border-top: 0.55px solid #c8c7cc75 !important;
+}
+.list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block {
+	border: none !important;
+}
+	.menu-inner .header-ios .toolbar-background-ios,
+	.menu-inner .footer-ios .toolbar-background-ios {
+		background: none !important;
+	}
+	.toolbar-title-ios {
+		color: #fff !important;
+	}
+	.ios .header_title {
+		top: 18px !important;
+	}
+	.tabs-ios {
+		top: 62px !important;
+	}
+	.content-ios .scroll-content {
+		margin-top: 40px !important;
+		margin-bottom: 30px !important;
+	}
+	/* .tabs-ios .tabbar {
+    border: none !important;
+    background: #5c0632 !important;
+}
+.tabs-ios .tab-button-icon {
+	color: #fff !important;
+} */
+.tabs-ios .tab-button[aria-selected=true] .tab-button-icon {
+	color: #5c0632 !important;
+}
+.toggle-ios {
+    width: 40px !important;
+    height: 22px !important;
+}
+.toggle-ios .toggle-inner {
+		width: 19px !important;
+    height: 19px !important;
+}
+#iphone-frame .statusbar {
+    background-color: #fff;
+}
