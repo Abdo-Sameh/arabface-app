@@ -1,9 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { Push } from '@ionic-native/push';
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
 import { FriendsPage } from '../pages/friends/friends';
@@ -21,23 +19,17 @@ import { SettingsPrivacyPage } from '../pages/settings-privacy/settings-privacy'
 import { SettingsBlockingPage } from '../pages/settings-blocking/settings-blocking';
 import { SettingsDeletePage } from '../pages/settings-delete/settings-delete';
 import { PhotosPage } from '../pages/photos/photos';
-import { ForumsPage } from '../pages/forums/forums';
 import { SettingsPage } from '../pages/settings/settings';
 import { MenuPage } from '../pages/menu/menu';
 import { TabsPage } from '../pages/tabs/tabs';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { ProfilePage } from '../pages/profile/profile';
-import { ChatPage } from '../pages/chat/chat';
 import { MessagesPage } from '../pages/messages/messages';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { RemoteServiceProvider } from '../providers/remote-service/remote-service';
 import { OnlinePage } from '../pages/online/online'
 import { ContactUsPage } from '../pages/contact-us/contact-us'
-import { FindFriendsPage }  from '../pages/find-friends/find-friends'
-import { FriendListPage }  from '../pages/friend-list/friend-list'
-import { FriendRequestsPage }  from '../pages/friend-requests/friend-requests'
-import { GiftsPage }  from '../pages/gifts/gifts'
 import { FriendProfilePage }  from '../pages/friend-profile/friend-profile'
 import { TrendingPage }  from '../pages/trending/trending'
 import { CreatePagePage }  from '../pages/create-page/create-page'
@@ -50,7 +42,6 @@ import { EditPagePage }  from '../pages/edit-page/edit-page'
 import { CreateEventPage }  from '../pages/create-event/create-event'
 import { EditEventPage }  from '../pages/edit-event/edit-event'
 import { EventPage }  from '../pages/event/event'
-import { PhotoselectionPage }  from '../pages/photoselection/photoselection'
 import { SavedPage } from '../pages/saved/saved';
 import { VideoPage } from '../pages/video/video';
 import { AddVideoPage } from '../pages/add-video/add-video';
@@ -67,7 +58,6 @@ import { FileTransfer } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { Globalization } from '@ionic-native/globalization';
-import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
 import { NotFound_404Page } from '../pages/not-found-404/not-found-404';
 import { LatestVisitorsPage } from '../pages/latest-visitors/latest-visitors';
 import { ViewAlbumPage } from '../pages/view-album/view-album';
@@ -82,11 +72,11 @@ import { ImageUploadingProvider } from '../providers/image-uploading/image-uploa
 import { FriendProvider } from '../providers/friend/friend';
 import { LongPressModule } from 'ionic-long-press';
 import { EmojiPickerModule } from '@ionic-tools/emoji-picker';
+import { ChatPage } from '../pages/chat/chat';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
     TabsPage,
     SignupPage,
     LoginPage,
@@ -95,7 +85,6 @@ import { EmojiPickerModule } from '@ionic-tools/emoji-picker';
     NewsPage,
     NotificationsPage,
     ProfilePage,
-    ChatPage,
     MenuPage,
     SettingsPage,
     PagesPage,
@@ -104,30 +93,24 @@ import { EmojiPickerModule } from '@ionic-tools/emoji-picker';
     PhotosPage,
     OnlinePage,
     VideosPage, AddVideoPage, VideoPage, EditVideoPage,
-    ForumsPage,
     GroupPage,
-    Page,
+    Page, ChatPage,
     SettingsGeneralPage, SettingsNotificationsPage, SettingsPasswordPage,
     SettingsPrivacyPage, SettingsBlockingPage, SettingsDeletePage,
     ContactUsPage,
-    FriendRequestsPage,
-    FriendListPage,
-    FindFriendsPage,
-    GiftsPage,
     FriendProfilePage,
     TrendingPage,
     CreatePagePage,
     CreateGroupPage,
     EditGroupPage,
     EditPagePage,
-    PhotoselectionPage,
     PostFeatursPage,
     DisplayPostPage,
     MembersPage,
     InviteFriendPage, EditPostPage,
     SavedPage, SearchPage,
     CreateAlbumPage, EditAlbumPage, ViewAlbumPage,
-    PhotoselectionPage, CreateEventPage, EditEventPage, EventPage,
+    CreateEventPage, EditEventPage, EventPage,
     NotFound_404Page, LatestVisitorsPage,UploadImagePage,
     YoutubePipe
   ],
@@ -144,7 +127,6 @@ BrowserModule , LongPressModule, IonicModule.forRoot(MyApp), HttpModule, EmojiPi
   entryComponents: [
     MyApp,
     TabsPage,
-    HomePage,
     NotificationsPage,
     LoginPage,
     SignupPage,
@@ -152,7 +134,6 @@ BrowserModule , LongPressModule, IonicModule.forRoot(MyApp), HttpModule, EmojiPi
     MessagesPage,
     NewsPage,
     ProfilePage,
-    ChatPage,
     MenuPage,
     SettingsPage,
     PagesPage,
@@ -161,16 +142,11 @@ BrowserModule , LongPressModule, IonicModule.forRoot(MyApp), HttpModule, EmojiPi
     PhotosPage,
     OnlinePage,
     VideosPage, AddVideoPage, VideoPage, EditVideoPage,
-    ForumsPage,
     GroupPage,
-    Page,
+    Page, ChatPage,
     SettingsGeneralPage, SettingsNotificationsPage, SettingsPasswordPage,
     SettingsPrivacyPage, SettingsBlockingPage, SettingsDeletePage,
     ContactUsPage,
-    FriendRequestsPage,
-    FriendListPage,
-    FindFriendsPage,
-    GiftsPage,
     FriendProfilePage,
     PostFeatursPage,
     TrendingPage,
@@ -183,7 +159,7 @@ BrowserModule , LongPressModule, IonicModule.forRoot(MyApp), HttpModule, EmojiPi
     MembersPage,
     CreateAlbumPage, EditAlbumPage, ViewAlbumPage,
     InviteFriendPage, EditPostPage,
-    PhotoselectionPage, CreateEventPage, EditEventPage, EventPage,
+    CreateEventPage, EditEventPage, EventPage,
     NotFound_404Page, LatestVisitorsPage, UploadImagePage
   ],
   providers: [
@@ -196,8 +172,6 @@ BrowserModule , LongPressModule, IonicModule.forRoot(MyApp), HttpModule, EmojiPi
     Globalization,
     FilePath,
     File,
-    Push,
-    YoutubeVideoPlayer,
     Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RemoteServiceProvider,

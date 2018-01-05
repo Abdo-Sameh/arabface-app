@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, AlertController, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, AlertController, LoadingController } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { TimeProvider } from './../../providers/time/time';
 import { VideosPage } from '../videos/videos';
 import { EditVideoPage } from '../edit-video/edit-video';
 import { SocialSharing } from '@ionic-native/social-sharing';
-import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
 /**
  * Generated class for the VideoPage page.
  *
@@ -30,7 +29,7 @@ export class VideoPage {
     'edited': '',
   }
   friendsMention
-  constructor(public time: TimeProvider, public loadingCtrl: LoadingController, private youtube: YoutubeVideoPlayer, public alert: AlertController, private socialSharing: SocialSharing, public navCtrl: NavController, public navParams: NavParams, public remoteService: RemoteServiceProvider, public toastCtrl: ToastController) {
+  constructor(public time: TimeProvider, public loadingCtrl: LoadingController, public alert: AlertController, private socialSharing: SocialSharing, public navCtrl: NavController, public navParams: NavParams, public remoteService: RemoteServiceProvider, public toastCtrl: ToastController) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.userAvatar = localStorage.getItem('userAvatar').slice(8, -1);
     this.userAvatar = "http://" + this.userAvatar;

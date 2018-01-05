@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController, ActionSheetController, Loading, Platform } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ToastController, AlertController, ActionSheetController, Loading, Platform } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { TimeProvider } from './../../providers/time/time';
 import { InviteFriendPage } from '../invite-friend/invite-friend';
-import { GroupsPage } from '../groups/groups';
 import { EditGroupPage } from '../edit-group/edit-group';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { MembersPage } from '../members/members';
@@ -12,7 +11,6 @@ import { FriendProfilePage } from '../friend-profile/friend-profile';
 import { DisplayPostPage } from '../display-post/display-post';
 import { PostFeatursPage } from '../post-featurs/post-featurs';
 import { TranslateService } from '@ngx-translate/core';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
 import { UploadImagePage } from '../upload-image/upload-image';

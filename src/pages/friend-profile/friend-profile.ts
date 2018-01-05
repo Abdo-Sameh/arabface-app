@@ -1,10 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, IonicPage, App, NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
+import { Nav, App, NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { FriendProvider } from './../../providers/friend/friend';
 import { TimeProvider } from './../../providers/time/time';
 import { ProfilePage } from '../profile/profile'
-import { TabsPage } from '../tabs/tabs';
 import { PhotosPage } from '../photos/photos'
 import { NotFound_404Page } from '../not-found-404/not-found-404';
 import { PostFeatursPage } from '../post-featurs/post-featurs';
@@ -144,7 +143,7 @@ export class FriendProfilePage {
 
   deleteComment(commentId, feedIndex, commentIndex) {
 
-    let title, reason, ok, cancel, message;
+    let title, ok, cancel, message;
     this.translate.get('delete-comment').subscribe(value => { title = value; })
     this.translate.get('delete-comment-question').subscribe(value => { message = value; })
     this.translate.get('ok').subscribe(value => { ok = value; })

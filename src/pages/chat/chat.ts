@@ -16,19 +16,19 @@ import { RemoteServiceProvider} from './../../providers/remote-service/remote-se
 })
 export class ChatPage {
   user = {
-     'message':'' 
+     'message':''
   };
   Id ;
   cid;
   chatMessages
   chatResonse ;
   constructor(public navCtrl: NavController, public navParams: NavParams ,public remoteService : RemoteServiceProvider) {
-    this.Id=localStorage.getItem('userDataID').replace(/[^0-9]/g, "");  
+    this.Id=localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.cid= this.navParams.get("cid")
     console.log(this.cid)
     console.log(this.Id)
     console.log(this.user.message)
-    
+
      this.chatMessages= this.navParams.get("chat");
      console.log(this.chatMessages)
   }
@@ -42,7 +42,7 @@ export class ChatPage {
 
 
     this.remoteService.ChatMessagesSend(this.cid,this.Id,this.user.message).subscribe(res => {this.chatResonse =res});
-    
+
   }
 
   back()

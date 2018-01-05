@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, PopoverController, NavParams, LoadingController, AlertController, ToastController } from 'ionic-angular';
+import { NavController, PopoverController, NavParams, LoadingController, AlertController, ToastController } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { TimeProvider } from './../../providers/time/time';
 import { TranslateService } from '@ngx-translate/core';
@@ -387,7 +387,7 @@ export class DisplayPostPage {
   }
   deleteComment(commentId, feedIndex, commentIndex) {
 
-    let title, reason, ok, cancel, message;
+    let title, ok, cancel, message;
     this.translate.get('delete-comment').subscribe(value => { title = value; })
     this.translate.get('delete-comment-question').subscribe(value => { message = value; })
     this.translate.get('ok').subscribe(value => { ok = value; })

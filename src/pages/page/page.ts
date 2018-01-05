@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController, ActionSheetController, Platform } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ToastController, AlertController, ActionSheetController, Platform } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { TimeProvider } from './../../providers/time/time';
-import { TabsPage } from '../tabs/tabs';
-import { PagesPage } from '../pages/pages';
 import { InviteFriendPage } from '../invite-friend/invite-friend';
 import { EditPagePage } from '../edit-page/edit-page';
 import { SocialSharing } from '@ionic-native/social-sharing';

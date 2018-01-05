@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Loading, ToastController, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, Loading, ToastController, LoadingController } from 'ionic-angular';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { TranslateService } from '@ngx-translate/core';

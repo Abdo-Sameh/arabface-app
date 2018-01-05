@@ -1,12 +1,10 @@
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
-//import { FirebaseProvider } from './../../providers/firebase/firebase2';
 import { SignupPage } from './../signup/signup';
 import { TabsPage } from './../tabs/tabs';
 
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, ToastController, MenuController } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms'
-let firebase;
 // import stylefile from '../assets/main.css' ;
 /**
  * Generated class for the LoginPage page.
