@@ -160,8 +160,12 @@ export class Page {
 
           });
       } else {
+        alert(imagePath);
+        alert(this.filePath.resolveNativePath(imagePath));
         var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
+        alert(currentName);
         var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
+        alert(correctPath);
         this.copyFileToLocalDir(correctPath, currentName, this.createFileName(), type);
 
       }

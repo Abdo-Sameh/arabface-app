@@ -151,11 +151,11 @@ export class UploadImagePage {
     fileTransfer.upload(targetPath, url, options, true).then(data => {
       this.loading.dismissAll()
       let response = JSON.parse(data.response);
-      // alert(response['data_one']);
-      // alert(data.response);
-      // alert(data.bytesSent);
-      // alert(targetPath);
-      // alert(url);
+      alert(response['data_one']);
+      alert(data.response);
+      alert(data.bytesSent);
+      alert(targetPath);
+      alert(url);
       if (response['status'] == 0) {
         this.presentToast('Error while uploading file.');
       } else {

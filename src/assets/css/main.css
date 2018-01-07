@@ -1447,11 +1447,11 @@ top: -10px;
 	.toolbar-title-ios {
 		color: #fff !important;
 	}
-	.ios .header_title {
+	/* .ios .header_title {
 		top: 18px !important;
-	}
+	} */
 	.tabs-ios {
-		top: 62px !important;
+		top: 42px !important;
 	}
 	.content-ios .scroll-content {
 		margin-top: 40px !important;
@@ -1475,6 +1475,7 @@ top: -10px;
 		width: 19px !important;
     height: 19px !important;
 }
+
 #iphone-frame .statusbar {
     background-color: #fff;
 }
