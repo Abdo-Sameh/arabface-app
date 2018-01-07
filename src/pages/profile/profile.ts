@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { App, NavController, NavParams, ActionSheetController, Platform, ToastController, Loading, AlertController, LoadingController } from 'ionic-angular';
+import { App, NavController, NavParams, ActionSheetController, Platform, ToastController, AlertController, LoadingController } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { TimeProvider } from './../../providers/time/time';
 import { NotFound_404Page } from '../not-found-404/not-found-404';
@@ -69,7 +69,6 @@ export class ProfilePage {
   hiddenPost
   feed = { 'feedid': "" }
   lastImage: string = null;
-  loading: Loading;
   videoURL
   text
   emptyFeeds=true;

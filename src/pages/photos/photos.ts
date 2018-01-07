@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { TabsPage } from '../tabs/tabs';
-import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
+import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { CreateAlbumPage } from '../create-album/create-album';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { ViewAlbumPage } from '../view-album/view-album';
@@ -24,7 +23,7 @@ export class PhotosPage {
   limit
   offset
   category
-  constructor(private photoViewer: PhotoViewer, public navCtrl: NavController,public remoteService : RemoteServiceProvider, public navParams: NavParams) {
+  constructor(private photoViewer: PhotoViewer, public navCtrl: NavController, public remoteService: RemoteServiceProvider, public navParams: NavParams) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "")
     this.limit = 10;
     this.offset = 0;
@@ -35,25 +34,25 @@ export class PhotosPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad PhotosPage');
   }
-  viewPhoto(url){
+  viewPhoto(url) {
     this.photoViewer.show(url);
   }
-  getPhotos(category, limit, offset){
+  getPhotos(category, limit, offset) {
     this.category = category;
     var album_id;
-    if(category == '3' || category == '4'){
-      if(category == "3")
+    if (category == '3' || category == '4') {
+      if (category == "3")
         album_id = "all";
-      else if(category == "4")
+      else if (category == "4")
         album_id = "user-all";
       console.log(category, album_id, limit, offset);
       this.remoteService.getPhotos(this.userId, album_id, limit, offset, this.userId).subscribe(res => {
         console.log(res);
-        if(offset == 0){
+        if (offset == 0) {
           this.photos = res;
         }
-        else{
-          for(let x of res){
+        else {
+          for (let x of res) {
             this.photos.push(x);
           }
         }
@@ -61,20 +60,20 @@ export class PhotosPage {
         this.limit = limit;
         this.offset += limit;
       });
-    }else{
+    } else {
       var type;
-      if(category == "1")
+      if (category == "1")
         type = "all";
-      else if(category == "2")
+      else if (category == "2")
         type = "user";
       // console.log(category, album_id, limit, offset);
       this.remoteService.getAlbums(this.userId, limit, offset, type).subscribe(res => {
         console.log(res);
-        if(offset == 0){
+        if (offset == 0) {
           this.albums = res;
         }
-        else{
-          for(let x of res){
+        else {
+          for (let x of res) {
             this.albums.push(x);
           }
         }
@@ -84,17 +83,16 @@ export class PhotosPage {
       });
     }
   }
-  createAlbum(){
+  createAlbum() {
     this.navCtrl.push(CreateAlbumPage);
   }
-  viewAlbum(album){
+  viewAlbum(album) {
     this.navCtrl.push(ViewAlbumPage, {
-      album : album
+      album: album
     })
   }
 
-  back()
-  {
-    this.navCtrl.push(TabsPage);
+  back() {
+    this.navCtrl.pop();
   }
 }

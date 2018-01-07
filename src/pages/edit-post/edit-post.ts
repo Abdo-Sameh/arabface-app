@@ -149,7 +149,7 @@ export class EditPostPage {
       e.preventDefault();
       let userName = $(this).find('a').text()
       let userID = $(this).find('p').text()
-      let userImage = $(this).find('img').attr('src')
+      // let userImage = $(this).find('img').attr('src')
       users
 
       Tagedusers.push(userID)

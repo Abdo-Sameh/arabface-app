@@ -5,10 +5,7 @@ import { MessagesPage } from '../messages/messages';
 import { NotificationsPage } from '../notifications/notifications';
 import { FriendsPage } from '../friends/friends';
 import { Nav, NavController, MenuController } from 'ionic-angular';
-import { LoginPage } from '../login/login';
 import { MenuPage } from '../menu/menu';
-import { ProfilePage } from '../profile/profile';
-import { ContactUsPage } from "../contact-us/contact-us";
 import { SearchPage } from "../search/search";
 
 @Component({

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,LoadingController,ToastController, App, AlertController } from 'ionic-angular';
-import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
-import { TabsPage } from '../tabs/tabs';
+import { NavController, NavParams, LoadingController, ToastController, App, AlertController } from 'ionic-angular';
+import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { FriendProfilePage } from '../friend-profile/friend-profile';
 import { TranslateService } from '@ngx-translate/core';
 /**
@@ -16,16 +15,16 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: 'friends.html',
 })
 export class FriendsPage {
-  friendslist  ;
+  friendslist;
   FriendsRequest;
   FriendsSuggestion;
-  Id :any;
+  Id: any;
   userData;
   friendID;
   friendData;
   show = false
-  constructor(public translate: TranslateService, public alert: AlertController, public app:App, public navCtrl: NavController, public navParams: NavParams ,public loadingCtrl:LoadingController,public toastCtrl :ToastController,public remoteService :RemoteServiceProvider) {
-    this.Id=localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
+  constructor(public translate: TranslateService, public alert: AlertController, public app: App, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public remoteService: RemoteServiceProvider) {
+    this.Id = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.getFriendsRequestList(this.Id)
     this.getFriendsList(this.Id);
     this.getFriendsSuggestionList(this.Id);
@@ -36,33 +35,34 @@ export class FriendsPage {
     console.log('ionViewDidLoad FriendsPage');
   }
 
-  getFriendsList(Id, term="") {
-    this.remoteService.friendsListApiCall(Id, Id, term).subscribe(res =>{this.friendslist=res ;console.log(res)});
+  getFriendsList(Id, term = "") {
+    this.remoteService.friendsListApiCall(Id, Id, term).subscribe(res => { this.friendslist = res; console.log(res) });
   }
 
   getFriendsRequestList(Id) {
-    this.remoteService.friendsRequestListApiCall(Id).subscribe(res =>{this.FriendsRequest=res ;console.log(res)});
+    this.remoteService.friendsRequestListApiCall(Id).subscribe(res => { this.FriendsRequest = res; console.log(res) });
   }
 
-  getFriendsSuggestionList(Id)
-  { let loading = this.loadingCtrl.create({
-    content: "",
-    spinner: "bubbles",
-  });
-  loading.present()
-    this.remoteService.friendsSuggestionListApiCall(Id).subscribe(res =>{ loading.dismiss();this.FriendsSuggestion=res ;console.log(res)});
+  getFriendsSuggestionList(Id) {
+    let loading = this.loadingCtrl.create({
+      content: "",
+      spinner: "bubbles",
+    });
+    loading.present()
+    this.remoteService.friendsSuggestionListApiCall(Id).subscribe(res => { loading.dismiss(); this.FriendsSuggestion = res; console.log(res) });
   }
 
-  GoToProfile(id,Id) {
-      this.remoteService.profileDetailsApiCall(id, Id).subscribe(res =>{this.userData = res ; res.id = id;      this.app.getRootNav().push(FriendProfilePage,{"userData" : res})
+  GoToProfile(id, Id) {
+    this.remoteService.profileDetailsApiCall(id, Id).subscribe(res => {
+    this.userData = res; res.id = id; this.app.getRootNav().push(FriendProfilePage, { "userData": res })
     });
 
   }
-  addfriend(friendId,index,userid=this.Id) {
+  addfriend(friendId, index, userid = this.Id) {
 
-    this.remoteService.addFriend(userid,friendId).subscribe(res => {
+    this.remoteService.addFriend(userid, friendId).subscribe(res => {
       console.log(res)
-      if(res.status == 1) {
+      if (res.status == 1) {
         this.FriendsSuggestion[index].friend_status = 1;
       }
       //  let toast = this.toastCtrl.create({
@@ -73,14 +73,12 @@ export class FriendsPage {
     })
   }
 
-  confirmFriendrequest(friendId,index,userid=this.Id)
-  {
+  confirmFriendrequest(friendId, index, userid = this.Id) {
     let added;
     this.translate.get('added').subscribe(value => { added = value; })
-    this.remoteService.ConfirmFriendRequest(userid,friendId).subscribe(res => {
-      if(res.status == 1)
-      {
-        this.FriendsRequest.splice(index,1)
+    this.remoteService.ConfirmFriendRequest(userid, friendId).subscribe(res => {
+      if (res.status == 1) {
+        this.FriendsRequest.splice(index, 1)
       };
       let toast = this.toastCtrl.create({
         message: added,
@@ -90,7 +88,7 @@ export class FriendsPage {
     })
   }
 
-  DeleteFriendrequest(friendId,index,userid=this.Id) {
+  DeleteFriendrequest(friendId, index, userid = this.Id) {
 
     let title, message, yes, no, result;
     this.translate.get('friend-request').subscribe(value => { title = value; })
@@ -106,19 +104,18 @@ export class FriendsPage {
         {
           text: yes,
           handler: data => {
-            this.remoteService.deleteFriendRequest(friendId,userid).subscribe(res => {
-              if(res.status == 1)
-              {
-                this.FriendsRequest.splice(index,1)
+            this.remoteService.deleteFriendRequest(friendId, userid).subscribe(res => {
+              if (res.status == 1) {
+                this.FriendsRequest.splice(index, 1)
                 let toast = this.toastCtrl.create({
                   message: result,
                   duration: 2000
                 });
                 toast.present();
               }
-          })
-        }
-      },
+            })
+          }
+        },
         {
           text: no,
           role: 'cancel',
@@ -145,14 +142,14 @@ export class FriendsPage {
           text: yes,
           handler: data => {
             this.remoteService.deleteFriendRequest(id, theUserId).subscribe(res => {
-              if(res.status == 1) {
-                  this.FriendsSuggestion[index].friend_status = 0;
-                  this.FriendsRequest.splice(index,1)
-                  let toast = this.toastCtrl.create({
-                    message: result,
-                    duration: 2000
-                  });
-                  toast.present();
+              if (res.status == 1) {
+                this.FriendsSuggestion[index].friend_status = 0;
+                this.FriendsRequest.splice(index, 1)
+                let toast = this.toastCtrl.create({
+                  message: result,
+                  duration: 2000
+                });
+                toast.present();
               }
             })
           }
@@ -168,8 +165,7 @@ export class FriendsPage {
     alert.present();
 
   }
-  back()
-  {
-    this.navCtrl.push(TabsPage);
+  back() {
+    this.navCtrl.pop();
   }
 }

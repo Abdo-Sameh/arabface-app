@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
-import { TabsPage } from '../tabs/tabs';
 /**
  * Generated class for the TrendingPage page.
  *
@@ -31,7 +30,7 @@ export class TrendingPage {
   }
 
   back() {
-    this.navCtrl.push(TabsPage);
+    this.navCtrl.pop();
   }
 
 }

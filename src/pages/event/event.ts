@@ -1,17 +1,14 @@
 import { Component } from '@angular/core';
-import { NavController, PopoverController, ToastController, NavParams, LoadingController, AlertController, ActionSheetController, Loading, Platform } from 'ionic-angular';
+import { NavController, ToastController, NavParams, LoadingController, AlertController, ActionSheetController, Platform } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { TimeProvider } from './../../providers/time/time';
 import { EditEventPage } from '../edit-event/edit-event';
-import { EventsPage } from '../events/events';
 import { InviteFriendPage } from '../invite-friend/invite-friend';
 import { PostFeatursPage } from '../post-featurs/post-featurs'
 import { FriendProfilePage } from '../friend-profile/friend-profile'
 import { DisplayPostPage } from '../display-post/display-post'
-import { TabsPage } from '../tabs/tabs';
 import { ProfilePage } from '../profile/profile';
 import { SocialSharing } from '@ionic-native/social-sharing';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
 import { UploadImagePage } from '../upload-image/upload-image';
@@ -55,7 +52,7 @@ export class EventPage {
   feed = { 'feedid': "" }
   lastImage: string = null;
   emptyFeeds = true;
-  constructor(public time: TimeProvider, public translate: TranslateService, public file: File, public filePath: FilePath, public platform: Platform, public camera: Camera, public actionSheetCtrl: ActionSheetController, private socialSharing: SocialSharing, public navCtrl: NavController, public popOver: PopoverController, public toast: ToastController, public navParams: NavParams, public alert: AlertController, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider) {
+  constructor(public time: TimeProvider, public translate: TranslateService, public file: File, public filePath: FilePath, public platform: Platform, public camera: Camera, public actionSheetCtrl: ActionSheetController, private socialSharing: SocialSharing, public navCtrl: NavController, public toast: ToastController, public navParams: NavParams, public alert: AlertController, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.userAvatar = localStorage.getItem('userAvatar');
 
@@ -612,7 +609,7 @@ export class EventPage {
   }
 
   deleteComment(commentId, feedIndex, commentIndex) {
-    let title, reason, ok, cancel, message;
+    let title, ok, cancel, message;
     this.translate.get('delete-comment').subscribe(value => { title = value; })
     this.translate.get('delete-comment-question').subscribe(value => { message = value; })
     this.translate.get('ok').subscribe(value => { ok = value; })

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
-import {TabsPage} from '../tabs/tabs';
 
 /**
  * Generated class for the OnlinePage page.
@@ -17,7 +16,7 @@ import {TabsPage} from '../tabs/tabs';
 export class OnlinePage {
   public userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
   online
-  constructor(public navCtrl: NavController, public navParams: NavParams, public remoteService:RemoteServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public remoteService: RemoteServiceProvider) {
     this.getOnlineFriends(this.userId)
   }
 
@@ -25,15 +24,13 @@ export class OnlinePage {
     console.log('ionViewDidLoad OnlinePage');
   }
 
-  getOnlineFriends(userID=this.userId)
-  {
-    this.remoteService.onlineFriends(userID).subscribe( res => {this.online=res;console.log(this.online)});
+  getOnlineFriends(userID = this.userId) {
+    this.remoteService.onlineFriends(userID).subscribe(res => { this.online = res; console.log(this.online) });
 
   }
 
-  back()
-  {
-        this.navCtrl.push(TabsPage);
+  back() {
+    this.navCtrl.pop();
   }
 
 }

@@ -387,7 +387,7 @@ export class DisplayPostPage {
   }
   deleteComment(commentId, feedIndex, commentIndex) {
 
-    let title, reason, ok, cancel, message;
+    let title, ok, cancel, message;
     this.translate.get('delete-comment').subscribe(value => { title = value; })
     this.translate.get('delete-comment-question').subscribe(value => { message = value; })
     this.translate.get('ok').subscribe(value => { ok = value; })

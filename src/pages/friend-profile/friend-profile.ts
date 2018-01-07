@@ -4,7 +4,6 @@ import { RemoteServiceProvider } from './../../providers/remote-service/remote-s
 import { FriendProvider } from './../../providers/friend/friend';
 import { TimeProvider } from './../../providers/time/time';
 import { ProfilePage } from '../profile/profile'
-import { TabsPage } from '../tabs/tabs';
 import { PhotosPage } from '../photos/photos'
 import { NotFound_404Page } from '../not-found-404/not-found-404';
 import { PostFeatursPage } from '../post-featurs/post-featurs';

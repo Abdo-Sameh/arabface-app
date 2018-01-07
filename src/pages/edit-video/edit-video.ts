@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
-import { VideosPage } from '../videos/videos';
 
 
 /**

@@ -5,7 +5,7 @@ import { TimeProvider } from './../../providers/time/time';
 import { VideosPage } from '../videos/videos';
 import { EditVideoPage } from '../edit-video/edit-video';
 import { SocialSharing } from '@ionic-native/social-sharing';
-import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
+
 /**
  * Generated class for the VideoPage page.
  *
@@ -30,7 +30,7 @@ export class VideoPage {
     'edited': '',
   }
   friendsMention
-  constructor(public time: TimeProvider, public loadingCtrl: LoadingController, private youtube: YoutubeVideoPlayer, public alert: AlertController, private socialSharing: SocialSharing, public navCtrl: NavController, public navParams: NavParams, public remoteService: RemoteServiceProvider, public toastCtrl: ToastController) {
+  constructor(public time: TimeProvider, public loadingCtrl: LoadingController, public alert: AlertController, private socialSharing: SocialSharing, public navCtrl: NavController, public navParams: NavParams, public remoteService: RemoteServiceProvider, public toastCtrl: ToastController) {
     this.userId = localStorage.getItem('userDataID').replace(/[^0-9]/g, "");
     this.userAvatar = localStorage.getItem('userAvatar').slice(8, -1);
     this.userAvatar = "http://" + this.userAvatar;

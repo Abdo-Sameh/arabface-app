@@ -2,7 +2,6 @@ import { RemoteServiceProvider } from './../../providers/remote-service/remote-s
 //import { FirebaseProvider } from './../../providers/firebase/firebase2';
 import { SignupPage } from './../signup/signup';
 import { TabsPage } from './../tabs/tabs';
-
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, ToastController, MenuController } from 'ionic-angular';
 // import stylefile from '../assets/main.css' ;

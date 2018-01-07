@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
-import { TabsPage } from '../tabs/tabs';
 import { VideoPage } from '../video/video';
 import { AddVideoPage } from '../add-video/add-video';
 
@@ -109,7 +108,7 @@ export class VideosPage {
     this.navCtrl.push(AddVideoPage);
   }
   back() {
-    this.navCtrl.push(TabsPage);
+    this.navCtrl.pop();
   }
 
 }
