@@ -22,12 +22,8 @@ import { VideosPage } from '../pages/videos/videos';
 import { TrendingPage } from '../pages/trending/trending';
 import { ContactUsPage } from "../pages/contact-us/contact-us";
 import { Globalization } from '@ionic-native/globalization';
-import { Push, PushObject, PushOptions } from '@ionic-native/push';
 
 //import { TabsPage } from '../pages/tabs/tabs';
-
-import xml2js from 'xml2js';
-let firebase;
 
 @Component({
   templateUrl: 'app.html'
@@ -46,7 +42,7 @@ export class MyApp {
   pages: Array<{ title: string, component: any, icon: string }>;
 
 
-  constructor( @Inject(DOCUMENT) private document, public alertCtrl: AlertController, public push: Push, public globalization: Globalization, public launchNavigator: LaunchNavigator, public translate: TranslateService, public database: RemoteServiceProvider, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public http: Http) {
+  constructor( @Inject(DOCUMENT) private document, public alertCtrl: AlertController, public globalization: Globalization, public launchNavigator: LaunchNavigator, public translate: TranslateService, public database: RemoteServiceProvider, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public http: Http) {
     // translate.setDefaultLang('ar');
 
     this.splashScreen.show();

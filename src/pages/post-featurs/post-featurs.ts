@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, AlertController, Platform, ActionSheetController, ToastController, Loading } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
-import { ImageUploadingProvider } from './../../providers/image-uploading/image-uploading';
 import { TranslateService } from '@ngx-translate/core';
 import { Camera } from '@ionic-native/camera';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
@@ -36,7 +35,7 @@ export class PostFeatursPage {
   imagePath
   lastImage: string = null;
   loading: Loading;
-  constructor(public toast: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform, private filePath: FilePath, private transfer: FileTransfer, private file: File, public camera: Camera, public imageUploading: ImageUploadingProvider, public translate: TranslateService, public navCtrl: NavController, public navParams: NavParams, public alert: AlertController, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider) {
+  constructor(public toast: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform, private filePath: FilePath, private transfer: FileTransfer, private file: File, public camera: Camera, public translate: TranslateService, public navCtrl: NavController, public navParams: NavParams, public alert: AlertController, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider) {
     this.type = navParams.get('type');
     this.typeId = navParams.get('type_id');
     this.to_user_id = navParams.get('to_user_id');
@@ -217,7 +216,7 @@ export class PostFeatursPage {
   postFeed(userID = this.userId, postText = this.post) {
 
     let privacy = $('.privacy').attr('id')
-    let id = $('.postBody').attr('id') 
+    let id = $('.postBody').attr('id')
 
     let loading = this.loadingCtrl.create({
       content: "Posting",

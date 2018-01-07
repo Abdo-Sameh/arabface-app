@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, App, NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
-import { FriendProvider } from './../../providers/friend/friend';
 import { TimeProvider } from './../../providers/time/time';
 import { ProfilePage } from '../profile/profile'
 import { PhotosPage } from '../photos/photos'
@@ -56,7 +55,7 @@ export class FriendProfilePage {
   text
   postToDisplay
   friendsMention
-  constructor(public friend: FriendProvider, public photoViewer: PhotoViewer, public translate: TranslateService, public app: App, public time: TimeProvider, public alert: AlertController, public navCtrl: NavController, public toastCtrl: ToastController, public navParams: NavParams, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider) {
+  constructor(public photoViewer: PhotoViewer, public translate: TranslateService, public app: App, public time: TimeProvider, public alert: AlertController, public navCtrl: NavController, public toastCtrl: ToastController, public navParams: NavParams, public loadingCtrl: LoadingController, public remoteService: RemoteServiceProvider) {
     let data = navParams.get('userData');
     this.userAvatar =  localStorage.getItem('userAvatar');
     this.blocked = navParams.get('blocked');

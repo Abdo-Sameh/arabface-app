@@ -71,8 +71,6 @@ import { UploadImagePage } from '../pages/upload-image/upload-image';
 import { SearchPage } from '../pages/search/search';
 import { TimeProvider } from '../providers/time/time';
 import { EditPostPage } from '../pages/edit-post/edit-post';
-import { ImageUploadingProvider } from '../providers/image-uploading/image-uploading';
-import { FriendProvider } from '../providers/friend/friend';
 import { LongPressModule } from 'ionic-long-press';
 import { EmojiPickerModule } from '@ionic-tools/emoji-picker';
 
@@ -182,8 +180,6 @@ BrowserModule , LongPressModule, IonicModule.forRoot(MyApp), HttpModule, EmojiPi
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RemoteServiceProvider,
     TimeProvider,
-    ImageUploadingProvider,
-    FriendProvider
   ]
 })
 export class AppModule {}
