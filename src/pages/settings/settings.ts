@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
-import { TabsPage } from '../tabs/tabs';
 import { SettingsGeneralPage } from '../settings-general/settings-general';
 import { SettingsNotificationsPage } from '../settings-notifications/settings-notifications';
 import { SettingsPasswordPage } from '../settings-password/settings-password';
@@ -69,7 +68,7 @@ export class SettingsPage {
     this.navCtrl.push(SettingsDeletePage);
   }
   back() {
-    this.navCtrl.push(TabsPage);
+    this.navCtrl.pop();
   }
 
 }

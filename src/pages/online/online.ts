@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import {TabsPage} from '../tabs/tabs';
 
@@ -28,12 +28,12 @@ export class OnlinePage {
   getOnlineFriends(userID=this.userId)
   {
     this.remoteService.onlineFriends(userID).subscribe( res => {this.online=res;console.log(this.online)});
-  
+
   }
 
   back()
   {
         this.navCtrl.push(TabsPage);
   }
-  
+
 }

@@ -19,10 +19,8 @@ import { ProfilePage } from '../pages/profile/profile';
 import { GroupsPage } from '../pages/groups/groups';
 import { EventsPage } from '../pages/events/events';
 import { VideosPage } from '../pages/videos/videos';
-import { ForumsPage } from '../pages/forums/forums';
 import { TrendingPage } from '../pages/trending/trending';
 import { ContactUsPage } from "../pages/contact-us/contact-us";
-import { GiftsPage } from "../pages/gifts/gifts";
 import { Globalization } from '@ionic-native/globalization';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
 
@@ -64,11 +62,9 @@ export class MyApp {
       { title: 'videos', component: VideosPage, icon: 'fa fa-video-camera' },
       { title: 'photos', component: PhotosPage, icon: 'fa fa-camera' },
       { title: 'pages', component: PagesPage, icon: 'fa fa-file' },
-      { title: 'forums', component: ForumsPage, icon: 'fa fa-commenting' },
       { title: 'groups', component: GroupsPage, icon: 'fa fa-users' },
       { title: 'events', component: EventsPage, icon: 'fa fa-calendar' },
       { title: 'contact-us', component: ContactUsPage, icon: 'fa fa-envelope' },
-      { title: 'gift-shop', component: GiftsPage, icon: 'fa fa-shopping-bag' },
       { title: 'saved', component: SavedPage, icon: 'fa fa-bookmark' },
       { title: 'discover', component: TrendingPage, icon: 'fa fa-hashtag' },
       { title: 'settings', component: SettingsPage, icon: 'fa fa-cog' },
@@ -84,25 +80,25 @@ export class MyApp {
   initializeApp() {
     this.platform.ready().then(() => {
       //running from browser
-      this.translate.setDefaultLang("ar");
-      this.platform.setDir('rtl', true);
-      this.document.getElementById('appstyle').setAttribute('href', 'assets/css/main-ar.css');
+      // this.translate.setDefaultLang("ar");
+      // this.platform.setDir('rtl', true);
+      // this.document.getElementById('appstyle').setAttribute('href', 'assets/css/main-ar.css');
       // this.deviceLanguage = "ar";
       // this.translate.getDefaultLang()
       //running from app
 
-      // this.globalization.getPreferredLanguage()
-      //   .then(res => {
-      //     this.translate.use((res.value).split("-")[0]);
-      //     this.translate.setDefaultLang((res.value).split("-")[0]);
-      //     if (this.translate.getDefaultLang() == "ar") {
-      //       this.platform.setDir('rtl', true);
-      //       this.document.getElementById('appstyle').setAttribute('href', 'assets/css/main-ar.css');
-      //     } else {
-      //       this.platform.setDir('ltr', true);
-      //       this.document.getElementById('appstyle').setAttribute('href', 'assets/css/main.css');
-      //     }
-      //   });
+      this.globalization.getPreferredLanguage()
+        .then(res => {
+          this.translate.use((res.value).split("-")[0]);
+          this.translate.setDefaultLang((res.value).split("-")[0]);
+          if (this.translate.getDefaultLang() == "ar") {
+            this.platform.setDir('rtl', true);
+            this.document.getElementById('appstyle').setAttribute('href', 'assets/css/main-ar.css');
+          } else {
+            this.platform.setDir('ltr', true);
+            this.document.getElementById('appstyle').setAttribute('href', 'assets/css/main.css');
+          }
+        });
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       // this.pushsetup();

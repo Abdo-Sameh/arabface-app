@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
-import { TabsPage } from '../tabs/tabs';
-import { SettingsPage } from '../settings/settings';
 import { LoginPage } from '../login/login';
 
 /**

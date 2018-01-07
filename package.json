@@ -1,5 +1,5 @@
 {
-    "name": "Arabface Application",
+    "name": "Arabface",
     "version": "1.0.0",
     "author": "Ionic Framework",
     "homepage": "http://ionicframework.com/",
@@ -44,7 +44,6 @@
         "angular-cache": "^4.6.0",
         "cloudinary-core": "^2.3.0",
         "com-sarriaroman-photoviewer": "^1.1.10",
-        "com.synconset.imagepicker": "~2.1.8",
         "cordova-android": "^6.2.3",
         "cordova-plugin-actionsheet": "^2.3.3",
         "cordova-plugin-camera": "^2.4.1",
@@ -63,7 +62,6 @@
         "cordova-plugin-video-player": "git+https://github.com/moust/cordova-plugin-videoplayer.git",
         "cordova-plugin-whitelist": "^1.3.1",
         "cordova-plugin-x-socialsharing": "^5.2.0",
-        "cordova-plugin-youtube-video-player": "^1.0.6",
         "es6-promise-plugin": "^4.1.0",
         "ionic-angular": "3.6.1",
         "ionic-long-press": "^1.2.0",
@@ -90,9 +88,6 @@
             "cordova-plugin-statusbar": {},
             "cordova-plugin-whitelist": {},
             "ionic-plugin-keyboard": {},
-            "com.synconset.imagepicker": {
-                "PHOTO_LIBRARY_USAGE_DESCRIPTION": "your usage message"
-            },
             "cordova-plugin-photo-library": {
                 "PHOTO_LIBRARY_USAGE_DESCRIPTION": "To choose photos"
             },
@@ -102,7 +97,6 @@
             "cordova-plugin-camera": {},
             "cordova-plugin-compat": {},
             "com-sarriaroman-photoviewer": {},
-            "cordova-plugin-youtube-video-player": {},
             "uk.co.workingedge.phonegap.plugin.launchnavigator": {},
             "cordova-plugin-globalization": {},
             "cordova-plugin-filepath": {},

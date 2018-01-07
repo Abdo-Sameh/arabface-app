@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, PopoverController, ToastController, NavParams, LoadingController, AlertController, ActionSheetController, Loading, Platform } from 'ionic-angular';
+import { NavController, PopoverController, ToastController, NavParams, LoadingController, AlertController, ActionSheetController, Loading, Platform } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { TimeProvider } from './../../providers/time/time';
 import { EditEventPage } from '../edit-event/edit-event';

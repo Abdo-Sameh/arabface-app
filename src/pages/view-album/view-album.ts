@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, Loading, LoadingController, ActionSheetController, AlertController, Platform } from 'ionic-angular';
+import { NavController, NavParams, ToastController, Loading, LoadingController, ActionSheetController, AlertController, Platform } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { EditAlbumPage } from '../edit-album/edit-album';
 import { PhotoViewer } from '@ionic-native/photo-viewer';

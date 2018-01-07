@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController, ActionSheetController, Loading, Platform } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ToastController, AlertController, ActionSheetController, Loading, Platform } from 'ionic-angular';
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { TimeProvider } from './../../providers/time/time';
 import { InviteFriendPage } from '../invite-friend/invite-friend';

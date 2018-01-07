@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController} from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ToastController, AlertController} from 'ionic-angular';
 import { RemoteServiceProvider} from './../../providers/remote-service/remote-service';
 import { GroupPage } from '../group/group';
 /**

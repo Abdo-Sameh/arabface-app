@@ -8,8 +8,7 @@ import { AlertController, LoadingController } from 'ionic-angular'
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-declare var firebase;
-let alert1, downloadURL, avatar, name; let signupres; let signupresult;
+let alert1;
 let userID = '25';
 // var config = {
 //     apiKey: "AIzaSyBECrQse7tXt8QiqiV_TJCxwLYOIwKWIW0",
@@ -247,11 +246,7 @@ export class RemoteServiceProvider {
   //
   // }
 
-  _handleReaderLoaded(readerEvt) {
-    var binaryString = readerEvt.target.result;
 
-
-  }
   // public creat2(email, password, name, photo, firstname, lastname) {
   //   let url = this.serverURL + '/api/' + this.KEY + '/signup?' + 'firstname=' + firstname + 'lastname=' + lastname + 'username=' + name + 'email_address=' + email + 'password=' + password;
   //
